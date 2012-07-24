@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MrKupidoModelStoreContainer" CdmEntityContainer="MrKupidoEntities">
+    <EntitySetMapping Name="Elements">
+      <EntityTypeMapping TypeName="MrKupidoModel.Element">
+        <MappingFragment StoreEntitySet="Element">
+          <ScalarProperty Name="ElementId" ColumnName="ElementId" />
+          <ScalarProperty Name="NameEng" ColumnName="NameEng" />
+          <ScalarProperty Name="NameHun" ColumnName="NameHun" />
+          <ScalarProperty Name="MetricUnit" ColumnName="MetricUnit" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Index" ColumnName="Index" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ingredients">
+      <EntityTypeMapping TypeName="MrKupidoModel.Ingredient">
+        <MappingFragment StoreEntitySet="Ingredient">
+          <ScalarProperty Name="IngredientId" ColumnName="IngredientId" />
+          <ScalarProperty Name="NameEng" ColumnName="NameEng" />
+          <ScalarProperty Name="NameHun" ColumnName="NameHun" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="Classname" ColumnName="Classname" />
+          <ScalarProperty Name="Index" ColumnName="Index" />
+          <ScalarProperty Name="ExpirationTime" ColumnName="ExpirationTime" />
+          <ScalarProperty Name="StorageTemperature" ColumnName="StorageTemperature" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Logs">
+      <EntityTypeMapping TypeName="MrKupidoModel.Log">
+        <MappingFragment StoreEntitySet="Log">
+          <ScalarProperty Name="LogId" ColumnName="LogId" />
+          <ScalarProperty Name="EventId" ColumnName="EventId" />
+          <ScalarProperty Name="EventParams" ColumnName="EventParams" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Nutritions">
+      <EntityTypeMapping TypeName="MrKupidoModel.Nutrition">
+        <MappingFragment StoreEntitySet="Nutrition">
+          <ScalarProperty Name="NutritionId" ColumnName="NutritionId" />
+          <ScalarProperty Name="ElementId" ColumnName="ElementId" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
+          <ScalarProperty Name="IngredientId" ColumnName="IngredientId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ratings">
+      <EntityTypeMapping TypeName="MrKupidoModel.Rating">
+        <MappingFragment StoreEntitySet="Rating">
+          <ScalarProperty Name="RatingId" ColumnName="RatingId" />
+          <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
+          <ScalarProperty Name="Rating1" ColumnName="Rating" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Recipes">
+      <EntityTypeMapping TypeName="MrKupidoModel.Recipe">
+        <MappingFragment StoreEntitySet="Recipe">
+          <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
+          <ScalarProperty Name="DisplayNameEng" ColumnName="DisplayNameEng" />
+          <ScalarProperty Name="UniqueNameEng" ColumnName="UniqueNameEng" />
+          <ScalarProperty Name="DisplayNameHun" ColumnName="DisplayNameHun" />
+          <ScalarProperty Name="UniqueNameHun" ColumnName="UniqueNameHun" />
+          <ScalarProperty Name="PreparationTime" ColumnName="PreparationTime" />
+          <ScalarProperty Name="CookingTime" ColumnName="CookingTime" />
+          <ScalarProperty Name="TotalTime" ColumnName="TotalTime" />
+          <ScalarProperty Name="PriceCategory" ColumnName="PriceCategory" />
+          <ScalarProperty Name="SavedCount" ColumnName="SavedCount" />
+          <ScalarProperty Name="ForwardedCount" ColumnName="ForwardedCount" />
+          <ScalarProperty Name="DirectionsFreeTextEng" ColumnName="DirectionsFreeTextEng" />
+          <ScalarProperty Name="DirectionsFreeTextHun" ColumnName="DirectionsFreeTextHun" />
+          <ScalarProperty Name="FootNotesEng" ColumnName="FootNotesEng" />
+          <ScalarProperty Name="FootNotesHun" ColumnName="FootNotesHun" />
+          <ScalarProperty Name="DescriptionEng" ColumnName="DescriptionEng" />
+          <ScalarProperty Name="DescriptionHun" ColumnName="DescriptionHun" />
+          <ScalarProperty Name="Servings" ColumnName="Servings" />
+          <ScalarProperty Name="RatingValue" ColumnName="RatingValue" />
+          <ScalarProperty Name="RatingCount" ColumnName="RatingCount" />
+          <ScalarProperty Name="ServingTemperature" ColumnName="ServingTemperature" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RecipeTags">
+      <EntityTypeMapping TypeName="MrKupidoModel.RecipeTag">
+        <MappingFragment StoreEntitySet="RecipeTag">
+          <ScalarProperty Name="RecipeTagId" ColumnName="RecipeTagId" />
+          <ScalarProperty Name="RecipeId" ColumnName="RecipeId" />
+          <ScalarProperty Name="TagId" ColumnName="TagId" />
+          <ScalarProperty Name="TimeAssigned" ColumnName="TimeAssigned" />
+          <ScalarProperty Name="AssignedBy" ColumnName="AssignedBy" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tags">
+      <EntityTypeMapping TypeName="MrKupidoModel.Tag">
+        <MappingFragment StoreEntitySet="Tag">
+          <ScalarProperty Name="TagId" ColumnName="TagId" />
+          <ScalarProperty Name="NameEng" ColumnName="NameEng" />
+          <ScalarProperty Name="NameHun" ColumnName="NameHun" />
+          <ScalarProperty Name="Classname" ColumnName="Classname" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="MrKupidoModel.User">
+        <MappingFragment StoreEntitySet="User">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

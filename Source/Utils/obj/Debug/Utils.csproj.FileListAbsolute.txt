@@ -1,0 +1,5 @@
+C:\Work\MrKupido\Source\Utils\bin\Debug\Utils.dll
+C:\Work\MrKupido\Source\Utils\bin\Debug\Utils.pdb
+C:\Work\MrKupido\Source\Utils\obj\Debug\ResolveAssemblyReference.cache
+C:\Work\MrKupido\Source\Utils\obj\Debug\Utils.dll
+C:\Work\MrKupido\Source\Utils\obj\Debug\Utils.pdb

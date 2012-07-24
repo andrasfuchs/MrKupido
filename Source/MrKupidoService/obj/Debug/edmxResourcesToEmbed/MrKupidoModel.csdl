@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MrKupidoModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+  <EntityContainer Name="MrKupidoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Elements" EntityType="MrKupidoModel.Element" />
+    <EntitySet Name="Ingredients" EntityType="MrKupidoModel.Ingredient" />
+    <EntitySet Name="Logs" EntityType="MrKupidoModel.Log" />
+    <EntitySet Name="Nutritions" EntityType="MrKupidoModel.Nutrition" />
+    <EntitySet Name="Ratings" EntityType="MrKupidoModel.Rating" />
+    <EntitySet Name="Recipes" EntityType="MrKupidoModel.Recipe" />
+    <EntitySet Name="RecipeTags" EntityType="MrKupidoModel.RecipeTag" />
+    <EntitySet Name="Tags" EntityType="MrKupidoModel.Tag" />
+    <EntitySet Name="Users" EntityType="MrKupidoModel.User" />
+    <AssociationSet Name="FK_Nutrition_Element" Association="MrKupidoModel.FK_Nutrition_Element">
+      <End Role="Element" EntitySet="Elements" />
+      <End Role="Nutrition" EntitySet="Nutritions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Nutrition_Ingredient" Association="MrKupidoModel.FK_Nutrition_Ingredient">
+      <End Role="Ingredient" EntitySet="Ingredients" />
+      <End Role="Nutrition" EntitySet="Nutritions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Nutrition_Recipe" Association="MrKupidoModel.FK_Nutrition_Recipe">
+      <End Role="Recipe" EntitySet="Recipes" />
+      <End Role="Nutrition" EntitySet="Nutritions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rating_Recipe" Association="MrKupidoModel.FK_Rating_Recipe">
+      <End Role="Recipe" EntitySet="Recipes" />
+      <End Role="Rating" EntitySet="Ratings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Rating_User" Association="MrKupidoModel.FK_Rating_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="Rating" EntitySet="Ratings" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RecipeTag_Recipe" Association="MrKupidoModel.FK_RecipeTag_Recipe">
+      <End Role="Recipe" EntitySet="Recipes" />
+      <End Role="RecipeTag" EntitySet="RecipeTags" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RecipeTag_Tag" Association="MrKupidoModel.FK_RecipeTag_Tag">
+      <End Role="Tag" EntitySet="Tags" />
+      <End Role="RecipeTag" EntitySet="RecipeTags" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RecipeTag_User" Association="MrKupidoModel.FK_RecipeTag_User">
+      <End Role="User" EntitySet="Users" />
+      <End Role="RecipeTag" EntitySet="RecipeTags" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Element">
+    <Key>
+      <PropertyRef Name="ElementId" />
+    </Key>
+    <Property Name="ElementId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameEng" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="NameHun" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="MetricUnit" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Category" Type="Int32" />
+    <Property Name="Index" Type="Int32" />
+    <NavigationProperty Name="Nutritions" Relationship="MrKupidoModel.FK_Nutrition_Element" FromRole="Element" ToRole="Nutrition" />
+  </EntityType>
+  <EntityType Name="Ingredient">
+    <Key>
+      <PropertyRef Name="IngredientId" />
+    </Key>
+    <Property Name="IngredientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameEng" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="NameHun" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Category" Type="Int32" Nullable="false" />
+    <Property Name="Classname" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Index" Type="Int32" />
+    <Property Name="ExpirationTime" Type="Time" />
+    <Property Name="StorageTemperature" Type="Int32" />
+    <NavigationProperty Name="Nutritions" Relationship="MrKupidoModel.FK_Nutrition_Ingredient" FromRole="Ingredient" ToRole="Nutrition" />
+  </EntityType>
+  <EntityType Name="Log">
+    <Key>
+      <PropertyRef Name="LogId" />
+    </Key>
+    <Property Name="LogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EventId" Type="Int32" Nullable="false" />
+    <Property Name="EventParams" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Text" Type="String" Nullable="false" MaxLength="250" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Nutrition">
+    <Key>
+      <PropertyRef Name="NutritionId" />
+    </Key>
+    <Property Name="NutritionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ElementId" Type="Int32" Nullable="false" />
+    <Property Name="Amount" Type="Double" Nullable="false" />
+    <Property Name="RecipeId" Type="Int32" />
+    <Property Name="IngredientId" Type="Int32" />
+    <NavigationProperty Name="Element" Relationship="MrKupidoModel.FK_Nutrition_Element" FromRole="Nutrition" ToRole="Element" />
+    <NavigationProperty Name="Ingredient" Relationship="MrKupidoModel.FK_Nutrition_Ingredient" FromRole="Nutrition" ToRole="Ingredient" />
+    <NavigationProperty Name="Recipe" Relationship="MrKupidoModel.FK_Nutrition_Recipe" FromRole="Nutrition" ToRole="Recipe" />
+  </EntityType>
+  <EntityType Name="Rating">
+    <Key>
+      <PropertyRef Name="RatingId" />
+    </Key>
+    <Property Name="RatingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RecipeId" Type="Int32" Nullable="false" />
+    <Property Name="Rating1" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" />
+    <Property Name="Comment" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Recipe" Relationship="MrKupidoModel.FK_Rating_Recipe" FromRole="Rating" ToRole="Recipe" />
+    <NavigationProperty Name="User" Relationship="MrKupidoModel.FK_Rating_User" FromRole="Rating" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Recipe">
+    <Key>
+      <PropertyRef Name="RecipeId" />
+    </Key>
+    <Property Name="RecipeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DisplayNameEng" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="UniqueNameEng" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="DisplayNameHun" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="UniqueNameHun" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="PreparationTime" Type="Time" />
+    <Property Name="CookingTime" Type="Time" />
+    <Property Name="TotalTime" Type="Time" />
+    <Property Name="PriceCategory" Type="Int32" />
+    <Property Name="SavedCount" Type="Int32" />
+    <Property Name="ForwardedCount" Type="Int32" />
+    <Property Name="DirectionsFreeTextEng" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+    <Property Name="DirectionsFreeTextHun" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+    <Property Name="FootNotesEng" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+    <Property Name="FootNotesHun" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+    <Property Name="DescriptionEng" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="DescriptionHun" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Servings" Type="Int32" />
+    <Property Name="RatingValue" Type="Double" />
+    <Property Name="RatingCount" Type="Int32" />
+    <Property Name="ServingTemperature" Type="Int32" />
+    <NavigationProperty Name="Nutritions" Relationship="MrKupidoModel.FK_Nutrition_Recipe" FromRole="Recipe" ToRole="Nutrition" />
+    <NavigationProperty Name="Ratings" Relationship="MrKupidoModel.FK_Rating_Recipe" FromRole="Recipe" ToRole="Rating" />
+    <NavigationProperty Name="RecipeTags" Relationship="MrKupidoModel.FK_RecipeTag_Recipe" FromRole="Recipe" ToRole="RecipeTag" />
+  </EntityType>
+  <EntityType Name="RecipeTag">
+    <Key>
+      <PropertyRef Name="RecipeTagId" />
+    </Key>
+    <Property Name="RecipeTagId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RecipeId" Type="Int32" Nullable="false" />
+    <Property Name="TagId" Type="Int32" Nullable="false" />
+    <Property Name="TimeAssigned" Type="DateTime" />
+    <Property Name="AssignedBy" Type="Int32" />
+    <NavigationProperty Name="Recipe" Relationship="MrKupidoModel.FK_RecipeTag_Recipe" FromRole="RecipeTag" ToRole="Recipe" />
+    <NavigationProperty Name="Tag" Relationship="MrKupidoModel.FK_RecipeTag_Tag" FromRole="RecipeTag" ToRole="Tag" />
+    <NavigationProperty Name="User" Relationship="MrKupidoModel.FK_RecipeTag_User" FromRole="RecipeTag" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Tag">
+    <Key>
+      <PropertyRef Name="TagId" />
+    </Key>
+    <Property Name="TagId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameEng" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="NameHun" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Classname" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="RecipeTags" Relationship="MrKupidoModel.FK_RecipeTag_Tag" FromRole="Tag" ToRole="RecipeTag" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Ratings" Relationship="MrKupidoModel.FK_Rating_User" FromRole="User" ToRole="Rating" />
+    <NavigationProperty Name="RecipeTags" Relationship="MrKupidoModel.FK_RecipeTag_User" FromRole="User" ToRole="RecipeTag" />
+  </EntityType>
+  <Association Name="FK_Nutrition_Element">
+    <End Role="Element" Type="MrKupidoModel.Element" Multiplicity="1" />
+    <End Role="Nutrition" Type="MrKupidoModel.Nutrition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Element">
+        <PropertyRef Name="ElementId" />
+      </Principal>
+      <Dependent Role="Nutrition">
+        <PropertyRef Name="ElementId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Nutrition_Ingredient">
+    <End Role="Ingredient" Type="MrKupidoModel.Ingredient" Multiplicity="0..1" />
+    <End Role="Nutrition" Type="MrKupidoModel.Nutrition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ingredient">
+        <PropertyRef Name="IngredientId" />
+      </Principal>
+      <Dependent Role="Nutrition">
+        <PropertyRef Name="IngredientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Nutrition_Recipe">
+    <End Role="Recipe" Type="MrKupidoModel.Recipe" Multiplicity="0..1" />
+    <End Role="Nutrition" Type="MrKupidoModel.Nutrition" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Recipe">
+        <PropertyRef Name="RecipeId" />
+      </Principal>
+      <Dependent Role="Nutrition">
+        <PropertyRef Name="RecipeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rating_Recipe">
+    <End Role="Recipe" Type="MrKupidoModel.Recipe" Multiplicity="1" />
+    <End Role="Rating" Type="MrKupidoModel.Rating" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Recipe">
+        <PropertyRef Name="RecipeId" />
+      </Principal>
+      <Dependent Role="Rating">
+        <PropertyRef Name="RecipeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Rating_User">
+    <End Role="User" Type="MrKupidoModel.User" Multiplicity="0..1" />
+    <End Role="Rating" Type="MrKupidoModel.Rating" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Rating">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RecipeTag_Recipe">
+    <End Role="Recipe" Type="MrKupidoModel.Recipe" Multiplicity="1" />
+    <End Role="RecipeTag" Type="MrKupidoModel.RecipeTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Recipe">
+        <PropertyRef Name="RecipeId" />
+      </Principal>
+      <Dependent Role="RecipeTag">
+        <PropertyRef Name="RecipeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RecipeTag_Tag">
+    <End Role="Tag" Type="MrKupidoModel.Tag" Multiplicity="1" />
+    <End Role="RecipeTag" Type="MrKupidoModel.RecipeTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tag">
+        <PropertyRef Name="TagId" />
+      </Principal>
+      <Dependent Role="RecipeTag">
+        <PropertyRef Name="TagId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RecipeTag_User">
+    <End Role="User" Type="MrKupidoModel.User" Multiplicity="0..1" />
+    <End Role="RecipeTag" Type="MrKupidoModel.RecipeTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="RecipeTag">
+        <PropertyRef Name="AssignedBy" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

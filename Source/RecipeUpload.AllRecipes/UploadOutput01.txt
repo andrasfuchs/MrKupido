@@ -1,0 +1,117 @@
+﻿0.00% Skipped '15-minute-marinated-chicken' 0.21% 0.42% Skipped 'alfredo-potatoes-2' 0.63% 0.84% 1.06% 1.27% 1.48% 1.69% 1.90% 2.11% Skipped
+ 'apple-crisp-ii-2' 2.32% 2.53% 2.74% 2.96% Skipped 'apricot-round-steak' 3.17% 3.38% 3.59% 3.80% 4.01% 4.22% 4.43% 4.64% Skipped 'bacon-bro
+ccoli--raisin-salad' Skipped 'bacon-cheese-fries' Skipped 'bacon-cheese-frittata' 4.86% 5.07% 5.28% Skipped 'baked-chicken-and-zucchini' 5.4
+9% Skipped 'baked-egg-rolls' Skipped 'baked-miniature-pumpkins' 5.70% Skipped 'baked-potato-casserole' Skipped 'baked-potato-pizza' Skipped
+'baked-spaghetti' 5.91% Skipped 'baked-ziti-casserole' Skipped 'baked-zucchini-squares' 6.12% 6.33% 6.54% Skipped 'banana-split-bread-2' 6.7
+6% Skipped 'bananas-n-cream-bundt-cake' 6.97% Skipped 'barbequed-pig' 7.18% 7.39% Skipped 'bbq-beer-brat-kabobs' 7.60% 7.81% 8.02% 8.23% Ski
+pped 'beer-brats-with-chutney-and-sauerkraut' 8.44% 8.66% 8.87% 9.08% 9.29% 9.50% Skipped 'black-bean-and-rice-enchiladas' 9.71% Skipped 'bl
+ack-bean-rice-burgers' Skipped 'black-forest-cheesecakes' 9.92% 10.13% 10.34% Skipped 'blueberry-buckle-2' Skipped 'blueberry-cheesecake-ice
+-cream' 10.56% 10.77% Skipped 'blueberry-spinach-salad' Skipped 'bob-evans-mediterranean-pasta-salad' Skipped 'bobs-stuffed-cabbage' 10.98%
+11.19% 11.40% Skipped 'bratwurst-and-shrimp-boil' 11.61% 11.82% Skipped 'brioche-2' 12.03% 12.24% 12.46% Skipped 'brownie-crackles' Skipped
+'brownie-cups-2' 12.67% Skipped 'brownie-tarts' Skipped 'brunch-egg-bake' 12.88% Skipped 'buffet-meatballs' 13.09% 13.30% 13.51% 13.72% Skip
+ped 'cabbage-roll-casserole' 13.93%
+s:\Downloads\WebSites\AllRecipesCom\allrecipes.com\recipe\cajun-kale-and-rice
+System.ArgumentOutOfRangeException: StartIndex cannot be less than zero.
+Parameter name: startIndex
+   at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex)
+   at MrKupido.RecipeUpload.AllRecipes.Program.Main(String[] args) in C:\Work\MrKupido\Source\RecipeUpload.AllRecipes\Program.cs:line 229
+14.14% Skipped 'cake-with-buttercream-decorating-frosting' Skipped 'california-pizzas' 14.36% 14.57% 14.78% 14.99% Skipped 'cappuccino-flats
+' Skipped 'caramel-corn-snack-mix' 15.20% 15.41% 15.62% 15.83% Skipped 'carrot-souffle' 16.04% 16.26% 16.47% 16.68% Skipped 'cheese-ball-ii-
+2' 16.89% 17.10%
+s:\Downloads\WebSites\AllRecipesCom\allrecipes.com\recipe\cheesy-chicken-stir-fry
+System.ArgumentOutOfRangeException: StartIndex cannot be less than zero.
+Parameter name: startIndex
+   at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex)
+   at MrKupido.RecipeUpload.AllRecipes.Program.Main(String[] args) in C:\Work\MrKupido\Source\RecipeUpload.AllRecipes\Program.cs:line 237
+17.31% 17.52% 17.73% 17.94% 18.15%
+s:\Downloads\WebSites\AllRecipesCom\allrecipes.com\recipe\chess-pie
+System.ArgumentOutOfRangeException: StartIndex cannot be less than zero.
+Parameter name: startIndex
+   at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex)
+   at MrKupido.RecipeUpload.AllRecipes.Program.Main(String[] args) in C:\Work\MrKupido\Source\RecipeUpload.AllRecipes\Program.cs:line 229
+Skipped 'chewy-brownies' 18.37% Skipped 'chicken-and-dumplings-ii-2' 18.58% 18.79% 19.00% Skipped 'chicken-crumb-coating' 19.21% 19.42% Skip
+ped 'chicken-nuggets' 19.63% 19.84% Skipped 'chicken-stir-fry' 20.05% Skipped 'chicken-with-blueberry-sauce' 20.27% 20.48% 20.69% Skipped 'c
+hinese-chicken-soup' 20.90% 21.11% 21.32% 21.53% 21.74% Skipped 'chocolate-covered-cherries' 21.95% 22.17% Skipped 'chocolate-mousse-2' 22.3
+8% Skipped 'chocolate-pinwheels' 22.59% 22.80% 23.01% Skipped 'christmas-meatballs' 23.22% 23.43% 23.64% 23.85% Skipped 'citrus-slush-2' 24.
+07% 24.28% 24.49% 24.70% 24.91% 25.12% Skipped 'comforting-chicken' 25.33% 25.54% 25.75% Skipped 'corn-tortilla-quiche' Skipped 'corned-beef
+-and-cabbage-3' 25.97% 26.18% Skipped 'country-green-beans' 26.39%
+s:\Downloads\WebSites\AllRecipesCom\allrecipes.com\recipe\crab-alfredo
+System.ArgumentOutOfRangeException: StartIndex cannot be less than zero.
+Parameter name: startIndex
+   at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex)
+   at MrKupido.RecipeUpload.AllRecipes.Program.Main(String[] args) in C:\Work\MrKupido\Source\RecipeUpload.AllRecipes\Program.cs:line 229
+26.60% 26.81% Skipped 'cranberry-chutney-ii' 27.02% Skipped 'cranberry-orange-bread-2' 27.23% Skipped 'cranberry-salsa-2' 27.44% 27.65% 27.8
+7% 28.08% 28.29% 28.50% 28.71% Skipped 'creamy-peach-pie-2' 28.92% Skipped 'creamy-twice-baked-potatoes' 29.13% 29.34% Skipped 'crispy-mashe
+d-potato-pancake' 29.55% 29.77% Skipped 'crunchy-romaine-strawberry-salad' 29.98% 30.19% Skipped 'curried-chicken-tea-sandwiches' 30.40% 30.
+61% 30.82% 31.03% Skipped 'deli-style-pasta-salad' 31.24% 31.45% Skipped 'deviled-eggs-2' 31.67% 31.88% 32.09% 32.30% 32.51% 32.72% 32.93% 3
+3.14% 33.35% 33.57% Skipped 'easy-italian-sausage-lasagna' 33.78% 33.99% 34.20% Skipped 'easy-sausage-pinwheels' Skipped 'easy-sausage-scram
+ble' 34.41% 34.62% Skipped 'egg-salad-english-muffins' 34.83% 35.04% 35.25% Skipped 'enchilada-sauce' 35.47% 35.68% 35.89% 36.10% 36.31% 36.
+52% 36.73% 36.94% Skipped 'five-veggie-stir-fry' Skipped 'flag-cake-4' Skipped 'flavorful-beef-stir-fry-2' 37.15% Skipped 'fluffy-hot-chocol
+ate' Skipped 'fluffy-whole-wheat-biscuits' 37.37% 37.58% Skipped 'french-salad-dressing' 37.79% 38.00% 38.21% 38.42% 38.63% 38.84% 39.05% 39
+.27% 39.48% 39.69% Skipped 'garlic-cheese-flat-bread' 39.90% 40.11% 40.32% 40.53% 40.74% Skipped 'gingerbread-pancakes' 40.95% 41.17% 41.38%
+ 41.59% 41.80% 42.01% 42.22% 42.43% 42.64% Skipped 'greek-seasoning' 42.85% Skipped 'green-bean-stir-fry' 43.07% 43.28% 43.49% 43.70% 43.91%
+ Skipped 'grilled-sausage-patties-with-peppers-and-onions' 44.12% 44.33% 44.54% 44.75% 44.97% 45.18% 45.39% 45.60% 45.81% 46.02% 46.23% 46.4
+4% 46.65% 46.87% 47.08% Skipped 'homemade-pizza-supreme' 47.29% 47.50% 47.71% Skipped 'honey-whole-wheat-bread-2' 47.92% 48.13% 48.34% 48.55
+% 48.77% 48.98% Skipped 'inside-out-stuffed-peppers' 49.19% 49.40% 49.61% Skipped 'italian-sausage-and-stuffing' 49.82% Skipped 'italian-sau
+sage-jambalaya' 50.03% 50.24% 50.45% 50.66% 50.88% 51.09% 51.30% 51.51% 51.72% 51.93% 52.14% 52.35% 52.56% 52.78% 52.99% 53.20% 53.41% 53.62
+% 53.83% Skipped 'lentil-soup-3' 54.04% 54.25% 54.46% 54.68% 54.89% 55.10% Skipped 'macaroni-tuna-casserole' 55.31% 55.52% 55.73% Skipped 'm
+andarin-orange-salad-2' 55.94% 56.15% 56.36% 56.58% 56.79% 57.00% 57.21% 57.42% 57.63% Skipped 'melt-in-your-mouth-meat-loaf' 57.84% 58.05%
+58.26% 58.48% 58.69% 58.90% Skipped 'minnehaha-cake-2' 59.11% 59.32% 59.53% 59.74% 59.95% Skipped 'moms-traditional-creamed-onions-2' 60.16%
+ 60.38% 60.59% 60.80% Skipped 'mushroom-spinach-omelet' 61.01% 61.22% 61.43% 61.64% 61.85% 62.06% 62.28% 62.49% 62.70% 62.91% Skipped 'old-f
+ashioned-hard-candy' 63.12% Skipped 'omelet-in-a-mug' 63.33% Skipped 'onion-cheese-bread' 63.54% 63.75% Skipped 'orange-gelatin-salad-2' 63.
+96% 64.18% 64.39% 64.60% 64.81% 65.02% 65.23% Skipped 'parmesan-fondue' Skipped 'parmesan-knots' Skipped 'parmesan-sage-pork-chops' 65.44% 6
+5.65% Skipped 'pasta-e-fagioli-iii' Skipped 'pasta-salad-with-pesto' 65.86% 66.08% 66.29% 66.50% 66.71% 66.92% Skipped 'peanut-butter-puffs'
+ 67.13% 67.34% Skipped 'pecan-sticky-muffins' 67.55% 67.76% 67.98% 68.19% 68.40% 68.61% 68.82% Skipped 'pineapple-casserole' 69.03% 69.24% 6
+9.45% Skipped 'pizza-bake-with-sausage-and-pepperoni' 69.66% Skipped 'plum-quick-bread' 69.88% 70.09% 70.30% Skipped 'poppy-seed-muffins' 70
+.51% 70.72% Skipped 'pork-tenderloin-with-pineapple-salsa' 70.93% 71.14% 71.35% Skipped 'potatoes-supreme' 71.56% 71.78% 71.99% 72.20% Skipp
+ed 'pumpkin-cheesecake' 72.41% 72.62% 72.83% 73.04% 73.25% Skipped 'quick-sausage-party-melts' 73.46% 73.68% 73.89% Skipped 'ranch-ham-roll-
+ups' 74.10% Skipped 'raspberry-ribbons' 74.31%
+s:\Downloads\WebSites\AllRecipesCom\allrecipes.com\recipe\really-cranberry-orange-yummy-gummy-pudding-cake
+System.ArgumentOutOfRangeException: Length cannot be less than zero.
+Parameter name: length
+   at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at MrKupido.RecipeUpload.AllRecipes.Program.Main(String[] args) in C:\Work\MrKupido\Source\RecipeUpload.AllRecipes\Program.cs:line 223
+74.52% 74.73% 74.94% Skipped 'reuben-sandwich-ii' 75.15% 75.36% 75.58% 75.79% Skipped 'roast-beef-sandwich-roll' 76.00% 76.21% 76.42% Skippe
+d 'rockette-and-parma-ham-salad' 76.63% Skipped 'rosemary-au-gratin-potatoes' 76.84% 77.05% 77.26% 77.48% 77.69% 77.90% 78.11% Skipped 'saue
+rkraut-and-swiss-sausage-balls' Skipped 'sausage-and-egg-casserole' 78.32% Skipped 'sausage-minestrone' 78.53% 78.74% 78.95% Skipped 'scallo
+ps-provenale' 79.16% Skipped 'scrambled-egg-brunch-bread' Skipped 'scrambled-egg-muffins' 79.38% 79.59% Skipped 'sesame-chicken' 79.80% 80.0
+1% 80.22% 80.43% 80.64% Skipped 'shrimp-marinara-2' 80.85% 81.06% 81.28% 81.49% 81.70% Skipped 'sloppy-joe-sandwiches' Skipped 'slumgullion-
+2' 81.91% 82.12% Skipped 'smothered-chicken-breasts' 82.33% 82.54% 82.75% 82.96% 83.18% 83.39% 83.60% 83.81% 84.02% Skipped 'spiced-pot-roas
+t' 84.23% 84.44% Skipped 'spicy-hot-brat-sandwiches-with-cool-creamy-salsa' 84.65% 84.86% Skipped 'spiderweb-pumpkin-cheesecake' 85.07% 85.2
+9% 85.50% 85.71% 85.92% 86.13% Skipped 'stir-fried-vegetables' 86.34% Skipped 'strawberry-cheesecake' 86.55% 86.76% Skipped 'streusel-rhubar
+b-dessert' 86.97% 87.19% Skipped 'stuffed-peppers-4' 87.40% 87.61% 87.82% Skipped 'sunday-brunch-casserole' Skipped 'sunday-gumbo' 88.03% 88
+.24% 88.45% 88.66% Skipped 'sweet-and-sour-meatballs-ii-2' Skipped 'sweet-and-sour-salad' 88.87% Skipped 'sweet-corn-bread' 89.09% 89.30% 89
+.51% 89.72% 89.93% Skipped 'taco-pasta-salad' 90.14% 90.35% Skipped 'tart-cherry-crisp' 90.56% Skipped 'tasty-lentil-tacos' 90.77% Skipped '
+teriyaki-burgers' 90.99% Skipped 'teriyaki-marinade-2' 91.20% 91.41% 91.62% 91.83% 92.04% 92.25% 92.46% Skipped 'toffee-bars-2' 92.67% Skipp
+ed 'tomato-bacon-salad' 92.89% Skipped 'tomato-mozzarella-salad' 93.10% 93.31% 93.52% 93.73% 93.94% 94.15% Skipped 'turkey-breast-with-gravy
+' 94.36% 94.57% 94.79% Skipped 'twice-baked-ranch-potatoes' 95.00% 95.21% 95.42% 95.63% Skipped 'vegetable-rice-medley' 95.84% Skipped 'vege
+tarian-quiche' 96.05% 96.26% 96.47% 96.69% 96.90% 97.11% 97.32% 97.53% 97.74% 97.95% Skipped 'wild-rice-chicken-salad' 98.16% Skipped 'wildf
+ire-bbq-beef-on-buns' Skipped 'wildfire-pulled-pork-sandwiches' 98.37% 98.59% Skipped 'yogurt-glaze-2' 98.80% Skipped 'zesty-hot-sausage-and
+-beans' 99.01% 99.22% Skipped 'zucchini-cakes-2' Skipped 'zucchini-cheese-appetizer-squares' Skipped 'zucchini-chicken-and-rice-casserole' S
+kipped 'zucchini-chocolate-chip-muffins' Skipped 'zucchini-chocolate-chip-muffins-2' Skipped 'zucchini-lemon-sorbet' 99.43% Skipped 'zucchin
+i-parmigiana' Skipped 'zucchini-pasta' Skipped 'zucchini-pasta-bake' Skipped 'zucchini-pasta-casserole' Skipped 'zucchini-pasta-ii' Skipped
+'zucchini-patties' Skipped 'zucchini-pepperjack-casserole' Skipped 'zucchini-picadillo-sandwich' Skipped 'zucchini-pie-2' Skipped 'zucchini-
+pie-3' Skipped 'zucchini-pie-4' Skipped 'zucchini-pie-i' Skipped 'zucchini-pie-ii' Skipped 'zucchini-pie-iii' Skipped 'zucchini-pie-with-cru
+mb-topping' Skipped 'zucchini-pineapple-bread' Skipped 'zucchini-pineapple-bread-i' Skipped 'zucchini-pineapple-bread-ii' Skipped 'zucchini-
+pineapple-loaf' Skipped 'zucchini-pizza-bake' Skipped 'zucchini-pork-and-peppers' Skipped 'zucchini-provencal' Skipped 'zucchini-provencale'
+ Skipped 'zucchini-puffs' Skipped 'zucchini-quiche' Skipped 'zucchini-quiche-2' Skipped 'zucchini-ranch-meatloaf' Skipped 'zucchini-raspberr
+y-bread' Skipped 'zucchini-raspberry-cupcakes' Skipped 'zucchini-relish' Skipped 'zucchini-relish-2' Skipped 'zucchini-relish-with-sweet-pep
+pers' Skipped 'zucchini-ribbons-with-goat-cheese' Skipped 'zucchini-risotto' Skipped 'zucchini-roll-ups' Skipped 'zucchini-salad-with-yogurt
+-and-walnuts' Skipped 'zucchini-saute' Skipped 'zucchini-saute-2' Skipped 'zucchini-skins' Skipped 'zucchini-slaw' Skipped 'zucchini-slice'
+Skipped 'zucchini-snack-bread' Skipped 'zucchini-souffle' Skipped 'zucchini-souffle-with-monterey-jack-cheese' Skipped 'zucchini-soup-i' Ski
+pped 'zucchini-soup-ii' Skipped 'zucchini-soup-iii' Skipped 'zucchini-soup-iv' Skipped 'zucchini-soup-with-herbs' Skipped 'zucchini-spice-ca
+ke' Skipped 'zucchini-spread' Skipped 'zucchini-stew' Skipped 'zucchini-stew-by-bob' Skipped 'zucchini-sticks' Skipped 'zucchini-stuffed-chi
+cken' Skipped 'zucchini-summer-pasta' Skipped 'zucchini-summer-soup' Skipped 'zucchini-tomato-and-onion-casserole' Skipped 'zucchini-tomato-
+casserole' Skipped 'zucchini-tomato-pie' Skipped 'zucchini-tomato-soup-i' Skipped 'zucchini-tomato-soup-ii' Skipped 'zucchini-tomato-toss' S
+kipped 'zucchini-tomato-toss-2' Skipped 'zucchini-walnut-bread' Skipped 'zucchini-with-basil-cream' Skipped 'zucchini-with-chickpea-and-mush
+room-stuffing' Skipped 'zucchini-with-dill-weed-and-garlic-yogurt-sauce' Skipped 'zucchini-with-farfalle' Skipped 'zucchini-with-mushroom-ra
+violi-in-truffle-butter-sauce' Skipped 'zucchini-with-pecans' Skipped 'zucchini-with-salsa' Skipped 'zucchini-wrapped-in-tortillas' Skipped
+'zucchini-yogurt-multigrain-muffins' Skipped 'zucchinipotato-soup' Skipped 'zucker-hutchen' Skipped 'zulandts-lentil-casserole' Skipped 'zup
+pa-de-farro' Skipped 'zuppa-inglese' Skipped 'zuppa-toscana' Skipped 'zus-fried-apple-pies' Skipped 'zweiback-cheesecake' Skipped 'zwetschek
+uchen-german-plum-tart' Skipped 'zwieback' Skipped 'zwieback-rolls' Saving...
+Done

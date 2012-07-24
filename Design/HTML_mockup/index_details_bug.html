@@ -1,0 +1,144 @@
+﻿<!doctype html>
+<html lang="hu">
+<head>
+    <meta charset="utf-8" />
+    <title>Mr. Kupido - Receptek</title>
+    <meta name="description" content="Mr Kupido - Receptek" />
+    <meta name="author" content="AndrasFuchs" />
+</head>
+<body>
+    <header>
+        <img src="MrKupidoLogo.png" alt="Mr. Kupido" />
+        <p>
+            <span id="name">Andras F</span><span id="messages">0</span><img src="Avatar.jpg" alr="Avatar" /></p>
+        <p>
+            <label for="location">Helyszin</label>
+            <input id="location" type="text" placeholder="(jelenleg ismeretlen)" />
+        </p>
+        <p>
+            <label for="query">Keresnivaló</label>
+            <input id="query" type="search" placeholder="(hozzávaló, diéta, eszköz)" />
+        </p>
+        <input id="search" type="submit" value="Keresés" />
+        <div id="filters">
+            <ul>
+                <li>krumpli</li>
+                <li>liszt</li>
+                <li>cukor</li>
+                <li>spenót</li>
+            </ul>
+        </div>
+        <input id="deleteall" type="button" value="Mindent töröl" />
+        <hr class="single" />
+    </header>
+    <p>
+        <img src="tip.png" alt="Tipp" />
+        Szűrőket használva leegyszerűsíthetjük a keresést. Próbálkozz hozzávalóval, diétával vagy az étel nevével.</p>
+    <hr class="double" />
+    <details>
+        <summary>
+            <h1>
+                Saját menüm</h1>
+            <h2>
+                (4 étel)</h2>
+        </summary>
+        <ul id="myMenu">
+            <li>
+                <img src="pork.png" alt="Sertés" /><span>Paprikás krumpli</span><img src="ticked.png" alt="Töröl" />
+            </li>
+            <li>
+                <img src="bread.png" alt="Kenyér" /><span>Bundáskenyér</span><img src="ticked.png" alt="Töröl" />
+            </li>
+            <li>
+                <img src="chicken.png" alt="Csirke" /><span>Csirkecomb mustármártásban</span><img src="ticked.png" alt="Töröl" />
+            </li>
+            <li>
+                <img src="chicken.png" alt="Csirke" /><span>Gombás sült csirkecomb</span><img src="ticked.png" alt="Töröl" />
+            </li>
+        </ul>
+    </details>
+    <hr class="double" />
+    <details>
+        <summary>
+            <h1>
+                Ajánlásaink</h1>
+            <h2>
+                (15 étel)</h2>
+        </summary>
+        <ul id="recommendations">
+            <li>
+                <img src="egg.png" alt="Tojás" /><span>Sajtban sült tojás</span><img src="notticked.png" alt="Kiválaszt" />
+                <img src="sajtban-sult-tojas-pic01.jpg" alt="Sajtban sült tojás kép 01" /><img src="sajtban-sult-tojas-pic02.jpg" alt="Sajtban sült tojás kép 02" />
+                <img src="stars_45.png" alt="4.5 csillag" />
+            </li>
+            <li>
+                <img src="salad.png" alt="Saláta" /><span>Cézár saláta</span><img src="notticked.png" alt="Kiválaszt" />
+                <img src="cezar-salata-pic01.jpg" alt="Cézár saláta kép 01" /><img src="cezar-salata-pic02.jpg" alt="Cézár saláta kép 02" />
+                <img src="stars_20.png" alt="2.0 csillag" />
+            </li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </details>
+    <hr class="double" />
+    <details>
+        <summary>
+            <h1>
+                Talátatok</h1>
+            <h2>
+                (135 étel)</h2>
+        </summary>
+        <hr class="single" />
+        <div>
+            <a id="filter01" href="#">
+                <img src="starter.png" alt="előétel" />előétel</a> <a id="filter02" href="#">
+                    <img src="soup.png" alt="leves" />leves</a> <a id="filter03" href="#">
+                        <img src="maindish.png" alt="főétel" />főétel</a> <a id="filter04" href="#">
+                            <img src="desert.png" alt="desszert" />desszert</a> <a id="filter05" href="#">
+                                <img src="beverage.png" alt="ital" />ital</a>
+        </div>
+        <div>
+            <select>
+                <optgroup id="orderby" label="rendezés">
+                    <option value="name">név</option>
+                    <option value="time">idő</option>
+                    <option value="rating">értékelés</option>
+                    <option value="type">típus</option>
+                </optgroup>
+            </select>
+        </div>
+        <ul id="results">
+            <li>
+                <img src="pork.png" alt="Sertés" /><span>Paprikás krumpli</span><img src="ticked.png" alt="Töröl" />
+            </li>
+            <li>
+                <img src="bread.png" alt="Kenyér" /><span>Bundáskenyér</span><img src="ticked.png" alt="Töröl" />
+            </li>
+            <li>
+                <img src="chicken.png" alt="Csirke" /><span>Csirkecomb mustármártásban</span><img src="ticked.png" alt="Töröl" />
+            </li>
+            <li>
+                <img src="chicken.png" alt="Csirke" /><span>Gombás sült csirkecomb</span><img src="ticked.png" alt="Töröl" />
+            </li>
+        </ul>
+    </details>
+    <footer>
+        <a href="#">főoldal</a>|<a href="#">profilom</a>|<a href="#">hírlevél</a>|<a href="#">beállításaim</a>|<a href="#">jogi nyilatkozat</a>
+    </footer>
+</body>
+</html>

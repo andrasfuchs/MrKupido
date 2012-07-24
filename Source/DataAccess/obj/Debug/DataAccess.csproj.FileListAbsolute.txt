@@ -1,0 +1,9 @@
+C:\Work\MrKupido\Source\DataAccess\obj\Debug\ResolveAssemblyReference.cache
+C:\Work\MrKupido\Source\DataAccess\bin\Debug\DataAccess.dll
+C:\Work\MrKupido\Source\DataAccess\bin\Debug\DataAccess.pdb
+C:\Work\MrKupido\Source\DataAccess\bin\Debug\EntityFramework.dll
+C:\Work\MrKupido\Source\DataAccess\bin\Debug\Model.dll
+C:\Work\MrKupido\Source\DataAccess\bin\Debug\Model.pdb
+C:\Work\MrKupido\Source\DataAccess\bin\Debug\EntityFramework.xml
+C:\Work\MrKupido\Source\DataAccess\obj\Debug\DataAccess.dll
+C:\Work\MrKupido\Source\DataAccess\obj\Debug\DataAccess.pdb

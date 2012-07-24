@@ -1,0 +1,506 @@
+﻿/********************* Colour reference chart****************
+*************************** comment ********* colour ******** 
+
+main color light        mcl         #ebe0d5
+main color medium       mcm         #cdb8ab
+main color dark         mcd         #553e31
+frame color light       fcl         #f4ede5
+frame color dark        fcd         #e4d7cd
+frame color content     fcc         #d2bfb3
+background              bgc         #fffcf5
+
+*/
+
+@font-face {
+    font-family: Cardo;
+    src: url('../Content/fonts/Cardo/Cardo-Regular.ttf');
+}
+
+@font-face {
+    font-family: Tangerine;
+    src: url('../Content/fonts/Tangerine/Tangerine_Regular.ttf');
+}
+
+@font-face {
+    font-family: TangerineBold;
+    src: url('../Content/fonts/Tangerine/Tangerine_Bold.ttf');
+}
+
+body {
+    font-size: 14px;
+    font-family: Cardo, Sans-Serif;
+    color: /*mcd*/#553e31;
+    background-color: #6f5d41;
+    background-image: url('../Content/images/background.jpg');
+}
+
+a:link, a:visited {
+    text-decoration: none;
+    color: /*mcd*/#553e31;
+}
+
+.wrapper
+{
+    padding: 40px;
+    margin: 20px auto 20px auto;
+    width: 960px;
+    background-color: /*bgc*/#fffcf5;
+    box-shadow: 0 0 30px #000000;
+}
+
+header, footer, nav, section {
+    display: block;
+}
+
+header label
+{
+    font-size: 44px;
+    font-family: Tangerine, Sans-Serif;
+    color: /*mcd*/#553e31;
+}
+
+header .userbar
+{
+    float: right;
+    width: 210px;
+    height: 51px;
+    text-align: right;
+    margin-top: 0px;
+}
+
+header .userbar span
+{
+    padding-left: 5px;
+    padding-right: 5px;
+    vertical-align: middle;
+}
+
+header .searchbox
+{
+    height: 175px;
+    margin-top: -170px;
+}
+
+.searchbox #search
+{
+    float: right;
+    width: 190px;
+    height: 33px;
+    margin-top: -50px;
+}
+
+.searchbox #filters
+{
+    float: right;
+    width: 620px;
+    height: 50px; 
+}
+
+
+.searchbox #filters ul 
+{
+    margin: 0px; 
+    padding: 0px; 
+    list-style-type: none; 
+    list-style-image: none; 
+}
+
+.searchbox #filters li 
+{
+    display: inline-block; 
+    margin: 1px 10px 1px -1px;
+    padding: 0px 0px 0px 10px;
+    border: 1px solid /*mcm*/#cdb8ab;
+}
+
+.searchbox #filters li a
+{
+    display: inline; 
+    margin-left: 5px;
+    padding: 0px 5px 0px 5px;
+    background-color: /*mcl*/#ebe0d5;
+}
+
+.searchbox #filters li a:hover
+{
+    background-color: /*mcm*/#cdb8ab;
+    text-decoration: none;
+}
+
+.searchbox #filters li a:focus
+{
+    background-color: /*mcm*/#cdb8ab;
+    text-decoration: none;
+    outline: none;
+}
+
+
+.searchbox #deleteall
+{
+    float: right;
+    height: 50px;
+    margin-top: 12px;
+}
+
+article .tip
+{
+    text-align: center;
+}
+
+article .tip p
+{   
+    vertical-align: middle; 
+}
+
+hr.single
+{
+    border: 0;
+    height: 2px;
+    background: url('../Content/images/hr_single.png') 0 0 no-repeat;
+    background-position: center;
+    margin: 1em 0;
+}
+
+hr.double
+{
+    border: 0;
+    height: 11px;
+    background: url('../Content/images/hr_double.png') 0 0 no-repeat;
+    background-position: center;
+    margin: 1em 0;
+}
+
+details summary::-webkit-details-marker 
+{ 
+    display:none; 
+}
+
+details summary h1
+{
+    font-size: 44px;
+    font-family: TangerineBold, Sans-Serif;
+    color: /*mcd*/#553e31;
+    text-align: center;
+    margin-top: -8px;
+    margin-bottom: 35px;
+    background: url('../Content/images/h1_bg.png') 0 0 repeat-y;
+    background-position: center;
+}
+
+details summary h1:hover, details summary h1:focus
+{
+    outline: /*mcm*/#cdb8ab dotted 1px;
+}
+
+details summary h2
+{
+    font-size: 26px;
+    font-family: Tangerine, Sans-Serif;
+    color: /*mcd*/#553e31;
+    text-align: right;
+    margin: -70px 10px 10px 0px;
+}
+
+details#mymenu ul 
+{
+    font-size: 20px;
+    font-family: Cardo, Sans-Serif;
+    color: /*mcd*/#553e31;
+
+    margin: 0px; 
+    padding: 0px; 
+    list-style-type: none; 
+    list-style-image: none; 
+}
+
+details#mymenu li 
+{
+    display: inline-block; 
+    width: 270px;
+    height: 55px;
+    margin: 10px 15px 5px 15px;
+    padding: 0px 0px 0px 10px;
+    border: 3px solid /*mcm*/#cdb8ab;
+    background: /*mcl*/#ebe0d5;
+}
+
+details#mymenu li.empty
+{
+    opacity: 0.3;
+}
+
+details#mymenu li span
+{
+    display: inline-block; 
+    width: 160px;
+    height: 46px;
+    padding: 0px 5px 0px 5px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+details#mymenu li img
+{
+    float: left;
+}
+
+details#mymenu li img.ticked, details#mymenu li img.unticked
+{
+    float: right;
+}
+
+details#searchresults div.filters div
+{
+    display: inline;
+}
+
+details#searchresults div.filters figure
+{
+    display: inline-block;
+    width: 100px;
+    text-align: center;
+    margin: 0px;
+}
+
+details#searchresults #resultsorderby
+{
+    float: right;
+}
+
+details#searchresults ul 
+{
+    float: left;
+    
+    font-size: 20px;
+    font-family: Cardo, Sans-Serif;
+    color: /*mcd*/#553e31;
+
+    margin: 0px; 
+    padding: 0px; 
+    list-style-type: none; 
+    list-style-image: none; 
+}
+
+details#searchresults li 
+{
+    display: inline-block; 
+    width: 270px;
+    height: 200px;
+    margin: 10px 15px 25px 15px;
+    border: 3px solid /*mcm*/#cdb8ab;
+}
+
+details#searchresults li div.resulthead
+{
+    height: 55px;
+    padding: 0px 0px 0px 5px;
+    background: /*mcl*/#ebe0d5;
+}
+
+details#searchresults li div.resulticons
+{
+    height: 45px;
+}
+
+details#searchresults li div.resultbody
+{
+    height: 58px;
+
+    font-size: 14px;
+    font-family: Cardo, Sans-Serif;
+    color: /*mcd*/#553e31;
+    
+    padding: 5px;
+    text-align: justify;
+}
+
+details#searchresults li div.resultfooter
+{
+    height: 32px;
+    width: 200px; /* temp */
+    
+    padding: 5px 0px 0px 5px;
+}
+
+details#searchresults li div.resultnutrition
+{
+    float: right;
+    
+    margin: -35px 10px 0px 0px;
+}
+
+
+details#searchresults li span
+{
+    display: inline-block; 
+    width: 160px;
+    height: 46px;
+    padding: 0px 5px 0px 5px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+details#searchresults li img
+{
+    float: left;
+}
+
+details#searchresults li img.ticked, details#searchresults li img.unticked
+{
+    float: right;
+}
+
+
+
+footer a
+{
+    padding: 0px 20px 0px 20px;
+    text-align: center;
+}
+
+a:hover
+{
+    text-decoration: underline;
+}
+
+a:focus
+{
+    text-decoration: underline;
+    outline: none;
+}
+
+footer p
+{
+    text-align: center;
+}
+
+hr 
+{
+    clear: both;
+}
+
+/* Styles for basic forms
+-----------------------------------------------------------*/
+input[type='button']
+{
+    font-size: 14px;
+}
+
+input[type='submit']
+{
+    font-size: 20px;
+}
+
+input[type='button'], input[type='submit']
+{
+    font-family: Cardo, Sans-Serif;
+    color: /*mcd*/#553e31;
+
+    background: /*mcl*/ #ebe0d5;
+   
+    border: 1px solid /*mcm*/ #cdb8ab;
+    border-radius: 3px;
+}
+
+input[type='button']:hover, input[type='submit']:hover
+{
+    background: #e8ddd2;
+    border: 1px solid /*mcd*/ #553e31;
+}
+
+input[type='button']:focus, input[type='submit']:focus
+{
+    background: #e8ddd2;
+    border: 1px solid /*mcd*/ #553e31;
+    outline: none;
+}
+
+fieldset {
+    border: 1px solid #ddd;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
+}
+
+legend {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+textarea {
+    min-height: 75px;
+}
+
+.editor-label {
+    margin: 1em 0 0 0;
+}
+
+.editor-field {
+    margin: 0.5em 0 0 0;
+}
+
+header .inputfield
+{
+    width: 530px;
+    text-align: right;
+    margin-left: 210px;
+}
+
+header .inputfield input
+{
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    
+    width: 300px;
+    font-size: 20px;
+    font-family: Cardo, Sans-Serif;
+    vertical-align: super;
+    color: /*mcd*/#553e31;
+    background-color: /*bgc*/#fffcf5;
+    margin-top: 0px;
+    text-align: center;
+    border-top-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 0px;
+    border-bottom-color: /*mcd*/#553e31;
+    outline: none;
+}
+
+.sortorderselect
+{
+    float: right;
+    
+    font-size: 26px;
+    font-family: Tangerine, Sans-Serif;
+    color: /*mcd*/#553e31;
+    
+    margin-top: -20px;
+}
+
+.sortorderselect a.selected
+{
+    text-decoration: underline;
+}
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}

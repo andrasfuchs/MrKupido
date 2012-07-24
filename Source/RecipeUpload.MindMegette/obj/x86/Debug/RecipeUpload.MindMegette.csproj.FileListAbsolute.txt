@@ -1,0 +1,13 @@
+C:\Work\MrKupido\Source\RecipeUpload.MindMegette\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Work\MrKupido\Source\RecipeUpload.MindMegette\bin\Debug\RecipeUpload.MindMegette.exe
+C:\Work\MrKupido\Source\RecipeUpload.MindMegette\bin\Debug\RecipeUpload.MindMegette.pdb
+C:\Work\MrKupido\Source\RecipeUpload.MindMegette\obj\x86\Debug\RecipeUpload.MindMegette.exe
+C:\Work\MrKupido\Source\RecipeUpload.MindMegette\obj\x86\Debug\RecipeUpload.MindMegette.pdb
+C:\Work\MrKupido\Source\RecipeUpload.MindMegette\bin\Debug\DataAccess.dll
+C:\Work\MrKupido\Source\RecipeUpload.MindMegette\bin\Debug\EntityFramework.dll
+C:\Work\MrKupido\Source\RecipeUpload.MindMegette\bin\Debug\Model.dll
+C:\Work\MrKupido\Source\RecipeUpload.MindMegette\bin\Debug\DataAccess.pdb
+C:\Work\MrKupido\Source\RecipeUpload.MindMegette\bin\Debug\Model.pdb
+C:\Work\MrKupido\Source\RecipeUpload.MindMegette\bin\Debug\EntityFramework.xml
+C:\Work\MrKupido\Source\RecipeUpload.MindMegette\bin\Debug\Utils.dll
+C:\Work\MrKupido\Source\RecipeUpload.MindMegette\bin\Debug\Utils.pdb

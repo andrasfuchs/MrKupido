@@ -1,0 +1,8 @@
+C:\Work\MrKupido\Source\MindmegetteReceptNepszeruseg\bin\Debug\MindmegetteReceptNepszeruseg.exe.config
+C:\Work\MrKupido\Source\MindmegetteReceptNepszeruseg\bin\Debug\MindmegetteReceptNepszeruseg.exe
+C:\Work\MrKupido\Source\MindmegetteReceptNepszeruseg\bin\Debug\MindmegetteReceptNepszeruseg.pdb
+C:\Work\MrKupido\Source\MindmegetteReceptNepszeruseg\bin\Debug\EntityFramework.dll
+C:\Work\MrKupido\Source\MindmegetteReceptNepszeruseg\bin\Debug\EntityFramework.xml
+C:\Work\MrKupido\Source\MindmegetteReceptNepszeruseg\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Work\MrKupido\Source\MindmegetteReceptNepszeruseg\obj\x86\Debug\MindmegetteReceptNepszeruseg.exe
+C:\Work\MrKupido\Source\MindmegetteReceptNepszeruseg\obj\x86\Debug\MindmegetteReceptNepszeruseg.pdb
