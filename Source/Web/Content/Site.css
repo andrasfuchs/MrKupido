@@ -72,7 +72,6 @@ header .userbar span
 {
     padding-left: 5px;
     padding-right: 5px;
-    vertical-align: middle;
 }
 
 header .searchbox
@@ -108,14 +107,20 @@ header .searchbox
 .searchbox #filters li 
 {
     display: inline-block; 
-    margin: 1px 10px 1px -1px;
+    /*min-width: 80px;*/
+    
+    margin: 5px 10px 5px -1px;
     padding: 0px 0px 0px 10px;
     border: 1px solid /*mcm*/#cdb8ab;
+    
+    text-align: justify;
 }
 
 .searchbox #filters li a
 {
+    /*float: right;*/
     display: inline; 
+    
     margin-left: 5px;
     padding: 0px 5px 0px 5px;
     background-color: /*mcl*/#ebe0d5;
@@ -142,14 +147,20 @@ header .searchbox
     margin-top: 12px;
 }
 
-article .tip
+article div.tip
 {
     text-align: center;
 }
 
-article .tip p
+article div.tip img
 {   
-    vertical-align: middle; 
+    vertical-align: middle;
+    margin-top: -8px;
+}
+
+article div.tip span
+{   
+    padding: 10px;
 }
 
 hr.single
@@ -189,7 +200,7 @@ details summary h1
 
 details summary h1:hover, details summary h1:focus
 {
-    outline: /*mcm*/#cdb8ab dotted 1px;
+    outline: /*mcm*/#cdb8ab dashed 1px;
 }
 
 details summary h2
@@ -197,12 +208,18 @@ details summary h2
     font-size: 26px;
     font-family: Tangerine, Sans-Serif;
     color: /*mcd*/#553e31;
+    
+    float: right;
+    width: auto;
+    
     text-align: right;
     margin: -70px 10px 10px 0px;
 }
 
-details#mymenu ul 
+details ul 
 {
+    float: left;
+
     font-size: 20px;
     font-family: Cardo, Sans-Serif;
     color: /*mcd*/#553e31;
@@ -215,38 +232,12 @@ details#mymenu ul
 
 details#mymenu li 
 {
-    display: inline-block; 
-    width: 270px;
     height: 55px;
-    margin: 10px 15px 5px 15px;
-    padding: 0px 0px 0px 10px;
-    border: 3px solid /*mcm*/#cdb8ab;
-    background: /*mcl*/#ebe0d5;
 }
 
-details#mymenu li.empty
+details li.empty
 {
     opacity: 0.3;
-}
-
-details#mymenu li span
-{
-    display: inline-block; 
-    width: 160px;
-    height: 46px;
-    padding: 0px 5px 0px 5px;
-    vertical-align: middle;
-    text-align: center;
-}
-
-details#mymenu li img
-{
-    float: left;
-}
-
-details#mymenu li img.ticked, details#mymenu li img.unticked
-{
-    float: right;
 }
 
 details#searchresults div.filters div
@@ -267,39 +258,98 @@ details#searchresults #resultsorderby
     float: right;
 }
 
-details#searchresults ul 
+details li 
 {
+    display: list-item; 
     float: left;
-    
-    font-size: 20px;
-    font-family: Cardo, Sans-Serif;
-    color: /*mcd*/#553e31;
-
-    margin: 0px; 
-    padding: 0px; 
-    list-style-type: none; 
-    list-style-image: none; 
-}
-
-details#searchresults li 
-{
-    display: inline-block; 
     width: 270px;
-    height: 200px;
     margin: 10px 15px 25px 15px;
     border: 3px solid /*mcm*/#cdb8ab;
 }
 
-details#searchresults li div.resulthead
+details li:not(.empty):hover, details li:not(.empty):focus
+{
+    border: 3px solid /*mcd*/#553e31;
+}
+
+details li div.resulthead
 {
     height: 55px;
-    padding: 0px 0px 0px 5px;
     background: /*mcl*/#ebe0d5;
+}
+
+details li div.resultpictures
+{
+    height: 110px;
+    background: /*bgc*/#fffcf5;
+
+    padding: 5px;
+    text-align: center;
+}
+
+details li div.resultpictures img
+{
+    padding: 5px;
+    vertical-align: middle;
+}
+
+details#searchresults li 
+{
+    height: 200px;
 }
 
 details#searchresults li div.resulticons
 {
     height: 45px;
+    text-align: center;
+}
+
+details#searchresults li div.resulticons img
+{
+    margin-left: 1px;
+    vertical-align: middle;
+}
+
+details#searchresults li div.resulticons div.preptime
+{
+    display: inline;
+    position: relative;
+}
+
+details#searchresults li div.resulticons div.preptime span
+{
+    position: absolute;
+    top: 6px;
+    left: 8px;
+
+    font-size: 18px;
+    font-family: Arial;
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: -1px -1px 0 /*mcd*/#553e31, 1px -1px 0 /*mcd*/#553e31, -1px 1px 0 /*mcd*/#553e31, 1px 1px 0 /*mcd*/#553e31;    
+}
+
+details#searchresults li div.resulticons div.versions
+{
+    display: inline;
+    position: relative;
+}
+
+details#searchresults li div.resulticons div.versions span
+{
+    position: absolute;
+    top: -2px;
+    left: 29px;
+
+    font-size: 18px;
+    font-family: Arial;
+    color: /*mcd*/#553e31;
+    font-weight: bold;
+}
+
+details#searchresults li div.resultbox
+{
+    height: 200px;
 }
 
 details#searchresults li div.resultbody
@@ -316,38 +366,53 @@ details#searchresults li div.resultbody
 
 details#searchresults li div.resultfooter
 {
-    height: 32px;
-    width: 200px; /* temp */
+    height: 27px;    
     
     padding: 5px 0px 0px 5px;
+}
+
+details#recommendations li div.resultfooter
+{
+    height: 27px;    
+    
+    padding: 5px 0px 0px 79px;
 }
 
 details#searchresults li div.resultnutrition
 {
     float: right;
     
-    margin: -35px 10px 0px 0px;
+    margin: -30px 10px 0px 0px;
 }
 
 
-details#searchresults li span
-{
-    display: inline-block; 
+details li div.title
+{   
+    display: inline-block;
     width: 160px;
-    height: 46px;
+    height: 55px;
+    
     padding: 0px 5px 0px 5px;
-    vertical-align: middle;
+    
+    vertical-align: middle;   
     text-align: center;
 }
 
-details#searchresults li img
+details li div.category
 {
     float: left;
+    width: 45px;
+    height: 45px;
+    
+    padding: 5px 0px 5px 8px;
 }
 
-details#searchresults li img.ticked, details#searchresults li img.unticked
+details li div.tick
 {
     float: right;
+    height: 25px;
+    
+    padding: 12px 9px 18px 7px;
 }
 
 

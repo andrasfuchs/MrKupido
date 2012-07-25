@@ -146,10 +146,21 @@
     <Content Include="Content\images\hr_double.png" />
     <Content Include="Content\images\hr_single.png" />
     <Content Include="Content\images\mrkupidologo.png" />
+    <Content Include="Content\images\resulticon_empty.png" />
     <Content Include="Content\images\ticked.png" />
     <Content Include="Content\images\unticked.png" />
-    <Content Include="Content\svg\star_test.svg" />
-    <Content Include="Content\svg\star_test_tiny12.svg" />
+    <Content Include="Content\svg\bulb.svg" />
+    <Content Include="Content\svg\cat_maindish_dark.svg" />
+    <Content Include="Content\svg\cat_maindish_light.svg" />
+    <Content Include="Content\svg\clock_15.svg" />
+    <Content Include="Content\svg\clock_30.svg" />
+    <Content Include="Content\svg\clock_45.svg" />
+    <Content Include="Content\svg\clock_60.svg" />
+    <Content Include="Content\svg\gluten_dark.svg" />
+    <Content Include="Content\svg\mrkupidologo.svg" />
+    <Content Include="Content\svg\nutrition_sample.svg" />
+    <Content Include="Content\svg\stars.svg" />
+    <Content Include="Content\svg\ticked.svg" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -224,7 +235,6 @@
     <None Include="Content\fonts\Cardo\Cardo-Regular.ttf" />
     <None Include="Content\fonts\Tangerine\Tangerine_Bold.ttf" />
     <None Include="Content\fonts\Tangerine\Tangerine_Regular.ttf" />
-    <None Include="Content\svg\star_test.svgz" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -240,7 +250,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>2365</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
