@@ -8,9 +8,18 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    @RenderBody()
-
-    @Scripts.Render("~/bundles/jquery")
-    @RenderSection("scripts", required: false)
+    <div class="wrapper">
+        @RenderBody()
+        @Scripts.Render("~/bundles/jquery")
+        @RenderSection("scripts", required: false)
+        <hr class="single" />
+        <footer>
+            <p>
+                <a href="#">főoldal</a>|<a href="#">profilom</a>|<a href="#">hírlevél</a>|<a href="#">beállításaim</a>|<a href="#">jogi nyilatkozat</a>
+            </p>
+            <p>
+                &copy; 2012 Kupido Inc. All rights reserved</p>
+        </footer>
+    </div>
 </body>
 </html>

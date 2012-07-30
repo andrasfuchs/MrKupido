@@ -6,19 +6,34 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MrKupido.Model
 {
-    public class Recipe
+    public class Recipe : FilterItem
     {
         public int RecipeId { get; set; }
-        [MaxLength(100)]
-        [MinLength(10)]
-        [StringLength(100, MinimumLength = 10)]
-        public string DisplayNameEng { get; set; }
+
         [Required]
-        [MaxLength(100)]
-        [MinLength(10)]
-        [StringLength(100, MinimumLength=10)]
-        public string UniqueNameEng { get; set; }
-        public string DisplayNameHun { get; set; }
-        public string UniqueNameHun { get; set; }
+        public int ServingTemperature { get; set; }
+
+        [Required]
+        public TimeSpan PreparationTime { get; set; }
+        [Required]
+        public TimeSpan CookingTime { get; set; }
+        
+        /// <summary>
+        /// TotalTime = PreparationTime + CookingTime + waiting
+        /// </summary>
+        [Required]
+        public TimeSpan TotalTime { get; set; }
+
+        [Required]
+        public decimal EstimatedPrice { get; set; }
+        [Required]
+        public DateTime EstimatedPriceDate { get; set; }
+
+        [Required]
+        public float Rating { get; set; }
+        [Required]
+        public int RatingCount { get; set; }
+        [Required]
+        public DateTime RatingDate { get; set; }
     }
 }

@@ -1,0 +1,1 @@
+bcp [MrKupido.DataAccess.MrKupidoContext].[dbo].[ImportedRecipes] in nul -i MrKupido_ImportedRecipes_data.csv -w -k -E -t, -w -T -S .\SQLEXPRESS

@@ -1,0 +1,1 @@
+bcp [MrKupido.DataAccess.MrKupidoContext].[dbo].[ImportedRecipes] format nul -c -x -f MrKupido_ImportedRecipes_format.xml -t, -T -S .\SQLEXPRESS

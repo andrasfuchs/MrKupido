@@ -27,10 +27,16 @@ namespace MrKupido.Web
             //);
 
             routes.MapRoute(
+                name: "AccountManagement",
+                url: "{language}/Account/{action}",
+                defaults: new { language = "hun", controller = "Account", action = "Profile" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{language}/{controller}/{id}/{action}",
                 defaults: new { language="hun", controller = "Home", id = UrlParameter.Optional, action = "Index" }
-            );
+            );        
         }
     }
 }

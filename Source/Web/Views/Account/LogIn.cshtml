@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Mr. Kupido - Log in";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<header class="nosearch">
+    <a runat="server" href="~/">
+        <img runat="server" src="~/Content/svg/mrkupidologo.svg" alt="Mr. Kupido" width="400" height="304" />
+    </a>
+</header>
+
+@using (Html.BeginForm("LogIn", "Account", FormMethod.Post, new { @id = "openIdForm" }))
+{
+    @Html.Hidden("loginIdentifier", "")
+<details id="login" open class="alwaysopen">
+    <summary>
+        <h1>
+            Log in with OpenID</h1>
+        <h2>
+            <a href="#">What is OpenID?</a>
+        </h2>
+    </summary>
+    <ul>
+        <li>
+            <a href="javascript:$('#loginIdentifier').val('https://www.google.com/accounts/o8/id'); $('#openIdForm').submit();">Log in with
+                <img runat="server" src="~/Content/svg/logo_google.svg" alt="Google" width="270px" /></a>
+        </li>
+        <li class="disabled">
+            <a href="@Url.Action("LogInWithFacebook", "Account", new { loginIdentifier = "https://www.google.com/accounts/o8/id" })">Connect with
+                <img runat="server" src="~/Content/svg/logo_facebook.svg" alt="Facebook" width="270px" /></a> 
+        </li>
+        <li class="disabled">
+            <a href="@Url.Action("LogIn", "Account", new { loginIdentifier = "https://me.yahoo.com" })">Log in with
+                    <img runat="server" src="~/Content/svg/logo_yahoo.svg" alt="Yahoo!" width="270px" /></a>
+        </li>
+        <li class="disabled">
+            <a href="@Url.Action("LogIn", "Account", new { loginIdentifier = "http://matt.wordpress.com/" })">Log in with
+                    <img runat="server" src="~/Content/svg/logo_wordpress.svg" alt="Wordpress" width="270px" /></a> 
+        </li>
+        <li class="disabled">
+            <a href="@Url.Action("LogIn", "Account", new { loginIdentifier = "http://www.flickr.com/username" })">Log in with                    
+                <img runat="server" src="~/Content/svg/logo_flickr.svg" alt="Flickr" width="270px" /></a>
+        </li>
+        <li class="disabled">
+            <a href="@Url.Action("LogIn", "Account", new { loginIdentifier = "http://www.flickr.com/username" })">Log in with                    
+                    <img runat="server" src="~/Content/svg/logo_twitter.svg" alt="Twitter" width="270px" /></a>
+        </li>
+    </ul>
+    <div class="openidoption">
+        OR<br />
+        <br />
+        you can enter your openID manually</div>
+    <div class="openid">
+        <img runat="server" src="~/Content/svg/logo_openid.svg" alt="OpenID" width="270px" />
+        <input type="text" name="loginIdentifier" placeholder="(like https://www.google.com/accounts/o8/id)" />
+        <input type="button" value="Log in" onclick="javascript:$('#openIdForm').submit();" />
+    </div>
+</details>
+
+}

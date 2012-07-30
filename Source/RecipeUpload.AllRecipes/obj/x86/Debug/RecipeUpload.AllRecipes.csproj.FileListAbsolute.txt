@@ -1,4 +1,3 @@
-C:\Work\MrKupido\Source\RecipeUpload.AllRecipes\obj\x86\Debug\ResolveAssemblyReference.cache
 C:\Work\MrKupido\Source\RecipeUpload.AllRecipes\bin\Debug\RecipeUpload.AllRecipes.exe
 C:\Work\MrKupido\Source\RecipeUpload.AllRecipes\bin\Debug\RecipeUpload.AllRecipes.pdb
 C:\Work\MrKupido\Source\RecipeUpload.AllRecipes\bin\Debug\DataAccess.dll
@@ -12,3 +11,4 @@ C:\Work\MrKupido\Source\RecipeUpload.AllRecipes\obj\x86\Debug\RecipeUpload.AllRe
 C:\Work\MrKupido\Source\RecipeUpload.AllRecipes\bin\Debug\RecipeUpload.AllRecipes.exe.config
 C:\Work\MrKupido\Source\RecipeUpload.AllRecipes\bin\Debug\Utils.dll
 C:\Work\MrKupido\Source\RecipeUpload.AllRecipes\bin\Debug\Utils.pdb
+C:\Work\MrKupido\Source\RecipeUpload.AllRecipes\obj\x86\Debug\RecipeUpload.AllRecipes.csprojResolveAssemblyReference.cache

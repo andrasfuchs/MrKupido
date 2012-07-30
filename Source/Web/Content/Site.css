@@ -52,6 +52,12 @@ header, footer, nav, section {
     display: block;
 }
 
+header.nosearch
+{
+    text-align: center;
+    margin: 40px;
+}
+
 header label
 {
     font-size: 44px;
@@ -235,9 +241,73 @@ details#mymenu li
     height: 55px;
 }
 
+details#login li
+{
+    padding: 10px;
+    height: 130px;
+    width: 250px;
+    text-align: center;
+}
+
+details#login img
+{
+    vertical-align: middle;
+    max-width: 230px;
+    max-height: 90px;
+    padding: 10px;
+}
+
+details div.openidoption
+{
+    font-size: 22px;
+    font-family: Cardo, Sans-Serif;
+    color: /*mcd*/#553e31;
+
+    text-align: center;    
+}
+
+details div.openid
+{
+    width: 960px;
+    text-align: center;
+    margin-top: 30px;
+}
+
+details div.openid img
+{
+    vertical-align: middle;
+    margin-top: -30px;
+}
+
+details div.openid input[type='text']
+{
+    width: 400px;
+}
+
 details li.empty
 {
     opacity: 0.3;
+}
+
+details li.disabled
+{
+    opacity: 0.3;
+}
+
+details li.disabled a
+{
+    pointer-events: none;
+    cursor: default;
+}
+
+details.alwaysopen
+{
+    
+}
+
+details.alwaysopen summary
+{
+    pointer-events: none;
 }
 
 details#searchresults div.filters div
@@ -267,7 +337,7 @@ details li
     border: 3px solid /*mcm*/#cdb8ab;
 }
 
-details li:not(.empty):hover, details li:not(.empty):focus
+details li:not(.disabled):hover, details li:not(.disabled):focus
 {
     border: 3px solid /*mcd*/#553e31;
 }
@@ -385,6 +455,66 @@ details#searchresults li div.resultnutrition
     margin: -30px 10px 0px 0px;
 }
 
+div#profile details li 
+{
+    margin: 5px;
+    margin-left: 80px;
+    border: 0px;
+    width: 800px;
+    border: 1px dotted /*mcl*/ #ebe0d5;
+}
+
+div#profile details li:hover
+{
+    border: 1px dotted /*mcm*/#cdb8ab;
+}
+
+div#profile details li div.label
+{
+    float: left;
+    
+    width: 380px;
+    text-align: right;
+}
+
+div#profile details li div.input
+{
+    float: right;
+    
+    width: 380px;
+    text-align: left;
+}
+
+div#profile details li div.input input
+{
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    
+    width: 300px;
+    font-size: 20px;
+    font-family: Cardo, Sans-Serif;
+    vertical-align: super;
+    color: /*mcd*/#553e31;
+    background-color: /*bgc*/#fffcf5;
+    background-color: /*mcl*/#ebe0d5;
+    margin-top: 0px;
+    text-align: center;
+    border-top-color: /*mcl*/#ebe0d5;
+    border-right-color: /*mcl*/#ebe0d5;
+    border-bottom-color: /*mcd*/#553e31;
+    border-left-color: /*mcl*/#ebe0d5;
+    border-top-width: 0px;
+    border-right-width: 0px;
+    border-bottom-width: 2px;
+    border-left-width: 0px;
+    outline: none;
+}
+
+div#profile details li div.input input:disabled
+{
+    color: /*mcd*/#553e31;
+    background-color: /*mcm*/#cdb8ab;
+}
 
 details li div.title
 {   

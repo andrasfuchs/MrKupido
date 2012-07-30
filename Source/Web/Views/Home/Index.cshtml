@@ -2,11 +2,11 @@
     ViewBag.Title = "Mr. Kupido";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="wrapper">
     <header>
         <img runat="server" src="~/Content/svg/mrkupidologo.svg" alt="Mr. Kupido" width="200" height="152" />
         <p class="userbar">
-            <span id="name">Andras Fuchs</span><span id="messages">0</span><img runat="server" src="~/Content/images/avatar.jpg" alt="Avatar" width="51" height="51" /></p>
+            <span id="login"><a runat="server" href="~/hun/Account/LogIn">Log in</a></span>
+            <span id="name"><a runat="server" href="~/hun/Account/Profile">Andras Fuchs</a></span><span id="messages">0</span><img runat="server" src="~/Content/images/avatar.jpg" alt="Avatar" width="51" height="51" /></p>
         <div class="searchbox">
             <p class="inputfield">
                 <label for="location">
@@ -111,11 +111,11 @@
                         </div>
                     </div>
                 </li>
-                <li class="empty"></li>
-                <li class="empty"></li>
-                <li class="empty"></li>
-                <li class="empty"></li>
-                <li class="empty"></li>
+                <li class="disabled"></li>
+                <li class="disabled"></li>
+                <li class="disabled"></li>
+                <li class="disabled"></li>
+                <li class="disabled"></li>
             </ul>
         </details>
         <hr class="double" />
@@ -319,20 +319,11 @@
                             <img runat="server" src="~/Content/svg/nutrition_sample.svg" alt="tápérték" width="131px" height="47px" />
                         </div>
                     </li>
-                    <li class="empty"></li>
-                    <li class="empty"></li>
-                    <li class="empty"></li>
-                    <li class="empty"></li>
+                    <li class="disabled"></li>
+                    <li class="disabled"></li>
+                    <li class="disabled"></li>
+                    <li class="disabled"></li>
                 </ul>
             </div>
         </details>
     </article>
-    <hr class="single" />
-    <footer>
-        <p>
-            <a href="#">főoldal</a>|<a href="#">profilom</a>|<a href="#">hírlevél</a>|<a href="#">beállításaim</a>|<a href="#">jogi nyilatkozat</a>
-        </p>
-        <p>
-            &copy; 2012 Kupido Inc. All rights reserved</p>
-    </footer>
-</div>
