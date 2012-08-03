@@ -5,3 +5,4 @@ C:\Work\MrKupido\Source\MindmegetteReceptNepszeruseg\bin\Debug\EntityFramework.d
 C:\Work\MrKupido\Source\MindmegetteReceptNepszeruseg\bin\Debug\EntityFramework.xml
 C:\Work\MrKupido\Source\MindmegetteReceptNepszeruseg\obj\x86\Debug\MindmegetteReceptNepszeruseg.exe
 C:\Work\MrKupido\Source\MindmegetteReceptNepszeruseg\obj\x86\Debug\MindmegetteReceptNepszeruseg.pdb
+C:\Work\MrKupido\Source\MindmegetteReceptNepszeruseg\obj\x86\Debug\Mindmegette.ReceptNepszeruseg.csprojResolveAssemblyReference.cache

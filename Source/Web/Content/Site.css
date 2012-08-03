@@ -43,7 +43,7 @@ a:link, a:visited {
 {
     padding: 40px;
     margin: 20px auto 20px auto;
-    width: 960px;
+    width: 880px;
     background-color: /*bgc*/#fffcf5;
     box-shadow: 0 0 30px #000000;
 }
@@ -94,10 +94,10 @@ header .searchbox
     margin-top: -50px;
 }
 
-.searchbox #filters
+.searchbox div#filters
 {
     float: right;
-    width: 620px;
+    width: 540px;
     height: 50px; 
 }
 
@@ -300,11 +300,6 @@ details li.disabled a
     cursor: default;
 }
 
-details.alwaysopen
-{
-    
-}
-
 details.alwaysopen summary
 {
     pointer-events: none;
@@ -333,7 +328,7 @@ details li
     display: list-item; 
     float: left;
     width: 270px;
-    margin: 10px 15px 25px 15px;
+    margin: 0px 5px 15px 5px;
     border: 3px solid /*mcm*/#cdb8ab;
 }
 
@@ -366,6 +361,7 @@ details li div.resultpictures img
 details#searchresults li 
 {
     height: 200px;
+    margin-bottom: 30px;
 }
 
 details#searchresults li div.resulticons
@@ -608,6 +604,12 @@ input[type='button']:focus, input[type='submit']:focus
     background: #e8ddd2;
     border: 1px solid /*mcd*/ #553e31;
     outline: none;
+}
+
+div.formbuttons
+{
+    width: 960px;
+    text-align: center;
 }
 
 fieldset {

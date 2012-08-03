@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "FormatIngredients";
+}
+<h1>
+    Format Ingredients</h1>
+<h2>
+    1. Select language</h2>
+<select id="language">
+    <option>English</option>
+    <option>Hungarian</option>
+</select>
+<h2>
+    2. Select imported recipe</h2>
+<select id="recipes" size="5">
+</select>
+<h2>
+    3. Select edit ingredients</h2>
+<textarea id="ingredients" rows="5" cols="30"></textarea>
+<input id="saveingredients" type="button" value="Save" />
+<h2>
+    4. Check if all ingredients are recognized corretly</h2>
+<table id="ingredienttable">
+@*
+     @Html.RenderPartial("MyPartialView")
+
+*@
+</table>

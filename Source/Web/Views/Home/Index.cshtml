@@ -2,328 +2,336 @@
     ViewBag.Title = "Mr. Kupido";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-    <header>
-        <img runat="server" src="~/Content/svg/mrkupidologo.svg" alt="Mr. Kupido" width="200" height="152" />
-        <p class="userbar">
+<header>
+    <img runat="server" src="~/Content/svg/mrkupidologo.svg" alt="Mr. Kupido" width="200" height="152" />
+    <p class="userbar">
+        @if (Session["CurrentUser"] == null)
+        {
             <span id="login"><a runat="server" href="~/hun/Account/LogIn">Log in</a></span>
-            <span id="name"><a runat="server" href="~/hun/Account/Profile">Andras Fuchs</a></span><span id="messages">0</span><img runat="server" src="~/Content/images/avatar.jpg" alt="Avatar" width="51" height="51" /></p>
-        <div class="searchbox">
-            <p class="inputfield">
-                <label for="location">
-                    Helyszin:</label>
-                <input id="location" type="text" placeholder="(jelenleg ismeretlen)" />
-            </p>
-            <p class="inputfield">
-                <label for="query">
-                    Keresnivaló:</label>
-                <input id="query" type="search" placeholder="(hozzávaló, diéta, eszköz)" autofocus />
-            </p>
-            <input id="search" type="submit" value="Keresés" />
-            <div id="deleteall">
-                <input type="button" value="Mindent töröl" />
-            </div>
-            <div id="filters">
-                <ul>
-                    <li>+ krumpli <a href="#">x</a></li>
-                    <li>+ liszt <a href="#">x</a></li>
-                    <li>+ cukor <a href="#">x</a></li>
-                    <li>- spenót <a href="#">x</a></li>
-                    <li>+ répa <a href="#">x</a></li>
-                    <li>+ csirke <a href="#">x</a></li>
-                    <li>- paprika <a href="#">x</a></li>
-                    <li>+ sütő <a href="#">x</a></li>
-                    <li>+ paleolit <a href="#">x</a></li>
-                    <li>- gesztenye <a href="#">x</a></li>
-                </ul>
-            </div>
+        }
+        @if (Session["CurrentUser"] != null)
+        {
+            <span id="name"><a runat="server" href="~/hun/Account/Profile">@Session["CurrentUser.DisplayName"]</a></span><span id="messages">0</span>
+            <img runat="server" src="~/Content/images/avatar.jpg" alt="Avatar" width="51" height="51" />
+        }
+    </p>
+    <div class="searchbox">
+        <p class="inputfield">
+            <label for="location">
+                Helyszin:</label>
+            <input id="location" type="text" placeholder="(jelenleg ismeretlen)" />
+        </p>
+        <p class="inputfield">
+            <label for="query">
+                Keresnivaló:</label>
+            <input id="query" type="search" placeholder="(hozzávaló, diéta, eszköz)" autofocus />
+        </p>
+        <input id="search" type="submit" value="Keresés" />
+        <div id="deleteall">
+            <input type="button" value="Mindent töröl" />
         </div>
-    </header>
-    <hr class="single" />
-    <article>
-        <div class="tip">
-            <p>
-                <img runat="server" src="~/Content/svg/bulb.svg" alt="Tipp" width="20" height="30" />
-                <span>Szűrőket használva leegyszerűsíthetjük a keresést. Próbálkozz hozzávalóval, diétával vagy az étel nevével.</span>
-            </p>
+        <div id="filters">
+            <ul>
+                <li>+ krumpli <a href="#">x</a></li>
+                <li>+ liszt <a href="#">x</a></li>
+                <li>+ cukor <a href="#">x</a></li>
+                <li>- spenót <a href="#">x</a></li>
+                <li>+ répa <a href="#">x</a></li>
+                <li>+ csirke <a href="#">x</a></li>
+                <li>- paprika <a href="#">x</a></li>
+                <li>+ sütő <a href="#">x</a></li>
+                <li>+ paleolit <a href="#">x</a></li>
+                <li>- gesztenye <a href="#">x</a></li>
+            </ul>
         </div>
-        <hr class="double" />
-        <details id="mymenu">
-            <summary>
-                <h1>
-                    Saját menüm</h1>
-                <h2>
-                    (4 étel)</h2>
-            </summary>
+    </div>
+</header>
+<hr class="single" />
+<article>
+    <div class="tip">
+        <p>
+            <img runat="server" src="~/Content/svg/bulb.svg" alt="Tipp" width="20" height="30" />
+            <span>Szűrőket használva leegyszerűsíthetjük a keresést. Próbálkozz hozzávalóval, diétával vagy az étel nevével.</span>
+        </p>
+    </div>
+    <hr class="double" />
+    <details id="mymenu">
+        <summary>
+            <h1>
+                Saját menüm</h1>
+            <h2>
+                (4 étel)</h2>
+        </summary>
+        <ul>
+            <li>
+                <div class="resulthead">
+                    <div class="category">
+                        <img runat="server" src="~/Content/svg/cat_maindish_light.svg" alt="Sertés" width="45px" height="30px" />
+                    </div>
+                    <div class="title">
+                        Paprikás krumpli
+                    </div>
+                    <div class="tick">
+                        <a href="#">
+                            <img runat="server" src="~/Content/svg/tick_on.svg" alt="Töröl" width="25px" height="25px" /></a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="resulthead">
+                    <div class="category">
+                        <img runat="server" src="~/Content/svg/cat_maindish_light.svg" alt="Sertés" width="45px" height="30px" />
+                    </div>
+                    <div class="title">
+                        Bundáskenyér
+                    </div>
+                    <div class="tick">
+                        <a href="#">
+                            <img runat="server" src="~/Content/svg/tick_on.svg" alt="Töröl" width="25px" height="25px" /></a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="resulthead">
+                    <div class="category">
+                        <img runat="server" src="~/Content/svg/cat_maindish_light.svg" alt="Sertés" width="45px" height="30px" />
+                    </div>
+                    <div class="title">
+                        Csirkecomb mustármártásban
+                    </div>
+                    <div class="tick">
+                        <a href="#">
+                            <img runat="server" src="~/Content/svg/tick_on.svg" alt="Töröl" width="25px" height="25px" /></a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="resulthead">
+                    <div class="category">
+                        <img runat="server" src="~/Content/svg/cat_maindish_light.svg" alt="Sertés" width="45px" height="30px" />
+                    </div>
+                    <div class="title">
+                        Gombás sült csirkecomb
+                    </div>
+                    <div class="tick">
+                        <a href="#">
+                            <img runat="server" src="~/Content/svg/tick_on.svg" alt="Töröl" width="25px" height="25px" /></a>
+                    </div>
+                </div>
+            </li>
+            <li class="disabled"></li>
+            <li class="disabled"></li>
+            <li class="disabled"></li>
+            <li class="disabled"></li>
+            <li class="disabled"></li>
+        </ul>
+    </details>
+    <hr class="double" />
+    <details id="recommendations" open>
+        <summary>
+            <h1>
+                Ajánlásaink</h1>
+            <h2>
+                (15 étel)</h2>
+        </summary>
+        <ul>
+            <li>
+                <div class="resultbox">
+                    <div class="resulthead">
+                        <div class="category">
+                            <img runat="server" src="~/Content/svg/cat_maindish_light.svg" alt="Sertés" width="45px" height="30px" />
+                        </div>
+                        <div class="title">
+                            Sajtban sült tojás
+                        </div>
+                        <div class="tick">
+                            <a href="#">
+                                <img runat="server" src="~/Content/svg/tick_off.svg" alt="Töröl" width="25px" height="25px" /></a>
+                        </div>
+                    </div>
+                    <div class="resultpictures">
+                        <img runat="server" src="~/Content/recipe_images/sajtban-sult-tojas_01.jpg" alt="Sajtban sült tojás - kép 01" width="100px" />
+                        <img runat="server" src="~/Content/recipe_images/sajtban-sult-tojas_02.jpg" alt="Sajtban sült tojás - kép 02" width="100px" />
+                    </div>
+                    <div class="resultbody">
+                        <div class="resultfooter">
+                            <img runat="server" src="~/Content/svg/stars_35.svg" alt="3.5 csillag" width="111px" height="20px" />
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="resultbox">
+                    <div class="resulthead">
+                        <div class="category">
+                            <img runat="server" src="~/Content/svg/cat_maindish_light.svg" alt="Sertés" width="45px" height="30px" />
+                        </div>
+                        <div class="title">
+                            Cézár saláta
+                        </div>
+                        <div class="tick">
+                            <a href="#">
+                                <img runat="server" src="~/Content/svg/tick_off.svg" alt="Töröl" width="25px" height="25px" /></a>
+                        </div>
+                    </div>
+                    <div class="resultpictures">
+                        <img runat="server" src="~/Content/recipe_images/cezar-salata_01.jpg" alt="Cézár saláta - kép 01" width="100px" />
+                        <img runat="server" src="~/Content/recipe_images/cezar-salata_02.jpg" alt="Cézár saláta - kép 02" width="100px" />
+                    </div>
+                    <div class="resultbody">
+                        <div class="resultfooter">
+                            <img runat="server" src="~/Content/svg/stars_45.svg" alt="4.5 csillag" width="111px" height="20px" />
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="resultbox">
+                    <div class="resulthead">
+                        <div class="category">
+                            <img runat="server" src="~/Content/svg/cat_maindish_light.svg" alt="Sertés" width="45px" height="30px" />
+                        </div>
+                        <div class="title">
+                            Pizza
+                        </div>
+                        <div class="tick">
+                            <a href="#">
+                                <img runat="server" src="~/Content/svg/tick_off.svg" alt="Töröl" width="25px" height="25px" /></a>
+                        </div>
+                    </div>
+                    <div class="resultpictures">
+                        <img runat="server" src="~/Content/recipe_images/pizza_01.jpg" alt="Pizza - kép 01" width="100px" />
+                        <img runat="server" src="~/Content/recipe_images/pizza_02.jpg" alt="Pizza - kép 02" width="100px" />
+                    </div>
+                    <div class="resultbody">
+                        <div class="resultfooter">
+                            <img runat="server" src="~/Content/svg/stars_50.svg" alt="2.5 csillag" width="111px" height="20px" />
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </details>
+    <hr class="double" />
+    <details id="searchresults">
+        <summary>
+            <h1>
+                Találatok</h1>
+            <h2>
+                (135 étel)</h2>
+        </summary>
+        <hr class="single" />
+        <div class="filters">
+            <figure>
+                <a id="filter01" href="#">
+                    <img runat="server" src="~/Content/svg/cat_maindish_light.svg" alt="előétel" width="45px" height="30px" />
+                    <figcaption>előétel (+11)</figcaption>
+                </a>
+            </figure>
+            <figure>
+                <a id="filter02" href="#">
+                    <img runat="server" src="~/Content/svg/cat_maindish_dark.svg" alt="leves" width="45px" height="30px" /><figcaption>leves (-5)</figcaption></a>
+            </figure>
+            <figure>
+                <a id="filter03" href="#">
+                    <img runat="server" src="~/Content/svg/cat_maindish_light.svg" alt="főétel" width="45px" height="30px" /><figcaption>főétel (+32)</figcaption></a>
+            </figure>
+            <figure>
+                <a id="filter04" href="#">
+                    <img runat="server" src="~/Content/svg/cat_maindish_light.svg" alt="desszert" width="45px" height="30px" /><figcaption>desszert (+3)</figcaption></a>
+            </figure>
+            <figure>
+                <a id="filter05" href="#">
+                    <img runat="server" src="~/Content/svg/cat_maindish_light.svg" alt="ital" width="45px" height="30px" /><figcaption>ital (+1)</figcaption></a>
+            </figure>
+        </div>
+        <div class="sortorderselect">
+            <a href="#">név</a> - <a href="#">idö</a> - <a href="#" class="selected">értékelés</a> - <a href="#">típus</a>
+        </div>
+        <hr class="single" />
+        <div>
             <ul>
                 <li>
-                    <div class="resulthead">
-                        <div class="category">
-                            <img runat="server" src="~/Content/svg/cat_maindish_light.svg" alt="Sertés" width="45px" height="30px" />
+                    <div class="resultbox">
+                        <div class="resulthead">
+                            <div class="category">
+                                <img runat="server" src="~/Content/svg/cat_maindish_light.svg" alt="Sertés" width="45px" height="30px" />
+                            </div>
+                            <div class="title">
+                                Paprikás krumpli mézzel
+                            </div>
+                            <div class="tick">
+                                <a href="#">
+                                    <img runat="server" src="~/Content/svg/tick_off.svg" alt="Töröl" width="25px" height="25px" /></a>
+                            </div>
                         </div>
-                        <div class="title">
-                            Paprikás krumpli
+                        <div class="resulticons">
+                            <div class="preptime">
+                                <img runat="server" src="~/Content/svg/clock_15.svg" alt="13 perc" width="35px" height="35px" />
+                                <span>13</span>
+                            </div>
+                            <img runat="server" src="~/Content/svg/clock_30.svg" alt="30 perc" width="35px" height="35px" />
+                            <img runat="server" src="~/Content/svg/gluten_dark.svg" alt="30 perc" width="35px" height="35px" />
+                            <img runat="server" src="~/Content/svg/clock_45.svg" alt="30 perc" width="35px" height="35px" />
+                            <img runat="server" src="~/Content/images/resulticon_photos.png" alt="30 perc" width="40px" height="45px" />
+                            <div class="versions">
+                                <img runat="server" src="~/Content/svg/versions.svg" alt="11 változat" width="50px" height="45px" />
+                                <span>11</span>
+                            </div>
                         </div>
-                        <div class="tick">
-                            <a href="#">
-                                <img runat="server" src="~/Content/svg/tick_on.svg" alt="Töröl" width="25px" height="25px" /></a>
+                        <div class="resultbody">
+                            krumpli, paprika, virsli, borsó, só, liszt, tej, disznósajt, tojás, élesztő, paradicsom, krumpli, paprika, virsli, borsó, só, liszt, tej</div>
+                        <div class="resultfooter">
+                            <img runat="server" src="~/Content/svg/stars_25.svg" alt="2.5 csillag" width="111px" height="20px" />
                         </div>
+                    </div>
+                    <div class="resultnutrition">
+                        <img runat="server" src="~/Content/svg/nutrition_sample.svg" alt="tápérték" width="131px" height="47px" />
                     </div>
                 </li>
                 <li>
-                    <div class="resulthead">
-                        <div class="category">
-                            <img runat="server" src="~/Content/svg/cat_maindish_light.svg" alt="Sertés" width="45px" height="30px" />
+                    <div class="resultbox">
+                        <div class="resulthead">
+                            <div class="category">
+                                <img runat="server" src="~/Content/svg/cat_maindish_light.svg" alt="Sertés" width="45px" height="30px" />
+                            </div>
+                            <div class="title">
+                                Paprikás krumpli lekvárral
+                            </div>
+                            <div class="tick">
+                                <a href="#">
+                                    <img runat="server" src="~/Content/svg/tick_off.svg" alt="Töröl" width="25px" height="25px" /></a>
+                            </div>
                         </div>
-                        <div class="title">
-                            Bundáskenyér
+                        <div class="resulticons">
+                            <div class="preptime">
+                                <img runat="server" src="~/Content/svg/clock_45.svg" alt="42 perc" width="35px" height="35px" />
+                                <span>42</span>
+                            </div>
+                            <img runat="server" src="~/Content/svg/clock_30.svg" alt="30 perc" width="35px" height="35px" />
+                            <img runat="server" src="~/Content/svg/gluten_dark.svg" alt="30 perc" width="35px" height="35px" />
+                            <img runat="server" src="~/Content/svg/clock_45.svg" alt="30 perc" width="35px" height="35px" />
+                            <img runat="server" src="~/Content/images/resulticon_photos.png" alt="30 perc" width="40px" height="45px" />
+                            <div class="versions">
+                                <img runat="server" src="~/Content/svg/versions.svg" alt="3 változat" width="50px" height="45px" />
+                                <span>03</span>
+                            </div>
                         </div>
-                        <div class="tick">
-                            <a href="#">
-                                <img runat="server" src="~/Content/svg/tick_on.svg" alt="Töröl" width="25px" height="25px" /></a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="resulthead">
-                        <div class="category">
-                            <img runat="server" src="~/Content/svg/cat_maindish_light.svg" alt="Sertés" width="45px" height="30px" />
-                        </div>
-                        <div class="title">
-                            Csirkecomb mustármártásban
-                        </div>
-                        <div class="tick">
-                            <a href="#">
-                                <img runat="server" src="~/Content/svg/tick_on.svg" alt="Töröl" width="25px" height="25px" /></a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="resulthead">
-                        <div class="category">
-                            <img runat="server" src="~/Content/svg/cat_maindish_light.svg" alt="Sertés" width="45px" height="30px" />
-                        </div>
-                        <div class="title">
-                            Gombás sült csirkecomb
-                        </div>
-                        <div class="tick">
-                            <a href="#">
-                                <img runat="server" src="~/Content/svg/tick_on.svg" alt="Töröl" width="25px" height="25px" /></a>
+                        <div class="resultbody">
+                            krumpli, paprika, virsli, borsó, só, liszt, tej, disznósajt, tojás, élesztő, paradicsom, krumpli, paprika, virsli, borsó, só, liszt, tej</div>
+                        <div class="resultfooter">
+                            <img runat="server" src="~/Content/svg/stars_15.svg" alt="1.5 csillag" width="111px" height="20px" />
                         </div>
                     </div>
+                    <div class="resultnutrition">
+                        <img runat="server" src="~/Content/svg/nutrition_sample.svg" alt="tápérték" width="131px" height="47px" />
+                    </div>
                 </li>
-                <li class="disabled"></li>
                 <li class="disabled"></li>
                 <li class="disabled"></li>
                 <li class="disabled"></li>
                 <li class="disabled"></li>
             </ul>
-        </details>
-        <hr class="double" />
-        <details  id="recommendations" open>
-            <summary>
-                <h1>
-                    Ajánlásaink</h1>
-                <h2>
-                    (15 étel)</h2>
-            </summary>
-            <ul>
-                <li>
-                    <div class="resultbox">
-                        <div class="resulthead">
-                            <div class="category">
-                                <img runat="server" src="~/Content/svg/cat_maindish_light.svg" alt="Sertés" width="45px" height="30px" />
-                            </div>
-                            <div class="title">
-                                Sajtban sült tojás
-                            </div>
-                            <div class="tick">
-                                <a href="#">
-                                    <img runat="server" src="~/Content/svg/tick_off.svg" alt="Töröl" width="25px" height="25px" /></a>
-                            </div>
-                        </div>
-                        <div class="resultpictures">
-                            <img runat="server" src="~/Content/recipe_images/sajtban-sult-tojas_01.jpg" alt="Sajtban sült tojás - kép 01" width="100px"/>
-                            <img runat="server" src="~/Content/recipe_images/sajtban-sult-tojas_02.jpg" alt="Sajtban sült tojás - kép 02" width="100px"/>
-                        </div>
-                        <div class="resultbody">
-                            <div class="resultfooter">
-                                <img runat="server" src="~/Content/svg/stars_35.svg" alt="3.5 csillag" width="111px" height="20px" />
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="resultbox">
-                        <div class="resulthead">
-                            <div class="category">
-                                <img runat="server" src="~/Content/svg/cat_maindish_light.svg" alt="Sertés" width="45px" height="30px" />
-                            </div>
-                            <div class="title">
-                                Cézár saláta
-                            </div>
-                            <div class="tick">
-                                <a href="#">
-                                    <img runat="server" src="~/Content/svg/tick_off.svg" alt="Töröl" width="25px" height="25px" /></a>
-                            </div>
-                        </div>
-                        <div class="resultpictures">
-                            <img runat="server" src="~/Content/recipe_images/cezar-salata_01.jpg" alt="Cézár saláta - kép 01" width="100px"/>
-                            <img runat="server" src="~/Content/recipe_images/cezar-salata_02.jpg" alt="Cézár saláta - kép 02" width="100px"/>
-                        </div>
-                        <div class="resultbody">
-                            <div class="resultfooter">
-                                <img runat="server" src="~/Content/svg/stars_45.svg" alt="4.5 csillag" width="111px" height="20px" />
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="resultbox">
-                        <div class="resulthead">
-                            <div class="category">
-                                <img runat="server" src="~/Content/svg/cat_maindish_light.svg" alt="Sertés" width="45px" height="30px" />
-                            </div>
-                            <div class="title">
-                                Pizza
-                            </div>
-                            <div class="tick">
-                                <a href="#">
-                                    <img runat="server" src="~/Content/svg/tick_off.svg" alt="Töröl" width="25px" height="25px" /></a>
-                            </div>
-                        </div>
-                        <div class="resultpictures">
-                            <img runat="server" src="~/Content/recipe_images/pizza_01.jpg" alt="Pizza - kép 01" width="100px"/>
-                            <img runat="server" src="~/Content/recipe_images/pizza_02.jpg" alt="Pizza - kép 02" width="100px"/>
-                        </div>
-                        <div class="resultbody">
-                            <div class="resultfooter">
-                                <img runat="server" src="~/Content/svg/stars_50.svg" alt="2.5 csillag" width="111px" height="20px" />
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </details>
-        <hr class="double" />
-        <details id="searchresults">
-            <summary>
-                <h1>
-                    Találatok</h1>
-                <h2>
-                    (135 étel)</h2>
-            </summary>
-            <hr class="single" />
-            <div class="filters">
-                <figure>
-                    <a id="filter01" href="#">
-                        <img runat="server" src="~/Content/svg/cat_maindish_light.svg" alt="előétel" width="45px" height="30px" />
-                        <figcaption>előétel (+11)</figcaption>
-                    </a>
-                </figure>
-                <figure>
-                    <a id="filter02" href="#">
-                        <img runat="server" src="~/Content/svg/cat_maindish_dark.svg" alt="leves" width="45px" height="30px" /><figcaption>leves (-5)</figcaption></a>
-                </figure>
-                <figure>
-                    <a id="filter03" href="#">
-                        <img runat="server" src="~/Content/svg/cat_maindish_light.svg" alt="főétel" width="45px" height="30px" /><figcaption>főétel (+32)</figcaption></a>
-                </figure>
-                <figure>
-                    <a id="filter04" href="#">
-                        <img runat="server" src="~/Content/svg/cat_maindish_light.svg" alt="desszert" width="45px" height="30px" /><figcaption>desszert (+3)</figcaption></a>
-                </figure>
-                <figure>
-                    <a id="filter05" href="#">
-                        <img runat="server" src="~/Content/svg/cat_maindish_light.svg" alt="ital" width="45px" height="30px" /><figcaption>ital (+1)</figcaption></a>
-                </figure>
-            </div>
-            <div class="sortorderselect">
-                <a href="#">név</a> - <a href="#">idö</a> - <a href="#" class="selected">értékelés</a> - <a href="#">típus</a>
-            </div>
-            <hr class="single" />
-            <div>
-                <ul>
-                    <li>
-                        <div class="resultbox">
-                            <div class="resulthead">
-                                <div class="category">
-                                    <img runat="server" src="~/Content/svg/cat_maindish_light.svg" alt="Sertés" width="45px" height="30px" />
-                                </div>
-                                <div class="title">
-                                    Paprikás krumpli mézzel
-                                </div>
-                                <div class="tick">
-                                    <a href="#">
-                                        <img runat="server" src="~/Content/svg/tick_off.svg" alt="Töröl" width="25px" height="25px" /></a>
-                                </div>
-                            </div>
-                            <div class="resulticons">
-                                <div class="preptime">
-                                    <img runat="server" src="~/Content/svg/clock_15.svg" alt="13 perc" width="35px" height="35px" />
-                                    <span>13</span>
-                                </div>
-                                <img runat="server" src="~/Content/svg/clock_30.svg" alt="30 perc" width="35px" height="35px" />
-                                <img runat="server" src="~/Content/svg/gluten_dark.svg" alt="30 perc" width="35px" height="35px" />
-                                <img runat="server" src="~/Content/svg/clock_45.svg" alt="30 perc" width="35px" height="35px" />
-                                <img runat="server" src="~/Content/images/resulticon_photos.png" alt="30 perc" width="40px" height="45px" />
-                                <div class="versions">
-                                    <img runat="server" src="~/Content/svg/versions.svg" alt="11 változat" width="50px" height="45px" />
-                                    <span>11</span>
-                                </div>
-                            </div>
-                            <div class="resultbody">
-                                krumpli, paprika, virsli, borsó, só, liszt, tej, disznósajt, tojás, élesztő, paradicsom, krumpli, paprika, virsli, borsó, só, liszt, tej</div>
-                            <div class="resultfooter">
-                                <img runat="server" src="~/Content/svg/stars_25.svg" alt="2.5 csillag" width="111px" height="20px" />
-                            </div>
-                        </div>
-                        <div class="resultnutrition">
-                            <img runat="server" src="~/Content/svg/nutrition_sample.svg" alt="tápérték" width="131px" height="47px" />
-                        </div>
-                    </li>
-                    <li>
-                        <div class="resultbox">
-                            <div class="resulthead">
-                                <div class="category">
-                                    <img runat="server" src="~/Content/svg/cat_maindish_light.svg" alt="Sertés" width="45px" height="30px" />
-                                </div>
-                                <div class="title">
-                                    Paprikás krumpli lekvárral
-                                </div>
-                                <div class="tick">
-                                    <a href="#">
-                                        <img runat="server" src="~/Content/svg/tick_off.svg" alt="Töröl" width="25px" height="25px" /></a>
-                                </div>
-                            </div>
-                            <div class="resulticons">
-                                <div class="preptime">
-                                    <img runat="server" src="~/Content/svg/clock_45.svg" alt="42 perc" width="35px" height="35px" />
-                                    <span>42</span>
-                                </div>
-                                <img runat="server" src="~/Content/svg/clock_30.svg" alt="30 perc" width="35px" height="35px" />
-                                <img runat="server" src="~/Content/svg/gluten_dark.svg" alt="30 perc" width="35px" height="35px" />
-                                <img runat="server" src="~/Content/svg/clock_45.svg" alt="30 perc" width="35px" height="35px" />
-                                <img runat="server" src="~/Content/images/resulticon_photos.png" alt="30 perc" width="40px" height="45px" />
-                                <div class="versions">
-                                    <img runat="server" src="~/Content/svg/versions.svg" alt="3 változat" width="50px" height="45px" />
-                                    <span>03</span>
-                                </div>
-                            </div>
-                            <div class="resultbody">
-                                krumpli, paprika, virsli, borsó, só, liszt, tej, disznósajt, tojás, élesztő, paradicsom, krumpli, paprika, virsli, borsó, só, liszt, tej</div>
-                            <div class="resultfooter">
-                                <img runat="server" src="~/Content/svg/stars_15.svg" alt="1.5 csillag" width="111px" height="20px" />
-                            </div>
-                        </div>
-                        <div class="resultnutrition">
-                            <img runat="server" src="~/Content/svg/nutrition_sample.svg" alt="tápérték" width="131px" height="47px" />
-                        </div>
-                    </li>
-                    <li class="disabled"></li>
-                    <li class="disabled"></li>
-                    <li class="disabled"></li>
-                    <li class="disabled"></li>
-                </ul>
-            </div>
-        </details>
-    </article>
+        </div>
+    </details>
+</article>

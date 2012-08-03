@@ -1,0 +1,96 @@
+﻿@model MrKupido.Model.Ingredient
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Ingredient</legend>
+
+        @Html.HiddenFor(model => model.IngredientId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ExpirationTime)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ExpirationTime)
+            @Html.ValidationMessageFor(model => model.ExpirationTime)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StorageTemperature)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StorageTemperature)
+            @Html.ValidationMessageFor(model => model.StorageTemperature)
+        </div>
+
+        @Html.HiddenFor(model => model.FilterItemId)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NameEng)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NameEng)
+            @Html.ValidationMessageFor(model => model.NameEng)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NameHun)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NameHun)
+            @Html.ValidationMessageFor(model => model.NameHun)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UniqueNameEng)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UniqueNameEng)
+            @Html.ValidationMessageFor(model => model.UniqueNameEng)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.UniqueNameHun)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.UniqueNameHun)
+            @Html.ValidationMessageFor(model => model.UniqueNameHun)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Index)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Index)
+            @Html.ValidationMessageFor(model => model.Index)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ClassName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ClassName)
+            @Html.ValidationMessageFor(model => model.ClassName)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

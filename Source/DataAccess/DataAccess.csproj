@@ -54,6 +54,50 @@
     <Compile Include="Migrations\201207301748562_MrKupido_20120730b.Designer.cs">
       <DependentUpon>201207301748562_MrKupido_20120730b.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201207310951508_MrKupido_20120731a.cs" />
+    <Compile Include="Migrations\201207310951508_MrKupido_20120731a.Designer.cs">
+      <DependentUpon>201207310951508_MrKupido_20120731a.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201207310957377_MrKupido_20120731b.cs" />
+    <Compile Include="Migrations\201207310957377_MrKupido_20120731b.Designer.cs">
+      <DependentUpon>201207310957377_MrKupido_20120731b.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201207311435096_MrKupido_20120731c.cs" />
+    <Compile Include="Migrations\201207311435096_MrKupido_20120731c.Designer.cs">
+      <DependentUpon>201207311435096_MrKupido_20120731c.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201207311509126_MrKupido_20120731c1.cs" />
+    <Compile Include="Migrations\201207311509126_MrKupido_20120731c1.Designer.cs">
+      <DependentUpon>201207311509126_MrKupido_20120731c1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201207311509529_MrKupido_20120731c2.cs" />
+    <Compile Include="Migrations\201207311509529_MrKupido_20120731c2.Designer.cs">
+      <DependentUpon>201207311509529_MrKupido_20120731c2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201207311510279_MrKupido_20120731c3.cs" />
+    <Compile Include="Migrations\201207311510279_MrKupido_20120731c3.Designer.cs">
+      <DependentUpon>201207311510279_MrKupido_20120731c3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201207311511281_MrKupido_20120731c4.cs" />
+    <Compile Include="Migrations\201207311511281_MrKupido_20120731c4.Designer.cs">
+      <DependentUpon>201207311511281_MrKupido_20120731c4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201208011451461_MrKupido_20120801a.cs" />
+    <Compile Include="Migrations\201208011451461_MrKupido_20120801a.Designer.cs">
+      <DependentUpon>201208011451461_MrKupido_20120801a.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201208021144419_MrKupido_20120802a.cs" />
+    <Compile Include="Migrations\201208021144419_MrKupido_20120802a.Designer.cs">
+      <DependentUpon>201208021144419_MrKupido_20120802a.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201208030802410_MrKupido_20120803a.cs" />
+    <Compile Include="Migrations\201208030802410_MrKupido_20120803a.Designer.cs">
+      <DependentUpon>201208030802410_MrKupido_20120803a.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201208032059114_MrKupido_20120803b.cs" />
+    <Compile Include="Migrations\201208032059114_MrKupido_20120803b.Designer.cs">
+      <DependentUpon>201208032059114_MrKupido_20120803b.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MrKupidoContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

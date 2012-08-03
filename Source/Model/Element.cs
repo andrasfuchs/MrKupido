@@ -8,8 +8,6 @@ namespace MrKupido.Model
 {
     public class Element : FilterItem
     {
-        public int ElementId { get; set; }
-
         [Required]
         public ElementCategory Category { get; set; }
 

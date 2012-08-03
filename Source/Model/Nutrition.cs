@@ -6,12 +6,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MrKupido.Model
 {
-    public class Nutrition : FilterItem
+    public class Nutrition
     {
         public int NutritionId { get; set; }
 
         [Required]
         public Element Element { get; set; }        
+
         [Required]
         public float Amount { get; set; }
     }

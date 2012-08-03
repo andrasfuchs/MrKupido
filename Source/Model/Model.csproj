@@ -47,6 +47,7 @@
     <Compile Include="Address.cs" />
     <Compile Include="Condition.cs" />
     <Compile Include="ConversionRate.cs" />
+    <Compile Include="IngredientAmount.cs" />
     <Compile Include="IngredientNutrition.cs" />
     <Compile Include="IngredientPrice.cs" />
     <Compile Include="RecipeNutrition.cs" />

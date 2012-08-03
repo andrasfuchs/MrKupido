@@ -1,0 +1,72 @@
+﻿@model MrKupido.Model.Ingredient
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Ingredient</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ExpirationTime)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ExpirationTime)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.StorageTemperature)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StorageTemperature)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NameEng)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NameEng)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NameHun)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NameHun)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UniqueNameEng)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UniqueNameEng)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UniqueNameHun)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UniqueNameHun)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Index)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Index)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ClassName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ClassName)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

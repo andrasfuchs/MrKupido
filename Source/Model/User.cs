@@ -41,23 +41,21 @@ namespace MrKupido.Model
         [StringLength(110, MinimumLength = 3)]
         public string FullName { get; set; }
 
-        [Required]
         [MaxLength(50)]
-        [MinLength(1)]
-        [StringLength(50, MinimumLength = 1)]
+        [StringLength(50)]
         public string NickName { get; set; }
 
         [Required]
         public Gender Gender { get; set; }
 
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         public float Height { get; set; }
         public float Weight { get; set; }
 
         [Required]
         public int NewsletterFlags { get; set; }
         
-        public int PrimaryAddressId { get; set; }
+        public int? PrimaryAddressId { get; set; }
         //[ForeignKey("PrimaryAddressId")]
         //public Address PrimaryAddress { get; set; }
 

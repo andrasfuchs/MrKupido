@@ -10,7 +10,7 @@ namespace MrKupido.Model
     {
         public int IngredientNutritionId { get; set; }
 
-        [Required]
-        public Ingredient Ingredient { get; set; }
+        //[Required]
+        //public Ingredient Ingredient { get; set; }
     }
 }
