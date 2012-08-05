@@ -1,0 +1,12 @@
+﻿@model IEnumerable<MrKupido.Model.ImportedRecipe>
+<select id="recipes" size="5">
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+        <option value="@Html.DisplayFor(modelItem => item.UniqueName)">
+            @Html.DisplayFor(modelItem => item.DisplayName)
+        </option>
+        }
+    }
+</select>

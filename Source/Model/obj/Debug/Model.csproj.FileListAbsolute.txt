@@ -1,7 +1,7 @@
 C:\Work\MrKupido\Source\Model\bin\Debug\Model.dll
 C:\Work\MrKupido\Source\Model\bin\Debug\Model.pdb
-C:\Work\MrKupido\Source\Model\obj\Debug\Model.dll
-C:\Work\MrKupido\Source\Model\obj\Debug\Model.pdb
 C:\Work\MrKupido\Source\Model\bin\Debug\EntityFramework.dll
 C:\Work\MrKupido\Source\Model\bin\Debug\EntityFramework.xml
+C:\Work\MrKupido\Source\Model\obj\Debug\Model.dll
+C:\Work\MrKupido\Source\Model\obj\Debug\Model.pdb
 C:\Work\MrKupido\Source\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache

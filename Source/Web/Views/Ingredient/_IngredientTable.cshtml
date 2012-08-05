@@ -1,0 +1,53 @@
+﻿@model IEnumerable<MrKupido.Model.IngredientAmount>
+<table id="ingredienttable" class="wide">
+    <thead>
+        <tr>
+            <th>
+                Teljes szöveg
+            </th>
+            <th>
+                Mennyiség
+            </th>
+            <th>
+                Mértékegység
+            </th>
+            <th>
+                Megnevezés
+            </th>
+            <th>
+                Egyedi név
+            </th>
+            <th>
+                Formátum
+            </th>
+            <th>
+                Állapot
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr> <td>
+                @item.ToString()
+                </td> <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+                </td> <td>
+                @Html.DisplayFor(modelItem => item.MU)
+                </td> <td>
+                @Html.DisplayFor(modelItem => item.IngredientName)
+                </td> <td>
+                @Html.DisplayFor(modelItem => item.IngredientUniqueName)
+                </td> <td>
+                @Html.DisplayFor(modelItem => item.Format)
+                </td> <td>
+                @Html.ActionLink("Add", "Add", new { id = item.IngredientUniqueName })
+                </td> </tr>
+            }
+
+        }
+    </tbody>
+    <tfoot><tr><td colspan="7">Összesen @(Model != null ? Model.Count() : 0) hozzávaló</td></tr></tfoot>
+</table>

@@ -15,7 +15,7 @@ namespace MrKupido.Model
         public MeasurementUnit Unit { get; set; }
     }
 
-    public enum MeasurementUnit { NA, gramm, meter, IU, Celsius, second }
+    public enum MeasurementUnit { piece, gramm, meter, liter, IU, Celsius, second }
     public enum ElementCategory { Vitamin, Mineral }
     
 }

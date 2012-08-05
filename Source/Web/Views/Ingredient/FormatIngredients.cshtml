@@ -1,27 +1,147 @@
 ﻿@{
-    ViewBag.Title = "FormatIngredients";
+    ViewBag.Title = "Format Ingredients";
 }
-<h1>
-    Format Ingredients</h1>
-<h2>
-    1. Select language</h2>
-<select id="language">
-    <option>English</option>
-    <option>Hungarian</option>
-</select>
-<h2>
-    2. Select imported recipe</h2>
-<select id="recipes" size="5">
-</select>
-<h2>
-    3. Select edit ingredients</h2>
-<textarea id="ingredients" rows="5" cols="30"></textarea>
-<input id="saveingredients" type="button" value="Save" />
-<h2>
-    4. Check if all ingredients are recognized corretly</h2>
-<table id="ingredienttable">
-@*
-     @Html.RenderPartial("MyPartialView")
+<header class="nosearch">
+    <a runat="server" href="~/">
+        <img runat="server" src="~/Content/svg/mrkupidologo.svg" alt="Mr. Kupido" width="400" height="304" />
+    </a>
+</header>
+<details id="formatingredients" open class="alwaysopen">
+    <summary>
+        <h1>
+            Format Ingredients</h1>
+    </summary>
+    <div id="languages" class="boxed">
+        <h2>
+            1. Select language</h2>
+           @*<div style="display: none">
+                <input type="radio" name="languageGroup" id="hun" value="hun" />
+                <label for="hun">
+                    Hungarian</label>
+                <input type="radio" name="languageGroup" id="eng" value="eng" />
+                <label for="eng">
+                    English</label>
+          </div>*@
+        <select id="language">
+            <option value="eng">English</option>
+            <option value="hun">Hungarian</option>
+        </select>
+    </div>
+    <div id="recipelist" class="boxed">
+        <h2>
+            2. Select imported recipe</h2>
+        <div id="_ImportedRecipeList">
+            <select id="recipes" size="5">
+            </select>
+        </div>
+    </div>
+    <div id="ingredientlist" class="boxed">
+        <h2>
+            3. Edit ingredients</h2>
+        <div id="_IngredientList">
+            @{ Html.RenderPartial("_IngredientList"); }
+        </div>
+    </div>
+    <div id="ingredienttable" class="boxed">
+        <h2>
+            4. Check if all ingredients are recognized corretly</h2>
+        <div id="_IngredientTable">
+            @{ Html.RenderPartial("_IngredientTable"); }
+        </div>
+    </div>
+</details>
 
-*@
-</table>
+
+<div id="confirmSave" title="Save changes">Do you want to save your changes?</div>
+
+<script type="text/javascript">
+    var $textChanged = false;
+
+    $(document).ready(function () {
+        afterLoad();
+
+        $("body").bind("ajaxComplete", function (e, xhr, settings) {
+            afterLoad();
+        });
+    });
+
+    $.ajaxSetup({
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        dataType: 'html',
+        cache: false
+    });
+
+    function afterLoad() {
+
+        $('select#language').off('change.kupido');
+        $('select#language').on('change.kupido', function () {
+            var langISO = $(this).val();
+            $(this).attr('disabled', 'disabled');
+
+            $.ajax({
+                url: 'LoadImportedRecipes',
+                data: JSON.stringify({ langISO: langISO }),
+                success: function (result) {
+                    $('div#_ImportedRecipeList').html(result);
+                    $('select#language').removeAttr('disabled');
+                }
+            });
+        });
+
+        $('select#recipes').off('change.kupido');
+        $('select#recipes').on('change.kupido', function () {
+            var recipeUniqueName = $(this).val();
+
+            if ($textChanged) {
+                //showSaveDialog();
+            }
+
+            $(this).attr('disabled', 'disabled');
+
+            $.ajax({
+                url: 'LoadIngredients',
+                data: JSON.stringify({ recipeUniqueName: recipeUniqueName }),
+                success: function (result) {
+                    $('div#_IngredientList').html(result);
+                    $('select#recipes').removeAttr('disabled');
+                    refreshIngredientsTable();
+                    $textChanged = false;
+                }
+            });
+        });
+
+        $('textarea#ingredients').off('change.kupido');
+        $('textarea#ingredients').on('change.kupido', refreshIngredientsTable());
+    }
+
+    function refreshIngredientsTable() {
+        var ingredients = $('textarea#ingredients').val();
+
+        $textChanged = true;
+        $('textarea#ingredients').attr('disabled', 'disabled');
+
+        $.ajax({
+            url: 'LoadIngredientTable',
+            data: JSON.stringify({ ingredients: ingredients }),
+            success: function (result) {
+                $('div#_IngredientTable').html(result);
+                $('textarea#ingredients').removeAttr('disabled');
+            }
+        });
+    }
+
+    function showSaveDialog() {
+        $("div#confirmSave").dialog({ modal: true, resizeable: false, buttons: [
+                {
+                    text: "Yes",
+                    click: function () { $(this).dialog("close"); }
+                },
+                {
+                    text: "No",
+                    click: function () { $(this).dialog("close"); }
+                }
+            ]
+        });
+    }
+</script>

@@ -3,15 +3,17 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <title>@ViewBag.Title - Mr. Kupido</title>
     @Styles.Render("~/Content/themes/base/css", "~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/jquery-ui-1.8.11.js")
+    @RenderSection("scripts", required: false)
+
     <div class="wrapper">
         @RenderBody()
-        @Scripts.Render("~/bundles/jquery")
-        @RenderSection("scripts", required: false)
         <hr class="single" />
         <footer>
             <p>

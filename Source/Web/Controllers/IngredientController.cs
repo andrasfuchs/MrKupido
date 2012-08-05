@@ -10,7 +10,6 @@ using MrKupido.DataAccess;
 using System.Runtime.Serialization.Json;
 using System.IO;
 using System.Text;
-using Model;
 
 namespace Web.Controllers
 {
@@ -116,25 +115,61 @@ namespace Web.Controllers
             return RedirectToAction("Index");
         }
 
-        //
-        // GET: /Ingredient/CreateFromRecipes
-
-        public ActionResult CreateFromRecipes()
+        [HttpPost]
+        public ActionResult LoadImportedRecipes(string langISO)
         {
-            List<ImportedRecipe> recipes = db.ImportedRecipes.Where(rec => (rec.UploadedOn < new DateTime(2011, 01, 01)) && (rec.Favourited > 500) && (rec.Rating >= 5) && (rec.Language == "hun")).OrderByDescending(rec => rec.Favourited + rec.Forwarded).Take(100).ToList();
+            List<ImportedRecipe> recipes = null;
 
-            List<string> ingredientsText = new List<string>();
-
-            foreach (ImportedRecipe rec in recipes)
+            if (langISO == "hun")
             {
-                DataContractJsonSerializer dcjs = new DataContractJsonSerializer(typeof(string[]));
-
-                ingredientsText.AddRange(dcjs.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(rec.Ingredients))) as string[]);
+                recipes = db.ImportedRecipes.Where(rec => (rec.UploadedOn < new DateTime(2011, 01, 01)) && (rec.Favourited > 500) && (rec.Rating >= 5) && (rec.Language == langISO)).OrderByDescending(rec => rec.Favourited + rec.Forwarded).Take(100).ToList();
             }
 
-            IngredientAmount[] ingredients = ConvertToIngredientAmount(ingredientsText);
+            if (langISO == "eng")
+            {
+                recipes = db.ImportedRecipes.Where(rec => (rec.ReviewCount > 500) && (rec.Rating >= 4) && (rec.Language == langISO)).OrderByDescending(rec => rec.Rating + (rec.ReviewCount / 1000000)).Take(175).ToList();
+            }
 
-            return View();
+            return PartialView("_ImportedRecipeList", recipes);
+        }
+
+        [HttpPost]
+        public ActionResult LoadIngredients(string recipeUniqueName)
+        {
+            string ingredients = db.ImportedRecipes.Where(rec => (rec.UniqueName == recipeUniqueName)).First().Ingredients;
+
+            DataContractJsonSerializer dcjs = new DataContractJsonSerializer(typeof(string[]));
+            List<string> ingredientList = new List<string>();
+            ingredientList.AddRange(dcjs.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(ingredients))) as string[]);
+
+            StringBuilder sb = new StringBuilder();
+            foreach (string ingredient in ingredientList)
+            {
+                sb.AppendLine(ingredient.Trim());
+            }
+
+            return PartialView("_IngredientList", sb.ToString());
+        }
+
+        [HttpPost]
+        public ActionResult LoadIngredientTable(string ingredients)
+        {
+            List<IngredientAmount> result = new List<IngredientAmount>();
+
+            foreach (string text in ingredients.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                IngredientAmount ingredient = IngredientAmount.FromString(text);
+                if (ingredient != null)
+                {
+                    result.Add(ingredient);
+                }
+                else 
+                {
+                    result.Add(new IngredientAmount());
+                }
+            }
+
+            return PartialView("_IngredientTable", result.ToArray());
         }
 
         private IngredientAmount[] ConvertToIngredientAmount(IEnumerable<string> texts)
@@ -143,79 +178,26 @@ namespace Web.Controllers
 
             foreach (string text in texts)
             {
-                string textToCheck = text;
-
-                if (text.Contains('(') && text.Contains(')'))
+                IngredientAmount ingredient = IngredientAmount.FromString(text);
+                if (ingredient != null)
                 {
-                    textToCheck = text.Substring(0, text.IndexOf('(')) + text.Substring(text.IndexOf(')') + 1);
+                    result.Add(ingredient);
                 }
-
-                if (text.Contains(':')) continue;
-
-                string[] tokens = textToCheck.Split(new char[] { ' ' });
-
-                tokens = TransformTokens(tokens);
                 
-                string ingredientName = "";
-
-                double value;
-                int tokenIndex = tokens.Length - 1;
-                while ((tokenIndex >= 0) && (!IsMeasurementUnit(tokens[tokenIndex])) && (!Double.TryParse(tokens[tokenIndex], out value)))
-                {
-                    ingredientName = tokens[tokenIndex] + " " + ingredientName;
-                    tokenIndex--;
-                }
-                ingredientName = ingredientName.Trim();
-
-                if (!String.IsNullOrEmpty(ingredientName))
-                {
-                    IngredientAmount ingredient = result.FirstOrDefault(ing => ing.IngredientName == ingredientName);
-                    if (ingredient == null)
-                    {
-                        ingredient = new IngredientAmount();
-                        ingredient.IngredientName = ingredientName;
-                        ingredient.Index = 1;
-                        result.Add(ingredient);
-                    }
-                    else
-                    {
-                        ingredient.Index++;
-                    }
-                }
+                //IngredientAmount ingredient = result.FirstOrDefault(ing => ing.IngredientName == ingredientName);
+                //if (ingredient == null)
+                //{
+                //    result.Add(ingredient);
+                //}
+                //else
+                //{
+                //    ingredient.Index++;
+                //}
             }
 
-            var stats = result.OrderByDescending(ing => ing.Index).ToArray();
+            //var stats = result.OrderByDescending(ing => ing.Index).ToArray();
 
             return result.ToArray();
-        }
-
-        private bool IsMeasurementUnit(string text)
-        {
-            string[] knownMeasureUnits = { "gramm", "g", "dkg", "kilo", "kg", "darab", "db", "csomag", "csipet", "evőkanál", "dl", "l", "liter", "teáskanál", "mokkáskanál", 
-                                           "egész", "gerezd", "bögre", "késhegynyi", "kávéskanál", "pohár", "szál", "fej", "szelet", "kiskanál", "csipetnyi", "kevés", "szelet",
-                                           "csokor", "kanál", "pici", "közepes", "kisebb", "zacskó", "nagy" };
-
-            return knownMeasureUnits.Contains(text);
-        }
-
-        private string[] TransformTokens(string[] tokens)
-        {
-            string[] result = tokens;
-
-            for (int i = 0; i < result.Length; i++)
-            {
-                result[i] = result[i].Replace("fél", "0.5");
-                result[i] = result[i].Replace("1/4", "0.25");
-                result[i] = result[i].Replace("1/2", "0.5");
-                result[i] = result[i].Replace("3/4", "0.75");
-                result[i] = result[i].Replace("db", "");
-                result[i] = result[i].Replace("darab", "");
-                result[i] = result[i].Replace("Rama", "");
-                result[i] = result[i].Replace("ízlés szerint", "");
-                result[i] = result[i].Replace("  ", " ");
-            }
-
-            return result;
         }
 
         protected override void Dispose(bool disposing)

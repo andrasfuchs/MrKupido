@@ -570,6 +570,11 @@ hr
     clear: both;
 }
 
+table.wide
+{
+    width: 880px;
+}
+
 /* Styles for basic forms
 -----------------------------------------------------------*/
 input[type='button']
@@ -678,6 +683,61 @@ header .inputfield input
     text-decoration: underline;
 }
 
+
+table {
+    border-spacing: 0; 
+}
+
+th:first-child {
+    border-radius: 6px 0 0 0;
+}
+
+th:last-child {
+    border-radius: 0 6px 0 0;
+}
+
+th:only-child{
+    border-radius: 6px 6px 0 0;
+}
+
+td, th {
+    padding: 3px;
+    border-bottom: 1px solid /*mcd*/#553e31;
+    height: 25px;
+}
+
+tbody tr:nth-child(even) {
+    background: /*mcl*/#ebe0d5;
+}
+
+th {
+    text-align: center;
+    text-decoration: underline;
+    background-color: /*mcl*/#ebe0d5;
+    border-bottom-width: 2px;
+}
+
+tfoot td 
+{
+    text-align: center;
+    
+    border-bottom: 0;
+    border-top: 1px solid /*mcd*/#553e31;
+    background-color: /*mcl*/#ebe0d5;
+}
+
+tfoot td:first-child {
+    border-radius: 0 0 0 6px;
+}
+
+tfoot td:last-child {
+    border-radius: 0 0 6px 0;
+}
+
+tfoot td:only-child{
+    border-radius: 0 0 6px 6px;
+}
+
 /* Styles for validation helpers
 -----------------------------------------------------------*/
 .field-validation-error {
@@ -700,4 +760,58 @@ header .inputfield input
 
 .validation-summary-valid {
     display: none;
+}
+
+
+/* Styles for admin controls
+-----------------------------------------------------------*/
+
+div.boxed
+{
+    display: inline-block;
+    
+    min-height: 200px;
+    padding: 5px;
+}
+
+div.boxed h2
+{
+    text-decoration: underline;
+}
+
+div#languages
+{
+    float: left;
+    width: 200px;
+}
+
+div#languages select
+{
+    width: 180px;
+    margin: 10px;
+}
+
+div#recipelist
+{
+    width: 250px;
+}
+
+div#recipelist select
+{
+    width: 230px;
+    height: 110px;
+    margin: 10px;
+}
+
+div#ingredientlist
+{
+    float: right;
+    width: 380px;
+}
+
+div#ingredientlist textarea
+{
+    width: 360px;
+    height: 105px;
+    margin: 10px;
 }
