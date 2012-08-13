@@ -98,6 +98,10 @@
     <Compile Include="Migrations\201208032059114_MrKupido_20120803b.Designer.cs">
       <DependentUpon>201208032059114_MrKupido_20120803b.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201208051916140_MkKupido_20120805a.cs" />
+    <Compile Include="Migrations\201208051916140_MkKupido_20120805a.Designer.cs">
+      <DependentUpon>201208051916140_MkKupido_20120805a.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MrKupidoContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

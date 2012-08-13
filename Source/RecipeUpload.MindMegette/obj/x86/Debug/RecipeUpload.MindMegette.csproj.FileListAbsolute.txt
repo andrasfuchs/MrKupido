@@ -11,3 +11,4 @@ C:\Work\MrKupido\Source\RecipeUpload.MindMegette\bin\Debug\EntityFramework.xml
 C:\Work\MrKupido\Source\RecipeUpload.MindMegette\obj\x86\Debug\RecipeUpload.MindMegette.csprojResolveAssemblyReference.cache
 C:\Work\MrKupido\Source\RecipeUpload.MindMegette\obj\x86\Debug\RecipeUpload.MindMegette.exe
 C:\Work\MrKupido\Source\RecipeUpload.MindMegette\obj\x86\Debug\RecipeUpload.MindMegette.pdb
+C:\Work\MrKupido\Source\RecipeUpload.MindMegette\bin\Debug\RecipeUpload.MindMegette.exe.config

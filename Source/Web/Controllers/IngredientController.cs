@@ -10,6 +10,8 @@ using MrKupido.DataAccess;
 using System.Runtime.Serialization.Json;
 using System.IO;
 using System.Text;
+using MrKupido.Web.Models;
+using MrKupido.Utils;
 
 namespace Web.Controllers
 {
@@ -152,7 +154,80 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult LoadIngredientTable(string ingredients)
+        public ActionResult LoadDirections(string recipeUniqueName)
+        {
+            string directions = HttpUtility.HtmlDecode(db.ImportedRecipes.Where(rec => (rec.UniqueName == recipeUniqueName)).First().Directions);
+
+            DataContractJsonSerializer dcjs = new DataContractJsonSerializer(typeof(string[]));
+            List<string> directionList = new List<string>();
+            directionList.AddRange(dcjs.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(directions))) as string[]);
+
+            // re-format the orignal text
+            List<string> rfdl = new List<string>();
+            foreach (string direction in directionList)
+            {
+                rfdl.AddRange(direction.Split(new char[] { ',', '.' }));
+            }
+
+            // TODO: use openoffice
+
+            // TODO: remove special characters
+
+            //
+
+            return PartialView("_RecipeEditor", rfdl);
+        }
+
+        [HttpPost]
+        public ActionResult SaveIngredientList(string recipeUniqueName, string ingredients)
+        {
+            ImportedRecipe recipe = db.ImportedRecipes.Where(rec => (rec.UniqueName == recipeUniqueName)).First();
+            string[] ingredientList = ingredients.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            DataContractJsonSerializer dcjs = new DataContractJsonSerializer(typeof(string[]));
+            MemoryStream ms = new MemoryStream();
+            dcjs.WriteObject(ms, ingredientList);
+            recipe.Ingredients = Encoding.UTF8.GetString(ms.ToArray());
+
+            db.SaveChanges();
+
+            return null;
+        }
+
+        [HttpPost]
+        public ActionResult SaveRecipeDirections(string recipeUniqueName, string directions)
+        {
+            ImportedRecipe recipe = db.ImportedRecipes.Where(rec => (rec.UniqueName == recipeUniqueName)).First();
+            directions = directions.Replace("&nbsp;", " ").Replace("\n", "").Replace("</span><span>", " ").Replace("<span>", "").Replace("</span>", "").Replace("<li>", "").Replace("<br>", "").Trim();
+            if ((directions.IndexOf("<ol>") != 0) || (directions.IndexOf("</ol>") != directions.Length - 5))
+            {
+                throw new Exception("Invalid directions! Every step should be in an ordered list!");
+            }
+            directions = HttpUtility.HtmlDecode(directions.Replace("<ol>", "").Replace("</ol>", ""));
+
+            while (directions.IndexOf("  ") > -1)
+            {
+                directions = directions.Replace("  ", " ").Trim();
+            }
+
+            string[] directionsList = directions.Split(new string[] { "</li>" }, StringSplitOptions.RemoveEmptyEntries);
+            for (int i = 0; i < directionsList.Length; i++)
+            {
+                directionsList[i] = HtmlUtils.StripTagsCharArray(directionsList[i]).Trim();
+            }
+
+            DataContractJsonSerializer dcjs = new DataContractJsonSerializer(typeof(string[]));
+            MemoryStream ms = new MemoryStream();
+            dcjs.WriteObject(ms, directionsList);
+            recipe.Directions = Encoding.UTF8.GetString(ms.ToArray());
+
+            db.SaveChanges();
+
+            return null;
+        }
+
+        [HttpPost]
+        public ActionResult LoadIngredientTable(string langISO, string ingredients)
         {
             List<IngredientAmount> result = new List<IngredientAmount>();
 
@@ -161,6 +236,11 @@ namespace Web.Controllers
                 IngredientAmount ingredient = IngredientAmount.FromString(text);
                 if (ingredient != null)
                 {
+                    ingredient.Language = langISO;
+                    
+                    Ingredient dbIngredient = db.Ingredients.Where(ing => ((ingredient.Language == "hun") && (ing.UniqueNameHun == ingredient.IngredientUniqueName)) || ((ingredient.Language == "eng") && (ing.UniqueNameEng == ingredient.IngredientUniqueName))).FirstOrDefault();
+                    ingredient.Index = (dbIngredient != null ? dbIngredient.Index.Value : -1);
+
                     result.Add(ingredient);
                 }
                 else 
@@ -170,6 +250,91 @@ namespace Web.Controllers
             }
 
             return PartialView("_IngredientTable", result.ToArray());
+        }
+
+        [HttpPost]
+        public ActionResult CreateIngredient(string nameHun, string uniqueNameHun, string nameEng, string uniqueNameEng)
+        {
+            Ingredient ingredient = new Ingredient();
+            ingredient.NameHun = nameHun;
+            ingredient.UniqueNameHun = uniqueNameHun;
+            ingredient.NameEng = nameEng;
+            ingredient.UniqueNameEng = uniqueNameEng;
+
+            ingredient.Index = 1;
+            ingredient.Type = FilterItemType.Ingredient;
+            ingredient.Category = IngredientCategory.Unknown;
+            ingredient.Unit = MeasurementUnit.piece;
+
+            db.Ingredients.Add(ingredient);
+
+            db.SaveChanges();
+
+            return null;
+        }
+
+        [HttpPost]
+        public ActionResult LoadRecipeKeywords(string langISO, string directions)
+        {
+            string[] verbs = new string[0];
+            string[] conjunctions = new string[0];
+            HashSet<string> ingredients = new HashSet<string>();
+            string[] devices = new string[0];
+            HashSet<string> aliases = new HashSet<string>();
+            string[] units = new string[0];
+
+            if (langISO == "hun")
+            {
+                verbs = new string[] { "meghamozni", "mosni", "megtisztitani", "szetszedni", "szetvalasztani", "keverni", "osszekeverni", "kemenyreverni", 
+                    "bekapcsolni", "belerakni", "varni", "talalni", "elomelegiteni", "berakni", "rarakni", "megfuttatni", "osszegyurni", "letakarni", 
+                    "homerseklet", "kiszaggatni", "nyujtani", "sodorni", "felkarikazni", "lereszelni", "rarakni", "belerakni", "raonteni", "beboritani", 
+                    "elomelegiteni", "eltavolitani", "felkockazni", "raszorni", "feldarabolni", "megforgatni", "raszorni", "lelocsolni", "levenni",
+                "megfozni", "preselni", "reszelni", "felverni", "megpuhitani", "megforgatni", "lecsepegtetni" };
+                conjunctions = new string[] { "a", "az", "egy", "majd" };
+                devices = new string[] { "labas", "huto", "fakanal", "gofrisuto", "suto", "alufolia", "tepsi", "serpenyo" };
+                units = new string[] { "g", "dkg", "kg", "db", "ml", "cl", "dl", "l", "perc", "óra", "mm", "cm", "dm", "m", "fok" };
+            }
+
+            if (langISO == "eng")
+            {                
+            }
+
+            Ingredient[] dbIngredients = db.Ingredients.ToArray();
+
+            foreach (Ingredient ingredient in dbIngredients)
+            {
+                if (langISO == "hun")
+                {
+                    if (!String.IsNullOrEmpty(ingredient.UniqueNameHun)) ingredients.Add(ingredient.UniqueNameHun);
+                }
+
+                if (langISO == "eng")
+                {
+                    if (!String.IsNullOrEmpty(ingredient.UniqueNameEng)) ingredients.Add(ingredient.UniqueNameEng);
+                }
+            }
+
+            int di = 0;
+            int ei = 0;
+            while ((ei = directions.IndexOf("<span>=</span>", di)) >= 0)
+            {
+                int ai = ei + 14;
+
+                di = directions.IndexOf("</li>", ai);
+                string aliasText = directions.Substring(ai,di  - ai);
+                ai = 0;
+
+                while ((ai = aliasText.IndexOf("<span>", ai)) >= 0)
+                {
+                    int aie = aliasText.IndexOf("</span>", ai);
+
+                    aliases.Add(aliasText.Substring(ai+6, aie - ai - 6));
+                    
+                    ai = aie;
+                }
+            }
+
+            return Json(new { verbs = verbs, conjunctions = conjunctions, devices = devices, ingredients = ingredients.ToArray(), aliases = aliases, units = units });
         }
 
         private IngredientAmount[] ConvertToIngredientAmount(IEnumerable<string> texts)

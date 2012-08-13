@@ -13,5 +13,9 @@ namespace Web.Controllers
             return View();
         }
 
+        public ActionResult NotSupportedBrowser()
+        {
+            return View();
+        }
     }
 }

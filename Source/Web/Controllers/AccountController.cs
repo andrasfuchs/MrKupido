@@ -148,17 +148,17 @@ namespace Web.Controllers
 
                     if (String.IsNullOrEmpty(user.FirstName))
                     {
-                        user.FirstName = HttpUtility.HtmlEncode(facebookGraph.FirstName);
+                        user.FirstName = HttpUtility.HtmlDecode(facebookGraph.FirstName);
                     }
 
                     if (String.IsNullOrEmpty(user.LastName))
                     {
-                        user.LastName = HttpUtility.HtmlEncode(facebookGraph.LastName);
+                        user.LastName = HttpUtility.HtmlDecode(facebookGraph.LastName);
                     }
 
                     if (String.IsNullOrEmpty(user.FullName))
                     {
-                        user.FullName = HttpUtility.HtmlEncode(facebookGraph.Name);
+                        user.FullName = HttpUtility.HtmlDecode(facebookGraph.Name);
                     }
 
                     if (user.Gender == MrKupido.Model.Gender.Unknown)

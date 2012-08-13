@@ -9,11 +9,14 @@ namespace MrKupido.Model
     public class IngredientAmount
     {
         private const string validUrlChars = "abcdefghijklmnopqrstuvwxyz0123456789-_.";
+        
         private static string[] knownMeasureUnits = { "gramm", "g", "dkg", "kilo", "kg", "darab", "db", "csomag", "csipet", "evőkanál", "dl", "l", "liter", "teáskanál", "mokkáskanál", 
                                                        "egész", "gerezd", "bögre", "késhegynyi", "kávéskanál", "pohár", "szál", "fej", "szelet", "kiskanál", "csipetnyi", "kevés", "szelet",
                                                        "csokor", "kanál", "pici", "közepes", "kisebb", "zacskó", "nagy" };
 
         private static string[] formatWords = new string[] { "savanykás", "reszelt", "törött", "őrölt", "langyos", "hideg", "meleg", "forró", "szénsavas" };
+
+        public string Language { get; set; }
 
         public float Amount { get; set; }
 
@@ -86,18 +89,18 @@ namespace MrKupido.Model
 
             if ((tokenIndex - 1 >= 0) && IsMeasurementUnit(tokens[tokenIndex]) && Double.TryParse(tokens[tokenIndex - 1], out value))
             {
-                TransformMeasurementUnit(tokens[tokenIndex - 1], tokens[tokenIndex], ref ingredient);
+                TransformMeasurementUnit(tokens[tokenIndex - 1].Replace(',','.'), tokens[tokenIndex], ref ingredient);
             }
             else if ((tokenIndex >= 0) && Double.TryParse(tokens[tokenIndex], out value))
             {
-                TransformMeasurementUnit(tokens[tokenIndex], "", ref ingredient);
+                TransformMeasurementUnit(tokens[tokenIndex].Replace(',', '.'), "", ref ingredient);
             }
 
             if (!String.IsNullOrEmpty(ingredientName))
             {
                 foreach (string formatWord in formatWords)
                 {
-                    if (ingredientName.StartsWith(formatWord))
+                    if (ingredientName.StartsWith(formatWord + " "))
                     {
                         ingredient.Format = formatWord;
                         ingredientName = ingredientName.Substring(formatWord.Length);
@@ -173,7 +176,7 @@ namespace MrKupido.Model
                 case "kilo":
                 case "kg":
                     ia.MU = MeasurementUnit.gramm;
-                    ia.Amount = am * 100;
+                    ia.Amount = am * 1000;
                     break;
 
                 // TODO: púpozott -> *2.0

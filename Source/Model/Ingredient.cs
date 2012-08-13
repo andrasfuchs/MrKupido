@@ -40,6 +40,10 @@ namespace MrKupido.Model
         [Column(Order = 15)]
         public float? PotencialAlkalinity { get; set; }
 
+        [Column(Order = 15)]
+        [Required]
+        public MeasurementUnit Unit { get; set; }
+
         public override string ToString()
         {
             return this.NameHun;

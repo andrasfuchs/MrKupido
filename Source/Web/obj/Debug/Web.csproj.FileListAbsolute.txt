@@ -38,3 +38,5 @@ C:\Work\MrKupido\Source\Web\bin\System.Web.WebPages.Razor.xml
 C:\Work\MrKupido\Source\Web\obj\Debug\Web.csprojResolveAssemblyReference.cache
 C:\Work\MrKupido\Source\Web\obj\Debug\Web.dll
 C:\Work\MrKupido\Source\Web\obj\Debug\Web.pdb
+C:\Work\MrKupido\Source\Web\bin\Utils.dll
+C:\Work\MrKupido\Source\Web\bin\Utils.pdb

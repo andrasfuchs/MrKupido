@@ -16,9 +16,10 @@ namespace MrKupido.Model
         [Column(Order = 2)]
         public FilterItemType Type { get; set; }
 
-        [MaxLength(100)]
-        [MinLength(2)]
-        [StringLength(100, MinimumLength = 2)]
+        //[Required]
+        //[MaxLength(100)]
+        //[MinLength(2)]
+        //[StringLength(100, MinimumLength = 2)]
         [Column(Order = 3)]
         public string NameEng { get; set; }
 
@@ -29,10 +30,10 @@ namespace MrKupido.Model
         [Column(Order = 4)]
         public string NameHun { get; set; }
 
-        [Required]
-        [MaxLength(100)]
-        [MinLength(2)]
-        [StringLength(100, MinimumLength = 2)]
+        //[Required]
+        //[MaxLength(100)]
+        //[MinLength(2)]
+        //[StringLength(100, MinimumLength = 2)]
         [Column(Order = 5)]
         public string UniqueNameEng { get; set; }
 

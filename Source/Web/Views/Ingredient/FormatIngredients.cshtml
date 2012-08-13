@@ -9,12 +9,12 @@
 <details id="formatingredients" open class="alwaysopen">
     <summary>
         <h1>
-            Format Ingredients</h1>
+            Hozzávalók formázása</h1>
     </summary>
     <div id="languages" class="boxed">
         <h2>
-            1. Select language</h2>
-           @*<div style="display: none">
+            1. Válassz nyelvet</h2>
+        @*<div style="display: none">
                 <input type="radio" name="languageGroup" id="hun" value="hun" />
                 <label for="hun">
                     Hungarian</label>
@@ -22,14 +22,14 @@
                 <label for="eng">
                     English</label>
           </div>*@
-        <select id="language">
+        <select id="language" autofocus>
             <option value="eng">English</option>
             <option value="hun">Hungarian</option>
         </select>
     </div>
     <div id="recipelist" class="boxed">
         <h2>
-            2. Select imported recipe</h2>
+            2. Válassz receptet</h2>
         <div id="_ImportedRecipeList">
             <select id="recipes" size="5">
             </select>
@@ -37,33 +37,39 @@
     </div>
     <div id="ingredientlist" class="boxed">
         <h2>
-            3. Edit ingredients</h2>
+            3. Módosítsd a hozzávalók listáját</h2>
         <div id="_IngredientList">
             @{ Html.RenderPartial("_IngredientList"); }
         </div>
     </div>
     <div id="ingredienttable" class="boxed">
         <h2>
-            4. Check if all ingredients are recognized corretly</h2>
+            4. Ellenőrízd, hogy minden összetevő helyesen szerepel-e a táblában</h2>
         <div id="_IngredientTable">
             @{ Html.RenderPartial("_IngredientTable"); }
         </div>
     </div>
+    <div id="recipeeditor" class="boxed">
+        <h2>
+            5. Ird át úgy a receptet, hogy ne legyen benne értelmezhetetlen kifejezés</h2>
+        <div id="_RecipeEditor">
+            @{ Html.RenderPartial("_RecipeEditor"); }
+        </div>
+    </div>
 </details>
 
+<div id="confirmSave" title="Hozzávalók mentése">
+    El akarod menteni a változtatásaidat?</div>
 
-<div id="confirmSave" title="Save changes">Do you want to save your changes?</div>
+<div id="confirmRecipeSave" title="Recept mentése">
+    El akarod menteni a változtatásaidat?</div>
 
 <script type="text/javascript">
     var $textChanged = false;
-
-    $(document).ready(function () {
-        afterLoad();
-
-        $("body").bind("ajaxComplete", function (e, xhr, settings) {
-            afterLoad();
-        });
-    });
+    var $prevRecipeUniqueName = "";
+    var $recipeUniqueName = "";
+    var $prevIngredients = "";
+    var $ingredients = "";
 
     $.ajaxSetup({
         type: 'POST',
@@ -72,9 +78,8 @@
         cache: false
     });
 
-    function afterLoad() {
+    $(document).ready(function () {
 
-        $('select#language').off('change.kupido');
         $('select#language').on('change.kupido', function () {
             var langISO = $(this).val();
             $(this).attr('disabled', 'disabled');
@@ -85,63 +90,119 @@
                 success: function (result) {
                     $('div#_ImportedRecipeList').html(result);
                     $('select#language').removeAttr('disabled');
+
+                    attachEventHandlerToImportedRecipeList();
                 }
             });
         });
 
-        $('select#recipes').off('change.kupido');
+        $("div#confirmSave").dialog({ modal: true, resizable: false, autoOpen: false, buttons: [
+                {
+                    text: "Yes",
+                    click: function () {
+                        $("div#confirmSave").dialog("option", "title", "Mentés folyamatban...");
+
+                        $.ajax({
+                            url: 'SaveIngredientList',
+                            data: JSON.stringify({ recipeUniqueName: $prevRecipeUniqueName, ingredients: $prevIngredients }),
+                            success: function (result) {
+                                $("div#confirmSave").dialog("close");
+                                $("div#confirmSave").dialog("option", "title", "Hozzávalók mentése");
+                            }
+                        });
+                    }
+                },
+                {
+                    text: "No",
+                    click: function () { $(this).dialog("close"); }
+                }
+            ],
+            close: function (event, ui) {
+                $('select#recipes').focus();
+            }
+        });
+
+        $("div#confirmRecipeSave").dialog({ modal: true, resizable: false, autoOpen: false, buttons: [
+            {
+                text: "Yes",
+                click: function () {
+                    $("div#confirmRecipeSave").dialog("option", "title", "Mentés folyamatban...");
+
+                    $.ajax({
+                        url: 'SaveRecipeDirections',
+                        data: JSON.stringify({ recipeUniqueName: $recipeUniqueName, directions: $("section#recipeeditor").html() }),
+                        success: function (result) {
+                            $("div#confirmRecipeSave").dialog("close");
+                            $("div#confirmRecipeSave").dialog("option", "title", "Recept mentése");
+                        }
+                    });
+                }
+            },
+            {
+                text: "No",
+                click: function () { $(this).dialog("close"); }
+            }
+        ]
+        });
+
+        $("div#confirmRecipeSave").bind('dialogclose', function(event) {
+            $('select#recipes').trigger('change');
+        });
+
+    });
+
+    function attachEventHandlerToImportedRecipeList() {
         $('select#recipes').on('change.kupido', function () {
-            var recipeUniqueName = $(this).val();
+            $prevRecipeUniqueName = $recipeUniqueName;
+            $recipeUniqueName = $(this).val();
 
             if ($textChanged) {
-                //showSaveDialog();
+                $("div#confirmSave").dialog("open");
             }
 
             $(this).attr('disabled', 'disabled');
 
             $.ajax({
                 url: 'LoadIngredients',
-                data: JSON.stringify({ recipeUniqueName: recipeUniqueName }),
+                data: JSON.stringify({ recipeUniqueName: $recipeUniqueName }),
                 success: function (result) {
                     $('div#_IngredientList').html(result);
                     $('select#recipes').removeAttr('disabled');
-                    refreshIngredientsTable();
+
+                    attachEventHandlerToIngredientList();
+                    $('textarea#ingredients').trigger('change');
                     $textChanged = false;
                 }
             });
-        });
 
-        $('textarea#ingredients').off('change.kupido');
-        $('textarea#ingredients').on('change.kupido', refreshIngredientsTable());
-    }
-
-    function refreshIngredientsTable() {
-        var ingredients = $('textarea#ingredients').val();
-
-        $textChanged = true;
-        $('textarea#ingredients').attr('disabled', 'disabled');
-
-        $.ajax({
-            url: 'LoadIngredientTable',
-            data: JSON.stringify({ ingredients: ingredients }),
-            success: function (result) {
-                $('div#_IngredientTable').html(result);
-                $('textarea#ingredients').removeAttr('disabled');
-            }
-        });
-    }
-
-    function showSaveDialog() {
-        $("div#confirmSave").dialog({ modal: true, resizeable: false, buttons: [
-                {
-                    text: "Yes",
-                    click: function () { $(this).dialog("close"); }
-                },
-                {
-                    text: "No",
-                    click: function () { $(this).dialog("close"); }
+            $.ajax({
+                url: 'LoadDirections',
+                data: JSON.stringify({ recipeUniqueName: $recipeUniqueName }),
+                success: function (result) {
+                    $('div#_RecipeEditor').html(result);
+                    $('select#recipes').removeAttr('disabled');
                 }
-            ]
+            });
+
+        });
+    }
+
+    function attachEventHandlerToIngredientList() {
+        $('textarea#ingredients').on('change.kupido', function () {
+            $prevIngredients = $ingredients;
+            $ingredients = $('textarea#ingredients').val();
+
+            $textChanged = true;
+            $('textarea#ingredients').attr('disabled', 'disabled');
+
+            $.ajax({
+                url: 'LoadIngredientTable',
+                data: JSON.stringify({ langISO: $('select#language').val(), ingredients: $ingredients }),
+                success: function (result) {
+                    $('div#_IngredientTable').html(result);
+                    $('textarea#ingredients').removeAttr('disabled');
+                }
+            });
         });
     }
 </script>

@@ -43,3 +43,5 @@ C:\Work\MrKupido\Source\Web.Tests\bin\Debug\EntityFramework.xml
 C:\Work\MrKupido\Source\Web.Tests\obj\Debug\Web.Tests.csprojResolveAssemblyReference.cache
 C:\Work\MrKupido\Source\Web.Tests\obj\Debug\Web.Tests.dll
 C:\Work\MrKupido\Source\Web.Tests\obj\Debug\Web.Tests.pdb
+C:\Work\MrKupido\Source\Web.Tests\bin\Debug\Utils.dll
+C:\Work\MrKupido\Source\Web.Tests\bin\Debug\Utils.pdb
