@@ -12,3 +12,5 @@ C:\Work\MrKupido\Source\RecipeUpload.MindMegette\obj\x86\Debug\RecipeUpload.Mind
 C:\Work\MrKupido\Source\RecipeUpload.MindMegette\obj\x86\Debug\RecipeUpload.MindMegette.exe
 C:\Work\MrKupido\Source\RecipeUpload.MindMegette\obj\x86\Debug\RecipeUpload.MindMegette.pdb
 C:\Work\MrKupido\Source\RecipeUpload.MindMegette\bin\Debug\RecipeUpload.MindMegette.exe.config
+C:\Work\MrKupido\Source\RecipeUpload.MindMegette\bin\Debug\Library.dll
+C:\Work\MrKupido\Source\RecipeUpload.MindMegette\bin\Debug\Library.pdb

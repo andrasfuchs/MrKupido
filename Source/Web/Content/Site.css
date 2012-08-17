@@ -228,6 +228,22 @@ details summary h2
     margin: -70px 10px 10px 0px;
 }
 
+details h2
+{
+    font-size: 20px;
+    font-family: Cardo, Sans-Serif;
+    color: /*mcd*/#553e31;
+
+    margin: 10px auto 10px auto; 
+    padding: 0px; 
+    list-style-type: none; 
+    list-style-image: none; 
+    
+    width: auto;
+    
+    text-align: center;
+}
+
 details ul 
 {    
     float: left;
@@ -245,6 +261,22 @@ details ul
 details#mymenu li 
 {
     height: 55px;
+}
+
+details#browser li
+{
+    padding: 10px;
+    height: 230px;
+    width: 250px;
+    text-align: center;
+}
+
+details#browser img
+{
+    vertical-align: middle;
+    max-width: 230px;
+    max-height: 190px;
+    padding: 10px;
 }
 
 details#login li

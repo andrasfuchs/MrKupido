@@ -40,3 +40,5 @@ C:\Work\MrKupido\Source\Web\obj\Debug\Web.dll
 C:\Work\MrKupido\Source\Web\obj\Debug\Web.pdb
 C:\Work\MrKupido\Source\Web\bin\Utils.dll
 C:\Work\MrKupido\Source\Web\bin\Utils.pdb
+C:\Work\MrKupido\Source\Web\bin\Library.dll
+C:\Work\MrKupido\Source\Web\bin\Library.pdb

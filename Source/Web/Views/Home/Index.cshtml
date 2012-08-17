@@ -7,7 +7,7 @@
     <p class="userbar">
         @if (Session["CurrentUser"] == null)
         {
-            <span id="login"><a runat="server" href="~/hun/Account/LogIn">Log in</a></span>
+            <span id="login"><a runat="server" href="~/hun/Account/LogIn" onclick="_gaq.push(['_trackEvent', 'Profile', 'Login', '']);">Log in</a></span>
         }
         @if (Session["CurrentUser"] != null)
         {
@@ -30,7 +30,7 @@
                 Keresnivaló:</label>
             <input id="query" type="search" placeholder="(hozzávaló, diéta, eszköz)" autofocus />
         </p>
-        <input id="search" type="submit" value="Keresés" />
+        <input id="search" type="submit" value="Keresés" onclick="_gaq.push(['_trackEvent', 'Search', 'Search', '+karalábé -pulyka']);"/>
         <div id="deleteall">
             <input type="button" value="Mindent töröl" />
         </div>

@@ -130,6 +130,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\IngredientAmountExt.cs" />
+    <Compile Include="Models\OldBrowserData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -158,6 +159,7 @@
     <Content Include="Content\images\unticked.png" />
     <Content Include="Content\svg\arrow_right_light.svg" />
     <Content Include="Content\svg\avatar.svg" />
+    <Content Include="Content\svg\browser_chrome.svg" />
     <Content Include="Content\svg\bulb.svg" />
     <Content Include="Content\svg\cat_bread_dark.svg" />
     <Content Include="Content\svg\cat_cookies_dark.svg" />
@@ -259,7 +261,9 @@
     <Content Include="Scripts\knockout-2.0.0.js" />
     <Content Include="Scripts\modernizr-2.0.6-development-only.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -308,6 +312,10 @@
     <ProjectReference Include="..\DotNetOpenAuth.ApplicationBlock\DotNetOpenAuth.ApplicationBlock.csproj">
       <Project>{AA78D112-D889-414B-A7D4-467B34C7B663}</Project>
       <Name>DotNetOpenAuth.ApplicationBlock</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Library\Library.csproj">
+      <Project>{44930A70-2BFF-4634-BD17-1ECB20D9C683}</Project>
+      <Name>Library</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{35A67DC3-381C-43E3-B424-6C170E216D49}</Project>

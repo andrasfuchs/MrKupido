@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{44930A70-2BFF-4634-BD17-1ECB20D9C683}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Library</RootNamespace>
+    <AssemblyName>Library</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Action\Active.cs" />
+    <Compile Include="Action\Passive.cs" />
+    <Compile Include="Attributes\ContainsGlutenAttribute.cs" />
+    <Compile Include="Attributes\EggOfAttribute.cs" />
+    <Compile Include="Attributes\GristOfAttribute.cs" />
+    <Compile Include="Attributes\MilkOfAttribute.cs" />
+    <Compile Include="Attributes\KindOfAttribute.cs" />
+    <Compile Include="Attributes\NameAliasAttribute.cs" />
+    <Compile Include="Attributes\NatureClassAttribute.cs" />
+    <Compile Include="Attributes\NatureFamilyAttribute.cs" />
+    <Compile Include="Attributes\NatureKingdomAttribute.cs" />
+    <Compile Include="Attributes\NatureSpeciesAttribute.cs" />
+    <Compile Include="Attributes\NatureSubspeciesAttribute.cs" />
+    <Compile Include="Attributes\PartOfAttribute.cs" />
+    <Compile Include="ElementCategory.cs" />
+    <Compile Include="Equipment\Container.cs" />
+    <Compile Include="Equipment\LaposTanyer.cs" />
+    <Compile Include="Equipment\Serpenyo.cs" />
+    <Compile Include="Equipment\Tanyer.cs" />
+    <Compile Include="IEquipment.cs" />
+    <Compile Include="IIngredient.cs" />
+    <Compile Include="IngredientBase.cs" />
+    <Compile Include="IngredientCategory.cs" />
+    <Compile Include="IngredientGroup.cs" />
+    <Compile Include="Ingredient\Csirkemell.cs" />
+    <Compile Include="Ingredient\Eleszto.cs" />
+    <Compile Include="Ingredient\Liszt.cs" />
+    <Compile Include="Ingredient\Olaj.cs" />
+    <Compile Include="Ingredient\So.cs" />
+    <Compile Include="Ingredient\Tej.cs" />
+    <Compile Include="Ingredient\Tejfol.cs" />
+    <Compile Include="Ingredient\Tojas.cs" />
+    <Compile Include="Ingredient\Viz.cs" />
+    <Compile Include="Instruction.cs" />
+    <Compile Include="IRecipe.cs" />
+    <Compile Include="MeasurementUnit.cs" />
+    <Compile Include="Nature\Animalia\Animalia.cs" />
+    <Compile Include="Nature\Animalia\Aves\Aves.cs" />
+    <Compile Include="Nature\Animalia\Aves\Phasianidae\GallusGallus.cs" />
+    <Compile Include="Nature\Animalia\Mammalia\Bovidae\BosPrimigenius.cs" />
+    <Compile Include="Nature\Animalia\Mammalia\Bovidae\Bovidae.cs" />
+    <Compile Include="Nature\Animalia\Mammalia\Mammalia.cs" />
+    <Compile Include="Nature\Fungi\Fungi.cs" />
+    <Compile Include="Nature\Animalia\Aves\Phasianidae\GallusGallusDomesticus.cs" />
+    <Compile Include="Nature\Fungi\Hemiascomycetes\Hemiascomycetes.cs" />
+    <Compile Include="Nature\Nonliving\Minerale.cs" />
+    <Compile Include="Nature\Animalia\Aves\Phasianidae\Phasianidae.cs" />
+    <Compile Include="Nature\Nonliving\Nonliving.cs" />
+    <Compile Include="Nature\Plantae\Liliopsida\Liliopsida.cs" />
+    <Compile Include="Nature\Plantae\Liliopsida\Poaceae\HordeumVulgare.cs" />
+    <Compile Include="Nature\Plantae\Liliopsida\Poaceae\Poaceae.cs" />
+    <Compile Include="Nature\Plantae\Liliopsida\Poaceae\SecaleCereale.cs" />
+    <Compile Include="Nature\Plantae\Liliopsida\Poaceae\TriticumAestivum.cs" />
+    <Compile Include="Nature\Plantae\Plantae.cs" />
+    <Compile Include="Nature\Fungi\Hemiascomycetes\Saccharomycetaceae\SaccharomycesCerevisiae.cs" />
+    <Compile Include="Nature\Fungi\Hemiascomycetes\Saccharomycetaceae\Saccharomycetaceae.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecipeBase.cs" />
+    <Compile Include="Recipe\SampleRecipe.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

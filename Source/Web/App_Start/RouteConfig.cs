@@ -20,12 +20,6 @@ namespace MrKupido.Web
                 defaults: new { id = RouteParameter.Optional }
             );
 
-            //routes.MapRoute(
-            //    name: "Default",
-            //    url: "{controller}/{action}/{id}",
-            //    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            //);
-
             routes.MapRoute(
                 name: "AccountManagement",
                 url: "{language}/Account/{action}",
@@ -39,9 +33,15 @@ namespace MrKupido.Web
             );
 
             routes.MapRoute(
+                name: "OldBrowser",
+                url: "hun/Home/NotSupportedBrowser",
+                defaults: new { language = "hun", controller = "Home", action = "NotSupportedBrowser", id = UrlParameter.Optional }
+            );
+            
+            routes.MapRoute(
                 name: "Default",
-                url: "{language}/{controller}/{id}/{action}",
-                defaults: new { language="hun", controller = "Home", id = UrlParameter.Optional, action = "Index" }
+                url: "{language}/{controller}/{action}/{id}",
+                defaults: new { language = "hun", controller = "Home", action = "Index", id = UrlParameter.Optional }
             );        
         }
     }

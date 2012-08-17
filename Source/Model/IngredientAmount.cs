@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MrKupido.Model;
+using MrKupido.Library;
 
 namespace MrKupido.Model
 {
@@ -20,7 +21,7 @@ namespace MrKupido.Model
 
         public float Amount { get; set; }
 
-        public MeasurementUnit MU { get; set; }
+        public MeasurementUnit Unit { get; set; }
 
         public string Format { get; set; }
 
@@ -120,7 +121,7 @@ namespace MrKupido.Model
 
         public override string ToString()
         {
-            return this.Amount.ToString("0.00") + " " + MUToString(this.MU) + " " + (String.IsNullOrEmpty(this.Format) ? "" : "[" + this.Format + "] ") + this.IngredientName + " (" + this.Index + ")";
+            return this.Amount.ToString("0.00") + " " + MUToString(this.Unit) + " " + (String.IsNullOrEmpty(this.Format) ? "" : "[" + this.Format + "] ") + this.IngredientName + " (" + this.Index + ")";
         }
 
         private string MUToString(MeasurementUnit measurementUnit)
@@ -163,71 +164,71 @@ namespace MrKupido.Model
             {
                 case "gramm":
                 case "g":
-                    ia.MU = MeasurementUnit.gramm;
+                    ia.Unit = MeasurementUnit.gramm;
                     ia.Amount = am;
                     break;
 
                 case "deka":
                 case "dkg":
-                    ia.MU = MeasurementUnit.gramm;
+                    ia.Unit = MeasurementUnit.gramm;
                     ia.Amount = am * 10;
                     break;
 
                 case "kilo":
                 case "kg":
-                    ia.MU = MeasurementUnit.gramm;
+                    ia.Unit = MeasurementUnit.gramm;
                     ia.Amount = am * 1000;
                     break;
 
                 // TODO: púpozott -> *2.0
                 case "evőkanál":
-                    ia.MU = MeasurementUnit.gramm;
+                    ia.Unit = MeasurementUnit.gramm;
                     ia.Amount = (am == 0 ? 15.0f : am * 15.0f);
                     break;
 
                 case "teáskanál":
-                    ia.MU = MeasurementUnit.gramm;
+                    ia.Unit = MeasurementUnit.gramm;
                     ia.Amount = (am == 0 ? 5.0f : am * 5.0f);
                     break;
 
                 case "kávéskanál":
                 case "mokkáskanál":
-                    ia.MU = MeasurementUnit.gramm;
+                    ia.Unit = MeasurementUnit.gramm;
                     ia.Amount = (am == 0 ? 3.0f : am * 3.0f);
                     break;
 
                 case "csipet":
                 case "késhegynyi":
-                    ia.MU = MeasurementUnit.gramm;
+                    ia.Unit = MeasurementUnit.gramm;
                     ia.Amount = (am == 0 ? 1.5f : am * 1.5f);
                     break;
 
 
                 case "liter":
                 case "l":
-                    ia.MU = MeasurementUnit.liter;
+                    ia.Unit = MeasurementUnit.liter;
                     ia.Amount = am;
                     break;
 
                 case "bögre":
-                    ia.MU = MeasurementUnit.liter;
+                    ia.Unit = MeasurementUnit.liter;
                     ia.Amount = am * 0.25f;
                     break;
 
                 case "pohár":
-                    ia.MU = MeasurementUnit.liter;
+                    ia.Unit = MeasurementUnit.liter;
                     ia.Amount = am * 0.2f;
                     break;
 
                 case "deci":
                 case "dl":
-                    ia.MU = MeasurementUnit.liter;
+                    ia.Unit = MeasurementUnit.liter;
                     ia.Amount = am * 0.1f;
                     break;
 
                 case "cent":
                 case "cl":
-                    ia.MU = MeasurementUnit.liter;
+                    ia.Unit = MeasurementUnit.liter;
                     ia.Amount = am * 0.01f;
                     break;
 
@@ -235,12 +236,12 @@ namespace MrKupido.Model
                 case "db":
                 case "egész":
                 case "szál":
-                    ia.MU = MeasurementUnit.piece;
+                    ia.Unit = MeasurementUnit.piece;
                     ia.Amount = am;
                     break;
 
                 default:
-                    ia.MU = MeasurementUnit.piece;
+                    ia.Unit = MeasurementUnit.piece;
                     ia.Amount = (am == 0 ? 1 : am);
                     break;
             }

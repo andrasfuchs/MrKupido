@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using MrKupido.Library;
 
 namespace MrKupido.Model
 {
@@ -14,8 +15,4 @@ namespace MrKupido.Model
         [Required]
         public MeasurementUnit Unit { get; set; }
     }
-
-    public enum MeasurementUnit { piece, gramm, meter, liter, IU, Celsius, second }
-    public enum ElementCategory { Vitamin, Mineral }
-    
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using MrKupido.Library;
 
 namespace MrKupido.Model
 {
@@ -40,15 +41,17 @@ namespace MrKupido.Model
         [Column(Order = 15)]
         public float? PotencialAlkalinity { get; set; }
 
-        [Column(Order = 15)]
+        [Column(Order = 16)]
         [Required]
         public MeasurementUnit Unit { get; set; }
+
+        //[Column(Order = 17)]
+        //[Required]
+        //public float SpecificGravity { get; set; }
 
         public override string ToString()
         {
             return this.NameHun;
         }
     }
-
-    public enum IngredientCategory { Unknown, Meat, Fish, Vegetable, Mineral }
 }
