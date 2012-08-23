@@ -7,6 +7,6 @@ namespace MrKupido.Library.Equipment
 {
     public class Container : IEquipment
     {
-        public IngredientGroup Contents { get; protected set; }
+        public IngredientGroup Contents { get; set; }
     }
 }

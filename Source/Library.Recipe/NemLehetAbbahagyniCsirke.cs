@@ -10,40 +10,46 @@ namespace MrKupido.Library.Recipe
 {
     class NemLehetAbbahagyniCsirke : RecipeBase
     {
-        public new float Cook(float pm)
+        public NemLehetAbbahagyniCsirke(float amount) : base(amount)
         {
             float result = 0.0f;
 
             // preparation
-            IngredientGroup tej = Action.Active.Megfuttatni(new IngredientGroup(new IIngredient[] { new Tej(0.5f), new Eleszto(30f) }));
-            IngredientGroup teszta = Action.Active.Osszegyurni(new IngredientGroup(new IIngredient[] { tej, new Liszt(1000f), new Tejfol(0.2f), new So(15f), new Viz(0.5f) }));
-            teszta = Action.Active.Letakarni(teszta);
-            teszta = Action.Active.Homerseklet(24, teszta);
-            teszta = Action.Passive.Varni(30, teszta);
-            teszta = Action.Active.Nyujtani(5, teszta);
-            IngredientGroup tesztadarabok = Action.Active.Kiszaggatni(40, 10, teszta);
+            IngredientGroup csirkemell = Action.Active.Feldarabolni(50.0f, new Csirkemell(500.0f));
+            csirkemell = Action.Active.Raszorni(new So(5.0f), csirkemell);
+            IngredientGroup fuszeresliszt = Action.Active.Osszekeverni(new IngredientGroup(new IIngredient[] { new Liszt(70.0f), new So(5.0f), new Fuszerpaprika(5.0f), new FeketeBors(3.0f), new Majoranna(3.0f) }));
+            csirkemell = Action.Active.Megforgatni(fuszeresliszt, csirkemell);
 
+            IngredientGroup hagyma = Action.Active.Felkarikazni(5.0f, new Hagyma(35.0f));
+            IngredientGroup tejfol = Action.Active.Osszekeverni(new IngredientGroup(new IIngredient[] { new NapraforgoOlaj(0.1f), new Tejfol(0.2f) }));
+            IngredientGroup sajt = Action.Active.Lereszelni(new Sajt(100.0f));
+            
             // cooking
-            Serpenyo serpenyo = new Serpenyo(26, 4);
-            serpenyo = Action.Active.Berakni(serpenyo, new IngredientGroup(new IIngredient[] { new Olaj(0.1f) })) as Serpenyo;
-            serpenyo = Action.Active.Homerseklet(350, serpenyo) as Serpenyo;
+            Tepsi tepsi = new Tepsi(30, 34, 2);
+            tepsi = Action.Active.Berakni(tepsi, csirkemell) as Tepsi;
+            tepsi.Contents = Action.Active.Raszorni(new Liszt(10.0f), tepsi.Contents);
+            tepsi.Contents = Action.Active.Rarakni(hagyma, tepsi.Contents);
+            tepsi.Contents = Action.Active.Lelocsolni(tejfol, tepsi.Contents);
+            tepsi.Contents = Action.Active.Raszorni(sajt, tepsi.Contents);
+            Alufolia alufolia = new Alufolia(29.0f, 1000.0f);
+            tepsi = Action.Active.Letakarni(alufolia, tepsi) as Tepsi;
 
-            Action.Passive.Amig(
-                () => tesztadarabok.Count > 0,
-                delegate()
-                {
-                    serpenyo = Action.Active.Berakni(serpenyo, tesztadarabok) as Serpenyo;
-                    serpenyo = Action.Passive.Varni(5, serpenyo) as Serpenyo;
+            Suto suto = new Suto(38, 40, 4);
+            suto = Action.Active.Homerseklet(200, suto) as Suto;
+            suto = Action.Active.BerakniTarolot(suto, tepsi) as Suto;
+            suto = Action.Passive.Varni(30, suto) as Suto;
 
-                    IngredientGroup langosok = Action.Active.Kivenni(serpenyo);
-                    result += langosok.Count;
-                }
-                );
+            tepsi = Action.Active.KivenniTarolot(suto) as Tepsi;
+            tepsi = Action.Active.Levenni(alufolia, tepsi) as Tepsi;
+
+            suto = Action.Active.BerakniTarolot(suto, tepsi) as Suto;
+            suto = Action.Passive.Varni(10, suto) as Suto;
+            tepsi = Action.Active.KivenniTarolot(suto) as Tepsi;
 
             // serving
-            Action.Passive.Talalni(new LaposTanyer());
+            Action.Passive.Talalni(new LaposTanyer(), tepsi.Contents);
 
-            return result;
+            //return result;
         }
     }
 }

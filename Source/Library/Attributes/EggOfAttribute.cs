@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MrKupido.Library.Nature;
 
 namespace MrKupido.Library.Attributes
 {
@@ -10,6 +11,7 @@ namespace MrKupido.Library.Attributes
     {
         public EggOfAttribute(Type natureClass)
         {
+            natureClass.CheckParents(typeof(Animalia));
         }
     }
 }

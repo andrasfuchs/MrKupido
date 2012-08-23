@@ -2,14 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MrKupido.Library.Nature;
 
 namespace MrKupido.Library.Attributes
 {
     [AttributeUsage(System.AttributeTargets.Class)]
     public class KindOfAttribute : Attribute
     {
-        public KindOfAttribute(Type natureClass)
+        public int Priority;
+
+        public KindOfAttribute(Type baseClass)
         {
+            baseClass.CheckParents(typeof(NatureBase));
+            Priority = 100;
         }
     }
 }

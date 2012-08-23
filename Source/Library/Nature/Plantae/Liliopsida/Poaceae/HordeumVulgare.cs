@@ -9,7 +9,8 @@ namespace MrKupido.Library.Nature
     [NameAlias("hun", "árpa")]
 
     [ContainsGluten]
-    class HordeumVulgare
+    [NatureSpecies]
+    public class HordeumVulgare : Poaceae
     {
     }
 }

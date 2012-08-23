@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using MrKupido.Library;
 
-namespace Processor
+namespace MrKupido.Processor
 {
     public class RecipeAnalyzer
     {

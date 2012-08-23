@@ -13,6 +13,7 @@ using System.Text;
 using MrKupido.Web.Models;
 using MrKupido.Utils;
 using MrKupido.Library;
+using MrKupido.Processor;
 
 namespace Web.Controllers
 {
@@ -264,7 +265,7 @@ namespace Web.Controllers
 
             ingredient.Index = 1;
             ingredient.Type = FilterItemType.Ingredient;
-            ingredient.Category = IngredientCategory.Unknown;
+            ingredient.Category = ShoppingListCategory.Unknown;
             ingredient.Unit = MeasurementUnit.piece;
 
             db.Ingredients.Add(ingredient);
@@ -376,6 +377,14 @@ namespace Web.Controllers
         public ActionResult FormatIngredients()
         {
             return View();
+        }
+
+        public ActionResult Taxonomy()
+        {
+            TaxonomyTreeBuilder ttb = new TaxonomyTreeBuilder();
+            MrKupido.Processor.Model.TreeNode tn = ttb.Build();
+
+            return View(tn);
         }
     }
 }

@@ -51,5 +51,70 @@ namespace MrKupido.Library.Action
         {
             return null;
         }
+
+        public static IEquipment BerakniTarolot(IEquipment equipment, IEquipment contents)
+        {
+            return null;
+        }
+
+        public static IEquipment KivenniTarolot(IEquipment equipment)
+        {
+            return null;
+        }
+
+        public static IngredientGroup Feldarabolni(int count, IIngredient ing)
+        {
+            return null;
+        }
+
+        public static IngredientGroup Feldarabolni(float weight, IIngredient ing)
+        {
+            return null;
+        }
+
+        public static IngredientGroup Felkarikazni(float weight, IIngredient ing)
+        {
+            return null;
+        }
+
+        public static IngredientGroup Raszorni(IIngredient ing, IngredientGroup ig)
+        {
+            return null;
+        }
+
+        public static IngredientGroup Megforgatni(IngredientGroup inwhat, IngredientGroup what)
+        {
+            return null;
+        }
+
+        public static IngredientGroup Osszekeverni(IngredientGroup ig)
+        {
+            return null;
+        }
+
+        public static IngredientGroup Rarakni(IIngredient ing, IngredientGroup ig)
+        {
+            return null;
+        }
+
+        public static IngredientGroup Lelocsolni(IIngredient ing, IngredientGroup ig)
+        {
+            return null;
+        }
+
+        public static IngredientGroup Lereszelni(IIngredient ing)
+        {
+            return null;
+        }
+
+        public static IEquipment Letakarni(IEquipment with, IEquipment what)
+        {
+            return null;
+        }
+
+        public static IEquipment Levenni(IEquipment with, IEquipment what)
+        {
+            return null;
+        }
     }
 }

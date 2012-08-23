@@ -11,7 +11,7 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("eng", "chicken breast")]
 
     [PartOf(typeof(GallusGallusDomesticus))]
-    class Csirkemell : IngredientBase
+    public class Csirkemell : IngredientBase
     {
         public Csirkemell(float amount)
             : base(amount, MeasurementUnit.gramm)

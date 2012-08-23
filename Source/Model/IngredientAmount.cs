@@ -15,7 +15,7 @@ namespace MrKupido.Model
                                                        "egész", "gerezd", "bögre", "késhegynyi", "kávéskanál", "pohár", "szál", "fej", "szelet", "kiskanál", "csipetnyi", "kevés", "szelet",
                                                        "csokor", "kanál", "pici", "közepes", "kisebb", "zacskó", "nagy" };
 
-        private static string[] formatWords = new string[] { "savanykás", "reszelt", "törött", "őrölt", "langyos", "hideg", "meleg", "forró", "szénsavas" };
+        private static string[] formatWords = new string[] { "savanykás", "reszelt", "törött", "őrölt", "langyos", "hideg", "meleg", "forró", "szénsavas", "magozott", "vaníliás", "darabolt", "natúr", "szikkadt", "füstölt", "darált", "fehér" };
 
         public string Language { get; set; }
 

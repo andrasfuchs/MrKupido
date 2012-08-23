@@ -9,7 +9,8 @@ namespace MrKupido.Library.Nature
     [NameAlias("hun", "rozs")]
 
     [ContainsGluten]
-    class SecaleCereale : Poaceae
+    [NatureSpecies]
+    public class SecaleCereale : Poaceae
     {
     }
 }

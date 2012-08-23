@@ -9,15 +9,7 @@ namespace MrKupido.Library.Recipe
 {
     public class LustaLangos : RecipeBase
     {
-        public new MeasurementUnit Unit
-        {
-            get
-            {
-                return MeasurementUnit.piece;
-            }
-        }
-
-        public new float Cook(float pm)
+        public LustaLangos(float amount) : base(amount)
         {
             float result = 0.0f;
 
@@ -32,8 +24,10 @@ namespace MrKupido.Library.Recipe
 
             // cooking
             Serpenyo serpenyo = new Serpenyo(26, 4);
-            serpenyo = Action.Active.Berakni(serpenyo, new IngredientGroup(new IIngredient[] { new Olaj(0.1f) })) as Serpenyo;
+            serpenyo = Action.Active.Berakni(serpenyo, new IngredientGroup(new IIngredient[] { new NapraforgoOlaj(0.1f) })) as Serpenyo;
             serpenyo = Action.Active.Homerseklet(350, serpenyo) as Serpenyo;
+
+            IngredientGroup osszeslangos = new IngredientGroup(new IIngredient[] {});
 
             Action.Passive.Amig(
                 () => tesztadarabok.Count > 0,
@@ -43,14 +37,15 @@ namespace MrKupido.Library.Recipe
                     serpenyo = Action.Passive.Varni(5, serpenyo) as Serpenyo;
 
                     IngredientGroup langosok = Action.Active.Kivenni(serpenyo);
+                    osszeslangos = new IngredientGroup(new IIngredient[] { osszeslangos, langosok });
                     result += langosok.Count;
                 }
                 );
 
             // serving
-            Action.Passive.Talalni(new LaposTanyer());
+            Action.Passive.Talalni(new LaposTanyer(), osszeslangos);
 
-            return result;
+            //return result;
         }
     }
 }

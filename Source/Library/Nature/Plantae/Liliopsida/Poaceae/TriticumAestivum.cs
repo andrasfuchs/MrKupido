@@ -6,11 +6,12 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Nature
 {
-    [NameAlias("hun", "kenyérbúza", priority = 1)]
+    [NameAlias("hun", "kenyérbúza", Priority = 1)]
     [NameAlias("hun", "közönséges búza")]
 
     [ContainsGluten]
-    class TriticumAestivum : Poaceae
+    [NatureSpecies]
+    public class TriticumAestivum : Poaceae
     {
     }
 }

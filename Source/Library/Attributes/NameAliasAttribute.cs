@@ -8,15 +8,15 @@ namespace MrKupido.Library.Attributes
     [AttributeUsage(System.AttributeTargets.Class, AllowMultiple = true)]
     public class NameAliasAttribute : Attribute
     {
-        string cultureName;
-        string name;
-        public int priority;
+        public string CultureName { get; private set; }
+        public string Name { get; private set; }
+        public int Priority;
 
         public NameAliasAttribute(string cultureName, string name)
         {
-            this.cultureName = cultureName;
-            this.name = name;
-            priority = 100;
+            this.CultureName = cultureName;
+            this.Name = name;
+            this.Priority = 100;
         }
     }
 }

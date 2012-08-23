@@ -12,7 +12,7 @@ namespace MrKupido.Model
     {
         [Required]
         [Column(Order = 11)]
-        public IngredientCategory Category { get; set; }
+        public ShoppingListCategory Category { get; set; }
 
         /// <summary>
         /// Expiration in days
@@ -46,8 +46,13 @@ namespace MrKupido.Model
         public MeasurementUnit Unit { get; set; }
 
         //[Column(Order = 17)]
-        //[Required]
-        //public float SpecificGravity { get; set; }
+        //public float? GrammsPerLiter { get; set; }
+
+        //[Column(Order = 18)]
+        //public float? GrammsPerPiece { get; set; }
+
+        //[Column(Order = 19)]
+        //public float? KCaloriesPerGramm { get; set; }
 
         public override string ToString()
         {
