@@ -5,25 +5,9 @@ using System.Text;
 
 namespace MrKupido.Library
 {
-    public class IngredientGroup : IIngredient
+    public class IngredientGroup : IngredientBase, IIngredient
     {
         private IIngredient[] ingredients;
-
-        public ShoppingListCategory Category 
-        { 
-            get
-            {
-                return ShoppingListCategory.Mixed;
-            }
-        }
-
-        public MeasurementUnit Unit 
-        { 
-            get
-            {
-                return MeasurementUnit.gramm;
-            }        
-        }
 
         public int Count
         {
@@ -33,18 +17,10 @@ namespace MrKupido.Library
             }
         }
 
-        public IngredientGroup(IIngredient[] ingredients)
+        public IngredientGroup(IIngredient[] ingredients) : base(0.0f, MeasurementUnit.gramm)
         {
-        }
-
-        public float GetAmount()
-        {
-            return 0.0f;
-        }
-
-        public float GetAmount(MeasurementUnit unit)
-        {
-            return 0.0f;
+            Category = ShoppingListCategory.Mixed;
+            this.ingredients = ingredients;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace MrKupido.RecipeUpload.AllRecipes
 
         private static void InsertRecipe(string uniqueName, string htmlContent)
         {
-            string temp = "";
+            //string temp = "";
 
             ImportedRecipe recipe = new ImportedRecipe()
             {

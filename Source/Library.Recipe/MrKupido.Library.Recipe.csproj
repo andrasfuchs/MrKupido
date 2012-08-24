@@ -40,8 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LustaLangos.cs" />
-    <Compile Include="NemLehetAbbahagyniCsirke.cs" />
+    <Compile Include="PizzaTeszta.cs" />
+    <Compile Include="Langos.cs" />
+    <Compile Include="FuszeresCsirkemell.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,0 @@
-C:\Work\MrKupido\Source\MrKupidoService\bin\MrKupidoService.dll
-C:\Work\MrKupido\Source\MrKupidoService\bin\MrKupidoService.pdb
-C:\Work\MrKupido\Source\MrKupidoService\obj\Debug\MrKupidoService.dll
-C:\Work\MrKupido\Source\MrKupidoService\obj\Debug\MrKupidoService.pdb
-C:\Work\MrKupido\Source\MrKupidoService\obj\Debug\MrKupidoServices.csprojResolveAssemblyReference.cache

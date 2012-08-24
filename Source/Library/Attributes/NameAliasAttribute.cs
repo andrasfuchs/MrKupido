@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MrKupido.Library.Attributes
 {
-    [AttributeUsage(System.AttributeTargets.Class, AllowMultiple = true)]
+    [AttributeUsage(System.AttributeTargets.Class | System.AttributeTargets.Field, AllowMultiple = true)]
     public class NameAliasAttribute : Attribute
     {
         public string CultureName { get; private set; }

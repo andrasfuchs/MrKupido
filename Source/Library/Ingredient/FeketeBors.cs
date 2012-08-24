@@ -16,5 +16,10 @@ namespace MrKupido.Library.Ingredient
             : base(amount, MeasurementUnit.piece)
         {
         }
+
+        public FeketeBors(float amount, MeasurementUnit unit, IngredientState state)
+            : base(amount, unit, state)
+        {
+        }
     }
 }

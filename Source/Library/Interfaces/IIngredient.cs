@@ -7,12 +7,20 @@ namespace MrKupido.Library
 {
     public interface IIngredient
     {
+        string Name { get; }
+
         ShoppingListCategory Category { get; }
 
         MeasurementUnit Unit { get; }
 
+        IngredientState State { get; }
+
         float GetAmount();
 
-        float GetAmount(MeasurementUnit unit);        
+        float GetAmount(MeasurementUnit unit);
+
+        IIngredient Raszorni(IIngredient i);
+        IIngredient Rarakni(IIngredient i);
+        IIngredient Lelocsolni(IIngredient i);
     }
 }

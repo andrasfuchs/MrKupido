@@ -8,6 +8,7 @@ using MrKupido.Library.Nature;
 namespace MrKupido.Library.Ingredient
 {
     [NameAlias("hun", "só", Priority = 1)]
+    [NameAlias("hun", "konyhasó", Priority = 2)]
     [NameAlias("hun", "étkezési só")]
 
     [KindOf(typeof(Minerale))]

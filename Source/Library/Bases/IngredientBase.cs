@@ -8,20 +8,31 @@ namespace MrKupido.Library
 {
     public class IngredientBase : IIngredient
     {
-        public ShoppingListCategory Category { get; private set; }
+        public ShoppingListCategory Category { get; protected set; }
 
         private Dictionary<int, float> amounts = new Dictionary<int, float>();
         
         public MeasurementUnit Unit { get; set; }
+
+        public IngredientState State { get; set; }
+
+        public string Name
+        {
+            get
+            {
+                return GetName("hun");
+            }
+        }
 
         public int? ExpirationTime { get; private set; }
         public float? StorageTemperature { get; private set; }
         public int? GlichemicalIndex { get; private set; }
         public float? PotencialAlkalinity { get; private set; }
 
-        public IngredientBase(float amount, MeasurementUnit unit)
+        public IngredientBase(float amount, MeasurementUnit unit, IngredientState state = IngredientState.Normal)
         {
             this.SetAmount(amount, unit);
+            this.State = state;
         }
 
         public void LoadStaticInfoObject(object obj)
@@ -75,5 +86,27 @@ namespace MrKupido.Library
 
             throw new CultureNotSupportedException(this.GetType().Name, culture);
         }
+
+        public IIngredient Raszorni(IIngredient i)
+        {
+            if (i.Unit != MeasurementUnit.gramm) throw new InvalidActionForIngredientException("Raszorni", i.Name, i.Unit);
+
+            return new IngredientGroup(new IIngredient[] { this, i });
+        }
+
+        public IIngredient Rarakni(IIngredient i)
+        {
+            if (i.Unit != MeasurementUnit.piece) throw new InvalidActionForIngredientException("Rarakni", i.Name, i.Unit);
+
+            return new IngredientGroup(new IIngredient[] { this, i });
+        }
+
+        public IIngredient Lelocsolni(IIngredient i)
+        {
+            if (i.Unit != MeasurementUnit.liter) throw new InvalidActionForIngredientException("Lelocsolni", i.Name, i.Unit);
+
+            return new IngredientGroup(new IIngredient[] { this, i });
+        }
+
     }
 }

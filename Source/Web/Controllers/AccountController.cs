@@ -265,7 +265,7 @@ namespace Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult Profile()
+        public new ActionResult Profile()
         {
             if (Session["CurrentUser"] == null)
             {
@@ -276,7 +276,7 @@ namespace Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Profile(string userId)
+        public new ActionResult Profile(string userId)
         {
             User user = (User)Session["CurrentUser"];
 

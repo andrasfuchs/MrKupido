@@ -9,11 +9,10 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "bors", Priority = 1)]
     [NameAlias("hun", "őrölt fekete bors")]
 
-    [GristOf(typeof(FeketeBors))]
-    public class FeketeBorsOrolt : IngredientBase
+    public class FeketeBorsOrolt : FeketeBors
     {
         public FeketeBorsOrolt(float amount)
-            : base(amount, MeasurementUnit.gramm)
+            : base(amount, MeasurementUnit.gramm, IngredientState.Orolt)
         {
         }
     }
