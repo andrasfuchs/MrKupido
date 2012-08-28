@@ -26,8 +26,9 @@ namespace MrKupido.Library.Equipment.Devices
             this.Dimensions = new Dimensions(width, height, depth);
         }
 
-        public void Berakni(IIngredient ig)
+        public bool Berakni(IIngredient ig)
         {
+            return true;
         }
 
         public IIngredient Kivenni()

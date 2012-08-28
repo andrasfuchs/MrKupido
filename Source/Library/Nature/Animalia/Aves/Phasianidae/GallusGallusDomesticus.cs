@@ -10,7 +10,7 @@ namespace MrKupido.Library.Nature
     [NameAlias("hun", "házityúk")]
 
     [NatureSubspecies]
-    class GallusGallusDomesticus : GallusGallus
+    public class GallusGallusDomesticus : GallusGallus
     {
     }
 }

@@ -6,6 +6,8 @@ using MrKupido.Library.Nature;
 
 namespace MrKupido.Library.Attributes
 {
+    [NameAlias("hun", "termése")]
+
     [AttributeUsage(System.AttributeTargets.Class)]
     public class YieldOfAttribute : Attribute
     {

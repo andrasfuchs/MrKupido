@@ -42,16 +42,18 @@ namespace MrKupido.Library.Recipe
 
             Kes knife = eg.Use<Kes>();
 
-            IngredientGroup csirkemell = knife.Feldarabolni(new Csirkemell(500.0f * amount), 50.0f);
+            IIngredient csirkemell = knife.Feldarabolni(new Csirkemell(500.0f * amount), 50.0f);
             csirkemell.Raszorni(new So(5.0f * amount));
 
             Fakanal fakanal = eg.Use<Fakanal>();
             IngredientGroup fuszeresliszt = fakanal.Osszekeverni(new Liszt(70.0f * amount), new So(5.0f * amount), new Fuszerpaprika(5.0f * amount), new FeketeBors(3.0f * amount), new Majoranna(3.0f * amount));
-            csirkemell = Action.Active.Megforgatni(fuszeresliszt, csirkemell);
+            csirkemell = csirkemell.Megforgatni(fuszeresliszt);
 
             IngredientGroup hagyma = knife.Felkarikazni(new Hagyma(35.0f * amount), 5.0f);
             IngredientGroup tejfol = fakanal.Osszekeverni(new NapraforgoOlaj(0.1f * amount), new Tejfol(0.2f * amount));
-            IngredientGroup sajt = Action.Active.Lereszelni(new Sajt(100.0f * amount));
+
+            Reszelo reszelo = eg.Use<Reszelo>();
+            IngredientGroup sajt = reszelo.Lereszelni(new Sajt(100.0f * amount));
 
             result.Add("csirkemell", csirkemell);
             result.Add("hagyma", hagyma);
@@ -70,7 +72,7 @@ namespace MrKupido.Library.Recipe
 
             tepsi.Contents.Raszorni(new Liszt(10.0f * amount));
             tepsi.Contents.Rarakni(preps["hagyma"]);
-            tepsi.Contents.Lelocsolni(preps["tejfol"]);
+            tepsi.Contents.Ralocsolni(preps["tejfol"]);
             tepsi.Contents.Raszorni(preps["sajt"]);
             Alufolia alufolia = new Alufolia(29.0f, 1000.0f);
             tepsi.Lefedni(alufolia);
@@ -94,7 +96,7 @@ namespace MrKupido.Library.Recipe
 
         public override void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
-            Action.Passive.Talalni(eg.Use<LaposTanyer>(), food["csirke"]);
+            food["csirke"].Talalni(eg.Use<LaposTanyer>());
         }
     }
 }

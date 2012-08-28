@@ -9,7 +9,7 @@ namespace MrKupido.Library.Nature
     [NameAlias("hun", "tülkösszarvúak")]
 
     [NatureFamily]
-    class Bovidae : Mammalia
+    public class Bovidae : Mammalia
     {
     }
 }

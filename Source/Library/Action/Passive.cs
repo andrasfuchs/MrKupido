@@ -16,9 +16,5 @@ namespace MrKupido.Library.Action
                 action();
             }
         }
-
-        public static void Talalni(IEquipment container, IIngredient content)
-        {
-        }
     }
 }

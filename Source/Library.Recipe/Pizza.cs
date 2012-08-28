@@ -14,9 +14,9 @@ namespace MrKupido.Library.Recipe
     [NameAlias("hun", "pizza")]
     [NameAlias("eng", "pizza")]
 
-    public class PizzaTeszta : RecipeBase
+    public class Pizza : RecipeBase
     {
-        public PizzaTeszta(float amount)
+        public Pizza(float amount)
             : base(amount)
         { }
 
@@ -76,7 +76,7 @@ namespace MrKupido.Library.Recipe
 
         public override void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
-            Action.Passive.Talalni(eg.Use<LaposTanyer>(), food["pizzateszta"]);
+            food["pizzateszta"].Talalni(eg.Use<LaposTanyer>());
         }
     }
 }

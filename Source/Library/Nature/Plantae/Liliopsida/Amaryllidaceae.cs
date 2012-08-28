@@ -9,7 +9,7 @@ namespace MrKupido.Library.Nature
     [NameAlias("hun", "amarilliszfélék")]
 
     [NatureFamily]
-    class Amaryllidaceae : Liliopsida
+    public class Amaryllidaceae : Liliopsida
     {
     }
 }

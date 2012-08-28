@@ -8,7 +8,7 @@ namespace MrKupido.Library.Nature
 {
     [NameAlias("hun", "fácánfélék")]
     [NatureFamily]
-    class Phasianidae : Aves
+    public class Phasianidae : Aves
     {
     }
 }

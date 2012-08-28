@@ -14,6 +14,7 @@ namespace MrKupido.Library.Ingredient
         public Tejfol(float amount)
             : base(amount, MeasurementUnit.liter)
         {
+            throw new RecipeUnknownException(this.GetType().Name);
         }
     }
 }

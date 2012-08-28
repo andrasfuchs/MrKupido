@@ -8,7 +8,7 @@ namespace MrKupido.Library.Nature
 {
     [NameAlias("hun", "őstömlősök")]
     [NatureClass]
-    class Hemiascomycetes : Fungi
+    public class Hemiascomycetes : Fungi
     {
     }
 }

@@ -7,8 +7,9 @@ using MrKupido.Library.Attributes;
 namespace MrKupido.Library.Nature
 {
     [NameAlias("hun", "gombák")]
+
     [NatureKingdom]
-    class Fungi : NatureBase
+    public class Fungi : NatureBase
     {
     }
 }

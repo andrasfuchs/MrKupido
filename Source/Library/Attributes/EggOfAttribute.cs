@@ -6,6 +6,8 @@ using MrKupido.Library.Nature;
 
 namespace MrKupido.Library.Attributes
 {
+    [NameAlias("hun", "tojása")]
+
     [AttributeUsage(System.AttributeTargets.Class)]
     public class EggOfAttribute : Attribute
     {

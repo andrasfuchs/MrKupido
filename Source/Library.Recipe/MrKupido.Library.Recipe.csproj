@@ -40,10 +40,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PizzaTeszta.cs" />
+    <Compile Include="Pizza.cs" />
     <Compile Include="Langos.cs" />
     <Compile Include="FuszeresCsirkemell.cs" />
+    <Compile Include="Pizza\ParadicsomosAlapuPizza\HawaiiPizza.cs" />
+    <Compile Include="Pizza\ParadicsomosAlapuPizza.cs" />
+    <Compile Include="PizzaParadicsomszosz.cs" />
+    <Compile Include="Pizza\ParadicsomosAlapuPizza\MagyarosPizza.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sajtgolyo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Library\MrKupido.Library.csproj">

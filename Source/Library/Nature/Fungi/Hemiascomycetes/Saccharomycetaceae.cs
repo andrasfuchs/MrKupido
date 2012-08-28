@@ -8,7 +8,7 @@ namespace MrKupido.Library.Nature
 {
     [NameAlias("hun", "élesztőgombafélék")]
     [NatureFamily]
-    class Saccharomycetaceae : Hemiascomycetes
+    public class Saccharomycetaceae : Hemiascomycetes
     {
     }
 }

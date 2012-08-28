@@ -10,7 +10,7 @@ namespace MrKupido.Library.Nature
     [NameAlias("hun", "szarvasmarha")]
 
     [NatureSpecies]
-    class BosPrimigenius : Bovidae
+    public class BosPrimigenius : Bovidae
     {
     }
 }

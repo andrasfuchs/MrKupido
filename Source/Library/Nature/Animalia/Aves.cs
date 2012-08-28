@@ -7,8 +7,9 @@ using MrKupido.Library.Attributes;
 namespace MrKupido.Library.Nature
 {
     [NameAlias("hun", "madarak")]
+
     [NatureClass]
-    class Aves : Animalia
+    public class Aves : Animalia
     {
     }
 }

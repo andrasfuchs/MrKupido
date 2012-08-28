@@ -8,7 +8,7 @@ namespace MrKupido.Library.Nature
 {
     [NameAlias("hun", "bankivatyúk")]
     [NatureSpecies]
-    class GallusGallus : Phasianidae
+    public class GallusGallus : Phasianidae
     {
     }
 }

@@ -101,12 +101,22 @@ namespace MrKupido.Library
             return new IngredientGroup(new IIngredient[] { this, i });
         }
 
-        public IIngredient Lelocsolni(IIngredient i)
+        public IIngredient Ralocsolni(IIngredient i)
         {
             if (i.Unit != MeasurementUnit.liter) throw new InvalidActionForIngredientException("Lelocsolni", i.Name, i.Unit);
 
             return new IngredientGroup(new IIngredient[] { this, i });
         }
 
+        public IIngredient Megforgatni(IIngredient i)
+        {
+            if (i.Unit != MeasurementUnit.gramm) throw new InvalidActionForIngredientException("Megforgatni", i.Name, i.Unit);
+
+            // TODO: a small amount of i must be separated
+
+            return new IngredientGroup(new IIngredient[] { this, i });
+        }
+
+        public void Talalni(IEquipment container) { }
     }
 }

@@ -9,7 +9,7 @@ namespace MrKupido.Library.Nature
     [NameAlias("hun", "emlősök")]
 
     [NatureClass]
-    class Mammalia : Animalia
+    public class Mammalia : Animalia
     {
     }
 }

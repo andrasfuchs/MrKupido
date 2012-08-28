@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace MrKupido.Library.Equipment.Tools
+{
+    public class Kez : Tool
+    {
+        public IngredientGroup Osszegyurni(params IIngredient[] ingredients)
+        {
+            return new IngredientGroup(ingredients);
+        }
+    }
+}

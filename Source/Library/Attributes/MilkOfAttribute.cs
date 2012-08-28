@@ -6,6 +6,8 @@ using MrKupido.Library.Nature;
 
 namespace MrKupido.Library.Attributes
 {
+    [NameAlias("hun", "teje")]
+
     [AttributeUsage(System.AttributeTargets.Class)]
     public class MilkOfAttribute : Attribute
     {

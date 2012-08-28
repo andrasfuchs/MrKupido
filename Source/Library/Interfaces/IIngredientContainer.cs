@@ -11,7 +11,7 @@ namespace MrKupido.Library
 
         IIngredient Contents { get; set; }
 
-        void Berakni(IIngredient ig);
+        bool Berakni(IIngredient ig);
 
         IIngredient Kivenni();
 

@@ -8,7 +8,7 @@ namespace MrKupido.Library.Nature
 {
     [NameAlias("hun", "élesztőgomba")]
     [NatureSpecies]
-    class SaccharomycesCerevisiae : Saccharomycetaceae
+    public class SaccharomycesCerevisiae : Saccharomycetaceae
     {
     }
 }

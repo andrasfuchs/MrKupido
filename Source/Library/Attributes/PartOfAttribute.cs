@@ -6,6 +6,8 @@ using MrKupido.Library.Nature;
 
 namespace MrKupido.Library.Attributes
 {
+    [NameAlias("hun", "egy része")]
+
     [AttributeUsage(System.AttributeTargets.Class)]
     public class PartOfAttribute : Attribute
     {

@@ -9,7 +9,7 @@ namespace MrKupido.Library.Nature
     [NameAlias("hun", "vöröshagyma")]
 
     [NatureSpecies]
-    public class AlliumCepaL : Poaceae
+    public class AlliumCepaL : Amaryllidaceae
     {
     }
 }

@@ -21,6 +21,9 @@ namespace MrKupido.Library
 
         IIngredient Raszorni(IIngredient i);
         IIngredient Rarakni(IIngredient i);
-        IIngredient Lelocsolni(IIngredient i);
+        IIngredient Ralocsolni(IIngredient i);
+        IIngredient Megforgatni(IIngredient i);
+
+        void Talalni(IEquipment container);
     }
 }

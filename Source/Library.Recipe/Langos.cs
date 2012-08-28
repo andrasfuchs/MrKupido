@@ -36,8 +36,10 @@ namespace MrKupido.Library.Recipe
         {
             PreparedIngredients result = new PreparedIngredients();
 
-            IIngredient tej = Action.Active.Megfuttatni(new IngredientGroup(new IIngredient[] { new Tej(0.5f * amount), new Eleszto(30f * amount) }));
-            IIngredient teszta = Action.Active.Osszegyurni(new IngredientGroup(new IIngredient[] { tej, new Liszt(1000f * amount), new Tejfol(0.2f * amount), new So(15f * amount), new Viz(0.5f * amount) }));
+            IIngredient felfuttatottEleszto = new FelfuttatottEleszto(30f * amount);
+
+            Kez kez = eg.Use<Kez>();
+            IIngredient teszta = kez.Osszegyurni(felfuttatottEleszto, new Liszt(1000f * amount), new Tejfol(0.2f * amount), new So(15f * amount), new Viz(0.5f * amount));
             
             Edeny edeny = eg.Use<Edeny>();
             edeny.Berakni(teszta);
@@ -66,28 +68,25 @@ namespace MrKupido.Library.Recipe
             tuzhely.Behelyezni(serpenyo);
             tuzhely.Homerseklet(350);
 
-            IngredientGroup osszeslangos = new IngredientGroup(new IIngredient[] { });
+            Edeny edeny = eg.Use<Edeny>();
 
-            Action.Passive.Amig(
-                () => ((IngredientGroup)preps["tesztadarabok"]).Count > 0,
-                delegate()
-                {
-                    serpenyo.Berakni(preps["tesztadarabok"]);
-                    serpenyo.Varni(5);
+            bool mindbefert = false;
+            do
+            {
+                mindbefert = serpenyo.Berakni(preps["tesztadarabok"]);
+                serpenyo.Varni(5);
 
-                    IIngredient langosok = serpenyo.Kivenni();
-                    osszeslangos = new IngredientGroup(new IIngredient[] { osszeslangos, langosok });
-                }
-                );
+                edeny.Berakni(serpenyo.Kivenni());
+            } while (!mindbefert);
 
-            cfp.Add("osszeslangos", osszeslangos);
+            cfp.Add("osszeslangos", edeny.Contents);
 
             return cfp;
         }
 
         public override void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
-            Action.Passive.Talalni(eg.Use<LaposTanyer>(), food["osszeslangos"]);
+            food["osszeslangos"].Talalni(eg.Use<LaposTanyer>());
         }
     }
 }
