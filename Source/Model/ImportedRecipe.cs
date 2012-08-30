@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel.DataAnnotations;
 
 namespace MrKupido.Model
 {
@@ -10,8 +11,20 @@ namespace MrKupido.Model
         public int ImportedRecipeId { get; set; }
         public DateTime ImportedAt { get; set; }
         public ImportedRecipeState State { get; set; }
+        [Required]
+        [MaxLength(3)]
+        [MinLength(3)]
+        [StringLength(3, MinimumLength = 3)]
         public string Language { get; set; }
+        [Required]
+        [MaxLength(150)]
+        [MinLength(2)]
+        [StringLength(150, MinimumLength = 2)]
         public string UniqueName { get; set; }
+        [Required]
+        [MaxLength(150)]
+        [MinLength(2)]
+        [StringLength(150, MinimumLength = 2)]
         public string DisplayName { get; set; }
         public string Description { get; set; }
         public string Category { get; set; }
@@ -25,8 +38,12 @@ namespace MrKupido.Model
         public int? PriceCategory { get; set; }
         public int? Favourited { get; set; }
         public int? Forwarded { get; set; }
+        [Required]
         public string Ingredients { get; set; }
+        [Required]
         public string Directions { get; set; }
+        [Required]
+        public string OriginalDirections { get; set; }
         public string Footnotes { get; set; }
         public string Tags { get; set; }
         public int? Servings { get; set; }

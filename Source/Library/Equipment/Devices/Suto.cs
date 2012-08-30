@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MrKupido.Library.Attributes;
 
-namespace MrKupido.Library.Equipment.Devices
+namespace MrKupido.Library.Equipment
 {
+    [NameAlias("hun", "sütő")]
+
     public class Suto : Heater
     {
         public Suto(float scale = 1.0f, int levels = 4, int heatLevels = 10)

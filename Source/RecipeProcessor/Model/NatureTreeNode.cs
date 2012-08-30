@@ -18,7 +18,7 @@ namespace MrKupido.Processor.Model
                 if (attr.GetType().FullName == "MrKupido.Library.Attributes.NatureKingdomAttribute")
                 {
                     if (Type == NatureNodeType.None) Type = NatureNodeType.Kingdom;
-                    else throw new Exception("Class '" + natureClass.Name + "' has more then one nature defining attributes.");
+                    else throw new ProcessorException("Class '" + natureClass.Name + "' has more then one nature defining attributes.");
                 }
             }
         }

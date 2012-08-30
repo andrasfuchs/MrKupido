@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MrKupido.Library.Ingredient;
+using MrKupido.Library.Attributes;
 
-namespace MrKupido.Library.Equipment.Tools
+namespace MrKupido.Library.Equipment
 {
+    [NameAlias("hun", "reszelő")]
+
     public class Reszelo : Tool
     {
         public IngredientGroup Lereszelni(IIngredient i)

@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MrKupido.Library.Ingredient;
+using MrKupido.Library.Attributes;
 
-namespace MrKupido.Library
+namespace MrKupido.Library.Recipe
 {
+    [NameAlias("hun", "receptek")]
+    [NameAlias("eng", "recipes")]
+
     public class RecipeBase : IngredientBase, IRecipe
     {
         public RecipeBase(float amount) : this(amount, MeasurementUnit.portion)

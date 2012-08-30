@@ -5,7 +5,7 @@ using System.Text;
 using MrKupido.Library.Attributes;
 using MrKupido.Library.Nature;
 
-namespace MrKupido.Library.Ingredient
+namespace MrKupido.Library.Recipe
 {
     [NameAlias("hun", "tejföl")]
 

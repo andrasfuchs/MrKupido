@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MrKupido.Library.Attributes;
-using MrKupido.Library.Equipment.Tools;
-using MrKupido.Library.Equipment.Containers;
-using MrKupido.Library.Equipment.Devices;
+using MrKupido.Library.Equipment;
 using MrKupido.Library.Ingredient;
 
 namespace MrKupido.Library.Recipe
@@ -39,9 +37,10 @@ namespace MrKupido.Library.Recipe
             IIngredient sonka = kes.Feldarabolni(new Sonka(50.0f), 1.0f);
             IIngredient kukorica = new MorzsoltFottKukorica(50.0f);
 
-            pizzateszta = pizzateszta.Rarakni(sonka);
-            pizzateszta = pizzateszta.Rarakni(kukorica);
-            pizzateszta = pizzateszta.Rarakni(ananaszdarabok);
+            Kez kez = eg.Use<Kez>();
+            pizzateszta = kez.Rarakni(pizzateszta, sonka);
+            pizzateszta = kez.Rarakni(pizzateszta, kukorica);
+            pizzateszta = kez.Rarakni(pizzateszta, ananaszdarabok);
             
             result.Add("pizzateszta", pizzateszta);
 

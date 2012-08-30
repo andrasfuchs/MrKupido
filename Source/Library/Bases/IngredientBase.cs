@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MrKupido.Library.Attributes;
+using System.Threading;
 
-namespace MrKupido.Library
+namespace MrKupido.Library.Ingredient
 {
+    [NameAlias("hun", "hozzávalók")]
+    [NameAlias("eng", "ingredients")]
+
     public class IngredientBase : IIngredient
     {
         public ShoppingListCategory Category { get; protected set; }
@@ -20,7 +24,7 @@ namespace MrKupido.Library
         {
             get
             {
-                return GetName("hun");
+                return NameAliasAttribute.GetDefaultName(this.GetType());
             }
         }
 
@@ -67,56 +71,9 @@ namespace MrKupido.Library
             amounts.Add((int)unit, amount);
         }
 
-        public string GetName(string culture)
+        public void ChangeUnitTo(MeasurementUnit unit)
         {
-            string result = null;
-            int priority = Int32.MaxValue;
-
-            Attribute[] attributes = System.Attribute.GetCustomAttributes(this.GetType());
-            foreach (Attribute attribute in attributes)
-            {
-                if (attribute is NameAliasAttribute)
-                {
-                    NameAliasAttribute naa = (NameAliasAttribute)attribute;
-                    if ((naa.CultureName == culture) && (naa.Priority < priority)) result = naa.Name;
-                }
-            }
-
-            if (result != null) return result;
-
-            throw new CultureNotSupportedException(this.GetType().Name, culture);
+            SetAmount(GetAmount(unit), unit);
         }
-
-        public IIngredient Raszorni(IIngredient i)
-        {
-            if (i.Unit != MeasurementUnit.gramm) throw new InvalidActionForIngredientException("Raszorni", i.Name, i.Unit);
-
-            return new IngredientGroup(new IIngredient[] { this, i });
-        }
-
-        public IIngredient Rarakni(IIngredient i)
-        {
-            if (i.Unit != MeasurementUnit.piece) throw new InvalidActionForIngredientException("Rarakni", i.Name, i.Unit);
-
-            return new IngredientGroup(new IIngredient[] { this, i });
-        }
-
-        public IIngredient Ralocsolni(IIngredient i)
-        {
-            if (i.Unit != MeasurementUnit.liter) throw new InvalidActionForIngredientException("Lelocsolni", i.Name, i.Unit);
-
-            return new IngredientGroup(new IIngredient[] { this, i });
-        }
-
-        public IIngredient Megforgatni(IIngredient i)
-        {
-            if (i.Unit != MeasurementUnit.gramm) throw new InvalidActionForIngredientException("Megforgatni", i.Name, i.Unit);
-
-            // TODO: a small amount of i must be separated
-
-            return new IngredientGroup(new IIngredient[] { this, i });
-        }
-
-        public void Talalni(IEquipment container) { }
     }
 }

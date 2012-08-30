@@ -17,30 +17,30 @@ namespace MrKupido.Model
         public FilterItemType Type { get; set; }
 
         //[Required]
-        //[MaxLength(100)]
-        //[MinLength(2)]
-        //[StringLength(100, MinimumLength = 2)]
+        [MaxLength(150)]
+        [MinLength(2)]
+        [StringLength(150, MinimumLength = 2)]
         [Column(Order = 3)]
         public string NameEng { get; set; }
 
         [Required]
-        [MaxLength(100)]
+        [MaxLength(150)]
         [MinLength(2)]
-        [StringLength(100, MinimumLength = 2)]
+        [StringLength(150, MinimumLength = 2)]
         [Column(Order = 4)]
         public string NameHun { get; set; }
 
         //[Required]
-        //[MaxLength(100)]
-        //[MinLength(2)]
-        //[StringLength(100, MinimumLength = 2)]
+        [MaxLength(150)]
+        [MinLength(2)]
+        [StringLength(150, MinimumLength = 2)]
         [Column(Order = 5)]
         public string UniqueNameEng { get; set; }
 
         [Required]
-        [MaxLength(100)]
+        [MaxLength(150)]
         [MinLength(2)]
-        [StringLength(100, MinimumLength = 2)]
+        [StringLength(150, MinimumLength = 2)]
         [Column(Order = 6)]
         public string UniqueNameHun { get; set; }
 
@@ -54,6 +54,9 @@ namespace MrKupido.Model
         /// <summary>
         /// Reference to the .NET class which represents this DB record
         /// </summary>
+        [MaxLength(150)]
+        [MinLength(2)]
+        [StringLength(150, MinimumLength = 2)]
         [Column(Order = 8)]
         public string ClassName { get; set; }
 

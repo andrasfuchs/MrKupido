@@ -36,8 +36,15 @@ namespace MrKupido.RecipeUpload.MindMegette
         // Wrapper method for use with thread pool.
         public void ThreadPoolCallback(object threadContext)
         {
-            ReadFileContent();
-            InsertRecipe(Path.GetFileNameWithoutExtension(filename), fileContent);
+            string uniqueName = Path.GetFileNameWithoutExtension(filename);
+
+            //if ((uniqueName == "gofri-iv") || (uniqueName == "lusta-langos_2") || (uniqueName == "nem-lehet-abbahagyni-csirke") || (uniqueName == "sajtgolyo-ii") || (uniqueName == "tepsis-karfiol"))
+            {
+                ReadFileContent();
+
+                InsertRecipe(uniqueName, fileContent);
+            }
+
 
             if (Interlocked.Decrement(ref NumBusy) == 0) doneEvent.Set();
         }

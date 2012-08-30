@@ -22,6 +22,8 @@ namespace MrKupido.Library
         [NameAlias("hun", "darált")]
         Daralt,
         [NameAlias("hun", "magozott")]
-        Magozott
+        Magozott,
+        [NameAlias("hun", "préselt")]
+        Preselt
     }
 }

@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MrKupido.Library.Attributes;
 
-namespace MrKupido.Library.Equipment.Containers
+namespace MrKupido.Library.Equipment
 {
+    [NameAlias("hun", "edény")]
+
     public class Edeny : RoundContainer
     {
         public Edeny(float scale = 1.0f)

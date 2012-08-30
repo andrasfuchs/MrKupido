@@ -4,10 +4,7 @@ using System.Linq;
 using System.Text;
 using MrKupido.Library.Ingredient;
 using MrKupido.Library.Equipment;
-using MrKupido.Library.Equipment.Containers;
 using MrKupido.Library.Attributes;
-using MrKupido.Library.Equipment.Tools;
-using MrKupido.Library.Equipment.Devices;
 
 namespace MrKupido.Library.Recipe
 {
@@ -86,7 +83,8 @@ namespace MrKupido.Library.Recipe
 
         public override void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
-            food["osszeslangos"].Talalni(eg.Use<LaposTanyer>());
+            Kez kez = eg.Use<Kez>();
+            kez.Talalni(food["osszeslangos"], eg.Use<LaposTanyer>());
         }
     }
 }

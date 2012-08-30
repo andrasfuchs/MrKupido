@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MrKupido.Library.Attributes;
 
-namespace MrKupido.Library.Equipment.Containers
+namespace MrKupido.Library.Equipment
 {
+    [NameAlias("hun", "nyújtódeszka")]
+
     public class NyujtoDeszka : Container
     {
         public NyujtoDeszka(float scale = 1.0f)

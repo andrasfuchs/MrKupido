@@ -40,20 +40,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IngredientTreeBuilder.cs" />
-    <Compile Include="ITreeBuilder.cs" />
+    <Compile Include="Exceptions\ProcessorException.cs" />
+    <Compile Include="Model\EquipmentTreeNode.cs" />
+    <Compile Include="Model\IngredientTreeNode.cs" />
     <Compile Include="Model\NatureNodeType.cs" />
     <Compile Include="Model\NatureTreeNode.cs" />
+    <Compile Include="Model\RecipeTreeNode.cs" />
     <Compile Include="Model\TreeNode.cs" />
     <Compile Include="RecipeAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecipeTagger.cs" />
-    <Compile Include="TaxonomyTreeBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Library\MrKupido.Library.csproj">
       <Project>{44930A70-2BFF-4634-BD17-1ECB20D9C683}</Project>
-      <Name>Library</Name>
+      <Name>MrKupido.Library</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

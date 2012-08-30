@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MrKupido.Library.Attributes;
+using MrKupido.Library.Equipment;
 
 namespace MrKupido.Library.Recipe
 {
@@ -22,7 +23,8 @@ namespace MrKupido.Library.Recipe
             result.Remove("pizzateszta");
 
             IIngredient paradicsomosPizzaszosz = new PizzaParadicsomszosz(0.2f);
-            pizzateszta = pizzateszta.Rarakni(paradicsomosPizzaszosz);
+            Kez kez = eg.Use<Kez>();
+            pizzateszta = kez.Rarakni(pizzateszta, paradicsomosPizzaszosz);
 
             result.Add("pizzateszta", pizzateszta);
 

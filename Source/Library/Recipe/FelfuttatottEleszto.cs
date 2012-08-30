@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using MrKupido.Library.Attributes;
 
-namespace MrKupido.Library.Ingredient
+namespace MrKupido.Library.Recipe
 {
     [NameAlias("hun", "felfuttatott élesztő")]
 

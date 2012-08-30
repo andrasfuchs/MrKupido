@@ -5,11 +5,8 @@ using System.Text;
 using MrKupido.Library;
 using MrKupido.Library.Equipment;
 using MrKupido.Library.Ingredient;
-using MrKupido.Library.Equipment.Containers;
-using MrKupido.Library.Equipment.Materials;
-using MrKupido.Library.Equipment.Devices;
+using MrKupido.Library.Equipment;
 using MrKupido.Library.Attributes;
-using MrKupido.Library.Equipment.Tools;
 
 namespace MrKupido.Library.Recipe
 {
@@ -41,13 +38,13 @@ namespace MrKupido.Library.Recipe
             PreparedIngredients result = new PreparedIngredients();
 
             Kes knife = eg.Use<Kes>();
-
             IIngredient csirkemell = knife.Feldarabolni(new Csirkemell(500.0f * amount), 50.0f);
-            csirkemell.Raszorni(new So(5.0f * amount));
+            Kez kez = eg.Use<Kez>();
+            csirkemell = kez.Raszorni(csirkemell, new So(5.0f * amount));
 
             Fakanal fakanal = eg.Use<Fakanal>();
             IngredientGroup fuszeresliszt = fakanal.Osszekeverni(new Liszt(70.0f * amount), new So(5.0f * amount), new Fuszerpaprika(5.0f * amount), new FeketeBors(3.0f * amount), new Majoranna(3.0f * amount));
-            csirkemell = csirkemell.Megforgatni(fuszeresliszt);
+            csirkemell = kez.Megforgatni(csirkemell, fuszeresliszt);
 
             IngredientGroup hagyma = knife.Felkarikazni(new Hagyma(35.0f * amount), 5.0f);
             IngredientGroup tejfol = fakanal.Osszekeverni(new NapraforgoOlaj(0.1f * amount), new Tejfol(0.2f * amount));
@@ -70,10 +67,11 @@ namespace MrKupido.Library.Recipe
             Tepsi tepsi = eg.Use<Tepsi>();
             tepsi.Berakni(preps["csirkemell"]);
 
-            tepsi.Contents.Raszorni(new Liszt(10.0f * amount));
-            tepsi.Contents.Rarakni(preps["hagyma"]);
-            tepsi.Contents.Ralocsolni(preps["tejfol"]);
-            tepsi.Contents.Raszorni(preps["sajt"]);
+            Kez kez = eg.Use<Kez>();
+            tepsi.Contents = kez.Raszorni(tepsi.Contents, new Liszt(10.0f * amount));
+            tepsi.Contents = kez.Rarakni(tepsi.Contents, preps["hagyma"]);
+            tepsi.Contents = kez.Ralocsolni(tepsi.Contents, preps["tejfol"]);
+            tepsi.Contents = kez.Raszorni(tepsi.Contents, preps["sajt"]);
             Alufolia alufolia = new Alufolia(29.0f, 1000.0f);
             tepsi.Lefedni(alufolia);
 
@@ -96,7 +94,8 @@ namespace MrKupido.Library.Recipe
 
         public override void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
-            food["csirke"].Talalni(eg.Use<LaposTanyer>());
+            Kez kez = eg.Use<Kez>();
+            kez.Talalni(food["csirke"], eg.Use<LaposTanyer>());
         }
     }
 }

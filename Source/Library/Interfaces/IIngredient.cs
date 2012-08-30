@@ -18,12 +18,5 @@ namespace MrKupido.Library
         float GetAmount();
 
         float GetAmount(MeasurementUnit unit);
-
-        IIngredient Raszorni(IIngredient i);
-        IIngredient Rarakni(IIngredient i);
-        IIngredient Ralocsolni(IIngredient i);
-        IIngredient Megforgatni(IIngredient i);
-
-        void Talalni(IEquipment container);
     }
 }

@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Equipment
 {
-    public abstract class Container : IEquipment, IIngredientContainer
+    [NameAlias("hun", "tárolók")]
+    [NameAlias("eng", "containers")]
+
+    public abstract class Container : EquipmentBase, IIngredientContainer
     {
         public Dimensions Dimensions { get; set; }
 
@@ -32,5 +36,7 @@ namespace MrKupido.Library.Equipment
         public void Lefedni(Material material = null) { }
         
         public void FedotLevenni() { }
+
+        public void FolyadekotLeonteni() { }
     }
 }

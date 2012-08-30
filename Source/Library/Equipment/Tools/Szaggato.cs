@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MrKupido.Library.Ingredient;
+using MrKupido.Library.Attributes;
 
-namespace MrKupido.Library.Equipment.Tools
+namespace MrKupido.Library.Equipment
 {
+    [NameAlias("hun", "szaggató")]
+
     public class Szaggato : Tool
     {
         public IngredientGroup Kiszaggatni(IIngredient i, float weight, float radius)

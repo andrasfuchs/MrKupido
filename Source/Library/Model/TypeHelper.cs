@@ -17,7 +17,7 @@ namespace MrKupido.Library
                 toCheck = toCheck.BaseType;
             }
 
-            if (throwException) throw new Exception("The type '" + type.Name + "' must derive from the base class '" + parentToCheck.Name + "'.");
+            if (throwException) throw new MrKupidoException("The type '" + type.Name + "' must derive from the base class '" + parentToCheck.Name + "'.");
 
             return false;
         }

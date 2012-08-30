@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Web.Models;
+using MrKupido.Web.Models;
 
 namespace MrKupido.Web
 {
@@ -29,6 +30,8 @@ namespace MrKupido.Web
         protected void Application_BeginRequest()
         {
             if (Request.AppRelativeCurrentExecutionFilePath.Contains('.') || (Request.AppRelativeCurrentExecutionFilePath == "~/hun/Home/NotSupportedBrowser")) return;
+
+            CultureInitializer.InitializeCulture(Request);
 
             if (IgnoreBrowserWarning) return;
 

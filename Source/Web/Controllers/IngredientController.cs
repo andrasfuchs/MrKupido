@@ -14,6 +14,7 @@ using MrKupido.Web.Models;
 using MrKupido.Utils;
 using MrKupido.Library;
 using MrKupido.Processor;
+using MrKupido.Processor.Model;
 
 namespace Web.Controllers
 {
@@ -203,7 +204,7 @@ namespace Web.Controllers
             directions = directions.Replace("&nbsp;", " ").Replace("\n", "").Replace("</span><span>", " ").Replace("<span>", "").Replace("</span>", "").Replace("<li>", "").Replace("<br>", "").Trim();
             if ((directions.IndexOf("<ol>") != 0) || (directions.IndexOf("</ol>") != directions.Length - 5))
             {
-                throw new Exception("Invalid directions! Every step should be in an ordered list!");
+                throw new MrKupidoException("Invalid directions! Every step should be in an ordered list!");
             }
             directions = HttpUtility.HtmlDecode(directions.Replace("<ol>", "").Replace("</ol>", ""));
 
@@ -381,10 +382,15 @@ namespace Web.Controllers
 
         public ActionResult Taxonomy()
         {
-            TaxonomyTreeBuilder ttb = new TaxonomyTreeBuilder();
-            MrKupido.Processor.Model.TreeNode tn = ttb.Build();
+            TreeNode model = new TreeNode(typeof(object));
+            model.Children = new TreeNode[4];
 
-            return View(tn);
+            model.Children[0] = TreeNode.BuildTree("MrKupido.Library.Nature", t => new NatureTreeNode(t));
+            model.Children[1] = TreeNode.BuildTree("MrKupido.Library.Ingredient", t => new IngredientTreeNode(t));
+            model.Children[2] = TreeNode.BuildTree("MrKupido.Library.Recipe", t => new RecipeTreeNode(t), "MrKupido.Library.Ingredient.IngredientBase");
+            model.Children[3] = TreeNode.BuildTree("MrKupido.Library.Equipment", t => new EquipmentTreeNode(t));
+
+            return View(model);
         }
     }
 }

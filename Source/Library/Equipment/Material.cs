@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Equipment
 {
-    public class Material : IEquipment
+    [NameAlias("hun", "anyagok")]
+    [NameAlias("eng", "material")]
+
+    public class Material : EquipmentBase
     {
     }
 }

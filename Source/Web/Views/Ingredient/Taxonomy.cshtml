@@ -1,8 +1,42 @@
-﻿@model MrKupido.Processor.Model.NatureTreeNode
+﻿@model MrKupido.Processor.Model.TreeNode
 @{
-    ViewBag.Title = "Taxonomy";
+    ViewBag.Title = "Trees of Mr. Kupido";
 }
 
-<h2>Taxonomy</h2>
 
-@{ Html.RenderPartial("_TaxonomyTree", Model); }
+<header class="nosearch">
+    <a runat="server" href="~/">
+        <img runat="server" src="~/Content/svg/mrkupidologo.svg" alt="Mr. Kupido" width="400" height="304" />
+    </a>
+</header>
+<details open class="alwaysopen">
+    <summary>
+        <h1>
+            Taxonómia</h1>
+    </summary>
+</details>
+   @{ Html.RenderPartial("_TaxonomyTree", Model.Children[0]); }
+
+<details open class="alwaysopen">
+    <summary>
+        <h1>
+            Hozzávalók</h1>
+    </summary>
+</details>
+   @{ Html.RenderPartial("_IngredientTree", Model.Children[1]); }
+
+<details open class="alwaysopen">
+    <summary>
+        <h1>
+            Receptek</h1>
+    </summary>
+</details>
+   @{ Html.RenderPartial("_RecipeTree", Model.Children[2]); }
+
+<details open class="alwaysopen">
+    <summary>
+        <h1>
+            Eszközök</h1>
+    </summary>
+</details>
+   @{ Html.RenderPartial("_EquipmentTree", Model.Children[3]); }

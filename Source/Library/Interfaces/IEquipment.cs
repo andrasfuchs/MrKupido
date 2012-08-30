@@ -7,5 +7,6 @@ namespace MrKupido.Library
 {
     public interface IEquipment
     {
+        bool IsInUse { get; }
     }
 }

@@ -8,12 +8,23 @@ namespace MrKupido.Processor
 {
     public class RecipeAnalyzer
     {
-        public RecipeAnalyzer(IRecipe recipe, float pm)
-        { }
+        private IRecipe recipe;
+        private float amount;
+
+        public RecipeAnalyzer(IRecipe recipe, float amount)
+        {
+            this.recipe = recipe;
+            this.amount = amount;
+        }
 
         public IIngredient[] GenerateIngredients()
         {
             List<IIngredient> result = new List<IIngredient>();
+
+            EquipmentGroup eg = recipe.SelectEquipment(amount);
+            PreparedIngredients preps = recipe.Prepare(amount, eg);
+            CookedFoodParts cfp = recipe.Cook(amount, preps, eg);
+            recipe.Serve(amount, cfp, eg);
 
             return result.ToArray();
         }

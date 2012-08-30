@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Equipment
 {
-    public class Device : IEquipment
+    [NameAlias("hun", "berendezések")]
+    [NameAlias("eng", "devices")]
+
+    public class Device : EquipmentBase
     {
         public int AveragePowerConsumption;
 

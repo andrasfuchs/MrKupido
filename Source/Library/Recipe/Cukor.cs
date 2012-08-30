@@ -12,7 +12,7 @@ namespace MrKupido.Library.Recipe
     [NameAlias("hun", "asztali cukor", Priority = 200)]
     [NameAlias("hun", "étkezési cukor", Priority = 201)]
     [NameAlias("hun", "finomított cukor", Priority = 202)]
-    [NameAlias("eng", "cheese")]
+    [NameAlias("eng", "sugar")]
 
     public class Cukor : RecipeBase
     {

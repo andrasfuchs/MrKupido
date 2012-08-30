@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MrKupido.Library.Attributes;
-using MrKupido.Library.Equipment.Tools;
+using MrKupido.Library.Equipment;
 using MrKupido.Library.Ingredient;
 
 namespace MrKupido.Library.Recipe
@@ -42,11 +42,12 @@ namespace MrKupido.Library.Recipe
             Reszelo reszelo = eg.Use<Reszelo>();
             IIngredient sajt = reszelo.Lereszelni(new Sajt(100.0f));
 
-            pizzateszta = pizzateszta.Rarakni(szalonna);
-            pizzateszta = pizzateszta.Rarakni(kolbasz);
-            pizzateszta = pizzateszta.Rarakni(hagyma);
-            pizzateszta = pizzateszta.Rarakni(paprika);
-            pizzateszta = pizzateszta.Raszorni(sajt);
+            Kez kez = eg.Use<Kez>();
+            pizzateszta = kez.Rarakni(pizzateszta, szalonna);
+            pizzateszta = kez.Rarakni(pizzateszta, kolbasz);
+            pizzateszta = kez.Rarakni(pizzateszta, hagyma);
+            pizzateszta = kez.Rarakni(pizzateszta, paprika);
+            pizzateszta = kez.Raszorni(pizzateszta, sajt);
             
             result.Add("pizzateszta", pizzateszta);
 

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MrKupido.Library.Attributes;
+using MrKupido.Library.Nature;
 
 namespace MrKupido.Library.Ingredient
 {
     [NameAlias("hun", "oregánólevél")]
 
-    [LeafOf(typeof(Oregano))]
+    [LeafOf(typeof(OriganumVulgareL))]
     public class Oregano : IngredientBase
     {
         public Oregano(float amount)

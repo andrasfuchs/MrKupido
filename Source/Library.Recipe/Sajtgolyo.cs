@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MrKupido.Library.Attributes;
+using MrKupido.Library.Ingredient;
+using MrKupido.Library.Equipment;
 
 namespace MrKupido.Library.Recipe
 {
@@ -18,11 +20,16 @@ namespace MrKupido.Library.Recipe
         {
             EquipmentGroup result = new EquipmentGroup();
 
-            result.Containers.Add(new Edeny(1.5f));
-            result.Containers.Add(new Tepsi());
+            result.Containers.Add(new Labas());
+            result.Containers.Add(new Serpenyo());
+            result.Containers.Add(new Edeny());
             result.Containers.Add(new LaposTanyer());
 
-            result.Devices.Add(new Suto(38, 40, 4));
+            result.Devices.Add(new Tuzhely());
+
+            result.Tools.Add(new Kez());
+            result.Tools.Add(new Fakanal());
+            result.Tools.Add(new Reszelo());
 
             return result;
         }
@@ -31,21 +38,50 @@ namespace MrKupido.Library.Recipe
         {
             PreparedIngredients result = new PreparedIngredients();
 
+            Labas labas = eg.Use<Labas>();
+            labas.Berakni(new Burgonya(2.0f));
+            labas.Berakni(new Viz(0.5f));
+
+            Tuzhely tuzhely = eg.Use<Tuzhely>();
+            tuzhely.Behelyezni(labas);
+            tuzhely.Homerseklet(350);
+            labas.Varni(20);
+            labas = tuzhely.Kiemelni<Labas>();
+            labas.FolyadekotLeonteni();
+
+            IIngredient burgonya = labas.Kivenni();
+            KrumpliPucolo kp = eg.Use<KrumpliPucolo>();
+            burgonya = kp.Meghamozni(burgonya);
+
+            BurgonyaPres bp = eg.Use<BurgonyaPres>();
+            burgonya = bp.Preselni(burgonya);
+
+            IIngredient fokhagyma = new Fokhagyma(1.0f);
+            FokhagymaPres fp = eg.Use<FokhagymaPres>();
+            fokhagyma = fp.Preselni(fokhagyma);
+
+            Reszelo reszelo = eg.Use<Reszelo>();
+            IIngredient sajt = reszelo.Lereszelni(new Sajt(70.0f));
+
+            IIngredient tojas = new Tojas(1.0f);
+            Habvero hv = eg.Use<Habvero>();
+            tojas = hv.Felverni(tojas);
+
+            Serpenyo serpenyo = eg.Use<Serpenyo>();
+            serpenyo.Berakni(new Vaj(40.0f));
+            tuzhely.Behelyezni(serpenyo);
+            tuzhely.Homerseklet(200);
+            serpenyo.Varni(5);
+            IIngredient vaj = serpenyo.Kivenni();
+
             Fakanal fakanal = eg.Use<Fakanal>();
-            IngredientGroup szaraz = fakanal.Osszekeverni(new Liszt(1000f * amount), new So(6.0f * amount), new Oregano(3.0f * amount), new FeketeBorsOrolt(5.0f * amount));
-            IngredientGroup nedves = fakanal.Osszekeverni(new Eleszto(14.0f * amount), new Cukor(1.5f * amount), new Viz(0.6f * amount), new OlivaOlaj(0.05f * amount));
+            IIngredient massza = fakanal.Osszekeverni(new Liszt(50.0f), new FeketeBorsOrolt(3.0f), new So(6.0f), vaj, burgonya, tojas, fokhagyma, sajt);
 
-            IIngredient pizzateszta = fakanal.Osszekeverni(szaraz, nedves);
-            Edeny edeny = eg.Use<Edeny>();
-            edeny.Berakni(pizzateszta);
-            edeny.Varni(45);
-            pizzateszta = edeny.Kivenni();
-            eg.WashUp(edeny);
+            Kez kez = eg.Use<Kez>();
+            IIngredient golyok = kez.Kiszaggatni(massza, 30.0f);
+            golyok = kez.GolyovaGyurni(golyok);
 
-            NyujtoDeszka nyd = eg.Use<NyujtoDeszka>();
-            pizzateszta = nyd.Nyujtani(pizzateszta, 1);
-
-            result.Add("pizzateszta", pizzateszta);
+            result.Add("golyok", golyok);
 
             return result;
         }
@@ -54,23 +90,39 @@ namespace MrKupido.Library.Recipe
         {
             CookedFoodParts cfp = new CookedFoodParts();
 
-            Tepsi tepsi = eg.Use<Tepsi>();
-            tepsi.Berakni(preps["pizzateszta"]);
+            Serpenyo serpenyo = eg.Use<Serpenyo>();
+            serpenyo.Berakni(new NapraforgoOlaj(0.1f));
 
-            Suto suto = eg.Use<Suto>();
-            suto.Homerseklet(200);
-            suto.Behelyezni(tepsi);
-            suto.Varni(30);
-            tepsi = suto.Kiemelni<Tepsi>();
+            Tuzhely tuzhely = eg.Use<Tuzhely>();
+            tuzhely.Behelyezni(serpenyo);
+            tuzhely.Homerseklet(350);
 
-            cfp.Add("pizzaalap", tepsi.Contents);
+            Edeny edeny = eg.Use<Edeny>();
+
+            Kez kez = eg.Use<Kez>();
+            IIngredient golyok = kez.Megforgatni(preps["golyok"], new Zsemlemorzsa(100.0f));
+
+            bool mindbefert = false;
+            do
+            {
+                mindbefert = serpenyo.Berakni(golyok);
+                serpenyo.Varni(5);
+
+                IIngredient keszgolyok = serpenyo.Kivenni();
+                keszgolyok = kez.Lecsepegtetni(keszgolyok);
+
+                edeny.Berakni(keszgolyok);
+            } while (!mindbefert);
+
+            cfp.Add("osszesgolyo", edeny.Contents);
 
             return cfp;
         }
 
         public override void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
-            food["pizzateszta"].Talalni(eg.Use<LaposTanyer>());
+            Kez kez = eg.Use<Kez>();
+            kez.Talalni(food["osszesgolyo"], eg.Use<LaposTanyer>());
         }
     }
 }
