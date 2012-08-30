@@ -1,29 +1,29 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.RecipeUpload.MindMegette", "RecipeUpload.MindMegette\MrKupido.RecipeUpload.MindMegette.csproj", "{B212328C-8464-4E99-8EB4-1702650284CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.RecipeUpload.MindMegette", "MrKupido.RecipeUpload.MindMegette\MrKupido.RecipeUpload.MindMegette.csproj", "{B212328C-8464-4E99-8EB4-1702650284CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.Model", "Model\MrKupido.Model.csproj", "{35A67DC3-381C-43E3-B424-6C170E216D49}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.Model", "MrKupido.Model\MrKupido.Model.csproj", "{35A67DC3-381C-43E3-B424-6C170E216D49}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.DataAccess", "DataAccess\MrKupido.DataAccess.csproj", "{8BD91A7F-5098-4728-BDBD-02E0802D04D2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.DataAccess", "MrKupido.DataAccess\MrKupido.DataAccess.csproj", "{8BD91A7F-5098-4728-BDBD-02E0802D04D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.RecipeUpload.AllRecipes", "RecipeUpload.AllRecipes\MrKupido.RecipeUpload.AllRecipes.csproj", "{C03A6875-EF1A-41EC-8EB1-F4AE9E986F6C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.RecipeUpload.AllRecipes", "MrKupido.RecipeUpload.AllRecipes\MrKupido.RecipeUpload.AllRecipes.csproj", "{C03A6875-EF1A-41EC-8EB1-F4AE9E986F6C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.Utils", "Utils\MrKupido.Utils.csproj", "{00DAE49E-6106-4252-902D-AACC3D4018D2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.Utils", "MrKupido.Utils\MrKupido.Utils.csproj", "{00DAE49E-6106-4252-902D-AACC3D4018D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.Web", "Web\MrKupido.Web.csproj", "{F1DD9F8F-8E3B-4F21-B0DA-99B038A1718E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.Web", "MrKupido.Web\MrKupido.Web.csproj", "{F1DD9F8F-8E3B-4F21-B0DA-99B038A1718E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.Web.Tests", "Web.Tests\MrKupido.Web.Tests.csproj", "{D5561E77-8493-467C-8B81-BCF5BFA8CDAB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.Web.Tests", "MrKupido.Web.Tests\MrKupido.Web.Tests.csproj", "{D5561E77-8493-467C-8B81-BCF5BFA8CDAB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotNetOpenAuth.ApplicationBlock", "DotNetOpenAuth.ApplicationBlock\DotNetOpenAuth.ApplicationBlock.csproj", "{AA78D112-D889-414B-A7D4-467B34C7B663}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.Library", "Library\MrKupido.Library.csproj", "{44930A70-2BFF-4634-BD17-1ECB20D9C683}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.Library", "MrKupido.Library\MrKupido.Library.csproj", "{44930A70-2BFF-4634-BD17-1ECB20D9C683}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.LanguageModule.Hun", "LanguageModule.Hun\MrKupido.LanguageModule.Hun.csproj", "{0095CD9F-DB11-451B-940B-E82527974FC2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.LanguageModule.Hun", "MrKupido.LanguageModule.Hun\MrKupido.LanguageModule.Hun.csproj", "{0095CD9F-DB11-451B-940B-E82527974FC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.Library.Recipe", "Library.Recipe\MrKupido.Library.Recipe.csproj", "{A11FE062-4069-4EC5-B2FF-967DC473F1CC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.Library.Recipe", "MrKupido.Library.Recipe\MrKupido.Library.Recipe.csproj", "{A11FE062-4069-4EC5-B2FF-967DC473F1CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.Processor", "RecipeProcessor\MrKupido.Processor.csproj", "{B6B63F3C-1D38-4AF5-94AE-55B2160A61FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.Processor", "MrKupido.RecipeProcessor\MrKupido.Processor.csproj", "{B6B63F3C-1D38-4AF5-94AE-55B2160A61FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
