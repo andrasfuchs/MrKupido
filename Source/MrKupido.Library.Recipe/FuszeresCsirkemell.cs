@@ -28,7 +28,9 @@ namespace MrKupido.Library.Recipe
 
             result.Devices.Add(new Suto(38, 40, 4));
 
+            result.Tools.Add(new Kez());
             result.Tools.Add(new Kes());
+            result.Tools.Add(new Fakanal());
 
             return result;
         }
@@ -46,7 +48,7 @@ namespace MrKupido.Library.Recipe
             IngredientGroup fuszeresliszt = fakanal.Osszekeverni(new Liszt(70.0f * amount), new So(5.0f * amount), new Fuszerpaprika(5.0f * amount), new FeketeBors(3.0f * amount), new Majoranna(3.0f * amount));
             csirkemell = kez.Megforgatni(csirkemell, fuszeresliszt);
 
-            IngredientGroup hagyma = knife.Felkarikazni(new Hagyma(35.0f * amount), 5.0f);
+            IngredientGroup hagyma = knife.Felkarikazni(new Hagyma(1.0f * amount, MeasurementUnit.piece), 5.0f);
             IngredientGroup tejfol = fakanal.Osszekeverni(new NapraforgoOlaj(0.1f * amount), new Tejfol(0.2f * amount));
 
             Reszelo reszelo = eg.Use<Reszelo>();

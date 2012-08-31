@@ -18,5 +18,7 @@ namespace MrKupido.Library
         float GetAmount();
 
         float GetAmount(MeasurementUnit unit);
+
+        void ChangeUnitTo(MeasurementUnit unit);
     }
 }

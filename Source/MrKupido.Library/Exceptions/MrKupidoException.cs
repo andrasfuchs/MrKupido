@@ -12,5 +12,11 @@ namespace MrKupido.Library
         {
             Trace.TraceError(message);
         }
+
+        public MrKupidoException(Exception innerException, string message, params object[] args)
+            : base(String.Format(message, args), innerException)
+        {
+            Trace.TraceError(message);
+        }
     }
 }

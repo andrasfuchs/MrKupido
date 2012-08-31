@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0-rc\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="Mono.Cecil">
       <HintPath>..\Cecil\bin\net_4_0_Release\Mono.Cecil.dll</HintPath>
     </Reference>
@@ -52,12 +55,21 @@
     <Compile Include="Model\TreeNode.cs" />
     <Compile Include="RecipeAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecipeIndexer.cs" />
     <Compile Include="RecipeTagger.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MrKupido.DataAccess\MrKupido.DataAccess.csproj">
+      <Project>{8BD91A7F-5098-4728-BDBD-02E0802D04D2}</Project>
+      <Name>MrKupido.DataAccess</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MrKupido.Library\MrKupido.Library.csproj">
       <Project>{44930A70-2BFF-4634-BD17-1ECB20D9C683}</Project>
       <Name>MrKupido.Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MrKupido.Model\MrKupido.Model.csproj">
+      <Project>{35A67DC3-381C-43E3-B424-6C170E216D49}</Project>
+      <Name>MrKupido.Model</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

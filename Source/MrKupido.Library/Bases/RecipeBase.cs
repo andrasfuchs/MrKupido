@@ -18,13 +18,13 @@ namespace MrKupido.Library.Recipe
 
         public RecipeBase(float amount, MeasurementUnit unit) : base(amount, unit)
         {
-            EquipmentGroup eg = SelectEquipment(amount);
+            //EquipmentGroup eg = SelectEquipment(amount);
 
-            PreparedIngredients preps = Prepare(amount, eg);
+            //PreparedIngredients preps = Prepare(amount, eg);
 
-            CookedFoodParts food = Cook(amount, preps, eg);
+            //CookedFoodParts food = Cook(amount, preps, eg);
 
-            Serve(amount, food, eg);
+            //Serve(amount, food, eg);
         }
 
         public virtual EquipmentGroup SelectEquipment(float amount)

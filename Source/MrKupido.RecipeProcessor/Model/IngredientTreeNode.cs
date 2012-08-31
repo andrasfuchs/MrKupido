@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
+using System.Linq;
 using MrKupido.Library.Attributes;
+using MrKupido.Library.Ingredient;
+using MrKupido.DataAccess;
+using MrKupido.Model;
+using MrKupido.Library;
 
 namespace MrKupido.Processor.Model
 {
@@ -11,6 +16,7 @@ namespace MrKupido.Processor.Model
     {
         private NatureRelationAttribute taxonomyConnectionAttribute = null;
         public Type NatureConnectionClassType { set; get; }
+        public IngredientBase StandardInstance { get; private set; }
 
         public IngredientTreeNode(Type ingredientClass)
             : base(ingredientClass)
@@ -31,6 +37,15 @@ namespace MrKupido.Processor.Model
             if (hasConnectionToTaxonomyTree && (taxonomyConnectionAttribute != null))
             {
                 Name += " [" + NameAliasAttribute.GetDefaultName(taxonomyConnectionAttribute.NatureClass) + " " + NameAliasAttribute.GetDefaultName(taxonomyConnectionAttribute.GetType()) + "]";
+            }
+
+            Ingredient dbIngredient = db.Ingredients.Where(i => i.ClassName == ingredientClass.Name).FirstOrDefault();
+
+            this.StandardInstance = ingredientClass.DefaultConstructor(1.0f, MeasurementUnit.gramm, IngredientState.Normal) as IngredientBase;
+
+            if (this.StandardInstance != null)
+            {
+                this.StandardInstance.LoadStaticInfoObject(dbIngredient);
             }
         }
     }

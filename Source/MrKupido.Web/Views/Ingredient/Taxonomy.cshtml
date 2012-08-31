@@ -1,4 +1,4 @@
-﻿@model MrKupido.Processor.Model.TreeNode
+﻿@model object[]
 @{
     ViewBag.Title = "Trees of Mr. Kupido";
 }
@@ -15,7 +15,7 @@
             Taxonómia</h1>
     </summary>
 </details>
-   @{ Html.RenderPartial("_TaxonomyTree", Model.Children[0]); }
+   @{ Html.RenderPartial("_TaxonomyTree", Model[0]); }
 
 <details open class="alwaysopen">
     <summary>
@@ -23,7 +23,7 @@
             Hozzávalók</h1>
     </summary>
 </details>
-   @{ Html.RenderPartial("_IngredientTree", Model.Children[1]); }
+   @{ Html.RenderPartial("_IngredientTree", Model[1]); }
 
 <details open class="alwaysopen">
     <summary>
@@ -31,7 +31,7 @@
             Receptek</h1>
     </summary>
 </details>
-   @{ Html.RenderPartial("_RecipeTree", Model.Children[2]); }
+   @{ Html.RenderPartial("_RecipeTree", Model[2]); }
 
 <details open class="alwaysopen">
     <summary>
@@ -39,4 +39,4 @@
             Eszközök</h1>
     </summary>
 </details>
-   @{ Html.RenderPartial("_EquipmentTree", Model.Children[3]); }
+   @{ Html.RenderPartial("_EquipmentTree", Model[3]); }

@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Action\Active.cs" />
     <Compile Include="Action\Passive.cs" />
+    <Compile Include="Attributes\CommercialProductOfAttribute.cs" />
     <Compile Include="Attributes\ContainsGlutenAttribute.cs" />
     <Compile Include="Attributes\NatureRelation\EggOfAttribute.cs" />
     <Compile Include="Attributes\NatureRelation\GranulesOfAttribute.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Exceptions\AmountUnknownException.cs" />
     <Compile Include="Exceptions\CultureNotSupportedException.cs" />
     <Compile Include="Exceptions\InvalidActionForIngredientException.cs" />
+    <Compile Include="Exceptions\InvalidUnitConversionException.cs" />
     <Compile Include="Exceptions\MrKupidoException.cs" />
     <Compile Include="Exceptions\RecipeUnknownException.cs" />
     <Compile Include="Ingredient\Ananasz.cs" />

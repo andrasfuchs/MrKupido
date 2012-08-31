@@ -6,17 +6,21 @@ using System.Reflection;
 using System.Threading;
 using System.Diagnostics;
 using MrKupido.Library.Attributes;
+using MrKupido.DataAccess;
 
 namespace MrKupido.Processor.Model
 {
     public class TreeNode
     {
-        public TreeNode Parent { get; set; }
+        protected static MrKupidoContext db = new MrKupidoContext();
+
+        public TreeNode Parent { get; private set; }
         public TreeNode[] Children { get; set; }
 
-        public string Name { get; set; }
-        public string ClassName { get; set; }
-        public string FullClassName { get; set; }
+        public string Name { get; protected set; }
+        public string ClassName { get; private set; }
+        public Type ClassType { get; private set; }
+        public string FullClassName { get; private set; }
         public bool IsOpen { get; set; }
         public bool IsSelected { get; set; }
         public bool IsDisabled { get; set; }
@@ -24,6 +28,7 @@ namespace MrKupido.Processor.Model
         public TreeNode(Type nodeClass)
         {
             ClassName = nodeClass.Name;
+            ClassType = nodeClass;
             FullClassName = nodeClass.FullName;
             Children = new TreeNode[0];
 

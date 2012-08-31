@@ -13,7 +13,7 @@ namespace MrKupido.Library.Equipment
     {
         public IngredientGroup Feldarabolni(IIngredient i, float weight)
         {
-            if ((!(i is IngredientBase))  || (i.Unit != MeasurementUnit.gramm)) throw new InvalidActionForIngredientException("Feldarabolni/Felkarikazni", i.Name, i.Unit);
+            if ((!(i is IngredientBase))  || (i.Unit != MeasurementUnit.gramm)) throw new InvalidActionForIngredientException("Feldarabolni", i.Name, i.Unit);
 
             List<IIngredient> result = new List<IIngredient>();
 
@@ -22,7 +22,7 @@ namespace MrKupido.Library.Equipment
 
             for (int j = 0; j < count; j++)
             {
-                result.Add((IIngredient)Activator.CreateInstance(i.GetType(), totalWeight / count, MeasurementUnit.gramm));
+                result.Add((IIngredient)Activator.CreateInstance(i.GetType(), totalWeight / count));
             }
 
             return new IngredientGroup(result.ToArray());
@@ -30,6 +30,10 @@ namespace MrKupido.Library.Equipment
 
         public IngredientGroup Felkarikazni(IIngredient i, float weight)
         {
+            if ((!(i is IngredientBase)) || (i.Unit != MeasurementUnit.piece)) throw new InvalidActionForIngredientException("Felkarikazni", i.Name, i.Unit);
+
+            i.ChangeUnitTo(MeasurementUnit.gramm);
+
             return Feldarabolni(i, weight);
         }
     }

@@ -45,14 +45,14 @@ namespace MrKupido.Model
         [Required]
         public MeasurementUnit Unit { get; set; }
 
-        //[Column(Order = 17)]
-        //public float? GrammsPerLiter { get; set; }
+        [Column(Order = 17)]
+        public float? GrammsPerLiter { get; set; }
 
-        //[Column(Order = 18)]
-        //public float? GrammsPerPiece { get; set; }
+        [Column(Order = 18)]
+        public float? GrammsPerPiece { get; set; }
 
-        //[Column(Order = 19)]
-        //public float? KCaloriesPerGramm { get; set; }
+        [Column(Order = 19)]
+        public float? KCaloriesPerGramm { get; set; }
 
         public override string ToString()
         {

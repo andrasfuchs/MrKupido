@@ -382,15 +382,14 @@ namespace Web.Controllers
 
         public ActionResult Taxonomy()
         {
-            TreeNode model = new TreeNode(typeof(object));
-            model.Children = new TreeNode[4];
+            object[] result = new object[4];
 
-            model.Children[0] = TreeNode.BuildTree("MrKupido.Library.Nature", t => new NatureTreeNode(t));
-            model.Children[1] = TreeNode.BuildTree("MrKupido.Library.Ingredient", t => new IngredientTreeNode(t));
-            model.Children[2] = TreeNode.BuildTree("MrKupido.Library.Recipe", t => new RecipeTreeNode(t), "MrKupido.Library.Ingredient.IngredientBase");
-            model.Children[3] = TreeNode.BuildTree("MrKupido.Library.Equipment", t => new EquipmentTreeNode(t));
+            result[0] = TreeNode.BuildTree("MrKupido.Library.Nature", t => new NatureTreeNode(t));
+            result[1] = TreeNode.BuildTree("MrKupido.Library.Ingredient", t => new IngredientTreeNode(t));
+            result[2] = TreeNode.BuildTree("MrKupido.Library.Recipe", t => new RecipeTreeNode(t), "MrKupido.Library.Ingredient.IngredientBase");
+            result[3] = TreeNode.BuildTree("MrKupido.Library.Equipment", t => new EquipmentTreeNode(t));
 
-            return View(model);
+            return View(result);
         }
     }
 }

@@ -1,0 +1,139 @@
+﻿@model MrKupido.Processor.Model.RecipeTreeNode
+@{
+    ViewBag.Title = "Details";
+}
+<header>
+    <img runat="server" src="~/Content/svg/mrkupidologo.svg" alt="Mr. Kupido" width="200" height="152" />
+    <p class="userbar">
+        @if (Session["CurrentUser"] == null)
+        {
+            <span id="login"><a runat="server" href="~/hun/Account/LogIn" onclick="_gaq.push(['_trackEvent', 'Profile', 'Login', '']);">Log in</a></span>
+        }
+        @if (Session["CurrentUser"] != null)
+        {
+            <span id="name"><a runat="server" href="~/hun/Account/Profile">@Session["CurrentUser.DisplayName"]</a></span><span id="messages">0</span>
+            <img runat="server" src="~/Content/images/avatar.jpg" alt="Avatar" width="51" height="51" />
+        }
+        else
+        { 
+            <img runat="server" src="~/Content/svg/avatar.svg" alt="Avatar" width="51" height="51" />
+        }
+    </p>
+    <div class="searchbox">
+        <p class="inputfield">
+            <label for="location">
+                Helyszin:</label>
+            <input id="location" type="text" placeholder="(jelenleg ismeretlen)" />
+        </p>
+        <p class="inputfield">
+            <label for="query">
+                Keresnivaló:</label>
+            <input id="query" type="search" placeholder="(hozzávaló, diéta, eszköz)" autofocus />
+        </p>
+        <input id="search" type="submit" value="Keresés" onclick="_gaq.push(['_trackEvent', 'Search', 'Search', '+karalábé -pulyka']);" />
+        <div id="deleteall">
+            <input type="button" value="Mindent töröl" />
+        </div>
+        <div id="filters">
+            <ul>
+                <li>+ krumpli <a href="#">x</a></li>
+                <li>+ liszt <a href="#">x</a></li>
+                <li>+ cukor <a href="#">x</a></li>
+                <li>- spenót <a href="#">x</a></li>
+                <li>+ répa <a href="#">x</a></li>
+                <li>+ csirke <a href="#">x</a></li>
+                <li>- paprika <a href="#">x</a></li>
+                <li>+ sütő <a href="#">x</a></li>
+                <li>+ paleolit <a href="#">x</a></li>
+                <li>- gesztenye <a href="#">x</a></li>
+            </ul>
+        </div>
+    </div>
+</header>
+<hr class="single" />
+<article>
+    <div class="tip">
+        <p>
+            <img runat="server" src="~/Content/svg/bulb.svg" alt="Tipp" width="21" height="30" />
+            <span>Szűrőket használva leegyszerűsíthetjük a keresést. Próbálkozz hozzávalóval, diétával vagy az étel nevével.</span>
+        </p>
+    </div>
+    <hr class="single" />
+    <div class="question">
+        <p>
+            <img runat="server" src="~/Content/svg/question_mark.svg" alt="Kérdés" width="16" height="30" />
+            <span><a href="#">Szeretnéd, ha személyre szabott porciókat ajánlanánk? Add meg a magasságod, súlyod és életkorod! >></a></span>
+        </p>
+    </div>
+    <hr class="double" />
+    <details id="mymenu">
+        <summary>
+            <h1>
+                @Model.Name</h1>
+        </summary>
+        <ul>
+            <li>
+                <div class="resulthead">
+                    <div class="category">
+                        <img runat="server" src="~/Content/svg/cat_maindish.svg" alt="Sertés" width="45px" height="30px" />
+                    </div>
+                    <div class="title">
+                        Paprikás krumpli
+                    </div>
+                    <div class="tick">
+                        <a href="#">
+                            <img runat="server" src="~/Content/svg/tick_on.svg" alt="Töröl" width="25px" height="25px" /></a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="resulthead">
+                    <div class="category">
+                        <img runat="server" src="~/Content/svg/cat_maindish.svg" alt="Sertés" width="45px" height="30px" />
+                    </div>
+                    <div class="title">
+                        Bundáskenyér
+                    </div>
+                    <div class="tick">
+                        <a href="#">
+                            <img runat="server" src="~/Content/svg/tick_on.svg" alt="Töröl" width="25px" height="25px" /></a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="resulthead">
+                    <div class="category">
+                        <img runat="server" src="~/Content/svg/cat_maindish.svg" alt="Sertés" width="45px" height="30px" />
+                    </div>
+                    <div class="title">
+                        Csirkecomb mustármártásban
+                    </div>
+                    <div class="tick">
+                        <a href="#">
+                            <img runat="server" src="~/Content/svg/tick_on.svg" alt="Töröl" width="25px" height="25px" /></a>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="resulthead">
+                    <div class="category">
+                        <img runat="server" src="~/Content/svg/cat_maindish.svg" alt="Sertés" width="45px" height="30px" />
+                    </div>
+                    <div class="title">
+                        Gombás sült csirkecomb
+                    </div>
+                    <div class="tick">
+                        <a href="#">
+                            <img runat="server" src="~/Content/svg/tick_on.svg" alt="Töröl" width="25px" height="25px" /></a>
+                    </div>
+                </div>
+            </li>
+            <li class="disabled"></li>
+            <li class="disabled"></li>
+            <li class="disabled"></li>
+            <li class="disabled"></li>
+            <li class="disabled"></li>
+        </ul>
+    </details>
+    <hr class="double" />
+</article>

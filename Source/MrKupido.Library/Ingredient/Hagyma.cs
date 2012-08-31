@@ -21,5 +21,10 @@ namespace MrKupido.Library.Ingredient
             : base(amount, MeasurementUnit.piece)
         {
         }
+
+        public Hagyma(float amount, MeasurementUnit unit)
+            : base(amount, unit)
+        {
+        }
     }
 }

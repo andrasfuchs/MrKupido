@@ -127,6 +127,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IngredientController.cs" />
+    <Compile Include="Controllers\RecipeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -311,6 +312,8 @@
     <Content Include="Views\Ingredient\_IngredientTree.cshtml" />
     <Content Include="Views\Ingredient\_RecipeTree.cshtml" />
     <Content Include="Views\Ingredient\_EquipmentTree.cshtml" />
+    <Content Include="Views\Recipe\Details.cshtml" />
+    <Content Include="Views\Recipe\_RecipeIngredients.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MrKupido.DataAccess\MrKupido.DataAccess.csproj">

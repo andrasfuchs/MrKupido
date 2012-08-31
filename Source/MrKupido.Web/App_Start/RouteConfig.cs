@@ -22,22 +22,34 @@ namespace MrKupido.Web
 
             routes.MapRoute(
                 name: "AccountManagement",
-                url: "{language}/Account/{action}",
+                url: "{language}/account/{action}",
                 defaults: new { language = "hun", controller = "Account", action = "Profile" }
             );
 
             routes.MapRoute(
                 name: "Admin",
-                url: "{language}/Admin/{controller}/{action}/{id}",
+                url: "{language}/admin/{controller}/{action}/{id}",
                 defaults: new { language = "hun", controller = "Ingredient", action = "Index", id = UrlParameter.Optional,  }
             );
 
             routes.MapRoute(
                 name: "OldBrowser",
-                url: "hun/Home/NotSupportedBrowser",
+                url: "hun/home/notsupportedbrowser",
                 defaults: new { language = "hun", controller = "Home", action = "NotSupportedBrowser", id = UrlParameter.Optional }
             );
-            
+
+            routes.MapRoute(
+                name: "RecipeHun",
+                url: "hun/recept/{id}",
+                defaults: new { language = "hun", controller = "Recipe", action = "Details" }
+            );
+
+            routes.MapRoute(
+                name: "RecipeEng",
+                url: "eng/recipe/{id}",
+                defaults: new { language = "eng", controller = "Recipe", action = "Details" }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{language}/{controller}/{action}/{id}",

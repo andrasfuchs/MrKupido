@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MrKupido.Library;
+using Mono.Cecil;
 
 namespace MrKupido.Processor
 {
@@ -11,9 +12,9 @@ namespace MrKupido.Processor
         private IRecipe recipe;
         private float amount;
 
-        public RecipeAnalyzer(IRecipe recipe, float amount)
+        public RecipeAnalyzer(Type recipe, float amount)
         {
-            this.recipe = recipe;
+            this.recipe = Activator.CreateInstance(recipe, amount) as IRecipe;
             this.amount = amount;
         }
 
@@ -25,6 +26,9 @@ namespace MrKupido.Processor
             PreparedIngredients preps = recipe.Prepare(amount, eg);
             CookedFoodParts cfp = recipe.Cook(amount, preps, eg);
             recipe.Serve(amount, cfp, eg);
+
+
+            AssemblyDefinition ad = AssemblyDefinition.ReadAssembly(recipe.GetType().Assembly.Location);
 
             return result.ToArray();
         }
