@@ -22,7 +22,7 @@ namespace MrKupido.Library.Equipment
 
             for (int j = 0; j < count; j++)
             {
-                result.Add((IIngredient)Activator.CreateInstance(i.GetType(), totalWeight / count));
+                result.Add(i.GetType().DefaultConstructor(totalWeight / count, MeasurementUnit.gramm) as IngredientBase);
             }
 
             return new IngredientGroup(result.ToArray());
@@ -34,7 +34,14 @@ namespace MrKupido.Library.Equipment
 
             i.ChangeUnitTo(MeasurementUnit.gramm);
 
-            return Feldarabolni(i, weight);
+            IngredientGroup ig = Feldarabolni(i, weight);
+
+            foreach (IIngredient ingredient in ig)
+            {
+                ingredient.ChangeUnitTo(MeasurementUnit.piece);
+            }
+
+            return ig;
         }
     }
 }

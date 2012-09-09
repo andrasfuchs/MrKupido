@@ -13,7 +13,7 @@ namespace MrKupido.Library.Recipe
         public Kolbasz(float amount)
             : base(amount, MeasurementUnit.gramm)
         {
-            throw new RecipeUnknownException(this.GetType().Name);
+            RecipeUnknown();
         }
     }
 }

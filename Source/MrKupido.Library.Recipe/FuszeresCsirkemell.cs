@@ -31,6 +31,7 @@ namespace MrKupido.Library.Recipe
             result.Tools.Add(new Kez());
             result.Tools.Add(new Kes());
             result.Tools.Add(new Fakanal());
+            result.Tools.Add(new Reszelo());
 
             return result;
         }
@@ -59,6 +60,7 @@ namespace MrKupido.Library.Recipe
             result.Add("tejfol", tejfol);
             result.Add("sajt", sajt);
 
+            eg.WashUp();
             return result;
         }
 
@@ -91,6 +93,7 @@ namespace MrKupido.Library.Recipe
 
             cfp.Add("csirke", tepsi.Contents);
 
+            eg.WashUp();
             return cfp;
         }
 
@@ -98,6 +101,7 @@ namespace MrKupido.Library.Recipe
         {
             Kez kez = eg.Use<Kez>();
             kez.Talalni(food["csirke"], eg.Use<LaposTanyer>());
+            eg.WashUp();
         }
     }
 }

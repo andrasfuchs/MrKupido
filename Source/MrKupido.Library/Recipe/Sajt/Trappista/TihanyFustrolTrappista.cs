@@ -14,7 +14,7 @@ namespace MrKupido.Library.Recipe
         public TihanyFustrolTrappista(float amount)
             : base(amount)
         {
-            throw new RecipeUnknownException(this.GetType().Name);
+            RecipeUnknown();
         }
     }
 }

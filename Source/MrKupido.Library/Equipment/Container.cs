@@ -23,12 +23,17 @@ namespace MrKupido.Library.Equipment
         public bool Berakni(IIngredient ig)
         {
             // TODO: return if it fits in
+            this.Contents = ig;
+
             return true;
         }
 
         public IIngredient Kivenni()
         {
-            return this.Contents;
+            IIngredient i = this.Contents;
+            this.Contents = null;
+
+            return i;
         }
 
         public void Varni(int minutes) {}

@@ -9,6 +9,7 @@ using MrKupido.Library.Recipe;
 using MrKupido.Processor;
 using MrKupido.Processor.Model;
 using MrKupido.Library;
+using MrKupido.Library.Recipe;
 
 namespace MrKupido.Web.Controllers
 {

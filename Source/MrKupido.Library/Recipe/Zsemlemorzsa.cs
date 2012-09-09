@@ -15,7 +15,7 @@ namespace MrKupido.Library.Recipe
         public Zsemlemorzsa(float amount)
             : base(amount, MeasurementUnit.gramm)
         {
-            throw new RecipeUnknownException(this.GetType().Name);
+            RecipeUnknown();
         }
     }
 }

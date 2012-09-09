@@ -5,5 +5,6 @@ using System.Text;
 
 namespace MrKupido.Library
 {
-    public enum MeasurementUnit { piece, gramm, meter, liter, IU, Celsius, second, calories, portion }
+    [Flags]
+    public enum MeasurementUnit { none, piece, gramm, meter, liter, IU, Celsius, second, calories, portion }
 }

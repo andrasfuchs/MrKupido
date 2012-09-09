@@ -6,12 +6,13 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Recipe
 {
-    [NameAlias("hun", "füstölt szalonna")]
+    [NameAlias("hun", "Milli tejföl")]
 
-    public class FustoltSzalonna : RecipeBase
+    [CommercialProductOf("Milli")]
+    public class MilliTejfol : Tejfol
     {
-        public FustoltSzalonna(float amount)
-            : base(amount, MeasurementUnit.gramm)
+        public MilliTejfol(float amount)
+            : base(amount)
         {
             RecipeUnknown();
         }

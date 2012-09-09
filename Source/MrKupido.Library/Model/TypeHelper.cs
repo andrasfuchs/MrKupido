@@ -13,6 +13,7 @@ namespace MrKupido.Library
         {
             Type toCheck = type;
 
+            // NOTE: might be replacable with Type.IsSubclassOf() method
             while (toCheck != typeof(object))
             {
                 if (toCheck.BaseType.FullName == parentToCheck.FullName) return true;
@@ -27,13 +28,34 @@ namespace MrKupido.Library
         public static object DefaultConstructor(this Type type, params object[] args)
         {
             object result = null;
-            ConstructorInfo[] constructors = type.GetConstructors();
+            List<ConstructorInfo> constructors = new List<ConstructorInfo>();
+            constructors.AddRange(type.GetConstructors());
+            //if (type.BaseType != null) constructors.AddRange(type.BaseType.GetConstructors());
 
-            if (constructors.Length == 0) throw new MrKupidoException("The type '{0}' must have a constructor to call the DefaultContructor method.", type.FullName);
+            if (constructors.Count() == 0)
+            {
+                Trace.TraceWarning("The type '{0}' must have a constructor to call the DefaultContructor method.", type.FullName);
+                return null;
+            }
+
+            ConstructorInfo selectedConstructor = null;
+
+            foreach (ConstructorInfo ci in constructors)
+            {
+                if (ci.GetParameters().Length == args.Length)
+                {
+                    selectedConstructor = ci;
+                    break;
+                }
+            }
+
+            if (selectedConstructor == null) selectedConstructor = constructors[0];
+
+            // NOTE: if the objet has more then one constuctors with the same number of parameters, this method will not work properly
 
             try
             {
-                switch (constructors[0].GetParameters().Length)
+                switch (selectedConstructor.GetParameters().Length)
                 {
                     case 1:
                         result = Activator.CreateInstance(type, args[0]);
@@ -62,10 +84,22 @@ namespace MrKupido.Library
             }
             catch 
             {
-                Trace.TraceWarning("The type '' doesn't have a compatible contructor to use default parameters.", type.FullName);
+                Trace.TraceWarning("The type '{0}' doesn't have a compatible contructor to use default parameters.", type.FullName);
             }
 
             return result;
+        }
+
+        public static Type[] GetDescendants(this Type type)
+        {
+            List<Type> result = new List<Type>();
+
+            foreach (Assembly currentassembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                result.AddRange(currentassembly.GetTypes().Where(t => (t.IsClass) && (t.Namespace == type.Namespace) && (t.IsSubclassOf(type))).ToArray());
+            }
+
+            return result.ToArray();
         }
     }
 }

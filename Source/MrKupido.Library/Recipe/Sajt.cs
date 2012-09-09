@@ -14,7 +14,7 @@ namespace MrKupido.Library.Recipe
         public Sajt(float amount)
             : base(amount, MeasurementUnit.gramm)
         {
-            throw new RecipeUnknownException(this.GetType().Name);
+            RecipeUnknown();
         }
     }
 }

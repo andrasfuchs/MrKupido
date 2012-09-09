@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using MrKupido.Library.Attributes;
 
-namespace MrKupido.Library.Equipment
+namespace MrKupido.Library.Nature
 {
-    [NameAlias("hun", "eszközök")]
-    [NameAlias("eng", "equipments")]
+    [NameAlias("hun", "természet")]
 
-    public class EquipmentBase : IEquipment
+    public class NatureBase
     {
         public string Name
         {
@@ -19,22 +18,9 @@ namespace MrKupido.Library.Equipment
             }
         }
 
-        public bool IsInUse { get; private set; }
-
-        public void Use()
-        {
-            IsInUse = true;
-        }
-
-        public void WashUp()
-        {
-            IsInUse = false;
-        }
-
         public override string ToString()
         {
             return Name;
         }
-
     }
 }

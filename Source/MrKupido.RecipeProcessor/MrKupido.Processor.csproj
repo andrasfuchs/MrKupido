@@ -63,6 +63,10 @@
       <Project>{8BD91A7F-5098-4728-BDBD-02E0802D04D2}</Project>
       <Name>MrKupido.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MrKupido.Library.Recipe\MrKupido.Library.Recipe.csproj">
+      <Project>{A11FE062-4069-4EC5-B2FF-967DC473F1CC}</Project>
+      <Name>MrKupido.Library.Recipe</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MrKupido.Library\MrKupido.Library.csproj">
       <Project>{44930A70-2BFF-4634-BD17-1ECB20D9C683}</Project>
       <Name>MrKupido.Library</Name>

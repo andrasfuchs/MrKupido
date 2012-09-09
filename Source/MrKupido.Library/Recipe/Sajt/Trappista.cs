@@ -12,7 +12,7 @@ namespace MrKupido.Library.Recipe
     {
         public Trappista(float amount) : base(amount)
         {
-            throw new RecipeUnknownException(this.GetType().Name);
+            RecipeUnknown();
         }
     }
 }

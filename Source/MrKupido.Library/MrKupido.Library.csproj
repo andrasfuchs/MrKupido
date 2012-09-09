@@ -126,7 +126,13 @@
     <Compile Include="Nature\Animalia\Mammalia\Suidae.cs" />
     <Compile Include="Nature\Animalia\Mammalia\Suidae\SusScrofa.cs" />
     <Compile Include="Nature\Animalia\Mammalia\Suidae\SusScrofaDomestica.cs" />
-    <Compile Include="Nature\NatureBase.cs" />
+    <Compile Include="Nature\Fungi\Homobasidiomycetes.cs" />
+    <Compile Include="Nature\Fungi\Homobasidiomycetes\Amanitaceae.cs" />
+    <Compile Include="Nature\Fungi\Homobasidiomycetes\Amanitaceae\AmanitaMuscaria.cs" />
+    <Compile Include="Nature\Fungi\Homobasidiomycetes\Amanitaceae\AmanitaPantherina.cs" />
+    <Compile Include="Nature\Fungi\Homobasidiomycetes\Strophariaceae.cs" />
+    <Compile Include="Nature\Fungi\Homobasidiomycetes\Strophariaceae\PsilocybeCubensis.cs" />
+    <Compile Include="Bases\NatureBase.cs" />
     <Compile Include="Nature\Plantae\Liliopsida\Amaryllidaceae.cs" />
     <Compile Include="Nature\Plantae\Liliopsida\Amaryllidaceae\AlliumCepaL.cs" />
     <Compile Include="Nature\Plantae\Liliopsida\Amaryllidaceae\AlliumSativum.cs" />
@@ -139,6 +145,7 @@
     <Compile Include="Nature\Plantae\Magnoliopsida\Lamiaceae.cs" />
     <Compile Include="Nature\Plantae\Magnoliopsida\Lamiaceae\OriganumMajorana.cs" />
     <Compile Include="Nature\Plantae\Magnoliopsida\Lamiaceae\OriganumVulgareL.cs" />
+    <Compile Include="Nature\Plantae\Magnoliopsida\Lamiaceae\SalviaDivinorum.cs" />
     <Compile Include="Nature\Plantae\Magnoliopsida\Oleaceae.cs" />
     <Compile Include="Nature\Plantae\Magnoliopsida\Oleaceae\OleaEuropaea.cs" />
     <Compile Include="Nature\Plantae\Magnoliopsida\Piperaceae.cs" />
@@ -193,6 +200,7 @@
     <Compile Include="Nature\Fungi\Hemiascomycetes\Saccharomycetaceae.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Bases\RecipeBase.cs" />
+    <Compile Include="Recipe\Tejfol\MilliTejfol.cs" />
     <Compile Include="Recipe\Turo.cs" />
     <Compile Include="Recipe\Vaj.cs" />
     <Compile Include="Recipe\Zsemlemorzsa.cs" />

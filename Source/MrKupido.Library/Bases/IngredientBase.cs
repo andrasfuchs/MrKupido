@@ -57,6 +57,8 @@ namespace MrKupido.Library.Ingredient
 
             try
             {
+                // TODO: load only the properties which are NULL at the moment
+
                 this.Category = (ShoppingListCategory)obj.GetType().GetProperty("Category").GetValue(obj, null);
                 this.StorageTemperature = (float?)obj.GetType().GetProperty("StorageTemperature").GetValue(obj, null);
                 //this.Unit = (MeasurementUnit)obj.GetType().GetProperty("Unit").GetValue(obj, null);
@@ -145,6 +147,11 @@ namespace MrKupido.Library.Ingredient
             SetAmount(amount, unit);
 
             this.Unit = unit;
+        }
+
+        public override string ToString()
+        {
+            return Name;
         }
     }
 }

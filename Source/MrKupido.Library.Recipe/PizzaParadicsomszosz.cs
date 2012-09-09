@@ -14,7 +14,7 @@ namespace MrKupido.Library.Recipe
         public PizzaParadicsomszosz(float amount)
             : base(amount, MeasurementUnit.liter)
         {
-            throw new RecipeUnknownException(this.GetType().Name);
+            RecipeUnknown();
         }
     }
 }

@@ -6,9 +6,10 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Nature
 {
-    [NameAlias("hun", "természet")]
+    [NameAlias("hun", "galócafélék")]
 
-    public class NatureBase
+    [NatureFamily]
+    public class Amanitaceae : Homobasidiomycetes
     {
     }
 }

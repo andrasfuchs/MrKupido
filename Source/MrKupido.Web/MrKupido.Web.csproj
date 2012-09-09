@@ -289,11 +289,11 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Content\fonts\Cardo\Cardo-Bold.ttf" />
-    <None Include="Content\fonts\Cardo\Cardo-Italic.ttf" />
-    <None Include="Content\fonts\Cardo\Cardo-Regular.ttf" />
-    <None Include="Content\fonts\Tangerine\Tangerine_Bold.ttf" />
-    <None Include="Content\fonts\Tangerine\Tangerine_Regular.ttf" />
+    <Content Include="Content\fonts\Cardo\Cardo-Bold.ttf" />
+    <Content Include="Content\fonts\Cardo\Cardo-Italic.ttf" />
+    <Content Include="Content\fonts\Cardo\Cardo-Regular.ttf" />
+    <Content Include="Content\fonts\Tangerine\Tangerine_Bold.ttf" />
+    <Content Include="Content\fonts\Tangerine\Tangerine_Regular.ttf" />
     <Content Include="Views\Account\LogIn.cshtml" />
     <Content Include="Views\Account\Profile.cshtml" />
     <Content Include="Views\Ingredient\Index.cshtml" />
@@ -363,7 +363,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>2365</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/MrKupido</IISUrl>
+          <IISUrl>http://localhost/mrkupido</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

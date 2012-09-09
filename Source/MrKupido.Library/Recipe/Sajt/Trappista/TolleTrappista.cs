@@ -14,7 +14,7 @@ namespace MrKupido.Library.Recipe
         public TolleTrappista(float amount)
             : base(amount)
         {
-            throw new RecipeUnknownException(this.GetType().Name);
+            RecipeUnknown();
         }
     }
 

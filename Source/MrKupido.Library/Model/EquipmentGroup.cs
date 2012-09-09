@@ -50,7 +50,7 @@ namespace MrKupido.Library
 
             if (sametypeEquipment.Count() == 0)
             {
-                throw new MrKupidoException("There are no classes of type '{0}' in the equipment group.", typeFullName);
+                throw new MrKupidoException("There are no classes of type '{0}' in the equipment group. Please add it to the 'SelectEquipment' method of the recipe.", typeFullName);
             }
 
             result = sametypeEquipment.FirstOrDefault(c => !c.IsInUse) as T;
@@ -60,14 +60,29 @@ namespace MrKupido.Library
                 throw new MrKupidoException("All the equipment of type '{0}' in the equipment group are in use.", typeFullName);
             }
 
-            result.IsInUse = true;
+            result.Use();
 
             return result;
         }
 
-        public void WashUp(EquipmentBase eq)
+        public void WashUp()
         {
-            eq.IsInUse = true;
+            foreach (Container container in Containers)
+            {
+                if (container.IsInUse) container.WashUp();
+            }
+            foreach (Device device in Devices)
+            {
+                if (device.IsInUse) device.WashUp();
+            }
+            foreach (Material material in Materials)
+            {
+                if (material.IsInUse) material.WashUp();
+            }
+            foreach (Tool tool in Tools)
+            {
+                if (tool.IsInUse) tool.WashUp();
+            }
         }
     }
 }

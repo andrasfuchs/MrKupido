@@ -9,37 +9,63 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "*hozzávalók csoportja")]
     [NameAlias("eng", "*ingredient group")]
 
-    public class IngredientGroup : IngredientBase, IIngredient
+    public class IngredientGroup : IngredientBase, IIngredient, IEnumerable<IIngredient>
     {
-        private IIngredient[] ingredients;
+        private List<IIngredient> ingredients = new List<IIngredient>();
+
+        public IIngredient[] Ingredients
+        {
+            get
+            {
+                return ingredients.ToArray();
+            }
+        }
 
         public int Count
         {
             get
             {
-                return ingredients.Length;
+                return ingredients.Count();
             }
         }
 
-        public IngredientGroup(IIngredient[] ingredients) : base(0.0f, MeasurementUnit.gramm)
+        public IngredientGroup(IIngredient[] ingredients) : base(0.0f, MeasurementUnit.none)
         {
             Category = ShoppingListCategory.Mixed;
-            this.ingredients = ingredients;
+
+            AddIngredients(ingredients);
+        }
+
+        private void AddIngredients(IIngredient[] ingredients)
+        {
+            foreach (IIngredient ingredient in ingredients)
+            {
+                if (ingredient is IngredientGroup) AddIngredients(((IngredientGroup)ingredient).Ingredients);
+
+                this.ingredients.Add(ingredient);
+                if (this.Unit == MeasurementUnit.none)
+                {
+                    this.Unit = ingredient.Unit;
+                } else if (this.Unit != ingredient.Unit) 
+                {
+                    this.Unit = MeasurementUnit.gramm;
+                }
+            }
         }
 
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder(base.ToString());
 
-            if (ingredients.Length > 0)
+            if (ingredients.Count() > 0)
             {
                 sb.Append(": [");
 
-                for (int i = 0; i < ingredients.Length; i++)
+                for (int i = 0; i < ingredients.Count(); i++)
                 {
                     sb.Append(ingredients[i].ToString());
 
-                    if (i < ingredients.Length-1) sb.Append(", ");
+                    if (i < ingredients.Count()-1) sb.Append(", ");
                 }
 
                 sb.Append("]");
@@ -47,5 +73,23 @@ namespace MrKupido.Library.Ingredient
 
             return sb.ToString();
         }
+
+        #region IEnumerable<IIngredient> Members
+
+        public IEnumerator<IIngredient> GetEnumerator()
+        {
+            return ingredients.GetEnumerator();
+        }
+
+        #endregion
+
+        #region IEnumerable Members
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+        {
+            return ingredients.GetEnumerator();
+        }
+
+        #endregion
     }
 }

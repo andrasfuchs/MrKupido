@@ -44,13 +44,13 @@ namespace MrKupido.Library.Recipe
             edeny.Berakni(pizzateszta);
             edeny.Varni(45);
             pizzateszta = edeny.Kivenni();
-            eg.WashUp(edeny);
 
             NyujtoDeszka nyd = eg.Use<NyujtoDeszka>();
             pizzateszta = nyd.Nyujtani(pizzateszta, 1);
 
             result.Add("pizzateszta", pizzateszta);
 
+            eg.WashUp();
             return result;
         }
 
@@ -69,6 +69,7 @@ namespace MrKupido.Library.Recipe
 
             cfp.Add("pizzaalap", tepsi.Contents);
 
+            eg.WashUp();
             return cfp;
         }
 
@@ -76,6 +77,7 @@ namespace MrKupido.Library.Recipe
         {
             Kez kez = eg.Use<Kez>();
             kez.Talalni(food["pizzateszta"], eg.Use<LaposTanyer>());
+            eg.WashUp();
         }
     }
 }

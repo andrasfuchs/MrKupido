@@ -15,7 +15,7 @@ namespace MrKupido.Library.Recipe
     {
         public Mascarpone(float amount) : base(amount)
         {
-            throw new RecipeUnknownException(this.GetType().Name);
+            RecipeUnknown();
         }
     }
 }

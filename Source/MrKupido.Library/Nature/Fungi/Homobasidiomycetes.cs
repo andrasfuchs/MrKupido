@@ -6,10 +6,10 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Nature
 {
-    [NameAlias("hun", "élesztőgombafélék")]
+    [NameAlias("hun", "osztatlan bazídiumú gombák")]
 
-    [NatureFamily]
-    public class Saccharomycetaceae : Hemiascomycetes
+    [NatureClass]
+    public class Homobasidiomycetes : Fungi
     {
     }
 }
