@@ -41,7 +41,7 @@ namespace MrKupido.Library.Equipment
                 ingredient.ChangeUnitTo(MeasurementUnit.piece);
             }
 
-            return ig;
+            return new IngredientGroup(ig.ToArray());
         }
     }
 }

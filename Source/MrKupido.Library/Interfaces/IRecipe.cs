@@ -7,6 +7,8 @@ namespace MrKupido.Library
 {
     public interface IRecipe : IIngredient
     {
+        string Name { get; }
+
         EquipmentGroup SelectEquipment(float amount);
 
         PreparedIngredients Prepare(float amount, EquipmentGroup eg);

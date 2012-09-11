@@ -12,7 +12,7 @@ namespace MrKupido.Library.Recipe
 {
     [NameAlias("hun", "fűszeres csirkemell")]
 
-    class FuszeresCsirkemell : RecipeBase
+    public class FuszeresCsirkemell : RecipeBase
     {
         public FuszeresCsirkemell(float amount)
             : base(amount)
@@ -36,8 +36,16 @@ namespace MrKupido.Library.Recipe
             return result;
         }
 
+        public static object InterceptionMethod(object returnedObject)
+        {
+            return returnedObject;
+        }
+
         public override PreparedIngredients Prepare(float amount, EquipmentGroup eg)
         {
+            object l1 = new Liszt(10.0f * amount);
+            object l2 = InterceptionMethod(new Liszt(20.0f * amount));
+
             PreparedIngredients result = new PreparedIngredients();
 
             Kes knife = eg.Use<Kes>();

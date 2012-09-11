@@ -31,6 +31,7 @@ namespace MrKupido.Library.Ingredient
 
         public IngredientGroup(IIngredient[] ingredients) : base(0.0f, MeasurementUnit.none)
         {
+            // TODO: decide the category on the individual ingredient categories
             Category = ShoppingListCategory.Mixed;
 
             AddIngredients(ingredients);
@@ -40,7 +41,11 @@ namespace MrKupido.Library.Ingredient
         {
             foreach (IIngredient ingredient in ingredients)
             {
-                if (ingredient is IngredientGroup) AddIngredients(((IngredientGroup)ingredient).Ingredients);
+                if (ingredient is IngredientGroup)
+                {
+                    AddIngredients(((IngredientGroup)ingredient).Ingredients);
+                    continue;
+                }
 
                 this.ingredients.Add(ingredient);
                 if (this.Unit == MeasurementUnit.none)

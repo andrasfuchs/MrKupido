@@ -7,6 +7,8 @@ namespace MrKupido.Library
 {
     public interface IIngredientContainer
     {
+        string Name { get; }
+
         Dimensions Dimensions { get; set; }
 
         IIngredient Contents { get; set; }

@@ -34,6 +34,8 @@ namespace MrKupido.Processor
             RecipeTreeNode rtn = null;
             classNameIndex.TryGetValue(className, out rtn);
 
+            if (rtn == null) throw new MrKupidoException("The class '{0}' was not found in the tree.", className);
+
             return rtn;
         }
     }

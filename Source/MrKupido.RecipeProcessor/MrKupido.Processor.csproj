@@ -47,6 +47,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Exceptions\ProcessorException.cs" />
+    <Compile Include="ILReader\FormatProvider.cs" />
+    <Compile Include="ILReader\ILInstruction.cs" />
+    <Compile Include="ILReader\ILProvider.cs" />
+    <Compile Include="ILReader\ILReader.cs" />
+    <Compile Include="ILReader\ReadableILStringVisitor.cs" />
+    <Compile Include="ILReader\TokenResolver.cs" />
+    <Compile Include="Model\DynamicMethodHelper.cs" />
     <Compile Include="Model\EquipmentTreeNode.cs" />
     <Compile Include="Model\IngredientTreeNode.cs" />
     <Compile Include="Model\NatureNodeType.cs" />
@@ -75,6 +82,10 @@
       <Project>{35A67DC3-381C-43E3-B424-6C170E216D49}</Project>
       <Name>MrKupido.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ILReader\ILReader.csproj" />
+    <Content Include="ILReader\README.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
