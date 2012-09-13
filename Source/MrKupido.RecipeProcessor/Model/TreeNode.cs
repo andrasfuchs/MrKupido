@@ -7,6 +7,7 @@ using System.Threading;
 using System.Diagnostics;
 using MrKupido.Library.Attributes;
 using MrKupido.DataAccess;
+using MrKupido.Library;
 
 namespace MrKupido.Processor.Model
 {
@@ -52,43 +53,34 @@ namespace MrKupido.Processor.Model
             return root;
         }
 
-        public static T BuildTree<T>(string treeNamespace, Func<Type, T> t2tn, string rootClassFullname = "System.Object") where T : TreeNode
+        public static T BuildTree<T>(Assembly[] assemblies, Func<Type, T> t2tn, Type rootType) where T : TreeNode
         {
             T root = null;
 
             Dictionary<string, List<Type>> classBases = new Dictionary<string, List<Type>>();
             List<Type> nodeClasses = new List<Type>();
 
-            foreach (Assembly currentassembly in AppDomain.CurrentDomain.GetAssemblies())
+            foreach (Assembly currentAssembly in assemblies)
             {
-                nodeClasses.AddRange(currentassembly.GetTypes().Where(t => (t.IsClass) && (t.Namespace == treeNamespace)).ToArray());
+                nodeClasses.AddRange(currentAssembly.GetTypes().Where(t => (t.IsClass) && ((t.IsSubclassOf(rootType)) || (t == rootType))).ToArray());
             }
 
             foreach (Type nodeClass in nodeClasses)
             {
-                if (nodeClass.BaseType.FullName == rootClassFullname)
+                if (nodeClass == rootType)
                 {
-                    if (root == null)
-                    {
-                        root = t2tn(nodeClass);
-                    }
-                    else
-                    {
-                        throw new ProcessorException("There must be only one root in '" + treeNamespace + "' namespace. Neighter '" + root.ClassName + "' nor '" + nodeClass.Name + "' have base classes defined.");
-                    }
+                    root = t2tn(nodeClass);
                 }
+                else
+                {
+                    if (!classBases.ContainsKey(nodeClass.BaseType.FullName)) classBases.Add(nodeClass.BaseType.FullName, new List<Type>());
 
-                if (!classBases.ContainsKey(nodeClass.BaseType.FullName)) classBases.Add(nodeClass.BaseType.FullName, new List<Type>());
-
-                classBases[nodeClass.BaseType.FullName].Add(nodeClass);
+                    classBases[nodeClass.BaseType.FullName].Add(nodeClass);
+                }
             }
 
-            if (root == null) throw new ProcessorException("There must be exactly one root in '" + treeNamespace + "' namespace which has the base class of '" + rootClassFullname + "'.");
+            if (root == null) throw new ProcessorException("There must be one '{0}' root item in the tree.'", rootType.FullName);
             root = TreeNode.SetChilden(root, classBases, t2tn);
-
-            classBases.Remove(rootClassFullname);
-
-            if (classBases.Count() > 0) throw new ProcessorException("All classes in the '" + treeNamespace + "' namespace must connect to the root '" + root.ClassName + "'. There are classes like '" + classBases.First().Value[0].Name + "' which are not connected to the main tree.");
 
             return root;
         }

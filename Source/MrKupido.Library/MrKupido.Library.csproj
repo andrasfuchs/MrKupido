@@ -154,6 +154,8 @@
     <Compile Include="Nature\Plantae\Magnoliopsida\Solanaceae\CapsicumAnnuumL.cs" />
     <Compile Include="Nature\Plantae\Magnoliopsida\Solanaceae\SolanumTuberosum.cs" />
     <Compile Include="Recipe\Cukor.cs" />
+    <Compile Include="Recipe\Cukor\KristalyCukor.cs" />
+    <Compile Include="Recipe\Cukor\KristalyCukor\KoronasKristalyCukor.cs" />
     <Compile Include="Recipe\FelfuttatottEleszto.cs" />
     <Compile Include="Recipe\FustoltSzalonna.cs" />
     <Compile Include="Recipe\Kolbasz.cs" />

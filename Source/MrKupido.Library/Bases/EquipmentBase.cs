@@ -21,6 +21,8 @@ namespace MrKupido.Library.Equipment
 
         public bool IsInUse { get; private set; }
 
+        public uint LastActionDuration { get; private set; }
+
         public void Use()
         {
             IsInUse = true;

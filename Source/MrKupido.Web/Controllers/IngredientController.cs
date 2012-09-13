@@ -384,10 +384,12 @@ namespace Web.Controllers
         {
             object[] result = new object[4];
 
-            result[0] = TreeNode.BuildTree("MrKupido.Library.Nature", t => new NatureTreeNode(t));
-            result[1] = TreeNode.BuildTree("MrKupido.Library.Ingredient", t => new IngredientTreeNode(t));
-            result[2] = TreeNode.BuildTree("MrKupido.Library.Recipe", t => new RecipeTreeNode(t), "MrKupido.Library.Ingredient.IngredientBase");
-            result[3] = TreeNode.BuildTree("MrKupido.Library.Equipment", t => new EquipmentTreeNode(t));
+            System.Reflection.Assembly[] ass = AppDomain.CurrentDomain.GetAssemblies();
+
+            result[0] = TreeNode.BuildTree(ass, t => new NatureTreeNode(t), typeof(MrKupido.Library.Nature.NatureBase));
+            result[1] = Cache.Ingredient["IngredientBase"];
+            result[2] = TreeNode.BuildTree(ass, t => new RecipeTreeNode(t), typeof(MrKupido.Library.Recipe.RecipeBase));
+            result[3] = TreeNode.BuildTree(ass, t => new EquipmentTreeNode(t), typeof(MrKupido.Library.Equipment.EquipmentBase));
 
             return View(result);
         }

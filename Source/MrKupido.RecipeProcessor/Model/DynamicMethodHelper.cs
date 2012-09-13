@@ -106,10 +106,10 @@ namespace MrKupido.Processor.Model
                 throw new ArgumentNullException("method");
             }
 
-            if (!method.IsStatic)
-            {
-                throw new InvalidOperationException("the method is expected to be static");
-            }
+            //if (!method.IsStatic)
+            //{
+            //    throw new InvalidOperationException("the method is expected to be static");
+            //}
 
             if (method.IsGenericMethod)
             {

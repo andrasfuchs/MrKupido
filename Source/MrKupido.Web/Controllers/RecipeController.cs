@@ -9,7 +9,6 @@ using MrKupido.Library.Recipe;
 using MrKupido.Processor;
 using MrKupido.Processor.Model;
 using MrKupido.Library;
-using MrKupido.Library.Recipe;
 
 namespace MrKupido.Web.Controllers
 {
@@ -25,17 +24,17 @@ namespace MrKupido.Web.Controllers
 
             if (recipe == null) return new RedirectToRouteResult("Default", null);
 
-            TreeNode.BuildTree("MrKupido.Library.Ingredient", t => new IngredientTreeNode(t));
-            RecipeIndexer ri = new RecipeIndexer(TreeNode.BuildTree("MrKupido.Library.Recipe", t => new RecipeTreeNode(t), "MrKupido.Library.Ingredient.IngredientBase"));
+            Pizza pizza = new Pizza(1.0f);
 
-            RecipeTreeNode rtn = ri.GetByClassName(recipe.ClassName);
+            Cache.Recipe.Initialize(typeof(RecipeAnalyzer), "InterceptionMethod");
+            RecipeTreeNode rtn = Cache.Recipe[recipe.ClassName];
             result[0] = rtn;
 
             RecipeAnalyzer ra = new RecipeAnalyzer(rtn.ClassType, 1.0f);
             IIngredient[] ingredients = ra.GenerateIngredients();
             result[1] = ingredients;
 
-            return View(result);
+            return View(rtn);
         }
 
     }

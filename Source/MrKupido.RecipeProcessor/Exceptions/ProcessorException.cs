@@ -8,8 +8,8 @@ namespace MrKupido.Processor
 {
     public class ProcessorException : MrKupidoException
     {
-        public ProcessorException(string message)
-            : base(message)
+        public ProcessorException(string message, params object[] args)
+            : base(message, args)
         { }
     }
 }

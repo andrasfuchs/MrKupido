@@ -62,19 +62,27 @@ namespace MrKupido.Library.Recipe
             // a, if it is, then do not throw the Exception, only trace a warning (because it would be nice to have the recipe, but we can buy the product, so it's fine)
             // b, if none of them are, throw the Exception, because then we can't make this recipe
 
-            foreach (Type desc in this.GetType().GetDescendants())
+            List<Type> typesToCheck = new List<Type>();
+            typesToCheck.Add(this.GetType());
+            typesToCheck.AddRange(this.GetType().GetDescendants());
+
+            foreach (Type desc in typesToCheck)
             {
                 foreach (object attr in desc.GetCustomAttributes(false))
                 {
                     if (attr is CommercialProductOfAttribute)
                     {
-                        Trace.TraceWarning("The recipe of '{0}' is unknown, so it is available only as commercial product. Please consider adding its recipe to the library.", this.GetType().Name);
+                        if (desc != this.GetType())
+                        {
+                            Trace.TraceWarning("The recipe of '{0}' is unknown, so it is available only as commercial product. Please consider adding its recipe to the library.", this.GetType().Name);
+                        }
                         return;
                     }
                 }
             }
 
-            throw new RecipeUnknownException(this.GetType().Name);
+            //TODO: re-enable this exception
+            //throw new RecipeUnknownException(this.GetType().Name);
         }
 
         public override string ToString()
