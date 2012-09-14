@@ -31,11 +31,15 @@ namespace MrKupido.Processor
 
             ingredients.Clear();
 
-            object eg = InvokePatched(rtn.StandardPatchedInstance, "SelectEquipment", amount);
-            object preps = InvokePatched(rtn.StandardPatchedInstance, "Prepare", amount, eg);
-            object cfp = InvokePatched(rtn.StandardPatchedInstance, "Cook", amount, preps, eg);
-            InvokePatched(rtn.StandardPatchedInstance, "Serve", amount, cfp, eg);
-
+            //object eg = InvokePatched(rtn.StandardPatchedInstance, "SelectEquipment", amount);
+            //object preps = InvokePatched(rtn.StandardPatchedInstance, "Prepare", amount, eg);
+            //object cfp = InvokePatched(rtn.StandardPatchedInstance, "Cook", amount, preps, eg);
+            //InvokePatched(rtn.StandardPatchedInstance, "Serve", amount, cfp, eg);
+            EquipmentGroup eg = rtn.SelectEquipment(amount);
+            PreparedIngredients preps = rtn.Prepare(amount, eg);
+            CookedFoodParts cfp = rtn.Cook(amount, preps, eg);
+            rtn.Serve(amount, cfp, eg);
+            
             return ingredients.ToArray();
         }
 

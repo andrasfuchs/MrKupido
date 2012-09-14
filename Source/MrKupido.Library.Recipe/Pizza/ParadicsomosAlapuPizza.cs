@@ -15,9 +15,9 @@ namespace MrKupido.Library.Recipe
             : base(amount)
         { }
 
-        public override PreparedIngredients Prepare(float amount, EquipmentGroup eg)
+        public static new PreparedIngredients Prepare(float amount, EquipmentGroup eg)
         {
-            PreparedIngredients result = base.Prepare(amount, eg);
+            PreparedIngredients result = Pizza.Prepare(amount, eg);
 
             IIngredient pizzateszta = result["pizzateszta"];
             result.Remove("pizzateszta");

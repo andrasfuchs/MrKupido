@@ -23,7 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.LanguageModule.Hun
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.Library.Recipe", "MrKupido.Library.Recipe\MrKupido.Library.Recipe.csproj", "{A11FE062-4069-4EC5-B2FF-967DC473F1CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.Processor", "MrKupido.RecipeProcessor\MrKupido.Processor.csproj", "{B6B63F3C-1D38-4AF5-94AE-55B2160A61FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.Processor", "MrKupido.Processor\MrKupido.Processor.csproj", "{B6B63F3C-1D38-4AF5-94AE-55B2160A61FE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -9,13 +9,12 @@ namespace MrKupido.Library
     {
         string Name { get; }
 
-        EquipmentGroup SelectEquipment(float amount);
+        //EquipmentGroup SelectEquipment(float amount);
 
-        PreparedIngredients Prepare(float amount, EquipmentGroup eg);
+        //PreparedIngredients Prepare(float amount, EquipmentGroup eg);
 
-        CookedFoodParts Cook(float amount, PreparedIngredients preps, EquipmentGroup eg);
+        //CookedFoodParts Cook(float amount, PreparedIngredients preps, EquipmentGroup eg);
 
-        void Serve(float amount, CookedFoodParts food, EquipmentGroup eg);
-
+        //void Serve(float amount, CookedFoodParts food, EquipmentGroup eg);
     }
 }

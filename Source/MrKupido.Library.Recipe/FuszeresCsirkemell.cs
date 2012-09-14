@@ -19,7 +19,7 @@ namespace MrKupido.Library.Recipe
         {
         }
 
-        public override EquipmentGroup SelectEquipment(float amount)
+        public static new EquipmentGroup SelectEquipment(float amount)
         {
             EquipmentGroup result = new EquipmentGroup();
 
@@ -41,7 +41,7 @@ namespace MrKupido.Library.Recipe
             return returnedObject;
         }
 
-        public override PreparedIngredients Prepare(float amount, EquipmentGroup eg)
+        public static new PreparedIngredients Prepare(float amount, EquipmentGroup eg)
         {
             object l1 = new Liszt(10.0f * amount);
             object l2 = InterceptionMethod(new Liszt(20.0f * amount));
@@ -72,7 +72,7 @@ namespace MrKupido.Library.Recipe
             return result;
         }
 
-        public override CookedFoodParts Cook(float amount, PreparedIngredients preps, EquipmentGroup eg)
+        public static new CookedFoodParts Cook(float amount, PreparedIngredients preps, EquipmentGroup eg)
         {
             CookedFoodParts cfp = new CookedFoodParts();
 

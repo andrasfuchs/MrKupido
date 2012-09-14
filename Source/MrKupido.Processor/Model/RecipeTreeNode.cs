@@ -42,7 +42,7 @@ namespace MrKupido.Processor.Model
             Assembly ass = Assembly.LoadFile(recipeType.Assembly.Location + ".Patched.dll");
             RecipePatchedType = ass.GetTypes().FirstOrDefault(t => t.FullName == recipeType.FullName);
             if (RecipePatchedType == null) throw new MrKupidoException("The type '{0}' was not found in the patched assembly '{1}'.", RecipeType.FullName, ass.Location);
-            StandardPatchedInstance = RecipePatchedType.DefaultConstructor(1.0f);
+            //StandardPatchedInstance = RecipePatchedType.DefaultConstructor(1.0f);
 
             EquipmentGroup eg = null;
             PreparedIngredients preps = null;
@@ -55,7 +55,7 @@ namespace MrKupido.Processor.Model
             try
             {
                 SelectEquipmentMethod = new RecipeMethod(RecipeType, RecipePatchedType, td, "SelectEquipment");
-                eg = StandardInstance.SelectEquipment(1.0f); // we need this as well, otherwise we can't get the delegate working
+                //eg = StandardInstance.SelectEquipment(1.0f); // we need this as well, otherwise we can't get the delegate working
                 SelectEquipment = (SelectEquipmentDelegate)SelectEquipmentMethod.PatchedDM.CreateDelegate(typeof(SelectEquipmentDelegate));
             }
             catch (Exception) { }
@@ -63,7 +63,7 @@ namespace MrKupido.Processor.Model
             try
             {
                 PrepareMethod = new RecipeMethod(RecipeType, RecipePatchedType, td, "Prepare");
-                preps = (PreparedIngredients)StandardInstance.Prepare(1.0f, eg); // we need this as well, otherwise we can't get the delegate working
+                //preps = (PreparedIngredients)StandardInstance.Prepare(1.0f, eg); // we need this as well, otherwise we can't get the delegate working
                 Prepare = (PrepareDelegate)PrepareMethod.PatchedDM.CreateDelegate(typeof(PrepareDelegate));
             }
             catch (Exception) { }
@@ -71,7 +71,7 @@ namespace MrKupido.Processor.Model
             try
             {
                 CookMethod = new RecipeMethod(RecipeType, RecipePatchedType, td, "Cook");
-                cfp = (CookedFoodParts)StandardInstance.Cook(1.0f, preps, eg); // we need this as well, otherwise we can't get the delegate working
+                //cfp = (CookedFoodParts)StandardInstance.Cook(1.0f, preps, eg); // we need this as well, otherwise we can't get the delegate working
                 Cook = (CookDelegate)CookMethod.PatchedDM.CreateDelegate(typeof(CookDelegate));
             }
             catch (Exception) {}
@@ -79,7 +79,7 @@ namespace MrKupido.Processor.Model
             try
             {
                 ServeMethod = new RecipeMethod(RecipeType, RecipePatchedType, td, "Serve");
-                StandardInstance.Serve(1.0f, cfp, eg); // we need this as well, otherwise we can't get the delegate working
+                //StandardInstance.Serve(1.0f, cfp, eg); // we need this as well, otherwise we can't get the delegate working
                 Serve = (ServeDelegate)ServeMethod.PatchedDM.CreateDelegate(typeof(ServeDelegate));
             }
             catch (Exception) { }

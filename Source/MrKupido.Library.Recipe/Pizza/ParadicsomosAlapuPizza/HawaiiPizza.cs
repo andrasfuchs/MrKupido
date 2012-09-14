@@ -16,18 +16,18 @@ namespace MrKupido.Library.Recipe
             : base(amount)
         { }
 
-        public override EquipmentGroup SelectEquipment(float amount)
+        public static new EquipmentGroup SelectEquipment(float amount)
         {
-            EquipmentGroup result = base.SelectEquipment(amount);
+            EquipmentGroup result = ParadicsomosAlapuPizza.SelectEquipment(amount);
 
             result.Tools.Add(new Kes());
 
             return result;
         }
 
-        public override PreparedIngredients Prepare(float amount, EquipmentGroup eg)
+        public static new PreparedIngredients Prepare(float amount, EquipmentGroup eg)
         {
-            PreparedIngredients result = base.Prepare(amount, eg);
+            PreparedIngredients result = ParadicsomosAlapuPizza.Prepare(amount, eg);
 
             IIngredient pizzateszta = result["pizzateszta"];
             result.Remove("pizzateszta");
