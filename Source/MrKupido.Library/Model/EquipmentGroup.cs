@@ -84,5 +84,13 @@ namespace MrKupido.Library
                 if (tool.IsInUse) tool.WashUp();
             }
         }
+
+        public void Merge(EquipmentGroup eg)
+        {
+            Containers.AddRange(eg.Containers);
+            Devices.AddRange(eg.Devices);
+            Materials.AddRange(eg.Materials);
+            Tools.AddRange(eg.Tools);
+        }
     }
 }

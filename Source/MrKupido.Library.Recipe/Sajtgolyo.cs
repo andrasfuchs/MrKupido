@@ -123,7 +123,7 @@ namespace MrKupido.Library.Recipe
             return cfp;
         }
 
-        public override void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
+        public static new void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
             Kez kez = eg.Use<Kez>();
             kez.Talalni(food["osszesgolyo"], eg.Use<LaposTanyer>());

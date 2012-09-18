@@ -26,7 +26,7 @@ namespace MrKupido.Web.Controllers
 
             Pizza pizza = new Pizza(1.0f);
 
-            Cache.Recipe.Initialize(typeof(RecipeAnalyzer), "InterceptionMethod");
+            Cache.Recipe.Initialize();
             RecipeTreeNode rtn = Cache.Recipe[recipe.ClassName];
             result[0] = rtn;
 
@@ -34,7 +34,9 @@ namespace MrKupido.Web.Controllers
             IIngredient[] ingredients = ra.GenerateIngredients();
             result[1] = ingredients;
 
-            return View(rtn);
+            RecipeTreeNode inlineSajt = Cache.Recipe.RenderInline("FuszeresCsirkemell", new string[] { "Sajt" });
+
+            return View(result);
         }
 
     }

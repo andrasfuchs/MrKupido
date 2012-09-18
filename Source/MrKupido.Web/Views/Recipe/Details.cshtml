@@ -1,4 +1,4 @@
-﻿@model MrKupido.Processor.Model.RecipeTreeNode
+﻿@model object[]
 @{
     ViewBag.Title = "Details";
 }
@@ -66,74 +66,18 @@
         </p>
     </div>
     <hr class="double" />
-    <details id="mymenu">
+    <details id="recipe" open class="alwaysopen">
         <summary>
             <h1>
-                @Model.Name</h1>
+                @(((MrKupido.Processor.Model.RecipeTreeNode)Model[0]).Name)</h1>
         </summary>
-        <ul>
-            <li>
-                <div class="resulthead">
-                    <div class="category">
-                        <img runat="server" src="~/Content/svg/cat_maindish.svg" alt="Sertés" width="45px" height="30px" />
-                    </div>
-                    <div class="title">
-                        Paprikás krumpli
-                    </div>
-                    <div class="tick">
-                        <a href="#">
-                            <img runat="server" src="~/Content/svg/tick_on.svg" alt="Töröl" width="25px" height="25px" /></a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="resulthead">
-                    <div class="category">
-                        <img runat="server" src="~/Content/svg/cat_maindish.svg" alt="Sertés" width="45px" height="30px" />
-                    </div>
-                    <div class="title">
-                        Bundáskenyér
-                    </div>
-                    <div class="tick">
-                        <a href="#">
-                            <img runat="server" src="~/Content/svg/tick_on.svg" alt="Töröl" width="25px" height="25px" /></a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="resulthead">
-                    <div class="category">
-                        <img runat="server" src="~/Content/svg/cat_maindish.svg" alt="Sertés" width="45px" height="30px" />
-                    </div>
-                    <div class="title">
-                        Csirkecomb mustármártásban
-                    </div>
-                    <div class="tick">
-                        <a href="#">
-                            <img runat="server" src="~/Content/svg/tick_on.svg" alt="Töröl" width="25px" height="25px" /></a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="resulthead">
-                    <div class="category">
-                        <img runat="server" src="~/Content/svg/cat_maindish.svg" alt="Sertés" width="45px" height="30px" />
-                    </div>
-                    <div class="title">
-                        Gombás sült csirkecomb
-                    </div>
-                    <div class="tick">
-                        <a href="#">
-                            <img runat="server" src="~/Content/svg/tick_on.svg" alt="Töröl" width="25px" height="25px" /></a>
-                    </div>
-                </div>
-            </li>
-            <li class="disabled"></li>
-            <li class="disabled"></li>
-            <li class="disabled"></li>
-            <li class="disabled"></li>
-            <li class="disabled"></li>
-        </ul>
+        <div id="ingredientlist">
+            <h2>
+                Hozzávalók listája</h2>
+            <div id="_RecipeIngredients">
+                @{ Html.RenderPartial("_RecipeIngredients", (MrKupido.Library.IIngredient[])Model[1]); }
+            </div>
+        </div>
     </details>
     <hr class="double" />
 </article>

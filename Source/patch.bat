@@ -1,0 +1,1 @@
+C:\Work\MrKupido\Source\\MrKupido.Patcher\bin\Debug\MrKupido.Patcher.exe C:\Work\MrKupido\Source\MrKupido.Library.Recipe\bin\Debug\MrKupido.Library.Recipe.dll C:\Work\MrKupido\Source\\MrKupido.Processor\bin\Debug\MrKupido.Processor.dll MrKupido.Processor.RecipeAnalyzer InterceptionMethod

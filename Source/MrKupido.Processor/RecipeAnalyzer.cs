@@ -31,28 +31,36 @@ namespace MrKupido.Processor
 
             ingredients.Clear();
 
-            //object eg = InvokePatched(rtn.StandardPatchedInstance, "SelectEquipment", amount);
-            //object preps = InvokePatched(rtn.StandardPatchedInstance, "Prepare", amount, eg);
-            //object cfp = InvokePatched(rtn.StandardPatchedInstance, "Cook", amount, preps, eg);
-            //InvokePatched(rtn.StandardPatchedInstance, "Serve", amount, cfp, eg);
-            EquipmentGroup eg = rtn.SelectEquipment(amount);
-            PreparedIngredients preps = rtn.Prepare(amount, eg);
-            CookedFoodParts cfp = rtn.Cook(amount, preps, eg);
-            rtn.Serve(amount, cfp, eg);
+            if (rtn.SelectEquipment != null)
+            {
+                EquipmentGroup eg = rtn.SelectEquipment(amount);
+                if (rtn.Prepare != null)
+                {
+                    PreparedIngredients preps = rtn.Prepare(amount, eg);
+                    if (rtn.Cook != null)
+                    {
+                        CookedFoodParts cfp = rtn.Cook(amount, preps, eg);
+                        if (rtn.Serve != null) rtn.Serve(amount, cfp, eg);
+                    }
+                }
+            }
             
             return ingredients.ToArray();
         }
 
         public static object InterceptionMethod(object returnedObject)
         {
-            if (returnedObject is IngredientBase) ingredients.Add((IngredientBase)returnedObject);
+            if (returnedObject is IngredientBase)
+            {
+                IngredientBase ib = (IngredientBase)returnedObject;
+
+                IngredientBase item = ingredients.FirstOrDefault(i => (i.Name == ib.Name) && (i.Unit == ib.Unit));
+
+                if (item == null) ingredients.Add(ib);
+                else item.Add(ib);
+            }
 
             return returnedObject;
-        }
-
-        private object InvokePatched(object patchedRecipe, string methodName, params object[] args)
-        {
-            return patchedRecipe.GetType().GetMethod(methodName).Invoke(patchedRecipe, args);
         }
 
         public Instruction[] GenerateIntructions()

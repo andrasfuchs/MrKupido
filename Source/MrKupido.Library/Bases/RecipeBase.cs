@@ -13,13 +13,13 @@ namespace MrKupido.Library.Recipe
 
     public class RecipeBase : IngredientBase, IRecipe
     {
-        public string Name
-        {
-            get
-            {
-                return NameAliasAttribute.GetDefaultName(this.GetType());
-            }
-        }
+        //public string Name
+        //{
+        //    get
+        //    {
+        //        return NameAliasAttribute.GetDefaultName(this.GetType());
+        //    }
+        //}
 
         public RecipeBase(float amount) : this(amount, MeasurementUnit.portion)
         {
@@ -87,7 +87,7 @@ namespace MrKupido.Library.Recipe
 
         public override string ToString()
         {
-            return Name;
+            return base.ToString();
         }
     }
 }

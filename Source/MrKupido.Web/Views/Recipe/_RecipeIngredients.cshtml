@@ -1,1 +1,7 @@
-﻿
+﻿@model MrKupido.Library.IIngredient[]
+<ul>
+    @foreach (MrKupido.Library.IIngredient ing in Model)
+    { 
+        <li>@ing</li>
+    }
+</ul>

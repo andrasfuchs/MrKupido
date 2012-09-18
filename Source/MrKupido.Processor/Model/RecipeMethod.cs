@@ -17,7 +17,7 @@ namespace MrKupido.Processor.Model
         [Obsolete]
         public System.Reflection.Emit.DynamicMethod PatchedDM { get; private set; }
 
-        public RecipeMethod (Type type, Type patchedType, TypeDefinition td, string methodName)
+        public RecipeMethod(Type type, Type patchedType, TypeDefinition td, string methodName)
         {
             Original = type.GetMethod(methodName);
 

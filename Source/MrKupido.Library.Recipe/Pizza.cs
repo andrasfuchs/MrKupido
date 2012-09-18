@@ -5,7 +5,6 @@ using System.Text;
 using MrKupido.Library.Equipment;
 using MrKupido.Library.Ingredient;
 using MrKupido.Library.Attributes;
-using MrKupido.Library.Equipment;
 
 namespace MrKupido.Library.Recipe
 {
@@ -73,7 +72,7 @@ namespace MrKupido.Library.Recipe
             return cfp;
         }
 
-        public override void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
+        public static new void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
             Kez kez = eg.Use<Kez>();
             kez.Talalni(food["pizzateszta"], eg.Use<LaposTanyer>());

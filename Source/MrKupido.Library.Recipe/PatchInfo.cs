@@ -7,6 +7,6 @@ namespace MrKupido.Library.Recipe
 {
     public class PatchInfo
     {
-        public DateTime PatchedVersion = new DateTime(1980, 01, 02, 03, 04, 05);
+        public const string PatchedVersion = "0001-01-01 00:00:00";
     }
 }
