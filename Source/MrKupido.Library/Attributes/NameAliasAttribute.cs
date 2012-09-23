@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace MrKupido.Library.Attributes
 {
-    [AttributeUsage(System.AttributeTargets.Class | System.AttributeTargets.Field, AllowMultiple = true)]
+    [AttributeUsage(System.AttributeTargets.Class | System.AttributeTargets.Field | System.AttributeTargets.Method, AllowMultiple = true)]
     public class NameAliasAttribute : Attribute
     {
         public string CultureName { get; private set; }
@@ -54,6 +54,11 @@ namespace MrKupido.Library.Attributes
             }
 
             return result;
+        }
+
+        public static NameAliasAttribute[] GetNameAliases(Type objType, string languageISOCode)
+        {
+            return objType.GetCustomAttributes(false).Where(na => (na is NameAliasAttribute) && ((NameAliasAttribute)na).CultureName == languageISOCode).Cast<NameAliasAttribute>().ToArray();
         }
     }
 }

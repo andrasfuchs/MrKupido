@@ -107,11 +107,13 @@
     <Compile Include="Ingredient\Oregano.cs" />
     <Compile Include="Ingredient\OreganoOrolt.cs" />
     <Compile Include="Ingredient\So\TengeriSo.cs" />
+    <Compile Include="Interfaces\IDirection.cs" />
     <Compile Include="Interfaces\IIngredientContainer.cs" />
     <Compile Include="Interfaces\IEquipment.cs" />
     <Compile Include="Interfaces\IIngredient.cs" />
     <Compile Include="Bases\IngredientBase.cs" />
     <Compile Include="Enums\IngredientCategory.cs" />
+    <Compile Include="Interfaces\INutritionInfo.cs" />
     <Compile Include="Model\CookedFoodParts.cs" />
     <Compile Include="Model\Dimensions.cs" />
     <Compile Include="Model\EnumToMultilingualString.cs" />
@@ -122,6 +124,7 @@
     <Compile Include="Ingredient\Eleszto.cs" />
     <Compile Include="Ingredient\FeketeBorsOrolt.cs" />
     <Compile Include="Model\PreparedIngredients.cs" />
+    <Compile Include="Model\StringHelper.cs" />
     <Compile Include="Model\TypeHelper.cs" />
     <Compile Include="Nature\Animalia\Mammalia\Suidae.cs" />
     <Compile Include="Nature\Animalia\Mammalia\Suidae\SusScrofa.cs" />

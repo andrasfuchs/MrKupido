@@ -14,21 +14,10 @@ namespace MrKupido.Processor
 {
     public class RecipeAnalyzer
     {
-        private IRecipe recipe;
-        private float amount;
-
         private static List<IngredientBase> ingredients = new List<IngredientBase>();
 
-        public RecipeAnalyzer(Type recipe, float amount)
+        public static IIngredient[] GenerateIngredients(RecipeTreeNode rtn, float amount)
         {
-            this.recipe = Activator.CreateInstance(recipe, amount) as IRecipe;
-            this.amount = amount;
-        }
-
-        public IIngredient[] GenerateIngredients()
-        {
-            RecipeTreeNode rtn = Cache.Recipe[recipe.GetType().Name];
-
             ingredients.Clear();
 
             if (rtn.SelectEquipment != null)
@@ -48,7 +37,7 @@ namespace MrKupido.Processor
             return ingredients.ToArray();
         }
 
-        public static object InterceptionMethod(object returnedObject)
+        public static object NewIngredient(object returnedObject)
         {
             if (returnedObject is IngredientBase)
             {
@@ -63,6 +52,11 @@ namespace MrKupido.Processor
             return returnedObject;
         }
 
+        public static void DirectionGenerator(string methodFullName, object result, params object[] parameters)
+        {
+            return;
+        }
+
         public Instruction[] GenerateIntructions()
         {
             List<Instruction> result = new List<Instruction>();
@@ -70,14 +64,14 @@ namespace MrKupido.Processor
             return result.ToArray();
         }
 
-        public IEquipment[] EquipmentNeeded()
+        public static IEquipment[] EquipmentNeeded()
         {
             List<IEquipment> result = new List<IEquipment>();
 
             return result.ToArray();
         }
 
-        public string[] Nutritions()
+        public static string[] Nutritions()
         {
             List<string> result = new List<string>();
 

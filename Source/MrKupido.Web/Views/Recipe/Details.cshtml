@@ -70,12 +70,51 @@
         <summary>
             <h1>
                 @(((MrKupido.Processor.Model.RecipeTreeNode)Model[0]).Name)</h1>
+            <h3>
+                Betyár módra</h3>
         </summary>
+        <div id="taglist">
+            <div id="_RecipeTags">
+                @*@{ Html.RenderPartial("_RecipeTags", Model[1]); }*@
+            </div>
+        </div>
+        <div id="equipmentlist">
+            <h2>
+                Szükséges eszközök</h2>
+            <h3>(2 eszközöd nincs)</h3>
+            <div id="_RecipeEquipments">
+                @*@{ Html.RenderPartial("_RecipeEquipments", (MrKupido.Library.IEquipment[])Model[2]); }*@
+            </div>
+        </div>
         <div id="ingredientlist">
             <h2>
-                Hozzávalók listája</h2>
+                Hozzávalók</h2>
+            <h3>(2 főre)</h3>
             <div id="_RecipeIngredients">
-                @{ Html.RenderPartial("_RecipeIngredients", (MrKupido.Library.IIngredient[])Model[1]); }
+                @{ Html.RenderPartial("_RecipeIngredients", (MrKupido.Library.IIngredient[])Model[3]); }
+            </div>
+        </div>
+        <div id="directionlist">
+            <h2>
+                Elkészítés</h2>
+            <h3>(egyedül)</h3>
+            <div id="_RecipeDirections">
+                @*@{ Html.RenderPartial("_RecipeDirections", (MrKupido.Library.IDirection[])Model[4]); }*@
+            </div>
+        </div>
+        <div id="serving">
+            <h2>
+                Tálalás</h2>
+            <div id="_RecipeServing">
+                @*@{ Html.RenderPartial("_RecipeServing", (MrKupido.Library.EquipmentGroup)Model[5]); }*@
+            </div>
+        </div>
+        <div id="nutritionlist">
+            <h2>
+                Tápanyag táblázat (1 főre)</h2>
+            <h3>(részeletes)</h3>
+            <div id="_RecipeNutritions">
+                @*@{ Html.RenderPartial("_RecipeNutritions", (MrKupido.Library.INutritionInfo[])Model[6]); }*@
             </div>
         </div>
     </details>

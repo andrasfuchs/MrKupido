@@ -75,10 +75,14 @@
       <Project>{44930A70-2BFF-4634-BD17-1ECB20D9C683}</Project>
       <Name>MrKupido.Library</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MrKupido.Processor\MrKupido.Processor.csproj">
+      <Project>{B6B63F3C-1D38-4AF5-94AE-55B2160A61FE}</Project>
+      <Name>MrKupido.Processor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>$(SolutionDir)MrKupido.Patcher\bin\Debug\MrKupido.Patcher.exe $(TargetPath) $(SolutionDir)MrKupido.Processor\bin\Debug\MrKupido.Processor.dll MrKupido.Processor.RecipeAnalyzer InterceptionMethod</PostBuildEvent>
+    <PostBuildEvent>$(SolutionDir)MrKupido.Patcher\bin\Debug\MrKupido.Patcher.exe $(TargetPath) $(SolutionDir)MrKupido.Processor\bin\Debug\MrKupido.Processor.dll MrKupido.Processor.RecipeAnalyzer NewObj</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

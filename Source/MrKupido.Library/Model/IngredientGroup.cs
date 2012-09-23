@@ -6,8 +6,8 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Ingredient
 {
-    [NameAlias("hun", "*hozzávalók csoportja")]
-    [NameAlias("eng", "*ingredient group")]
+    [NameAlias("hun", "hozzávalók csoportja")]
+    [NameAlias("eng", "ingredient group")]
 
     public class IngredientGroup : IngredientBase, IIngredient, IEnumerable<IIngredient>
     {
@@ -26,6 +26,15 @@ namespace MrKupido.Library.Ingredient
             get
             {
                 return ingredients.Count();
+            }
+        }
+
+        public string Name
+        {
+            get
+            {
+                if (Ingredients.Length == 0) return base.Name;
+                else return Ingredients[0].Name;
             }
         }
 

@@ -15,7 +15,8 @@ namespace MrKupido.Processor
     public class RecipeCache
     {
         private Indexer ri;
-        public static AppDomain dynamicDomain = null;
+        private static AppDomain dynamicDomain = null;
+        private static Dictionary<string, Assembly> dynamicAssemblies = new Dictionary<string, Assembly>();
         
         public RecipeTreeNode this [string className]
         {
@@ -32,6 +33,8 @@ namespace MrKupido.Processor
             foreach (Assembly ass in AppDomain.CurrentDomain.GetAssemblies())
             {
                 if (ass.IsDynamic) continue;
+
+                if (String.IsNullOrEmpty(ass.Location)) continue;
 
                 if (ass.GetTypes().Where(t => (t.FullName == "MrKupido.Library.Recipe.RecipeBase") || t.IsSubclassOf(typeof(MrKupido.Library.Recipe.RecipeBase))).Count() > 0) assembliesToCheck.Add(ass);
 
@@ -57,22 +60,32 @@ namespace MrKupido.Processor
         public RecipeTreeNode RenderInline(string masterRecipeClass, string[] inlineRecipeClasses)
         {
             RecipeTreeNode result;
+            string newTypeName = masterRecipeClass + "__" + inlineRecipeClasses[0];
 
+
+            // create a new domain for the dynamic assemblies
             if (dynamicDomain == null)
             {
                 dynamicDomain = AppDomain.CreateDomain("DynamicAssemblies", AppDomain.CurrentDomain.Evidence, AppDomain.CurrentDomain.BaseDirectory, AppDomain.CurrentDomain.RelativeSearchPath, AppDomain.CurrentDomain.ShadowCopyFiles);
 
+
                 dynamicDomain.AssemblyResolve += new ResolveEventHandler(dynamicDomain_AssemblyResolve);
+                // NOTE: Is this a bug??
+                AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(mainDomain_AssemblyResolve);
             }
+            else
+            {
+                // TODO: check if we already have this generated and loaded
+            }
+
 
             result = (RecipeTreeNode)ri.GetByClassName(masterRecipeClass);
 
-            Guid dynamicId = Guid.NewGuid();
-
-            //
+            // keep the original assembly for the method references
             AssemblyDefinition adOrig = AssemblyDefinition.ReadAssembly(result.ClassType.Assembly.Location);
 
-            // load main method
+            // load assembly again, but let's modify it this time
+            Guid dynamicId = Guid.NewGuid();
             AssemblyDefinition ad = AssemblyDefinition.ReadAssembly(result.ClassType.Assembly.Location);
             ad.MainModule.AssemblyReferences.Add(adOrig.Name);
             ad.Name = new AssemblyNameDefinition(ad.Name.Name + ".Dynamic." + dynamicId, ad.Name.Version);
@@ -80,20 +93,23 @@ namespace MrKupido.Processor
             
             TypeDefinition td = ad.MainModule.Types.First(t => t.Name == result.ClassName);
             td.Namespace = td.Namespace + ".Dynamic";
-            td.Name = td.Name + "__" + inlineRecipeClasses[0];
-           
-            MethodDefinition md = td.Methods.First(m => m.Name == "SelectEquipment");
+            td.Name = newTypeName;
 
+
+            // let's modify the methods
             foreach (string inlineClass in inlineRecipeClasses)
             {
                 RecipeTreeNode inline = (RecipeTreeNode)ri.GetByClassName(inlineClass);
 
-                // load method to be inserted
+                // load inline type and its methods which are to be inserted
                 AssemblyDefinition adInline = null;
                 if (result.ClassType.Assembly.Location != inline.ClassType.Assembly.Location) AssemblyDefinition.ReadAssembly(inline.ClassType.Assembly.Location);
                 else adInline = ad;
 
                 TypeDefinition tdInline = adInline.MainModule.Types.First(t => t.Name == inlineClass);
+
+                // TODO: do the dynamic code insertation here
+                MethodDefinition md = td.Methods.First(m => m.Name == "SelectEquipment");
                 MethodDefinition mdInline = tdInline.Methods.First(m => m.Name == "SelectEquipment");
 
                 for (int i = 0; i < mdInline.Body.Instructions.Count; i++)
@@ -103,7 +119,7 @@ namespace MrKupido.Processor
             }
 
 
-
+            // replace method references
             foreach (MethodDefinition mds in td.Methods)
             {
                 foreach (Mono.Cecil.Cil.Instruction ins in mds.Body.Instructions)
@@ -122,22 +138,42 @@ namespace MrKupido.Processor
                 }
             }
             
+            // remove types we don't need
             for (int i = ad.MainModule.Types.Count - 1; i >= 0; i--)
             {
                 if ((ad.MainModule.Types[i].Namespace != "") && (ad.MainModule.Types[i].FullName != td.FullName)) ad.MainModule.Types.RemoveAt(i);
             }
 
+            // save and load our new assembly
             MemoryStream ms = new MemoryStream();
             ad.Write(ms);
-            ad.Write(Path.GetTempFileName() + ".MrKupido.dll");
+            //ad.Write(Path.GetTempFileName() + ".MrKupido.dll");
 
+            //Assembly[] assembliesDynamic = dynamicDomain.GetAssemblies().OrderBy(a => a.FullName).ToArray();
+            //Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies().OrderBy(a => a.FullName).ToArray();
 
-            //Assembly ass = Assembly.Load(ms.ToArray());
-            //dynamicAssemblies.Add(Assembly.Load(ms.ToArray()));
+            //dynamicDomain.DefineDynamicAssembly()
+            Assembly ass = Assembly.Load(ms.ToArray()); // this one uses the current domain
+            dynamicAssemblies.Add(ad.FullName, ass);
 
-            //result = new RecipeTreeNode(AppDomain.CurrentDomain.Load(ms.ToArray()).GetType(td.FullName));
+            //assembliesDynamic = dynamicDomain.GetAssemblies().OrderBy(a => a.FullName).ToArray();
+            //assemblies = AppDomain.CurrentDomain.GetAssemblies().OrderBy(a => a.FullName).ToArray();
 
-            result = new RecipeTreeNode(dynamicDomain.Load(ms.ToArray()).GetType(td.FullName));
+            // BUG: something is just wrong here: the assembly gets loaded by the current AppDomain, not by the dynamicDomain
+
+            ass = dynamicDomain.Load(ms.ToArray());
+
+            //assembliesDynamic = dynamicDomain.GetAssemblies().OrderBy(a => a.FullName).ToArray();
+            //assemblies = AppDomain.CurrentDomain.GetAssemblies().OrderBy(a => a.FullName).ToArray();
+
+            //object newTypeInstance = dynamicDomain.CreateInstanceFromAndUnwrap(ad.FullName, td.FullName);
+
+            result = new RecipeTreeNode(ass.GetType(td.FullName));
+
+            //assembliesDynamic = dynamicDomain.GetAssemblies().OrderBy(a => a.FullName).ToArray();
+            //assemblies = AppDomain.CurrentDomain.GetAssemblies().OrderBy(a => a.FullName).ToArray();
+            
+            //AppDomain.Unload(dynamicDomain);
 
             return result;
 
@@ -165,7 +201,22 @@ namespace MrKupido.Processor
 
         static Assembly dynamicDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
-            throw new NotImplementedException();
+            // good
+            Assembly result = null;
+
+            dynamicAssemblies.TryGetValue(args.Name, out result);
+
+            return result;
+        }
+
+        static Assembly mainDomain_AssemblyResolve(object sender, ResolveEventArgs args)
+        {
+            // NOT GOOD
+            Assembly result = null;
+
+            dynamicAssemblies.TryGetValue(args.Name, out result);
+
+            return result;
         }
     }
 }

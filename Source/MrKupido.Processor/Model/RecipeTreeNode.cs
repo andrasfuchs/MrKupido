@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MrKupido.Library;
 using Mono.Cecil;
 using System.Diagnostics;
-using MrKupido.Library.Recipe;
 using System.Reflection;
+using MrKupido.Library;
+using MrKupido.Library.Recipe;
 
 namespace MrKupido.Processor.Model
 {
@@ -20,22 +20,18 @@ namespace MrKupido.Processor.Model
         public DateTime? ExpiresAt;
 
         public SelectEquipmentDelegate SelectEquipment;
-        //public RecipeMethod SelectEquipmentMethod;
         public PrepareDelegate Prepare;
-        //public RecipeMethod PrepareMethod;
         public CookDelegate Cook;
-        //public RecipeMethod CookMethod;
         public ServeDelegate Serve;
-        //public RecipeMethod ServeMethod;
+
+        private Dictionary<float, IIngredient[]> ingredientCache = new Dictionary<float, IIngredient[]>();
 
         public Type RecipeType { get; private set; }
-        //public RecipeBase StandardInstance { get; private set; }
 
         public RecipeTreeNode(Type recipeType)
             : base(recipeType)
         {
             RecipeType = recipeType;
-            //StandardInstance = (RecipeBase)RecipeType.DefaultConstructor(0.0f);
 
             try
             {
@@ -61,6 +57,36 @@ namespace MrKupido.Processor.Model
             }
             catch (Exception) { }
 
+        }
+
+        public string[] GetTags()
+        {
+            return new string[0];
+        }
+        
+        public IIngredient[] GetIngredients(float amount)
+        {
+            if (!ingredientCache.ContainsKey(amount))
+            {
+                ingredientCache.Add(amount, RecipeAnalyzer.GenerateIngredients(this, 1.0f));
+            }
+
+            return ingredientCache[amount];
+        }
+
+        public IEquipment[] GetEquipments(float amount)
+        {
+            return new MrKupido.Library.Equipment.EquipmentBase[0];
+        }
+
+        public IDirection[] GetDirections(float amount)
+        {
+            return new RecipeDirection[0];
+        }
+
+        public INutritionInfo[] GetNutritions(float amount)
+        {
+            return new NutritionInfo[0];
         }
     }
 }

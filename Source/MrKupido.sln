@@ -29,6 +29,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.Processor", "MrKupido.Processor\MrKupido.Processor.csproj", "{B6B63F3C-1D38-4AF5-94AE-55B2160A61FE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.Patcher", "MrKupido.Patcher\MrKupido.Patcher.csproj", "{8FEC2D94-732E-4C80-87C0-CD34BF2E5814}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B6B63F3C-1D38-4AF5-94AE-55B2160A61FE} = {B6B63F3C-1D38-4AF5-94AE-55B2160A61FE}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mono.Cecil", "Cecil\Mono.Cecil.csproj", "{D68133BD-1E63-496E-9EDE-4FBDBF77B486}"
 EndProject

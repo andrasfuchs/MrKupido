@@ -10,7 +10,7 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "hozzávalók")]
     [NameAlias("eng", "ingredients")]
 
-    public class IngredientBase : IIngredient
+    public class IngredientBase : MarshalByRefObject, IIngredient
     {
         private static Dictionary<string,object> staticInfoObjects = new Dictionary<string,object>();
 

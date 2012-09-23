@@ -57,6 +57,8 @@
     <Compile Include="Model\IngredientTreeNode.cs" />
     <Compile Include="Model\NatureNodeType.cs" />
     <Compile Include="Model\NatureTreeNode.cs" />
+    <Compile Include="Model\NutritionInfo.cs" />
+    <Compile Include="Model\RecipeDirection.cs" />
     <Compile Include="Model\RecipeMethod.cs" />
     <Compile Include="Model\RecipeTreeNode.cs" />
     <Compile Include="Model\TreeNode.cs" />

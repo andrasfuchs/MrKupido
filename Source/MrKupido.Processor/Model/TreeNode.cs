@@ -53,7 +53,7 @@ namespace MrKupido.Processor.Model
             return root;
         }
 
-        public static T BuildTree<T>(Assembly[] assemblies, Func<Type, T> t2tn, Type rootType) where T : TreeNode
+        public static T BuildTree<T>(Assembly[] assemblies, Func<Type, T> t2tn, Type rootType, Type excludeType = null) where T : TreeNode
         {
             T root = null;
 
@@ -62,7 +62,7 @@ namespace MrKupido.Processor.Model
 
             foreach (Assembly currentAssembly in assemblies)
             {
-                nodeClasses.AddRange(currentAssembly.GetTypes().Where(t => (t.IsClass) && ((t.IsSubclassOf(rootType)) || (t == rootType))).ToArray());
+                nodeClasses.AddRange(currentAssembly.GetTypes().Where(t => (t.IsClass) && ((t.IsSubclassOf(rootType)) || (t == rootType)) && ((excludeType == null) || (!t.IsSubclassOf(excludeType)))).ToArray());
             }
 
             foreach (Type nodeClass in nodeClasses)

@@ -35,20 +35,22 @@ namespace MrKupido.Library.Recipe
             return result;
         }
 
-        public static object InterceptionMethod(object returnedObject)
-        {
-            return returnedObject;
-        }
-
         public static new PreparedIngredients Prepare(float amount, EquipmentGroup eg)
         {
-            object l1 = new Liszt(10.0f * amount);
-            object l2 = InterceptionMethod(new Liszt(20.0f * amount));
-
             PreparedIngredients result = new PreparedIngredients();
 
             Kes knife = eg.Use<Kes>();
+
+            // original
             IIngredient csirkemell = knife.Feldarabolni(new Csirkemell(500.0f * amount), 50.0f);
+
+            // patched
+            //IIngredient method01param01 = new Csirkemell(500.0f * amount);
+            //float method01param02 = 50.0f;
+
+            //IIngredient csirkemell = knife.Feldarabolni(method01param01, method01param02);
+            //MrKupido.Processor.RecipeAnalyzer.DirectionGenerator("MrKupido.Library.Equipment.Kes::Feldarabolni", csirkemell, method01param01, method01param02);
+
             Kez kez = eg.Use<Kez>();
             csirkemell = kez.Raszorni(csirkemell, new So(5.0f * amount));
 
@@ -57,7 +59,7 @@ namespace MrKupido.Library.Recipe
             csirkemell = kez.Megforgatni(csirkemell, fuszeresliszt);
 
             IngredientGroup hagyma = knife.Felkarikazni(new Hagyma(1.0f * amount, MeasurementUnit.piece), 5.0f);
-            IngredientGroup tejfol = fakanal.Osszekeverni(new NapraforgoOlaj(0.1f * amount), new Tejfol(0.2f * amount));
+            IngredientGroup tejfol = fakanal.Osszekeverni(new Tejfol(0.2f * amount), new NapraforgoOlaj(0.1f * amount));
 
             Reszelo reszelo = eg.Use<Reszelo>();
             IngredientGroup sajt = reszelo.Lereszelni(new Sajt(100.0f * amount));

@@ -9,6 +9,7 @@ using MrKupido.Library.Recipe;
 
 namespace MrKupido.Processor.Model
 {
+    [Obsolete]
     public class RecipeMethod
     {
         public System.Reflection.MethodInfo Original { get; private set; }

@@ -18,7 +18,7 @@ namespace MrKupido.Web.Controllers
 
         public ActionResult Details(string id)
         {
-            object[] result = new object[2];
+            object[] result = new object[7];
 
             Recipe recipe = db.Recipes.Where(r => r.UniqueNameHun == id).FirstOrDefault();
 
@@ -29,10 +29,13 @@ namespace MrKupido.Web.Controllers
             Cache.Recipe.Initialize();
             RecipeTreeNode rtn = Cache.Recipe[recipe.ClassName];
             result[0] = rtn;
+            result[1] = rtn.GetTags();
+            result[2] = rtn.GetEquipments(1.0f);
+            result[3] = rtn.GetIngredients(1.0f);
+            result[4] = rtn.GetDirections(1.0f);
+            result[5] = rtn.GetNutritions(1.0f);
 
-            RecipeAnalyzer ra = new RecipeAnalyzer(rtn.ClassType, 1.0f);
-            IIngredient[] ingredients = ra.GenerateIngredients();
-            result[1] = ingredients;
+            rtn.Prepare(1.0f, rtn.SelectEquipment(1.0f));
 
             RecipeTreeNode inlineSajt = Cache.Recipe.RenderInline("FuszeresCsirkemell", new string[] { "Sajt" });
 
