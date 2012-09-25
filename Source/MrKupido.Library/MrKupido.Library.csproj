@@ -165,7 +165,6 @@
     <Compile Include="Ingredient\Tej.cs" />
     <Compile Include="Ingredient\Tojas.cs" />
     <Compile Include="Ingredient\Viz.cs" />
-    <Compile Include="Model\Instruction.cs" />
     <Compile Include="Interfaces\IRecipe.cs" />
     <Compile Include="Enums\MeasurementUnit.cs" />
     <Compile Include="Nature\Animalia.cs" />

@@ -25,6 +25,7 @@ namespace MrKupido.Processor.Model
         public ServeDelegate Serve;
 
         private Dictionary<float, IIngredient[]> ingredientCache = new Dictionary<float, IIngredient[]>();
+        private Dictionary<float, IDirection[]> directionCache = new Dictionary<float, IDirection[]>();
 
         public Type RecipeType { get; private set; }
 
@@ -81,7 +82,12 @@ namespace MrKupido.Processor.Model
 
         public IDirection[] GetDirections(float amount)
         {
-            return new RecipeDirection[0];
+            if (!directionCache.ContainsKey(amount))
+            {
+                directionCache.Add(amount, RecipeAnalyzer.GenerateDirections(this, 1.0f));
+            }
+
+            return directionCache[amount];
         }
 
         public INutritionInfo[] GetNutritions(float amount)

@@ -41,15 +41,7 @@ namespace MrKupido.Library.Recipe
 
             Kes knife = eg.Use<Kes>();
 
-            // original
             IIngredient csirkemell = knife.Feldarabolni(new Csirkemell(500.0f * amount), 50.0f);
-
-            // patched
-            //IIngredient method01param01 = new Csirkemell(500.0f * amount);
-            //float method01param02 = 50.0f;
-
-            //IIngredient csirkemell = knife.Feldarabolni(method01param01, method01param02);
-            //MrKupido.Processor.RecipeAnalyzer.DirectionGenerator("MrKupido.Library.Equipment.Kes::Feldarabolni", csirkemell, method01param01, method01param02);
 
             Kez kez = eg.Use<Kez>();
             csirkemell = kez.Raszorni(csirkemell, new So(5.0f * amount));
@@ -81,24 +73,24 @@ namespace MrKupido.Library.Recipe
             tepsi.Berakni(preps["csirkemell"]);
 
             Kez kez = eg.Use<Kez>();
-            tepsi.Contents = kez.Raszorni(tepsi.Contents, new Liszt(10.0f * amount));
-            tepsi.Contents = kez.Rarakni(tepsi.Contents, preps["hagyma"]);
-            tepsi.Contents = kez.Ralocsolni(tepsi.Contents, preps["tejfol"]);
-            tepsi.Contents = kez.Raszorni(tepsi.Contents, preps["sajt"]);
+            //tepsi.Contents = kez.Raszorni(tepsi.Contents, new Liszt(10.0f * amount));
+            //tepsi.Contents = kez.Rarakni(tepsi.Contents, preps["hagyma"]);
+            //tepsi.Contents = kez.Ralocsolni(tepsi.Contents, preps["tejfol"]);
+            //tepsi.Contents = kez.Raszorni(tepsi.Contents, preps["sajt"]);
             Alufolia alufolia = new Alufolia(29.0f, 1000.0f);
             tepsi.Lefedni(alufolia);
 
-            Suto suto = eg.Use<Suto>();
-            suto.Homerseklet(200);
-            suto.Behelyezni(tepsi);
-            suto.Varni(30);
+            //Suto suto = eg.Use<Suto>();
+            //suto.Homerseklet(200);
+            //suto.Behelyezni(tepsi);
+            //suto.Varni(30);
 
-            tepsi = suto.Kiemelni<Tepsi>();
-            tepsi.FedotLevenni();
+            //tepsi = suto.Kiemelni<Tepsi>();
+            //tepsi.FedotLevenni();
 
-            suto.Behelyezni(tepsi);
-            suto.Varni(10);
-            tepsi = suto.Kiemelni<Tepsi>();
+            //suto.Behelyezni(tepsi);
+            //suto.Varni(10);
+            //tepsi = suto.Kiemelni<Tepsi>();
 
             cfp.Add("csirke", tepsi.Contents);
 

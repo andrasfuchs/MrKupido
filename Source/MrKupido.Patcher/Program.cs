@@ -48,8 +48,26 @@ namespace MrKupido.Patcher
 
             AssemblyDefinition interAD = AssemblyDefinition.ReadAssembly(args[1]);
             TypeDefinition interTD = interAD.MainModule.GetType(args[2]);
+            if (interTD == null)
+            {
+                Console.WriteLine("The type '{0}' was not found in assembly '{1}'.", args[2], args[1]);
+                return -6;
+            }
+
             MethodDefinition newIngredientMD = interTD.Methods.FirstOrDefault(m => m.Name == args[3]);
+            if (newIngredientMD == null)
+            {
+                Console.WriteLine("The method '{0}' was not found in type '{1}' and assembly '{2}'.", args[3], args[2], args[1]);
+                return -7;
+            }
+
             MethodDefinition directionGeneratorMD = interTD.Methods.FirstOrDefault(m => m.Name == args[4]);
+            if (directionGeneratorMD == null)
+            {
+                Console.WriteLine("The method '{0}' was not found in type '{1}' and assembly '{2}'.", args[4], args[2], args[1]);
+                return -8;
+            }
+
 
             Console.Write("Patching...");
             PatchAssembly(patchAD, newIngredientMD, directionGeneratorMD);
@@ -103,6 +121,7 @@ namespace MrKupido.Patcher
                     }
                 }
 
+                #region Direction Generator
                 if (instr.OpCode.Code == Mono.Cecil.Cil.Code.Callvirt)
                 {
                     MethodReference mr = (Mono.Cecil.MethodReference)instr.Operand;
@@ -130,80 +149,86 @@ namespace MrKupido.Patcher
                         i = md.Body.Instructions.IndexOf(instr);
 
 
-                        Mono.Cecil.Cil.VariableDefinition result = null;
-
-                        if (mr.ReturnType != null)
+                        if (mr.ReturnType.FullName == "System.Void") // NOTE: test only
                         {
-                            result = new Mono.Cecil.Cil.VariableDefinition(mr.ReturnType);
-                            md.Body.Variables.Add(result);
 
-                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Stloc_S, result);
-                            processor.InsertBefore(instrNext, ii);
+                            Mono.Cecil.Cil.VariableDefinition result = null;
 
-                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldloc_S, result);
-                            processor.InsertBefore(instrNext, ii);
-                        }
-
-                        ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldc_I4, mr.Parameters.Count);
-                        processor.InsertBefore(instrNext, ii);
-
-                        ii = processor.Create(Mono.Cecil.Cil.OpCodes.Newarr, directionGeneratorMD.Parameters[2].ParameterType.GetElementType());
-                        processor.InsertBefore(instrNext, ii);
-
-                        Mono.Cecil.Cil.VariableDefinition arrayVar = new Mono.Cecil.Cil.VariableDefinition(directionGeneratorMD.Parameters[2].ParameterType);
-                        md.Body.Variables.Add(arrayVar);
-
-                        ii = processor.Create(Mono.Cecil.Cil.OpCodes.Stloc_S, arrayVar);
-                        processor.InsertBefore(instrNext, ii);
-
-
-                        for (int j = 0; j < mr.Parameters.Count; j++)
-                        {
-                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldloc_S, arrayVar);
-                            processor.InsertBefore(instrNext, ii);
-
-                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldc_I4, j);
-                            processor.InsertBefore(instrNext, ii);
-
-                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldloc_S, nvs[j]);
-                            processor.InsertBefore(instrNext, ii);
-
-                            // do the boxing if necessary
-                            if (nvs[j].VariableType.IsValueType)
+                            if (mr.ReturnType.FullName != "System.Void")
                             {
-                                ii = processor.Create(Mono.Cecil.Cil.OpCodes.Box, nvs[j].VariableType);
+                                result = new Mono.Cecil.Cil.VariableDefinition(mr.ReturnType);
+                                md.Body.Variables.Add(result);
+
+                                ii = processor.Create(Mono.Cecil.Cil.OpCodes.Stloc_S, result);
+                                processor.InsertBefore(instrNext, ii);
+
+                                ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldloc_S, result);
                                 processor.InsertBefore(instrNext, ii);
                             }
 
-                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Stelem_Ref);
+                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldc_I4, mr.Parameters.Count);
                             processor.InsertBefore(instrNext, ii);
-                        }
 
-
-
-                        ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldstr, mr.DeclaringType.FullName + " " + mr.Name);
-                        processor.InsertBefore(instrNext, ii);
-
-                        if (mr.ReturnType != null)
-                        {
-                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldloc_S, result);
+                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Newarr, directionGeneratorMD.Parameters[2].ParameterType.GetElementType());
                             processor.InsertBefore(instrNext, ii);
-                        }
-                        else
-                        {
-                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldnull);
+
+                            Mono.Cecil.Cil.VariableDefinition arrayVar = new Mono.Cecil.Cil.VariableDefinition(directionGeneratorMD.Parameters[2].ParameterType);
+                            md.Body.Variables.Add(arrayVar);
+
+                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Stloc_S, arrayVar);
                             processor.InsertBefore(instrNext, ii);
+
+
+                            for (int j = 0; j < mr.Parameters.Count; j++)
+                            {
+                                ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldloc_S, arrayVar);
+                                processor.InsertBefore(instrNext, ii);
+
+                                ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldc_I4, j);
+                                processor.InsertBefore(instrNext, ii);
+
+                                ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldloc_S, nvs[j]);
+                                processor.InsertBefore(instrNext, ii);
+
+                                // do the boxing if necessary
+                                if (nvs[j].VariableType.IsValueType)
+                                {
+                                    ii = processor.Create(Mono.Cecil.Cil.OpCodes.Box, nvs[j].VariableType);
+                                    processor.InsertBefore(instrNext, ii);
+                                }
+
+                                ii = processor.Create(Mono.Cecil.Cil.OpCodes.Stelem_Ref);
+                                processor.InsertBefore(instrNext, ii);
+                            }
+
+
+
+                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldstr, mr.DeclaringType.FullName + " " + mr.Name);
+                            processor.InsertBefore(instrNext, ii);
+
+                            if (mr.ReturnType.FullName != "System.Void")
+                            {
+                                ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldloc_S, result);
+                                processor.InsertBefore(instrNext, ii);
+                            }
+                            else
+                            {
+                                ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldnull);
+                                processor.InsertBefore(instrNext, ii);
+                            }
+
+                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldloc_S, arrayVar);
+                            processor.InsertBefore(instrNext, ii);
+
+                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Call, directionGeneratorMD);
+                            processor.InsertBefore(instrNext, ii);
+
+                            i = md.Body.Instructions.IndexOf(instrNext) - 1;
+
                         }
-
-                        ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldloc_S, arrayVar);
-                        processor.InsertBefore(instrNext, ii);
-
-                        ii = processor.Create(Mono.Cecil.Cil.OpCodes.Call, directionGeneratorMD);
-                        processor.InsertBefore(instrNext, ii);
-
-                        i = md.Body.Instructions.IndexOf(instrNext) - 1;
                     }
                 }
+                #endregion
 
             }
         }

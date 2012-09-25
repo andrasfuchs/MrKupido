@@ -69,7 +69,8 @@ namespace MrKupido.Library.Ingredient
 
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder(base.ToString());
+            //StringBuilder sb = new StringBuilder(base.ToString());
+            StringBuilder sb = new StringBuilder(Name);
 
             if (ingredients.Count() > 0)
             {

@@ -15,24 +15,14 @@ namespace MrKupido.Processor
     public class RecipeAnalyzer
     {
         private static List<IngredientBase> ingredients = new List<IngredientBase>();
+        private static List<RecipeDirection> directions = new List<RecipeDirection>();
+        private static RecipeStage stage = RecipeStage.Unknown;
 
         public static IIngredient[] GenerateIngredients(RecipeTreeNode rtn, float amount)
         {
             ingredients.Clear();
 
-            if (rtn.SelectEquipment != null)
-            {
-                EquipmentGroup eg = rtn.SelectEquipment(amount);
-                if (rtn.Prepare != null)
-                {
-                    PreparedIngredients preps = rtn.Prepare(amount, eg);
-                    if (rtn.Cook != null)
-                    {
-                        CookedFoodParts cfp = rtn.Cook(amount, preps, eg);
-                        if (rtn.Serve != null) rtn.Serve(amount, cfp, eg);
-                    }
-                }
-            }
+            RunRecipe(rtn, amount);
             
             return ingredients.ToArray();
         }
@@ -54,14 +44,16 @@ namespace MrKupido.Processor
 
         public static void DirectionGenerator(string methodFullName, object result, params object[] parameters)
         {
-            return;
+            directions.Add(new RecipeDirection(methodFullName, parameters, result, stage));
         }
 
-        public Instruction[] GenerateIntructions()
+        public static RecipeDirection[] GenerateDirections(RecipeTreeNode rtn, float amount)
         {
-            List<Instruction> result = new List<Instruction>();
+            directions.Clear();
+            
+            RunRecipe(rtn, amount);
 
-            return result.ToArray();
+            return directions.ToArray();
         }
 
         public static IEquipment[] EquipmentNeeded()
@@ -76,6 +68,31 @@ namespace MrKupido.Processor
             List<string> result = new List<string>();
 
             return result.ToArray();
+        }
+
+        private static void RunRecipe(RecipeTreeNode rtn, float amount)
+        {
+            if (rtn.SelectEquipment != null)
+            {
+                stage = RecipeStage.EquipmentSelection;
+                EquipmentGroup eg = rtn.SelectEquipment(amount);
+                if (rtn.Prepare != null)
+                {
+                    stage = RecipeStage.Preparation;
+                    PreparedIngredients preps = rtn.Prepare(amount, eg);
+                    if (rtn.Cook != null)
+                    {
+                        stage = RecipeStage.Cooking;
+                        CookedFoodParts cfp = rtn.Cook(amount, preps, eg);
+                        if (rtn.Serve != null)
+                        {
+                            stage = RecipeStage.Serving;
+                            rtn.Serve(amount, cfp, eg);
+                        }
+                    }
+                }
+            }
+
         }
     }
 }

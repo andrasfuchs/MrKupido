@@ -164,39 +164,47 @@ namespace MrKupido.Library.Ingredient
         public override string ToString()
         {
             string amountStr = "";
-            float amount = GetAmount();
 
-            switch (Unit)
+            try
             {
-                case MeasurementUnit.piece:
-                    amountStr = (amount).ToString("0") + " db";
-                    break;
+                float amount = GetAmount();
 
-                case MeasurementUnit.portion:
-                    amountStr = (amount).ToString("0") + " adag";
-                    break;
+                switch (Unit)
+                {
+                    case MeasurementUnit.piece:
+                        amountStr = (amount).ToString("0") + " db";
+                        break;
 
-                case MeasurementUnit.gramm:
-                    if (amount >= 1000) amountStr = (amount / 1000).ToString("0.0") + " kg";
-                    else if (amount >= 100) amountStr = (amount / 10).ToString("0") + " dkg";
-                    else if (amount >= 10) amountStr = (amount / 10).ToString("0.0") + " dkg";
-                    else amountStr = (amount).ToString("0") + " g";
-                    break;
+                    case MeasurementUnit.portion:
+                        amountStr = (amount).ToString("0") + " adag";
+                        break;
 
-                case MeasurementUnit.liter:
-                    if (amount >= 1) amountStr = (amount).ToString("0.0") + " l";
-                    else if (amount >= 0.1) amountStr = (amount * 10).ToString("0") + " dl";
-                    else if (amount >= 0.01) amountStr = (amount * 10).ToString("0.0") + " dl";
-                    else amountStr = (amount * 100).ToString("0") + " cl";
-                    break;
+                    case MeasurementUnit.gramm:
+                        if (amount >= 1000) amountStr = (amount / 1000).ToString("0.0") + " kg";
+                        else if (amount >= 100) amountStr = (amount / 10).ToString("0") + " dkg";
+                        else if (amount >= 10) amountStr = (amount / 10).ToString("0.0") + " dkg";
+                        else amountStr = (amount).ToString("0") + " g";
+                        break;
 
-                default: 
-                    break;
+                    case MeasurementUnit.liter:
+                        if (amount >= 1) amountStr = (amount).ToString("0.0") + " l";
+                        else if (amount >= 0.1) amountStr = (amount * 10).ToString("0") + " dl";
+                        else if (amount >= 0.01) amountStr = (amount * 10).ToString("0.0") + " dl";
+                        else amountStr = (amount * 100).ToString("0") + " cl";
+                        break;
+
+                    default:
+                        break;
+                }
+
+                if (amount > 0) amountStr += " ";
+            }
+            catch (AmountUnknownException)
+            { 
+                // NOTE: that's fine for now, we do not calculate the amount for ingredient groups for the moment
             }
 
-            if (amount <= 0) amountStr = "";
-
-            return amountStr + " " + Name;
+            return amountStr + Name;
         }
     }
 }
