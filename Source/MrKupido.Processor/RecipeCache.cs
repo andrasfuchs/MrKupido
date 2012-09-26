@@ -28,6 +28,8 @@ namespace MrKupido.Processor
 
         public void Initialize()
         {
+            if (ri != null) return;
+
             // check if the assemblies are patched already and they are up-to-date
             List<Assembly> assembliesToCheck = new List<Assembly>();
             foreach (Assembly ass in AppDomain.CurrentDomain.GetAssemblies())

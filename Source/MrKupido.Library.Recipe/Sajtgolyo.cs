@@ -50,7 +50,7 @@ namespace MrKupido.Library.Recipe
             tuzhely.Behelyezni(labas);
             tuzhely.Homerseklet(350);
             labas.Varni(20);
-            labas = tuzhely.Kiemelni<Labas>();
+            labas = (Labas)tuzhely.Kiemelni(typeof(Labas));
             labas.FolyadekotLeonteni();
 
             IIngredient burgonya = labas.Kivenni();

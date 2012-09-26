@@ -11,13 +11,13 @@ namespace MrKupido.Library.Equipment
 
     public class Kez : Tool
     {
-        [NameAlias("hun", "gyúrd össze a következőket: ({*}, )")]
+        [NameAlias("hun", "gyúrd össze a következőket: ({0*}, )")]
         public IngredientGroup Osszegyurni(params IIngredient[] ingredients)
         {
             return new IngredientGroup(ingredients);
         }
 
-        [NameAlias("hun", "gyúrd golyóvá a {0T}")]
+        [NameAlias("hun", "gyúrd golyóvá a(z) {0T}")]
         public IIngredient GolyovaGyurni(IIngredient i)
         {
             if ((!(i is IngredientBase)) || (i.Unit != MeasurementUnit.gramm)) throw new InvalidActionForIngredientException("GolyovaGyurni", i.Name, i.Unit);
@@ -27,7 +27,7 @@ namespace MrKupido.Library.Equipment
             return i;
         }
 
-        [NameAlias("hun", "szaggass {1} grammos darabokat a {0B}")]
+        [NameAlias("hun", "szaggass {1} grammos darabokat a(z) {0B}")]
         public IngredientGroup Kiszaggatni(IIngredient i, float weight)
         {
             if ((!(i is IngredientBase)) || (i.Unit != MeasurementUnit.gramm)) throw new InvalidActionForIngredientException("Kiszaggatni", i.Name, i.Unit);
@@ -48,7 +48,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "csepegtesd le a {0T}")]
         public IIngredient Lecsepegtetni(IIngredient i) { return i; }
 
-        [NameAlias("hun", "szórd rá a {1T} a {0R}")]
+        [NameAlias("hun", "szórd rá a(z) {1T} a(z) {0R}")]
         public IIngredient Raszorni(IIngredient iOn, IIngredient i)
         {
             if (i.Unit != MeasurementUnit.gramm) throw new InvalidActionForIngredientException("Raszorni", i.Name, i.Unit);
@@ -56,7 +56,7 @@ namespace MrKupido.Library.Equipment
             return new IngredientGroup(new IIngredient[] { iOn, i });
         }
 
-        [NameAlias("hun", "rakd rá a {1T} a {0R}")]
+        [NameAlias("hun", "rakd rá a(z) {1T} a(z) {0R}")]
         public IIngredient Rarakni(IIngredient iOnTo, IIngredient i)
         {
             if (i.Unit != MeasurementUnit.piece) throw new InvalidActionForIngredientException("Rarakni", i.Name, i.Unit);
@@ -64,7 +64,7 @@ namespace MrKupido.Library.Equipment
             return new IngredientGroup(new IIngredient[] { iOnTo, i });
         }
 
-        [NameAlias("hun", "locsold rá a {1T} a {0R}")]
+        [NameAlias("hun", "locsold rá a(z) {1T} a(z) {0R}")]
         public IIngredient Ralocsolni(IIngredient iOn, IIngredient i)
         {
             if (i.Unit != MeasurementUnit.liter) throw new InvalidActionForIngredientException("Lelocsolni", i.Name, i.Unit);
@@ -72,17 +72,17 @@ namespace MrKupido.Library.Equipment
             return new IngredientGroup(new IIngredient[] { iOn, i });
         }
 
-        [NameAlias("hun", "forgasd meg a {1T} a {0N}")]
+        [NameAlias("hun", "forgasd meg a(z) {0T} a(z) {1N}")]
         public IIngredient Megforgatni(IIngredient i, IIngredient iIn)
         {
             if (i.Unit != MeasurementUnit.gramm) throw new InvalidActionForIngredientException("Megforgatni", i.Name, i.Unit);
 
             // TODO: a small amount of i must be separated
 
-            return new IngredientGroup(new IIngredient[] { iIn, i });
+            return new IngredientGroup(new IIngredient[] { i, iIn });
         }
 
-        [NameAlias("hun", "tálald a {0T} a {1N}")]
+        [NameAlias("hun", "tálald a(z) {0T} a(z) {1N}")]
         public void Talalni(IIngredient i, IEquipment container) { }
     }
 }

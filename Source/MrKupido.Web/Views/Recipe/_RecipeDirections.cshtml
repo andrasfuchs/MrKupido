@@ -1,0 +1,15 @@
+﻿@model MrKupido.Library.IDirection[]
+<ul>
+    @{ TimeSpan time = new TimeSpan();
+    foreach (MrKupido.Library.IDirection dir in Model)
+    {
+        time = time + dir.TimeToComplete;
+        <li>
+        <span class="stage">@dir.Stage</span>
+        <span class="time">@Math.Floor(time.TotalHours).ToString("00"):@time.Minutes.ToString("00")</span>
+        <span class="direction">@dir</span>
+        </li>
+        <br />
+    }
+    }
+</ul>

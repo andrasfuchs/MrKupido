@@ -244,6 +244,33 @@ details h2
     text-align: center;
 }
 
+details#recipe h2
+{
+    font-size: 44px;
+    font-family: TangerineBold, Sans-Serif;
+    color: /*mcd*/#553e31;
+    text-align: center;
+    margin-top: -8px;
+    margin-bottom: 35px;
+    background: url('../Content/svg/h1_bg.svg') 0 0 repeat-y;
+    /*background: url('../Content/images/h1_bg.png') 0 0 repeat-y;*/
+    background-position: center;
+}
+
+details#recipe h3
+{
+    font-size: 26px;
+    font-family: Tangerine, Sans-Serif;
+    color: /*mcd*/#553e31;
+    
+    float: right;
+    width: auto;
+    
+    text-align: right;
+    margin: -70px 10px 10px 0px;
+}
+
+
 details ul 
 {    
     float: left;
@@ -366,6 +393,16 @@ details li
     display: list-item; 
     float: left;
     width: 270px;
+    margin: 0px 5px 15px 5px;
+    border: 1px solid /*mcm*/#cdb8ab;
+    border-radius: 5px;
+}
+
+details#recipe li 
+{
+    display: list-item; 
+    float: left;
+    width: auto;
     margin: 0px 5px 15px 5px;
     border: 1px solid /*mcm*/#cdb8ab;
     border-radius: 5px;
@@ -608,6 +645,10 @@ footer p
 hr 
 {
     clear: both;
+
+    border: 0;
+    height: 20px;
+    margin: 1em 0;
 }
 
 table.wide
@@ -846,13 +887,13 @@ div#recipelist select
     margin: 10px;
 }
 
-div#ingredientlist
+details#formatingredients div#ingredientlist
 {
     float: right;
     width: 380px;
 }
 
-div#ingredientlist textarea
+details#formatingredients div#ingredientlist textarea
 {
     width: 360px;
     height: 105px;

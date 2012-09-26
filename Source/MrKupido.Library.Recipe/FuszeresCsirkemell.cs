@@ -70,27 +70,28 @@ namespace MrKupido.Library.Recipe
             CookedFoodParts cfp = new CookedFoodParts();
 
             Tepsi tepsi = eg.Use<Tepsi>();
-            tepsi.Berakni(preps["csirkemell"]);
+            tepsi.Berakni((IngredientBase)preps["csirkemell"]);
+            uint time = tepsi.LastActionDuration;
 
             Kez kez = eg.Use<Kez>();
-            //tepsi.Contents = kez.Raszorni(tepsi.Contents, new Liszt(10.0f * amount));
-            //tepsi.Contents = kez.Rarakni(tepsi.Contents, preps["hagyma"]);
-            //tepsi.Contents = kez.Ralocsolni(tepsi.Contents, preps["tejfol"]);
-            //tepsi.Contents = kez.Raszorni(tepsi.Contents, preps["sajt"]);
+            tepsi.Contents = kez.Raszorni(tepsi.Contents, new Liszt(10.0f * amount));
+            tepsi.Contents = kez.Rarakni(tepsi.Contents, preps["hagyma"]);
+            tepsi.Contents = kez.Ralocsolni(tepsi.Contents, preps["tejfol"]);
+            tepsi.Contents = kez.Raszorni(tepsi.Contents, preps["sajt"]);
             Alufolia alufolia = new Alufolia(29.0f, 1000.0f);
             tepsi.Lefedni(alufolia);
 
-            //Suto suto = eg.Use<Suto>();
-            //suto.Homerseklet(200);
-            //suto.Behelyezni(tepsi);
-            //suto.Varni(30);
+            Suto suto = eg.Use<Suto>();
+            suto.Homerseklet(200);
+            suto.Behelyezni(tepsi);
+            suto.Varni(30);
 
-            //tepsi = suto.Kiemelni<Tepsi>();
-            //tepsi.FedotLevenni();
+            tepsi = (Tepsi)suto.Kiemelni(typeof(Tepsi));
+            tepsi.FedotLevenni();
 
-            //suto.Behelyezni(tepsi);
-            //suto.Varni(10);
-            //tepsi = suto.Kiemelni<Tepsi>();
+            suto.Behelyezni(tepsi);
+            suto.Varni(10);
+            tepsi = (Tepsi)suto.Kiemelni(typeof(Tepsi));
 
             cfp.Add("csirke", tepsi.Contents);
 

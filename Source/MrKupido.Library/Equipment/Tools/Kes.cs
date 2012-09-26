@@ -11,6 +11,7 @@ namespace MrKupido.Library.Equipment
 
     public class Kes : Tool
     {
+        [NameAlias("hun", "darabold fel a(z) {0T} {1} grammos darabokra")]
         public IngredientGroup Feldarabolni(IIngredient i, float weight)
         {
             if ((!(i is IngredientBase))  || (i.Unit != MeasurementUnit.gramm)) throw new InvalidActionForIngredientException("Feldarabolni", i.Name, i.Unit);
@@ -28,6 +29,7 @@ namespace MrKupido.Library.Equipment
             return new IngredientGroup(result.ToArray());
         }
 
+        [NameAlias("hun", "karikázd fel a(z) {0T} {1} grammos darabokra")]
         public IngredientGroup Felkarikazni(IIngredient i, float weight)
         {
             if ((!(i is IngredientBase)) || (i.Unit != MeasurementUnit.piece)) throw new InvalidActionForIngredientException("Felkarikazni", i.Name, i.Unit);

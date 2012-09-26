@@ -78,6 +78,7 @@
                 @*@{ Html.RenderPartial("_RecipeTags", Model[1]); }*@
             </div>
         </div>
+        <hr />
         <div id="equipmentlist">
             <h2>
                 Szükséges eszközök</h2>
@@ -86,6 +87,7 @@
                 @*@{ Html.RenderPartial("_RecipeEquipments", (MrKupido.Library.IEquipment[])Model[2]); }*@
             </div>
         </div>
+        <hr />
         <div id="ingredientlist">
             <h2>
                 Hozzávalók</h2>
@@ -94,14 +96,16 @@
                 @{ Html.RenderPartial("_RecipeIngredients", (MrKupido.Library.IIngredient[])Model[3]); }
             </div>
         </div>
+        <hr />
         <div id="directionlist">
             <h2>
                 Elkészítés</h2>
             <h3>(egyedül)</h3>
             <div id="_RecipeDirections">
-                @*@{ Html.RenderPartial("_RecipeDirections", (MrKupido.Library.IDirection[])Model[4]); }*@
+                @{ Html.RenderPartial("_RecipeDirections", (MrKupido.Library.IDirection[])Model[4]); }
             </div>
         </div>
+        <hr />
         <div id="serving">
             <h2>
                 Tálalás</h2>
@@ -109,6 +113,7 @@
                 @*@{ Html.RenderPartial("_RecipeServing", (MrKupido.Library.EquipmentGroup)Model[5]); }*@
             </div>
         </div>
+        <hr />
         <div id="nutritionlist">
             <h2>
                 Tápanyag táblázat (1 főre)</h2>

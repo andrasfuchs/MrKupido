@@ -35,7 +35,7 @@ namespace MrKupido.Web.Controllers
             result[4] = rtn.GetDirections(1.0f);
             result[5] = rtn.GetNutritions(1.0f);
 
-            RecipeTreeNode inlineSajt = Cache.Recipe.RenderInline("FuszeresCsirkemell", new string[] { "Sajt" });
+            //RecipeTreeNode inlineSajt = Cache.Recipe.RenderInline("FuszeresCsirkemell", new string[] { "Sajt" });
 
             return View(result);
         }

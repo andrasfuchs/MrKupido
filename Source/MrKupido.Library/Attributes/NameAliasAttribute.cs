@@ -60,5 +60,42 @@ namespace MrKupido.Library.Attributes
         {
             return objType.GetCustomAttributes(false).Where(na => (na is NameAliasAttribute) && ((NameAliasAttribute)na).CultureName == languageISOCode).Cast<NameAliasAttribute>().ToArray();
         }
+
+        public static string GetMethodName(Type objType, string methodName)
+        {
+            string result = null;
+            int priority = Int32.MaxValue;
+
+            System.Reflection.MethodInfo mi = objType.GetMethod(methodName);
+
+            foreach (object attr in mi.GetCustomAttributes(false))
+            {
+                if (attr is NameAliasAttribute)
+                {
+                    NameAliasAttribute name = (NameAliasAttribute)attr;
+
+                    if (name.CultureName == Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName)
+                    {
+                        if (name.Priority == priority)
+                        {
+                            throw new MrKupidoException("Class '{0}' has more then one name alias with the same priority.", objType.Name);
+                        }
+
+                        if (name.Priority < priority)
+                        {
+                            result = name.Name;
+                            priority = name.Priority;
+                        }
+                    }
+                }
+            }
+
+            if (String.IsNullOrEmpty(result))
+            {
+                Trace.TraceWarning("Class '{0}' has no name defined in culture '{1}'.", objType.Name, Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName);
+            }
+
+            return result;
+        }
     }
 }

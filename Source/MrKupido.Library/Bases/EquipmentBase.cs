@@ -11,7 +11,7 @@ namespace MrKupido.Library.Equipment
 
     public class EquipmentBase : IEquipment
     {
-        public string Name
+        public virtual string Name
         {
             get
             {
@@ -21,7 +21,7 @@ namespace MrKupido.Library.Equipment
 
         public bool IsInUse { get; private set; }
 
-        public uint LastActionDuration { get; private set; }
+        public virtual uint LastActionDuration { get; private set; }
 
         public void Use()
         {

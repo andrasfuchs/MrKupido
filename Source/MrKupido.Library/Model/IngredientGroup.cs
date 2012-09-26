@@ -29,7 +29,7 @@ namespace MrKupido.Library.Ingredient
             }
         }
 
-        public string Name
+        public new string Name
         {
             get
             {

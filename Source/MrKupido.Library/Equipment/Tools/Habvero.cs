@@ -11,6 +11,7 @@ namespace MrKupido.Library.Equipment
 
     public class Habvero : Tool
     {
+        [NameAlias("hun", "verd fel a(z) {0T}")]
         public IngredientGroup Felverni(IIngredient i)
         {
             if ((!(i is IngredientBase)) || (i.Unit != MeasurementUnit.liter)) throw new InvalidActionForIngredientException("Felverni", i.Name, i.Unit);

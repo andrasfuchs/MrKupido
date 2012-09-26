@@ -42,9 +42,9 @@ namespace MrKupido.Processor
             return returnedObject;
         }
 
-        public static void DirectionGenerator(string methodFullName, object result, params object[] parameters)
+        public static void DirectionGenerator(string assemblyFullName, string methodFullName, uint actionDuration, object result, object[] parameters)
         {
-            directions.Add(new RecipeDirection(methodFullName, parameters, result, stage));
+            directions.Add(new RecipeDirection(assemblyFullName, methodFullName, parameters, result, stage, 1, actionDuration));
         }
 
         public static RecipeDirection[] GenerateDirections(RecipeTreeNode rtn, float amount)

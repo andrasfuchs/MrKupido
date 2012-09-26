@@ -11,6 +11,7 @@ namespace MrKupido.Library.Equipment
 
     public class Reszelo : Tool
     {
+        [NameAlias("hun", "reszeld le a(z) {0T}")]
         public IngredientGroup Lereszelni(IIngredient i)
         {
             if ((!(i is IngredientBase)) || (i.Unit != MeasurementUnit.gramm)) throw new InvalidActionForIngredientException("Lereszelni", i.Name, i.Unit);

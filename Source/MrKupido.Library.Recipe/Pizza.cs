@@ -64,7 +64,7 @@ namespace MrKupido.Library.Recipe
             suto.Homerseklet(200);
             suto.Behelyezni(tepsi);
             suto.Varni(30);
-            tepsi = suto.Kiemelni<Tepsi>();
+            tepsi = (Tepsi)suto.Kiemelni(typeof(Tepsi));
 
             cfp.Add("pizzaalap", tepsi.Contents);
 

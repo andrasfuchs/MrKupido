@@ -6,8 +6,8 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Equipment
 {
-    [NameAlias("hun", "berendezések")]
-    [NameAlias("eng", "devices")]
+    [NameAlias("hun", "berendezés")]
+    [NameAlias("eng", "device")]
 
     public class Device : EquipmentBase
     {
@@ -15,6 +15,7 @@ namespace MrKupido.Library.Equipment
 
         private IEquipment contents;
 
+        [NameAlias("hun", "helyezd be a(z) {B} a {0T}")]
         public void Behelyezni(IEquipment contents)
         {
             if (this.contents != null) throw new MrKupidoException("The device '{0}' already has a '{1}' in it. Remove it before putting something other in it.", this.Name, this.contents.Name);
@@ -22,13 +23,14 @@ namespace MrKupido.Library.Equipment
             this.contents = contents;
         }
 
-        public T Kiemelni<T>()
+        [NameAlias("hun", "emeld ki a(z) {K} a tartalmát")]
+        public IEquipment Kiemelni(Type equipmentType)
         {
-            if (this.contents == null) throw new MrKupidoException("The device '{0}' doesn't have a '{1}' in it.", this.Name, typeof(T).Name);
+            if (this.contents == null) throw new MrKupidoException("The device '{0}' is empty at the moment, it doesn't have a '{1}' in it.", this.Name, equipmentType.Name);
 
-            if (!(this.contents is T)) throw new MrKupidoException("The device '{0}' doesn't have a '{1}' in it. It has a '{2}' instead.", this.Name, typeof(T).Name, this.contents.Name);
+            if (!(this.contents.GetType() == equipmentType)) throw new MrKupidoException("The device '{0}' doesn't have a '{1}' in it. It has a '{2}' instead.", this.Name, equipmentType.Name, this.contents.Name);
 
-            T result = (T)this.contents;
+            IEquipment result = this.contents;
 
             this.contents = null;
 

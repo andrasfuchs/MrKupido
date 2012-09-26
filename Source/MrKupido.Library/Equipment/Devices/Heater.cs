@@ -29,18 +29,22 @@ namespace MrKupido.Library.Equipment
             this.Dimensions = new Dimensions(width, height, depth);
         }
 
+        [NameAlias("hun", "rakd be a(z) {B} a {0T}")]
         public bool Berakni(IIngredient ig)
         {
             return true;
         }
 
+        [NameAlias("hun", "vedd ki a(z) {} tartalmát")]
         public IIngredient Kivenni()
         {
             return this.Contents;
         }
 
+        [NameAlias("hun", "várj {0} percet")]
         public void Varni(int minutes) { }
 
+        [NameAlias("hun", "állítsd a(z) {} hőmérsékletét {0} fokra")]
         public void Homerseklet(int temperature) { }
     }
 }

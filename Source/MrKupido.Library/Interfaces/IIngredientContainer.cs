@@ -9,9 +9,9 @@ namespace MrKupido.Library
     {
         string Name { get; }
 
-        Dimensions Dimensions { get; set; }
+        Dimensions Dimensions { get; }
 
-        IIngredient Contents { get; set; }
+        IIngredient Contents { get; }
 
         bool Berakni(IIngredient ig);
 

@@ -11,6 +11,7 @@ namespace MrKupido.Library.Equipment
 
     public class Fakanal : Spoon
     {
+        [NameAlias("hun", "keverd össze a következőket: ({0*}, )")]
         public IngredientGroup Osszekeverni(params IIngredient[] ingredients)
         {
             return new IngredientGroup(ingredients);
