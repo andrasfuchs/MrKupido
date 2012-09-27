@@ -1,15 +1,34 @@
 ﻿@model MrKupido.Library.IDirection[]
-<ul>
-    @{ TimeSpan time = new TimeSpan();
-    foreach (MrKupido.Library.IDirection dir in Model)
-    {
-        time = time + dir.TimeToComplete;
-        <li>
-        <span class="stage">@dir.Stage</span>
-        <span class="time">@Math.Floor(time.TotalHours).ToString("00"):@time.Minutes.ToString("00")</span>
-        <span class="direction">@dir</span>
-        </li>
-        <br />
-    }
-    }
-</ul>
+@if (Model == null)
+{
+    <span>Az étel elkészítése jelenleg ismeretlen</span>
+}
+else
+{ 
+    <ul id="directions">
+        @{ TimeSpan time = new TimeSpan();
+           foreach (MrKupido.Library.IDirection dir in Model)
+           {
+               time = time + dir.TimeToComplete;
+            <li><span class="stage">
+                @if (dir.Stage == MrKupido.Library.RecipeStage.Preparation)
+                {
+                    <img runat="server" src="~/Content/svg/stage_preparation.svg"  alt="@dir.Stage" width="25px" height="70px" />
+                }
+                else if (dir.Stage == MrKupido.Library.RecipeStage.Cooking)
+                {
+                    <img runat="server" src="~/Content/svg/stage_cooking.svg"  alt="@dir.Stage" width="25px" height="70px" />
+                }
+                else if (dir.Stage == MrKupido.Library.RecipeStage.Serving)
+                {
+                    <img runat="server" src="~/Content/svg/stage_serving.svg"  alt="@dir.Stage" width="25px" height="70px" />
+                }
+            </span>
+            <span class="time">@Math.Floor(time.TotalHours).ToString("00"):@time.Minutes.ToString("00")</span> 
+            <span class="action"><img runat="server" src="~/Content/svg/action_none.svg" alt="1 perc" width="70px" height="70px" /></span> 
+                <div class="direction"><span class="directioncontent">@dir</span></div> 
+             </li>
+           }
+        }
+    </ul>
+}

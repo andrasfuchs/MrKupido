@@ -408,6 +408,46 @@ details#recipe li
     border-radius: 5px;
 }
 
+details#recipe div#directionlist li 
+{
+    display: list-item; 
+    float: left;
+    width: 880px;
+    height: 70px;
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+}
+
+details#recipe div#directionlist li span
+{    
+    display: inline-block;
+    vertical-align: middle;
+}
+
+details#recipe div#directionlist li span.time
+{    
+    margin: 0px 5px 0px 10px;
+}
+
+details#recipe div#directionlist li div.direction
+{   
+    display: table;
+    float: right;
+     
+    height: 70px;
+    width: 700px;
+}
+
+details#recipe div#directionlist li span.directioncontent
+{
+    display: table-cell;
+    
+    vertical-align: middle;
+    line-height: 25px;
+    word-wrap: break-word;
+}
+
 details li:not(.disabled):hover, details li:not(.disabled):focus
 {
     border: 1px solid /*mcd*/#553e31;

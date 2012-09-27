@@ -1,7 +1,14 @@
 ﻿@model MrKupido.Library.IIngredient[]
-<ul>
-    @foreach (MrKupido.Library.IIngredient ing in Model)
-    { 
-        <li>@ing</li>
-    }
-</ul>
+@if (Model == null)
+{
+    <span>A hozzávalók jelenleg ismeretlenek</span>
+}
+else
+{ 
+    <ul>
+        @foreach (MrKupido.Library.IIngredient ing in Model)
+        { 
+            <li>@ing</li>
+        }
+    </ul>
+}

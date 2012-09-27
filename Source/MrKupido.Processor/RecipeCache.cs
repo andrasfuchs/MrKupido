@@ -9,6 +9,7 @@ using MrKupido.Processor.Model;
 using System.Diagnostics;
 using MrKupido.Library;
 using System.Reflection.Emit;
+using System.Threading;
 
 namespace MrKupido.Processor
 {
@@ -18,11 +19,37 @@ namespace MrKupido.Processor
         private static AppDomain dynamicDomain = null;
         private static Dictionary<string, Assembly> dynamicAssemblies = new Dictionary<string, Assembly>();
         
-        public RecipeTreeNode this [string className]
+        public RecipeTreeNode this [string name]
         {
             get
             {
-                return (RecipeTreeNode)ri.GetByClassName(className);
+                RecipeTreeNode result = null;
+
+                try
+                {
+                    result = (RecipeTreeNode)ri.GetByClassName(name);
+                }
+                catch { }
+
+                if (result == null)
+                {
+                    try
+                    {
+                        result = (RecipeTreeNode)ri.GetByUniqueName(name, Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName);
+                    }
+                    catch { }
+                }
+
+                if (result == null)
+                {
+                    try
+                    {
+                        result = (RecipeTreeNode)ri.GetByName(name, Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName);
+                    }
+                    catch { }
+                }
+
+                return result;
             }
         }
 

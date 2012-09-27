@@ -161,6 +161,7 @@
     <Content Include="Content\images\ticked.png" />
     <Content Include="Content\images\tree-icons.png" />
     <Content Include="Content\images\unticked.png" />
+    <Content Include="Content\svg\action_none.svg" />
     <Content Include="Content\svg\arrow_right_light.svg" />
     <Content Include="Content\svg\avatar.svg" />
     <Content Include="Content\svg\browser_chrome.svg" />
@@ -201,11 +202,15 @@
     <Content Include="Content\svg\logo_flickr.svg" />
     <Content Include="Content\svg\logo_google.svg" />
     <Content Include="Content\svg\logo_openid.svg" />
+    <Content Include="Content\svg\logo_twitter.svg" />
     <Content Include="Content\svg\logo_wordpress.svg" />
     <Content Include="Content\svg\logo_yahoo.svg" />
     <Content Include="Content\svg\mrkupidologo.svg" />
     <Content Include="Content\svg\nutrition_sample.svg" />
     <Content Include="Content\svg\question_mark.svg" />
+    <Content Include="Content\svg\stage_cooking.svg" />
+    <Content Include="Content\svg\stage_preparation.svg" />
+    <Content Include="Content\svg\stage_serving.svg" />
     <Content Include="Content\svg\stars_00.svg" />
     <Content Include="Content\svg\stars_05.svg" />
     <Content Include="Content\svg\stars_10.svg" />

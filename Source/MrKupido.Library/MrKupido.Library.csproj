@@ -65,6 +65,7 @@
     <Compile Include="Enums\ElementCategory.cs" />
     <Compile Include="Enums\IngredientState.cs" />
     <Compile Include="Enums\RecipeStage.cs" />
+    <Compile Include="Enums\VowelHarmony.cs" />
     <Compile Include="Equipment\Containers\NyujtoDeszka.cs" />
     <Compile Include="Equipment\Containers\RoundContainer.cs" />
     <Compile Include="Equipment\Containers\RoundContainer\Labas.cs" />
