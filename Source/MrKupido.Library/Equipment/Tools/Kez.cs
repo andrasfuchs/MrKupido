@@ -39,7 +39,15 @@ namespace MrKupido.Library.Equipment
 
             for (int j = 0; j < count; j++)
             {
-                result.Add(i.GetType().DefaultConstructor(totalWeight / count, MeasurementUnit.gramm) as IngredientBase);
+                if (i is IngredientGroup)
+                {
+                    result.Add(((IngredientGroup)i).Clone(totalWeight / count, MeasurementUnit.gramm));
+                }
+                else
+                {
+                    result.Add(i.GetType().DefaultConstructor(totalWeight / count, MeasurementUnit.gramm) as IngredientBase);
+                }
+
             }
 
             return new IngredientGroup(result.ToArray());
@@ -59,7 +67,15 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "rakd rá a(z) {1T} a(z) {0R}")]
         public IIngredient Rarakni(IIngredient iOnTo, IIngredient i)
         {
-            if (i.Unit != MeasurementUnit.piece) throw new InvalidActionForIngredientException("Rarakni", i.Name, i.Unit);
+            if ((i.Unit != MeasurementUnit.piece) && (i.Unit != MeasurementUnit.gramm)) throw new InvalidActionForIngredientException("Rarakni", i.Name, i.Unit);
+
+            return new IngredientGroup(new IIngredient[] { iOnTo, i });
+        }
+
+        [NameAlias("hun", "öntsd rá a(z) {1T} a(z) {0R}")]
+        public IIngredient Raonteni(IIngredient iOnTo, IIngredient i)
+        {
+            if (i.Unit != MeasurementUnit.liter) throw new InvalidActionForIngredientException("Raonteni", i.Name, i.Unit);
 
             return new IngredientGroup(new IIngredient[] { iOnTo, i });
         }
@@ -84,5 +100,22 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("hun", "tálald a(z) {0T} a(z) {1N}")]
         public void Talalni(IIngredient i, IEquipment container) { }
+
+        [NameAlias("hun", "válaszd szét a(z) {0T}")]
+        public IIngredient[] Szetvalasztani(IIngredient i) 
+        {
+            if (!(i is Tojas)) throw new InvalidActionForIngredientException("Szetvalasztani", i.Name, i.Unit);
+
+            List<IIngredient> result = new List<IIngredient>();
+
+            if (i is Tojas)
+            {
+                result.Add(new TojasSargaja(i.GetAmount()));
+                result.Add(new TojasFeherje(i.GetAmount()));
+                result[1].ChangeUnitTo(MeasurementUnit.liter);
+            }
+
+            return result.ToArray();
+        }
     }
 }

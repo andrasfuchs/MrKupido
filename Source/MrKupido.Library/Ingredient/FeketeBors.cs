@@ -9,15 +9,13 @@ namespace MrKupido.Library.Ingredient
 {
     [NameAlias("hun", "fekete bors")]
 
+    // TODO: GrammsPerPiece
+    [IngredientConsts(GrammsPerPiece = 3)]
+
     [YieldOf(typeof(PiperNigrum))]
     public class FeketeBors : IngredientBase
     {
-        public FeketeBors(float amount)
-            : base(amount, MeasurementUnit.piece)
-        {
-        }
-
-        public FeketeBors(float amount, MeasurementUnit unit, IngredientState state)
+        public FeketeBors(float amount, MeasurementUnit unit = MeasurementUnit.piece, IngredientState state = IngredientState.Normal)
             : base(amount, unit, state)
         {
         }

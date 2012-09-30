@@ -13,8 +13,8 @@ namespace MrKupido.Library.Ingredient
     [GristOf(typeof(CapsicumAnnuumL))]
     public class Fuszerpaprika : IngredientBase
     {
-        public Fuszerpaprika(float amount)
-            : base(amount, MeasurementUnit.gramm)
+        public Fuszerpaprika(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+            : base(amount, unit)
         {
         }
     }

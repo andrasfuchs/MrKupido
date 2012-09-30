@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MrKupido.Library.Attributes;
+using MrKupido.Library.Ingredient;
 
 namespace MrKupido.Library.Equipment
 {
@@ -24,7 +25,14 @@ namespace MrKupido.Library.Equipment
         public bool Berakni(IIngredient ig)
         {
             // TODO: return if it fits in
-            this.Contents = ig;
+            if (this.Contents != null)
+            {
+                this.Contents = new IngredientGroup(new IIngredient[] { this.Contents, ig });
+            }
+            else
+            {
+                this.Contents = ig;
+            }
 
             return true;
         }
@@ -42,12 +50,29 @@ namespace MrKupido.Library.Equipment
         public void Varni(int minutes) {}
 
         [NameAlias("hun", "fedd le a(z) {T} {0V}")]
-        public void Lefedni(Material material = null) { }
+        public void Lefedni(Material material) { }
 
         [NameAlias("hun", "vedd le a fedőt")]
         public void FedotLevenni() { }
 
         [NameAlias("hun", "öntsd le a folyadékot a(z) {L}")]
-        public void FolyadekotLeonteni() { }
+        public IngredientGroup FolyadekotLeonteni() 
+        {
+            List<IIngredient> result = new List<IIngredient>();
+
+            if (Contents is IngredientGroup)
+            {
+                foreach (IIngredient i in ((IngredientGroup)Contents).Ingredients)
+                {
+                    if (i.Unit != MeasurementUnit.liter) result.Add(i);
+                }
+            } 
+            else 
+            {
+                throw new InvalidActionForIngredientException("FolyadekotLeonteni", Contents.Name, Contents.Unit);
+            }
+
+            return new IngredientGroup(result.ToArray());
+        }
     }
 }

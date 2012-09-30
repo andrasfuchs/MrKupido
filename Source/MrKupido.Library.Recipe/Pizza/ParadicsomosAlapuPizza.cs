@@ -11,8 +11,8 @@ namespace MrKupido.Library.Recipe
 
     public class ParadicsomosAlapuPizza : Pizza
     {
-        public ParadicsomosAlapuPizza(float amount)
-            : base(amount)
+        public ParadicsomosAlapuPizza(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+            : base(amount, unit)
         { }
 
         public static new PreparedIngredients Prepare(float amount, EquipmentGroup eg)
@@ -24,10 +24,11 @@ namespace MrKupido.Library.Recipe
 
             IIngredient paradicsomosPizzaszosz = new PizzaParadicsomszosz(0.2f);
             Kez kez = eg.Use<Kez>();
-            pizzateszta = kez.Rarakni(pizzateszta, paradicsomosPizzaszosz);
+            pizzateszta = kez.Raonteni(pizzateszta, paradicsomosPizzaszosz);
 
             result.Add("pizzateszta", pizzateszta);
 
+            eg.WashUp();
             return result;
         }
     }

@@ -10,8 +10,8 @@ namespace MrKupido.Library.Recipe
 
     public class Kolbasz : RecipeBase
     {
-        public Kolbasz(float amount)
-            : base(amount, MeasurementUnit.gramm)
+        public Kolbasz(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+            : base(amount, unit)
         {
             RecipeUnknown();
         }

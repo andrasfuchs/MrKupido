@@ -10,38 +10,38 @@
                     <li>
                         @if (level1.Children.Length > 0)
                         {
-                            <input type="checkbox"  checked="checked" id="@level1.ClassName" /><label for="@level1.ClassName">@level1</label>
+                            <input type="checkbox"  checked="checked" id="@level1.ClassName" /><label for="@level1.ClassName"><a href="./../../recept/@level1.UniqueName">@level1</a></label>
                             <ul>
                                 @foreach (RecipeTreeNode level2 in level1.Children)
                                 { 
                                     <li>
                                         @if (level2.Children.Length > 0)
                                         {
-                                            <input type="checkbox" id="@level2.ClassName" /><label for="@level2.ClassName">@level2</label>
+                                            <input type="checkbox" id="@level2.ClassName" /><label for="@level2.ClassName"><a href="./../../recept/@level2.UniqueName">@level2</a></label>
                                             <ul>
                                                 @foreach (RecipeTreeNode level3 in level2.Children)
                                                 { 
                                                     <li>
                                                         @if (level3.Children.Length > 0)
                                                         {
-                                                            <input type="checkbox" id="@level3.ClassName" /><label for="@level3.ClassName">@level3</label>
+                                                            <input type="checkbox" id="@level3.ClassName" /><label for="@level3.ClassName"><a href="./../../recept/@level3.UniqueName">@level3</a></label>
                                                             <ul>
                                                                 @foreach (RecipeTreeNode level4 in level3.Children)
                                                                 { 
                                                                     <li>
                                                                         @if (level4.Children.Length > 0)
                                                                         {
-                                                                            <input type="checkbox" id="@level4.ClassName" /><label for="@level4.ClassName">@level4</label>
+                                                                            <input type="checkbox" id="@level4.ClassName" /><label for="@level4.ClassName"><a href="./../../recept/@level4.UniqueName">@level4</a></label>
                                                                             <ul>
                                                                                 @foreach (RecipeTreeNode level5 in level4.Children)
                                                                                 { 
-                                                                                    <li><a href="./Recipe/@level5.ClassName">@level5</a></li>
+                                                                                    <li><a href="./../../recept/@level5.UniqueName">@level5</a></li>
                                                                                 }
                                                                             </ul>
                                                                         }
                                                                         else
                                                                         {
-                                                                            <a href="./Recipe/@level4.ClassName">@level4</a>
+                                                                            <a href="./../../recept/@level4.UniqueName">@level4</a>
                                                                         }
                                                                     </li>
                                                                 }
@@ -49,7 +49,7 @@
                                                         }
                                                         else
                                                         {
-                                                            <a href="./Recipe/@level3.ClassName">@level3</a>
+                                                            <a href="./../../recept/@level3.UniqueName">@level3</a>
                                                         }
                                                     </li>
                                                 }
@@ -57,7 +57,7 @@
                                         }
                                         else
                                         {
-                                            <a href="./Recipe/@level2.ClassName">@level2</a>
+                                            <a href="./../../recept/@level2.UniqueName">@level2</a>
                                         }
                                     </li>
                                 }
@@ -65,7 +65,7 @@
                         }
                         else
                         {
-                            <a href="./Recipe/@level1.ClassName">@level1</a>
+                            <a href="./../../recept/@level1.UniqueName">@level1</a>
                         }
                     </li>
                 }

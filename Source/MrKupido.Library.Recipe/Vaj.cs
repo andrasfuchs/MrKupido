@@ -11,8 +11,8 @@ namespace MrKupido.Library.Recipe
 
     public class Vaj : RecipeBase
     {
-        public Vaj(float amount)
-            : base(amount, MeasurementUnit.gramm)
+        public Vaj(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+            : base(amount, unit)
         {
             RecipeUnknown();
         }

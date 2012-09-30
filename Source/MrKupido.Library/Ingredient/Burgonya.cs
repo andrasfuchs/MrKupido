@@ -13,11 +13,13 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "krompé", Priority = 201)]
     [NameAlias("hun", "pityóka", Priority = 202)]
 
+    [IngredientConsts(GrammsPerPiece = 150)]
+
     [RootOf(typeof(SolanumTuberosum))]
     public class Burgonya : IngredientBase
     {
-        public Burgonya(float amount)
-            : base(amount, MeasurementUnit.piece)
+        public Burgonya(float amount, MeasurementUnit unit = MeasurementUnit.piece)
+            : base(amount, unit)
         {
         }
     }

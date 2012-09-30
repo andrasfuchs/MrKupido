@@ -14,15 +14,12 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "zsidószalonna", Priority = 202)]
     [NameAlias("hun", "mózespecsenye", Priority = 203)]
 
+    [IngredientConsts(GrammsPerPiece = 35)]
+
     [RootOf(typeof(AlliumCepaL))]
     public class Hagyma : IngredientBase
     {
-        public Hagyma(float amount)
-            : base(amount, MeasurementUnit.piece)
-        {
-        }
-
-        public Hagyma(float amount, MeasurementUnit unit)
+        public Hagyma(float amount, MeasurementUnit unit = MeasurementUnit.piece)
             : base(amount, unit)
         {
         }

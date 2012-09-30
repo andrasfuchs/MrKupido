@@ -12,8 +12,8 @@ namespace MrKupido.Library.Recipe
 
     public class Sajtgolyo : RecipeBase
     {
-        public Sajtgolyo(float amount)
-            : base(amount)
+        public Sajtgolyo(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+            : base(amount, unit)
         { }
 
         public static new EquipmentGroup SelectEquipment(float amount)
@@ -58,35 +58,39 @@ namespace MrKupido.Library.Recipe
             burgonya = kp.Meghamozni(burgonya);
 
             BurgonyaPres bp = eg.Use<BurgonyaPres>();
-            //burgonya = bp.Preselni(burgonya);
+            burgonya = bp.Preselni(burgonya);
 
             IIngredient fokhagyma = new Fokhagyma(1.0f);
             FokhagymaPres fp = eg.Use<FokhagymaPres>();
-            //fokhagyma = fp.Preselni(fokhagyma);
+            fokhagyma = fp.Preselni(fokhagyma);
 
             Reszelo reszelo = eg.Use<Reszelo>();
             IIngredient sajt = reszelo.Lereszelni(new Sajt(70.0f));
 
             IIngredient tojas = new Tojas(1.0f);
+            Kez kez = eg.Use<Kez>();
+            IIngredient tojasfeherje = kez.Szetvalasztani(tojas)[1];
+
             Habvero hv = eg.Use<Habvero>();
-            //tojas = hv.Felverni(tojas);
+            tojas = hv.Felverni(tojasfeherje);
 
             Serpenyo serpenyo = eg.Use<Serpenyo>();
             serpenyo.Berakni(new Vaj(40.0f));
             tuzhely.Behelyezni(serpenyo);
             tuzhely.Homerseklet(200);
             serpenyo.Varni(5);
+            serpenyo = (Serpenyo)tuzhely.Kiemelni(typeof(Serpenyo));
             IIngredient vaj = serpenyo.Kivenni();
 
             Fakanal fakanal = eg.Use<Fakanal>();
             IIngredient massza = fakanal.Osszekeverni(new Liszt(50.0f), new FeketeBorsOrolt(3.0f), new So(6.0f), vaj, burgonya, tojas, fokhagyma, sajt);
 
-            Kez kez = eg.Use<Kez>();
-            IIngredient golyok = null; //kez.Kiszaggatni(massza, 30.0f);
-            //golyok = kez.GolyovaGyurni(golyok);
+            IIngredient golyok = kez.Kiszaggatni(massza, 30.0f);
+            golyok = kez.GolyovaGyurni(golyok);
 
             result.Add("golyok", golyok);
 
+            eg.WashUp();
             return result;
         }
 
@@ -117,9 +121,11 @@ namespace MrKupido.Library.Recipe
 
                 edeny.Berakni(keszgolyok);
             } while (!mindbefert);
+            
 
             cfp.Add("osszesgolyo", edeny.Contents);
 
+            eg.WashUp();
             return cfp;
         }
 
@@ -127,6 +133,8 @@ namespace MrKupido.Library.Recipe
         {
             Kez kez = eg.Use<Kez>();
             kez.Talalni(food["osszesgolyo"], eg.Use<LaposTanyer>());
+
+            eg.WashUp();
         }
     }
 }

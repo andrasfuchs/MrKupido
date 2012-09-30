@@ -13,8 +13,8 @@ namespace MrKupido.Library.Recipe
 
     public class FuszeresCsirkemell : RecipeBase
     {
-        public FuszeresCsirkemell(float amount)
-            : base(amount)
+        public FuszeresCsirkemell(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+            : base(amount, unit)
         {
         }
 

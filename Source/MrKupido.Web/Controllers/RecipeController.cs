@@ -20,15 +20,13 @@ namespace MrKupido.Web.Controllers
         {
             object[] result = new object[7];
 
-            Pizza pizza = new Pizza(1.0f);
-
             Cache.Recipe.Initialize();
             RecipeTreeNode rtn = Cache.Recipe[id];
 
             if (rtn == null) return RedirectToAction("Index", "HomeController");
 
             result[0] = rtn;
-            try
+            //try
             {
                 result[1] = rtn.GetTags();
                 result[2] = rtn.GetEquipments(1.0f);
@@ -36,10 +34,12 @@ namespace MrKupido.Web.Controllers
                 result[4] = rtn.GetDirections(1.0f);
                 result[5] = rtn.GetNutritions(1.0f);
             }
-            catch 
-            { 
-                // Don't panic: the recipe is known, but it is not implemented (or the implementation throw an exception). See trace log for details.
-            }
+            //catch 
+            //{ 
+            //    // Don't panic: the recipe is known, but it is not implemented (or the implementation throw an exception). See trace log for details.
+            //}
+            
+            
             //RecipeTreeNode inlineSajt = Cache.Recipe.RenderInline("FuszeresCsirkemell", new string[] { "Sajt" });
 
             return View(result);

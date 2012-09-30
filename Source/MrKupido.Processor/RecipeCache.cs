@@ -25,17 +25,20 @@ namespace MrKupido.Processor
             {
                 RecipeTreeNode result = null;
 
-                try
-                {
-                    result = (RecipeTreeNode)ri.GetByClassName(name);
-                }
-                catch { }
-
                 if (result == null)
                 {
                     try
                     {
                         result = (RecipeTreeNode)ri.GetByUniqueName(name, Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName);
+                    }
+                    catch { }
+                }
+
+                if (result == null)
+                {
+                    try
+                    {
+                        result = (RecipeTreeNode)ri.GetByClassName(name);
                     }
                     catch { }
                 }
@@ -59,7 +62,7 @@ namespace MrKupido.Processor
 
             // check if the assemblies are patched already and they are up-to-date
             List<Assembly> assembliesToCheck = new List<Assembly>();
-            foreach (Assembly ass in AppDomain.CurrentDomain.GetAssemblies())
+            foreach (Assembly ass in Cache.Assemblies)
             {
                 if (ass.IsDynamic) continue;
 

@@ -47,8 +47,7 @@ namespace DotNetOpenAuth.ApplicationBlock.Facebook {
         [DataMember(Name = "picture")]
         public FacebookPicture Picture { get; set; }
 
-        public static FacebookGraph Deserialize(string json)
-        {
+        public static FacebookGraph Deserialize(string json) {
             if (string.IsNullOrEmpty(json)) {
                 throw new ArgumentNullException("json");
             }
@@ -63,20 +62,20 @@ namespace DotNetOpenAuth.ApplicationBlock.Facebook {
 
             return (FacebookGraph)jsonSerializer.ReadObject(jsonStream);
         }
-    }
 
-    public struct FacebookPicture
-    {
-        [DataMember(Name = "data")]
-        public FacebookPictureData Data { get; set; }
-    }
+        public struct FacebookPicture
+        {
+            [DataMember(Name = "data")]
+            public FacebookPictureData Data { get; set; }
+        }
 
-    public struct FacebookPictureData
-    {
-        [DataMember(Name = "url")]
-        public string Url { get; set; }
+        public struct FacebookPictureData
+        {
+            [DataMember(Name = "url")]
+            public string Url { get; set; }
 
-        [DataMember(Name = "is_silhouette")]
-        public string Is_Silhouette { get; set; }
+            [DataMember(Name = "is_silhouette")]
+            public string Is_Silhouette { get; set; }
+        }
     }
 }

@@ -12,7 +12,8 @@ namespace MrKupido.Library.Recipe
 
     public class Langos : RecipeBase
     {
-        public Langos(float amount) : base(amount)
+        public Langos(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+            : base(amount, unit)
         {
         }
 
@@ -20,11 +21,16 @@ namespace MrKupido.Library.Recipe
         {
             EquipmentGroup result = new EquipmentGroup();
 
+            result.Containers.Add(new NyujtoDeszka());
             result.Containers.Add(new Edeny(1.5f));
             result.Containers.Add(new Serpenyo());
             result.Containers.Add(new LaposTanyer());
 
-            result.Devices.Add(new Suto(38, 40, 4));
+            result.Devices.Add(new Suto());
+            result.Devices.Add(new Tuzhely());
+
+            result.Tools.Add(new Kez());
+            result.Tools.Add(new Szaggato());
 
             return result;
         }
@@ -40,7 +46,7 @@ namespace MrKupido.Library.Recipe
             
             Edeny edeny = eg.Use<Edeny>();
             edeny.Berakni(teszta);
-            edeny.Lefedni();
+            edeny.Lefedni(edeny.Fedo);
             edeny.Varni(30);
 
             NyujtoDeszka nyd = eg.Use<NyujtoDeszka>();
@@ -51,6 +57,7 @@ namespace MrKupido.Library.Recipe
 
             result.Add("tesztadarabok", tesztadarabok);
 
+            eg.WashUp();
             return result;
         }
 
@@ -78,6 +85,7 @@ namespace MrKupido.Library.Recipe
 
             cfp.Add("osszeslangos", edeny.Contents);
 
+            eg.WashUp();
             return cfp;
         }
 
@@ -85,6 +93,8 @@ namespace MrKupido.Library.Recipe
         {
             Kez kez = eg.Use<Kez>();
             kez.Talalni(food["osszeslangos"], eg.Use<LaposTanyer>());
+
+            eg.WashUp();
         }
     }
 }

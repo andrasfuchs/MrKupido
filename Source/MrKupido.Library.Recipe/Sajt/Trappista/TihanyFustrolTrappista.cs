@@ -11,8 +11,8 @@ namespace MrKupido.Library.Recipe
     [CommercialProductOf("Tihany")]
     public class TihanyFustrolTrappista : Trappista
     {
-        public TihanyFustrolTrappista(float amount)
-            : base(amount)
+        public TihanyFustrolTrappista(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+            : base(amount, unit)
         {
             RecipeUnknown();
         }

@@ -14,8 +14,8 @@ namespace MrKupido.Library.Ingredient
     [KindOf(typeof(Minerale))]
     public class So : IngredientBase
     {
-        public So(float amount)
-            : base(amount, MeasurementUnit.gramm)
+        public So(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+            : base(amount, unit)
         {
         }
     }

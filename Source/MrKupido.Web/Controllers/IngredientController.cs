@@ -266,8 +266,6 @@ namespace Web.Controllers
 
             ingredient.Index = 1;
             ingredient.Type = FilterItemType.Ingredient;
-            ingredient.Category = ShoppingListCategory.Unknown;
-            ingredient.Unit = MeasurementUnit.piece;
 
             db.Ingredients.Add(ingredient);
 
@@ -384,12 +382,10 @@ namespace Web.Controllers
         {
             object[] result = new object[4];
 
-            System.Reflection.Assembly[] ass = AppDomain.CurrentDomain.GetAssemblies();
-
-            result[0] = TreeNode.BuildTree(ass, t => new NatureTreeNode(t), typeof(MrKupido.Library.Nature.NatureBase));
+            result[0] = TreeNode.BuildTree(Cache.Assemblies, t => new NatureTreeNode(t), typeof(MrKupido.Library.Nature.NatureBase));
             result[1] = Cache.Ingredient["IngredientBase"];
-            result[2] = TreeNode.BuildTree(ass, t => new RecipeTreeNode(t), typeof(MrKupido.Library.Recipe.RecipeBase));
-            result[3] = TreeNode.BuildTree(ass, t => new EquipmentTreeNode(t), typeof(MrKupido.Library.Equipment.EquipmentBase));
+            result[2] = TreeNode.BuildTree(Cache.Assemblies, t => new RecipeTreeNode(t), typeof(MrKupido.Library.Recipe.RecipeBase));
+            result[3] = TreeNode.BuildTree(Cache.Assemblies, t => new EquipmentTreeNode(t), typeof(MrKupido.Library.Equipment.EquipmentBase));
 
             return View(result);
         }

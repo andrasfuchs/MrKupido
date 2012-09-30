@@ -12,12 +12,7 @@ namespace MrKupido.Library.Ingredient
     [LeafOf(typeof(OriganumVulgareL))]
     public class Oregano : IngredientBase
     {
-        public Oregano(float amount)
-            : base(amount, MeasurementUnit.gramm)
-        {
-        }
-
-        public Oregano(float amount, MeasurementUnit unit, IngredientState state)
+        public Oregano(float amount, MeasurementUnit unit = MeasurementUnit.gramm, IngredientState state = IngredientState.Normal)
             : base(amount, unit, state)
         {
         }

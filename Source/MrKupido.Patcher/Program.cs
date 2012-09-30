@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Mono.Cecil;
 using System.IO;
+using Mono.Cecil;
+using Mono.Cecil.Rocks;
 
 namespace MrKupido.Patcher
 {
@@ -102,6 +103,8 @@ namespace MrKupido.Patcher
         {
             newIngredientMD = md.Module.Import(newIngredientMD);
             directionGeneratorMD = md.Module.Import(directionGeneratorMD);
+
+            md.Body.SimplifyMacros();
 
             Mono.Cecil.Cil.ILProcessor processor = md.Body.GetILProcessor();
             for (int i = 0; i < md.Body.Instructions.Count; i++)
@@ -241,6 +244,20 @@ namespace MrKupido.Patcher
                 #endregion
 
             }
+
+            md.Body.OptimizeMacros();
+
+
+            // TODO: take care of branches location
+            //for (int i = 0; i < md.Body.Instructions.Count; i++)
+            //{
+            //    Mono.Cecil.Cil.Instruction instr = md.Body.Instructions[i];
+
+            //    if (instr.Operand is Mono.Cecil.Cil.Instruction)
+            //    {
+            //        Mono.Cecil.Cil.Instruction ir = (Mono.Cecil.Cil.Instruction)instr.Operand;
+            //    }
+            //}
         }
 
     }

@@ -76,7 +76,11 @@ namespace MrKupido.Processor.Model
                 string[] ops = new string[Operands.Length];
                 for (int i = 0; i < ops.Length; i++)
                 {
-                    if (Operands[i] is IngredientGroup)
+                    if (Operands[i] == null)
+                    {
+                        ops[i] = "(null)";
+                    }
+                    else if (Operands[i] is IngredientGroup)
                     {
                         ops[i] = ((IngredientGroup)Operands[i]).Name;
                     }
@@ -128,7 +132,10 @@ namespace MrKupido.Processor.Model
                     {
                         object operandObj = Operands[Int32.Parse(operandId.ToString())];
 
-                        operand = ((operandObj is IngredientGroup) ? ((IngredientGroup)operandObj).Name : operandObj.ToString());
+                        if (operandObj != null)
+                        {
+                            operand = ((operandObj is IngredientGroup) ? ((IngredientGroup)operandObj).Name : operandObj.ToString());
+                        }
                     }
                     else 
                     {
@@ -136,54 +143,61 @@ namespace MrKupido.Processor.Model
                     }
 
                     string word = "";
-                    char affixId = direction[clauseEndIndex - 1];
-                    if (Char.IsLetter(affixId))
+                    if (operand != null)
                     {
-                        string[] words = operand.Split(' ');
-                        word = PrepareForAffix(words[words.Length - 1]);
-                        operand = operand.Remove(operand.Length - word.Length);
-                        VowelHarmony vh = VowelHarmonyOf(word);
-
-                        switch (affixId)
+                        char affixId = direction[clauseEndIndex - 1];
+                        if (Char.IsLetter(affixId))
                         {
-                            case 'T':
-                                vh = VowelHarmonyOf(word, true);
-                                if (IsVowel(word[word.Length - 1])) word += "t";
-                                else
-                                {
-                                    if (vh == VowelHarmony.Low) word += "ot";
-                                    if (vh == VowelHarmony.HighType1) word += "et";
-                                    if (vh == VowelHarmony.HighType2) word += "öt";
-                                    if (vh == VowelHarmony.Mixed) word += "t";
-                                }
-                                break;
-                            case 'R':
-                                if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) word += "ra";
-                                if (vh == VowelHarmony.HighType1) word += "re";
-                                break;
-                            case 'N':
-                                if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) word += "ban";
-                                if (vh == VowelHarmony.HighType1) word += "ben";
-                                break;
-                            case 'B':
-                                if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) word += "ba";
-                                if (vh == VowelHarmony.HighType1) word += "be";
-                                break;
-                            case 'V':
-                                if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) word += (IsVowel(word[word.Length - 1]) ? "v" : "word[word.Length - 1]") + "al";
-                                if (vh == VowelHarmony.HighType1) word += (IsVowel(word[word.Length - 1]) ? "v" : "word[word.Length - 1]") + "el";
-                                break;
-                            case 'L':
-                                if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) word += "ról";
-                                if (vh == VowelHarmony.HighType1) word += "ről";
-                                break;
-                            case 'K':
-                                if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) word += "ból";
-                                if (vh == VowelHarmony.HighType1) word += "ből";
-                                break;
-                            default:
-                                throw new MrKupidoException("The affix id '{0}' is unknown in the '{1}' string.", affixId, direction);
+                            string[] words = operand.Split(' ');
+                            word = PrepareForAffix(words[words.Length - 1]);
+                            operand = operand.Remove(operand.Length - word.Length);
+                            VowelHarmony vh = VowelHarmonyOf(word);
+
+                            switch (affixId)
+                            {
+                                case 'T':
+                                    vh = VowelHarmonyOf(word, true);
+                                    if (IsVowel(word[word.Length - 1])) word += "t";
+                                    else
+                                    {
+                                        if (vh == VowelHarmony.Low) word += "ot";
+                                        if (vh == VowelHarmony.HighType1) word += "et";
+                                        if (vh == VowelHarmony.HighType2) word += "öt";
+                                        if (vh == VowelHarmony.Mixed) word += "t";
+                                    }
+                                    break;
+                                case 'R':
+                                    if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) word += "ra";
+                                    if (vh == VowelHarmony.HighType1) word += "re";
+                                    break;
+                                case 'N':
+                                    if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) word += "ban";
+                                    if (vh == VowelHarmony.HighType1) word += "ben";
+                                    break;
+                                case 'B':
+                                    if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) word += "ba";
+                                    if (vh == VowelHarmony.HighType1) word += "be";
+                                    break;
+                                case 'V':
+                                    if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) word += (IsVowel(word[word.Length - 1]) ? "v" : "word[word.Length - 1]") + "al";
+                                    if (vh == VowelHarmony.HighType1) word += (IsVowel(word[word.Length - 1]) ? "v" : "word[word.Length - 1]") + "el";
+                                    break;
+                                case 'L':
+                                    if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) word += "ról";
+                                    if (vh == VowelHarmony.HighType1) word += "ről";
+                                    break;
+                                case 'K':
+                                    if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) word += "ból";
+                                    if (vh == VowelHarmony.HighType1) word += "ből";
+                                    break;
+                                default:
+                                    throw new MrKupidoException("The affix id '{0}' is unknown in the '{1}' string.", affixId, direction);
+                            }
                         }
+                    }
+                    else
+                    {
+                        operand = "(null)";
                     }
 
                     direction = direction.Remove(clauseStartIndex, clauseEndIndex - clauseStartIndex + 1);

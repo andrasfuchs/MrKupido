@@ -15,7 +15,6 @@ namespace MrKupido.Processor.Model
     {
         private NatureRelationAttribute taxonomyConnectionAttribute = null;
         public Type NatureConnectionClassType { set; get; }
-        public IngredientBase StandardInstance { get; private set; }
 
         public IngredientTreeNode(Type ingredientClass)
             : base(ingredientClass)
@@ -39,13 +38,6 @@ namespace MrKupido.Processor.Model
             }
 
             Ingredient dbIngredient = db.Ingredients.Where(i => i.ClassName == ingredientClass.Name).FirstOrDefault();
-
-            this.StandardInstance = ingredientClass.DefaultConstructor(1.0f, MeasurementUnit.gramm, IngredientState.Normal) as IngredientBase;
-
-            if (this.StandardInstance != null)
-            {
-                this.StandardInstance.LoadStaticInfoObject(dbIngredient);
-            }
         }
     }
 }

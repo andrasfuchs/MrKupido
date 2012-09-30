@@ -13,8 +13,8 @@ namespace MrKupido.Library.Recipe
 
     public class Pizza : RecipeBase
     {
-        public Pizza(float amount)
-            : base(amount)
+        public Pizza(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+            : base(amount, unit)
         { }
 
         public static new EquipmentGroup SelectEquipment(float amount)
@@ -24,8 +24,12 @@ namespace MrKupido.Library.Recipe
             result.Containers.Add(new Edeny(1.5f));
             result.Containers.Add(new Tepsi());
             result.Containers.Add(new LaposTanyer());
+            result.Containers.Add(new NyujtoDeszka());
 
             result.Devices.Add(new Suto(38, 40, 4));
+
+            result.Tools.Add(new Fakanal());
+            result.Tools.Add(new Kez());
 
             return result;
         }
@@ -75,7 +79,7 @@ namespace MrKupido.Library.Recipe
         public static new void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
             Kez kez = eg.Use<Kez>();
-            kez.Talalni(food["pizzateszta"], eg.Use<LaposTanyer>());
+            kez.Talalni(food["pizzaalap"], eg.Use<LaposTanyer>());
             eg.WashUp();
         }
     }

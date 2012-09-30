@@ -44,6 +44,31 @@ namespace MrKupido.Library.Ingredient
             Category = ShoppingListCategory.Mixed;
 
             AddIngredients(ingredients);
+
+            float amount = 0.0f;
+            foreach (IIngredient i in Ingredients)
+            {
+                amount += i.GetAmount(this.Unit);
+            }
+            SetAmount(amount, this.Unit);
+        }
+
+        public IngredientGroup Clone(float amount, MeasurementUnit unit)
+        {
+            List<IngredientBase> ibs = new List<IngredientBase>();
+
+            float ratio = amount / GetAmount(unit);
+
+            foreach (IIngredient i in this.Ingredients)
+            {
+                IngredientBase ib = (IngredientBase)i.GetType().DefaultConstructor(ratio * i.GetAmount(unit), unit);
+                ib.ChangeUnitTo(i.Unit);
+
+                ibs.Add(ib);
+            }
+
+            IngredientGroup ig = new IngredientGroup(ibs.ToArray());
+            return ig;
         }
 
         private void AddIngredients(IIngredient[] ingredients)

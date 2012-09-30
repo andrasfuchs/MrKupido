@@ -11,8 +11,8 @@ namespace MrKupido.Library.Recipe
     [CommercialProductOf("Bakony")]
     public class BakonyTrappista : Trappista
     {
-        public BakonyTrappista(float amount)
-            : base(amount)
+        public BakonyTrappista(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+            : base(amount, unit)
         {
             RecipeUnknown();
         }

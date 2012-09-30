@@ -22,7 +22,14 @@ namespace MrKupido.Library.Equipment
 
             for (int j = 0; j < count; j++)
             {
-                result.Add(i.GetType().DefaultConstructor(totalWeight / count, MeasurementUnit.gramm) as IngredientBase);
+                if (i is IngredientGroup)
+                {
+                    result.Add(((IngredientGroup)i).Clone(totalWeight / count, MeasurementUnit.gramm));
+                }
+                else
+                {
+                    result.Add(i.GetType().DefaultConstructor(totalWeight / count, MeasurementUnit.gramm) as IngredientBase);
+                }
             }
 
             return new IngredientGroup(result.ToArray());

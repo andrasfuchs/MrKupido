@@ -14,11 +14,9 @@ namespace MrKupido.Library.Ingredient
     {
         private static Dictionary<string,object> staticInfoObjects = new Dictionary<string,object>();
 
-        public ShoppingListCategory Category { get; protected set; }
-
         private Dictionary<int, float> amounts = new Dictionary<int, float>();
         
-        public MeasurementUnit Unit { get; set; }
+        public MeasurementUnit Unit { get; protected set; }
 
         public IngredientState State { get; set; }
 
@@ -30,20 +28,37 @@ namespace MrKupido.Library.Ingredient
             }
         }
 
-        public int? ExpirationTime { get; private set; }
-        public float? StorageTemperature { get; private set; }
-        public int? GlichemicalIndex { get; private set; }
-        public float? PotencialAlkalinity { get; private set; }
+        public ShoppingListCategory Category { get; protected set; }
 
-        public float? GrammsPerLiter { get; private set; }
-        public float? GrammsPerPiece { get; private set; }
-        public float? KCaloriesPerGramm { get; private set; }
+        public int ExpirationTime { get; private set; }
+        public float StorageTemperature { get; private set; }
+        public int GlichemicalIndex { get; private set; }
+        public float PotencialAlkalinity { get; private set; }
+
+        public float GrammsPerLiter { get; private set; }
+        public float GrammsPerPiece { get; private set; }
+        public float KCaloriesPerGramm { get; private set; }
 
         public IngredientBase(float amount, MeasurementUnit unit, IngredientState state = IngredientState.Normal)
         {
             this.Unit = unit;
             this.SetAmount(amount, unit);
             this.State = state;
+
+            foreach (object icaObj in this.GetType().GetCustomAttributes(typeof(IngredientConstsAttribute), true))
+            {
+                IngredientConstsAttribute ica = (IngredientConstsAttribute)icaObj;
+
+                this.Category = ica.Category;
+                
+                this.ExpirationTime = ica.ExpirationTime;
+                this.GlichemicalIndex = ica.GlichemicalIndex;
+                this.PotencialAlkalinity = ica.PotencialAlkalinity;
+
+                this.GrammsPerLiter = ica.GrammsPerLiter;
+                this.GrammsPerPiece = ica.GrammsPerPiece;
+                this.KCaloriesPerGramm = ica.KCaloriesPerGramm;
+            }
 
             if (staticInfoObjects.ContainsKey(this.GetType().FullName)) LoadStaticInfoObject(staticInfoObjects[this.GetType().FullName]);
         }
@@ -58,18 +73,6 @@ namespace MrKupido.Library.Ingredient
             try
             {
                 // TODO: load only the properties which are NULL at the moment
-
-                this.Category = (ShoppingListCategory)obj.GetType().GetProperty("Category").GetValue(obj, null);
-                this.StorageTemperature = (float?)obj.GetType().GetProperty("StorageTemperature").GetValue(obj, null);
-                //this.Unit = (MeasurementUnit)obj.GetType().GetProperty("Unit").GetValue(obj, null);
-
-                this.ExpirationTime = (int?)obj.GetType().GetProperty("ExpirationTime").GetValue(obj, null);
-                this.GlichemicalIndex = (int?)obj.GetType().GetProperty("GlichemicalIndex").GetValue(obj, null);
-                this.PotencialAlkalinity = (float?)obj.GetType().GetProperty("PotencialAlkalinity").GetValue(obj, null);
-
-                this.GrammsPerLiter = (float?)obj.GetType().GetProperty("GrammsPerLiter").GetValue(obj, null);
-                this.GrammsPerPiece = (float?)obj.GetType().GetProperty("GrammsPerPiece").GetValue(obj, null);
-                this.KCaloriesPerGramm = (float?)obj.GetType().GetProperty("KCaloriesPerGramm").GetValue(obj, null);
             }
             catch (Exception ex)
             {
@@ -84,7 +87,14 @@ namespace MrKupido.Library.Ingredient
 
         public float GetAmount(MeasurementUnit unit)
         {
-            float result;
+            float result = 0.0f;
+
+            if (amounts.TryGetValue((int)unit, out result)) return result;
+
+            // generate the new unit
+            MeasurementUnit mu = this.Unit;
+            this.ChangeUnitTo(unit);
+            this.Unit = mu;
 
             if (amounts.TryGetValue((int)unit, out result)) return result;
 
@@ -100,48 +110,50 @@ namespace MrKupido.Library.Ingredient
 
         public void ChangeUnitTo(MeasurementUnit unit)
         {
+            if (this.Unit == unit) return;
+
             float amount = GetAmount(this.Unit);
 
             if ((this.Unit == MeasurementUnit.gramm) && (unit == MeasurementUnit.piece))
             {
-                if (!this.GrammsPerPiece.HasValue) throw new InvalidUnitConversionException(this, this.Unit, unit);
+                if (this.GrammsPerPiece == 0) throw new InvalidUnitConversionException(this, this.Unit, unit);
 
-                amount /= this.GrammsPerPiece.Value;
+                amount /= this.GrammsPerPiece;
             }
 
             if ((this.Unit == MeasurementUnit.piece) && (unit == MeasurementUnit.gramm))
             {
-                if (!this.GrammsPerPiece.HasValue) throw new InvalidUnitConversionException(this, this.Unit, unit);
+                if (this.GrammsPerPiece == 0) throw new InvalidUnitConversionException(this, this.Unit, unit);
 
-                amount *= this.GrammsPerPiece.Value;
+                amount *= this.GrammsPerPiece;
             }
 
             if ((this.Unit == MeasurementUnit.gramm) && (unit == MeasurementUnit.liter))
             {
-                if (!this.GrammsPerPiece.HasValue) throw new InvalidUnitConversionException(this, this.Unit, unit);
+                if (this.GrammsPerLiter == 0) throw new InvalidUnitConversionException(this, this.Unit, unit);
 
-                amount /= this.GrammsPerLiter.Value;
+                amount /= this.GrammsPerLiter;
             }
 
             if ((this.Unit == MeasurementUnit.liter) && (unit == MeasurementUnit.gramm))
             {
-                if (!this.GrammsPerPiece.HasValue) throw new InvalidUnitConversionException(this, this.Unit, unit);
+                if (this.GrammsPerLiter == 0) throw new InvalidUnitConversionException(this, this.Unit, unit);
 
-                amount *= this.GrammsPerLiter.Value;
+                amount *= this.GrammsPerLiter;
             }
 
             if ((this.Unit == MeasurementUnit.gramm) && (unit == MeasurementUnit.calories))
             {
-                if (!this.GrammsPerPiece.HasValue) throw new InvalidUnitConversionException(this, this.Unit, unit);
+                if (this.KCaloriesPerGramm == 0) throw new InvalidUnitConversionException(this, this.Unit, unit);
 
-                amount *= this.KCaloriesPerGramm.Value;
+                amount *= this.KCaloriesPerGramm;
             }
 
             if ((this.Unit == MeasurementUnit.calories) && (unit == MeasurementUnit.gramm))
             {
-                if (!this.GrammsPerPiece.HasValue) throw new InvalidUnitConversionException(this, this.Unit, unit);
+                if (this.KCaloriesPerGramm == 0) throw new InvalidUnitConversionException(this, this.Unit, unit);
 
-                amount /= this.KCaloriesPerGramm.Value;
+                amount /= this.KCaloriesPerGramm;
             }
 
             SetAmount(amount, unit);
@@ -183,14 +195,14 @@ namespace MrKupido.Library.Ingredient
                         if (amount >= 1000) amountStr = (amount / 1000).ToString("0.0") + " kg";
                         else if (amount >= 100) amountStr = (amount / 10).ToString("0") + " dkg";
                         else if (amount >= 10) amountStr = (amount / 10).ToString("0.0") + " dkg";
-                        else amountStr = (amount).ToString("0") + " g";
+                        else amountStr = (amount).ToString("0.00") + " g";
                         break;
 
                     case MeasurementUnit.liter:
                         if (amount >= 1) amountStr = (amount).ToString("0.0") + " l";
                         else if (amount >= 0.1) amountStr = (amount * 10).ToString("0") + " dl";
                         else if (amount >= 0.01) amountStr = (amount * 10).ToString("0.0") + " dl";
-                        else amountStr = (amount * 100).ToString("0") + " cl";
+                        else amountStr = (amount * 100).ToString("0.00") + " cl";
                         break;
 
                     default:

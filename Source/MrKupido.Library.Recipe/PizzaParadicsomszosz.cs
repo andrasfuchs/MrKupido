@@ -9,10 +9,13 @@ namespace MrKupido.Library.Recipe
     [NameAlias("hun", "paradicsomos pizzaszósz", Priority = 1)]
     [NameAlias("hun", "paradicsomszósz pizzához")]
 
+    // TODO: GrammsPerLiter
+    [IngredientConsts(GrammsPerLiter = 1500)]
+
     public class PizzaParadicsomszosz : RecipeBase
     {
-        public PizzaParadicsomszosz(float amount)
-            : base(amount, MeasurementUnit.liter)
+        public PizzaParadicsomszosz(float amount, MeasurementUnit unit = MeasurementUnit.liter)
+            : base(amount, unit)
         {
             RecipeUnknown();
         }

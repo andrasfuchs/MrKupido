@@ -13,8 +13,8 @@ namespace MrKupido.Library.Ingredient
     [GristOf(typeof(TriticumAestivum))]
     public class Liszt : IngredientBase
     {
-        public Liszt(float amount)
-            : base(amount, MeasurementUnit.gramm)
+        public Liszt(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+            : base(amount, unit)
         {
         }
     }

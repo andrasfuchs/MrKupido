@@ -12,8 +12,8 @@ namespace MrKupido.Library.Recipe
 
     public class Zsemlemorzsa : RecipeBase
     {
-        public Zsemlemorzsa(float amount)
-            : base(amount, MeasurementUnit.gramm)
+        public Zsemlemorzsa(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+            : base(amount, unit)
         {
             RecipeUnknown();
         }

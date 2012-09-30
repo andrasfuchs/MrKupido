@@ -11,8 +11,8 @@ namespace MrKupido.Library.Recipe
 
     public class Sajt : RecipeBase
     {
-        public Sajt(float amount)
-            : base(amount, MeasurementUnit.gramm)
+        public Sajt(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+            : base(amount, unit)
         {
             RecipeUnknown();
         }

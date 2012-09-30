@@ -23,9 +23,7 @@ namespace MrKupido.Processor
 
         public void Initialize()
         {
-            Assembly[] ass = AppDomain.CurrentDomain.GetAssemblies();
-
-            IngredientTreeNode root = TreeNode.BuildTree(ass, t => new IngredientTreeNode(t), typeof(MrKupido.Library.Ingredient.IngredientBase), typeof(MrKupido.Library.Recipe.RecipeBase));
+            IngredientTreeNode root = TreeNode.BuildTree(Cache.Assemblies, t => new IngredientTreeNode(t), typeof(MrKupido.Library.Ingredient.IngredientBase), typeof(MrKupido.Library.Recipe.RecipeBase));
             ri = new Indexer(root);
 
             WasInitialized = true;

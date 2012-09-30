@@ -11,8 +11,8 @@ namespace MrKupido.Library.Recipe
     [CommercialProductOf("Milli")]
     public class MilliTejfol : Tejfol
     {
-        public MilliTejfol(float amount)
-            : base(amount)
+        public MilliTejfol(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+            : base(amount, unit)
         {
             RecipeUnknown();
         }

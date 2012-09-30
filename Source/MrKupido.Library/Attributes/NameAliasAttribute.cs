@@ -26,24 +26,21 @@ namespace MrKupido.Library.Attributes
             string result = null;
             int priority = Int32.MaxValue;
 
-            foreach (object attr in objType.GetCustomAttributes(false))
+            foreach (object attr in objType.GetCustomAttributes(typeof(NameAliasAttribute),false))
             {
-                if (attr is NameAliasAttribute)
+                NameAliasAttribute name = (NameAliasAttribute)attr;
+
+                if (name.CultureName == Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName)
                 {
-                    NameAliasAttribute name = (NameAliasAttribute)attr;
-
-                    if (name.CultureName == Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName)
+                    if (name.Priority == priority)
                     {
-                        if (name.Priority == priority)
-                        {
-                            throw new MrKupidoException("Class '{0}' has more then one name alias with the same priority.", objType.Name);
-                        }
+                        throw new MrKupidoException("Class '{0}' has more then one name alias with the same priority.", objType.Name);
+                    }
 
-                        if (name.Priority < priority)
-                        {
-                            result = name.Name;
-                            priority = name.Priority;
-                        }
+                    if (name.Priority < priority)
+                    {
+                        result = name.Name;
+                        priority = name.Priority;
                     }
                 }
             }

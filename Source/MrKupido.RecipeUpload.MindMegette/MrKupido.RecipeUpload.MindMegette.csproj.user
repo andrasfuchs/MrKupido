@@ -3,4 +3,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <StartArguments>s:\Downloads\WebSites\Other.done\www.mindmegette.hu_receptek\</StartArguments>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <StartArguments>s:\Downloads\WebSites\Other.done\www.mindmegette.hu_receptek\</StartArguments>
+  </PropertyGroup>
 </Project>

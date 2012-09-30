@@ -10,11 +10,13 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "víz")]
     [NameAlias("eng", "water")]
 
+    [IngredientConsts(GrammsPerLiter = 1000)]
+
     [KindOf(typeof(Nonliving))]
     public class Viz  : IngredientBase
     {
-        public Viz(float amount)
-            : base(amount, MeasurementUnit.liter)
+        public Viz(float amount, MeasurementUnit unit = MeasurementUnit.liter)
+            : base(amount, unit)
         {
         }
     }

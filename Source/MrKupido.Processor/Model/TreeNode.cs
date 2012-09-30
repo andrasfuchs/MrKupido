@@ -18,6 +18,7 @@ namespace MrKupido.Processor.Model
         public TreeNode Parent { get; private set; }
         public TreeNode[] Children { get; set; }
 
+        public string UniqueName { get; protected set; }
         public string Name { get; protected set; }
         public string ClassName { get; private set; }
         public Type ClassType { get; private set; }
@@ -34,6 +35,7 @@ namespace MrKupido.Processor.Model
             Children = new TreeNode[0];
 
             Name = NameAliasAttribute.GetDefaultName(nodeClass);
+            UniqueName = Name.ToUniqueString();
         }
 
         private static T SetChilden<T>(T root, Dictionary<string, List<Type>> children, Func<Type, T> t2tn) where T : TreeNode

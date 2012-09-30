@@ -12,11 +12,13 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "büdös hagyma", Priority = 201)]
     [NameAlias("eng", "garlic")]
 
+    [IngredientConsts(GrammsPerPiece = 5)]
+
     [RootOf(typeof(AlliumSativum))]
     public class Fokhagyma : IngredientBase
     {
-        public Fokhagyma(float amount)
-            : base(amount, MeasurementUnit.piece)
+        public Fokhagyma(float amount, MeasurementUnit unit = MeasurementUnit.piece)
+            : base(amount, unit)
         {
         }
     }

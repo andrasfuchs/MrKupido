@@ -30,6 +30,40 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Debug\MrKupido.Library.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisLogFile>bin\Release\MrKupido.Library.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
+    <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
+    <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -44,6 +78,7 @@
     <Compile Include="Action\Passive.cs" />
     <Compile Include="Attributes\CommercialProductOfAttribute.cs" />
     <Compile Include="Attributes\ContainsGlutenAttribute.cs" />
+    <Compile Include="Attributes\IngredientConstsAttribute.cs" />
     <Compile Include="Attributes\NatureRelation\EggOfAttribute.cs" />
     <Compile Include="Attributes\NatureRelation\GranulesOfAttribute.cs" />
     <Compile Include="Attributes\NatureRelation\GristOfAttribute.cs" />
@@ -81,6 +116,7 @@
     <Compile Include="Equipment\Devices\Suto.cs" />
     <Compile Include="Equipment\Containers\RoundContainer\Tanyer.cs" />
     <Compile Include="Equipment\Containers\Tepsi.cs" />
+    <Compile Include="Equipment\Materials\Fedo.cs" />
     <Compile Include="Equipment\Tool.cs" />
     <Compile Include="Equipment\Tools\Fakanal.cs" />
     <Compile Include="Equipment\Tools\FokhagymaPres.cs" />
@@ -109,6 +145,8 @@
     <Compile Include="Ingredient\Oregano.cs" />
     <Compile Include="Ingredient\OreganoOrolt.cs" />
     <Compile Include="Ingredient\So\TengeriSo.cs" />
+    <Compile Include="Ingredient\TojasFeherje.cs" />
+    <Compile Include="Ingredient\TojasSargaja.cs" />
     <Compile Include="Interfaces\IDirection.cs" />
     <Compile Include="Interfaces\IIngredientContainer.cs" />
     <Compile Include="Interfaces\IEquipment.cs" />

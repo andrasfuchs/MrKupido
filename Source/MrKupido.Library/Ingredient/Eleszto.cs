@@ -14,8 +14,8 @@ namespace MrKupido.Library.Ingredient
     [GranulesOf(typeof(SaccharomycesCerevisiae))]
     public class Eleszto : IngredientBase
     {
-        public Eleszto(float amount)
-            : base(amount, MeasurementUnit.gramm)
+        public Eleszto(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+            : base(amount, unit)
         {
         }
     }

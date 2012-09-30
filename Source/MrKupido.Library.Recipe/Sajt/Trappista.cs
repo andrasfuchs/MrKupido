@@ -10,7 +10,8 @@ namespace MrKupido.Library.Recipe
 
     public class Trappista : Sajt
     {
-        public Trappista(float amount) : base(amount)
+        public Trappista(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+            : base(amount, unit)
         {
             RecipeUnknown();
         }

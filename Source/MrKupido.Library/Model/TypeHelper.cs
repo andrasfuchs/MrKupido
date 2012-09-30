@@ -28,9 +28,9 @@ namespace MrKupido.Library
         public static object DefaultConstructor(this Type type, params object[] args)
         {
             object result = null;
+            List<object> parameters = new List<object>(args);
             List<ConstructorInfo> constructors = new List<ConstructorInfo>();
             constructors.AddRange(type.GetConstructors());
-            //if (type.BaseType != null) constructors.AddRange(type.BaseType.GetConstructors());
 
             if (constructors.Count() == 0)
             {
@@ -39,10 +39,13 @@ namespace MrKupido.Library
             }
 
             ConstructorInfo selectedConstructor = null;
-
-            foreach (ConstructorInfo ci in constructors)
+            ParameterInfo[] pis = null;
+            foreach (ConstructorInfo ci in constructors.OrderByDescending(c => c.GetParameters().Length))
             {
-                if (ci.GetParameters().Length == args.Length)
+                pis = ci.GetParameters();
+                int optionalCount = pis.Count(pi => pi.IsOptional);
+
+                if (pis.Length - optionalCount <= args.Length)
                 {
                     selectedConstructor = ci;
                     break;
@@ -51,41 +54,19 @@ namespace MrKupido.Library
 
             if (selectedConstructor == null) selectedConstructor = constructors[0];
 
-            // NOTE: if the objet has more then one constuctors with the same number of parameters, this method will not work properly
 
-            try
+            pis = selectedConstructor.GetParameters();
+            while (parameters.Count < pis.Length)
             {
-                switch (selectedConstructor.GetParameters().Length)
-                {
-                    case 1:
-                        result = Activator.CreateInstance(type, args[0]);
-                        break;
-
-                    case 2:
-                        result = Activator.CreateInstance(type, args[0], args[1]);
-                        break;
-
-                    case 3:
-                        result = Activator.CreateInstance(type, args[0], args[1], args[2]);
-                        break;
-
-                    case 4:
-                        result = Activator.CreateInstance(type, args[0], args[1], args[2], args[3]);
-                        break;
-
-                    case 5:
-                        result = Activator.CreateInstance(type, args[0], args[1], args[2], args[3], args[4]);
-                        break;
-
-                    default:
-                        result = Activator.CreateInstance(type, args);
-                        break;
-                }
+                parameters.Add(Type.Missing);
             }
-            catch 
+            while (parameters.Count > pis.Length)
             {
-                Trace.TraceWarning("The type '{0}' doesn't have a compatible contructor to use default parameters.", type.FullName);
+                parameters.RemoveAt(parameters.Count - 1);
             }
+
+            // NOTE: if the object has more then one constuctors with the same number of parameters, this method will not work properly
+            result = Activator.CreateInstance(type, BindingFlags.CreateInstance | BindingFlags.Public | BindingFlags.Instance | BindingFlags.OptionalParamBinding, null, parameters.ToArray(), System.Globalization.CultureInfo.CurrentCulture);
 
             return result;
         }

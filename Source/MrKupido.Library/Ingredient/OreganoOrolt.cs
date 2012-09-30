@@ -11,8 +11,8 @@ namespace MrKupido.Library.Ingredient
 
     public class OreganoOrolt : Oregano
     {
-        public OreganoOrolt(float amount)
-            : base(amount, MeasurementUnit.gramm, IngredientState.Orolt)
+        public OreganoOrolt(float amount, MeasurementUnit unit = MeasurementUnit.gramm, IngredientState state = IngredientState.Orolt)
+            : base(amount, unit, state)
         {
         }
     }

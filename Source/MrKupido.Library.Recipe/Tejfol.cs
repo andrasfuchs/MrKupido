@@ -9,10 +9,11 @@ namespace MrKupido.Library.Recipe
 {
     [NameAlias("hun", "tejföl")]
 
+    [IngredientConsts(GrammsPerLiter = 1750)]
     public class Tejfol : RecipeBase
     {
-        public Tejfol(float amount)
-            : base(amount, MeasurementUnit.liter)
+        public Tejfol(float amount, MeasurementUnit unit = MeasurementUnit.liter)
+            : base(amount, unit)
         {
             RecipeUnknown();
         }

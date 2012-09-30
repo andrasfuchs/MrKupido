@@ -11,8 +11,8 @@ namespace MrKupido.Library.Recipe
 
     public class Turo : RecipeBase
     {
-        public Turo(float amount)
-            : base(amount, MeasurementUnit.gramm)
+        public Turo(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+            : base(amount, unit)
         {
             RecipeUnknown();
         }

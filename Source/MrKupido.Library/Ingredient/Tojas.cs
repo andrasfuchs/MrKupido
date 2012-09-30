@@ -11,13 +11,14 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "tyúktojás")]
     [NameAlias("eng", "egg")]
 
+    [IngredientConsts(GrammsPerPiece = 30)]
+
     [EggOf(typeof(GallusGallusDomesticus))]
     public class Tojas : IngredientBase
     {
-        public Tojas(float amount)
-            : base(amount, MeasurementUnit.piece)
+        public Tojas(float amount, MeasurementUnit unit = MeasurementUnit.piece)
+            : base(amount, unit)
         {
-            //this.grammsPerPiece = 30;
         }
     }
 }

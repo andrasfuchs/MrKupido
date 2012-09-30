@@ -10,11 +10,14 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "olaj", Priority = 1)]
     [NameAlias("hun", "napraforgó olaj")]
 
+    // TODO: GrammsPerLiter
+    [IngredientConsts(GrammsPerLiter = 1000)]
+
     [OilOf(typeof(HelianthusAnnuus))]
     public class NapraforgoOlaj : IngredientBase
     {
-        public NapraforgoOlaj(float amount)
-            : base(amount, MeasurementUnit.liter)
+        public NapraforgoOlaj(float amount, MeasurementUnit unit = MeasurementUnit.liter)
+            : base(amount, unit)
         {
         }
     }

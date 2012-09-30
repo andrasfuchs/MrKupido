@@ -32,8 +32,11 @@ namespace MrKupido.Processor.Model
         public RecipeTreeNode(Type recipeType)
             : base(recipeType)
         {
-            RecipeType = recipeType;
+            char[] name = Name.ToCharArray();
+            name[0] = Char.ToUpper(name[0]);
+            Name = new String(name);
 
+            RecipeType = recipeType; 
             try
             {
                 SelectEquipment = (SelectEquipmentDelegate)Delegate.CreateDelegate(typeof(SelectEquipmentDelegate), RecipeType.GetMethod("SelectEquipment"));

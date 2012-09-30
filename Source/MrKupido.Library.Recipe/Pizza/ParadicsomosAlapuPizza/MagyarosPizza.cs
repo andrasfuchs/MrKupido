@@ -12,8 +12,8 @@ namespace MrKupido.Library.Recipe
 
     public class MagyarosPizza : ParadicsomosAlapuPizza
     {
-        public MagyarosPizza(float amount)
-            : base(amount)
+        public MagyarosPizza(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+            : base(amount, unit)
         { }
 
         public static new EquipmentGroup SelectEquipment(float amount)
@@ -51,6 +51,7 @@ namespace MrKupido.Library.Recipe
             
             result.Add("pizzateszta", pizzateszta);
 
+            eg.WashUp();
             return result;
         }
     }

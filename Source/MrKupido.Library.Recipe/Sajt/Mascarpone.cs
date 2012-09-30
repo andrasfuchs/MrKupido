@@ -13,7 +13,8 @@ namespace MrKupido.Library.Recipe
 
     public class Mascarpone : Sajt
     {
-        public Mascarpone(float amount) : base(amount)
+        public Mascarpone(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+            : base(amount, unit)
         {
             RecipeUnknown();
         }

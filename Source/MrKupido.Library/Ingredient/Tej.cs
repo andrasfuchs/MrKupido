@@ -14,8 +14,8 @@ namespace MrKupido.Library.Ingredient
     [MilkOf(typeof(BosPrimigenius))]
     public class Tej : IngredientBase
     {
-        public Tej(float amount)
-            : base(amount, MeasurementUnit.liter)
+        public Tej(float amount, MeasurementUnit unit = MeasurementUnit.liter)
+            : base(amount, unit)
         {
         }
     }

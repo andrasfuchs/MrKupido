@@ -11,8 +11,8 @@ namespace MrKupido.Library.Ingredient
 
     public class FeketeBorsOrolt : FeketeBors
     {
-        public FeketeBorsOrolt(float amount)
-            : base(amount, MeasurementUnit.gramm, IngredientState.Orolt)
+        public FeketeBorsOrolt(float amount, MeasurementUnit unit = MeasurementUnit.gramm, IngredientState state = IngredientState.Orolt)
+            : base(amount, unit, state)
         {
         }
     }

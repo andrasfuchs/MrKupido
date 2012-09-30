@@ -11,8 +11,8 @@ namespace MrKupido.Library.Recipe
 
     public class Cukor : RecipeBase
     {
-        public Cukor(float amount)
-            : base(amount, MeasurementUnit.gramm)
+        public Cukor(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+            : base(amount, unit)
         {
             RecipeUnknown();
         }

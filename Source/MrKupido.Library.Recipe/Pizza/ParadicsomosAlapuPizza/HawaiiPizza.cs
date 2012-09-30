@@ -12,8 +12,8 @@ namespace MrKupido.Library.Recipe
 
     public class HawaiiPizza : ParadicsomosAlapuPizza
     {
-        public HawaiiPizza(float amount)
-            : base(amount)
+        public HawaiiPizza(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+            : base(amount, unit)
         { }
 
         public static new EquipmentGroup SelectEquipment(float amount)
@@ -44,6 +44,7 @@ namespace MrKupido.Library.Recipe
             
             result.Add("pizzateszta", pizzateszta);
 
+            eg.WashUp();
             return result;
         }
     }

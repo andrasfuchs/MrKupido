@@ -23,7 +23,14 @@ namespace MrKupido.Library.Equipment
 
             for (int j = 0; j < count; j++)
             {
-                result.Add(i.GetType().DefaultConstructor(totalWeight / count, MeasurementUnit.gramm) as IngredientBase);
+                if (i is IngredientGroup)
+                {
+                    result.Add(((IngredientGroup)i).Clone(totalWeight / count, MeasurementUnit.gramm));
+                }
+                else
+                {
+                    result.Add(i.GetType().DefaultConstructor(totalWeight / count, MeasurementUnit.gramm) as IngredientBase);
+                }
             }
 
             return new IngredientGroup(result.ToArray());
@@ -32,7 +39,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "karikázd fel a(z) {0T} {1} grammos darabokra")]
         public IngredientGroup Felkarikazni(IIngredient i, float weight)
         {
-            if ((!(i is IngredientBase)) || (i.Unit != MeasurementUnit.piece)) throw new InvalidActionForIngredientException("Felkarikazni", i.Name, i.Unit);
+            if ((!(i is IngredientBase)) || ((i.Unit != MeasurementUnit.piece) && (i.Unit != MeasurementUnit.gramm))) throw new InvalidActionForIngredientException("Felkarikazni", i.Name, i.Unit);
 
             i.ChangeUnitTo(MeasurementUnit.gramm);
 

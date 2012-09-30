@@ -10,7 +10,8 @@ namespace MrKupido.Library.Recipe
 
     public class Ementali : Sajt
     {
-        public Ementali(float amount) : base(amount)
+        public Ementali(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+            : base(amount, unit)
         {
             RecipeUnknown();
         }

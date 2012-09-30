@@ -11,8 +11,8 @@ namespace MrKupido.Library.Recipe
     [CommercialProductOf("Tolle")]
     public class TolleTrappista : Trappista
     {
-        public TolleTrappista(float amount)
-            : base(amount)
+        public TolleTrappista(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+            : base(amount, unit)
         {
             RecipeUnknown();
         }

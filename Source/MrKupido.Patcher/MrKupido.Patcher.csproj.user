@@ -3,4 +3,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <StartArguments>..\..\..\MrKupido.Library.Recipe\bin\Debug\MrKupido.Library.Recipe.dll ..\..\..\MrKupido.Processor\bin\Debug\MrKupido.Processor.dll MrKupido.Processor.RecipeAnalyzer NewIngredient DirectionGenerator</StartArguments>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <StartArguments>..\..\..\MrKupido.Library.Recipe\bin\Debug\MrKupido.Library.Recipe.dll ..\..\..\MrKupido.Processor\bin\Debug\MrKupido.Processor.dll MrKupido.Processor.RecipeAnalyzer NewIngredient DirectionGenerator</StartArguments>
+  </PropertyGroup>
 </Project>

@@ -11,8 +11,8 @@ namespace MrKupido.Library.Recipe
     [CommercialProductOf("Koronás")]
     public class KoronasKristalyCukor : KristalyCukor
     {
-        public KoronasKristalyCukor(float amount)
-            : base(amount)
+        public KoronasKristalyCukor(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+            : base(amount, unit)
         {
             RecipeUnknown();
         }

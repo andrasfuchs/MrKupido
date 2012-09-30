@@ -13,10 +13,9 @@ namespace MrKupido.Library.Equipment
     {
         public IngredientGroup Preselni(IIngredient i)
         {
-            if ((!(i is IngredientBase)) || (i.Unit != MeasurementUnit.gramm)) throw new InvalidActionForIngredientException("Preselni", i.Name, i.Unit);
+            if ((!(i is IngredientBase)) || (i.Unit != MeasurementUnit.piece)) throw new InvalidActionForIngredientException("Preselni", i.Name, i.Unit);
 
             List<IIngredient> result = new List<IIngredient>();
-
 
             ((IngredientBase)i).State = IngredientState.Preselt;
 

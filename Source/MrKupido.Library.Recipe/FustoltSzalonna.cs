@@ -10,8 +10,8 @@ namespace MrKupido.Library.Recipe
 
     public class FustoltSzalonna : RecipeBase
     {
-        public FustoltSzalonna(float amount)
-            : base(amount, MeasurementUnit.gramm)
+        public FustoltSzalonna(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+            : base(amount, unit)
         {
             RecipeUnknown();
         }
