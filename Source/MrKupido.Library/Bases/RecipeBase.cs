@@ -51,7 +51,7 @@ namespace MrKupido.Library.Recipe
             throw new NotImplementedException();
         }
 
-        public virtual void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
+        public static void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
             throw new NotImplementedException();
         }

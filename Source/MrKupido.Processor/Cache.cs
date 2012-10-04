@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Configuration;
 using System.Reflection;
+using MrKupido.Processor.Model;
 
 namespace MrKupido.Processor
 {
@@ -39,10 +40,20 @@ namespace MrKupido.Processor
         {
             get
             {
-                if (!ingredientCache.WasInitialized) ingredientCache.Initialize();
+                if (!recipeCache.WasInitialized) recipeCache.Initialize();
 
                 return recipeCache;
             }
+        }
+
+        public static Dictionary<string, TreeNode> NodesQuery(string queryString)
+        {
+            Dictionary<string, TreeNode> result = new Dictionary<string, TreeNode>();
+
+            foreach (KeyValuePair<string, TreeNode> o in Ingredient.Query(queryString)) { result.Add(o.Key, o.Value); }
+            foreach (KeyValuePair<string, TreeNode> o in Recipe.Query(queryString)) { result.Add(o.Key, o.Value); }
+
+            return result;
         }
     }
 }

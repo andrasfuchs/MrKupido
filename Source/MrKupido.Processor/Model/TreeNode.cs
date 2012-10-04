@@ -8,19 +8,26 @@ using System.Diagnostics;
 using MrKupido.Library.Attributes;
 using MrKupido.DataAccess;
 using MrKupido.Library;
+using System.Web.Script.Serialization;
 
 namespace MrKupido.Processor.Model
 {
     public class TreeNode
     {
+        [ScriptIgnore]
         protected static MrKupidoContext db = new MrKupidoContext();
 
+        [ScriptIgnore]
         public TreeNode Parent { get; private set; }
+        [ScriptIgnore]
         public TreeNode[] Children { get; set; }
 
+        public char NodeType { get; private set; }
         public string UniqueName { get; protected set; }
-        public string Name { get; protected set; }
+        public string ShortName { get; protected set; }
+        public string LongName { get; protected set; }
         public string ClassName { get; private set; }
+        [ScriptIgnore]
         public Type ClassType { get; private set; }
         public string FullClassName { get; private set; }
         public bool IsOpen { get; set; }
@@ -34,8 +41,15 @@ namespace MrKupido.Processor.Model
             FullClassName = nodeClass.FullName;
             Children = new TreeNode[0];
 
-            Name = NameAliasAttribute.GetDefaultName(nodeClass);
-            UniqueName = Name.ToUniqueString();
+            ShortName = NameAliasAttribute.GetDefaultName(nodeClass);
+            LongName = ShortName;
+            UniqueName = LongName.ToUniqueString();
+
+            if (nodeClass.IsSubclassOf(typeof(MrKupido.Library.Equipment.EquipmentBase))) NodeType = 'E';
+            else if (nodeClass.IsSubclassOf(typeof(MrKupido.Library.Recipe.RecipeBase))) NodeType = 'R';
+            else if (nodeClass.IsSubclassOf(typeof(MrKupido.Library.Ingredient.IngredientBase))) NodeType = 'I';
+            else if (nodeClass.IsSubclassOf(typeof(MrKupido.Library.Nature.NatureBase))) NodeType = 'N';
+            else NodeType = 'U';
         }
 
         private static T SetChilden<T>(T root, Dictionary<string, List<Type>> children, Func<Type, T> t2tn) where T : TreeNode
@@ -89,7 +103,7 @@ namespace MrKupido.Processor.Model
 
         public override string ToString()
         {
-            return Name + " (" + ClassName + ")";
+            return LongName + " (" + ClassName + ")";
         }
     }
 }

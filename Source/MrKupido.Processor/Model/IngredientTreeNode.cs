@@ -32,9 +32,10 @@ namespace MrKupido.Processor.Model
 
             if (!hasConnectionToTaxonomyTree) Trace.TraceWarning("Class '{0}' has no connection to the taxonomy tree.", ingredientClass.Name);
 
+            ShortName = LongName;
             if (hasConnectionToTaxonomyTree && (taxonomyConnectionAttribute != null))
             {
-                Name += " [" + NameAliasAttribute.GetDefaultName(taxonomyConnectionAttribute.NatureClass) + " " + NameAliasAttribute.GetDefaultName(taxonomyConnectionAttribute.GetType()) + "]";
+                LongName += " [" + NameAliasAttribute.GetDefaultName(taxonomyConnectionAttribute.NatureClass) + " " + NameAliasAttribute.GetDefaultName(taxonomyConnectionAttribute.GetType()) + "]";
             }
 
             Ingredient dbIngredient = db.Ingredients.Where(i => i.ClassName == ingredientClass.Name).FirstOrDefault();

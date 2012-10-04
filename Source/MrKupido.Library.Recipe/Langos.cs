@@ -42,7 +42,7 @@ namespace MrKupido.Library.Recipe
             IIngredient felfuttatottEleszto = new FelfuttatottEleszto(30f * amount);
 
             Kez kez = eg.Use<Kez>();
-            IIngredient teszta = kez.Osszegyurni(felfuttatottEleszto, new Liszt(1000f * amount), new Tejfol(0.2f * amount), new So(15f * amount), new Viz(0.5f * amount));
+            IIngredient teszta = kez.Osszegyurni(new Liszt(1000f * amount), felfuttatottEleszto, new Tejfol(0.2f * amount), new So(15f * amount), new Viz(0.5f * amount));
             
             Edeny edeny = eg.Use<Edeny>();
             edeny.Berakni(teszta);

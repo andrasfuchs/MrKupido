@@ -7,17 +7,13 @@ using System.Reflection;
 
 namespace MrKupido.Processor
 {
-    public class IngredientCache
-    {
-        private Indexer ri;
-
-        public bool WasInitialized = false;
-        
-        public IngredientTreeNode this [string className]
+    public class IngredientCache : BaseCache
+    {        
+        public new IngredientTreeNode this [string name]
         {
             get
             {
-                return (IngredientTreeNode)ri.GetByClassName(className);
+                return (IngredientTreeNode)base[name];
             }
         }
 

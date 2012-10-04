@@ -55,6 +55,7 @@ namespace MrKupido.Web
                 url: "{language}/{controller}/{action}/{id}",
                 defaults: new { language = "hun", controller = "Home", action = "Index", id = UrlParameter.Optional }
             );        
+
         }
     }
 }

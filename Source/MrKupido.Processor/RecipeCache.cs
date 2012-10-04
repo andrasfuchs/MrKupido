@@ -13,46 +13,16 @@ using System.Threading;
 
 namespace MrKupido.Processor
 {
-    public class RecipeCache
+    public class RecipeCache : BaseCache
     {
-        private Indexer ri;
         private static AppDomain dynamicDomain = null;
         private static Dictionary<string, Assembly> dynamicAssemblies = new Dictionary<string, Assembly>();
         
-        public RecipeTreeNode this [string name]
+        public new RecipeTreeNode this [string name]
         {
             get
             {
-                RecipeTreeNode result = null;
-
-                if (result == null)
-                {
-                    try
-                    {
-                        result = (RecipeTreeNode)ri.GetByUniqueName(name, Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName);
-                    }
-                    catch { }
-                }
-
-                if (result == null)
-                {
-                    try
-                    {
-                        result = (RecipeTreeNode)ri.GetByClassName(name);
-                    }
-                    catch { }
-                }
-
-                if (result == null)
-                {
-                    try
-                    {
-                        result = (RecipeTreeNode)ri.GetByName(name, Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName);
-                    }
-                    catch { }
-                }
-
-                return result;
+                return (RecipeTreeNode)base[name];
             }
         }
 
@@ -87,6 +57,8 @@ namespace MrKupido.Processor
 
             // index the tree
             ri = new Indexer(recipeRoot);
+
+            WasInitialized = true;
         }
 
         public RecipeTreeNode RenderInline(string masterRecipeClass, string[] inlineRecipeClasses)

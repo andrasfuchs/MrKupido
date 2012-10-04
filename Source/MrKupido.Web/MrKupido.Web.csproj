@@ -162,8 +162,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CultureInitializer.cs" />
+    <Compile Include="Models\FilterListItem.cs" />
     <Compile Include="Models\IngredientAmountExt.cs" />
     <Compile Include="Models\OldBrowserData.cs" />
+    <Compile Include="Models\SearchQueryResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -289,6 +291,9 @@
     <Content Include="Scripts\jquery-1.7.2.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.11.js" />
     <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
+    <Content Include="Scripts\jquery.ui.autocomplete.accentFolding.js" />
+    <Content Include="Scripts\jquery.ui.autocomplete.autoSelect.js" />
+    <Content Include="Scripts\jquery.ui.autocomplete.selectFirst.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
@@ -382,6 +387,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Recipe\_RecipeDirections.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_SearchHeader.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

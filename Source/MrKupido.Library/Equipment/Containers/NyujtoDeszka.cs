@@ -15,6 +15,7 @@ namespace MrKupido.Library.Equipment
         {
         }
 
+        [NameAlias("hun", "nyújtsd ki nyújtódeszkán a(z) {0T} {1} mm-esre")]
         public IIngredient Nyujtani(IIngredient i, float thickness)
         {
             return i;

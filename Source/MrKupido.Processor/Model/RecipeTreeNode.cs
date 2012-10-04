@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Reflection;
 using MrKupido.Library;
 using MrKupido.Library.Recipe;
+using System.Web.Script.Serialization;
 
 namespace MrKupido.Processor.Model
 {
@@ -17,50 +18,58 @@ namespace MrKupido.Processor.Model
         public delegate CookedFoodParts CookDelegate(float amount, PreparedIngredients preps, EquipmentGroup eg);
         public delegate void ServeDelegate(float amount, CookedFoodParts food, EquipmentGroup eg);
 
+        [ScriptIgnore]
         public DateTime? ExpiresAt;
 
+        [ScriptIgnore]
         public SelectEquipmentDelegate SelectEquipment;
+        [ScriptIgnore]
         public PrepareDelegate Prepare;
+        [ScriptIgnore]
         public CookDelegate Cook;
+        [ScriptIgnore]
         public ServeDelegate Serve;
 
+        [ScriptIgnore]
         private Dictionary<float, IIngredient[]> ingredientCache = new Dictionary<float, IIngredient[]>();
+        [ScriptIgnore]
         private Dictionary<float, IDirection[]> directionCache = new Dictionary<float, IDirection[]>();
 
+        [ScriptIgnore]
         public Type RecipeType { get; private set; }
 
         public RecipeTreeNode(Type recipeType)
             : base(recipeType)
         {
-            char[] name = Name.ToCharArray();
+            char[] name = LongName.ToCharArray();
             name[0] = Char.ToUpper(name[0]);
-            Name = new String(name);
+            LongName = new string(name);
 
             RecipeType = recipeType; 
-            try
-            {
-                SelectEquipment = (SelectEquipmentDelegate)Delegate.CreateDelegate(typeof(SelectEquipmentDelegate), RecipeType.GetMethod("SelectEquipment"));
-            }
-            catch (Exception) { }
 
-            try
+            MethodInfo mi = RecipeType.GetMethod("SelectEquipment");
+            if (mi != null)
             {
-                Prepare = (PrepareDelegate)Delegate.CreateDelegate(typeof(PrepareDelegate), RecipeType.GetMethod("Prepare"));
+                SelectEquipment = (SelectEquipmentDelegate)Delegate.CreateDelegate(typeof(SelectEquipmentDelegate), mi);
             }
-            catch (Exception) { }
 
-            try
+            mi = RecipeType.GetMethod("Prepare");
+            if (mi != null)
             {
-                Cook = (CookDelegate)Delegate.CreateDelegate(typeof(CookDelegate), RecipeType.GetMethod("Cook"));
+                Prepare = (PrepareDelegate)Delegate.CreateDelegate(typeof(PrepareDelegate), mi);
             }
-            catch (Exception) { }
 
-            try
+            mi = RecipeType.GetMethod("Cook");
+            if (mi != null)
             {
-                Serve = (ServeDelegate)Delegate.CreateDelegate(typeof(ServeDelegate), RecipeType.GetMethod("Serve"));
+                Cook = (CookDelegate)Delegate.CreateDelegate(typeof(CookDelegate), mi);
             }
-            catch (Exception) { }
 
+            mi = RecipeType.GetMethod("Serve");
+            if (mi != null)
+            {
+                Serve = (ServeDelegate)Delegate.CreateDelegate(typeof(ServeDelegate), mi);
+            }
         }
 
         public string[] GetTags()

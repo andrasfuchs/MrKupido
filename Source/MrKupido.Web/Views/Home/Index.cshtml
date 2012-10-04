@@ -3,52 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <header>
-    <img runat="server" src="~/Content/svg/mrkupidologo.svg" alt="Mr. Kupido" width="200" height="152" />
-    <p class="userbar">
-        @if (Session["CurrentUser"] == null)
-        {
-            <span id="login"><a runat="server" href="~/hun/Account/LogIn" onclick="_gaq.push(['_trackEvent', 'Profile', 'Login', '']);">Log in</a></span>
-        }
-        @if (Session["CurrentUser"] != null)
-        {
-            <span id="name"><a runat="server" href="~/hun/Account/Profile">@Session["CurrentUser.DisplayName"]</a></span><span id="messages">0</span>
-            <img runat="server" src="~/Content/images/avatar.jpg" alt="Avatar" width="51" height="51" />
-        }
-        else
-        { 
-            <img runat="server" src="~/Content/svg/avatar.svg" alt="Avatar" width="51" height="51" />
-        }
-    </p>
-    <div class="searchbox">
-        <p class="inputfield">
-            <label for="location">
-                Helyszin:</label>
-            <input id="location" type="text" placeholder="(jelenleg ismeretlen)" />
-        </p>
-        <p class="inputfield">
-            <label for="query">
-                Keresnivaló:</label>
-            <input id="query" type="search" placeholder="(hozzávaló, diéta, eszköz)" autofocus />
-        </p>
-        <input id="search" type="submit" value="Keresés" onclick="_gaq.push(['_trackEvent', 'Search', 'Search', '+karalábé -pulyka']);"/>
-        <div id="deleteall">
-            <input type="button" value="Mindent töröl" />
-        </div>
-        <div id="filters">
-            <ul>
-                <li>+ krumpli <a href="#">x</a></li>
-                <li>+ liszt <a href="#">x</a></li>
-                <li>+ cukor <a href="#">x</a></li>
-                <li>- spenót <a href="#">x</a></li>
-                <li>+ répa <a href="#">x</a></li>
-                <li>+ csirke <a href="#">x</a></li>
-                <li>- paprika <a href="#">x</a></li>
-                <li>+ sütő <a href="#">x</a></li>
-                <li>+ paleolit <a href="#">x</a></li>
-                <li>- gesztenye <a href="#">x</a></li>
-            </ul>
-        </div>
-    </div>
+    @{ Html.RenderPartial("_SearchHeader"); }
 </header>
 <hr class="single" />
 <article>

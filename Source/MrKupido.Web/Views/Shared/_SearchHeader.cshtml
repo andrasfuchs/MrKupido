@@ -1,0 +1,145 @@
+﻿@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+    <script type="text/javascript">
+        $(function () {
+            $("#query").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "Home/SearchAutocomplete",
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            featureClass: "P",
+                            style: "full",
+                            maxRows: 12,
+                            name_startsWith: request.term
+                        },
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return {
+                                    label: item.DisplayString,
+                                    value: item.TreeNode.NodeType + ":" + item.TreeNode.UniqueName,
+                                    icon: item.TreeNode.NodeType == "I" ? "http://localhost/MrKupido/Content/svg/cat_bread_dark.svg" :
+                                              (item.TreeNode.NodeType == "R" ? "http://localhost/MrKupido/Content/svg/cat_pasta_dark.svg" : null)
+                                }
+                            }) // map
+                            ); // response
+                        }, // success
+                        error: function (xhr, textStatus, errorThrown) {
+                            //                              alert("Error");
+                            //                              alert(xhr);
+                            //                              alert(textStatus);
+                            //                              alert(errorThrown);
+                        }
+                    }); // ajax
+                },
+                minLength: 2,
+                select: function (event, ui) {
+                    $.ajax({
+                        url: "Home/SearchSelected",
+                        type: "POST",
+                        dataType: "json",
+                        data: {
+                            selectedValue: ui.item ? ui.item.value : this.value,
+                            wasItemSelected: ui.item != null
+                        },
+                        success: function (data) {
+                            refreshFilters(data);
+                        }, // success
+                        error: function (xhr, textStatus, errorThrown) {
+                            //                              alert("Error");
+                            //                              alert(xhr);
+                            //                              alert(textStatus);
+                            //                              alert(errorThrown);
+                        }
+                    }); // ajax
+                    $(this).val(''); return false;
+                },
+                open: function () {
+                    $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+                },
+                close: function () {
+                    $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+                }
+            })
+            .data("autocomplete")._renderItem = function (ul, item) {
+                return $('<li class="ui-menu-item-with-icon"></li>')
+                    .data("item.autocomplete", item)
+                    .append('<a><img class="ui-menu-item-icon" src="' + item.icon + '" />' + item.label + '</a>')
+                    .appendTo(ul);
+            };
+        });
+
+        function refreshFilters(filters) {            
+            ulBody = '';
+            
+            for(x=0; x<filters.length; x++) {
+                ulBody += '<li>' + filters[x].Text + ' <a href="javascript:deleteFilter(\'' + filters[x].Value + '\')">x</a></li>';
+            }
+
+            $('#filters').empty();
+            $('#filters').append('<ul>' + ulBody + '</ul>');
+        };
+
+        function deleteFilter(filterValue) {
+            $.ajax({
+                url: "Home/DeleteFilter",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    value: filterValue
+                },
+                success: function (data) {
+                    refreshFilters(data);
+                }, // success
+                error: function (xhr, textStatus, errorThrown) {
+                    //                              alert("Error");
+                    //                              alert(xhr);
+                    //                              alert(textStatus);
+                    //                              alert(errorThrown);
+                }
+            }); // ajax
+        }
+
+        $(document).ready(function () {
+            deleteFilter("");
+        });
+    </script>
+
+<img runat="server" src="~/Content/svg/mrkupidologo.svg" alt="Mr. Kupido" width="200" height="152" />
+<p class="userbar">
+    @if (Session["CurrentUser"] == null)
+    {
+        <span id="login"><a runat="server" href="~/hun/Account/LogIn" onclick="_gaq.push(['_trackEvent', 'Profile', 'Login', '']);">Log in</a></span>
+    }
+    @if (Session["CurrentUser"] != null)
+    {
+        <span id="name"><a runat="server" href="~/hun/Account/Profile">@Session["CurrentUser.DisplayName"]</a></span><span id="messages">0</span>
+        <img runat="server" src="~/Content/images/avatar.jpg" alt="Avatar" width="51" height="51" />
+    }
+    else
+    { 
+        <img runat="server" src="~/Content/svg/avatar.svg" alt="Avatar" width="51" height="51" />
+    }
+</p>
+<div class="searchbox">
+    <p class="inputfield">
+        <label for="location">
+            Helyszin:</label>
+        <input id="location" type="text" placeholder="(jelenleg ismeretlen)" />
+    </p>
+    <p class="inputfield">
+        <label for="query">
+            Keresnivaló:</label>
+        <input id="query" type="search" placeholder="(hozzávaló, diéta, eszköz)" autofocus />
+    </p>
+    <input id="search" type="submit" value="Keresés" onclick="_gaq.push(['_trackEvent', 'Search', 'Search', '+karalábé -pulyka']);" />
+    <div id="deleteall">
+        <input type="button" value="Mindent töröl" onclick="deleteFilter()" />
+    </div>
+    <div id="filters">
+        <ul>            
+        </ul>
+    </div>
+</div>
