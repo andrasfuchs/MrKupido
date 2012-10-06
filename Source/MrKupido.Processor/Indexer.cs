@@ -18,13 +18,25 @@ namespace MrKupido.Processor
         private Dictionary<string, SortedList<string, TreeNode>> nameIndex = new Dictionary<string, SortedList<string, TreeNode>>();
         private Dictionary<string, SortedList<string, TreeNode>> uniqueNameIndex = new Dictionary<string, SortedList<string, TreeNode>>();
 
+        private List<TreeNode> all = new List<TreeNode>();
+        public TreeNode[] All 
+        { 
+            get
+            {
+                return all.ToArray();
+            }
+        }
+
         public Indexer(TreeNode root)
         {
+            all.Clear();
             AddToIndex(root);
         }
 
         private void AddToIndex(TreeNode node)
         {
+            all.Add(node);
+
             if (classNameIndex.ContainsKey(node.ClassName)) throw new MrKupidoException("Class-name index already has an item with the key '{0}'", node.ClassName);
             classNameIndex.Add(node.ClassName, node);
 

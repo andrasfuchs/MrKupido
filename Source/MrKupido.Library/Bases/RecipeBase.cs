@@ -36,25 +36,25 @@ namespace MrKupido.Library.Recipe
             //Serve(amount, food, eg);
         }
 
-        public static EquipmentGroup SelectEquipment(float amount)
-        {
-            throw new NotImplementedException();
-        }
+        //public static EquipmentGroup SelectEquipment(float amount)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public static PreparedIngredients Prepare(float amount, EquipmentGroup eg)
-        {
-            throw new NotImplementedException();
-        }
+        //public static PreparedIngredients Prepare(float amount, EquipmentGroup eg)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public static CookedFoodParts Cook(float amount, PreparedIngredients preps, EquipmentGroup eg)
-        {
-            throw new NotImplementedException();
-        }
+        //public static CookedFoodParts Cook(float amount, PreparedIngredients preps, EquipmentGroup eg)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        public static void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
-        {
-            throw new NotImplementedException();
-        }
+        //public static void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public void RecipeUnknown()
         {

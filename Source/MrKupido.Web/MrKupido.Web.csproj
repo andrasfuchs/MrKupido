@@ -162,10 +162,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CultureInitializer.cs" />
-    <Compile Include="Models\FilterListItem.cs" />
     <Compile Include="Models\IngredientAmountExt.cs" />
     <Compile Include="Models\OldBrowserData.cs" />
-    <Compile Include="Models\SearchQueryResult.cs" />
+    <Compile Include="Models\RecipeCategoryGroup.cs" />
+    <Compile Include="Models\RecipeSearchQueryResults.cs" />
+    <Compile Include="Models\RecipeSearchResultItem.cs" />
+    <Compile Include="Models\RecipeSearchResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -390,6 +392,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\_SearchHeader.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\_RecipeSearchResults.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

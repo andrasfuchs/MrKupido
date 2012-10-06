@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using MrKupido.Web.Models;
 using MrKupido.Processor;
 using MrKupido.Processor.Model;
+using MrKupido.Processor.Models;
+using System.Threading;
 
 namespace Web.Controllers
 {
@@ -24,7 +26,7 @@ namespace Web.Controllers
         [HttpPost]
         public JsonResult SearchAutocomplete(string name_startsWith)
         {
-            SearchQueryResult[] sqrs = Cache.NodesQuery(name_startsWith.ToLower()).Select(o => new SearchQueryResult(o.Key, o.Value)).ToArray();
+            RecipeSearchQueryResults[] sqrs = Cache.NodesQuery(name_startsWith.ToLower()).Select(o => new RecipeSearchQueryResults(o.Key, o.Value)).ToArray();
 
             return Json(sqrs);
         }
@@ -32,9 +34,9 @@ namespace Web.Controllers
         [HttpPost]
         public JsonResult SearchSelected(string selectedValue, bool wasItemSelected)
         {
-            if (Session["filters"] == null) Session["filters"] = new List<FilterListItem>();
+            if (Session["filters"] == null) Session["filters"] = new List<FilterCondition>();
 
-            List<FilterListItem> filters = (List<FilterListItem>)Session["filters"];
+            List<FilterCondition> filters = (List<FilterCondition>)Session["filters"];
 
             TreeNode tn = null;
             if (wasItemSelected)
@@ -61,7 +63,7 @@ namespace Web.Controllers
 
             if (tn != null)
             {
-                FilterListItem fli = new FilterListItem(tn, false);
+                FilterCondition fli = new FilterCondition(tn, false);
 
                 if (filters.Count(f => f.Value == fli.Value) == 0)
                 {
@@ -76,13 +78,13 @@ namespace Web.Controllers
         [HttpPost]
         public JsonResult DeleteFilter(string value)
         {
-            if (Session["filters"] == null) Session["filters"] = new List<FilterListItem>();
+            if (Session["filters"] == null) Session["filters"] = new List<FilterCondition>();
 
-            List<FilterListItem> filters = (List<FilterListItem>)Session["filters"];
+            List<FilterCondition> filters = (List<FilterCondition>)Session["filters"];
 
             if (value != null)
             {
-                FilterListItem fli = filters.FirstOrDefault(f => (f.Value == value));
+                FilterCondition fli = filters.FirstOrDefault(f => (f.Value == value));
 
                 if (fli != null)
                 {
@@ -99,5 +101,18 @@ namespace Web.Controllers
 
             return Json(filters.ToArray());
         }
+
+        [HttpPost]
+        public ActionResult Search(int maxResult)
+        {
+            if (Session["filters"] == null) Session["filters"] = new List<FilterCondition>();
+
+            List<FilterCondition> filters = (List<FilterCondition>)Session["filters"];
+
+            RecipeSearchResult rsr = new RecipeSearchResult(Cache.Search.Search(filters.ToArray(), Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName).ToArray());
+
+            return PartialView("_RecipeSearchResults", rsr);
+        }
+    
     }
 }

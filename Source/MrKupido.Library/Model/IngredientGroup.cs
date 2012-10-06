@@ -40,8 +40,7 @@ namespace MrKupido.Library.Ingredient
 
         public IngredientGroup(IIngredient[] ingredients) : base(0.0f, MeasurementUnit.none)
         {
-            // TODO: decide the category on the individual ingredient categories
-            Category = ShoppingListCategory.Mixed;
+            this.Category = 0;
 
             AddIngredients(ingredients);
 
@@ -89,6 +88,8 @@ namespace MrKupido.Library.Ingredient
                 {
                     this.Unit = MeasurementUnit.gramm;
                 }
+
+                this.Category |= ingredient.Category;
             }
         }
 

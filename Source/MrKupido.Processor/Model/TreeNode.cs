@@ -14,8 +14,8 @@ namespace MrKupido.Processor.Model
 {
     public class TreeNode
     {
-        [ScriptIgnore]
-        protected static MrKupidoContext db = new MrKupidoContext();
+        //[ScriptIgnore]
+        //protected static MrKupidoContext db = new MrKupidoContext();
 
         [ScriptIgnore]
         public TreeNode Parent { get; private set; }

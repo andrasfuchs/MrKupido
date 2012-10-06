@@ -38,6 +38,8 @@ namespace MrKupido.Processor.Model
         [ScriptIgnore]
         public Type RecipeType { get; private set; }
 
+        public bool IsImplemented = false;
+
         public RecipeTreeNode(Type recipeType)
             : base(recipeType)
         {
@@ -63,6 +65,7 @@ namespace MrKupido.Processor.Model
             if (mi != null)
             {
                 Cook = (CookDelegate)Delegate.CreateDelegate(typeof(CookDelegate), mi);
+                IsImplemented = true;
             }
 
             mi = RecipeType.GetMethod("Serve");

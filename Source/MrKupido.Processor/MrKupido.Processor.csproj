@@ -91,18 +91,21 @@
     <Compile Include="IngredientCache.cs" />
     <Compile Include="Model\DynamicMethodHelper.cs" />
     <Compile Include="Model\EquipmentTreeNode.cs" />
+    <Compile Include="Model\FilterCondition.cs" />
     <Compile Include="Model\IngredientTreeNode.cs" />
     <Compile Include="Model\NatureNodeType.cs" />
     <Compile Include="Model\NatureTreeNode.cs" />
     <Compile Include="Model\NutritionInfo.cs" />
     <Compile Include="Model\RecipeDirection.cs" />
     <Compile Include="Model\RecipeMethod.cs" />
+    <Compile Include="Model\RecipeSearchInstance.cs" />
     <Compile Include="Model\RecipeTreeNode.cs" />
     <Compile Include="Model\TreeNode.cs" />
     <Compile Include="RecipeAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RecipeCache.cs" />
     <Compile Include="Indexer.cs" />
+    <Compile Include="RecipeSearchCache.cs" />
     <Compile Include="RecipeTagger.cs" />
   </ItemGroup>
   <ItemGroup>

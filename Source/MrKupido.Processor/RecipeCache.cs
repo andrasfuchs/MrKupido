@@ -26,6 +26,14 @@ namespace MrKupido.Processor
             }
         }
 
+        public RecipeTreeNode[] All
+        {
+            get
+            {
+                return ri.All.Cast<RecipeTreeNode>().ToArray();
+            }
+        }
+
         public void Initialize()
         {
             if (ri != null) return;

@@ -17,7 +17,7 @@ namespace MrKupido.Library.Recipe
             RecipeUnknown();
         }
 
-        public static new EquipmentGroup SelectEquipment(float amount)
+        public static EquipmentGroup SelectEquipment(float amount)
         {
             throw new NotImplementedException();
         }

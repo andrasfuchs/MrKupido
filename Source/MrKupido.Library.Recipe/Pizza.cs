@@ -17,7 +17,7 @@ namespace MrKupido.Library.Recipe
             : base(amount, unit)
         { }
 
-        public static new EquipmentGroup SelectEquipment(float amount)
+        public static EquipmentGroup SelectEquipment(float amount)
         {
             EquipmentGroup result = new EquipmentGroup();
 
@@ -34,7 +34,7 @@ namespace MrKupido.Library.Recipe
             return result;
         }
 
-        public static new PreparedIngredients Prepare(float amount, EquipmentGroup eg)
+        public static PreparedIngredients Prepare(float amount, EquipmentGroup eg)
         {
             PreparedIngredients result = new PreparedIngredients();
 
@@ -57,7 +57,7 @@ namespace MrKupido.Library.Recipe
             return result;
         }
 
-        public static new CookedFoodParts Cook(float amount, PreparedIngredients preps, EquipmentGroup eg)
+        public static CookedFoodParts Cook(float amount, PreparedIngredients preps, EquipmentGroup eg)
         {
             CookedFoodParts cfp = new CookedFoodParts();
 
@@ -76,7 +76,7 @@ namespace MrKupido.Library.Recipe
             return cfp;
         }
 
-        public static new void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
+        public static void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
             Kez kez = eg.Use<Kez>();
             kez.Talalni(food["pizzaalap"], eg.Use<LaposTanyer>());

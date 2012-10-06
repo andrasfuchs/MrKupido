@@ -78,6 +78,7 @@
     <Compile Include="Action\Passive.cs" />
     <Compile Include="Attributes\CommercialProductOfAttribute.cs" />
     <Compile Include="Attributes\ContainsGlutenAttribute.cs" />
+    <Compile Include="Attributes\IconUriFragmentAttribute.cs" />
     <Compile Include="Attributes\IngredientConstsAttribute.cs" />
     <Compile Include="Attributes\NatureRelation\EggOfAttribute.cs" />
     <Compile Include="Attributes\NatureRelation\GranulesOfAttribute.cs" />

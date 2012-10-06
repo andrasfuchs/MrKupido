@@ -6,12 +6,12 @@ using MrKupido.Processor.Model;
 
 namespace MrKupido.Web.Models
 {
-    public class SearchQueryResult
+    public class RecipeSearchQueryResults
     {
         public string DisplayString;
         public TreeNode TreeNode;
 
-        public SearchQueryResult(string displayString, TreeNode treeNode)
+        public RecipeSearchQueryResults(string displayString, TreeNode treeNode)
         {
             this.DisplayString = displayString;
             this.TreeNode = treeNode;

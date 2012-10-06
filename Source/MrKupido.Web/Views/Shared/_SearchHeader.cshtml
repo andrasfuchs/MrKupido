@@ -3,6 +3,14 @@
 }
     <script type="text/javascript">
         $(function () {
+            $("#query").keyup(function (e) {
+                var code = e.which; // recommended to use e.which, it's normalized across browsers
+                if (code == 13) e.preventDefault();
+                if (code == 32 || code == 13 || code == 188 || code == 186) {
+                    $("#search").trigger("onclick");
+                } // missing closing if brace
+            });
+
             $("#query").autocomplete({
                 source: function (request, response) {
                     $.ajax({
@@ -35,6 +43,9 @@
                     }); // ajax
                 },
                 minLength: 2,
+                selectFirst: true,
+                autoSelect: true,
+                accentFolding: true, /* is it working/necessary */
                 select: function (event, ui) {
                     $.ajax({
                         url: "Home/SearchSelected",
@@ -75,7 +86,7 @@
             ulBody = '';
             
             for(x=0; x<filters.length; x++) {
-                ulBody += '<li>' + filters[x].Text + ' <a href="javascript:deleteFilter(\'' + filters[x].Value + '\')">x</a></li>';
+                ulBody += '<li>' + filters[x].Text + ' <a href="javascript:deleteFilter(\'' + filters[x].Value + '\'); doSearch(12);">x</a></li>';
             }
 
             $('#filters').empty();
@@ -134,9 +145,9 @@
             Keresnivaló:</label>
         <input id="query" type="search" placeholder="(hozzávaló, diéta, eszköz)" autofocus />
     </p>
-    <input id="search" type="submit" value="Keresés" onclick="_gaq.push(['_trackEvent', 'Search', 'Search', '+karalábé -pulyka']);" />
+    <input id="search" type="submit" value="Keresés" onclick="_gaq.push(['_trackEvent', 'Search', 'Search', '+karalábé -pulyka']); doSearch(12);" style="display: none"/>
     <div id="deleteall">
-        <input type="button" value="Mindent töröl" onclick="deleteFilter()" />
+        <input type="button" value="Mindent töröl" onclick="deleteFilter();" />
     </div>
     <div id="filters">
         <ul>            

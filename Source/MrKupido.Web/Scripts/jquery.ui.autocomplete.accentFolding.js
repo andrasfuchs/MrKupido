@@ -1,4 +1,4 @@
-﻿/*
+/*
  * jQuery UI Autocomplete Accent Folding Extension
  *
  * Copyright 2010, Scott González (http://scottgonzalez.com)

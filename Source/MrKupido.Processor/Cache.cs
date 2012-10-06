@@ -12,6 +12,7 @@ namespace MrKupido.Processor
     {
         private static IngredientCache ingredientCache = new IngredientCache();
         private static RecipeCache recipeCache = new RecipeCache();
+        private static RecipeSearchCache recipeSearchCache = new RecipeSearchCache();
         public static Assembly[] Assemblies { get; private set; }
 
         static Cache()
@@ -43,6 +44,14 @@ namespace MrKupido.Processor
                 if (!recipeCache.WasInitialized) recipeCache.Initialize();
 
                 return recipeCache;
+            }
+        }
+
+        public static RecipeSearchCache Search
+        {
+            get
+            {
+                return recipeSearchCache;
             }
         }
 

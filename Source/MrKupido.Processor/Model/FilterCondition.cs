@@ -4,18 +4,18 @@ using System.Linq;
 using System.Web;
 using MrKupido.Processor.Model;
 
-namespace MrKupido.Web.Models
+namespace MrKupido.Processor.Models
 {
-    public class FilterListItem
+    public class FilterCondition
     {
         public string Text;
         public string Value;
         public bool IsNeg;
-        //public TreeNode TN;
+        public TreeNode Node;
 
-        public FilterListItem(TreeNode tn, bool isNeg)
+        public FilterCondition(TreeNode tn, bool isNeg)
         {
-            //TN = tn;
+            Node = tn;
             IsNeg = isNeg;
             Text = (isNeg ? '-' : '+') + " " + tn.ShortName;
             Value = (isNeg ? '-' : '+') + " " + tn.NodeType + ":" + tn.UniqueName;

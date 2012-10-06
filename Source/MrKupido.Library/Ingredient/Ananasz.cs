@@ -10,6 +10,8 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "ananász")]
     [NameAlias("eng", "pineapple")]
 
+    [IngredientConsts(Category = ShoppingListCategory.Fruit)]
+
     [YieldOf(typeof(AnanasComosus))]
     public class Ananasz : IngredientBase
     {
