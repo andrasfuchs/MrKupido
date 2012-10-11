@@ -49,12 +49,28 @@ namespace MrKupido.RecipeUpload.MindMegette
             if (Interlocked.Decrement(ref NumBusy) == 0) doneEvent.Set();
         }
 
+        private StringBuilder sb = new StringBuilder();
+        private string content;
+
         private void ReadFileContent()
         {
-            fileContent = File.ReadAllText(filename, Encoding.GetEncoding(1250));
-            fileContent = fileContent.Substring(fileContent.IndexOf("<div class=\"recept-fej cf\">"));
-            fileContent = fileContent.Substring(0, fileContent.IndexOf("<div class=\"megjegyzes-box-wrap fl\">"));
-            fileContent = fileContent.Replace("\n", "").Replace("\t", "").Replace("\r", "");
+            // version A
+            //fileContent = File.ReadAllText(filename, Encoding.GetEncoding(1250));
+            //fileContent = fileContent.Substring(fileContent.IndexOf("<div class=\"recept-fej cf\">"));
+            //fileContent = fileContent.Substring(0, fileContent.IndexOf("<div class=\"megjegyzes-box-wrap fl\">"));
+            //fileContent = fileContent.Replace("\n", "").Replace("\t", "").Replace("\r", "");
+
+            // version B
+            content = File.ReadAllText(filename, Encoding.GetEncoding(1250));
+            int startIndex = content.IndexOf("<div class=\"recept-fej cf\">");
+            int endIndex = content.IndexOf("<div class=\"megjegyzes-box-wrap fl\">");
+            
+            sb.Clear();
+            sb.Append(content.Substring(startIndex, endIndex - startIndex));
+            sb.Replace("\n", "");
+            sb.Replace("\t", "");
+            sb.Replace("\r", "");
+            fileContent = sb.ToString();
         }
 
         private void InsertRecipe(string uniqueName, string htmlContent)
@@ -94,6 +110,7 @@ namespace MrKupido.RecipeUpload.MindMegette
             MemoryStream ms = new MemoryStream();
             dcjs.WriteObject(ms, directions);
             recipe.Directions = Encoding.UTF8.GetString(ms.ToArray());
+            recipe.OriginalDirections = recipe.Directions;
 
             // Ingredients
             recipe.Ingredients = HtmlUtils.HtmlToCommaSeparated(HttpUtility.HtmlDecode(recipe.Ingredients), "li", true);

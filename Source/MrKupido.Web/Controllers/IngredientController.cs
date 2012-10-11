@@ -15,12 +15,14 @@ using MrKupido.Utils;
 using MrKupido.Library;
 using MrKupido.Processor;
 using MrKupido.Processor.Model;
+using NHunspell;
 
 namespace Web.Controllers
 {
     public class IngredientController : Controller
     {
         private MrKupidoContext db = new MrKupidoContext();
+        private static char[] whiteSpaces = new char[] { ' ', ',', '.', '!', '?', ')', '(', '"', '&', ';', '\'', '[', ']', ':', '\\', '_', '`', '„', '<', '>', '\r', '\n', '”' };
 
         //
         // GET: /Ingredient/
@@ -176,9 +178,82 @@ namespace Web.Controllers
 
             // TODO: remove special characters
 
-            //
+            // TODO: generate C# code
 
             return PartialView("_RecipeEditor", rfdl);
+        }
+
+        [HttpPost]
+        public ActionResult MakeDirectionsBasic(string langISO, string directions)
+        {            
+            StringBuilder result = new StringBuilder();
+
+            // TODO: remove special characters
+            bool isHtmlTag = false;
+            foreach (char d in directions.Replace("\n","").Replace("</li>","\n"))
+            {
+                if (d == '<') isHtmlTag = true;
+
+                if (!isHtmlTag)
+                {
+                    result.Append(d);
+                }
+                else
+                {
+                    if (d == '>') isHtmlTag = false;
+                }
+            }
+            string dirs = result.ToString();
+            result.Clear();
+
+            // TODO: use openoffice
+            string culture = System.Threading.Thread.CurrentThread.CurrentCulture.Name.Replace("-", "_");
+            string hunspellFilename = Path.GetFullPath(@".\" + culture + @"\") + culture;
+            hunspellFilename = Server.MapPath(@"~\Content\spelling\" + culture + @"\") + culture;
+            Hunspell hunspell = new Hunspell(hunspellFilename + ".aff", hunspellFilename + ".dic");
+
+            foreach (string dir in dirs.ToString().Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                foreach (string word in dir.Split(whiteSpaces, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    result.Append(" ");
+
+                    string w = word.Trim();
+
+                    bool correct = hunspell.Spell(w);
+                    if (!correct)
+                    {
+                        result.Append(w);
+                        continue;
+                    }
+
+                    try
+                    {
+                        List<string> stems = hunspell.Stem(w);
+                        result.Append(stems[0]);
+                    }
+                    catch 
+                    {
+                        result.Append(w);
+                    }
+                }
+                result.Append('\n');
+            }
+
+            return PartialView("_BasicRecipe", result.ToString().Split('\n'));
+        }
+
+        [HttpPost]
+        public ActionResult LoadOriginalRecipe(string recipeUniqueName)
+        {
+            string directions = db.ImportedRecipes.Where(rec => (rec.UniqueName == recipeUniqueName)).First().OriginalDirections;
+            directions = HttpUtility.HtmlDecode(directions);
+
+            DataContractJsonSerializer dcjs = new DataContractJsonSerializer(typeof(string[]));
+            List<string> directionList = new List<string>();
+            directionList.AddRange(dcjs.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(directions))) as string[]);
+
+            return PartialView("_RecipeEditor", directionList);
         }
 
         [HttpPost]

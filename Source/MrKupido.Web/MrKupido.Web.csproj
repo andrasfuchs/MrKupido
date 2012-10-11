@@ -67,6 +67,9 @@
       <HintPath>..\DotNetOpenAuth\DotNetOpenAuth.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NHunspell">
+      <HintPath>..\NHunSpell\NHunspell.dll</HintPath>
+    </Reference>
     <Reference Include="Roslyn.Services.Editor.CSharp, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -195,6 +198,12 @@
     <Content Include="Content\images\ticked.png" />
     <Content Include="Content\images\tree-icons.png" />
     <Content Include="Content\images\unticked.png" />
+    <Content Include="Hunspellx64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Hunspellx86.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\svg\action_none.svg" />
     <Content Include="Content\svg\arrow_right_light.svg" />
     <Content Include="Content\svg\avatar.svg" />
@@ -395,6 +404,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\_RecipeSearchResults.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Ingredient\_OriginalRecipe.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Ingredient\_BasicRecipe.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\spelling\en_US\en_US.aff" />
+    <None Include="Content\spelling\en_US\en_US.dic" />
+    <None Include="Content\spelling\hu_HU\hu_HU.aff" />
+    <None Include="Content\spelling\hu_HU\hu_HU.dic" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

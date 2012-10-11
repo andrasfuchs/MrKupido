@@ -50,7 +50,22 @@ namespace MrKupido.RecipeUpload.MindMegette
             Console.WriteLine("Saving...");
             for (int i = 0; i < files.Length; i++)
             {
-                context.ImportedRecipes.Add(workItems[i].Recipe);
+                ImportedRecipe cr = workItems[i].Recipe;
+                ImportedRecipe ir = context.ImportedRecipes.FirstOrDefault(r => (r.UniqueName == cr.UniqueName) && (r.Language == "hun"));
+                if (ir == null) ir = context.ImportedRecipes.FirstOrDefault(r => r.UniqueName == (cr.UniqueName + "-hun") && (r.Language == "hun"));
+
+                if (ir == null)
+                {
+                    //context.ImportedRecipes.Add(workItems[i].Recipe);
+                }
+                else
+                {
+                    if (ir.OriginalDirections != workItems[i].Recipe.OriginalDirections)
+                    {
+                        ir.OriginalDirections = workItems[i].Recipe.OriginalDirections;
+                    }
+                }
+
                 if (i % 250 == 0)
                 {
                     context.SaveChanges();

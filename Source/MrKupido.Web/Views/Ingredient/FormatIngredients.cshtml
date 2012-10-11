@@ -49,11 +49,32 @@
             @{ Html.RenderPartial("_IngredientTable"); }
         </div>
     </div>
+    <div id="originalrecipe" class="boxed">
+        <h2>
+            5. A recept eredeti szövege</h2>
+        <div id="_OriginalRecipe">
+            @{ Html.RenderPartial("_OriginalRecipe"); }
+        </div>
+    </div>
     <div id="recipeeditor" class="boxed">
         <h2>
-            5. Ird át úgy a receptet, hogy ne legyen benne értelmezhetetlen kifejezés</h2>
+            6. Ird át úgy a receptet, hogy ne legyen benne értelmezhetetlen kifejezés</h2>
         <div id="_RecipeEditor">
             @{ Html.RenderPartial("_RecipeEditor"); }
+        </div>
+    </div>
+    <div id="basicrecipe" class="boxed">
+        <h2>
+            7. A gépiesített szöveg, amit feldolgozunk</h2>
+        <div id="_BasicRecipe">
+            @{ Html.RenderPartial("_BasicRecipe"); }
+        </div>
+    </div>
+    <div id="recipecode" class="boxed">
+        <h2>
+            8. A generált programkód, amit be lehet illeszteni</h2>
+        <div id="_RecipeCode">
+            
         </div>
     </div>
 </details>
@@ -172,6 +193,14 @@
                     attachEventHandlerToIngredientList();
                     $('textarea#ingredients').trigger('change');
                     $textChanged = false;
+                }
+            });
+
+            $.ajax({
+                url: 'LoadOriginalRecipe',
+                data: JSON.stringify({ recipeUniqueName: $recipeUniqueName }),
+                success: function (result) {
+                    $('div#_OriginalRecipe').html(result);
                 }
             });
 

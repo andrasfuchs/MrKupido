@@ -82,9 +82,33 @@
         }
     });
 
-    $('section#recipeeditor').change(function () {
-        $contentChanged = true;
+    //setup before functions
+    var typingTimer;                //timer identifier
+    var doneTypingInterval = 1000;  //time in ms, 1.0 second for example
+
+    //on keyup, start the countdown
+    $('section#recipeeditor').keyup(function () {
+        typingTimer = setTimeout(doneTyping, doneTypingInterval);
     });
+
+    //on keydown, clear the countdown 
+    $('section#recipeeditor').keydown(function () {
+        clearTimeout(typingTimer);
+    });
+
+    //user is "finished typing," do something
+    function doneTyping() {
+        //do something
+        $contentChanged = true;
+
+        $.ajax({
+            url: 'MakeDirectionsBasic',
+            data: JSON.stringify({ langISO: $('select#language').val(), directions: $('section#recipeeditor').html() }),
+            success: function (result) {
+                $('div#_BasicRecipe').html(result);
+            }
+        });
+    }
 
     $('section#recipeeditor').blur(function () {
         if ($contentChanged) {
