@@ -3,7 +3,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section scripts {
 <script type="text/javascript">
+
+    $(document).ready(function () {
+        doSearch(6);
+    });
+
     function doSearch(maxResult) {
         $.ajax({
             url: "Home/Search",
@@ -25,6 +31,7 @@
         $("#query").focus();
         }
 </script>
+}
 
 <header>
     @{ Html.RenderPartial("_SearchHeader"); }

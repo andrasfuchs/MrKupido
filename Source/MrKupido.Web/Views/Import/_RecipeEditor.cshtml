@@ -1,0 +1,118 @@
+﻿@model IEnumerable<string>
+<section id="recipeeditor" contenteditable="true" spellcheck="false">
+    <ol>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+            <li>
+                @foreach (string s in item.Split(new string[] { " ", "&nbsp;" }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    <span>@s</span>
+                }
+            </li>
+            }
+        }
+    </ol>
+</section>
+
+<script type="text/javascript">
+
+    $('section#recipeeditor[contenteditable]').live('focus', function () {
+        var $this = $(this);
+        $this.data('before', $this.html());
+        return $this;
+    }).live('blur keyup paste', function () {
+        var $this = $(this);
+        if ($this.data('before') !== $this.html()) {
+            $this.data('before', $this.html());
+            $this.trigger('change');
+        }
+        return $this;
+    });
+
+
+    $.ajax({
+        url: '../LoadRecipeKeywords',
+        data: JSON.stringify({ langISO: $('select#language').val(), directions: $('section#recipeeditor').html() }),
+        success: function (result) {
+            var stringLists = JSON.parse(result);
+
+            $.each(stringLists.conjunctions, function (i, item) {
+                $('section#recipeeditor span').each(function () {
+                    if ($(this).html() == item) $(this).removeClass().addClass('conjunction');
+                });
+            });
+
+            $.each(stringLists.verbs, function (i, item) {
+                $('section#recipeeditor span').each(function () {
+                    if ($(this).html() == item) $(this).removeClass().addClass('verb');
+                });
+            });
+
+            $.each(stringLists.ingredients, function (i, item) {
+                $('section#recipeeditor span').each(function () {
+                    if ($(this).html() == item) $(this).removeClass().addClass('ingredient');
+                });
+            });
+
+            $.each(stringLists.devices, function (i, item) {
+                $('section#recipeeditor span').each(function () {
+                    if ($(this).html() == item) $(this).removeClass().addClass('device');
+                });
+            });
+
+            $.each(stringLists.units, function (i, item) {
+                $('section#recipeeditor span').each(function () {
+                    if ($(this).html() == item) $(this).removeClass().addClass('unit');
+                });
+            });
+
+            $.each(stringLists.aliases, function (i, item) {
+                $('section#recipeeditor span').each(function () {
+                    if ($(this).html() == item) $(this).removeClass().addClass('alias');
+                });
+            });
+
+            $('section#recipeeditor span').each(function () {
+                if (!isNaN(parseFloat($(this).html()))) $(this).removeClass().addClass('unit');
+            });
+
+            $contentChanged = false;
+        }
+    });
+
+    //setup before functions
+    var typingTimer;                //timer identifier
+    var doneTypingInterval = 1000;  //time in ms, 1.0 second for example
+
+    //on keyup, start the countdown
+    $('section#recipeeditor').keyup(function () {
+        typingTimer = setTimeout(doneTyping, doneTypingInterval);
+    });
+
+    //on keydown, clear the countdown 
+    $('section#recipeeditor').keydown(function () {
+        clearTimeout(typingTimer);
+    });
+
+    //user is "finished typing," do something
+    function doneTyping() {
+        //do something
+        $contentChanged = true;
+
+        $.ajax({
+            url: '../MakeDirectionsBasic',
+            data: JSON.stringify({ langISO: $('select#language').val(), directions: $('section#recipeeditor').html() }),
+            success: function (result) {
+                $('div#_BasicRecipe').html(result);
+            }
+        });
+    }
+
+    $('section#recipeeditor').blur(function () {
+        if ($contentChanged) {
+            $("div#confirmRecipeSave").dialog("open");
+        }
+    });
+</script>

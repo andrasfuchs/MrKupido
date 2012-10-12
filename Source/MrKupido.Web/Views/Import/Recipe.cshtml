@@ -1,0 +1,112 @@
+﻿@model object[]
+@{
+    ViewBag.Title = "Recipe";
+}
+
+@section scripts {
+<script type="text/javascript">
+    var $textChanged = false;
+    var $prevRecipeUniqueName = "";
+    var $recipeUniqueName = "";
+    var $prevIngredients = "";
+    var $ingredients = "";
+
+    $.ajaxSetup({
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        dataType: 'html',
+        cache: false
+    });
+
+    $(document).ready(function () {
+
+        attachEventHandlerToIngredientList();
+        $('textarea#ingredients').trigger('change');
+        $textChanged = false;
+       
+        $("div#confirmRecipeSave").bind('dialogclose', function (event) {
+            $('select#recipes').trigger('change');
+        });
+
+    });
+
+    function attachEventHandlerToIngredientList() {
+        $('textarea#ingredients').on('change.kupido', function () {
+            $prevIngredients = $ingredients;
+            $ingredients = $('textarea#ingredients').val();
+
+            $textChanged = true;
+            $('textarea#ingredients').attr('disabled', 'disabled');
+
+            $.ajax({
+                url: '../LoadIngredientTable',
+                data: JSON.stringify({ langISO: 'hun', ingredients: $ingredients }),
+                success: function (result) {
+                    $('div#_IngredientTable').html(result);
+                    $('textarea#ingredients').removeAttr('disabled');
+                }
+            });
+        });
+    }
+</script>
+}
+<header class="nosearch">
+    <a runat="server" href="~/">
+        <img runat="server" src="~/Content/svg/mrkupidologo.svg" alt="Mr. Kupido" width="400" height="304" />
+    </a>
+</header>
+<hr class="double" />
+<details id="importrecipe" open class="alwaysopen">
+    <summary>
+        <h1>
+            Recept importálás</h1>
+        <hr class="single" />
+        <h3>
+            @{ string name = ((MrKupido.Model.ImportedRecipe)Model[0]).DisplayName;}
+            @name</h3>
+        <hr class="single" />
+    </summary>
+    <div id="ingredientlist" class="boxed">
+        <h2>
+            1. Módosítsd a hozzávalók listáját</h2>
+        <div id="_IngredientList">
+            @{ Html.RenderPartial("_IngredientList", Model[1]); }
+        </div>
+    </div>
+    <div id="ingredienttable" class="boxed">
+        <h2>
+            2. Ellenőrízd, hogy minden összetevő helyesen szerepel-e a táblában</h2>
+        <div id="_IngredientTable">
+            @{ Html.RenderPartial("_IngredientTable", null, new ViewDataDictionary()); }
+        </div>
+    </div>
+    <div id="originalrecipe" class="boxed">
+        <h2>
+            3. A recept eredeti szövege</h2>
+        <div id="_OriginalRecipe">
+            @{ Html.RenderPartial("_OriginalRecipe", Model[2]); }
+        </div>
+    </div>
+    <div id="recipeeditor" class="boxed">
+        <h2>
+            4. Ird át úgy a receptet, hogy ne legyen benne értelmezhetetlen kifejezés</h2>
+        <div id="_RecipeEditor">
+            @{ Html.RenderPartial("_RecipeEditor", Model[3]); }
+        </div>
+    </div>
+    <div id="basicrecipe" class="boxed">
+        <h2>
+            5. A gépiesített szöveg, amit feldolgozunk</h2>
+        <div id="_BasicRecipe">
+            @{ Html.RenderPartial("_BasicRecipe", null, new ViewDataDictionary()); }
+        </div>
+    </div>
+    <div id="recipecode" class="boxed">
+        <h2>
+            6. A generált programkód, amit be lehet illeszteni</h2>
+        <div id="_RecipeCode">
+            @{ Html.RenderPartial("_RecipeCode", null, new ViewDataDictionary()); }
+        </div>
+    </div>
+    <input type="button" title="Save" value="Save" onclick="location.href='@Url.Action("SaveRecipe", "ImportController")'"/>
+</details>

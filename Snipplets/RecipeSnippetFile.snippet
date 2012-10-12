@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CodeSnippets xmlns="http://schemas.microsoft.com/VisualStudio/2005/CodeSnippet">
+  <CodeSnippet Format="1.0.0">
+    <Header>
+      <SnippetTypes>
+        <SnippetType>Expansion</SnippetType>
+      </SnippetTypes>
+      <Title>RecipeSnippetFile</Title>
+      <Author>Andras</Author>
+      <Description>
+      </Description>
+      <HelpUrl>
+      </HelpUrl>
+      <Shortcut>
+      </Shortcut>
+    </Header>
+    <Snippet>
+      <Declarations>
+        <Literal Editable="true">
+          <ID>Cukor</ID>
+          <ToolTip>Cukor</ToolTip>
+          <Default>Cukor</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>cukor</ID>
+          <ToolTip>cukor</ToolTip>
+          <Default>cukor</Default>
+          <Function>
+          </Function>
+        </Literal>
+        <Literal Editable="true">
+          <ID>sugar</ID>
+          <ToolTip>sugar</ToolTip>
+          <Default>sugar</Default>
+          <Function>
+          </Function>
+        </Literal>
+      </Declarations>
+      <Code Language="csharp"><![CDATA[using System;
+using MrKupido.Library.Attributes;
+
+namespace MrKupido.Library.Recipe
+{
+    [NameAlias("hun", "$cukor$")]
+    [NameAlias("eng", "$sugar$")]
+
+    public class $Cukor$ : RecipeBase
+    {
+        public $Cukor$(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+            : base(amount, unit)
+        {
+            RecipeUnknown();
+        }
+    }
+}]]></Code>
+    </Snippet>
+  </CodeSnippet>
+</CodeSnippets>

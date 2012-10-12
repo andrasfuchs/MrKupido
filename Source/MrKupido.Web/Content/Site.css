@@ -177,10 +177,10 @@ article div.tip span
 hr.single
 {
     border: 0;
-    height: 20px;
+    height: 3px;
     background: url('../Content/svg/hr_single.svg') 0 0 no-repeat;
     background-position: center;
-    margin: 1em 0;
+    margin: 3px;
 }
 
 hr.double
@@ -189,7 +189,7 @@ hr.double
     height: 11px;
     background: url('../Content/svg/hr_double.svg') 0 0 no-repeat;
     background-position: center;
-    margin: 1em 0;
+    margin: 2px
 }
 
 details summary::-webkit-details-marker 
@@ -203,8 +203,7 @@ details summary h1
     font-family: TangerineBold, Sans-Serif;
     color: /*mcd*/#553e31;
     text-align: center;
-    margin-top: -8px;
-    margin-bottom: 35px;
+    margin: 0px;
     background: url('../Content/svg/h1_bg.svg') 0 0 repeat-y;
     /*background: url('../Content/images/h1_bg.png') 0 0 repeat-y;*/
     background-position: center;
@@ -225,7 +224,19 @@ details summary h2
     width: auto;
     
     text-align: right;
-    margin: -70px 10px 10px 0px;
+    margin: -35px 10px 10px 0px;
+}
+
+details summary h3
+{
+    font-size: 26px;
+    font-family: Tangerine, Sans-Serif;
+    color: /*mcd*/#553e31;
+    margin: 0px;
+    
+    width: auto;
+    
+    text-align: center;
 }
 
 details h2
@@ -905,27 +916,38 @@ div.boxed h2
 
 div#languages
 {
-    float: left;
-    width: 200px;
+    width: 900px;
 }
 
 div#languages select
 {
-    width: 180px;
-    margin: 10px;
+    width: 870px;
 }
 
+   
 div#recipelist
 {
-    width: 250px;
+    width: 900px;
+    height: 800px;
+    
+    /* Column-count not implemented yet */  
+    -moz-column-count: 3;  
+    -webkit-column-count: 3;  
+    /* Column-gap not implemented yet */  
+    -moz-column-gap: 22px;  
+    -webkit-column-gap: 22px; 
+    
+    column-count: 3;  
+    column-gap: 22px;
 }
 
-div#recipelist select
-{
-    width: 230px;
-    height: 110px;
-    margin: 10px;
-}
+div#recipelist h2 
+{    
+    -moz-column-span: all;  
+    -webkit-column-span: all;  
+
+    column-span: all;  
+} 
 
 details#formatingredients div#ingredientlist
 {
@@ -935,12 +957,12 @@ details#formatingredients div#ingredientlist
 
 details#formatingredients div#ingredientlist textarea
 {
-    width: 360px;
+    width: 800px;
     height: 105px;
     margin: 10px;
 }
 
-section#recipeeditor li
+section#recipeeditor li, section#originalrecipe li, section#basicrecipe li, section#recipecode li
 {
     border: 0px;
     width: 800px;

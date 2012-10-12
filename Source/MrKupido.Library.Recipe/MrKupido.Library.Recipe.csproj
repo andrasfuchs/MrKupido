@@ -74,6 +74,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Cukor\PorCukor.cs" />
+    <Compile Include="Sutopor.cs" />
     <Compile Include="Cukor.cs" />
     <Compile Include="Cukor\KristalyCukor.cs" />
     <Compile Include="Cukor\KristalyCukor\KoronasKristalyCukor.cs" />
@@ -98,6 +100,7 @@
     <Compile Include="Sajt\Trappista\BakonyTrappista.cs" />
     <Compile Include="Sajt\Trappista\TihanyFustrolTrappista.cs" />
     <Compile Include="Sajt\Trappista\TolleTrappista.cs" />
+    <Compile Include="NaturJoghurt.cs" />
     <Compile Include="Tejfol.cs" />
     <Compile Include="Tejfol\MilliTejfol.cs" />
     <Compile Include="Turo.cs" />

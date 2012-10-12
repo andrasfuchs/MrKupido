@@ -159,6 +159,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImportController.cs" />
     <Compile Include="Controllers\IngredientController.cs" />
     <Compile Include="Controllers\RecipeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -347,16 +348,10 @@
     <Content Include="Content\fonts\Tangerine\Tangerine_Regular.ttf" />
     <Content Include="Views\Account\LogIn.cshtml" />
     <Content Include="Views\Account\Profile.cshtml" />
-    <Content Include="Views\Ingredient\Index.cshtml" />
-    <Content Include="Views\Ingredient\Details.cshtml" />
-    <Content Include="Views\Ingredient\Create.cshtml" />
-    <Content Include="Views\Ingredient\Edit.cshtml" />
-    <Content Include="Views\Ingredient\Delete.cshtml" />
-    <Content Include="Views\Ingredient\FormatIngredients.cshtml" />
-    <Content Include="Views\Ingredient\_IngredientTable.cshtml" />
-    <Content Include="Views\Ingredient\_ImportedRecipeList.cshtml" />
-    <Content Include="Views\Ingredient\_IngredientList.cshtml" />
-    <Content Include="Views\Ingredient\_RecipeEditor.cshtml" />
+    <Content Include="Views\Import\_IngredientTable.cshtml" />
+    <Content Include="Views\Import\_ImportedRecipeList.cshtml" />
+    <Content Include="Views\Import\_IngredientList.cshtml" />
+    <Content Include="Views\Import\_RecipeEditor.cshtml" />
     <Content Include="Views\Home\NotSupportedBrowser.cshtml" />
     <Content Include="Views\Ingredient\_TaxonomyTree.cshtml" />
     <Content Include="Views\Ingredient\Taxonomy.cshtml" />
@@ -406,16 +401,19 @@
     <Content Include="Views\Home\_RecipeSearchResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Ingredient\_OriginalRecipe.cshtml" />
+    <Content Include="Views\Import\_OriginalRecipe.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Ingredient\_BasicRecipe.cshtml" />
+    <Content Include="Views\Import\_BasicRecipe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\spelling\en_US\en_US.aff" />
     <None Include="Content\spelling\en_US\en_US.dic" />
     <None Include="Content\spelling\hu_HU\hu_HU.aff" />
     <None Include="Content\spelling\hu_HU\hu_HU.dic" />
+    <Content Include="Views\Import\RecipeList.cshtml" />
+    <Content Include="Views\Import\Recipe.cshtml" />
+    <Content Include="Views\Import\_RecipeCode.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

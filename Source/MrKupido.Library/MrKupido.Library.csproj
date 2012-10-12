@@ -139,6 +139,9 @@
     <Compile Include="Exceptions\RecipeUnknownException.cs" />
     <Compile Include="Ingredient\Ananasz.cs" />
     <Compile Include="Ingredient\Burgonya.cs" />
+    <Compile Include="Ingredient\Alma.cs" />
+    <Compile Include="Ingredient\RetesLiszt.cs" />
+    <Compile Include="Ingredient\Fahej.cs" />
     <Compile Include="Ingredient\Fokhagyma.cs" />
     <Compile Include="Ingredient\OlivaOlaj.cs" />
     <Compile Include="Ingredient\Sonka.cs" />

@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "RecipeList";
+}
+
+@section scripts {
+<script type="text/javascript">
+    var $textChanged = false;
+    var $prevRecipeUniqueName = "";
+    var $recipeUniqueName = "";
+    var $prevIngredients = "";
+    var $ingredients = "";
+
+    $.ajaxSetup({
+        type: 'POST',
+        contentType: "application/json; charset=utf-8",
+        dataType: 'html',
+        cache: false
+    });
+
+    $(document).ready(function () {
+
+        $('select#language').on('change.kupido', function () {
+            var langISO = $(this).val();
+            $(this).attr('disabled', 'disabled');
+
+            $.ajax({
+                url: 'LoadImportedRecipes',
+                data: JSON.stringify({ langISO: langISO }),
+                success: function (result) {
+                    $('div#_ImportedRecipeList').html(result);
+                    $('select#language').removeAttr('disabled');
+
+                    attachEventHandlerToImportedRecipeList();
+                }
+            });
+        });
+
+        $('select#language').trigger('change');
+    });
+</script>
+}
+
+<header class="nosearch">
+    <a runat="server" href="~/">
+        <img runat="server" src="~/Content/svg/mrkupidologo.svg" alt="Mr. Kupido" width="400" height="304" />
+    </a>
+</header>
+<details id="chooserecipe" open class="alwaysopen">
+    <summary>
+        <h1>
+            Recept importálás - recept kiválasztása</h1>
+    </summary>
+    <div id="languages" class="boxed">
+        <h2>
+            1. Válassz nyelvet</h2>
+        <select id="language" autofocus>
+            <option value="eng">English</option>
+            <option value="hun">Hungarian</option>
+        </select>
+    </div>
+    <div id="recipelist" class="boxed">
+        <h2>
+            2. Válassz receptet</h2>
+        <div id="_ImportedRecipeList">
+        </div>
+    </div>
+</details>

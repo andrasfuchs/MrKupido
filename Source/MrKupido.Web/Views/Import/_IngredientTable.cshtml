@@ -1,0 +1,142 @@
+﻿@model IEnumerable<MrKupido.Model.IngredientAmount>
+@using MrKupido.Web.Models
+<table id="ingredienttable" class="wide">
+    <thead>
+        <tr>
+            <th>
+                Teljes szöveg
+            </th>
+            <th>
+                Mennyiség
+            </th>
+            <th>
+                Mértékegység
+            </th>
+            <th>
+                Megnevezés
+            </th>
+            <th>
+                Egyedi név
+            </th>
+            <th>
+                Formátum
+            </th>
+            <th>
+                Állapot
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            int i = 0;
+            foreach (var item in Model)
+            {
+                i++;
+            <tr>
+                <td>
+                    @item.ToString()
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Unit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IngredientName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IngredientUniqueName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Format)
+                </td>
+                <td>
+                    @if (item.Warnings().Length > 0)
+                    {
+                        <img runat="server" src="~/Content/svg/circle_warning.svg" alt="Warning" title="@item.Warnings()[0]" width="20" height="20"/>
+                    }
+                    else if (item.Index > -1)
+                    {
+                        <img runat="server" src="~/Content/svg/circle_tick.svg" alt="OK" width="20" height="20" />
+                    }
+                    else
+                    {
+                        <a class="add" href='@i'>
+                            <img runat="server" src="~/Content/svg/circle_plus.svg" alt="Add" width="20" height="20" />
+                        </a>
+                        
+                        <div id="createIngredient_@i" class="createIngredient" title="Új hozzávaló hozzáadása">
+                            <h3>
+                                Az új hozzávaló részletei</h3>
+                            <input type="hidden" class="index" value="@i" />
+                            <label for="nameHun">
+                                Magyar megnevezés:</label>
+                            <input type="text" class="nameHun" name="nameHun" value='@(item.Language == "hun" ? item.IngredientName : "")'  disabled/><br />
+                            <label for="uniqueNameHun">
+                                Magyar egyedi név:</label>
+                            <input type="text" class="uniqueNameHun"  name="uniqueNameHun" value='@(item.Language == "hun" ? item.IngredientUniqueName : "")' disabled/><br />
+                            <label for="nameEng">
+                                Angol megnevezés:</label>
+                            <input type="text" class="nameEng" name="nameEng" value='@(item.Language == "eng" ? item.IngredientName : "")'  disabled/><br />
+                            <label for="uniqueNameEng">
+                                Angol egyedi név:</label>
+                            <input type="text" class="uniqueNameEng" name="uniqueNameEng" value='@(item.Language == "eng" ? item.IngredientUniqueName : "")' disabled/><br />
+                        </div>
+
+                    }
+                </td>
+            </tr>
+            }
+
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="7">
+                Összesen @(Model != null ? Model.Count() : 0)
+                hozzávaló
+            </td>
+        </tr>
+    </tfoot>
+</table>
+<script type="text/javascript">
+
+
+    $("a.add").click(function (event) {
+        event.preventDefault();
+
+        $("div#createIngredient_" + $(this).attr('href')).dialog("open");
+    });
+
+    $("div.createIngredient").dialog({ modal: true, resizable: false, autoOpen: false, buttons: [
+                {
+                    text: "Save",
+                    click: function () {
+                        $(this).dialog("option", "title", "Mentés folyamatban...");
+                        var index = $(this).children("input.index").val();
+
+                        $.ajax({
+                            url: 'CreateIngredient',
+                            data: JSON.stringify(
+                            {
+                                nameHun: $(this).children("input.nameHun").val(),
+                                uniqueNameHun: $(this).children("input.uniqueNameHun").val(),
+                                nameEng: $(this).children("input.nameEng").val(),
+                                uniqueNameEng: $(this).children("input.uniqueNameEng").val()
+                            }),
+                            success: function (result) {
+                                $("div#createIngredient_" + index).dialog("close");
+                                $("div#createIngredient_" + index).dialog("option", "title", "Új hozzávaló hozzáadása");
+                            }
+                        });
+                    }
+                },
+                {
+                    text: "Cancel",
+                    click: function () { $(this).dialog("close"); }
+                }
+            ]
+    });
+</script>
