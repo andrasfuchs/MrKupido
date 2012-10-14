@@ -11,6 +11,8 @@ namespace MrKupido.Library.Equipment
 
     public class Kes : Tool
     {
+        [NameAlias("hun", "feldarabol", Priority = 200)]
+
         [NameAlias("hun", "darabold fel a(z) {0T} {1} grammos darabokra")]
         public IngredientGroup Feldarabolni(IIngredient i, float weight)
         {
@@ -35,6 +37,8 @@ namespace MrKupido.Library.Equipment
 
             return new IngredientGroup(result.ToArray());
         }
+
+        [NameAlias("hun", "felkarikáz", Priority = 200)]
 
         [NameAlias("hun", "karikázd fel a(z) {0T} {1} grammos darabokra")]
         public IngredientGroup Felkarikazni(IIngredient i, float weight)

@@ -6,7 +6,10 @@
             foreach (string item in Model)
             {
             <li>
-                @item
+                @foreach (string s in item.Split(new string[] { " ", "&nbsp;" }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    <span>@s</span>
+                }
             </li>
             }
         }

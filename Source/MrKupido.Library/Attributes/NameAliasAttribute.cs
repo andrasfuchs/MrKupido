@@ -60,11 +60,16 @@ namespace MrKupido.Library.Attributes
 
         public static string GetMethodName(Type objType, string methodName)
         {
-            string result = null;
-            int priority = Int32.MaxValue;
+            string[] names = GetMethodNames(objType, methodName);
+
+            return ((names != null) && (names.Length > 0) ? names[0] : null);
+        }
+
+        public static string[] GetMethodNames(Type objType, string methodName)
+        {
+            SortedDictionary<int, string> names = new SortedDictionary<int, string>();
 
             System.Reflection.MethodInfo mi = objType.GetMethod(methodName);
-
             foreach (object attr in mi.GetCustomAttributes(false))
             {
                 if (attr is NameAliasAttribute)
@@ -73,26 +78,22 @@ namespace MrKupido.Library.Attributes
 
                     if (name.CultureName == Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName)
                     {
-                        if (name.Priority == priority)
+                        if (names.ContainsKey(name.Priority))
                         {
-                            throw new MrKupidoException("Class '{0}' has more then one name alias with the same priority.", objType.Name);
+                            throw new MrKupidoException("The method '{1}' of the class '{0}' has more then one name alias with the same priority.", objType.Name, mi.Name);
                         }
 
-                        if (name.Priority < priority)
-                        {
-                            result = name.Name;
-                            priority = name.Priority;
-                        }
+                        names.Add(name.Priority, name.Name);
                     }
                 }
             }
 
-            if (String.IsNullOrEmpty(result))
+            if (names.Count == 0)
             {
-                Trace.TraceWarning("Class '{0}' has no name defined in culture '{1}'.", objType.Name, Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName);
+                Trace.TraceWarning("The method '{1}' of the class '{0}' has no name defined in culture '{2}'.", objType.Name, mi.Name, Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName);
             }
 
-            return result;
+            return names.Values.ToArray();
         }
     }
 }

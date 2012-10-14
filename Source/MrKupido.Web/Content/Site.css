@@ -1004,6 +1004,18 @@ details#formatingredients div#ingredientlist textarea
     margin: 10px;
 }
 
+section#recipeeditor
+{
+    width: 400px;
+    float: left;
+}
+
+section#basicrecipe
+{
+    width: 400px;
+    float: right;
+}
+
 section#recipeeditor li, section#originalrecipe li, section#basicrecipe li, section#recipecode li
 {
     border: 0px;
@@ -1011,42 +1023,47 @@ section#recipeeditor li, section#originalrecipe li, section#basicrecipe li, sect
     text-align: justify;
 }
 
-section#recipeeditor span.error
+section#recipeeditor li, section#basicrecipe li
+{
+    width: 350px;
+}
+
+section#basicrecipe span.error
 {
     font-weight: bold;
     color: #990033;
 }
 
-section#recipeeditor span.verb
+section#basicrecipe span.verb
 {
     font-weight: bold;
     color: #808000;
 }
 
-section#recipeeditor span.ingredient
+section#basicrecipe span.ingredient
 {
     font-weight: bold;
     color: #336633;
 }
 
-section#recipeeditor span.conjuntion
+section#basicrecipe span.conjuntion
 {
     color: #000000;
 }
 
-section#recipeeditor span.unit
+section#basicrecipe span.unit
 {
     font-weight: bold;
     color: #00cccc;
 }
 
-section#recipeeditor span.device
+section#basicrecipe span.device
 {
     font-weight: bold;
     color: #666666;
 }
 
-section#recipeeditor span.alias
+section#basicrecipe span.alias
 {
     font-weight: bold;
     color: #000000;

@@ -11,6 +11,8 @@ namespace MrKupido.Library.Equipment
 
     public class Habvero : Tool
     {
+        [NameAlias("hun", "felver", Priority = 200)]
+
         [NameAlias("hun", "verd fel a(z) {0T}")]
         public IngredientGroup Felverni(IIngredient i)
         {

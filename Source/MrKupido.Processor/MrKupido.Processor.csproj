@@ -79,8 +79,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaseCache.cs" />
+    <Compile Include="Cache\BaseCache.cs" />
     <Compile Include="Cache.cs" />
+    <Compile Include="Cache\EquipmentCache.cs" />
     <Compile Include="Exceptions\ProcessorException.cs" />
     <Compile Include="ILReader\FormatProvider.cs" />
     <Compile Include="ILReader\ILInstruction.cs" />
@@ -88,8 +89,9 @@
     <Compile Include="ILReader\ILReader.cs" />
     <Compile Include="ILReader\ReadableILStringVisitor.cs" />
     <Compile Include="ILReader\TokenResolver.cs" />
-    <Compile Include="IngredientCache.cs" />
+    <Compile Include="Cache\IngredientCache.cs" />
     <Compile Include="Model\DynamicMethodHelper.cs" />
+    <Compile Include="Model\EquipmentCommand.cs" />
     <Compile Include="Model\EquipmentTreeNode.cs" />
     <Compile Include="Model\FilterCondition.cs" />
     <Compile Include="Model\IngredientTreeNode.cs" />
@@ -103,9 +105,9 @@
     <Compile Include="Model\TreeNode.cs" />
     <Compile Include="RecipeAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RecipeCache.cs" />
+    <Compile Include="Cache\RecipeCache.cs" />
     <Compile Include="Indexer.cs" />
-    <Compile Include="RecipeSearchCache.cs" />
+    <Compile Include="Cache\RecipeSearchCache.cs" />
     <Compile Include="RecipeTagger.cs" />
   </ItemGroup>
   <ItemGroup>

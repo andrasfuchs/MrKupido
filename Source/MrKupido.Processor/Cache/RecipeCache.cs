@@ -30,13 +30,13 @@ namespace MrKupido.Processor
         {
             get
             {
-                return ri.All.Cast<RecipeTreeNode>().ToArray();
+                return Indexer.All.Cast<RecipeTreeNode>().ToArray();
             }
         }
 
         public void Initialize()
         {
-            if (ri != null) return;
+            if (Indexer != null) return;
 
             // check if the assemblies are patched already and they are up-to-date
             List<Assembly> assembliesToCheck = new List<Assembly>();
@@ -64,7 +64,7 @@ namespace MrKupido.Processor
             RecipeTreeNode recipeRoot = TreeNode.BuildTree(assembliesToCheck.ToArray(), t => new RecipeTreeNode(t), typeof(MrKupido.Library.Recipe.RecipeBase));
 
             // index the tree
-            ri = new Indexer(recipeRoot);
+            Indexer = new Indexer(recipeRoot);
 
             WasInitialized = true;
         }
@@ -91,7 +91,7 @@ namespace MrKupido.Processor
             }
 
 
-            result = (RecipeTreeNode)ri.GetByClassName(masterRecipeClass);
+            result = (RecipeTreeNode)Indexer.GetByClassName(masterRecipeClass);
 
             // keep the original assembly for the method references
             AssemblyDefinition adOrig = AssemblyDefinition.ReadAssembly(result.ClassType.Assembly.Location);
@@ -111,7 +111,7 @@ namespace MrKupido.Processor
             // let's modify the methods
             foreach (string inlineClass in inlineRecipeClasses)
             {
-                RecipeTreeNode inline = (RecipeTreeNode)ri.GetByClassName(inlineClass);
+                RecipeTreeNode inline = (RecipeTreeNode)Indexer.GetByClassName(inlineClass);
 
                 // load inline type and its methods which are to be inserted
                 AssemblyDefinition adInline = null;

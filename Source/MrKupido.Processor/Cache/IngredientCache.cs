@@ -20,7 +20,7 @@ namespace MrKupido.Processor
         public void Initialize()
         {
             IngredientTreeNode root = TreeNode.BuildTree(Cache.Assemblies, t => new IngredientTreeNode(t), typeof(MrKupido.Library.Ingredient.IngredientBase), typeof(MrKupido.Library.Recipe.RecipeBase));
-            ri = new Indexer(root);
+            Indexer = new Indexer(root);
 
             WasInitialized = true;
         }

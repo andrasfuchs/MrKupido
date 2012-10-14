@@ -11,6 +11,8 @@ namespace MrKupido.Library.Equipment
 
     public class BurgonyaPres : Tool
     {
+        [NameAlias("hun", "összeprésel", Priority = 200)]
+
         [NameAlias("hun", "préseld össze a(z) {0T}")]
         public IngredientGroup Preselni(IIngredient i)
         {

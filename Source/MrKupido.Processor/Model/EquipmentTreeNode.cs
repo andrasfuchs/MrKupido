@@ -2,26 +2,36 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Reflection;
+using MrKupido.Library.Attributes;
 
 namespace MrKupido.Processor.Model
 {
     public class EquipmentTreeNode : TreeNode
     {
-        //public NatureNodeType Type { set; get; }
+        public EquipmentCommand[] ValidCommands { private set; get; }
 
         public EquipmentTreeNode(Type equipmentClass)
             : base(equipmentClass)
         {
-            //Type = NatureNodeType.None;
+            List<EquipmentCommand> commands = new List<EquipmentCommand>();
 
-            //foreach (object attr in natureClass.GetCustomAttributes(false))
-            //{
-            //    if (attr.GetType().FullName == "MrKupido.Library.Attributes.NatureKingdomAttribute")
-            //    {
-            //        if (Type == NatureNodeType.None) Type = NatureNodeType.Kingdom;
-            //        else throw new ProcessorException("Class '" + natureClass.Name + "' has more then one nature defining attributes.");
-            //    }
-            //}
+            foreach (MethodInfo mi in equipmentClass.GetMethods())
+            {
+                if (mi.Name.StartsWith("get_")) continue;
+                if (mi.Name.StartsWith("set_")) continue;
+
+                if ((mi.Name == "ToString") || (mi.Name == "Equals") || (mi.Name == "GetHashCode") || (mi.Name == "GetType")) continue;
+
+                EquipmentCommand ec = new EquipmentCommand();
+
+                ec.Method = mi;
+                ec.Names = NameAliasAttribute.GetMethodNames(equipmentClass, mi.Name);
+
+                commands.Add(ec);
+            }
+
+            ValidCommands = commands.ToArray();
         }
     }
 }

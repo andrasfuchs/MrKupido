@@ -12,7 +12,7 @@ namespace MrKupido.Library.Equipment
 
     public class Fakanal : Spoon
     {
-        [NameAlias("hun", "összekeverni", Priority=200)]
+        [NameAlias("hun", "összekever", Priority=200)]
         [NameAlias("eng", "mix together", Priority=200)]
 
         [IconUriFragment("mix")]

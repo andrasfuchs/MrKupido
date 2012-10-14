@@ -31,52 +31,13 @@
         return $this;
     });
 
+    var $stringLists = null;
 
     $.ajax({
         url: '../LoadRecipeKeywords',
         data: JSON.stringify({ langISO: $('select#language').val(), directions: $('section#recipeeditor').html() }),
         success: function (result) {
-            var stringLists = JSON.parse(result);
-
-            $.each(stringLists.conjunctions, function (i, item) {
-                $('section#recipeeditor span').each(function () {
-                    if ($(this).html() == item) $(this).removeClass().addClass('conjunction');
-                });
-            });
-
-            $.each(stringLists.verbs, function (i, item) {
-                $('section#recipeeditor span').each(function () {
-                    if ($(this).html() == item) $(this).removeClass().addClass('verb');
-                });
-            });
-
-            $.each(stringLists.ingredients, function (i, item) {
-                $('section#recipeeditor span').each(function () {
-                    if ($(this).html() == item) $(this).removeClass().addClass('ingredient');
-                });
-            });
-
-            $.each(stringLists.devices, function (i, item) {
-                $('section#recipeeditor span').each(function () {
-                    if ($(this).html() == item) $(this).removeClass().addClass('device');
-                });
-            });
-
-            $.each(stringLists.units, function (i, item) {
-                $('section#recipeeditor span').each(function () {
-                    if ($(this).html() == item) $(this).removeClass().addClass('unit');
-                });
-            });
-
-            $.each(stringLists.aliases, function (i, item) {
-                $('section#recipeeditor span').each(function () {
-                    if ($(this).html() == item) $(this).removeClass().addClass('alias');
-                });
-            });
-
-            $('section#recipeeditor span').each(function () {
-                if (!isNaN(parseFloat($(this).html()))) $(this).removeClass().addClass('unit');
-            });
+            $stringLists = JSON.parse(result);            
 
             $contentChanged = false;
         }
@@ -98,7 +59,6 @@
 
     //user is "finished typing," do something
     function doneTyping() {
-        //do something
         $contentChanged = true;
 
         $.ajax({
@@ -106,6 +66,48 @@
             data: JSON.stringify({ langISO: $('select#language').val(), directions: $('section#recipeeditor').html() }),
             success: function (result) {
                 $('div#_BasicRecipe').html(result);
+
+                if ($stringLists != null) {
+                    $.each($stringLists.conjunctions, function (i, item) {
+                        $('section#basicrecipe span').each(function () {
+                            if ($(this).html() == item) $(this).removeClass().addClass('conjunction');
+                        });
+                    });
+
+                    $.each($stringLists.verbs, function (i, item) {
+                        $('section#basicrecipe span').each(function () {
+                            if ($(this).html() == item) $(this).removeClass().addClass('verb');
+                        });
+                    });
+
+                    $.each($stringLists.ingredients, function (i, item) {
+                        $('section#basicrecipe span').each(function () {
+                            if ($(this).html() == item) $(this).removeClass().addClass('ingredient');
+                        });
+                    });
+
+                    $.each($stringLists.devices, function (i, item) {
+                        $('section#basicrecipe span').each(function () {
+                            if ($(this).html() == item) $(this).removeClass().addClass('device');
+                        });
+                    });
+
+                    $.each($stringLists.units, function (i, item) {
+                        $('section#basicrecipe span').each(function () {
+                            if ($(this).html() == item) $(this).removeClass().addClass('unit');
+                        });
+                    });
+
+                    $.each($stringLists.aliases, function (i, item) {
+                        $('section#basicrecipe span').each(function () {
+                            if ($(this).html() == item) $(this).removeClass().addClass('alias');
+                        });
+                    });
+
+                    $('section#basicrecipe span').each(function () {
+                        if (!isNaN(parseFloat($(this).html()))) $(this).removeClass().addClass('unit');
+                    });
+                }
             }
         });
     }

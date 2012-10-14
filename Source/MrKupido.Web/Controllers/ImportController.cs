@@ -44,6 +44,8 @@ namespace MrKupido.Web.Controllers
             return PartialView("_ImportedRecipeList", recipes);
         }
 
+
+
         public ActionResult Recipe(string id)
         {
             ImportedRecipe importedRecipe = db.ImportedRecipes.FirstOrDefault(r => (r.UniqueName == id) && (r.Language == System.Threading.Thread.CurrentThread.CurrentCulture.ThreeLetterISOLanguageName));
@@ -73,7 +75,12 @@ namespace MrKupido.Web.Controllers
             List<string> directionList = new List<string>();
             foreach (string direction in directions)
             {
-                directionList.AddRange(direction.Split(new char[] { ',', '.' }));
+                string[] dirs = direction.Split(new char[] { ',', '.' }, StringSplitOptions.RemoveEmptyEntries);
+
+                foreach (string dir in dirs)
+                {
+                    if (!String.IsNullOrWhiteSpace(dir)) directionList.Add(dir);
+                }
             }
 
             return View(new object[] { importedRecipe, ingredients.ToString(), originalDirections, directionList });
@@ -114,6 +121,7 @@ namespace MrKupido.Web.Controllers
 
             // TODO: remove special characters
             bool isHtmlTag = false;
+            directions = HttpUtility.HtmlDecode(directions);
             foreach (char d in directions.Replace("\n", "").Replace("</li>", "\n"))
             {
                 if (d == '<') isHtmlTag = true;
@@ -144,8 +152,11 @@ namespace MrKupido.Web.Controllers
 
                     string w = word.Trim();
 
+                    float r;
+                    bool isNumber = Single.TryParse(w, out r);
+
                     bool correct = hunspell.Spell(w);
-                    if (!correct)
+                    if ((!correct) || (isNumber))
                     {
                         result.Append(w);
                         continue;
@@ -189,41 +200,41 @@ namespace MrKupido.Web.Controllers
         [HttpPost]
         public ActionResult LoadRecipeKeywords(string langISO, string directions)
         {
-            string[] verbs = new string[0];
+            //string[] verbs = new string[0];
             string[] conjunctions = new string[0];
-            HashSet<string> ingredients = new HashSet<string>();
+            string[] ingredients = new string[0];
             string[] devices = new string[0];
             HashSet<string> aliases = new HashSet<string>();
             string[] units = new string[0];
 
             if (langISO == "hun")
             {
-                verbs = new string[] { "meghamozni", "mosni", "megtisztitani", "szetszedni", "szetvalasztani", "keverni", "osszekeverni", "kemenyreverni", 
-                    "bekapcsolni", "belerakni", "varni", "talalni", "elomelegiteni", "berakni", "rarakni", "megfuttatni", "osszegyurni", "letakarni", 
-                    "homerseklet", "kiszaggatni", "nyujtani", "sodorni", "felkarikazni", "lereszelni", "rarakni", "belerakni", "raonteni", "beboritani", 
-                    "elomelegiteni", "eltavolitani", "felkockazni", "raszorni", "feldarabolni", "megforgatni", "raszorni", "lelocsolni", "levenni",
-                "megfozni", "preselni", "reszelni", "felverni", "megpuhitani", "megforgatni", "lecsepegtetni" };
+                //verbs = new string[] { "meghamozni", "mosni", "megtisztitani", "szetszedni", "szetvalasztani", "keverni", "osszekeverni", "kemenyreverni", 
+                //    "bekapcsolni", "belerakni", "varni", "talalni", "elomelegiteni", "berakni", "rarakni", "megfuttatni", "osszegyurni", "letakarni", 
+                //    "homerseklet", "kiszaggatni", "nyujtani", "sodorni", "felkarikazni", "lereszelni", "rarakni", "belerakni", "raonteni", "beboritani", 
+                //    "elomelegiteni", "eltavolitani", "felkockazni", "raszorni", "feldarabolni", "megforgatni", "raszorni", "lelocsolni", "levenni",
+                //"megfozni", "preselni", "reszelni", "felverni", "megpuhitani", "megforgatni", "lecsepegtetni" };
                 conjunctions = new string[] { "a", "az", "egy", "majd" };
-                devices = new string[] { "labas", "huto", "fakanal", "gofrisuto", "suto", "alufolia", "tepsi", "serpenyo" };
                 units = new string[] { "g", "dkg", "kg", "db", "ml", "cl", "dl", "l", "perc", "óra", "mm", "cm", "dm", "m", "fok" };
             }
 
             if (langISO == "eng")
             {
+                // TODO
             }
 
-            Ingredient[] dbIngredients = db.Ingredients.ToArray();
+            ingredients = Cache.Ingredient.Indexer.All.Select(tn => tn.ShortName).ToArray();
+            devices = Cache.Equipment.Indexer.All.Select(tn => tn.ShortName).ToArray();
 
-            foreach (Ingredient ingredient in dbIngredients)
+            List<string> verbs = new List<string>();
+            foreach (EquipmentTreeNode etn in Cache.Equipment.Indexer.All)
             {
-                if (langISO == "hun")
+                foreach (EquipmentCommand ec in etn.ValidCommands)
                 {
-                    if (!String.IsNullOrEmpty(ingredient.UniqueNameHun)) ingredients.Add(ingredient.UniqueNameHun);
-                }
-
-                if (langISO == "eng")
-                {
-                    if (!String.IsNullOrEmpty(ingredient.UniqueNameEng)) ingredients.Add(ingredient.UniqueNameEng);
+                    foreach (string name in ec.Names)
+                    {
+                        if (!verbs.Contains(name)) verbs.Add(name);
+                    }
                 }
             }
 
@@ -247,7 +258,7 @@ namespace MrKupido.Web.Controllers
                 }
             }
 
-            return Json(new { verbs = verbs, conjunctions = conjunctions, devices = devices, ingredients = ingredients.ToArray(), aliases = aliases, units = units });
+            return Json(new { verbs = verbs.ToArray(), conjunctions = conjunctions, devices = devices, ingredients = ingredients.ToArray(), aliases = aliases, units = units });
         }
 
         [HttpPost]

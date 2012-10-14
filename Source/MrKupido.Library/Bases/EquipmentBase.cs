@@ -23,11 +23,21 @@ namespace MrKupido.Library.Equipment
 
         public virtual uint LastActionDuration { get; private set; }
 
+        [NameAlias("hun", "használ", Priority = 200)]
+        [NameAlias("eng", "use", Priority = 200)]
+
+        [IconUriFragment("use")]
+        [NameAlias("hun", "használd a(z) {T}")]
         public void Use()
         {
             IsInUse = true;
         }
 
+        [NameAlias("hun", "elmosogat", Priority = 200)]
+        [NameAlias("eng", "wash up", Priority = 200)]
+
+        [IconUriFragment("washup")]
+        [NameAlias("hun", "mosogasd el a(z) {T}")]
         public void WashUp()
         {
             IsInUse = false;

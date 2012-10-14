@@ -11,6 +11,8 @@ namespace MrKupido.Library.Equipment
 
     public class Reszelo : Tool
     {
+        [NameAlias("hun", "lereszel", Priority = 200)]
+
         [NameAlias("hun", "reszeld le a(z) {0T}")]
         public IngredientGroup Lereszelni(IIngredient i)
         {

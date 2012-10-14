@@ -9,9 +9,9 @@ namespace MrKupido.Processor
 {
     public class BaseCache
     {
-        public bool WasInitialized = false;
+        public Indexer Indexer { get; protected set; }
 
-        protected Indexer ri;
+        public bool WasInitialized = false;
 
         public TreeNode this[string name]
         {
@@ -21,17 +21,17 @@ namespace MrKupido.Processor
 
                 if (result == null)
                 {
-                    result = ri.GetByUniqueName(name, Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName);
+                    result = Indexer.GetByUniqueName(name, Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName);
                 }
 
                 if (result == null)
                 {
-                    result = ri.GetByClassName(name);
+                    result = Indexer.GetByClassName(name);
                 }
 
                 if (result == null)
                 {
-                    result = ri.GetByName(name, Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName);
+                    result = Indexer.GetByName(name, Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName);
                 }
 
                 return result;
@@ -40,7 +40,7 @@ namespace MrKupido.Processor
 
         public Dictionary<string, TreeNode> Query(string query)
         {
-            return ri.QueryByName(query, Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName);
+            return Indexer.QueryByName(query, Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName);
         }
     }
 }
