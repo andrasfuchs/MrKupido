@@ -193,6 +193,7 @@
     <Content Include="Content\images\h1_bg.png" />
     <Content Include="Content\images\hr_double.png" />
     <Content Include="Content\images\hr_single.png" />
+    <Content Include="Content\images\mrkupido.ico" />
     <Content Include="Content\images\mrkupidologo.png" />
     <Content Include="Content\images\resulticon_empty.png" />
     <Content Include="Content\images\resulticon_photos.png" />

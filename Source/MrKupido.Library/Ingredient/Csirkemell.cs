@@ -10,6 +10,8 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "csirkemell")]
     [NameAlias("eng", "chicken breast")]
 
+    [IngredientConsts(Category = ShoppingListCategory.Meat)]
+
     [PartOf(typeof(GallusGallusDomesticus))]
     public class Csirkemell : IngredientBase
     {

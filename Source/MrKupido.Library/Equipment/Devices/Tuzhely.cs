@@ -8,6 +8,7 @@ namespace MrKupido.Library.Equipment
 {
     [NameAlias("hun", "tűzhely")]
 
+    [IconUriFragment("cooker")]
     public class Tuzhely : Heater
     {
         public Tuzhely(float scale = 1.0f, int positions = 4, int heatLevels = 10)

@@ -11,6 +11,7 @@ namespace MrKupido.Library.Equipment
 
     public class BurgonyaPres : Tool
     {
+        [NameAlias("hun", "préseld össze a(z) {0T}")]
         public IngredientGroup Preselni(IIngredient i)
         {
             if ((!(i is IngredientBase)) || (i.Unit != MeasurementUnit.gramm)) throw new InvalidActionForIngredientException("Preselni", i.Name, i.Unit);

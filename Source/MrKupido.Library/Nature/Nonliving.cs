@@ -8,6 +8,7 @@ namespace MrKupido.Library.Nature
 {
     [NameAlias("hun", "élettelen anyagok")]
 
+    [IconUriFragment("nonliving")]
     public class Nonliving : NatureBase
     {
     }

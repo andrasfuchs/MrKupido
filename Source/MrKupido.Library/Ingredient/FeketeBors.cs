@@ -10,7 +10,7 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "fekete bors")]
 
     // TODO: GrammsPerPiece
-    [IngredientConsts(GrammsPerPiece = 3)]
+    [IngredientConsts(Category = ShoppingListCategory.Spice, GrammsPerPiece = 3)]
 
     [YieldOf(typeof(PiperNigrum))]
     public class FeketeBors : IngredientBase

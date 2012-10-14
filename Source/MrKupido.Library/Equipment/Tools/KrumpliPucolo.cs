@@ -10,6 +10,7 @@ namespace MrKupido.Library.Equipment
 
     public class KrumpliPucolo : Tool
     {
+        [NameAlias("hun", "hámozd meg a(z) {0T}")]
         public IIngredient Meghamozni(IIngredient i)
         {
             return i;

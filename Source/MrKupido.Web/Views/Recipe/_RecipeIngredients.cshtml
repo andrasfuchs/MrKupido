@@ -8,7 +8,7 @@ else
     <ul>
         @foreach (MrKupido.Library.IIngredient ing in Model)
         { 
-            <li>@ing</li>
+            <li><input type="checkbox" name="@ing.Name" value="@ing.Name">@ing<a href="#">v</a></li>
         }
     </ul>
 }

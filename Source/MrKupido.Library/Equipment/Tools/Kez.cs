@@ -53,7 +53,7 @@ namespace MrKupido.Library.Equipment
             return new IngredientGroup(result.ToArray());
         }
 
-        [NameAlias("hun", "csepegtesd le a {0T}")]
+        [NameAlias("hun", "csepegtesd le a(z) {0T}")]
         public IIngredient Lecsepegtetni(IIngredient i) { return i; }
 
         [NameAlias("hun", "szórd rá a(z) {1T} a(z) {0R}")]

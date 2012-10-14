@@ -8,13 +8,14 @@ using MrKupido.Library.Attributes;
 namespace MrKupido.Library.Equipment
 {
     [NameAlias("hun", "fakanál")]
-    [NameAlias("hun", "wooden spoon")]
+    [NameAlias("eng", "wooden spoon")]
 
     public class Fakanal : Spoon
     {
         [NameAlias("hun", "összekeverni", Priority=200)]
         [NameAlias("eng", "mix together", Priority=200)]
 
+        [IconUriFragment("mix")]
         [NameAlias("hun", "keverd össze a következőket: ({0*}, )")]
         public IngredientGroup Osszekeverni(params IIngredient[] ingredients)
         {

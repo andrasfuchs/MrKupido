@@ -34,7 +34,7 @@ namespace MrKupido.Web.Models
 
         public RecipeSearchResultItem(RecipeTreeNode rtn)
         {
-            this.DisplayName = rtn.ShortName;
+            this.DisplayName = Char.ToUpper(rtn.ShortName[0]) + rtn.ShortName.Substring(1);
             this.UniqueName = rtn.UniqueName;
 
             StringBuilder sb = new StringBuilder();

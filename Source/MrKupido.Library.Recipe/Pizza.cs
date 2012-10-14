@@ -11,6 +11,8 @@ namespace MrKupido.Library.Recipe
     [NameAlias("hun", "pizza")]
     [NameAlias("eng", "pizza")]
 
+    [IngredientConsts(Category = ShoppingListCategory.Pizza)]
+
     public class Pizza : RecipeBase
     {
         public Pizza(float amount, MeasurementUnit unit = MeasurementUnit.gramm)

@@ -11,7 +11,7 @@ namespace MrKupido.Library.Equipment
 
     public class Szaggato : Tool
     {
-        [NameAlias("hun", "szaggass ki {1} grammos, {2} mm sugarú alakzatokat a(z) {0B}")]
+        [NameAlias("hun", "szaggass ki {1} grammos, {2} mm sugarú alakzatokat a(z) {0L}")]
         public IngredientGroup Kiszaggatni(IIngredient i, float weight, float radius)
         {
             if (!(i is IngredientBase)) throw new InvalidActionForIngredientException("Kiszaggatni", i.Name, i.Unit);

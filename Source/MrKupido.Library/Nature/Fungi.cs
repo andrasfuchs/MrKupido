@@ -9,6 +9,7 @@ namespace MrKupido.Library.Nature
     [NameAlias("hun", "gombák")]
     [NameAlias("eng", "fungi")]
 
+    [IconUriFragment("fungi")]
     [NatureKingdom]
     public class Fungi : NatureBase
     {

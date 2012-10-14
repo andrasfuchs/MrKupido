@@ -8,6 +8,7 @@ namespace MrKupido.Library.Nature
 {
     [NameAlias("hun", "állatok")]
 
+    [IconUriFragment("animalia")]
     [NatureKingdom]
     public class Animalia : NatureBase
     {

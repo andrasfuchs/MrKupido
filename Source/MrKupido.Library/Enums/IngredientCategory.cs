@@ -37,7 +37,10 @@ namespace MrKupido.Library
         [IconUriFragment("pizza")]
         Pizza = 64,
         [NameAlias("hun", "sütemény")]
-        [IconUriFragment("cookies")]
-        Cookies = 128
+        [IconUriFragment("cookie")]
+        Cookie = 128,
+        [NameAlias("hun", "fűszer")]
+        [IconUriFragment("spice")]
+        Spice = 256
     }
 }

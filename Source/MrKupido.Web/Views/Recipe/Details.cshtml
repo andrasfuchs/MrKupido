@@ -24,9 +24,12 @@
     <details id="recipe" open class="alwaysopen">
         <summary>
             <h1>
-                @(((MrKupido.Processor.Model.RecipeTreeNode)Model[0]).Name)</h1>
+                @{string name = ((MrKupido.Processor.Model.RecipeTreeNode)Model[0]).LongName;}
+                @name</h1>
+            <hr class="single" />
             <h3>
                 Betyár módra</h3>
+            <hr class="single" />
         </summary>
         <div id="taglist">
             <div id="_RecipeTags">
