@@ -17,9 +17,9 @@ namespace MrKupido.Processor
 
             if (!searchResults.ContainsKey(languageISO)) searchResults.Add(languageISO, new SortedList<string, RecipeSearchInstance>());
 
-            if (!searchResults[languageISO].ContainsKey(filterKey))
+            //if (!searchResults[languageISO].ContainsKey(filterKey) || (searchResults[languageISO][filterKey].ResultExpiresAt < DateTime.Now))
             {
-                searchResults[languageISO].Add(filterKey, new RecipeSearchInstance());
+                if (!searchResults[languageISO].ContainsKey(filterKey)) searchResults[languageISO].Add(filterKey, new RecipeSearchInstance());
 
                 searchResults[languageISO][filterKey].FilterConditions = filters;
                 searchResults[languageISO][filterKey].SearchStartedAt = DateTime.Now;
@@ -40,9 +40,14 @@ namespace MrKupido.Processor
                 {
                     if (fc.IsNeg) continue; // TODO: implement negative filters
 
-                    if (fc.Node is IngredientTreeNode)
+                    FilterCondition tempFC = fc;
+
+                    if (tempFC.Node is IngredientTreeNode)
                     {
-                        q = q.Where(r => r.GetIngredients(1.0f).Any(i => i.GetType() == fc.Node.ClassType));
+                        q = q.Where(r => r.GetIngredients(1.0f).Any(i => i.GetType() == tempFC.Node.ClassType));
+                    } else if (tempFC.Node is RecipeTreeNode)
+                    {
+                        q = q.Where(r => (r.ClassType == tempFC.Node.ClassType) || (r.ClassType.IsSubclassOf(tempFC.Node.ClassType)));
                     }
                     else 
                     { 

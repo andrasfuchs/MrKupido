@@ -11,16 +11,18 @@ namespace MrKupido.Model
         public int LogId { get; set; }
 
         [Required]
-        public LogType Type { get; set; }
-        [Required]
-        public LogEvent Event { get; set; }
+        public DateTime UtcTime { get; set; }
 
         [Required]
-        public string Message { get; set; }
+        public string IPAddress { get; set; }
         [Required]
-        public User User { get; set; }
+        public string SessionId { get; set; }
+
+        [Required]
+        public string Action { get; set; }
+        
+        public string Parameters { get; set; }
+        
+        public string FormattedMessage { get; set; }
     }
-
-    public enum LogType { General, User }
-    public enum LogEvent { PageLoad, ButtonClicked, DetailsOpened, DetailsClosed, LogIn, LogOut }
 }

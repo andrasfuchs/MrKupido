@@ -16,11 +16,11 @@ using DotNetOpenAuth.OpenId.RelyingParty;
 using DotNetOpenAuth.OpenId.Extensions.AttributeExchange;
 using DotNetOpenAuth.OpenId;
 using MrKupido.Model;
+using MrKupido.Web.Models;
 
-
-namespace Web.Controllers
+namespace MrKupido.Web.Controllers
 {
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private static MrKupido.DataAccess.MrKupidoContext context = new MrKupido.DataAccess.MrKupidoContext();
 
@@ -34,6 +34,7 @@ namespace Web.Controllers
         public ActionResult LogIn()
         {
             string email = "";
+            string id = "";
             FetchResponse openIdFetch = null;
             Identifier openIdIdentifier = null;
             FacebookGraph facebookGraph = null;
@@ -49,6 +50,7 @@ namespace Web.Controllers
                     {
                         case AuthenticationStatus.Authenticated:
                             openIdIdentifier = response.ClaimedIdentifier;
+                            id = openIdIdentifier.ToString();
                             openIdFetch = response.GetExtension<FetchResponse>();
                             email = openIdFetch == null ? null : openIdFetch.GetAttributeValue(WellKnownAttributes.Contact.Email);
                             break;
@@ -84,6 +86,7 @@ namespace Web.Controllers
                             facebookGraph = FacebookGraph.Deserialize(responseStream);
 
                             email = facebookGraph == null ? null : facebookGraph.Email;
+                            id = facebookGraph == null ? null : facebookGraph.Id.ToString();
                         }
                     }
                 }
@@ -194,21 +197,41 @@ namespace Web.Controllers
 
                 context.SaveChanges();
 
+                this.IssueAuthTicket(user.UserId.ToString(), user, true);
 
                 Session["CurrentUser"] = user;
                 Session["CurrentUser.DisplayName"] = !String.IsNullOrEmpty(user.NickName) ? user.NickName : user.FullName;
 
-                if ((string)Session["LoginType"] == "OpenId")
+                string returnUrl = HttpContext.Request.QueryString["ReturnUrl"];
+                if (String.IsNullOrEmpty(returnUrl))
                 {
-                    FormsAuthentication.RedirectFromLoginPage(openIdIdentifier, false);
+                    return RedirectToRoute(new { contoller = "Home", action = "Index" });
                 }
                 else
                 {
-                    FormsAuthentication.RedirectFromLoginPage(email, false);
+                    return new RedirectResult(returnUrl);
                 }
             }
 
             return View();
+        }
+
+        /// <summary>
+        /// Issues an authentication issue from a userState instance
+        /// </summary>
+        /// <param name="userState"></param>
+        /// <param name="rememberMe"></param>
+        private void IssueAuthTicket(string id, User userState, bool rememberMe)
+        {
+            FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, id,
+                                                                 DateTime.Now, DateTime.Now.AddDays(10),
+                                                                 rememberMe, userState.ToJSONString());
+
+            string ticketString = FormsAuthentication.Encrypt(ticket);
+            HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, ticketString);
+            if (rememberMe) cookie.Expires = DateTime.Now.AddDays(10);
+
+            HttpContext.Response.Cookies.Add(cookie);
         }
 
         [HttpPost]

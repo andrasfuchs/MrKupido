@@ -14,9 +14,9 @@ using MrKupido.Library;
 using MrKupido.Processor.Model;
 using MrKupido.Processor;
 
-namespace Web.Controllers
+namespace MrKupido.Web.Controllers
 {
-    public class IngredientController : Controller
+    public class IngredientController : BaseController
     {
         public ActionResult Taxonomy()
         {

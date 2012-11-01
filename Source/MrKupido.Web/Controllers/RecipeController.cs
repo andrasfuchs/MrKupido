@@ -12,7 +12,7 @@ using MrKupido.Library;
 
 namespace MrKupido.Web.Controllers
 {
-    public class RecipeController : Controller
+    public class RecipeController : BaseController
     {
         private MrKupidoContext db = new MrKupidoContext();
 

@@ -1279,3 +1279,36 @@ li:not(#foo) > fieldset > div > span > input[type='radio']:checked + label {
 li:not(#foo) > fieldset > div > span > input[type='checkbox']:checked + label {
     background-image: url(check.png);
 }
+
+/* --------------- reviewer ---------------------- */
+
+#reviewer
+{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 0.15em 0.25em 0em 0.5em;
+    white-space: nowrap;
+    overflow: hidden;
+    z-index: 30;
+    background: /*mcd*/#553e31;
+    color: white;
+    border: 1px solid /*mcl*/#ebe0d5;
+    border-bottom-width: 0px;
+    border-right-width: 0px;
+    border-radius: 1em 0 0 0;
+    -moz-border-radius: 1em 0 0 0;
+    max-width: 90%;
+}
+#reviewer input
+{
+    max-width: 50%;
+}
+#reviewer *
+{
+    font-size: small;
+}
+#reviewer.off > :not(:first-child)
+{
+    display: none;
+}

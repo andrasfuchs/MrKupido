@@ -12,7 +12,7 @@
 
     function doSearch(maxResult) {
         $.ajax({
-            url: "Home/Search",
+            url: '@Url.Action("Search", "Home")',
             type: "POST",
             dataType: "html",
             data: {

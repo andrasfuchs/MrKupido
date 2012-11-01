@@ -49,10 +49,10 @@ namespace MrKupido.Library.Equipment
 
             IngredientGroup ig = Feldarabolni(i, weight);
 
-            foreach (IIngredient ingredient in ig)
-            {
-                ingredient.ChangeUnitTo(MeasurementUnit.piece);
-            }
+            //foreach (IIngredient ingredient in ig)
+            //{
+            //    ingredient.ChangeUnitTo(MeasurementUnit.piece);
+            //}
 
             return new IngredientGroup(ig.ToArray());
         }

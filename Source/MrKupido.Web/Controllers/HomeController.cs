@@ -9,9 +9,9 @@ using MrKupido.Processor.Model;
 using MrKupido.Processor.Models;
 using System.Threading;
 
-namespace Web.Controllers
+namespace MrKupido.Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         public ActionResult Index()
         {
@@ -113,6 +113,5 @@ namespace Web.Controllers
 
             return PartialView("_RecipeSearchResults", rsr);
         }
-    
     }
 }

@@ -7,8 +7,6 @@
             (@(Model == null ? "0" : Model.Items.Count.ToString())
             étel)</h2>
     </summary>
-    @if (Model != null)
-    { 
         <hr class="single" />
         <div class="filters">
             <figure>
@@ -47,7 +45,7 @@
         <hr class="single" />
         <div>
             <ul>
-                @{MrKupido.Web.Models.RecipeSearchResultItem[] rsri = Model.GetItems(0, 6);}
+                @{MrKupido.Web.Models.RecipeSearchResultItem[] rsri = (Model == null ? new MrKupido.Web.Models.RecipeSearchResultItem[0] : Model.GetItems(0, 6));}
                 @for (int i = 0; i < rsri.Length; i++)
                 { 
                     <li>
@@ -58,7 +56,7 @@
                                 </div>
                                 <div class="title">
                                     <span class="titlecontent">
-                                        @rsri[i].DisplayName
+                                        <a runat="server" href="~/hun/recept/@rsri[i].UniqueName">@rsri[i].DisplayName</a>
                                     </span>
                                 </div>
                                 <div class="tick">
@@ -92,49 +90,11 @@
                         </div>
                     </li>
                 }
-@*                <li>
-                    <div class="resultbox">
-                        <div class="resulthead">
-                            <div class="category">
-                                <img runat="server" src="~/Content/svg/cat_maindish.svg" alt="Sertés" width="45px" height="30px" />
-                            </div>
-                            <div class="title">
-                                Paprikás krumpli lekvárral
-                            </div>
-                            <div class="tick">
-                                <a href="#">
-                                    <img runat="server" src="~/Content/svg/tick_off.svg" alt="Töröl" width="25px" height="25px" /></a>
-                            </div>
-                        </div>
-                        <div class="resulticons">
-                            <div class="preptime">
-                                <img runat="server" src="~/Content/svg/clock_45.svg" alt="42 perc" width="35px" height="35px" />
-                                <span>42</span>
-                            </div>
-                            <img runat="server" src="~/Content/svg/icon_vegetarian_dark.svg" alt="vegetáriánus" width="35px" height="35px" />
-                            <img runat="server" src="~/Content/svg/icon_glutenfree.svg" alt="glutént tartalmaz" width="35px" height="35px" />
-                            <img runat="server" src="~/Content/svg/icon_lactosefree.svg" alt="laktózt tartalmaz" width="35px" height="35px" />
-                            <img runat="server" src="~/Content/svg/icon_photo_dark.svg" alt="3 kép" width="40px" height="45px" />
-                            <div class="versions">
-                                <img runat="server" src="~/Content/svg/versions.svg" alt="3 változat" width="50px" height="45px" />
-                                <span>03</span>
-                            </div>
-                        </div>
-                        <div class="resultbody">
-                            krumpli, paprika, virsli, borsó, só, liszt, tej, disznósajt, tojás, élesztő, paradicsom, krumpli, paprika, virsli, borsó, só, liszt, tej</div>
-                        <div class="resultfooter">
-                            <img runat="server" src="~/Content/svg/stars_15.svg" alt="1.5 csillag" width="111px" height="20px" />
-                        </div>
-                    </div>
-                    <div class="resultnutrition">
-                        <img runat="server" src="~/Content/svg/nutrition_sample.svg" alt="tápérték" width="155px" height="50px" />
-                    </div>
-                </li>*@
+
                 @for (int j = rsri.Length; j < 6; j++)
                 { 
                     <li class="disabled"></li>
                 }
             </ul>
         </div>
-    }
 </details>

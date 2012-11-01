@@ -6,9 +6,7 @@
     <title>@ViewBag.Title - Mr. Kupido</title>
     @Styles.Render("~/Content/themes/base/css", "~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
     <link rel="icon" type="image/ico" runat="server" href="~/Content/images/mrkupido.ico">
-
     <script type="text/javascript">
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-34057275-1']);
@@ -25,8 +23,54 @@
 <body>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
-    @RenderSection("scripts", required: false)
 
+    <script type="text/javascript">
+
+        /* Downloaded from http://www.whatwg.org/specs/web-apps/current-work/reviewer.js */
+
+        function submitReviewComment() {
+            var textField = document.getElementById('reviewCommentText');
+            var text = textField.value;
+
+            if ((!text) || (text.length <= 15)) return;
+
+            $.ajax({
+                url: '@Url.Action("ReportBug", "Base")',
+                type: "POST",
+                dataType: "html",
+                data: {
+                    text: text
+                },
+                success: function () {
+                    $('input#reviewCommentButton').attr('disabled', 'disabled');
+                    $('input#reviewCommentText').val("");
+                }, // success
+                error: function (xhr, textStatus, errorThrown) {
+                    alert("Error");
+                    alert(xhr);
+                    alert(textStatus);
+                    alert(errorThrown);
+                }
+            });    // ajax
+
+            textField.focus();
+        }
+
+        function reviewCommentChanged(event) {
+            var textField = document.getElementById('reviewCommentText');
+            var text = textField.value;
+            if ((!text) || (text.length <= 15)) {
+                $('input#reviewCommentButton').attr('disabled', 'disabled');
+                return;
+            }
+
+            $('input#reviewCommentButton').removeAttr('disabled');
+
+            if (event.keyCode == 13) { submitReviewComment() };
+        }
+    </script>
+
+    @RenderSection("scripts", required: false)
     <div class="wrapper">
         @RenderBody()
         <hr class="single" />
@@ -38,5 +82,14 @@
                 &copy; 2012 <a href="http://hu.linkedin.com/pub/andras-fuchs/32/355/924">Andras Fuchs</a>. All rights reserved</p>
         </footer>
     </div>
+
+
+
+    <div id="reviewer" class="on">
+        <span id="reviewSection">Ird ide, hogy szerinted mi nem stimmel az oldalon:</span>
+        <input id="reviewCommentText" placeholder="(minimum 15 karakter)" size="60" onkeydown="javascript:reviewCommentChanged(event);">
+        <input id="reviewCommentButton" value="Vélemény elküldése" type="button" disabled="disabled" onclick="javascript:submitReviewComment();">
+    </div>
+
 </body>
 </html>

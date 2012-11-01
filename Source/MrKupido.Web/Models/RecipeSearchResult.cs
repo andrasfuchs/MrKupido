@@ -97,7 +97,7 @@ namespace MrKupido.Web.Models
 
             if ((count > 0) && (result.Count > count))
             {
-                result.RemoveRange(count, result.Count);
+                result.RemoveRange(count, result.Count - count);
             }
 
             return result.ToArray();

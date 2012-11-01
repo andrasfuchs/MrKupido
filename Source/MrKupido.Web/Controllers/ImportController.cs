@@ -16,7 +16,7 @@ using MrKupido.Processor.Model;
 
 namespace MrKupido.Web.Controllers
 {
-    public class ImportController : Controller
+    public class ImportController : BaseController
     {
         private static MrKupidoContext db = new MrKupidoContext();
         private static char[] whiteSpaces = new char[] { ' ', ',', '.', '!', '?', ')', '(', '"', '&', ';', '\'', '[', ']', ':', '\\', '_', '`', '„', '<', '>', '\r', '\n', '”' };

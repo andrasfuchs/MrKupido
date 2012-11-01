@@ -59,6 +59,7 @@ namespace MrKupido.Processor.Model
             if (mi != null)
             {
                 Prepare = (PrepareDelegate)Delegate.CreateDelegate(typeof(PrepareDelegate), mi);
+                IsImplemented = true;
             }
 
             mi = RecipeType.GetMethod("Cook");

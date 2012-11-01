@@ -14,7 +14,7 @@
             $("#query").autocomplete({
                 source: function (request, response) {
                     $.ajax({
-                        url: "Home/SearchAutocomplete",
+                        url: '@Url.Action("SearchAutocomplete", "Home")',
                         type: "POST",
                         dataType: "json",
                         data: {
@@ -48,7 +48,7 @@
                 accentFolding: true, /* is it working/necessary */
                 select: function (event, ui) {
                     $.ajax({
-                        url: "Home/SearchSelected",
+                        url: '@Url.Action("SearchSelected", "Home")',
                         type: "POST",
                         dataType: "json",
                         data: {
@@ -95,7 +95,7 @@
 
         function deleteFilter(filterValue) {
             $.ajax({
-                url: "Home/DeleteFilter",
+                url: '@Url.Action("DeleteFilter", "Home")',
                 type: "POST",
                 dataType: "json",
                 data: {
