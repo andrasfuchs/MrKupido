@@ -192,6 +192,13 @@ hr.double
     margin: 2px
 }
 
+hr.space
+{
+    border: 0;
+    height: 1px;
+    margin: 6px;
+}
+
 details summary::-webkit-details-marker 
 { 
     display:none; 
@@ -215,7 +222,7 @@ details summary h1:hover, details summary h1:focus
 }
 
 details summary h2
-{
+{   
     font-size: 26px;
     font-family: Tangerine, Sans-Serif;
     color: /*mcd*/#553e31;
@@ -225,6 +232,7 @@ details summary h2
     
     text-align: right;
     margin: -35px 10px 10px 0px;
+    background: Transparent;
 }
 
 details summary h3
@@ -512,6 +520,7 @@ details#searchresults li
 {
     height: 200px;
     margin-bottom: 30px;
+    margin-left: 15px;
 }
 
 details#searchresults li div.resulticons

@@ -6,12 +6,14 @@ using MrKupido.Library;
 using MrKupido.Processor.Model;
 using MrKupido.Processor;
 using System.Text;
+using MrKupido.Library.Attributes;
 
 namespace MrKupido.Web.Models
 {
     public class RecipeSearchResultItem
     {
         public ShoppingListCategory MainCategory;
+        public string IconUrl;
         public string DisplayName;
         public string UniqueName;
         public bool IsSelected;
@@ -36,14 +38,30 @@ namespace MrKupido.Web.Models
         {
             this.DisplayName = Char.ToUpper(rtn.ShortName[0]) + rtn.ShortName.Substring(1);
             this.UniqueName = rtn.UniqueName;
+            this.IconUrl = rtn.IconUrl == null ? null : VirtualPathUtility.ToAbsolute(rtn.IconUrl);
 
             StringBuilder sb = new StringBuilder();
             foreach (IIngredient i in rtn.GetIngredients(1.0f))
             {
+                if (this.MainCategory == ShoppingListCategory.Unknown)
+                {
+                    this.MainCategory = i.Category;
+                }
+
                 sb.Append(i.Name);
                 sb.Append(", ");
             }
             if (sb.Length >= 2) sb.Remove(sb.Length - 2, 2);
+
+            if (this.IconUrl == null)
+            {
+                this.IconUrl = VirtualPathUtility.ToAbsolute(IconUriFragmentAttribute.GetUrl(this.MainCategory.GetType(), "~/Content/svg/cat_{0}.svg", this.MainCategory.ToString()));
+            }
+
+            //if ((this.IconUrl == null) || (!System.IO.File.Exists(this.IconUrl)))
+            //{
+            //    this.IconUrl = VirtualPathUtility.ToAbsolute(IconUriFragmentAttribute.GetUrl(typeof(ShoppingListCategory), "~/Content/svg/cat_{0}.svg", ShoppingListCategory.Unknown.ToString()));
+            //}
 
             this.MainIngredients = sb.ToString();
         }

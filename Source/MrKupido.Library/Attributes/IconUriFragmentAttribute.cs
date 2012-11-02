@@ -15,28 +15,35 @@ namespace MrKupido.Library.Attributes
             this.UriFragment = uriFragment;
         }
 
+        public static string GetUrl(Type objType, string formatString, string fieldName)
+        {
+            return GetUrl(objType.GetField(fieldName), formatString);
+        }
+
         public static string GetUrl(Type objType, string formatString)
         {
-            string result = null;
+            return GetUrl((System.Reflection.MemberInfo)objType, formatString);
+        }
 
-            foreach (object attr in objType.GetCustomAttributes(typeof(IconUriFragmentAttribute), false))
+        public static string GetUrl(System.Reflection.MemberInfo mi, string formatString)
+        {
+            string result = null;
+            
+            foreach (IconUriFragmentAttribute attr in mi.GetCustomAttributes(typeof(IconUriFragmentAttribute), false).Cast<IconUriFragmentAttribute>().ToArray())
             {
-                IconUriFragmentAttribute uriFragment = (IconUriFragmentAttribute)attr;
                 if (result == null)
                 {
-                    result = String.Format(formatString, uriFragment.UriFragment);
+                    result = String.Format(formatString, attr.UriFragment);
                 }
             }
 
             if (result == null)
             {
-                foreach (object attr in objType.GetCustomAttributes(typeof(IngredientConstsAttribute), false))
+                foreach (IngredientConstsAttribute attr in mi.GetCustomAttributes(typeof(IngredientConstsAttribute), false).Cast<IngredientConstsAttribute>().ToArray())
                 {
-                    IngredientConstsAttribute ingrConsts = (IngredientConstsAttribute)attr;
-
-                    if (ingrConsts.Category != ShoppingListCategory.Unknown)
+                    if (attr.Category != ShoppingListCategory.Unknown)
                     {
-                        System.Reflection.FieldInfo field = ingrConsts.Category.GetType().GetField(ingrConsts.Category.ToString());
+                        System.Reflection.FieldInfo field = attr.Category.GetType().GetField(attr.Category.ToString());
                         IconUriFragmentAttribute uriFragment = Attribute.GetCustomAttribute(field, typeof(IconUriFragmentAttribute)) as IconUriFragmentAttribute;
 
                         if (uriFragment != null) result = String.Format(formatString, uriFragment.UriFragment);
@@ -46,26 +53,24 @@ namespace MrKupido.Library.Attributes
 
             if (result == null)
             {
-                foreach (object attr in objType.GetCustomAttributes(typeof(NatureRelationAttribute), false))
+                foreach (NatureRelationAttribute attr in mi.GetCustomAttributes(typeof(NatureRelationAttribute), false).Cast<NatureRelationAttribute>().ToArray())
                 {
-                    NatureRelationAttribute natureRel = (NatureRelationAttribute)attr;
-
-                    if (natureRel.NatureClass != null)
+                    if (attr.NatureClass != null)
                     {
-                        result = IconUriFragmentAttribute.GetUrl(natureRel.NatureClass, formatString);
+                        result = IconUriFragmentAttribute.GetUrl(attr.NatureClass, formatString);
                     }
                 }
             }
 
 
-            if (String.IsNullOrEmpty(result) && (objType.BaseType != null))
+            if (String.IsNullOrEmpty(result) && (mi is Type) && (((Type)mi).BaseType != null))
             {
-                result = IconUriFragmentAttribute.GetUrl(objType.BaseType, formatString);
+                result = IconUriFragmentAttribute.GetUrl(((Type)mi).BaseType, formatString);
             }
 
             if (String.IsNullOrEmpty(result))
             {
-                Trace.TraceWarning("Class '{0}' has no icon url defined.", objType.Name);
+                Trace.TraceWarning("Class '{0}' has no icon url defined.", mi.Name);
             }
 
             return result;

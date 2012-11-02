@@ -31,6 +31,7 @@
                 Betyár módra</h3>
             <hr class="single" />
         </summary>
+        <div style="display: none">
         <div id="taglist">
             <div id="_RecipeTags">
                 @*@{ Html.RenderPartial("_RecipeTags", Model[1]); }*@
@@ -44,6 +45,7 @@
             <div id="_RecipeEquipments">
                 @*@{ Html.RenderPartial("_RecipeEquipments", (MrKupido.Library.IEquipment[])Model[2]); }*@
             </div>
+        </div>
         </div>
         <hr />
         <div id="ingredientlist">
@@ -63,6 +65,7 @@
                 @{ Html.RenderPartial("_RecipeDirections", (MrKupido.Library.IDirection[])Model[4], new ViewDataDictionary()); }
             </div>
         </div>
+        <div style="display: none">
         <hr />
         <div id="serving">
             <h2>
@@ -80,6 +83,7 @@
                 @*@{ Html.RenderPartial("_RecipeNutritions", (MrKupido.Library.INutritionInfo[])Model[6]); }*@
             </div>
         </div>
+        </div>
     </details>
-    <hr class="double" />
+    <hr class="space" />
 </article>

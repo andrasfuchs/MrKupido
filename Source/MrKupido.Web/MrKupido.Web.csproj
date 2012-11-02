@@ -203,6 +203,26 @@
     <Content Include="Content\images\ticked.png" />
     <Content Include="Content\images\tree-icons.png" />
     <Content Include="Content\images\unticked.png" />
+    <Content Include="Content\svg\browser_android.svg" />
+    <Content Include="Content\svg\browser_firefox.svg" />
+    <Content Include="Content\svg\browser_ie.svg" />
+    <Content Include="Content\svg\browser_opera.svg" />
+    <Content Include="Content\svg\browser_safari.svg" />
+    <Content Include="Content\svg\cat_bread.svg" />
+    <Content Include="Content\svg\cat_cookies.svg" />
+    <Content Include="Content\svg\cat_fish.svg" />
+    <Content Include="Content\svg\cat_meat.svg" />
+    <Content Include="Content\svg\cat_pasta.svg" />
+    <Content Include="Content\svg\cat_pizza.svg" />
+    <Content Include="Content\svg\cat_sandwich.svg" />
+    <Content Include="Content\svg\cat_soup.svg" />
+    <Content Include="Content\svg\cat_unknown.svg" />
+    <Content Include="Content\svg\cat_unknown_dark.svg" />
+    <Content Include="Content\svg\cat_vegetabledish.svg" />
+    <Content Include="Content\svg\n_animalia.svg" />
+    <Content Include="Content\svg\n_plantae.svg" />
+    <Content Include="Content\svg\r_pizza.svg" />
+    <Content Include="Content\svg\stars_00_light.svg" />
     <Content Include="Hunspellx64.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
