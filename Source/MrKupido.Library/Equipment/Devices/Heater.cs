@@ -45,7 +45,10 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("hun", "vár", Priority = 200)]
         [NameAlias("hun", "várj {0} percet")]
-        public void Varni(int minutes) { }
+        public void Varni(int minutes) 
+        { 
+            this.LastActionDuration = (uint)(minutes * 60);
+        }
 
         [NameAlias("hun", "előmelegít", Priority = 200)]
         [NameAlias("hun", "felmelegít", Priority = 201)]

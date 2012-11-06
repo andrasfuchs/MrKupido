@@ -21,7 +21,7 @@ namespace MrKupido.Library.Equipment
 
         public bool IsInUse { get; private set; }
 
-        public virtual uint LastActionDuration { get; private set; }
+        public virtual uint LastActionDuration { get; protected set; }
 
         [NameAlias("hun", "használ", Priority = 200)]
         [NameAlias("eng", "use", Priority = 200)]

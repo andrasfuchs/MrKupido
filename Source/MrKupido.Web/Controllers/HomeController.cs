@@ -84,7 +84,11 @@ namespace MrKupido.Web.Controllers
 
             if (value != null)
             {
-                FilterCondition fli = filters.FirstOrDefault(f => (f.Value == value));
+                FilterCondition fli = null;
+
+                if (value == "!first") fli = filters.FirstOrDefault();
+                if (value == "!last") fli = filters.LastOrDefault();
+                if (fli == null) fli = filters.FirstOrDefault(f => (f.Value == value));
 
                 if (fli != null)
                 {
@@ -103,15 +107,46 @@ namespace MrKupido.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Search(int maxResult)
+        public ActionResult Search()
         {
             if (Session["filters"] == null) Session["filters"] = new List<FilterCondition>();
-
             List<FilterCondition> filters = (List<FilterCondition>)Session["filters"];
 
             RecipeSearchResult rsr = new RecipeSearchResult(Cache.Search.Search(filters.ToArray(), Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName).ToArray());
+            rsr.ItemsPerPage = 6;
+            rsr.PageIndex = 1;
 
-            return PartialView("_RecipeSearchResults", rsr);
+            Session["RecipeSearchResult"] = rsr;
+            return PartialView("_RecipeSearchResultHead", rsr);
         }
+
+        [HttpPost]
+        public ActionResult RefreshRecipeResults(string actionName)
+        {
+            if (Session["RecipeSearchResult"] == null) return null;
+            RecipeSearchResult rsr = (RecipeSearchResult)Session["RecipeSearchResult"];
+
+            switch (actionName)
+            {
+                case "first":
+                    rsr.PageIndex = 1;
+                    break;
+                case "prev":
+                    if (rsr.PageIndex > 1) rsr.PageIndex--;
+                    break;
+                case "next":
+                    if (rsr.PageIndex < rsr.PageNumber) rsr.PageIndex++;
+                    break;
+                case "last":
+                    rsr.PageIndex = rsr.PageNumber;
+                    break;
+                default:
+                    break;
+            }
+
+            Session["RecipeSearchResult"] = rsr;
+            return PartialView("_RecipeSearchResultHead", rsr);
+        }
+    
     }
 }

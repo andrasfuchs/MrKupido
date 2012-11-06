@@ -38,6 +38,7 @@ namespace MrKupido.Web.Models
         {
             this.DisplayName = Char.ToUpper(rtn.ShortName[0]) + rtn.ShortName.Substring(1);
             this.UniqueName = rtn.UniqueName;
+            this.SubVersions = TreeNode.GetDescendantCount(rtn);
             this.IconUrl = rtn.IconUrl == null ? null : VirtualPathUtility.ToAbsolute(rtn.IconUrl);
 
             StringBuilder sb = new StringBuilder();
@@ -52,6 +53,7 @@ namespace MrKupido.Web.Models
                 sb.Append(", ");
             }
             if (sb.Length >= 2) sb.Remove(sb.Length - 2, 2);
+            this.MainIngredients = sb.ToString();
 
             if (this.IconUrl == null)
             {
@@ -63,7 +65,7 @@ namespace MrKupido.Web.Models
             //    this.IconUrl = VirtualPathUtility.ToAbsolute(IconUriFragmentAttribute.GetUrl(typeof(ShoppingListCategory), "~/Content/svg/cat_{0}.svg", ShoppingListCategory.Unknown.ToString()));
             //}
 
-            this.MainIngredients = sb.ToString();
+            this.TotalTime = (int)rtn.GetDirections(1.0f).Select(d => d.TimeToComplete).Select(t => t.TotalMinutes).Sum();
         }
 
         public override string ToString()

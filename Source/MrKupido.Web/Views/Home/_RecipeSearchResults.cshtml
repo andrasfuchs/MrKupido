@@ -1,203 +1,157 @@
-﻿@model MrKupido.Web.Models.RecipeSearchResult
-<details id="searchresults" open>
-    <summary>
-        <h1>
-            Találatok</h1>
-        <h2>
-            (@(Model == null ? "0" : Model.Items.Count.ToString())
-            étel)</h2>
-    </summary>
-        <hr class="space" />
-        <div class="filters">
-            <figure>
-                <a id="filter01" href="#">
-                    <img runat="server" src="~/Content/svg/cat_maindish.svg" alt="előétel" width="45px" height="30px" /><figcaption>főétel (+11)</figcaption>
-                </a>
-            </figure>
-            <figure>
-                <a id="filter02" href="#">
-                    <img runat="server" src="~/Content/svg/cat_soup_dark.svg" alt="kenyér" width="45px" height="30px" /><figcaption>leves (-5)</figcaption></a>
-            </figure>
-            <figure>
-                <a id="filter03" href="#">
-                    <img runat="server" src="~/Content/svg/cat_vegetabledish_dark.svg" alt="sütemény" width="45px" height="30px" /><figcaption>főzelék (-7)</figcaption></a>
-            </figure>
-            <figure>
-                <a id="filter04" href="#">
-                    <img runat="server" src="~/Content/svg/cat_fish.svg" alt="desszert" width="45px" height="30px" /><figcaption>hal (+3)</figcaption></a>
-            </figure>
-            <figure>
-                <a id="filter05" href="#">
-                    <img runat="server" src="~/Content/svg/cat_meat.svg" alt="ital" width="45px" height="30px" /><figcaption>hús (+1)</figcaption></a>
-            </figure>
-            <figure>
-                <a id="filter06" href="#">
-                    <img runat="server" src="~/Content/svg/cat_pasta_dark.svg" alt="ital" width="45px" height="30px" /><figcaption>tészta (-1)</figcaption></a>
-            </figure>
-            <figure>
-                <a id="filter07" href="#">
-                    <img runat="server" src="~/Content/svg/cat_pizza_dark.svg" alt="ital" width="45px" height="30px" /><figcaption>pizza (-3)</figcaption></a>
-            </figure>
-        </div>
-        <div class="sortorderselect">
-            <a href="#">név</a> - <a href="#">idö</a> - <a href="#" class="selected">értékelés</a> - <a href="#">típus</a>
-        </div>
-        <hr class="space" />
-        <div>
-            <ul>
-                @{MrKupido.Web.Models.RecipeSearchResultItem[] rsri = (Model == null ? new MrKupido.Web.Models.RecipeSearchResultItem[0] : Model.GetItems(0, 6));}
-                @for (int i = 0; i < rsri.Length; i++)
-                { 
-                    <li>
-                        <div class="resultbox">
-                            <div class="resulthead">
-                                <div class="category">
-                                    <img runat="server" src="@rsri[i].IconUrl" alt="@rsri[i].MainCategory.ToString()" width="45px" height="30px" />
-                                </div>
-                                <div class="title">
-                                    <span class="titlecontent">
-                                        <a runat="server" href="~/hun/recept/@rsri[i].UniqueName">@rsri[i].DisplayName</a>
-                                    </span>
-                                </div>
-                                <div class="tick">
-                                    <a href="#">
-                                    @if (rsri[i].IsSelected)
-                                    { 
-                                        <img runat="server" src="~/Content/svg/tick_on.svg" alt="töröl" width="25px" height="25px" /></a>
-                                    }
-                                    else 
-                                    {
-                                         <img runat="server" src="~/Content/svg/tick_off.svg" alt="kiválaszt" width="25px" height="25px" /></a>
-                                    }
-                                </div>
-                            </div>
-                            <div class="resulticons">
-                                <div class="preptime">
-                                    @if (rsri[i].TotalTime >= 45)
-                                    {
-                                        <img runat="server" src="~/Content/svg/clock_60.svg" alt="@rsri[i].TotalTime perc" width="35px" height="35px" />
-                                    }
-                                    else if (rsri[i].TotalTime >= 30)
-                                    {
-                                        <img runat="server" src="~/Content/svg/clock_45.svg" alt="@rsri[i].TotalTime perc" width="35px" height="35px" />
-                                    }
-                                    else if (rsri[i].TotalTime >= 15)
-                                    {
-                                        <img runat="server" src="~/Content/svg/clock_30.svg" alt="@rsri[i].TotalTime perc" width="35px" height="35px" />
-                                    }
-                                    else
-                                    {
-                                        <img runat="server" src="~/Content/svg/clock_15.svg" alt="@rsri[i].TotalTime perc" width="35px" height="35px" />
-                                    }                              
-                                    <span>@rsri[i].TotalTime.ToString("00")</span>
-                                </div>
-                                @if (rsri[i].IsVegetarian)
-                                { 
-                                    <img runat="server" src="~/Content/svg/icon_vegetarian_dark.svg" alt="vegetáriánus" width="35px" height="35px" />
-                                }
-                                else
-                                { 
-                                    <img runat="server" src="~/Content/svg/icon_vegetarian.svg" alt="nem vegetáriánus" width="35px" height="35px" />
-                                }
+﻿@model MrKupido.Web.Models.RecipeSearchResultItem[]
+<ul>
+    @{MrKupido.Web.Models.RecipeSearchResultItem[] rsri = (Model == null ? new MrKupido.Web.Models.RecipeSearchResultItem[0] : Model);}
+    @for (int i = 0; i < rsri.Length; i++)
+    { 
+        <li>
+            <div class="resultbox">
+                <div class="resulthead">
+                    <div class="category">
+                        <img runat="server" src="@rsri[i].IconUrl" alt="@rsri[i].MainCategory.ToString()" width="45px" height="30px" />
+                    </div>
+                    <div class="title">
+                        <span class="titlecontent">
+                            <a runat="server" href="~/hun/recept/@rsri[i].UniqueName">@rsri[i].DisplayName</a>
+                        </span>
+                    </div>
+                    <div class="tick">
+                        @if (rsri[i].IsSelected)
+                        { 
+                            <a href="#">
+                                <img runat="server" src="~/Content/svg/tick_on.svg" alt="töröl" width="25px" height="25px" /></a>
+                        }
+                        else
+                        {
+                            <a href="#">
+                                <img runat="server" src="~/Content/svg/tick_off.svg" alt="kiválaszt" width="25px" height="25px" /></a>
+                        }
+                    </div>
+                </div>
+                <div class="resulticons">
+                    <div class="preptime">
+                        @if (rsri[i].TotalTime >= 45)
+                        {
+                            <img runat="server" src="~/Content/svg/clock_60.svg" alt="@rsri[i].TotalTime perc" width="35px" height="35px" />
+                        }
+                        else if (rsri[i].TotalTime >= 30)
+                        {
+                            <img runat="server" src="~/Content/svg/clock_45.svg" alt="@rsri[i].TotalTime perc" width="35px" height="35px" />
+                        }
+                        else if (rsri[i].TotalTime >= 15)
+                        {
+                            <img runat="server" src="~/Content/svg/clock_30.svg" alt="@rsri[i].TotalTime perc" width="35px" height="35px" />
+                        }
+                        else
+                        {
+                            <img runat="server" src="~/Content/svg/clock_15.svg" alt="@rsri[i].TotalTime perc" width="35px" height="35px" />
+                        }
+                        <span>@rsri[i].TotalTime.ToString("00")</span>
+                    </div>
+                    @if (rsri[i].IsVegetarian)
+                    { 
+                        <img runat="server" src="~/Content/svg/icon_vegetarian_dark.svg" alt="vegetáriánus" width="35px" height="35px" />
+                    }
+                    else
+                    { 
+                        <img runat="server" src="~/Content/svg/icon_vegetarian.svg" alt="nem vegetáriánus" width="35px" height="35px" />
+                    }
 
-                                @if (rsri[i].IsGlutenFree)
-                                { 
-                                    <img runat="server" src="~/Content/svg/icon_glutenfree_dark.svg" alt="gluténmentes" width="35px" height="35px" />
-                                }
-                                else
-                                { 
-                                    <img runat="server" src="~/Content/svg/icon_glutenfree.svg" alt="glutént tartalmaz" width="35px" height="35px" />
-                                }
+                    @if (rsri[i].IsGlutenFree)
+                    { 
+                        <img runat="server" src="~/Content/svg/icon_glutenfree_dark.svg" alt="gluténmentes" width="35px" height="35px" />
+                    }
+                    else
+                    { 
+                        <img runat="server" src="~/Content/svg/icon_glutenfree.svg" alt="glutént tartalmaz" width="35px" height="35px" />
+                    }
 
-                                @if (rsri[i].IsLactoseFree)
-                                { 
-                                    <img runat="server" src="~/Content/svg/icon_lactosefree_dark.svg" alt="laktózmentes" width="35px" height="35px" />
-                                }
-                                else
-                                { 
-                                    <img runat="server" src="~/Content/svg/icon_lactosefree.svg" alt="laktózt tartalmaz" width="35px" height="35px" />
-                                }
-                                
-                                @if ((rsri[i].Photos != null) && (rsri[i].Photos.Length > 0))
-                                { 
-                                    <img runat="server" src="~/Content/svg/icon_photo_dark.svg" alt="@rsri[i].Photos.Length kép" width="40px" height="45px" />
-                                }
-                                else
-                                { 
-                                    <img runat="server" src="~/Content/svg/icon_photo.svg" alt="0 kép" width="40px" height="45px" />
-                                }
-                                <div class="versions">
-                                    <img runat="server" src="~/Content/svg/versions.svg" alt="11 változat" width="50px" height="45px" />
-                                    <span>@rsri[i].SubVersions</span>
-                                </div>
-                            </div>
-                            <div class="resultbody">
-                                @rsri[i].MainIngredients
-                            </div>
-                            <div class="resultfooter">
-                                @if ((rsri[i].RatingCount == 0) || (!rsri[i].Rating.HasValue))
-                                { 
-                                    <img runat="server" src="~/Content/svg/stars_00_light.svg" alt="nincs értékelés" width="111px" height="20px" />
-                                }
-                                else
-                                {
-                                    if (rsri[i].Rating.Value >= 4.75)
-                                    { 
-                                        <img runat="server" src="~/Content/svg/stars_50.svg" alt="@rsri[i].Rating.Value" width="111px" height="20px" />
-                                    }
-                                    else if (rsri[i].Rating.Value >= 4.25)
-                                    { 
-                                        <img runat="server" src="~/Content/svg/stars_45.svg" alt="@rsri[i].Rating.Value" width="111px" height="20px" />
-                                    }
-                                    else if (rsri[i].Rating.Value >= 3.75)
-                                    { 
-                                        <img runat="server" src="~/Content/svg/stars_40.svg" alt="@rsri[i].Rating.Value" width="111px" height="20px" />
-                                    }
-                                    else if (rsri[i].Rating.Value >= 3.25)
-                                    { 
-                                        <img runat="server" src="~/Content/svg/stars_35.svg" alt="@rsri[i].Rating.Value" width="111px" height="20px" />
-                                    }
-                                    else if (rsri[i].Rating.Value >= 2.75)
-                                    { 
-                                        <img runat="server" src="~/Content/svg/stars_30.svg" alt="@rsri[i].Rating.Value" width="111px" height="20px" />
-                                    }
-                                    else if (rsri[i].Rating.Value >= 2.25)
-                                    { 
-                                        <img runat="server" src="~/Content/svg/stars_25.svg" alt="@rsri[i].Rating.Value" width="111px" height="20px" />
-                                    }
-                                    else if (rsri[i].Rating.Value >= 1.75)
-                                    { 
-                                        <img runat="server" src="~/Content/svg/stars_20.svg" alt="@rsri[i].Rating.Value" width="111px" height="20px" />
-                                    }
-                                    else if (rsri[i].Rating.Value >= 1.25)
-                                    { 
-                                        <img runat="server" src="~/Content/svg/stars_15.svg" alt="@rsri[i].Rating.Value" width="111px" height="20px" />
-                                    }
-                                    else if (rsri[i].Rating.Value >= 0.75)
-                                    { 
-                                        <img runat="server" src="~/Content/svg/stars_10.svg" alt="@rsri[i].Rating.Value" width="111px" height="20px" />
-                                    }
-                                    else if (rsri[i].Rating.Value >= 0.25)
-                                    { 
-                                        <img runat="server" src="~/Content/svg/stars_05.svg" alt="@rsri[i].Rating.Value" width="111px" height="20px" />
-                                    }
-                                    else
-                                    { 
-                                        <img runat="server" src="~/Content/svg/stars_00.svg" alt="@rsri[i].Rating.Value" width="111px" height="20px" />
-                                    }
-                                }
-                            </div>
-                        </div>
-                        <div class="resultnutrition">
-                            <img runat="server" src="~/Content/svg/nutrition_sample.svg" alt="tápérték" width="155px" height="50px" />
-                        </div>
-                    </li>
-                }
+                    @if (rsri[i].IsLactoseFree)
+                    { 
+                        <img runat="server" src="~/Content/svg/icon_lactosefree_dark.svg" alt="laktózmentes" width="35px" height="35px" />
+                    }
+                    else
+                    { 
+                        <img runat="server" src="~/Content/svg/icon_lactosefree.svg" alt="laktózt tartalmaz" width="35px" height="35px" />
+                    }
 
-                @for (int j = rsri.Length; j < 6; j++)
-                { 
-                    <li class="disabled"></li>
-                }
-            </ul>
-        </div>
-</details>
+                    @if ((rsri[i].Photos != null) && (rsri[i].Photos.Length > 0))
+                    { 
+                        <img runat="server" src="~/Content/svg/icon_photo_dark.svg" alt="@rsri[i].Photos.Length kép" width="40px" height="45px" />
+                    }
+                    else
+                    { 
+                        <img runat="server" src="~/Content/svg/icon_photo.svg" alt="0 kép" width="40px" height="45px" />
+                    }
+                    <div class="versions">
+                        <img runat="server" src="~/Content/svg/versions.svg" alt="11 változat" width="50px" height="45px" />
+                        <span>@rsri[i].SubVersions</span>
+                    </div>
+                </div>
+                <div class="resultbody">
+                    @rsri[i].MainIngredients
+                </div>
+                <div class="resultfooter">
+                    @if ((rsri[i].RatingCount == 0) || (!rsri[i].Rating.HasValue))
+                    { 
+                        <img runat="server" src="~/Content/svg/stars_00_light.svg" alt="nincs értékelés" width="111px" height="20px" />
+                    }
+                    else
+                    {
+                        if (rsri[i].Rating.Value >= 4.75)
+                        { 
+                        <img runat="server" src="~/Content/svg/stars_50.svg" alt="@rsri[i].Rating.Value" width="111px" height="20px" />
+                        }
+                        else if (rsri[i].Rating.Value >= 4.25)
+                        { 
+                        <img runat="server" src="~/Content/svg/stars_45.svg" alt="@rsri[i].Rating.Value" width="111px" height="20px" />
+                        }
+                        else if (rsri[i].Rating.Value >= 3.75)
+                        { 
+                        <img runat="server" src="~/Content/svg/stars_40.svg" alt="@rsri[i].Rating.Value" width="111px" height="20px" />
+                        }
+                        else if (rsri[i].Rating.Value >= 3.25)
+                        { 
+                        <img runat="server" src="~/Content/svg/stars_35.svg" alt="@rsri[i].Rating.Value" width="111px" height="20px" />
+                        }
+                        else if (rsri[i].Rating.Value >= 2.75)
+                        { 
+                        <img runat="server" src="~/Content/svg/stars_30.svg" alt="@rsri[i].Rating.Value" width="111px" height="20px" />
+                        }
+                        else if (rsri[i].Rating.Value >= 2.25)
+                        { 
+                        <img runat="server" src="~/Content/svg/stars_25.svg" alt="@rsri[i].Rating.Value" width="111px" height="20px" />
+                        }
+                        else if (rsri[i].Rating.Value >= 1.75)
+                        { 
+                        <img runat="server" src="~/Content/svg/stars_20.svg" alt="@rsri[i].Rating.Value" width="111px" height="20px" />
+                        }
+                        else if (rsri[i].Rating.Value >= 1.25)
+                        { 
+                        <img runat="server" src="~/Content/svg/stars_15.svg" alt="@rsri[i].Rating.Value" width="111px" height="20px" />
+                        }
+                        else if (rsri[i].Rating.Value >= 0.75)
+                        { 
+                        <img runat="server" src="~/Content/svg/stars_10.svg" alt="@rsri[i].Rating.Value" width="111px" height="20px" />
+                        }
+                        else if (rsri[i].Rating.Value >= 0.25)
+                        { 
+                        <img runat="server" src="~/Content/svg/stars_05.svg" alt="@rsri[i].Rating.Value" width="111px" height="20px" />
+                        }
+                        else
+                        { 
+                        <img runat="server" src="~/Content/svg/stars_00.svg" alt="@rsri[i].Rating.Value" width="111px" height="20px" />
+                        }
+                    }
+                </div>
+            </div>
+            <div class="resultnutrition">
+                <img runat="server" src="~/Content/svg/nutrition_sample.svg" alt="tápérték" width="155px" height="50px" />
+            </div>
+        </li>
+    }
+
+    @for (int j = rsri.Length; j < 6; j++)
+    { 
+        <li class="disabled"></li>
+    }
+</ul>

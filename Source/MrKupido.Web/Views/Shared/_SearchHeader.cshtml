@@ -5,10 +5,44 @@
         $(function () {
             $("#query").keyup(function (e) {
                 var code = e.which; // recommended to use e.which, it's normalized across browsers
+
+                // enter
                 if (code == 13) e.preventDefault();
+
+
                 if (code == 32 || code == 13 || code == 188 || code == 186) {
                     $("#search").trigger("onclick");
                 } // missing closing if brace
+
+                if (this.value == "") {
+                    // left or page up
+                    if (code == 37 || code == 33) {
+                        $("#pageprev").trigger("onclick");
+                    }
+                    // right or page down
+                    if (code == 39 || code == 34) {
+                        $("#pagenext").trigger("onclick");
+                    }
+                    // home
+                    if (code == 36) {
+                        $("#pagefirst").trigger("onclick");
+                    }
+                    // end
+                    if (code == 35) {
+                        $("#pagelast").trigger("onclick");
+                    }
+                    // del
+                    if (code == 46) {
+                        deleteFilter("!first");
+                        $("#search").trigger("onclick");
+                    }
+                    // backspace
+                    if (code == 8) {
+                        deleteFilter("!last");
+                        $("#search").trigger("onclick");
+                    }
+                    e.preventDefault();
+                }
             });
 
             $("#query").autocomplete({
@@ -86,7 +120,7 @@
             ulBody = '';
             
             for(x=0; x<filters.length; x++) {
-                ulBody += '<li>' + filters[x].Text + ' <a href="javascript:deleteFilter(\'' + filters[x].Value + '\'); doSearch(12);">x</a></li>';
+                ulBody += '<li>' + filters[x].Text + ' <a href="javascript:deleteFilter(\'' + filters[x].Value + '\'); doSearch();">x</a></li>';
             }
 
             $('#filters').empty();
@@ -115,7 +149,22 @@
 
         $(document).ready(function () {
             deleteFilter("");
+
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(success, error);
+            }
         });
+
+        function success(position) {
+            var s = document.querySelector('#location');
+
+            s.value = position.coords.latitude + ", " + position.coords.longitude;
+        }
+
+        function error(msg) {
+            var s = document.querySelector('#location');
+            s.value = "";
+        }
     </script>
 
 <a runat="server" href="~/hun" >
@@ -147,7 +196,7 @@
             Keresnivaló:</label>
         <input id="query" type="search" placeholder="(hozzávaló, diéta, eszköz)" autofocus />
     </p>
-    <input id="search" type="submit" value="Keresés" onclick="_gaq.push(['_trackEvent', 'Search', 'Search', '+karalábé -pulyka']); doSearch(12);" style="display: none"/>
+    <input id="search" type="submit" value="Keresés" onclick="_gaq.push(['_trackEvent', 'Search', 'Search', '+karalábé -pulyka']); doSearch();" style="display: none"/>
     <div id="deleteall">
         <input type="button" value="Mindent töröl" onclick="deleteFilter();" />
     </div>

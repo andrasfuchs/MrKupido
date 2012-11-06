@@ -104,6 +104,19 @@ namespace MrKupido.Processor.Model
             return root;
         }
 
+        public static int GetDescendantCount(TreeNode tn)
+        {
+            int result = 0;
+
+            foreach (TreeNode child in tn.Children)
+            {
+                result += GetDescendantCount(child);
+            }
+            result += tn.Children.Count();
+
+            return result;
+        }
+
         public override string ToString()
         {
             return LongName + " (" + ClassName + ")";

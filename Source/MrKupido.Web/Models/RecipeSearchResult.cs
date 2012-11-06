@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using MrKupido.Processor.Model;
 using System.Reflection;
+using MrKupido.Library;
 
 namespace MrKupido.Web.Models
 {
@@ -39,6 +40,30 @@ namespace MrKupido.Web.Models
             }
         }
 
+        private int itemsPerPage;
+        public int ItemsPerPage 
+        {
+            get
+            {
+                return itemsPerPage;
+            }
+            set
+            {
+                itemsPerPage = value;
+
+                if (itemsPerPage > 0)
+                {
+                    PageNumber = (this.Items.Count / value) + 1;
+                }
+                else
+                {
+                    PageNumber = 0;
+                }
+            }
+        }
+
+        public int PageIndex { get; set; }
+        public int PageNumber { get; private set; }
 
         public List<RecipeCategoryGroup> CategoryGroups = new List<RecipeCategoryGroup>();
         public List<RecipeSearchResultItem> Items = new List<RecipeSearchResultItem>();
@@ -101,6 +126,20 @@ namespace MrKupido.Web.Models
             }
 
             return result.ToArray();
+        }
+
+        public RecipeSearchResultItem[] GetPage(int pageIndex)
+        {
+            if (ItemsPerPage <= 0) throw new MrKupidoException("To get the result on the per-page basis you must set the 'ItemsPerPage' property first.");
+
+            if ((pageIndex <= 0) || (pageIndex > (Items.Count / ItemsPerPage) + 1)) throw new MrKupidoException("The pageIndex of '{0}' is out of range for this resultset.", pageIndex);
+
+            return GetItems((pageIndex - 1) * ItemsPerPage, ItemsPerPage);
+        }
+
+        public RecipeSearchResultItem[] GetCurrentPage()
+        {
+            return GetPage(PageIndex);
         }
     }
 }

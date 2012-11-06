@@ -44,6 +44,10 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -70,7 +74,6 @@
     <Reference Include="NHunspell">
       <HintPath>..\NHunSpell\NHunspell.dll</HintPath>
     </Reference>
-    <Reference Include="Roslyn.Services.Editor.CSharp, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -198,6 +201,10 @@
     <Content Include="Content\images\hr_single.png" />
     <Content Include="Content\images\mrkupido.ico" />
     <Content Include="Content\images\mrkupidologo.png" />
+    <Content Include="Content\images\paging_first.png" />
+    <Content Include="Content\images\paging_last.png" />
+    <Content Include="Content\images\paging_next.png" />
+    <Content Include="Content\images\paging_prev.png" />
     <Content Include="Content\images\resulticon_empty.png" />
     <Content Include="Content\images\resulticon_photos.png" />
     <Content Include="Content\images\ticked.png" />
@@ -432,6 +439,9 @@
     <Content Include="Views\Import\_BasicRecipe.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\fonts\Cardo\Cardo-Regular.eot" />
+    <Content Include="Content\fonts\Tangerine\Tangerine_Bold.eot" />
+    <Content Include="Content\fonts\Tangerine\Tangerine_Regular.eot" />
     <None Include="Content\spelling\en_US\en_US.aff" />
     <None Include="Content\spelling\en_US\en_US.dic" />
     <None Include="Content\spelling\hu_HU\hu_HU.aff" />
@@ -439,6 +449,8 @@
     <Content Include="Views\Import\RecipeList.cshtml" />
     <Content Include="Views\Import\Recipe.cshtml" />
     <Content Include="Views\Import\_RecipeCode.cshtml" />
+    <None Include="Properties\PublishProfiles\MrKupidoBeta.pubxml" />
+    <Content Include="Views\Home\_RecipeSearchResultHead.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -468,10 +480,14 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+<ItemGroup>
+    <TypeScriptCompile Include="$(ProjectDir)\**\*.ts" />
+</ItemGroup>
+  <Target Name="BeforeBuild">
+   <Exec Command="&quot;$(PROGRAMFILES)\Microsoft SDKs\TypeScript\0.8.0.0\tsc&quot; @(TypeScriptCompile ->'&quot;%(fullpath)&quot;', ' ')" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
   <Target Name="AfterBuild">
   </Target> -->
 </Project>

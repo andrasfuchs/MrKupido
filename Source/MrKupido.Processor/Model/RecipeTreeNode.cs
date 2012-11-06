@@ -83,9 +83,12 @@ namespace MrKupido.Processor.Model
         
         public IIngredient[] GetIngredients(float amount)
         {
-            if (!ingredientCache.ContainsKey(amount))
+            lock (ingredientCache)
             {
-                ingredientCache.Add(amount, RecipeAnalyzer.GenerateIngredients(this, 1.0f));
+                if (!ingredientCache.ContainsKey(amount))
+                {
+                    ingredientCache.Add(amount, RecipeAnalyzer.GenerateIngredients(this, 1.0f));
+                }
             }
 
             return ingredientCache[amount];

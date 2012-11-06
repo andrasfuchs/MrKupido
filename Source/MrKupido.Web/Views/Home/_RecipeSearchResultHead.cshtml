@@ -1,0 +1,81 @@
+﻿@model MrKupido.Web.Models.RecipeSearchResult
+
+<script type="text/javascript">
+    function doPaging(actionName) {
+        $.ajax({
+            url: '@Url.Action("RefreshRecipeResults", "Home")',
+            type: "POST",
+            dataType: "html",
+            data: {
+                actionName: actionName
+            },
+            success: function (data) {
+                $('div#_RecipeSearchResults').html(data);
+            }, // success
+            error: function (xhr, textStatus, errorThrown) {
+                //                                                  alert("Error");
+                //                                                  alert(xhr);
+                //                                                  alert(textStatus);
+                //                                                  alert(errorThrown);
+            }
+        });   // ajax
+    }
+</script>
+<hr class="space" />
+<details id="searchresults" open>
+    <summary>
+        <h1>Találatok</h1>
+        <h2>(@(Model == null ? "0" : Model.Items.Count.ToString()) étel)</h2>
+    </summary>
+    <hr class="space" />
+    <div style="display: none">
+        <div class="filters">
+            <figure>
+                <a id="filter01" href="#">
+                    <img runat="server" src="~/Content/svg/cat_maindish.svg" alt="előétel" width="45" height="30" /><figcaption>főétel (+11)</figcaption>
+                </a>
+            </figure>
+            <figure>
+                <a id="filter02" href="#">
+                    <img runat="server" src="~/Content/svg/cat_soup_dark.svg" alt="kenyér" width="45" height="30" /><figcaption>leves (-5)</figcaption></a>
+            </figure>
+            <figure>
+                <a id="filter03" href="#">
+                    <img runat="server" src="~/Content/svg/cat_vegetabledish_dark.svg" alt="sütemény" width="45" height="30" /><figcaption>főzelék (-7)</figcaption></a>
+            </figure>
+            <figure>
+                <a id="filter04" href="#">
+                    <img runat="server" src="~/Content/svg/cat_fish.svg" alt="desszert" width="45" height="30" /><figcaption>hal (+3)</figcaption></a>
+            </figure>
+            <figure>
+                <a id="filter05" href="#">
+                    <img runat="server" src="~/Content/svg/cat_meat.svg" alt="ital" width="45" height="30" /><figcaption>hús (+1)</figcaption></a>
+            </figure>
+            <figure>
+                <a id="filter06" href="#">
+                    <img runat="server" src="~/Content/svg/cat_pasta_dark.svg" alt="ital" width="45px" height="30px" /><figcaption>tészta (-1)</figcaption></a>
+            </figure>
+            <figure>
+                <a id="filter07" href="#">
+                    <img runat="server" src="~/Content/svg/cat_pizza_dark.svg" alt="ital" width="45px" height="30px" /><figcaption>pizza (-3)</figcaption></a>
+            </figure>
+        </div>
+        <div class="sortorderselect">
+            <a href="javascript:doPaging('sortBy:name')">név</a> - <a href="javascript:doPaging('sortBy:time')">idö</a> - <a href="javascript:doPaging('sortBy:rating')" class="selected">értékelés</a> - <a href="javascript:doPaging('sortBy:type')">típus</a>
+        </div>
+        <hr class="space" />
+    </div>
+    @{ Html.RenderPartial("_RecipeSearchResults", (Model == null ? null : Model.GetCurrentPage())); }
+    @if (Model != null)
+    {
+        <div id="pagingleft">
+            <img runat="server" id="pagefirst" src="~/Content/images/paging_first.png" alt="első oldal" width="29" height="18" onclick="javascript:doPaging('first')" />
+            <img runat="server" id="pageprev" src="~/Content/images/paging_prev.png" alt="előző oldal" width="15" height="18" onclick="javascript:doPaging('prev')" />
+        </div>
+        <div id="pagingnumber">@Model.PageIndex.ToString() / @Model.PageNumber.ToString()</div>    
+        <div id="pagingright">
+            <img runat="server" id="pagenext" src="~/Content/images/paging_next.png" alt="következő oldal" width="15" height="18" onclick="javascript:doPaging('next')" />
+            <img runat="server" id="pagelast" src="~/Content/images/paging_last.png" alt="utolsó oldal" width="29" height="18" onclick="javascript:doPaging('last')" />
+        </div>
+    }
+</details>
