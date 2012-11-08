@@ -42,7 +42,7 @@ namespace MrKupido.Library.Recipe
             Kes knife = eg.Use<Kes>();
 
             IIngredient csirkemell = knife.Feldarabolni(new Csirkemell(500.0f * amount), 50.0f);
-
+           
             Kez kez = eg.Use<Kez>();
             csirkemell = kez.Raszorni(csirkemell, new So(5.0f * amount));
 
@@ -71,7 +71,6 @@ namespace MrKupido.Library.Recipe
 
             Tepsi tepsi = eg.Use<Tepsi>();
             tepsi.Berakni((IngredientBase)preps["csirkemell"]);
-            uint time = tepsi.LastActionDuration;
 
             Kez kez = eg.Use<Kez>();
             tepsi.Contents = kez.Raszorni(tepsi.Contents, new Liszt(10.0f * amount));

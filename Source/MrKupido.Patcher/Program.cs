@@ -130,22 +130,34 @@ namespace MrKupido.Patcher
                     MethodReference mr = (Mono.Cecil.MethodReference)instr.Operand;
                     Mono.Cecil.Cil.Instruction ii = null;
 
-                    if ((mr.DeclaringType.Namespace == "MrKupido.Library.Equipment") && (!mr.Name.StartsWith("get_")) && (!mr.Name.StartsWith("set_")))
+                    if ((mr.DeclaringType.Namespace == "MrKupido.Library.Equipment") && (!mr.Name.StartsWith("get_")) && (!mr.Name.StartsWith("set_")) && (mr.HasThis))
                     {
-                        Mono.Cecil.Cil.VariableDefinition[] nvs = new Mono.Cecil.Cil.VariableDefinition[mr.Parameters.Count];
+                        Mono.Cecil.Cil.VariableDefinition[] nvs = new Mono.Cecil.Cil.VariableDefinition[mr.Parameters.Count + 1];
 
+                        // instance variable
+                        nvs[0] = new Mono.Cecil.Cil.VariableDefinition(mr.DeclaringType);
+                        md.Body.Variables.Add(nvs[0]);
+
+                        // parameters
                         for (int j = mr.Parameters.Count - 1; j >= 0; j--)
                         {
-                            nvs[j] = new Mono.Cecil.Cil.VariableDefinition(mr.Parameters[j].ParameterType);
-                            md.Body.Variables.Add(nvs[j]);
+                            nvs[j+1] = new Mono.Cecil.Cil.VariableDefinition(mr.Parameters[j].ParameterType);
+                            md.Body.Variables.Add(nvs[j + 1]);
 
-                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Stloc_S, nvs[j]);
+                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Stloc_S, nvs[j + 1]);
                             processor.InsertBefore(instr, ii);
                         }
 
+                        // instance
+                        ii = processor.Create(Mono.Cecil.Cil.OpCodes.Stloc_S, nvs[0]);
+                        processor.InsertBefore(instr, ii);
+                        ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldloc_S, nvs[0]);
+                        processor.InsertBefore(instr, ii);
+
+                        // parameters
                         for (int j = 0; j < mr.Parameters.Count; j++)
                         {
-                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldloc_S, nvs[j]);
+                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldloc_S, nvs[j + 1]);
                             processor.InsertBefore(instr, ii);
                         }
 
@@ -156,6 +168,7 @@ namespace MrKupido.Patcher
 
                         if (mr.ReturnType.FullName != "System.Void")
                         {
+                            // we need to store the return value
                             result = new Mono.Cecil.Cil.VariableDefinition(mr.ReturnType);
                             md.Body.Variables.Add(result);
 
@@ -166,20 +179,22 @@ namespace MrKupido.Patcher
                             processor.InsertBefore(instrNext, ii);
                         }
 
-                        ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldc_I4, mr.Parameters.Count);
+                        ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldc_I4, nvs.Length);
                         processor.InsertBefore(instrNext, ii);
 
-                        ii = processor.Create(Mono.Cecil.Cil.OpCodes.Newarr, directionGeneratorMD.Parameters[4].ParameterType.GetElementType());
+                        TypeReference objectTypeRef = directionGeneratorMD.Parameters[3].ParameterType.GetElementType(); // this MUST reference the 'object' type
+
+                        ii = processor.Create(Mono.Cecil.Cil.OpCodes.Newarr, objectTypeRef);
                         processor.InsertBefore(instrNext, ii);
 
-                        Mono.Cecil.Cil.VariableDefinition arrayVar = new Mono.Cecil.Cil.VariableDefinition(directionGeneratorMD.Parameters[4].ParameterType);
+                        Mono.Cecil.Cil.VariableDefinition arrayVar = new Mono.Cecil.Cil.VariableDefinition(objectTypeRef);
                         md.Body.Variables.Add(arrayVar);
 
                         ii = processor.Create(Mono.Cecil.Cil.OpCodes.Stloc_S, arrayVar);
                         processor.InsertBefore(instrNext, ii);
 
 
-                        for (int j = 0; j < mr.Parameters.Count; j++)
+                        for (int j = 0; j < nvs.Length; j++)
                         {
                             ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldloc_S, arrayVar);
                             processor.InsertBefore(instrNext, ii);
@@ -207,11 +222,24 @@ namespace MrKupido.Patcher
                         ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldstr, mr.DeclaringType.FullName + " " + mr.Name);
                         processor.InsertBefore(instrNext, ii);
 
+                        // this is the good one
+                        //ii = processor.Create(instr.Previous.OpCode, md.Body.Variables[((Mono.Cecil.Cil.VariableReference)instr.Previous.Operand).Index]);
+                        //ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldloc, md.Body.Variables[0]);
+                        //processor.InsertBefore(instrNext, ii);
+                        //MethodReference mref = new MethodReference("get_LastActionDuration", directionGeneratorMD.Parameters[2].ParameterType, new TypeReference(mr.DeclaringType.Namespace, "EquipmentBase", mr.DeclaringType.Module, mr.DeclaringType.Scope));
+                        //mref.HasThis = true;
+                        //ii = processor.Create(instr.OpCode, mref);
+                        //processor.InsertBefore(instrNext, ii);
 
+                        // not good, it is a static call (we need virtual instance)
                         //ii = processor.Create(instr.OpCode, new MethodReference("get_LastActionDuration", directionGeneratorMD.Parameters[2].ParameterType, new TypeReference(mr.DeclaringType.Namespace, "EquipmentBase", mr.DeclaringType.Module, mr.DeclaringType.Scope)));
                         //processor.InsertBefore(instrNext, ii);
 
-                        ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldc_I4, 60);
+                        // not good, temporary replacement
+                        //ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldc_I4, 60);
+                        //processor.InsertBefore(instrNext, ii);
+
+                        ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldloc_S, arrayVar);
                         processor.InsertBefore(instrNext, ii);
 
                         if (mr.ReturnType.FullName != "System.Void")
@@ -231,9 +259,6 @@ namespace MrKupido.Patcher
                             ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldnull);
                             processor.InsertBefore(instrNext, ii);
                         }
-
-                        ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldloc_S, arrayVar);
-                        processor.InsertBefore(instrNext, ii);
 
                         ii = processor.Create(Mono.Cecil.Cil.OpCodes.Call, directionGeneratorMD);
                         processor.InsertBefore(instrNext, ii);

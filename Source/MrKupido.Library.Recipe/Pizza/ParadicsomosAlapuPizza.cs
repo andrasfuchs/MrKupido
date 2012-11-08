@@ -15,6 +15,11 @@ namespace MrKupido.Library.Recipe
             : base(amount, unit)
         { }
 
+        public static new EquipmentGroup SelectEquipment(float amount)
+        {
+            return Pizza.SelectEquipment(amount);
+        }
+
         public static new PreparedIngredients Prepare(float amount, EquipmentGroup eg)
         {
             PreparedIngredients result = Pizza.Prepare(amount, eg);

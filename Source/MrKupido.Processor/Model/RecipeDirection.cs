@@ -23,7 +23,7 @@ namespace MrKupido.Processor.Model
         public string Alias { get; private set; }
         public uint ActionDuration { get; private set; }
 
-        public RecipeDirection(string assemblyName, string command, object[] operands = null, object result = null, RecipeStage stage = RecipeStage.Unknown, int actorIndex = 1, uint actionDuration = 0)
+        public RecipeDirection(string assemblyName, string command, object[] operands = null, object result = null, RecipeStage stage = RecipeStage.Unknown, int actorIndex = 1)
         {
             ActorIndex = actorIndex;
             Stage = stage;
@@ -32,8 +32,13 @@ namespace MrKupido.Processor.Model
             Command = command;
             Operands = (operands == null ? new string[0] : operands);
             Result = result;
-            ActionDuration = actionDuration;
-            TimeToComplete = new TimeSpan(0, 0, (int)actionDuration);
+
+            if (operands[0] is IEquipment)
+            {
+                IEquipment eq = ((IEquipment)operands[0]);
+                ActionDuration = eq.LastActionDuration;
+                TimeToComplete = new TimeSpan(0, 0, (int)eq.LastActionDuration);
+            }
 
             if (result is IngredientGroup)
             {
@@ -44,6 +49,8 @@ namespace MrKupido.Processor.Model
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
+            object[] operands = new object[Operands.Length - 1];
+            Array.Copy(Operands, 1, operands, 0, operands.Length);
 
             string[] ids = Command.Split(' ');
             string direction = null;
@@ -60,9 +67,9 @@ namespace MrKupido.Processor.Model
                 sb.Append(Command);
 
                 sb.Append(' ');
-                if (Operands.Length > 0)
+                if (operands.Length > 0)
                 {
-                    foreach (object operand in Operands)
+                    foreach (object operand in operands)
                     {
                         sb.Append(operand);
                         sb.Append(", ");
@@ -73,20 +80,20 @@ namespace MrKupido.Processor.Model
             }
             else
             {
-                string[] ops = new string[Operands.Length];
+                string[] ops = new string[operands.Length];
                 for (int i = 0; i < ops.Length; i++)
                 {
-                    if (Operands[i] == null)
+                    if (operands[i] == null)
                     {
                         ops[i] = "(null)";
                     }
-                    else if (Operands[i] is IngredientGroup)
+                    else if (operands[i] is IngredientGroup)
                     {
-                        ops[i] = ((IngredientGroup)Operands[i]).Name;
+                        ops[i] = ((IngredientGroup)operands[i]).Name;
                     }
                     else
                     {
-                        ops[i] = Operands[i].ToString();
+                        ops[i] = operands[i].ToString();
                     }
                 }
 
@@ -105,7 +112,7 @@ namespace MrKupido.Processor.Model
                     direction = direction.Remove(beforeStart-1, afterEnd - beforeStart + 3);
 
                     StringBuilder dirSB = new StringBuilder();
-                    object[] items = (object[])Operands[operandIndex];
+                    object[] items = (object[])operands[operandIndex];
                     if (items.Length > 0)
                     {
                         foreach (object item in items)
@@ -130,7 +137,7 @@ namespace MrKupido.Processor.Model
                     string operand = null;
                     if (Char.IsNumber(operandId))
                     {
-                        object operandObj = Operands[Int32.Parse(operandId.ToString())];
+                        object operandObj = operands[Int32.Parse(operandId.ToString())];
 
                         if (operandObj != null)
                         {

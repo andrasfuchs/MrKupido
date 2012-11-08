@@ -23,6 +23,11 @@ namespace MrKupido.Library.Equipment
 
         public virtual uint LastActionDuration { get; protected set; }
 
+        public EquipmentBase()
+        {
+            this.LastActionDuration = 60;
+        }
+
         [NameAlias("hun", "használ", Priority = 200)]
         [NameAlias("eng", "use", Priority = 200)]
 

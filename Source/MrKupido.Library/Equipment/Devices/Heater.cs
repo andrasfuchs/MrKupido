@@ -33,6 +33,8 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "rakd be a(z) {B} a {0T}")]
         public bool Berakni(IIngredient ig)
         {
+            this.LastActionDuration = 60;
+
             return true;
         }
 
@@ -40,6 +42,8 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "vedd ki a(z) {} tartalmát")]
         public IIngredient Kivenni()
         {
+            this.LastActionDuration = 60;
+
             return this.Contents;
         }
 
@@ -53,6 +57,9 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "előmelegít", Priority = 200)]
         [NameAlias("hun", "felmelegít", Priority = 201)]
         [NameAlias("hun", "állítsd a(z) {} hőmérsékletét {0} fokra")]
-        public void Homerseklet(int temperature) { }
+        public void Homerseklet(int temperature) 
+        {
+            this.LastActionDuration = 60;
+        }
     }
 }

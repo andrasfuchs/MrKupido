@@ -34,6 +34,8 @@ namespace MrKupido.Library.Equipment
                 this.Contents = ig;
             }
 
+            this.LastActionDuration = 60;
+
             return true;
         }
 
@@ -43,17 +45,28 @@ namespace MrKupido.Library.Equipment
             IIngredient i = this.Contents;
             this.Contents = null;
 
+            this.LastActionDuration = 60;
+
             return i;
         }
 
         [NameAlias("hun", "várj {0} percet")]
-        public void Varni(int minutes) {}
+        public void Varni(int minutes) 
+        {
+            this.LastActionDuration = (uint)(minutes * 60);
+        }
 
         [NameAlias("hun", "fedd le a(z) {T} {0V}")]
-        public void Lefedni(Material material) { }
+        public void Lefedni(Material material) 
+        {
+            this.LastActionDuration = 60;
+        }
 
         [NameAlias("hun", "vedd le a fedőt")]
-        public void FedotLevenni() { }
+        public void FedotLevenni() 
+        {
+            this.LastActionDuration = 60;
+        }
 
         [NameAlias("hun", "öntsd le a folyadékot a(z) {L}")]
         public IngredientGroup FolyadekotLeonteni() 
@@ -71,6 +84,8 @@ namespace MrKupido.Library.Equipment
             {
                 throw new InvalidActionForIngredientException("FolyadekotLeonteni", Contents.Name, Contents.Unit);
             }
+
+            this.LastActionDuration = 120;
 
             return new IngredientGroup(result.ToArray());
         }
