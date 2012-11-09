@@ -5310,7 +5310,7 @@ $.widget( "ui.autocomplete", {
 					if ( false !== self._trigger( "focus", event, { item: item } ) ) {
 						// use value to match what will end up in the input, if it was a key event
 						if ( /^key/.test(event.originalEvent.type) ) {
-							self.element.val( item.value );
+							self.element.val( item.displayString );
 						}
 					}
 				},
@@ -5563,7 +5563,7 @@ $.extend( $.ui.autocomplete, {
 	filter: function(array, term) {
 		var matcher = new RegExp( $.ui.autocomplete.escapeRegex(term), "i" );
 		return $.grep( array, function(value) {
-			return matcher.test( value.label || value.value || value );
+		    return matcher.test(value.label || value.value || value);
 		});
 	}
 });

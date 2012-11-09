@@ -2,8 +2,12 @@
     @Scripts.Render("~/bundles/jqueryval")
 }
     <script type="text/javascript">
+        var lastItemDisplayString = "";
+
         $(function () {
             $("#query").keyup(function (e) {
+                lastItemDisplayString = "";
+
                 var code = e.which; // recommended to use e.which, it's normalized across browsers
 
                 // enter
@@ -60,10 +64,11 @@
                         success: function (data) {
                             response($.map(data, function (item) {
                                 return {
-                                    label: item.DisplayString,
-                                    value: item.TreeNode.NodeType + ":" + item.TreeNode.UniqueName,
-                                    icon: item.TreeNode.NodeType == "I" ? "http://localhost/MrKupido/Content/svg/cat_bread_dark.svg" :
-                                              (item.TreeNode.NodeType == "R" ? "http://localhost/MrKupido/Content/svg/cat_pasta_dark.svg" : null)
+                                    displayString: item.DisplayString,
+                                    searchString: item.SearchString,
+                                    label: item.SearchString,
+                                    value: item.NodeType + ":" + item.UniqueName,
+                                    icon: item.IconUrl
                                 }
                             }) // map
                             ); // response
@@ -109,11 +114,17 @@
                 }
             })
             .data("autocomplete")._renderItem = function (ul, item) {
+                // remove duplicates
+                if (lastItemDisplayString == item.displayString) return '';
+                lastItemDisplayString = item.displayString;
+
+                // show one item
                 return $('<li class="ui-menu-item-with-icon"></li>')
                     .data("item.autocomplete", item)
-                    .append('<a><img class="ui-menu-item-icon" src="' + item.icon + '" />' + item.label + '</a>')
+                    .append('<a><img class="ui-menu-item-icon" src="' + item.icon + '" />' + item.displayString + '</a>')
                     .appendTo(ul);
             };
+
         });
 
         function refreshFilters(filters) {            

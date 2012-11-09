@@ -332,7 +332,7 @@
     <Content Include="Scripts\jquery-1.7.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.2.js" />
     <Content Include="Scripts\jquery-1.7.2.min.js" />
-    <Content Include="Scripts\jquery-ui-1.8.11.js" />
+    <Content Include="Scripts\jquery-ui-1.8.11_mod.js" />
     <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
     <Content Include="Scripts\jquery.ui.autocomplete.accentFolding.js" />
     <Content Include="Scripts\jquery.ui.autocomplete.autoSelect.js" />
@@ -365,6 +365,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\TypeScript\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -451,6 +452,9 @@
     <Content Include="Views\Import\_RecipeCode.cshtml" />
     <None Include="Properties\PublishProfiles\MrKupidoBeta.pubxml" />
     <Content Include="Views\Home\_RecipeSearchResultHead.cshtml" />
+    <Content Include="Scripts\jquery-ui-1.8.11.min.js.map">
+      <DependentUpon>jquery-ui-1.8.11_mod.js</DependentUpon>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -480,11 +484,11 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-<ItemGroup>
+  <ItemGroup>
     <TypeScriptCompile Include="$(ProjectDir)\**\*.ts" />
-</ItemGroup>
+  </ItemGroup>
   <Target Name="BeforeBuild">
-   <Exec Command="&quot;$(PROGRAMFILES)\Microsoft SDKs\TypeScript\0.8.0.0\tsc&quot; @(TypeScriptCompile ->'&quot;%(fullpath)&quot;', ' ')" />
+    <Exec Command="&quot;$(PROGRAMFILES)\Microsoft SDKs\TypeScript\0.8.0.0\tsc&quot; @(TypeScriptCompile ->'&quot;%(fullpath)&quot;', ' ')" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
