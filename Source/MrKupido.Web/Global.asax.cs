@@ -16,8 +16,6 @@ namespace MrKupido.Web
 
     public class MvcApplication : System.Web.HttpApplication
     {
-        public bool IgnoreBrowserWarning = false;
-
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -27,57 +25,58 @@ namespace MrKupido.Web
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
-        protected void Application_BeginRequest()
+        protected void Application_AcquireRequestState()
         {
-            if (Request.AppRelativeCurrentExecutionFilePath.Contains('.') || (Request.AppRelativeCurrentExecutionFilePath == "~/hun/Home/NotSupportedBrowser")) return;
+            if (Request.AppRelativeCurrentExecutionFilePath.Contains('.')) return;
 
             CultureInitializer.InitializeCulture(Request);
 
-            if (IgnoreBrowserWarning) return;
-
-            // =================================
-            // Check browser version
-
-            System.Web.HttpBrowserCapabilities browser = Request.Browser;
-            OldBrowserData obd = new OldBrowserData();
-            obd.BrowserName = browser.Browser;
-            obd.BrowserVersion = browser.Version;
-            obd.ReturnURL = Request.AppRelativeCurrentExecutionFilePath;
-
-            if ((browser.Browser == "Chrome") && ((browser.MajorVersion < 21)))
+            if (!(Request.Url.AbsoluteUri.Contains("notsupportedbrowser") || Request.Url.AbsoluteUri.Contains("IgnoreOldBrowser")))
             {
-                obd.UpdateURL = "http://www.google.com/chrome";
-            }
+                // =================================
+                // Check browser version
 
-            if ((browser.Browser == "Firefox") && ((browser.MajorVersion < 3) || (browser.MajorVersion == 3) && (browser.MinorVersion < 0.5)))
-            {
-                obd.UpdateURL = "http://www.mozilla.com/firefox/";
-            }
+                System.Web.HttpBrowserCapabilities browser = Request.Browser;
+                OldBrowserData obd = new OldBrowserData();
+                obd.BrowserName = browser.Browser;
+                obd.BrowserVersion = browser.Version;
+                obd.ReturnUrl = Request.AppRelativeCurrentExecutionFilePath;
 
-            if ((browser.Browser == "IE") && (browser.MajorVersion < 8))
-            {
-                obd.UpdateURL = "http://www.microsoft.com/windows/Internet-explorer/default.aspx";
-            }
+                if ((browser.Browser == "Chrome") && ((browser.MajorVersion < 21)))
+                {
+                    obd.UpdateUrl = "http://www.google.com/chrome";
+                }
 
-            if ((browser.Browser == "Opera") && ((browser.MajorVersion < 9) || (browser.MajorVersion == 9) && (browser.MinorVersion < 80.0)))
-            {
-                obd.UpdateURL = "http://www.opera.com/download/";
-            }
+                if ((browser.Browser == "Firefox") && ((browser.MajorVersion < 3) || (browser.MajorVersion == 3) && (browser.MinorVersion < 0.5)))
+                {
+                    obd.UpdateUrl = "http://www.mozilla.com/firefox/";
+                }
 
-            if ((browser.Browser == "AppleMAC-Safari") && (browser.MajorVersion < 4))
-            {
-                obd.UpdateURL = "http://www.apple.com/safari/download/";
-            }
+                if ((browser.Browser == "IE") && (browser.MajorVersion < 8))
+                {
+                    obd.UpdateUrl = "http://www.microsoft.com/windows/Internet-explorer/default.aspx";
+                }
 
-            if ((browser.Browser == "Mozilla") && ((browser.MajorVersion < 5) || (browser.MajorVersion == 5) && (browser.MinorVersion < 0.0)))
-            {
-                obd.UpdateURL = "https://play.google.com/store/apps/details?id=org.mozilla.firefox";
-            }
+                if ((browser.Browser == "Opera") && ((browser.MajorVersion < 9) || (browser.MajorVersion == 9) && (browser.MinorVersion < 80.0)))
+                {
+                    obd.UpdateUrl = "http://www.opera.com/download/";
+                }
 
-            //lblOldBrowser.Text = String.Format(lblOldBrowser.Text, browser.Browser + " " + browser.Version, obd.UpdateURL);
-            if (obd.UpdateURL != null)
-            {
-                Response.RedirectToRoute("OldBrowser", obd);
+                if ((browser.Browser == "AppleMAC-Safari") && (browser.MajorVersion < 4))
+                {
+                    obd.UpdateUrl = "http://www.apple.com/safari/download/";
+                }
+
+                if ((browser.Browser == "Mozilla") && ((browser.MajorVersion < 5) || (browser.MajorVersion == 5) && (browser.MinorVersion < 0.0)))
+                {
+                    obd.UpdateUrl = "https://play.google.com/store/apps/details?id=org.mozilla.firefox";
+                }
+
+                //lblOldBrowser.Text = String.Format(lblOldBrowser.Text, browser.Browser + " " + browser.Version, obd.UpdateURL);
+                if ((obd.UpdateUrl != null) && (Session["IgnoreOldBrowser"] == null))
+                {
+                    Response.RedirectToRoute("OldBrowser", new { browserName = obd.BrowserName, browserVersion = obd.BrowserVersion, returnURL = obd.ReturnUrl, updateURL = obd.UpdateUrl });
+                }
             }
         }
     }

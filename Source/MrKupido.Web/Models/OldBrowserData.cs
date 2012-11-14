@@ -5,12 +5,13 @@ using System.Web;
 
 namespace MrKupido.Web.Models
 {
+    [Serializable]
     public class OldBrowserData
     {
         public string BrowserName;
         public string BrowserVersion;
 
-        public string UpdateURL;
-        public string ReturnURL;
+        public string UpdateUrl;
+        public string ReturnUrl;
     }
 }

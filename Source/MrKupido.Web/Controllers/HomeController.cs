@@ -662,9 +662,17 @@ namespace MrKupido.Web.Controllers
             return View();
         }
 
-        public ActionResult NotSupportedBrowser()
+        public ActionResult NotSupportedBrowser(string browserName, string browserVersion, string returnUrl, string updateUrl)
         {
-            return View();
+            return View(new OldBrowserData() { BrowserName = browserName, BrowserVersion = browserVersion, ReturnUrl = returnUrl, UpdateUrl = updateUrl });
+        }
+        
+        [HttpPost]
+        public ActionResult IgnoreOldBrowser(string returnUrl)
+        {
+            Session["IgnoreOldBrowser"] = true;
+
+            return Redirect(returnUrl);
         }
 
         [HttpPost]

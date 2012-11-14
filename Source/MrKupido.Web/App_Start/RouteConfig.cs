@@ -35,7 +35,7 @@ namespace MrKupido.Web
             routes.MapRoute(
                 name: "OldBrowser",
                 url: "hun/home/notsupportedbrowser",
-                defaults: new { language = "hun", controller = "Home", action = "NotSupportedBrowser", id = UrlParameter.Optional }
+                defaults: new { language = "hun", controller = "Home", action = "NotSupportedBrowser" }
             );
 
             routes.MapRoute(

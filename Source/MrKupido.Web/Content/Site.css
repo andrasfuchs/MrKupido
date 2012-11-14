@@ -12,22 +12,41 @@ background              bgc         #fffcf5
 */
 
 @font-face {
-    font-family: Cardo;
-    src: url('../Content/fonts/Cardo/Cardo-Regular.eot'); /* EOT file for IE */
-    src: local('Cardo (Regular)') url('../Content/fonts/Cardo/Cardo-Regular.ttf') format('truetype');
+    font-family: 'Cardo';
+    src: url('../Content/fonts/Cardo/cardo-regular-webfont.eot');
+    src: url('../Content/fonts/Cardo/cardo-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../Content/fonts/Cardo/cardo-regular-webfont.woff') format('woff'),
+         url('../Content/fonts/Cardo/cardo-regular-webfont.ttf') format('truetype'),
+         url('../Content/fonts/Cardo/cardo-regular-webfont.svg#cardoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
 }
 
 @font-face {
-    font-family: Tangerine;
-    src: url('../Content/fonts/Tangerine/Tangerine_Regular.eot');  /* EOT file for IE */
-    src: local('Tangerine (Regular)') url('../Content/fonts/Tangerine/Tangerine_Regular.ttf') format('truetype');
+    font-family: 'TangerineBold';
+    src: url('../Content/fonts/Tangerine/tangerine_bold-webfont.eot');
+    src: url('../Content/fonts/Tangerine/tangerine_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../Content/fonts/Tangerine/tangerine_bold-webfont.woff') format('woff'),
+         url('../Content/fonts/Tangerine/tangerine_bold-webfont.ttf') format('truetype'),
+         url('../Content/fonts/Tangerine/tangerine_bold-webfont.svg#tangerineregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
 }
 
 @font-face {
-    font-family: TangerineBold;
-    src: url('../Content/fonts/Tangerine/Tangerine_Bold.eot');  /* EOT file for IE */
-    src: local('Tangerine (Bold)') url('../Content/fonts/Tangerine/Tangerine_Bold.ttf') format('truetype');
+    font-family: 'Tangerine';
+    src: url('../Content/fonts/Tangerine/tangerine_regular-webfont.eot');
+    src: url('../Content/fonts/Tangerine/tangerine_regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../Content/fonts/Tangerine/tangerine_regular-webfont.woff') format('woff'),
+         url('../Content/fonts/Tangerine/tangerine_regular-webfont.ttf') format('truetype'),
+         url('../Content/fonts/Tangerine/tangerine_regular-webfont.svg#tangerineregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
 }
+
 
 body {
     font-size: 14px;

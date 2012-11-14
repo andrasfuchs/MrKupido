@@ -1,5 +1,6 @@
-﻿@{
-    ViewBag.Title = "Unsupported browser - Mr. Kupido";
+﻿@model  MrKupido.Web.Models.OldBrowserData
+@{
+    ViewBag.Title = "Unsupported browser (" + Model.BrowserName + " v" + Model.BrowserVersion + ")- Mr. Kupido";
 }
 <header class="nosearch">
     <a runat="server" href="~/">
@@ -9,10 +10,8 @@
 <div>
     <details id="browser" open class="alwaysopen">
         <summary>
-            <h1>
-                Böngészö frissítés</h1>
-            <h3>
-                Kérlek frissítsd a böngésződet az alábbi címek valamelyikén!</h3>
+            <h1>Böngészö frissítés</h1>
+            <h3>Kérlek frissítsd a böngésződet az alábbi címek valamelyikén!</h3>
         </summary>
         <hr class="space" />
         <ul>
@@ -21,27 +20,30 @@
                 <img runat="server" src="~/Content/svg/browser_chrome.svg" alt="Google Chrome" width="230px" height="190px" /></a> </li>
             <li>
                 <a href="http://www.mozilla.com/firefox/">Firefox
-                <img runat="server" src="~/Content/svg/browser_firefox.svg" alt="Firefox" width="230px" height="190px" /></a> 
+                <img runat="server" src="~/Content/svg/browser_firefox.svg" alt="Firefox" width="230px" height="190px" /></a>
             </li>
             <li>
                 <a href="http://www.microsoft.com/windows/Internet-explorer/default.aspx">Internet Explorer
-                <img runat="server" src="~/Content/svg/browser_ie.svg" alt="Internet Explorer" width="230px" height="190px" /></a> 
+                <img runat="server" src="~/Content/svg/browser_ie.svg" alt="Internet Explorer" width="230px" height="190px" /></a>
             </li>
             <li>
                 <a href="http://www.apple.com/safari/download/">Apple Safari
-                <img runat="server" src="~/Content/svg/browser_safari.svg" alt="Apple Safari" width="230px" height="190px" /></a> 
+                <img runat="server" src="~/Content/svg/browser_safari.svg" alt="Apple Safari" width="230px" height="190px" /></a>
             </li>
             <li>
                 <a href="http://www.opera.com/download/">Opera
-                <img runat="server" src="~/Content/svg/browser_opera.svg" alt="Opera" width="230px" height="190px" /></a> 
+                <img runat="server" src="~/Content/svg/browser_opera.svg" alt="Opera" width="230px" height="190px" /></a>
             </li>
             <li>
                 <a href="https://play.google.com/store/apps/details?id=org.mozilla.firefox">Android Browser
-                <img runat="server" src="~/Content/svg/browser_android.svg" alt="Android Browser" width="230px" height="190px" /></a> 
+                <img runat="server" src="~/Content/svg/browser_android.svg" alt="Android Browser" width="230px" height="190px" /></a>
             </li>
         </ul>
     </details>
 </div>
 <div class="formbuttons">
-    <input type="submit" value="Továbblépek frissítés nélkül >>" />
+    @using (Html.BeginForm("IgnoreOldBrowser", "Home", new { returnUrl = Model.ReturnUrl }))
+    {
+        <input type="submit" value="Továbblépek frissítés nélkül >>" />
+    }
 </div>
