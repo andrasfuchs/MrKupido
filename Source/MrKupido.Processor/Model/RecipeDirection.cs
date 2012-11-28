@@ -18,10 +18,13 @@ namespace MrKupido.Processor.Model
 
         public string AssemblyName { get; private set; }
         public string Command { get; private set; }
+        private string Direction { get; set; }
+        private Type DirectionType { get; set; }
         public object[] Operands { get; private set; }
         public object Result { get; private set; }
         public string Alias { get; private set; }
         public uint ActionDuration { get; private set; }
+        public string IconUrl { get; private set; }
 
         public RecipeDirection(string assemblyName, string command, object[] operands = null, object result = null, RecipeStage stage = RecipeStage.Unknown, int actorIndex = 1)
         {
@@ -44,6 +47,16 @@ namespace MrKupido.Processor.Model
             {
                 Alias = ((IngredientGroup)result).Name;
             }
+
+
+            string[] ids = Command.Split(' ');
+            if (ids.Length == 2)
+            {
+                DirectionType = Assembly.Load(AssemblyName).GetType(ids[0]);
+                Direction = NameAliasAttribute.GetMethodName(DirectionType, ids[1]);
+
+                // TODO: IconUrl
+            }
         }
 
         public override string ToString()
@@ -52,17 +65,7 @@ namespace MrKupido.Processor.Model
             object[] operands = new object[Operands.Length - 1];
             Array.Copy(Operands, 1, operands, 0, operands.Length);
 
-            string[] ids = Command.Split(' ');
-            string direction = null;
-            Type directionType = null;
-
-            if (ids.Length == 2)
-            {
-                directionType = Assembly.Load(AssemblyName).GetType(ids[0]);
-                direction = NameAliasAttribute.GetMethodName(directionType, ids[1]);
-            }
-
-            if (direction == null)
+            if (Direction == null)
             {
                 sb.Append(Command);
 
@@ -99,17 +102,17 @@ namespace MrKupido.Processor.Model
 
                 // ({x*})
                 int starIndex = 0;
-                while ((starIndex = direction.IndexOf("*}")) > 0)
+                while ((starIndex = Direction.IndexOf("*}")) > 0)
                 {
-                    int operandIndex = Int32.Parse(direction[starIndex - 1].ToString());
+                    int operandIndex = Int32.Parse(Direction[starIndex - 1].ToString());
 
-                    int beforeStart = direction.LastIndexOf('(', starIndex)+1;
-                    string beforeString = direction.Substring(beforeStart, starIndex - 2 - beforeStart);
+                    int beforeStart = Direction.LastIndexOf('(', starIndex)+1;
+                    string beforeString = Direction.Substring(beforeStart, starIndex - 2 - beforeStart);
 
-                    int afterEnd = direction.IndexOf(')', starIndex + 2) - 1;
-                    string afterString = direction.Substring(starIndex + 2, afterEnd - starIndex - 1);
+                    int afterEnd = Direction.IndexOf(')', starIndex + 2) - 1;
+                    string afterString = Direction.Substring(starIndex + 2, afterEnd - starIndex - 1);
 
-                    direction = direction.Remove(beforeStart-1, afterEnd - beforeStart + 3);
+                    Direction = Direction.Remove(beforeStart-1, afterEnd - beforeStart + 3);
 
                     StringBuilder dirSB = new StringBuilder();
                     object[] items = (object[])operands[operandIndex];
@@ -124,16 +127,16 @@ namespace MrKupido.Processor.Model
                         dirSB.Remove(dirSB.Length - afterString.Length, afterString.Length);
                     }
 
-                    direction = direction.Insert(beforeStart - 1, dirSB.ToString());
+                    Direction = Direction.Insert(beforeStart - 1, dirSB.ToString());
                 }
 
                 // TODO: special (culture dependent) formatting for {0T} {0N} etc. etc.
                 int clauseEndIndex = 0;
-                while ((clauseEndIndex = direction.IndexOf("}")) > 0)
+                while ((clauseEndIndex = Direction.IndexOf("}")) > 0)
                 {
-                    int clauseStartIndex = direction.LastIndexOf('{', clauseEndIndex);
+                    int clauseStartIndex = Direction.LastIndexOf('{', clauseEndIndex);
 
-                    char operandId = direction[clauseStartIndex + 1];
+                    char operandId = Direction[clauseStartIndex + 1];
                     string operand = null;
                     if (Char.IsNumber(operandId))
                     {
@@ -146,13 +149,13 @@ namespace MrKupido.Processor.Model
                     }
                     else 
                     {
-                        operand = NameAliasAttribute.GetDefaultName(directionType);
+                        operand = NameAliasAttribute.GetDefaultName(Operands[0].GetType());
                     }
 
                     string word = "";
                     if (operand != null)
                     {
-                        char affixId = direction[clauseEndIndex - 1];
+                        char affixId = Direction[clauseEndIndex - 1];
                         if (Char.IsLetter(affixId))
                         {
                             string[] words = operand.Split(' ');
@@ -198,7 +201,7 @@ namespace MrKupido.Processor.Model
                                     if (vh == VowelHarmony.HighType1) word += "ből";
                                     break;
                                 default:
-                                    throw new MrKupidoException("The affix id '{0}' is unknown in the '{1}' string.", affixId, direction);
+                                    throw new MrKupidoException("The affix id '{0}' is unknown in the '{1}' string.", affixId, Direction);
                             }
                         }
                     }
@@ -207,29 +210,29 @@ namespace MrKupido.Processor.Model
                         operand = "(null)";
                     }
 
-                    direction = direction.Remove(clauseStartIndex, clauseEndIndex - clauseStartIndex + 1);
-                    direction = direction.Insert(clauseStartIndex, operand + word);
+                    Direction = Direction.Remove(clauseStartIndex, clauseEndIndex - clauseStartIndex + 1);
+                    Direction = Direction.Insert(clauseStartIndex, operand + word);
                 }
 
                 // a(z) -> a, az
                 int azIndex = 0;
-                while ((azIndex = direction.IndexOf("a(z)")) > 0)
+                while ((azIndex = Direction.IndexOf("a(z)")) > 0)
                 {
                     bool makeAz = false;
-                    if (IsVowel(direction[azIndex + 5])) makeAz = true;
-                    if ((direction[azIndex + 5] == '5') || (direction[azIndex + 5] == '1')) makeAz = true;
+                    if (IsVowel(Direction[azIndex + 5])) makeAz = true;
+                    if ((Direction[azIndex + 5] == '5') || (Direction[azIndex + 5] == '1')) makeAz = true;
 
                     if (makeAz)
                     {
-                        direction = direction.Remove(azIndex + 3, 1).Remove(azIndex + 1, 1);
+                        Direction = Direction.Remove(azIndex + 3, 1).Remove(azIndex + 1, 1);
                     }
                     else
                     {
-                        direction = direction.Remove(azIndex + 1, 3);
+                        Direction = Direction.Remove(azIndex + 1, 3);
                     }
                 }
 
-                sb.Append(direction);
+                sb.Append(Direction);
             }
 
             //if (!String.IsNullOrWhiteSpace(Alias))

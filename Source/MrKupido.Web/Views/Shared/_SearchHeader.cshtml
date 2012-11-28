@@ -82,6 +82,7 @@
                     }); // ajax
                 },
                 minLength: 2,
+                delay: 200,
                 selectFirst: true,
                 autoSelect: true,
                 accentFolding: true, /* is it working/necessary */
@@ -113,9 +114,10 @@
                     $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
                 }
             })
+
             .data("autocomplete")._renderItem = function (ul, item) {
                 // remove duplicates
-                if (lastItemDisplayString == item.displayString) return '';
+                if (lastItemDisplayString == item.displayString) return ul;
                 lastItemDisplayString = item.displayString;
 
                 // show one item

@@ -84,6 +84,8 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.WebRequest" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -107,16 +109,8 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.4.5.1\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="System.Net.Http">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20505.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.WebRequest">
-      <Private>True</Private>
-      <HintPath>..\packages\Microsoft.Net.Http.2.0.20505.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20505.0\lib\net40\System.Web.Http.dll</HintPath>
@@ -188,8 +182,8 @@
     <Content Include="Content\fonts\Cardo\cardo-regular-webfont.svg" />
     <Content Include="Content\fonts\Cardo\OFL.txt" />
     <Content Include="Content\fonts\Tangerine\OFL.txt" />
-    <Content Include="Content\fonts\Tangerine\tangerine_bold-webfont.svg" />
-    <Content Include="Content\fonts\Tangerine\tangerine_regular-webfont.svg" />
+    <Content Include="Content\fonts\Tangerine\tangerinea-webfont.svg" />
+    <Content Include="Content\fonts\Tangerine\tangerinea_bold-webfont.svg" />
     <Content Include="Content\images\avatar.jpg" />
     <Content Include="Content\images\background.jpg" />
     <Content Include="Content\images\bulb.png" />
@@ -217,6 +211,12 @@
     <Content Include="Content\images\ticked.png" />
     <Content Include="Content\images\tree-icons.png" />
     <Content Include="Content\images\unticked.png" />
+    <Content Include="Content\svg\action_betesz.svg" />
+    <Content Include="Content\svg\action_cover.svg" />
+    <Content Include="Content\svg\action_mix.svg" />
+    <Content Include="Content\svg\action_rarak.svg" />
+    <Content Include="Content\svg\action_raszor.svg" />
+    <Content Include="Content\svg\action_strech.svg" />
     <Content Include="Content\svg\browser_android.svg" />
     <Content Include="Content\svg\browser_firefox.svg" />
     <Content Include="Content\svg\browser_ie.svg" />
@@ -233,9 +233,19 @@
     <Content Include="Content\svg\cat_unknown.svg" />
     <Content Include="Content\svg\cat_unknown_dark.svg" />
     <Content Include="Content\svg\cat_vegetabledish.svg" />
+    <Content Include="Content\svg\d_clock0.svg" />
+    <Content Include="Content\svg\d_clock1.svg" />
+    <Content Include="Content\svg\d_clock2.svg" />
+    <Content Include="Content\svg\d_clock3.svg" />
+    <Content Include="Content\svg\d_clock4.svg" />
+    <Content Include="Content\svg\d_clock5.svg" />
+    <Content Include="Content\svg\d_clock6.svg" />
+    <Content Include="Content\svg\d_clock7.svg" />
+    <Content Include="Content\svg\d_clock8.svg" />
     <Content Include="Content\svg\n_animalia.svg" />
     <Content Include="Content\svg\n_plantae.svg" />
     <Content Include="Content\svg\r_pizza.svg" />
+    <Content Include="Content\svg\r_recipe.svg" />
     <Content Include="Content\svg\stars_00_light.svg" />
     <Content Include="Hunspellx64.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -336,17 +346,15 @@
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\jquery-1.7.2-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.7.2.js" />
-    <Content Include="Scripts\jquery-1.7.2.min.js" />
+    <Content Include="Content\fonts\Tangerine\tangerinea-webfont.eot" />
+    <Content Include="Content\fonts\Tangerine\tangerinea-webfont.ttf" />
+    <Content Include="Content\fonts\Tangerine\tangerinea_bold-webfont.eot" />
+    <Content Include="Content\fonts\Tangerine\tangerinea_bold-webfont.ttf" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
-    <Content Include="Scripts\jquery-ui-1.8.11_mod.js" />
-    <Content Include="Scripts\jquery-ui-1.8.11.min.js" />
-    <Content Include="Scripts\jquery.ui.autocomplete.accentFolding.js" />
-    <Content Include="Scripts\jquery.ui.autocomplete.autoSelect.js" />
-    <Content Include="Scripts\jquery.ui.autocomplete.selectFirst.js" />
+    <Content Include="Scripts\jquery-ui-1.9.1.custom.js" />
+    <Content Include="Scripts\jquery-ui-1.9.1.custom.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
@@ -445,12 +453,6 @@
     <Content Include="Views\Import\_BasicRecipe.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\fonts\Tangerine\tangerine_bold-webfont.eot" />
-    <Content Include="Content\fonts\Tangerine\tangerine_bold-webfont.ttf" />
-    <Content Include="Content\fonts\Tangerine\tangerine_bold-webfont.woff" />
-    <Content Include="Content\fonts\Tangerine\tangerine_regular-webfont.eot" />
-    <Content Include="Content\fonts\Tangerine\tangerine_regular-webfont.ttf" />
-    <Content Include="Content\fonts\Tangerine\tangerine_regular-webfont.woff" />
     <Content Include="Content\fonts\Cardo\cardo-regular-webfont.eot" />
     <Content Include="Content\fonts\Cardo\cardo-regular-webfont.ttf" />
     <Content Include="Content\fonts\Cardo\cardo-regular-webfont.woff" />
@@ -463,9 +465,6 @@
     <Content Include="Views\Import\_RecipeCode.cshtml" />
     <None Include="Properties\PublishProfiles\MrKupidoBeta.pubxml" />
     <Content Include="Views\Home\_RecipeSearchResultHead.cshtml" />
-    <Content Include="Scripts\jquery-ui-1.8.11.min.js.map">
-      <DependentUpon>jquery-ui-1.8.11_mod.js</DependentUpon>
-    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

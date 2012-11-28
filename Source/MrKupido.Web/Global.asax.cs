@@ -8,6 +8,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using MrKupido.Web.Models;
 using System.Reflection;
+using MrKupido.Utils;
 
 namespace MrKupido.Web
 {
@@ -27,6 +28,9 @@ namespace MrKupido.Web
 
         protected void Application_AcquireRequestState()
         {
+            //new FindConflictingAssemblies().FindConflictingReferences();
+            
+            
             if (Request.AppRelativeCurrentExecutionFilePath.Contains('.')) return;
 
             CultureInitializer.InitializeCulture(Request);
@@ -77,6 +81,11 @@ namespace MrKupido.Web
                 {
                     Response.RedirectToRoute("OldBrowser", new { browserName = obd.BrowserName, browserVersion = obd.BrowserVersion, returnURL = obd.ReturnUrl, updateURL = obd.UpdateUrl });
                 }
+            }
+
+            if ((Session["CurrentUser"] == null) && !Request.Url.AbsoluteUri.Contains("/account/Login"))
+            {
+                Response.RedirectToRoute("AccountManagement", new { action = "Login" });
             }
         }
     }

@@ -46,10 +46,10 @@ namespace MrKupido.Processor.Model
             LongName = ShortName;
             UniqueName = LongName.ToUniqueString();
 
-            if (nodeClass.IsSubclassOf(typeof(MrKupido.Library.Equipment.EquipmentBase))) NodeType = 'E';
-            else if (nodeClass.IsSubclassOf(typeof(MrKupido.Library.Recipe.RecipeBase))) NodeType = 'R';
-            else if (nodeClass.IsSubclassOf(typeof(MrKupido.Library.Ingredient.IngredientBase))) NodeType = 'I';
-            else if (nodeClass.IsSubclassOf(typeof(MrKupido.Library.Nature.NatureBase))) NodeType = 'N';
+            if (nodeClass.IsSubclassOf(typeof(MrKupido.Library.Equipment.EquipmentBase)) || (nodeClass == typeof(MrKupido.Library.Equipment.EquipmentBase))) NodeType = 'E';
+            else if (nodeClass.IsSubclassOf(typeof(MrKupido.Library.Recipe.RecipeBase)) || (nodeClass == typeof(MrKupido.Library.Recipe.RecipeBase))) NodeType = 'R';
+            else if (nodeClass.IsSubclassOf(typeof(MrKupido.Library.Ingredient.IngredientBase)) || (nodeClass == typeof(MrKupido.Library.Ingredient.IngredientBase))) NodeType = 'I';
+            else if (nodeClass.IsSubclassOf(typeof(MrKupido.Library.Nature.NatureBase)) || (nodeClass == typeof(MrKupido.Library.Nature.NatureBase))) NodeType = 'N';
             else NodeType = 'U';
 
             IconUrl = IconUriFragmentAttribute.GetUrl(nodeClass, "~/Content/svg/" + Char.ToLower(NodeType) + "_{0}.svg");
@@ -81,7 +81,7 @@ namespace MrKupido.Processor.Model
 
             foreach (Assembly currentAssembly in assemblies)
             {
-                nodeClasses.AddRange(currentAssembly.GetTypes().Where(t => (t.IsClass) && ((t.IsSubclassOf(rootType)) || (t == rootType)) && ((excludeType == null) || (!t.IsSubclassOf(excludeType)))).ToArray());
+                nodeClasses.AddRange(currentAssembly.GetTypes().Where(t => (t.IsClass) && ((t.IsSubclassOf(rootType)) || (t == rootType)) && ((excludeType == null) || ((!t.IsSubclassOf(excludeType)) && (t != excludeType)))).ToArray());
             }
 
             foreach (Type nodeClass in nodeClasses)

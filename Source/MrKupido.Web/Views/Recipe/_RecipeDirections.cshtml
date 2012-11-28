@@ -6,7 +6,9 @@
 else
 { 
     <ul id="directions">
-        @{ TimeSpan time = new TimeSpan();
+        @{ 
+            int i = 0;
+            TimeSpan time = new TimeSpan();
            foreach (MrKupido.Library.IDirection dir in Model)
            {
             <li><span class="stage">
@@ -24,8 +26,36 @@ else
                 }
             </span>
                 <span class="time">@Math.Floor(time.TotalHours).ToString("00"):@time.Minutes.ToString("00")</span>
+                <span class="timer">
+                    <img runat="server" src="~/Content/svg/d_clock@(i++%9).svg" alt="1 perc" width="60px" height="60px" />
                 <span class="action">
-                    <img runat="server" src="~/Content/svg/action_none.svg" alt="1 perc" width="70px" height="70px" /></span>
+                    @if (i % 6 == 0) 
+                    {
+                        <img runat="server" src="~/Content/svg/action_mix.svg" alt="1 perc" width="60px" height="60px" />
+                    }
+                    else if (i % 6 == 1)
+                    {
+                        <img runat="server" src="~/Content/svg/action_strech.svg" alt="1 perc" width="60px" height="60px" />
+                    }
+                    else if (i % 6 == 2)
+                    {
+                        <img runat="server" src="~/Content/svg/action_cover.svg" alt="1 perc" width="60px" height="60px" />
+                    }
+                    else if (i % 6 == 3)
+                    {
+                        <img runat="server" src="~/Content/svg/action_betesz.svg" alt="1 perc" width="60px" height="60px" />
+                    }
+                    else if (i % 6 == 4)
+                    {
+                        <img runat="server" src="~/Content/svg/action_rarak.svg" alt="1 perc" width="60px" height="60px" />
+                    }
+                    else if (i % 6 == 5)
+                    {
+                        <img runat="server" src="~/Content/svg/action_raszor.svg" alt="1 perc" width="60px" height="60px" />
+                    }
+
+                </span>
+                </span>
                 <div class="direction"><span class="directioncontent">@dir</span></div>
             </li>
                 time = time + dir.TimeToComplete;

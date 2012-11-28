@@ -13,8 +13,7 @@
     <div id="profile">
         <details id="basicinfo" open class="alwaysopen">
             <summary>
-                <h1>
-                    Basic information</h1>
+                <h1>Basic information</h1>
                 <h2>
                     <a href="#">Why do we need this?</a>
                 </h2>
@@ -23,7 +22,8 @@
                 <li>
                     <div class="label">
                         <label for="email">
-                            My e-mail address is:</label></div>
+                            My e-mail address is:</label>
+                    </div>
                     <div class="input">
                         <input type="email" id="email" name="email" required disabled value='@(((MrKupido.Model.User)Session["CurrentUser"]).Email)'/>
                     </div>
@@ -31,86 +31,93 @@
                 <li>
                     <div class="label">
                         <label for="lastname">
-                            My surname is:</label></div>
+                            My surname is:</label>
+                    </div>
                     <div class="input">
-                        <input type="text" id="lastname" name="lastname" required value='@(((MrKupido.Model.User)Session["CurrentUser"]).LastName)'/></div>
-                </li>
-                <li>
-                    <div class="label">
-                        <label for="firstname">
-                            My first name is:</label></div>
-                    <div class="input">
-                        <input type="text" id="firstname" name="firstname" required value='@(((MrKupido.Model.User)Session["CurrentUser"]).FirstName)'/></div>
-                </li>
-                <li>
-                    <div class="label">
-                        <label for="nickname">
-                            But please just call me:</label></div>
-                    <div class="input">
-                        <input type="text" id="nickname" name="nickname" required value='@(((MrKupido.Model.User)Session["CurrentUser"]).NickName)'/></div>
-                </li>
-            </ul>
-        </details>
-        <hr class="single" />
-        <details id="physicalinfo">
-            <summary>
-                <h1>
-                    Physical details</h1>
-                <h2>
-                    <a href="#">Why should you tell us?</a>
-                </h2>
-            </summary>
-            <ul>
-                <li></li>
-            </ul>
-        </details>
-        <details id="likes">
-            <summary>
-                <h1>
-                    Your likes and dislikes</h1>
-                <h2>
-                    <a href="#">Why should you tell us?</a>
-                </h2>
-            </summary>
-            <ul>
-                <li></li>
-            </ul>
-        </details>
-        <details id="conditions">
-            <summary>
-                <h1>
-                    Your conditions</h1>
-                <h2>
-                    <a href="#">Why should you tell us?</a>
-                </h2>
-            </summary>
-            <ul>
-                <li></li>
-            </ul>
-        </details>
-        <details id="advanced">
-            <summary>
-                <h1>
-                    Advanced settings</h1>
-            </summary>
-            <ul>
-                <li>
-                    <div class="label">
-                        <label for="betatester">
-                            I am a beta tester:</label></div>
-                    <div class="input">
-                        <input type="checkbox" id="betatester" name="betatester"/>
+                        <input type="text" id="lastname" name="lastname" required value='@(((MrKupido.Model.User)Session["CurrentUser"]).LastName)'/>
                     </div>
                 </li>
                 <li>
                     <div class="label">
-                        <label for="githubuser">
-                            My GitHub username is:</label></div>
+                        <label for="firstname">
+                            My first name is:</label>
+                    </div>
                     <div class="input">
-                        <input type="text" id="githubuser" name="githubuser" required value='@(((MrKupido.Model.User)Session["CurrentUser"]).FullName)'/></div>
+                        <input type="text" id="firstname" name="firstname" required value='@(((MrKupido.Model.User)Session["CurrentUser"]).FirstName)'/>
+                    </div>
+                </li>
+                <li>
+                    <div class="label">
+                        <label for="nickname">
+                            But please just call me:</label>
+                    </div>
+                    <div class="input">
+                        <input type="text" id="nickname" name="nickname" required value='@(((MrKupido.Model.User)Session["CurrentUser"]).NickName)'/>
+                    </div>
                 </li>
             </ul>
         </details>
+        <hr class="single" />
+        <div style="display: none">
+            <details id="physicalinfo">
+                <summary>
+                    <h1>Physical details</h1>
+                    <h2>
+                        <a href="#">Why should you tell us?</a>
+                    </h2>
+                </summary>
+                <ul>
+                    <li></li>
+                </ul>
+            </details>
+            <details id="likes">
+                <summary>
+                    <h1>Your likes and dislikes</h1>
+                    <h2>
+                        <a href="#">Why should you tell us?</a>
+                    </h2>
+                </summary>
+                <ul>
+                    <li></li>
+                </ul>
+            </details>
+            <details id="conditions">
+                <summary>
+                    <h1>Your conditions</h1>
+                    <h2>
+                        <a href="#">Why should you tell us?</a>
+                    </h2>
+                </summary>
+                <ul>
+                    <li></li>
+                </ul>
+            </details>
+            <details id="advanced">
+                <summary>
+                    <h1>Advanced settings</h1>
+                </summary>
+                <ul>
+                    <li>
+                        <div class="label">
+                            <label for="betatester">
+                                I am a beta tester:</label>
+                        </div>
+                        <div class="input">
+                            <input type="checkbox" id="betatester" name="betatester" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="label">
+                            <label for="githubuser">
+                                My GitHub username is:</label>
+                        </div>
+                        <div class="input">
+                            <input type="text" id="githubuser" name="githubuser" required value='@(((MrKupido.Model.User)Session["CurrentUser"]).FullName)'/>
+                        </div>
+                    </li>
+                </ul>
+            </details>
+        </div>
     </div>
     <div class="formbuttons">
         <input type="submit" value="Save" />

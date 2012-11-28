@@ -11,6 +11,8 @@ namespace MrKupido.Library.Recipe
     [NameAlias("hun", "receptek")]
     [NameAlias("eng", "recipes")]
 
+    [IconUriFragment("recipe")]
+
     public class RecipeBase : IngredientBase, IRecipe
     {
         //public string Name
@@ -64,7 +66,7 @@ namespace MrKupido.Library.Recipe
 
             List<Type> typesToCheck = new List<Type>();
             typesToCheck.Add(this.GetType());
-            typesToCheck.AddRange(this.GetType().GetDescendants());
+            //typesToCheck.AddRange(this.GetType().GetDescendants());
 
             foreach (Type desc in typesToCheck)
             {

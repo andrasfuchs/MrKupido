@@ -50,43 +50,43 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/01/2012 14:45:42</publishTime>
     </File>
     <File Include="bin/MrKupido.DataAccess.dll">
-      <publishTime>11/13/2012 14:46:13</publishTime>
+      <publishTime>11/19/2012 16:14:01</publishTime>
     </File>
     <File Include="bin/MrKupido.DataAccess.pdb">
       <publishTime>11/02/2012 11:27:46</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.dll">
-      <publishTime>11/13/2012 14:46:13</publishTime>
+      <publishTime>11/19/2012 16:14:00</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.pdb">
       <publishTime>11/02/2012 11:27:44</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.Recipe.dll">
-      <publishTime>11/13/2012 14:48:05</publishTime>
+      <publishTime>11/20/2012 13:55:31</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.Recipe.pdb">
       <publishTime>11/02/2012 11:27:47</publishTime>
     </File>
     <File Include="bin/MrKupido.Model.dll">
-      <publishTime>11/13/2012 14:46:13</publishTime>
+      <publishTime>11/19/2012 16:14:00</publishTime>
     </File>
     <File Include="bin/MrKupido.Model.pdb">
       <publishTime>11/02/2012 11:27:45</publishTime>
     </File>
     <File Include="bin/MrKupido.Processor.dll">
-      <publishTime>11/13/2012 14:46:14</publishTime>
+      <publishTime>11/19/2012 16:14:01</publishTime>
     </File>
     <File Include="bin/MrKupido.Processor.pdb">
       <publishTime>11/02/2012 11:27:47</publishTime>
     </File>
     <File Include="bin/MrKupido.Utils.dll">
-      <publishTime>11/03/2012 18:02:44</publishTime>
+      <publishTime>11/16/2012 22:25:50</publishTime>
     </File>
     <File Include="bin/MrKupido.Utils.pdb">
       <publishTime>11/01/2012 14:45:45</publishTime>
     </File>
     <File Include="bin/MrKupido.Web.dll">
-      <publishTime>11/13/2012 14:48:06</publishTime>
+      <publishTime>11/20/2012 13:55:32</publishTime>
     </File>
     <File Include="bin/MrKupido.Web.pdb">
       <publishTime>11/02/2012 13:38:55</publishTime>
@@ -198,6 +198,24 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/fonts/Tangerine/OFL.txt">
       <publishTime>07/22/2012 15:05:54</publishTime>
+    </File>
+    <File Include="Content/fonts/Tangerine/tangerinea-webfont.eot">
+      <publishTime>11/16/2012 14:01:40</publishTime>
+    </File>
+    <File Include="Content/fonts/Tangerine/tangerinea-webfont.svg">
+      <publishTime>11/16/2012 14:01:40</publishTime>
+    </File>
+    <File Include="Content/fonts/Tangerine/tangerinea-webfont.ttf">
+      <publishTime>11/16/2012 14:03:37</publishTime>
+    </File>
+    <File Include="Content/fonts/Tangerine/tangerinea_bold-webfont.eot">
+      <publishTime>11/16/2012 14:01:40</publishTime>
+    </File>
+    <File Include="Content/fonts/Tangerine/tangerinea_bold-webfont.svg">
+      <publishTime>11/16/2012 14:01:40</publishTime>
+    </File>
+    <File Include="Content/fonts/Tangerine/tangerinea_bold-webfont.ttf">
+      <publishTime>11/16/2012 14:03:37</publishTime>
     </File>
     <File Include="Content/fonts/Tangerine/tangerine_bold-webfont.eot">
       <publishTime>11/10/2012 11:02:32</publishTime>
@@ -317,10 +335,28 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/25/2012 09:53:04</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>11/10/2012 17:14:47</publishTime>
+      <publishTime>11/19/2012 11:04:50</publishTime>
+    </File>
+    <File Include="Content/svg/action_betesz.svg">
+      <publishTime>11/18/2012 18:28:54</publishTime>
+    </File>
+    <File Include="Content/svg/action_cover.svg">
+      <publishTime>11/17/2012 19:15:48</publishTime>
+    </File>
+    <File Include="Content/svg/action_mix.svg">
+      <publishTime>11/17/2012 19:15:48</publishTime>
     </File>
     <File Include="Content/svg/action_none.svg">
       <publishTime>09/27/2012 15:34:45</publishTime>
+    </File>
+    <File Include="Content/svg/action_rarak.svg">
+      <publishTime>11/18/2012 18:29:28</publishTime>
+    </File>
+    <File Include="Content/svg/action_raszor.svg">
+      <publishTime>11/18/2012 18:29:10</publishTime>
+    </File>
+    <File Include="Content/svg/action_strech.svg">
+      <publishTime>11/17/2012 19:15:48</publishTime>
     </File>
     <File Include="Content/svg/arrow_right_light.svg">
       <publishTime>07/24/2012 19:53:20</publishTime>
@@ -436,6 +472,33 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/svg/clock_60.svg">
       <publishTime>07/24/2012 21:18:48</publishTime>
     </File>
+    <File Include="Content/svg/d_clock0.svg">
+      <publishTime>11/17/2012 19:15:48</publishTime>
+    </File>
+    <File Include="Content/svg/d_clock1.svg">
+      <publishTime>11/17/2012 19:15:48</publishTime>
+    </File>
+    <File Include="Content/svg/d_clock2.svg">
+      <publishTime>11/17/2012 19:15:48</publishTime>
+    </File>
+    <File Include="Content/svg/d_clock3.svg">
+      <publishTime>11/17/2012 19:15:48</publishTime>
+    </File>
+    <File Include="Content/svg/d_clock4.svg">
+      <publishTime>11/17/2012 19:15:48</publishTime>
+    </File>
+    <File Include="Content/svg/d_clock5.svg">
+      <publishTime>11/17/2012 19:15:48</publishTime>
+    </File>
+    <File Include="Content/svg/d_clock6.svg">
+      <publishTime>11/17/2012 19:15:48</publishTime>
+    </File>
+    <File Include="Content/svg/d_clock7.svg">
+      <publishTime>11/17/2012 19:15:48</publishTime>
+    </File>
+    <File Include="Content/svg/d_clock8.svg">
+      <publishTime>11/17/2012 19:15:48</publishTime>
+    </File>
     <File Include="Content/svg/frame160x160.svg">
       <publishTime>08/05/2012 22:15:46</publishTime>
     </File>
@@ -515,7 +578,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/06/2012 15:01:03</publishTime>
     </File>
     <File Include="Content/svg/r_pizza.svg">
-      <publishTime>11/02/2012 10:13:16</publishTime>
+      <publishTime>11/02/2012 10:12:09</publishTime>
+    </File>
+    <File Include="Content/svg/r_recipe.svg">
+      <publishTime>11/02/2012 10:12:09</publishTime>
     </File>
     <File Include="Content/svg/stage_cooking.svg">
       <publishTime>09/27/2012 15:21:13</publishTime>
@@ -662,7 +728,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/31/2011 17:30:18</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>07/26/2012 12:14:21</publishTime>
+      <publishTime>11/14/2012 12:35:01</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.6.2.js">
+      <publishTime>07/22/2012 09:51:24</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.6.2.min.js">
+      <publishTime>07/22/2012 09:51:24</publishTime>
     </File>
     <File Include="Scripts/jquery-1.7.2-vsdoc.js">
       <publishTime>08/05/2012 02:42:37</publishTime>
@@ -672,6 +744,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Scripts/jquery-1.7.2.min.js">
       <publishTime>08/05/2012 02:37:55</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.8.2.js">
+      <publishTime>11/14/2012 12:35:01</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.8.2.min.js">
+      <publishTime>11/14/2012 12:35:01</publishTime>
     </File>
     <File Include="Scripts/jquery-ui-1.8.11.js">
       <publishTime>10/04/2012 13:42:59</publishTime>
@@ -684,6 +762,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Scripts/jquery-ui-1.8.11_mod.js">
       <publishTime>11/09/2012 19:06:40</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui-1.9.1.custom.js">
+      <publishTime>11/19/2012 14:00:42</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui-1.9.1.custom.min.js">
+      <publishTime>11/19/2012 14:00:42</publishTime>
     </File>
     <File Include="Scripts/jquery.ui.autocomplete.accentFolding.js">
       <publishTime>11/09/2012 13:15:17</publishTime>
@@ -728,7 +812,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/01/2012 14:06:38</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>08/05/2012 02:44:42</publishTime>
+      <publishTime>11/14/2012 12:35:02</publishTime>
     </File>
     <File Include="Views/Account/LogIn.cshtml">
       <publishTime>11/02/2012 12:12:13</publishTime>
@@ -749,7 +833,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/05/2012 15:51:48</publishTime>
     </File>
     <File Include="Views/Import/Recipe.cshtml">
-      <publishTime>10/14/2012 18:49:50</publishTime>
+      <publishTime>11/16/2012 16:32:18</publishTime>
     </File>
     <File Include="Views/Import/RecipeList.cshtml">
       <publishTime>10/12/2012 14:58:52</publishTime>
@@ -779,22 +863,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>08/31/2012 16:58:07</publishTime>
     </File>
     <File Include="Views/Ingredient/_EquipmentTree.cshtml">
-      <publishTime>08/30/2012 13:07:05</publishTime>
+      <publishTime>11/15/2012 14:42:38</publishTime>
     </File>
     <File Include="Views/Ingredient/_IngredientTree.cshtml">
-      <publishTime>08/29/2012 12:08:14</publishTime>
+      <publishTime>11/15/2012 14:44:46</publishTime>
     </File>
     <File Include="Views/Ingredient/_RecipeTree.cshtml">
-      <publishTime>09/30/2012 23:52:10</publishTime>
+      <publishTime>11/15/2012 14:44:48</publishTime>
     </File>
     <File Include="Views/Ingredient/_TaxonomyTree.cshtml">
-      <publishTime>10/14/2012 00:08:55</publishTime>
+      <publishTime>11/15/2012 14:44:48</publishTime>
     </File>
     <File Include="Views/Recipe/Details.cshtml">
       <publishTime>11/02/2012 13:31:42</publishTime>
     </File>
     <File Include="Views/Recipe/_RecipeDirections.cshtml">
-      <publishTime>11/08/2012 16:05:10</publishTime>
+      <publishTime>11/18/2012 18:39:47</publishTime>
     </File>
     <File Include="Views/Recipe/_RecipeIngredients.cshtml">
       <publishTime>10/13/2012 20:58:00</publishTime>
@@ -806,7 +890,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/02/2012 12:59:17</publishTime>
     </File>
     <File Include="Views/Shared/_SearchHeader.cshtml">
-      <publishTime>11/09/2012 18:46:43</publishTime>
+      <publishTime>11/19/2012 14:30:48</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>07/22/2012 09:51:18</publishTime>
@@ -815,7 +899,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/22/2012 09:51:18</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/13/2012 14:48:07</publishTime>
+      <publishTime>11/20/2012 13:55:32</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -205,7 +205,8 @@ namespace MrKupido.Web.Controllers
                 string returnUrl = HttpContext.Request.QueryString["ReturnUrl"];
                 if (String.IsNullOrEmpty(returnUrl))
                 {
-                    return RedirectToRoute(new { contoller = "Home", action = "Index" });
+                    //return RedirectToRoute("Default");
+                    return RedirectToRoute("Default", new { contoller = "Home", action = "Index" });
                 }
                 else
                 {
