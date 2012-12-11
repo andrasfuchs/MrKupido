@@ -14,7 +14,7 @@ namespace MrKupido.Web.Controllers
 {
     public class RecipeController : BaseController
     {
-        private MrKupidoContext db = new MrKupidoContext();
+        private MrKupidoContext db = new MrKupidoContext("Name=MrKupidoContext");
 
         public ActionResult Details(string id)
         {

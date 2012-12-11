@@ -12,7 +12,7 @@ namespace MrKupido.RecipeUpload.AllRecipes
 {
     class Program
     {
-        private static MrKupidoContext context = new MrKupidoContext();
+        private static MrKupidoContext context = new MrKupidoContext("Name=MrKupidoContext");
 
         private static void InsertRecipe(string uniqueName, string htmlContent)
         {

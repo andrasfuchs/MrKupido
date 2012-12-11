@@ -10,7 +10,9 @@ namespace MrKupido.Model
     {
         public int ImportedRecipeId { get; set; }
         public DateTime ImportedAt { get; set; }
-        public ImportedRecipeState State { get; set; }
+        //public ImportedRecipeState State { get; set; }
+        public int State { get; set; }
+
         [Required]
         [MaxLength(3)]
         [MinLength(3)]

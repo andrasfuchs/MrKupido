@@ -18,7 +18,7 @@ namespace MrKupido.Web.Controllers
 {
     public class ImportController : BaseController
     {
-        private static MrKupidoContext db = new MrKupidoContext();
+        private static MrKupidoContext db = new MrKupidoContext("Name=MrKupidoContext");
         private static char[] whiteSpaces = new char[] { ' ', ',', '.', '!', '?', ')', '(', '"', '&', ';', '\'', '[', ']', ':', '\\', '_', '`', '„', '<', '>', '\r', '\n', '”' };
 
         public ActionResult RecipeList()
@@ -188,7 +188,7 @@ namespace MrKupido.Web.Controllers
             ingredient.UniqueNameEng = uniqueNameEng;
 
             ingredient.Index = 1;
-            ingredient.Type = FilterItemType.Ingredient;
+            ingredient.Type = (int)FilterItemType.Ingredient;
 
             db.Ingredients.Add(ingredient);
 

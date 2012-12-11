@@ -28,5 +28,9 @@ namespace MrKupido.DataAccess
         public DbSet<RecipeRating> RecipeRatings { get; set; }
         public DbSet<RecipeTag> RecipeTags { get; set; }
         public DbSet<User> Users { get; set; }
+
+        public MrKupidoContext() : this("Name=MrKupidoContext") { }
+
+        public MrKupidoContext(string connectionStringId) : base(connectionStringId) {}
     }
 }

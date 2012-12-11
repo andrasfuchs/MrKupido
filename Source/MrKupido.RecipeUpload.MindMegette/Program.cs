@@ -15,7 +15,7 @@ namespace MrKupido.RecipeUpload.MindMegette
 {
     class Program
     {
-        private static MrKupidoContext context = new MrKupidoContext();
+        private static MrKupidoContext context = new MrKupidoContext("Name=MrKupidoContext");
         private static ManualResetEvent doneEvent = new ManualResetEvent(false);
 
         static void Main(string[] args)

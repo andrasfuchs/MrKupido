@@ -13,16 +13,16 @@
     <div id="profile">
         <details id="basicinfo" open class="alwaysopen">
             <summary>
-                <h1>Basic information</h1>
+                <h1>Általános információk</h1>
                 <h2>
-                    <a href="#">Why do we need this?</a>
+                    <a href="#">Miért érdemes kitöltenem?</a>
                 </h2>
             </summary>
             <ul>
                 <li>
                     <div class="label">
                         <label for="email">
-                            My e-mail address is:</label>
+                            Az e-mail címem:</label>
                     </div>
                     <div class="input">
                         <input type="email" id="email" name="email" required disabled value='@(((MrKupido.Model.User)Session["CurrentUser"]).Email)'/>
@@ -31,7 +31,7 @@
                 <li>
                     <div class="label">
                         <label for="lastname">
-                            My surname is:</label>
+                            Vezetéknevem:</label>
                     </div>
                     <div class="input">
                         <input type="text" id="lastname" name="lastname" required value='@(((MrKupido.Model.User)Session["CurrentUser"]).LastName)'/>
@@ -40,7 +40,7 @@
                 <li>
                     <div class="label">
                         <label for="firstname">
-                            My first name is:</label>
+                            Keresztnevem:</label>
                     </div>
                     <div class="input">
                         <input type="text" id="firstname" name="firstname" required value='@(((MrKupido.Model.User)Session["CurrentUser"]).FirstName)'/>
@@ -49,7 +49,7 @@
                 <li>
                     <div class="label">
                         <label for="nickname">
-                            But please just call me:</label>
+                            Szólítsatok csak így:</label>
                     </div>
                     <div class="input">
                         <input type="text" id="nickname" name="nickname" required value='@(((MrKupido.Model.User)Session["CurrentUser"]).NickName)'/>
@@ -61,9 +61,9 @@
         <div style="display: none">
             <details id="physicalinfo">
                 <summary>
-                    <h1>Physical details</h1>
+                    <h1>Fizikai tulajdonságok</h1>
                     <h2>
-                        <a href="#">Why should you tell us?</a>
+                        <a href="#">Hol használjuk ezt?</a>
                     </h2>
                 </summary>
                 <ul>
@@ -72,9 +72,9 @@
             </details>
             <details id="likes">
                 <summary>
-                    <h1>Your likes and dislikes</h1>
+                    <h1>Mit szeretsz és mit nem?</h1>
                     <h2>
-                        <a href="#">Why should you tell us?</a>
+                        <a href="#">Miért hasznos?</a>
                     </h2>
                 </summary>
                 <ul>
@@ -83,9 +83,9 @@
             </details>
             <details id="conditions">
                 <summary>
-                    <h1>Your conditions</h1>
+                    <h1>Egészségügyi állapot</h1>
                     <h2>
-                        <a href="#">Why should you tell us?</a>
+                        <a href="#">Miért is mondanád el nekünk?</a>
                     </h2>
                 </summary>
                 <ul>
@@ -94,13 +94,13 @@
             </details>
             <details id="advanced">
                 <summary>
-                    <h1>Advanced settings</h1>
+                    <h1>Haladó beállítások</h1>
                 </summary>
                 <ul>
                     <li>
                         <div class="label">
                             <label for="betatester">
-                                I am a beta tester:</label>
+                                Béta-teszter vagyok:</label>
                         </div>
                         <div class="input">
                             <input type="checkbox" id="betatester" name="betatester" />
@@ -109,7 +109,7 @@
                     <li>
                         <div class="label">
                             <label for="githubuser">
-                                My GitHub username is:</label>
+                                A GitHub felhasználónevem:</label>
                         </div>
                         <div class="input">
                             <input type="text" id="githubuser" name="githubuser" required value='@(((MrKupido.Model.User)Session["CurrentUser"]).FullName)'/>

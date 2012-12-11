@@ -29,9 +29,12 @@ namespace MrKupido.Web
         protected void Application_AcquireRequestState()
         {
             //new FindConflictingAssemblies().FindConflictingReferences();
-            
-            
-            if (Request.AppRelativeCurrentExecutionFilePath.Contains('.')) return;
+
+
+            if (Request.AppRelativeCurrentExecutionFilePath.Contains('.') 
+                || Request.AppRelativeCurrentExecutionFilePath.Contains("/Content/") 
+                || Request.AppRelativeCurrentExecutionFilePath.Contains("/Scripts/")
+                || Request.AppRelativeCurrentExecutionFilePath.Contains("/bundles/")) return;
 
             CultureInitializer.InitializeCulture(Request);
 
@@ -77,13 +80,13 @@ namespace MrKupido.Web
                 }
 
                 //lblOldBrowser.Text = String.Format(lblOldBrowser.Text, browser.Browser + " " + browser.Version, obd.UpdateURL);
-                if ((obd.UpdateUrl != null) && (Session["IgnoreOldBrowser"] == null))
+                if ((obd.UpdateUrl != null) && (Session != null) && (Session["IgnoreOldBrowser"] == null))
                 {
                     Response.RedirectToRoute("OldBrowser", new { browserName = obd.BrowserName, browserVersion = obd.BrowserVersion, returnURL = obd.ReturnUrl, updateURL = obd.UpdateUrl });
                 }
             }
 
-            if ((Session["CurrentUser"] == null) && !Request.Url.AbsoluteUri.Contains("/account/Login"))
+            if ((Session != null) && (Session["CurrentUser"] == null) && !Request.Url.AbsoluteUri.Contains("/account/Login"))
             {
                 Response.RedirectToRoute("AccountManagement", new { action = "Login" });
             }

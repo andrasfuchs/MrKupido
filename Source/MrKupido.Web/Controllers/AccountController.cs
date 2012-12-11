@@ -22,7 +22,7 @@ namespace MrKupido.Web.Controllers
 {
     public class AccountController : BaseController
     {
-        private static MrKupido.DataAccess.MrKupidoContext context = new MrKupido.DataAccess.MrKupidoContext();
+        private static MrKupido.DataAccess.MrKupidoContext context = new MrKupido.DataAccess.MrKupidoContext("Name=MrKupidoContext");
 
         private static readonly FacebookClient client = new FacebookClient
         {
@@ -128,12 +128,12 @@ namespace MrKupido.Web.Controllers
                         user.FullName = openIdFetch.GetAttributeValue(WellKnownAttributes.Name.FullName);
                     }
 
-                    if (user.Gender == MrKupido.Model.Gender.Unknown)
+                    if (user.Gender == (int)MrKupido.Model.Gender.Unknown)
                     {
                         string gender = openIdFetch.GetAttributeValue(WellKnownAttributes.Person.Gender);
 
-                        if (gender == "M") user.Gender = MrKupido.Model.Gender.Male;
-                        if (gender == "F") user.Gender = MrKupido.Model.Gender.Female;
+                        if (gender == "M") user.Gender = (int)MrKupido.Model.Gender.Male;
+                        if (gender == "F") user.Gender = (int)MrKupido.Model.Gender.Female;
                     }
 
                     if (user.DateOfBirth == null)
@@ -164,12 +164,12 @@ namespace MrKupido.Web.Controllers
                         user.FullName = HttpUtility.HtmlDecode(facebookGraph.Name);
                     }
 
-                    if (user.Gender == MrKupido.Model.Gender.Unknown)
+                    if (user.Gender == (int)MrKupido.Model.Gender.Unknown)
                     {
                         string gender = facebookGraph.Gender;
 
-                        if (gender == "male") user.Gender = MrKupido.Model.Gender.Male;
-                        if (gender == "female") user.Gender = MrKupido.Model.Gender.Female;
+                        if (gender == "male") user.Gender = (int)MrKupido.Model.Gender.Male;
+                        if (gender == "female") user.Gender = (int)MrKupido.Model.Gender.Female;
                     }
 
                     if (user.DateOfBirth == null)

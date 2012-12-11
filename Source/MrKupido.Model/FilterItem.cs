@@ -14,7 +14,8 @@ namespace MrKupido.Model
 
         [Required]
         [Column(Order = 2)]
-        public FilterItemType Type { get; set; }
+        //public FilterItemType Type { get; set; }
+        public int Type { get; set; }
 
         //[Required]
         [MaxLength(150)]

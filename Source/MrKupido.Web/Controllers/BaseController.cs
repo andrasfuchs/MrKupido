@@ -14,7 +14,7 @@ namespace MrKupido.Web.Controllers
 {
     public class BaseController : Controller
     {
-        private static MrKupido.DataAccess.MrKupidoContext context = new MrKupido.DataAccess.MrKupidoContext();
+        private static MrKupido.DataAccess.MrKupidoContext context = new MrKupido.DataAccess.MrKupidoContext("Name=MrKupidoContext");
         public static Dictionary<string, UserState> CurrentSessions = new Dictionary<string, UserState>();
 
         /// <summary>

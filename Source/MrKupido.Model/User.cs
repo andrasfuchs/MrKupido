@@ -47,7 +47,8 @@ namespace MrKupido.Model
         public string NickName { get; set; }
 
         [Required]
-        public Gender Gender { get; set; }
+        //public Gender Gender { get; set; }
+        public int Gender { get; set; }
 
         public DateTime? DateOfBirth { get; set; }
         public float Height { get; set; }
