@@ -24,7 +24,9 @@ namespace MrKupido.Processor.Model
         public object Result { get; private set; }
         public string Alias { get; private set; }
         public uint ActionDuration { get; private set; }
-        public string IconUrl { get; private set; }
+        public string[] IconUrls { get; private set; }
+        public string IconUrl { get; set; }
+        public bool IsPassive { get; private set; }
 
         public RecipeDirection(string assemblyName, string command, object[] operands = null, object result = null, RecipeStage stage = RecipeStage.Unknown, int actorIndex = 1)
         {
@@ -54,8 +56,10 @@ namespace MrKupido.Processor.Model
             {
                 DirectionType = Assembly.Load(AssemblyName).GetType(ids[0]);
                 Direction = NameAliasAttribute.GetMethodName(DirectionType, ids[1]);
+                MemberInfo mi = DirectionType.GetMember(ids[1])[0];
 
-                // TODO: IconUrl
+                IconUrls = IconUriFragmentAttribute.GetUrls(mi, "~/Content/svg/action_{0}.svg");
+                IsPassive = PassiveActionAttribute.IsMethodPassiveAction(mi);
             }
         }
 

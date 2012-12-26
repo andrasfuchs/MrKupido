@@ -76,6 +76,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("eng", "wait", Priority = 200)]
         [NameAlias("hun", "vár", Priority = 200)]
         [NameAlias("hun", "várj {0} percet")]
+        [PassiveAction]
         public void Varni(int minutes) 
         {
             this.LastActionDuration = (uint)(minutes * 60);

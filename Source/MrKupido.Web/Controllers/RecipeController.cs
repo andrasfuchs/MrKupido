@@ -9,6 +9,7 @@ using MrKupido.Library.Recipe;
 using MrKupido.Processor;
 using MrKupido.Processor.Model;
 using MrKupido.Library;
+using MrKupido.Utils;
 
 namespace MrKupido.Web.Controllers
 {
@@ -28,8 +29,13 @@ namespace MrKupido.Web.Controllers
             result[2] = rtn.GetEquipments(1.0f);
             result[3] = rtn.GetIngredients(1.0f);
             result[4] = rtn.GetDirections(1.0f);
-            result[5] = rtn.GetNutritions(1.0f);           
-            
+            result[5] = rtn.GetNutritions(1.0f);
+
+            foreach (RecipeDirection direction in (RecipeDirection[])result[4])
+            {
+                direction.IconUrl = PathUtils.GetActualUrl(direction.IconUrls);
+            }
+
             //RecipeTreeNode inlineSajt = Cache.Recipe.RenderInline("FuszeresCsirkemell", new string[] { "Sajt" });
 
             return View(result);

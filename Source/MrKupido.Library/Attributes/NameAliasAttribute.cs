@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace MrKupido.Library.Attributes
 {
@@ -59,9 +60,9 @@ namespace MrKupido.Library.Attributes
             return result;
         }
 
-        public static NameAliasAttribute[] GetNameAliases(Type objType, string languageISOCode)
+        public static NameAliasAttribute[] GetNameAliases(MemberInfo objType, string languageISOCode)
         {
-            return objType.GetCustomAttributes(false).Where(na => (na is NameAliasAttribute) && ((NameAliasAttribute)na).CultureName == languageISOCode).Cast<NameAliasAttribute>().ToArray();
+            return objType.GetCustomAttributes(false).Where(na => (na is NameAliasAttribute) && ((NameAliasAttribute)na).CultureName == languageISOCode).Cast<NameAliasAttribute>().OrderByDescending(na => na.Priority).ToArray();
         }
 
         public static string GetMethodName(Type objType, string methodName)
@@ -76,22 +77,14 @@ namespace MrKupido.Library.Attributes
             SortedDictionary<int, string> names = new SortedDictionary<int, string>();
 
             System.Reflection.MethodInfo mi = objType.GetMethod(methodName);
-            foreach (object attr in mi.GetCustomAttributes(false))
+            foreach (NameAliasAttribute name in GetNameAliases(mi, Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName))
             {
-                if (attr is NameAliasAttribute)
+                if (names.ContainsKey(name.Priority))
                 {
-                    NameAliasAttribute name = (NameAliasAttribute)attr;
-
-                    if (name.CultureName == Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName)
-                    {
-                        if (names.ContainsKey(name.Priority))
-                        {
-                            throw new MrKupidoException("The method '{1}' of the class '{0}' has more then one name alias with the same priority.", objType.Name, mi.Name);
-                        }
-
-                        names.Add(name.Priority, name.Name);
-                    }
+                    throw new MrKupidoException("The method '{1}' of the class '{0}' has more then one name alias with the same priority.", objType.Name, mi.Name);
                 }
+
+                names.Add(name.Priority, name.Name);
             }
 
             if (names.Count == 0)
@@ -100,6 +93,12 @@ namespace MrKupido.Library.Attributes
             }
 
             return names.Values.ToArray();
+        }
+
+        public static NameAliasAttribute[] GetMethodNames(Type objType, string methodName, string languageISOCode )
+        {
+            System.Reflection.MethodInfo mi = objType.GetMethod(methodName);
+            return GetNameAliases(mi, languageISOCode);
         }
     }
 }

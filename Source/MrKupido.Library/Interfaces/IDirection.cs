@@ -18,5 +18,7 @@ namespace MrKupido.Library
         object Result { get; }
         string Alias { get; }
         uint ActionDuration { get; }
+        bool IsPassive { get; }
+        string IconUrl { get; }
     }
 }

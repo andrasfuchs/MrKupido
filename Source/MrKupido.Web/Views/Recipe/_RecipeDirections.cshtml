@@ -29,31 +29,7 @@ else
                 <span class="timer">
                     <img runat="server" src="~/Content/svg/d_clock@(i++%9).svg" alt="1 perc" width="60px" height="60px" />
                 <span class="action">
-                    @if (i % 6 == 0) 
-                    {
-                        <img runat="server" src="~/Content/svg/action_mix.svg" alt="1 perc" width="60px" height="60px" />
-                    }
-                    else if (i % 6 == 1)
-                    {
-                        <img runat="server" src="~/Content/svg/action_strech.svg" alt="1 perc" width="60px" height="60px" />
-                    }
-                    else if (i % 6 == 2)
-                    {
-                        <img runat="server" src="~/Content/svg/action_cover.svg" alt="1 perc" width="60px" height="60px" />
-                    }
-                    else if (i % 6 == 3)
-                    {
-                        <img runat="server" src="~/Content/svg/action_betesz.svg" alt="1 perc" width="60px" height="60px" />
-                    }
-                    else if (i % 6 == 4)
-                    {
-                        <img runat="server" src="~/Content/svg/action_rarak.svg" alt="1 perc" width="60px" height="60px" />
-                    }
-                    else if (i % 6 == 5)
-                    {
-                        <img runat="server" src="~/Content/svg/action_raszor.svg" alt="1 perc" width="60px" height="60px" />
-                    }
-
+                    <img runat="server" src="@dir.IconUrl" alt="1 perc" width="60px" height="60px" />
                 </span>
                 </span>
                 <div class="direction"><span class="directioncontent">@dir</span></div>

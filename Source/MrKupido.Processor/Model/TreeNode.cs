@@ -33,7 +33,7 @@ namespace MrKupido.Processor.Model
         public bool IsOpen { get; set; }
         public bool IsSelected { get; set; }
         public bool IsDisabled { get; set; }
-        public string IconUrl { get; set; }
+        public string[] IconUrls { get; private set; }
 
         public TreeNode(Type nodeClass)
         {
@@ -52,7 +52,7 @@ namespace MrKupido.Processor.Model
             else if (nodeClass.IsSubclassOf(typeof(MrKupido.Library.Nature.NatureBase)) || (nodeClass == typeof(MrKupido.Library.Nature.NatureBase))) NodeType = 'N';
             else NodeType = 'U';
 
-            IconUrl = IconUriFragmentAttribute.GetUrl(nodeClass, "~/Content/svg/" + Char.ToLower(NodeType) + "_{0}.svg");
+            IconUrls = IconUriFragmentAttribute.GetUrls(nodeClass, "~/Content/svg/" + Char.ToLower(NodeType) + "_{0}.svg");
         }
 
         private static T SetChilden<T>(T root, Dictionary<string, List<Type>> children, Func<Type, T> t2tn) where T : TreeNode

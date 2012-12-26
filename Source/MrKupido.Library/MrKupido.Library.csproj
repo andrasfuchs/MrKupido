@@ -87,6 +87,7 @@
     <Compile Include="Attributes\NatureRelation\MilkOfAttribute.cs" />
     <Compile Include="Attributes\NatureRelation\KindOfAttribute.cs" />
     <Compile Include="Attributes\NameAliasAttribute.cs" />
+    <Compile Include="Attributes\PassiveActionAttribute.cs" />
     <Compile Include="Attributes\Taxonomy\NatureClassAttribute.cs" />
     <Compile Include="Attributes\Taxonomy\NatureFamilyAttribute.cs" />
     <Compile Include="Attributes\Taxonomy\NatureKingdomAttribute.cs" />

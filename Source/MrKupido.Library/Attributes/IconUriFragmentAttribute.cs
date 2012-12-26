@@ -15,65 +15,160 @@ namespace MrKupido.Library.Attributes
             this.UriFragment = uriFragment;
         }
 
-        public static string GetUrl(Type objType, string formatString, string fieldName)
+        public static string[] GetUrls(Type objType, string formatString, string fieldName)
         {
-            return GetUrl(objType.GetField(fieldName), formatString);
+            return GetUrls(objType.GetField(fieldName), formatString);
         }
 
-        public static string GetUrl(Type objType, string formatString)
+        public static string[] GetUrls(Type objType, string formatString)
         {
-            return GetUrl((System.Reflection.MemberInfo)objType, formatString);
+            return GetUrls((System.Reflection.MemberInfo)objType, formatString);
         }
 
-        public static string GetUrl(System.Reflection.MemberInfo mi, string formatString)
+        public static string[] GetUrls(System.Reflection.MemberInfo mi, string formatString)
         {
-            string result = null;
-            
+            List<string> result = new List<string>();
+
+            IconUriFragmentAttribute classLevelIconUri = null;
+            IconUriFragmentAttribute memberLevelIconUri = null; // method or field
+            NameAliasAttribute[] classLevelEngNames = null;
+            NameAliasAttribute[] memberLevelEngNames = null;
+            IconUriFragmentAttribute ingredientCategoryIconUrl = null;
+
+            if (!(mi is Type))
+            {
+                // member level icon url
+                foreach (IconUriFragmentAttribute attr in mi.GetCustomAttributes(typeof(IconUriFragmentAttribute), false).Cast<IconUriFragmentAttribute>().ToArray())
+                {
+                    if (memberLevelIconUri == null)
+                    {
+                        memberLevelIconUri = attr;
+                    }
+                }
+
+                memberLevelEngNames = NameAliasAttribute.GetMethodNames(mi.DeclaringType, mi.Name, "eng");
+                mi = mi.DeclaringType;
+            }
+
+            // class level icon url
             foreach (IconUriFragmentAttribute attr in mi.GetCustomAttributes(typeof(IconUriFragmentAttribute), false).Cast<IconUriFragmentAttribute>().ToArray())
             {
-                if (result == null)
+                if (classLevelIconUri == null)
                 {
-                    result = String.Format(formatString, attr.UriFragment);
+                    classLevelIconUri = attr;
+                }
+            }
+            classLevelEngNames = NameAliasAttribute.GetNameAliases(mi, "eng");
+
+
+            // build the 'standard' urls by combining the names above
+            if ((classLevelIconUri != null) && (memberLevelIconUri != null))
+            {
+                result.Add(String.Format(formatString, classLevelIconUri.UriFragment + "__" + memberLevelIconUri.UriFragment));
+            }
+
+            if ((classLevelIconUri == null) && (memberLevelIconUri != null) && (classLevelEngNames != null))
+            {
+                foreach (NameAliasAttribute className in classLevelEngNames)
+                {
+                    result.Add(String.Format(formatString, className.Name + "__" + memberLevelIconUri.UriFragment));
                 }
             }
 
-            if (result == null)
+            if ((classLevelIconUri != null) && (memberLevelIconUri == null) && (memberLevelEngNames != null))
             {
-                foreach (IngredientConstsAttribute attr in mi.GetCustomAttributes(typeof(IngredientConstsAttribute), false).Cast<IngredientConstsAttribute>().ToArray())
+                foreach (NameAliasAttribute memberName in memberLevelEngNames)
                 {
-                    if (attr.Category != ShoppingListCategory.Unknown)
-                    {
-                        System.Reflection.FieldInfo field = attr.Category.GetType().GetField(attr.Category.ToString());
-                        IconUriFragmentAttribute uriFragment = Attribute.GetCustomAttribute(field, typeof(IconUriFragmentAttribute)) as IconUriFragmentAttribute;
+                    result.Add(String.Format(formatString, classLevelIconUri.UriFragment + "__" + memberName.Name));
+                }
+            }
 
-                        if (uriFragment != null) result = String.Format(formatString, uriFragment.UriFragment);
+            if ((classLevelIconUri == null) && (memberLevelIconUri == null) && (classLevelEngNames != null) && (memberLevelEngNames != null))
+            {
+                foreach (NameAliasAttribute className in classLevelEngNames)
+                {
+                    foreach (NameAliasAttribute memberName in memberLevelEngNames)
+                    {
+                        result.Add(String.Format(formatString, className.Name + "__" + memberName.Name));
                     }
                 }
             }
 
-            if (result == null)
+            if (classLevelIconUri != null)
             {
-                foreach (NatureRelationAttribute attr in mi.GetCustomAttributes(typeof(NatureRelationAttribute), false).Cast<NatureRelationAttribute>().ToArray())
+                result.Add(String.Format(formatString, classLevelIconUri.UriFragment));
+            }
+
+            if ((classLevelIconUri == null) && (classLevelEngNames != null))
+            {
+                foreach (NameAliasAttribute className in classLevelEngNames)
                 {
-                    if (attr.NatureClass != null)
-                    {
-                        result = IconUriFragmentAttribute.GetUrl(attr.NatureClass, formatString);
-                    }
+                    result.Add(String.Format(formatString, className.Name));
                 }
             }
 
-
-            if (String.IsNullOrEmpty(result) && (mi is Type) && (((Type)mi).BaseType != null))
+            if (memberLevelIconUri != null)
             {
-                result = IconUriFragmentAttribute.GetUrl(((Type)mi).BaseType, formatString);
+                result.Add(String.Format(formatString, memberLevelIconUri.UriFragment));
             }
 
-            if (String.IsNullOrEmpty(result))
+            if ((memberLevelIconUri == null) && (memberLevelEngNames != null))
+            {
+                foreach (NameAliasAttribute memberName in memberLevelEngNames)
+                {
+                    result.Add(String.Format(formatString, memberName.Name));
+                }
+            }
+
+            // ingredient consts' category icon url (class level)
+            foreach (IngredientConstsAttribute attr in mi.GetCustomAttributes(typeof(IngredientConstsAttribute), false).Cast<IngredientConstsAttribute>().ToArray())
+            {
+                if (attr.Category != ShoppingListCategory.Unknown)
+                {
+                    System.Reflection.FieldInfo field = attr.Category.GetType().GetField(attr.Category.ToString());
+                    IconUriFragmentAttribute uriFragment = Attribute.GetCustomAttribute(field, typeof(IconUriFragmentAttribute)) as IconUriFragmentAttribute;
+
+                    ingredientCategoryIconUrl = uriFragment;
+                }
+            }
+
+            if (ingredientCategoryIconUrl != null)
+            {
+                result.Add(String.Format(formatString, ingredientCategoryIconUrl.UriFragment));
+            }
+
+            // nature relation's icon url (class level)
+            foreach (NatureRelationAttribute attr in mi.GetCustomAttributes(typeof(NatureRelationAttribute), false).Cast<NatureRelationAttribute>().ToArray())
+            {
+                if (attr.NatureClass != null)
+                {
+                    result.AddRange(IconUriFragmentAttribute.GetUrls(attr.NatureClass, formatString));
+                }
+            }
+
+            
+            // check the base class
+            if ((mi is Type) && (((Type)mi).BaseType != null))
+            {
+                result.AddRange(IconUriFragmentAttribute.GetUrls(((Type)mi).BaseType, formatString));
+                result.RemoveAt(result.Count - 1); // remove the default url
+            }
+
+            if (result.Count == 0)
             {
                 Trace.TraceWarning("Class '{0}' has no icon url defined.", mi.Name);
             }
+            result.Add(String.Format(formatString, "default"));
 
-            return result;
+            for (int i = 0; i < result.Count(); i++)
+            {
+                for (int j = 0; j < result[i].Length; j++)
+                {
+                    if (result[i][j] == ' ') result[i] = result[i].Replace(' ', '_');
+                }
+            }
+
+            return result.ToArray();
         }
     }
 }

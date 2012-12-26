@@ -7,6 +7,7 @@ using MrKupido.Processor.Model;
 using MrKupido.Processor;
 using System.Text;
 using MrKupido.Library.Attributes;
+using MrKupido.Utils;
 
 namespace MrKupido.Web.Models
 {
@@ -17,6 +18,7 @@ namespace MrKupido.Web.Models
         public string DisplayName;
         public string UniqueName;
         public bool IsSelected;
+        public int NetTime;
         public int TotalTime;
         public bool IsVegetarian;
         public bool IsGlutenFree;
@@ -39,7 +41,7 @@ namespace MrKupido.Web.Models
             this.DisplayName = Char.ToUpper(rtn.ShortName[0]) + rtn.ShortName.Substring(1);
             this.UniqueName = rtn.UniqueName;
             this.SubVersions = TreeNode.GetDescendantCount(rtn);
-            this.IconUrl = rtn.IconUrl == null ? null : VirtualPathUtility.ToAbsolute(rtn.IconUrl);
+            this.IconUrl = PathUtils.GetActualUrl(rtn.IconUrls);
 
             StringBuilder sb = new StringBuilder();
             foreach (IIngredient i in rtn.GetIngredients(1.0f))
@@ -57,7 +59,7 @@ namespace MrKupido.Web.Models
 
             if (this.IconUrl == null)
             {
-                this.IconUrl = VirtualPathUtility.ToAbsolute(IconUriFragmentAttribute.GetUrl(this.MainCategory.GetType(), "~/Content/svg/cat_{0}.svg", this.MainCategory.ToString()));
+                this.IconUrl = PathUtils.GetActualUrl(IconUriFragmentAttribute.GetUrls(this.MainCategory.GetType(), "~/Content/svg/cat_{0}.svg", this.MainCategory.ToString()));
             }
 
             //if ((this.IconUrl == null) || (!System.IO.File.Exists(this.IconUrl)))
@@ -65,7 +67,10 @@ namespace MrKupido.Web.Models
             //    this.IconUrl = VirtualPathUtility.ToAbsolute(IconUriFragmentAttribute.GetUrl(typeof(ShoppingListCategory), "~/Content/svg/cat_{0}.svg", ShoppingListCategory.Unknown.ToString()));
             //}
 
-            this.TotalTime = (int)rtn.GetDirections(1.0f).Select(d => d.TimeToComplete).Select(t => t.TotalMinutes).Sum();
+            IDirection[] directions = rtn.GetDirections(1.0f);
+
+            this.TotalTime = (int)directions.Select(d => d.TimeToComplete).Select(t => t.TotalMinutes).Sum();
+            this.NetTime = (int)directions.Where(d => !d.IsPassive).Select(d => d.TimeToComplete).Select(t => t.TotalMinutes).Sum();
         }
 
         public override string ToString()

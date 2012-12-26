@@ -29,28 +29,28 @@
                 </div>
                 <div class="resulticons">
                     <div class="preptime">
-                        @if (rsri[i].TotalTime >= 45)
+                        @if (rsri[i].NetTime >= 45)
                         {
-                            <img runat="server" src="~/Content/svg/clock_60.svg" alt="@rsri[i].TotalTime perc" width="35px" height="35px" />
+                            <img runat="server" src="~/Content/svg/clock_60.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
                         }
-                        else if (rsri[i].TotalTime >= 30)
+                        else if (rsri[i].NetTime >= 30)
                         {
-                            <img runat="server" src="~/Content/svg/clock_45.svg" alt="@rsri[i].TotalTime perc" width="35px" height="35px" />
+                            <img runat="server" src="~/Content/svg/clock_45.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
                         }
-                        else if (rsri[i].TotalTime >= 15)
+                        else if (rsri[i].NetTime >= 15)
                         {
-                            <img runat="server" src="~/Content/svg/clock_30.svg" alt="@rsri[i].TotalTime perc" width="35px" height="35px" />
+                            <img runat="server" src="~/Content/svg/clock_30.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
                         }
                         else
                         {
-                            <img runat="server" src="~/Content/svg/clock_15.svg" alt="@rsri[i].TotalTime perc" width="35px" height="35px" />
+                            <img runat="server" src="~/Content/svg/clock_15.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
                         }
 
-                        @if (rsri[i].TotalTime >= 99)
+                        @if (rsri[i].NetTime >= 99)
                         {
                             <span>++</span>
                         } else {
-                            <span>@rsri[i].TotalTime.ToString("00")</span>
+                            <span>@rsri[i].NetTime.ToString("00")</span>
                         }
                     </div>
                     @if (rsri[i].IsVegetarian)

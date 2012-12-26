@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using MrKupido.Processor.Model;
+using MrKupido.Utils;
 
 namespace MrKupido.Web.Models
 {
@@ -22,7 +23,7 @@ namespace MrKupido.Web.Models
             this.SearchString = displayString;
             this.UniqueName = treeNode.UniqueName;
             this.NodeType = treeNode.NodeType;
-            this.IconUrl = treeNode.IconUrl;
+            this.IconUrl = PathUtils.GetActualUrl(treeNode.IconUrls);
         }
     }
 }
