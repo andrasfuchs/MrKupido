@@ -1,4 +1,4 @@
-  ================================================  Mr. Kupido  ================================================
+  ==========================================  Mr. Kupido  ==========================================
 
   Who is Mr. Kupido?
 
@@ -18,4 +18,5 @@
   
   We can’t answer that question. We just know that he serves our soul’s agenda. We want to give unconditional love to everybody and he can make it possible. You must ask the question for yourself. We can tell you one thing: if you got here, that’s not a coincidence. There are no coincidences in life, just signs and opportunities.
 
-  ============================================================================================================
+  ================================================================================================
+  
