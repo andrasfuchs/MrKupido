@@ -6,8 +6,8 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Equipment
 {
+    [NameAlias("eng", "flat plate")]
     [NameAlias("hun", "lapos tányér")]
-
     public class LaposTanyer : Tanyer
     {
         public LaposTanyer()

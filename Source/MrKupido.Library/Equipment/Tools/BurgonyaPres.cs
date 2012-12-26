@@ -7,12 +7,12 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Equipment
 {
-    [NameAlias("hun", "burgonyaprés")]
-
+    [NameAlias("eng", "potato squeeze")]
+    [NameAlias("hun", "burgonyaprés")]   
     public class BurgonyaPres : Tool
     {
+        [NameAlias("eng", "squash", Priority = 200)]
         [NameAlias("hun", "összeprésel", Priority = 200)]
-
         [NameAlias("hun", "préseld össze a(z) {0T}")]
         public IngredientGroup Preselni(IIngredient i)
         {

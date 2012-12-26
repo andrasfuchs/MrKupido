@@ -45,7 +45,13 @@
                         {
                             <img runat="server" src="~/Content/svg/clock_15.svg" alt="@rsri[i].TotalTime perc" width="35px" height="35px" />
                         }
-                        <span>@rsri[i].TotalTime.ToString("00")</span>
+
+                        @if (rsri[i].TotalTime >= 99)
+                        {
+                            <span>++</span>
+                        } else {
+                            <span>@rsri[i].TotalTime.ToString("00")</span>
+                        }
                     </div>
                     @if (rsri[i].IsVegetarian)
                     { 

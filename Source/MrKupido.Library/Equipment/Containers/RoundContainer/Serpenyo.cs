@@ -6,8 +6,8 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Equipment
 {
+    [NameAlias("eng", "pan")]
     [NameAlias("hun", "serpenyő")]
-
     public class Serpenyo : RoundContainer
     {
         public Serpenyo(float scale = 1.0f)

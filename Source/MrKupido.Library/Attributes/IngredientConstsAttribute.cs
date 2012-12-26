@@ -5,6 +5,11 @@ using System.Text;
 
 namespace MrKupido.Library.Attributes
 {
+
+    /// <summary>
+    /// This class is used to define constant for an ingredient or recipe class. Attributes are used because we need this information without instanciation. 
+    /// After the class is created all these values are copied to class properties and they should be used in logic.
+    /// </summary>
     public class IngredientConstsAttribute : Attribute
     {
         /// <summary>

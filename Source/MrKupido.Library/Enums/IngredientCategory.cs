@@ -41,6 +41,9 @@ namespace MrKupido.Library
         Cookie = 128,
         [NameAlias("hun", "fűszer")]
         [IconUriFragment("spice")]
-        Spice = 256
+        Spice = 256,
+        [NameAlias("eng", "nut")]
+        [NameAlias("hun", "mag")]
+        Nut = 512
     }
 }

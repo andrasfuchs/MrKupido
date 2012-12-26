@@ -6,6 +6,7 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Recipe
 {
+    [NameAlias("eng", "sausage")]
     [NameAlias("hun", "kolbász")]
 
     public class Kolbasz : RecipeBase

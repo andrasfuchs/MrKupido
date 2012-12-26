@@ -484,7 +484,7 @@ details#searchresults li {
 
             details#searchresults li div.resulticons div.preptime span {
                 position: absolute;
-                top: 6px;
+                top: 8px;
                 left: 8px;
                 font-size: 18px;
                 font-family: Arial;

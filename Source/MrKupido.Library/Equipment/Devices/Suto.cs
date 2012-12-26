@@ -6,9 +6,10 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Equipment
 {
+    [IconUriFragment("oven")]
+ 
+    [NameAlias("eng", "oven")]
     [NameAlias("hun", "sütő")]
-    
-    [IconUriFragment("cooker")]
     public class Suto : Heater
     {
         public Suto(float scale = 1.0f, int levels = 4, int heatLevels = 10)

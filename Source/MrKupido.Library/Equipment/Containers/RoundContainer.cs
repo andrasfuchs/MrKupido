@@ -6,8 +6,8 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Equipment
 {
+    [NameAlias("eng", "round shaped container")]
     [NameAlias("hun", "kör alapú tároló")]
-
     public class RoundContainer : Container
     {
         public RoundContainer(float radius, float depth) : base(radius*2, radius*2, depth)

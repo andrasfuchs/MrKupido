@@ -81,6 +81,9 @@
   <ItemGroup>
     <Compile Include="Cukor\PorCukor.cs" />
     <Compile Include="Cukor\VaniliasCukor.cs" />
+    <Compile Include="Etelizesito.cs" />
+    <Compile Include="Margarin.cs" />
+    <Compile Include="Mustar.cs" />
     <Compile Include="Sutopor.cs" />
     <Compile Include="Cukor.cs" />
     <Compile Include="Cukor\KristalyCukor.cs" />
@@ -109,6 +112,7 @@
     <Compile Include="NaturJoghurt.cs" />
     <Compile Include="Tejfol.cs" />
     <Compile Include="Tejfol\MilliTejfol.cs" />
+    <Compile Include="Tejszin.cs" />
     <Compile Include="Turo.cs" />
     <Compile Include="TurosKokuszgolyo.cs" />
     <Compile Include="Vaj.cs" />

@@ -9,7 +9,7 @@ namespace MrKupido.Library
     {
         string Name { get; }
 
-        ShoppingListCategory Category { get; }
+        ShoppingListCategory? Category { get; }
 
         MeasurementUnit Unit { get; }
 

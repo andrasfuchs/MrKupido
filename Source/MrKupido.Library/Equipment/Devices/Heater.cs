@@ -6,8 +6,8 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Equipment
 {
-    [NameAlias("hun", "melegítő berendezés")]
-
+    [NameAlias("eng", "heater device")]
+    [NameAlias("hun", "melegítő berendezés")]   
     public class Heater : Device, IIngredientContainer
     {
         public float MinHeat;
@@ -29,6 +29,7 @@ namespace MrKupido.Library.Equipment
             this.Dimensions = new Dimensions(width, height, depth);
         }
 
+        [NameAlias("eng", "put in", Priority = 200)]
         [NameAlias("hun", "berak", Priority = 200)]
         [NameAlias("hun", "rakd be a(z) {B} a {0T}")]
         public bool Berakni(IIngredient ig)
@@ -38,6 +39,7 @@ namespace MrKupido.Library.Equipment
             return true;
         }
 
+        [NameAlias("eng", "pull out", Priority = 200)]
         [NameAlias("hun", "kivesz", Priority = 200)]
         [NameAlias("hun", "vedd ki a(z) {} tartalmát")]
         public IIngredient Kivenni()
@@ -47,6 +49,7 @@ namespace MrKupido.Library.Equipment
             return this.Contents;
         }
 
+        [NameAlias("eng", "wait", Priority = 200)]
         [NameAlias("hun", "vár", Priority = 200)]
         [NameAlias("hun", "várj {0} percet")]
         public void Varni(int minutes) 
@@ -54,6 +57,7 @@ namespace MrKupido.Library.Equipment
             this.LastActionDuration = (uint)(minutes * 60);
         }
 
+        [NameAlias("eng", "preheat", Priority = 200)]
         [NameAlias("hun", "előmelegít", Priority = 200)]
         [NameAlias("hun", "felmelegít", Priority = 201)]
         [NameAlias("hun", "állítsd a(z) {} hőmérsékletét {0} fokra")]

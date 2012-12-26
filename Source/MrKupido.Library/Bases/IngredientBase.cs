@@ -28,16 +28,16 @@ namespace MrKupido.Library.Ingredient
             }
         }
 
-        public ShoppingListCategory Category { get; protected set; }
+        public ShoppingListCategory? Category { get; protected set; }
 
-        public int ExpirationTime { get; private set; }
-        public float StorageTemperature { get; private set; }
-        public int GlichemicalIndex { get; private set; }
-        public float PotencialAlkalinity { get; private set; }
+        public int? ExpirationTime { get; protected set; }
+        public float? StorageTemperature { get; protected set; }
+        public int? GlichemicalIndex { get; protected set; }
+        public float? PotencialAlkalinity { get; protected set; }
 
-        public float GrammsPerLiter { get; private set; }
-        public float GrammsPerPiece { get; private set; }
-        public float KCaloriesPerGramm { get; private set; }
+        public float? GrammsPerLiter { get; protected set; }
+        public float? GrammsPerPiece { get; protected set; }
+        public float? KCaloriesPerGramm { get; protected set; }
 
         public IngredientBase(float amount, MeasurementUnit unit, IngredientState state = IngredientState.Normal)
         {
@@ -116,44 +116,44 @@ namespace MrKupido.Library.Ingredient
 
             if ((this.Unit == MeasurementUnit.gramm) && (unit == MeasurementUnit.piece))
             {
-                if (this.GrammsPerPiece == 0) throw new InvalidUnitConversionException(this, this.Unit, unit);
+                if (!this.GrammsPerPiece.HasValue) throw new InvalidUnitConversionException(this, this.Unit, unit);
 
-                amount /= this.GrammsPerPiece;
+                amount /= this.GrammsPerPiece.Value;
             }
 
             if ((this.Unit == MeasurementUnit.piece) && (unit == MeasurementUnit.gramm))
             {
-                if (this.GrammsPerPiece == 0) throw new InvalidUnitConversionException(this, this.Unit, unit);
+                if (!this.GrammsPerPiece.HasValue) throw new InvalidUnitConversionException(this, this.Unit, unit);
 
-                amount *= this.GrammsPerPiece;
+                amount *= this.GrammsPerPiece.Value;
             }
 
             if ((this.Unit == MeasurementUnit.gramm) && (unit == MeasurementUnit.liter))
             {
-                if (this.GrammsPerLiter == 0) throw new InvalidUnitConversionException(this, this.Unit, unit);
+                if (!this.GrammsPerLiter.HasValue) throw new InvalidUnitConversionException(this, this.Unit, unit);
 
-                amount /= this.GrammsPerLiter;
+                amount /= this.GrammsPerLiter.Value;
             }
 
             if ((this.Unit == MeasurementUnit.liter) && (unit == MeasurementUnit.gramm))
             {
-                if (this.GrammsPerLiter == 0) throw new InvalidUnitConversionException(this, this.Unit, unit);
+                if (!this.GrammsPerLiter.HasValue) throw new InvalidUnitConversionException(this, this.Unit, unit);
 
-                amount *= this.GrammsPerLiter;
+                amount *= this.GrammsPerLiter.Value;
             }
 
             if ((this.Unit == MeasurementUnit.gramm) && (unit == MeasurementUnit.calories))
             {
-                if (this.KCaloriesPerGramm == 0) throw new InvalidUnitConversionException(this, this.Unit, unit);
+                if (!this.KCaloriesPerGramm.HasValue) throw new InvalidUnitConversionException(this, this.Unit, unit);
 
-                amount *= this.KCaloriesPerGramm;
+                amount *= this.KCaloriesPerGramm.Value;
             }
 
             if ((this.Unit == MeasurementUnit.calories) && (unit == MeasurementUnit.gramm))
             {
-                if (this.KCaloriesPerGramm == 0) throw new InvalidUnitConversionException(this, this.Unit, unit);
+                if (!this.KCaloriesPerGramm.HasValue) throw new InvalidUnitConversionException(this, this.Unit, unit);
 
-                amount /= this.KCaloriesPerGramm;
+                amount /= this.KCaloriesPerGramm.Value;
             }
 
             SetAmount(amount, unit);

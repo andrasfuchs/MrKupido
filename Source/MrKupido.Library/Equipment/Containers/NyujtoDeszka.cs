@@ -6,8 +6,8 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Equipment
 {
+    [NameAlias("eng", "providing board")]
     [NameAlias("hun", "nyújtódeszka")]
-
     public class NyujtoDeszka : Container
     {
         public NyujtoDeszka(float scale = 1.0f)
@@ -15,8 +15,8 @@ namespace MrKupido.Library.Equipment
         {
         }
 
+        [NameAlias("eng", "roll out", Priority = 200)]
         [NameAlias("hun", "kinyújt", Priority = 200)]
-
         [NameAlias("hun", "nyújtsd ki nyújtódeszkán a(z) {0T} {1} mm-esre")]
         public IIngredient Nyujtani(IIngredient i, float thickness)
         {

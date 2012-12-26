@@ -7,12 +7,12 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Equipment
 {
+    [NameAlias("eng", "rasper")]
     [NameAlias("hun", "reszelő")]
-
     public class Reszelo : Tool
     {
+        [NameAlias("eng", "rasp", Priority = 200)]
         [NameAlias("hun", "lereszel", Priority = 200)]
-
         [NameAlias("hun", "reszeld le a(z) {0T}")]
         public IngredientGroup Lereszelni(IIngredient i)
         {

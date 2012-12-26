@@ -7,12 +7,12 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Equipment
 {
+    [NameAlias("eng", "egg-beater")]
     [NameAlias("hun", "habverő")]
-
     public class Habvero : Tool
     {
+        [NameAlias("eng", "hunt out", Priority = 200)]
         [NameAlias("hun", "felver", Priority = 200)]
-
         [NameAlias("hun", "verd fel a(z) {0T}")]
         public IngredientGroup Felverni(IIngredient i)
         {

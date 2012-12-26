@@ -6,15 +6,15 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Equipment
 {
-    [NameAlias("hun", "berendezés")]
     [NameAlias("eng", "device")]
-
+    [NameAlias("hun", "berendezés")]
     public class Device : EquipmentBase
     {
         public int AveragePowerConsumption;
 
         private IEquipment contents;
 
+        [NameAlias("eng", "put in", Priority = 200)]
         [NameAlias("hun", "helyezd be a(z) {B} a {0T}")]
         public void Behelyezni(IEquipment contents)
         {
@@ -23,6 +23,7 @@ namespace MrKupido.Library.Equipment
             this.contents = contents;
         }
 
+        [NameAlias("eng", "pull out", Priority = 200)]
         [NameAlias("hun", "emeld ki a(z) {K} a tartalmát")]
         public IEquipment Kiemelni(Type equipmentType)
         {

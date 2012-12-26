@@ -6,8 +6,8 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Equipment
 {
+    [NameAlias("eng", "vessel")]
     [NameAlias("hun", "edény")]
-
     public class Edeny : RoundContainer
     {
         public Fedo Fedo = new Fedo();

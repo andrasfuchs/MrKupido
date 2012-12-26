@@ -7,20 +7,20 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Equipment
 {
+    [NameAlias("eng", "hand")]
     [NameAlias("hun", "kéz")]
-
     public class Kez : Tool
     {
+        [NameAlias("eng", "crumple", Priority = 200)]
         [NameAlias("hun", "összegyúr", Priority = 200)]
-
         [NameAlias("hun", "gyúrd össze a következőket: ({0*}, )")]
         public IngredientGroup Osszegyurni(params IIngredient[] ingredients)
         {
             return new IngredientGroup(ingredients);
         }
 
+        [NameAlias("eng", "knead to balls", Priority = 200)]
         [NameAlias("hun", "golyóvá gyúr", Priority = 200)]
-
         [NameAlias("hun", "gyúrd golyóvá a(z) {0T}")]
         public IIngredient GolyovaGyurni(IIngredient i)
         {
@@ -31,8 +31,8 @@ namespace MrKupido.Library.Equipment
             return i;
         }
 
+        [NameAlias("eng", "tear", Priority = 200)]
         [NameAlias("hun", "szaggat", Priority = 200)]
-
         [NameAlias("hun", "szaggass {1} grammos darabokat a(z) {0B}")]
         public IngredientGroup Kiszaggatni(IIngredient i, float weight)
         {
@@ -59,13 +59,13 @@ namespace MrKupido.Library.Equipment
             return new IngredientGroup(result.ToArray());
         }
 
+        [NameAlias("eng", "drip", Priority = 200)]
         [NameAlias("hun", "lecsepegtet", Priority = 200)]
-
         [NameAlias("hun", "csepegtesd le a(z) {0T}")]
         public IIngredient Lecsepegtetni(IIngredient i) { return i; }
 
+        [NameAlias("eng", "sprinkle", Priority = 200)]
         [NameAlias("hun", "rászór", Priority = 200)]
-
         [NameAlias("hun", "szórd rá a(z) {1T} a(z) {0R}")]
         public IIngredient Raszorni(IIngredient iOn, IIngredient i)
         {
@@ -74,9 +74,8 @@ namespace MrKupido.Library.Equipment
             return new IngredientGroup(new IIngredient[] { iOn, i });
         }
 
-
+        [NameAlias("eng", "superimpose", Priority = 200)]
         [NameAlias("hun", "rárak", Priority = 200)]
-
         [NameAlias("hun", "rakd rá a(z) {1T} a(z) {0R}")]
         public IIngredient Rarakni(IIngredient iOnTo, IIngredient i)
         {
@@ -85,8 +84,8 @@ namespace MrKupido.Library.Equipment
             return new IngredientGroup(new IIngredient[] { iOnTo, i });
         }
 
+        [NameAlias("eng", "pour on", Priority = 200)]
         [NameAlias("hun", "ráönt", Priority = 200)]
-
         [NameAlias("hun", "öntsd rá a(z) {1T} a(z) {0R}")]
         public IIngredient Raonteni(IIngredient iOnTo, IIngredient i)
         {
@@ -95,8 +94,8 @@ namespace MrKupido.Library.Equipment
             return new IngredientGroup(new IIngredient[] { iOnTo, i });
         }
 
+        [NameAlias("eng", "water", Priority = 200)]
         [NameAlias("hun", "rálocsol", Priority = 200)]
-
         [NameAlias("hun", "locsold rá a(z) {1T} a(z) {0R}")]
         public IIngredient Ralocsolni(IIngredient iOn, IIngredient i)
         {
@@ -105,8 +104,8 @@ namespace MrKupido.Library.Equipment
             return new IngredientGroup(new IIngredient[] { iOn, i });
         }
 
+        [NameAlias("eng", "plow", Priority = 200)]
         [NameAlias("hun", "megforgat", Priority = 200)]
-
         [NameAlias("hun", "forgasd meg a(z) {0T} a(z) {1N}")]
         public IIngredient Megforgatni(IIngredient i, IIngredient iIn)
         {
@@ -117,13 +116,13 @@ namespace MrKupido.Library.Equipment
             return new IngredientGroup(new IIngredient[] { i, iIn });
         }
 
+        [NameAlias("eng", "serve", Priority = 200)]
         [NameAlias("hun", "tálal", Priority = 200)]
-
         [NameAlias("hun", "tálald a(z) {0T} a(z) {1N}")]
         public void Talalni(IIngredient i, IEquipment container) { }
 
+        [NameAlias("eng", "separate", Priority = 200)]
         [NameAlias("hun", "szétválaszt", Priority = 200)]
-
         [NameAlias("hun", "válaszd szét a(z) {0T}")]
         public IIngredient[] Szetvalasztani(IIngredient i) 
         {

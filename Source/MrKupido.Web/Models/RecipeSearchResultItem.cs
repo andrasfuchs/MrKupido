@@ -44,9 +44,9 @@ namespace MrKupido.Web.Models
             StringBuilder sb = new StringBuilder();
             foreach (IIngredient i in rtn.GetIngredients(1.0f))
             {
-                if (this.MainCategory == ShoppingListCategory.Unknown)
+                if ((this.MainCategory == ShoppingListCategory.Unknown) && (i.Category.HasValue))
                 {
-                    this.MainCategory = i.Category;
+                    this.MainCategory = i.Category.Value;
                 }
 
                 sb.Append(i.Name);

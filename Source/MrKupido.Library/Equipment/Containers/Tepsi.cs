@@ -6,8 +6,8 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Equipment
 {
+    [NameAlias("eng", "tray")]
     [NameAlias("hun", "tepsi")]
-
     public class Tepsi : Container
     {
         public Tepsi(float scale = 1.0f)
