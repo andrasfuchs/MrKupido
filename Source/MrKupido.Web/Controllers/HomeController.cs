@@ -683,7 +683,7 @@ namespace MrKupido.Web.Controllers
             // add all items again without accents if they had any
             foreach (RecipeSearchQueryResults sqr in sqrs.ToArray())
             {
-                sqr.IconUrl = sqr.IconUrl == null ? null : VirtualPathUtility.ToAbsolute(sqr.IconUrl);
+                sqr.IconUrl = String.IsNullOrEmpty(sqr.IconUrl) ? null : VirtualPathUtility.ToAbsolute(sqr.IconUrl);
 
                 char[] s = sqr.DisplayString.ToCharArray();
                 for (int i = 0; i < s.Length; i++)

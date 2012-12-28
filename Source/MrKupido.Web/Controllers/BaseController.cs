@@ -9,6 +9,8 @@ using System.Web.Security;
 using MrKupido.Web.Models;
 using System.Net;
 using System.IO;
+using System.Reflection;
+using System.Diagnostics;
 
 namespace MrKupido.Web.Controllers
 {
@@ -57,6 +59,13 @@ namespace MrKupido.Web.Controllers
            
             CurrentSessions[requestContext.HttpContext.Session.SessionID].User = this.UserState;
             CurrentSessions[requestContext.HttpContext.Session.SessionID].RequestContext = requestContext;
+
+            if (this.Session["WebAppFileVersion"] == null)
+            {
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+                this.Session["WebAppFileVersion"] = fvi.ProductVersion;
+            }
         }
 
         void BaseController_UserStateChanged(object sender, DateTime utc, string ip, string sessionId, string action, string parameters)
@@ -100,7 +109,7 @@ namespace MrKupido.Web.Controllers
                     SessionId = HttpContext.Session.SessionID,
                     Action = "BUGREPORT",
                     Parameters = text,
-                    FormattedMessage = String.Format("User '{0}' reported the following bug: '{1}'", username, text)
+                    FormattedMessage = String.Format("User '{0}' reported the following bug using the version {2}: '{1}'", username, text, (Session["WebAppFileVersion"] == null ? "v?" : (string)Session["WebAppFileVersion"]))
                 });
                 context.SaveChanges();
             }

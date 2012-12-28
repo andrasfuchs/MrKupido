@@ -252,12 +252,18 @@
     <Content Include="Content\images\ticked.png" />
     <Content Include="Content\images\tree-icons.png" />
     <Content Include="Content\images\unticked.png" />
-    <Content Include="Content\svg\action_betesz.svg" />
     <Content Include="Content\svg\action_cover.svg" />
+    <Content Include="Content\svg\action_default.svg" />
     <Content Include="Content\svg\action_mix.svg" />
-    <Content Include="Content\svg\action_rarak.svg" />
-    <Content Include="Content\svg\action_raszor.svg" />
+    <Content Include="Content\svg\action_plow.svg" />
+    <Content Include="Content\svg\action_pour_on.svg" />
+    <Content Include="Content\svg\action_put_in.svg" />
+    <Content Include="Content\svg\action_separate.svg" />
+    <Content Include="Content\svg\action_sprinkle.svg" />
     <Content Include="Content\svg\action_strech.svg" />
+    <Content Include="Content\svg\action_superimpose.svg" />
+    <Content Include="Content\svg\action_tear.svg" />
+    <Content Include="Content\svg\action_water.svg" />
     <Content Include="Content\svg\browser_android.svg" />
     <Content Include="Content\svg\browser_firefox.svg" />
     <Content Include="Content\svg\browser_ie.svg" />
@@ -283,8 +289,16 @@
     <Content Include="Content\svg\d_clock6.svg" />
     <Content Include="Content\svg\d_clock7.svg" />
     <Content Include="Content\svg\d_clock8.svg" />
-    <Content Include="Content\svg\n_animalia.svg" />
-    <Content Include="Content\svg\n_plantae.svg" />
+    <Content Include="Content\svg\i_fruit.svg" />
+    <Content Include="Content\svg\i_pepper.svg" />
+    <Content Include="Content\svg\i_salt.svg" />
+    <Content Include="Content\svg\nutrition_all_sample.svg" />
+    <Content Include="Content\svg\nutrition_all_unknown.svg" />
+    <Content Include="Content\svg\nutrition_all_unknown_faded.svg" />
+    <Content Include="Content\svg\n_animals.svg" />
+    <Content Include="Content\svg\n_birds.svg" />
+    <Content Include="Content\svg\n_minerals.svg" />
+    <Content Include="Content\svg\n_plants.svg" />
     <Content Include="Content\svg\r_pizza.svg" />
     <Content Include="Content\svg\r_recipe.svg" />
     <Content Include="Content\svg\stars_00_light.svg" />
@@ -294,7 +308,6 @@
     <Content Include="Hunspellx86.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\svg\action_none.svg" />
     <Content Include="Content\svg\arrow_right_light.svg" />
     <Content Include="Content\svg\avatar.svg" />
     <Content Include="Content\svg\browser_chrome.svg" />
@@ -339,7 +352,6 @@
     <Content Include="Content\svg\logo_wordpress.svg" />
     <Content Include="Content\svg\logo_yahoo.svg" />
     <Content Include="Content\svg\mrkupidologo.svg" />
-    <Content Include="Content\svg\nutrition_sample.svg" />
     <Content Include="Content\svg\question_mark.svg" />
     <Content Include="Content\svg\stage_cooking.svg" />
     <Content Include="Content\svg\stage_preparation.svg" />
@@ -534,6 +546,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.None" BuildVersion_UpdateFileVersion="False" BuildVersion_StartDate="1975/10/21" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
   <ItemGroup>

@@ -33,7 +33,7 @@ namespace MrKupido.Web.Controllers
 
             foreach (RecipeDirection direction in (RecipeDirection[])result[4])
             {
-                direction.IconUrl = PathUtils.GetActualUrl(direction.IconUrls);
+                if (direction.IconUrl == null) direction.IconUrl = PathUtils.GetActualUrl(direction.IconUrls);
             }
 
             //RecipeTreeNode inlineSajt = Cache.Recipe.RenderInline("FuszeresCsirkemell", new string[] { "Sajt" });

@@ -10,6 +10,8 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("eng", "lemon")]
     [NameAlias("hun", "citrom")]
 
+    [IngredientConsts(Category = ShoppingListCategory.Fruit)]
+
     [YieldOf(typeof(CitrusMedicaL))]
     public class Citrom : IngredientBase
     {

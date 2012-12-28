@@ -32,7 +32,7 @@ namespace MrKupido.Utils
                 if (File.Exists(fileToCheck)) return PathUtils.ToAbsolute(url);
             }
 
-            return "";
+            return null;
         }
     }
 }

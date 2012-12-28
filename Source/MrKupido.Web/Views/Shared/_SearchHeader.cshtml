@@ -190,8 +190,9 @@
     }
     @if (Session["CurrentUser"] != null)
     {
-        <span id="name"><a runat="server" href="~/hun/Account/Profile">@Session["CurrentUser.DisplayName"]</a></span><span id="messages">0</span>
+        <span id="name"><a runat="server" href="~/hun/Account/Profile">@Session["CurrentUser.DisplayName"]</a></span><span id="messages" style="display: none">0</span>
         <img runat="server" src="~/Content/images/avatar.jpg" alt="Avatar" width="51" height="51" />
+        <img runat="server" src="~/Content/svg/smalldropdownarrow.svg" alt="Avatar" width="5" height="5" />
     }
     else
     { 

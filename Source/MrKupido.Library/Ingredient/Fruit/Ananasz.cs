@@ -7,8 +7,8 @@ using MrKupido.Library.Nature;
 
 namespace MrKupido.Library.Ingredient
 {
-    [NameAlias("hun", "ananász")]
     [NameAlias("eng", "pineapple")]
+    [NameAlias("hun", "ananász")]
 
     [IngredientConsts(Category = ShoppingListCategory.Fruit)]
 

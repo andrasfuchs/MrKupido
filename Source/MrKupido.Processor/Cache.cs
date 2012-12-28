@@ -37,7 +37,7 @@ namespace MrKupido.Processor
                 return ingredientCache;
             }
         }
-
+        
         public static RecipeCache Recipe
         {
             get

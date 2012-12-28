@@ -202,17 +202,20 @@ namespace MrKupido.Web.Controllers
                 Session["CurrentUser"] = user;
                 Session["CurrentUser.DisplayName"] = !String.IsNullOrEmpty(user.NickName) ? user.NickName : user.FullName;
 
-                string returnUrl = HttpContext.Request.QueryString["ReturnUrl"];
+                string returnUrl = (string)Session["ReturnUrl"];
                 if (String.IsNullOrEmpty(returnUrl))
                 {
                     //return RedirectToRoute("Default");
-                    return RedirectToRoute("Default", new { contoller = "Home", action = "Index" });
+                    return RedirectToRoute("Default", new { language = "hun", controller = "Home", action = "Index" });
                 }
                 else
                 {
+                    Session["ReturnUrl"] = null;
                     return new RedirectResult(returnUrl);
                 }
             }
+
+            Session["ReturnUrl"] = HttpContext.Request.QueryString["ReturnUrl"];
 
             return View();
         }

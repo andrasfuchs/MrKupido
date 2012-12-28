@@ -8,6 +8,8 @@ namespace MrKupido.Library.Ingredient
 {
     [NameAlias("hun", "kókuszreszelék")]
 
+    [IngredientConsts(Category = ShoppingListCategory.Fruit)]
+
     public class KokuszReszelek : KokuszBel
     {
         public KokuszReszelek(float amount, MeasurementUnit unit = MeasurementUnit.gramm, IngredientState state = IngredientState.Orolt)

@@ -7,6 +7,8 @@ using MrKupido.Library.Nature;
 
 namespace MrKupido.Library.Ingredient
 {
+    [NameAlias("eng", "salt", Priority = 1)]
+    [NameAlias("eng", "table salt")]
     [NameAlias("hun", "só", Priority = 1)]
     [NameAlias("hun", "konyhasó", Priority = 2)]
     [NameAlias("hun", "étkezési só")]

@@ -86,9 +86,9 @@ namespace MrKupido.Web
                 }
             }
 
-            if ((Session != null) && (Session["CurrentUser"] == null) && !Request.Url.AbsoluteUri.Contains("/account/Login"))
+            if ((Session != null) && (Session["CurrentUser"] == null) && !Request.Url.AbsoluteUri.ToLower().Contains("/account/login"))
             {
-                Response.RedirectToRoute("AccountManagement", new { action = "Login" });
+                Response.RedirectToRoute("AccountManagement", new { action = "Login", ReturnUrl = Request.Url.AbsolutePath });
             }
         }
     }

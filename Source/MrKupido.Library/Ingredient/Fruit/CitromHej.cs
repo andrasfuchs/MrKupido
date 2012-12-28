@@ -9,6 +9,8 @@ namespace MrKupido.Library.Ingredient
 {
     [NameAlias("hun", "citromhéj")]
 
+    [IngredientConsts(Category = ShoppingListCategory.Fruit)]
+
     [PartOf(typeof(CitrusMedicaL))]
     public class CitromHej : IngredientBase
     {

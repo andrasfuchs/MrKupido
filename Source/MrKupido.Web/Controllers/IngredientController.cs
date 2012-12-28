@@ -13,6 +13,7 @@ using System.Text;
 using MrKupido.Library;
 using MrKupido.Processor.Model;
 using MrKupido.Processor;
+using MrKupido.Utils;
 
 namespace MrKupido.Web.Controllers
 {
@@ -20,14 +21,33 @@ namespace MrKupido.Web.Controllers
     {
         public ActionResult Taxonomy()
         {
-            object[] result = new object[4];
+            TreeNode[] result = new TreeNode[4];
 
             result[0] = TreeNode.BuildTree(Cache.Assemblies, t => new NatureTreeNode(t), typeof(MrKupido.Library.Nature.NatureBase));
             result[1] = Cache.Ingredient["IngredientBase"];
             result[2] = TreeNode.BuildTree(Cache.Assemblies, t => new RecipeTreeNode(t), typeof(MrKupido.Library.Recipe.RecipeBase));
             result[3] = TreeNode.BuildTree(Cache.Assemblies, t => new EquipmentTreeNode(t), typeof(MrKupido.Library.Equipment.EquipmentBase));
 
+            ValidateIconUrls(result);
+            //ValidateIconUrls(new TreeNode[] { result[0] });
+            //ValidateIconUrls(new TreeNode[] { result[1] });
+            //ValidateIconUrls(new TreeNode[] { result[2] });
+            //ValidateIconUrls(new TreeNode[] { result[3] });
+
             return View(result);
+        }
+
+        private void ValidateIconUrls(TreeNode[] tns)
+        {
+            if (tns == null) return;
+
+            foreach (TreeNode tn in tns)
+            {
+                if (tn.IconUrl == null) tn.IconUrl = PathUtils.GetActualUrl(tn.IconUrls);
+                tn.IconUrl = tn.IconUrl;
+
+                ValidateIconUrls(tn.Children);
+            }
         }
     }
 }

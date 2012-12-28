@@ -88,7 +88,8 @@
 
     <div id="reviewer" class="on">
         <span id="reviewSection">Ird ide, hogy szerinted mi nem stimmel az oldalon:</span>
-        <input id="reviewCommentText" placeholder="(minimum 15 karakter)" size="60" onkeydown="javascript:reviewCommentChanged(event);">
+        @{ string placeHolderText = "(minimum 15 karakter) - v" + (Session["WebAppFileVersion"] as string); }
+        <input id="reviewCommentText" placeholder='@placeHolderText' size="60" onkeydown="javascript:reviewCommentChanged(event);">
         <input id="reviewCommentButton" value="Vélemény elküldése" type="button" disabled="disabled" onclick="javascript:submitReviewComment();">
     </div>
 

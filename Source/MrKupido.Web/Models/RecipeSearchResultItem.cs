@@ -41,7 +41,8 @@ namespace MrKupido.Web.Models
             this.DisplayName = Char.ToUpper(rtn.ShortName[0]) + rtn.ShortName.Substring(1);
             this.UniqueName = rtn.UniqueName;
             this.SubVersions = TreeNode.GetDescendantCount(rtn);
-            this.IconUrl = PathUtils.GetActualUrl(rtn.IconUrls);
+            if (rtn.IconUrl == null) rtn.IconUrl = PathUtils.GetActualUrl(rtn.IconUrls);
+            this.IconUrl = rtn.IconUrl;
 
             StringBuilder sb = new StringBuilder();
             foreach (IIngredient i in rtn.GetIngredients(1.0f))
@@ -61,11 +62,6 @@ namespace MrKupido.Web.Models
             {
                 this.IconUrl = PathUtils.GetActualUrl(IconUriFragmentAttribute.GetUrls(this.MainCategory.GetType(), "~/Content/svg/cat_{0}.svg", this.MainCategory.ToString()));
             }
-
-            //if ((this.IconUrl == null) || (!System.IO.File.Exists(this.IconUrl)))
-            //{
-            //    this.IconUrl = VirtualPathUtility.ToAbsolute(IconUriFragmentAttribute.GetUrl(typeof(ShoppingListCategory), "~/Content/svg/cat_{0}.svg", ShoppingListCategory.Unknown.ToString()));
-            //}
 
             IDirection[] directions = rtn.GetDirections(1.0f);
 

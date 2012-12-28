@@ -6,9 +6,9 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Nature
 {
+    [NameAlias("eng", "animals")]
     [NameAlias("hun", "állatok")]
 
-    [IconUriFragment("animalia")]
     [NatureKingdom]
     public class Animalia : NatureBase
     {

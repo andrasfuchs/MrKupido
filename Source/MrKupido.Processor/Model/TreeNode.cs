@@ -34,6 +34,7 @@ namespace MrKupido.Processor.Model
         public bool IsSelected { get; set; }
         public bool IsDisabled { get; set; }
         public string[] IconUrls { get; private set; }
+        public string IconUrl { get; set; }
 
         public TreeNode(Type nodeClass)
         {
