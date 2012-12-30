@@ -227,31 +227,10 @@
     <Content Include="Content\fonts\Tangerine\tangerinea_bold-webfont.svg" />
     <Content Include="Content\images\avatar.jpg" />
     <Content Include="Content\images\background.jpg" />
-    <Content Include="Content\images\bulb.png" />
-    <Content Include="Content\images\cat_beverage.png" />
-    <Content Include="Content\images\cat_chicken.png" />
-    <Content Include="Content\images\cat_dessert.png" />
-    <Content Include="Content\images\cat_maindish.png" />
-    <Content Include="Content\images\cat_other.png" />
-    <Content Include="Content\images\cat_pork.png" />
-    <Content Include="Content\images\cat_soup.png" />
-    <Content Include="Content\images\cat_soup_d.png" />
-    <Content Include="Content\images\cat_starter.png" />
     <Content Include="Content\images\frame_png.png" />
-    <Content Include="Content\images\h1_bg.png" />
-    <Content Include="Content\images\hr_double.png" />
-    <Content Include="Content\images\hr_single.png" />
     <Content Include="Content\images\mrkupido.ico" />
     <Content Include="Content\images\mrkupidologo.png" />
-    <Content Include="Content\images\paging_first.png" />
-    <Content Include="Content\images\paging_last.png" />
-    <Content Include="Content\images\paging_next.png" />
-    <Content Include="Content\images\paging_prev.png" />
-    <Content Include="Content\images\resulticon_empty.png" />
-    <Content Include="Content\images\resulticon_photos.png" />
-    <Content Include="Content\images\ticked.png" />
     <Content Include="Content\images\tree-icons.png" />
-    <Content Include="Content\images\unticked.png" />
     <Content Include="Content\svg\action_cover.svg" />
     <Content Include="Content\svg\action_default.svg" />
     <Content Include="Content\svg\action_mix.svg" />
@@ -292,23 +271,25 @@
     <Content Include="Content\svg\i_fruit.svg" />
     <Content Include="Content\svg\i_pepper.svg" />
     <Content Include="Content\svg\i_salt.svg" />
-    <Content Include="Content\svg\nutrition_all_sample.svg" />
     <Content Include="Content\svg\nutrition_all_unknown.svg" />
-    <Content Include="Content\svg\nutrition_all_unknown_faded.svg" />
     <Content Include="Content\svg\n_animals.svg" />
     <Content Include="Content\svg\n_birds.svg" />
     <Content Include="Content\svg\n_minerals.svg" />
     <Content Include="Content\svg\n_plants.svg" />
+    <Content Include="Content\svg\paging_first.svg" />
+    <Content Include="Content\svg\paging_last.svg" />
+    <Content Include="Content\svg\paging_next.svg" />
+    <Content Include="Content\svg\paging_prev.svg" />
     <Content Include="Content\svg\r_pizza.svg" />
     <Content Include="Content\svg\r_recipe.svg" />
     <Content Include="Content\svg\stars_00_light.svg" />
+    <Content Include="Content\svg\usermenu.svg" />
     <Content Include="Hunspellx64.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Hunspellx86.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\svg\arrow_right_light.svg" />
     <Content Include="Content\svg\avatar.svg" />
     <Content Include="Content\svg\browser_chrome.svg" />
     <Content Include="Content\svg\bulb.svg" />
@@ -546,7 +527,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.None" BuildVersion_UpdateFileVersion="False" BuildVersion_StartDate="1975/10/21" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="1975/10/21" BuildVersion_UpdateFileVersion="False" BuildVersion_BuildVersioningStyle="None.None.None.None" />
     </VisualStudio>
   </ProjectExtensions>
   <ItemGroup>

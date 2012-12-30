@@ -68,14 +68,16 @@
     @{ Html.RenderPartial("_RecipeSearchResults", (Model == null ? null : Model.GetCurrentPage())); }
     @if (Model != null)
     {
-        <div id="pagingleft">
-            <img runat="server" id="pagefirst" src="~/Content/images/paging_first.png" alt="első oldal" width="29" height="18" onclick="javascript:doPaging('first')" />
-            <img runat="server" id="pageprev" src="~/Content/images/paging_prev.png" alt="előző oldal" width="15" height="18" onclick="javascript:doPaging('prev')" />
-        </div>
-        <div id="pagingnumber">@Model.PageIndex.ToString() / @Model.PageNumber.ToString()</div>    
-        <div id="pagingright">
-            <img runat="server" id="pagenext" src="~/Content/images/paging_next.png" alt="következő oldal" width="15" height="18" onclick="javascript:doPaging('next')" />
-            <img runat="server" id="pagelast" src="~/Content/images/paging_last.png" alt="utolsó oldal" width="29" height="18" onclick="javascript:doPaging('last')" />
+        <div id="paging">
+            <div id="pagingleft">
+                <img runat="server" id="pagefirst" src="~/Content/svg/paging_first.svg" alt="első oldal" width="21" height="18" onclick="javascript:doPaging('first')" />
+                <img runat="server" id="pageprev" src="~/Content/svg/paging_prev.svg" alt="előző oldal" width="15" height="18" onclick="javascript:doPaging('prev')" />
+            </div>
+            <div id="pagingnumber">@Model.PageIndex.ToString() / @Model.PageNumber.ToString()</div>
+            <div id="pagingright">
+                <img runat="server" id="pagenext" src="~/Content/svg/paging_next.svg" alt="következő oldal" width="15" height="18" onclick="javascript:doPaging('next')" />
+                <img runat="server" id="pagelast" src="~/Content/svg/paging_last.svg" alt="utolsó oldal" width="21" height="18" onclick="javascript:doPaging('last')" />
+            </div>
         </div>
     }
 </details>

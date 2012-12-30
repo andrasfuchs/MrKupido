@@ -108,6 +108,21 @@ header, footer, nav, section {
             padding-right: 5px;
         }
 
+        header .userbar span#name {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        header .userbar img#usermenu {
+            display: inline-block;
+            vertical-align: super;
+            opacity: 0.4;
+        }
+
+        header .userbar img#usermenu:hover {
+            opacity: 1.0;
+        }
+
     header .searchbox {
         height: 175px;
         margin-top: -170px;
@@ -363,6 +378,15 @@ details#searchresults div.filters figure {
 details#searchresults #resultsorderby {
     float: right;
 }
+
+details#searchresults div#paging img {
+    opacity: 0.4;
+}
+
+details#searchresults div#paging img:hover{
+    opacity: 1.0;
+}
+
 
 details li {
     display: list-item;
