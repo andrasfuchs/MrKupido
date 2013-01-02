@@ -6,8 +6,8 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Recipe
 {
-    [NameAlias("hun", "cukor")]
     [NameAlias("eng", "sugar")]
+    [NameAlias("hun", "cukor")]
 
     public class Cukor : RecipeBase
     {

@@ -10,7 +10,7 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("eng", "apple")]
     [NameAlias("hun", "alma")]
 
-    [IngredientConsts(Category = ShoppingListCategory.Fruit)]
+    [IngredientConsts(Category = ShoppingListCategory.Fruit, GrammsPerPiece=35.0f)]
 
     //[YieldOf(typeof())]
     public class Alma : IngredientBase

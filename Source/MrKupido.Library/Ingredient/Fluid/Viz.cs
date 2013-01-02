@@ -7,8 +7,8 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Ingredient
 {
-    [NameAlias("hun", "víz")]
     [NameAlias("eng", "water")]
+    [NameAlias("hun", "víz")]
 
     [IngredientConsts(GrammsPerLiter = 1000)]
 

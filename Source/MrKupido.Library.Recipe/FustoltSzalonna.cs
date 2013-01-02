@@ -8,6 +8,8 @@ namespace MrKupido.Library.Recipe
 {
     [NameAlias("hun", "füstölt szalonna")]
 
+    [IngredientConsts(GrammsPerPiece=3.0f)]
+
     public class FustoltSzalonna : RecipeBase
     {
         public FustoltSzalonna(float amount, MeasurementUnit unit = MeasurementUnit.gramm)

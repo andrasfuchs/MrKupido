@@ -6,7 +6,7 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Nature
 {
-    [NameAlias("hun", "disznófélék")]
+    [NameAlias("hun", "disznóféle")]
 
     [NatureFamily]
     public class Suidae : Mammalia

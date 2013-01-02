@@ -1,58 +1,58 @@
 ﻿@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-    <script type="text/javascript">
-        var lastItemDisplayString = "";
+<script type="text/javascript">
+    var lastItemDisplayString = "";
 
-        $(function () {
-            $("#query").keyup(function (e) {
-                lastItemDisplayString = "";
+    $(function () {
+        $("#query").keyup(function (e) {
+            lastItemDisplayString = "";
 
-                var code = e.which; // recommended to use e.which, it's normalized across browsers
+            var code = e.which; // recommended to use e.which, it's normalized across browsers
 
-                // enter
-                if (code == 13) e.preventDefault();
+            // enter
+            if (code == 13) e.preventDefault();
 
 
-                if (code == 32 || code == 13 || code == 188 || code == 186) {
-                    $("#search").trigger("onclick");
-                } // missing closing if brace
+            if (code == 32 || code == 13 || code == 188 || code == 186) {
+                $("#search").trigger("onclick");
+            } // missing closing if brace
 
-                if (this.value == "") {
-                    // left or page up
-                    if (code == 37 || code == 33) {
-                        $("#pageprev").trigger("onclick");
-                    }
-                    // right or page down
-                    if (code == 39 || code == 34) {
-                        $("#pagenext").trigger("onclick");
-                    }
-                    // home
-                    if (code == 36) {
-                        $("#pagefirst").trigger("onclick");
-                    }
-                    // end
-                    if (code == 35) {
-                        $("#pagelast").trigger("onclick");
-                    }
-                    // del
-                    if (code == 46) {
-                        deleteFilter("!first");
-                        $("#search").trigger("onclick");
-                    }
-                    // backspace
-                    if (code == 8) {
-                        deleteFilter("!last");
-                        $("#search").trigger("onclick");
-                    }
-                    e.preventDefault();
+            if (this.value == "") {
+                // left or page up
+                if (code == 37 || code == 33) {
+                    $("#pageprev").trigger("onclick");
                 }
-            });
+                // right or page down
+                if (code == 39 || code == 34) {
+                    $("#pagenext").trigger("onclick");
+                }
+                // home
+                if (code == 36) {
+                    $("#pagefirst").trigger("onclick");
+                }
+                // end
+                if (code == 35) {
+                    $("#pagelast").trigger("onclick");
+                }
+                // del
+                if (code == 46) {
+                    deleteFilter("!first");
+                    $("#search").trigger("onclick");
+                }
+                // backspace
+                if (code == 8) {
+                    deleteFilter("!last");
+                    $("#search").trigger("onclick");
+                }
+                e.preventDefault();
+            }
+        });
 
-            $("#query").autocomplete({
-                source: function (request, response) {
-                    $.ajax({
-                        url: '@Url.Action("SearchAutocomplete", "Home")',
+        $("#query").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("SearchAutocomplete", "Home")',
                         type: "POST",
                         dataType: "json",
                         data: {
@@ -129,10 +129,10 @@
 
         });
 
-        function refreshFilters(filters) {            
+        function refreshFilters(filters) {
             ulBody = '';
-            
-            for(x=0; x<filters.length; x++) {
+
+            for (x = 0; x < filters.length; x++) {
                 ulBody += '<li>' + filters[x].Text + ' <a href="javascript:deleteFilter(\'' + filters[x].Value + '\'); doSearch();">x</a></li>';
             }
 
@@ -178,10 +178,26 @@
             var s = document.querySelector('#location');
             s.value = "";
         }
-    </script>
 
-<a runat="server" href="~/hun" >
-<img runat="server" src="~/Content/svg/mrkupidologo.svg" alt="Mr. Kupido" width="200" height="152" />
+        $(function () {
+            if ($.browser.msie && $.browser.version.substr(0, 1) < 7) {
+                $('li').has('ul').mouseover(function () {
+                    $(this).children('ul').css('visibility', 'visible');
+                }).mouseout(function () {
+                    $(this).children('ul').css('visibility', 'hidden');
+                })
+            }
+        });
+
+        $(document).ready(function () {
+            $("#usermenubtn").click(function () {
+                $("#usermenu").toggle();
+            });
+        });
+</script>
+
+<a runat="server" href="~/hun">
+    <img runat="server" src="~/Content/svg/mrkupidologo.svg" alt="Mr. Kupido" width="200" height="152" />
 </a>
 <p class="userbar">
     @if (Session["CurrentUser"] == null)
@@ -192,13 +208,41 @@
     {
         <span id="name"><a runat="server" href="~/hun/Account/Profile">@Session["CurrentUser.DisplayName"]</a></span><span id="messages" style="display: none">0</span>
         <img runat="server" src="~/Content/images/avatar.jpg" alt="Avatar" width="51" height="51" />
-        <img runat="server" id="usermenu" src="~/Content/svg/usermenu.svg" alt="Menu" width="11" height="9" />
+        <img runat="server" id="usermenubtn" src="~/Content/svg/usermenu.svg" alt="Menu" width="11" height="9" />
     }
     else
     { 
         <img runat="server" src="~/Content/svg/avatar.svg" alt="Avatar" width="51" height="51" />
     }
 </p>
+
+    <ul id="usermenu">
+        <li><a href="#">Nyelv</a>
+            <ul>
+                <li><a href="#">Magyar</a>
+                    <ul>
+                        <li><a href="#">Irodalmi magyar</a></li>
+                        <li><a href="#">Ómagyar</a></li>
+                        <li><a href="#">Cigány madzsar</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Angol</a></li>
+                <li><a href="#">Német</a></li>
+                <li><a href="#">Spanyol</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="#">Profil</a>
+            <ul>
+                <li><a href="#">Alapadatok</a></li>
+                <li><a href="#">Fizikai adatok</a></li>
+                <li><a href="#">Egészségi állapot</a></li>
+                <li><a href="#">Haladó beállítások</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Kijelentkezés</a></li>
+    </ul>
+
 <div class="searchbox">
     <p class="inputfield">
         <label for="location">
@@ -210,12 +254,12 @@
             Keresnivaló:</label>
         <input id="query" type="search" placeholder="(hozzávaló, diéta, eszköz)" autofocus />
     </p>
-    <input id="search" type="submit" value="Keresés" onclick="_gaq.push(['_trackEvent', 'Search', 'Search', '+karalábé -pulyka']); doSearch();" style="display: none"/>
+    <input id="search" type="submit" value="Keresés" onclick="_gaq.push(['_trackEvent', 'Search', 'Search', '+karalábé -pulyka']); doSearch();" style="display: none" />
     <div id="deleteall">
         <input type="button" value="Mindent töröl" onclick="deleteFilter();" />
     </div>
     <div id="filters">
-        <ul>            
+        <ul>
         </ul>
     </div>
 </div>

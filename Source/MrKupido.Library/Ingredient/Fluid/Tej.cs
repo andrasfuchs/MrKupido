@@ -11,6 +11,8 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "tehéntej")]
     [NameAlias("eng", "milk")]
 
+    [IngredientConsts(GrammsPerLiter = 1000)]
+
     [MilkOf(typeof(BosPrimigenius))]
     public class Tej : IngredientBase
     {

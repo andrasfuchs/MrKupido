@@ -268,14 +268,19 @@
     <Content Include="Content\svg\d_clock6.svg" />
     <Content Include="Content\svg\d_clock7.svg" />
     <Content Include="Content\svg\d_clock8.svg" />
+    <Content Include="Content\svg\e_fork.svg" />
+    <Content Include="Content\svg\e_knife.svg" />
+    <Content Include="Content\svg\e_spoon.svg" />
     <Content Include="Content\svg\i_fruit.svg" />
     <Content Include="Content\svg\i_pepper.svg" />
     <Content Include="Content\svg\i_salt.svg" />
     <Content Include="Content\svg\nutrition_all_unknown.svg" />
-    <Content Include="Content\svg\n_animals.svg" />
-    <Content Include="Content\svg\n_birds.svg" />
-    <Content Include="Content\svg\n_minerals.svg" />
-    <Content Include="Content\svg\n_plants.svg" />
+    <Content Include="Content\svg\n_animal.svg" />
+    <Content Include="Content\svg\n_bird.svg" />
+    <Content Include="Content\svg\n_fish.svg" />
+    <Content Include="Content\svg\n_fungi.svg" />
+    <Content Include="Content\svg\n_mineral.svg" />
+    <Content Include="Content\svg\n_plant.svg" />
     <Content Include="Content\svg\paging_first.svg" />
     <Content Include="Content\svg\paging_last.svg" />
     <Content Include="Content\svg\paging_next.svg" />
@@ -527,7 +532,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="1975/10/21" BuildVersion_UpdateFileVersion="False" BuildVersion_BuildVersioningStyle="None.None.None.None" />
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.None" BuildVersion_UpdateFileVersion="False" BuildVersion_StartDate="1975/10/21" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
   <ItemGroup>

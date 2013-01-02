@@ -6,8 +6,8 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Nature
 {
-    [NameAlias("eng", "plants")]
-    [NameAlias("hun", "növények")]
+    [NameAlias("eng", "plant")]
+    [NameAlias("hun", "növény")]
 
     [NatureKingdom]
     public class Plantae : NatureBase

@@ -6,8 +6,8 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Equipment
 {
-    [NameAlias("hun", "eszközök")]
-    [NameAlias("eng", "equipments")]
+    [NameAlias("hun", "eszköz")]
+    [NameAlias("eng", "equipment")]
 
     public class EquipmentBase : IEquipment
     {

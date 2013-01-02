@@ -6,7 +6,7 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Nature
 {
-    [NameAlias("hun", "tülkösszarvúak")]
+    [NameAlias("hun", "tülkösszarvú")]
 
     [NatureFamily]
     public class Bovidae : Mammalia

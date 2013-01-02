@@ -6,7 +6,9 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Nature
 {
-    [NameAlias("hun", "emlősök")]
+    [NameAlias("eng", "mammal")]
+    [NameAlias("hun", "emlős")]
+    [NameAlias("lat", "mammalia")]
 
     [NatureClass]
     public class Mammalia : Animalia

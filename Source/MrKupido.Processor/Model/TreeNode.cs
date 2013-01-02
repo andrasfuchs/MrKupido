@@ -43,8 +43,12 @@ namespace MrKupido.Processor.Model
             FullClassName = nodeClass.FullName;
             Children = new TreeNode[0];
 
-            ShortName = NameAliasAttribute.GetDefaultName(nodeClass);
-            LongName = ShortName;
+            string name = NameAliasAttribute.GetDefaultName(nodeClass);
+            int bracketStart = name.IndexOf('[');
+            //int bracketEnd = bracketStart >= 0 ? name.IndexOf(']', bracketStart) : -1;
+
+            ShortName = bracketStart == -1 ? name : name.Substring(0, bracketStart);
+            LongName = name;
             UniqueName = LongName.ToUniqueString();
 
             if (nodeClass.IsSubclassOf(typeof(MrKupido.Library.Equipment.EquipmentBase)) || (nodeClass == typeof(MrKupido.Library.Equipment.EquipmentBase))) NodeType = 'E';

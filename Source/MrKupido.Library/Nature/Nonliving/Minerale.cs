@@ -6,8 +6,9 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Nature
 {
-    [NameAlias("eng", "minerals")]
+    [NameAlias("eng", "mineral")]
     [NameAlias("hun", "ásványi anyag")]
+
     public class Minerale : Nonliving
     {
     }

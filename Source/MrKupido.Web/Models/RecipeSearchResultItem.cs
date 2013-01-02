@@ -38,6 +38,8 @@ namespace MrKupido.Web.Models
 
         public RecipeSearchResultItem(RecipeTreeNode rtn)
         {
+            if (String.IsNullOrEmpty(rtn.ShortName)) throw new MrKupidoException("Recipe '{0}' should have a ShortName defined.", rtn.UniqueName);
+
             this.DisplayName = Char.ToUpper(rtn.ShortName[0]) + rtn.ShortName.Substring(1);
             this.UniqueName = rtn.UniqueName;
             this.SubVersions = TreeNode.GetDescendantCount(rtn);

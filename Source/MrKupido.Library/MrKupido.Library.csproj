@@ -106,6 +106,7 @@
     <Compile Include="Equipment\Containers\NyujtoDeszka.cs" />
     <Compile Include="Equipment\Containers\RoundContainer.cs" />
     <Compile Include="Equipment\Containers\RoundContainer\Bogre.cs" />
+    <Compile Include="Equipment\Containers\RoundContainer\JenaiTal.cs" />
     <Compile Include="Equipment\Containers\RoundContainer\Labas.cs" />
     <Compile Include="Equipment\Devices\Hutogep.cs" />
     <Compile Include="Equipment\Devices\Tuzhely.cs" />
@@ -184,6 +185,8 @@
     <Compile Include="Model\PreparedIngredients.cs" />
     <Compile Include="Model\StringHelper.cs" />
     <Compile Include="Model\TypeHelper.cs" />
+    <Compile Include="Nature\Animalia\Actinopterygii.cs" />
+    <Compile Include="Nature\Animalia\Chondrichthyes.cs" />
     <Compile Include="Nature\Animalia\Mammalia\Suidae.cs" />
     <Compile Include="Nature\Animalia\Mammalia\Suidae\SusScrofa.cs" />
     <Compile Include="Nature\Animalia\Mammalia\Suidae\SusScrofaDomestica.cs" />
@@ -263,6 +266,7 @@
     <Compile Include="Bases\RecipeBase.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Nature\Animalia\Chondrichthyes\" />
     <Folder Include="Recipe\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
