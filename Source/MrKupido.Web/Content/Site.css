@@ -107,17 +107,23 @@ header, footer, nav, section {
                 vertical-align: top;
             }
 
-        header .userbar img#usermenubtn {
+        header .userbar img#menu-trigger {
+            cursor: pointer;
             display: inline-block;
             vertical-align: super;
             opacity: 0.4;
         }
 
-            header .userbar img#usermenubtn:hover {
+            header .userbar img#menu-trigger:hover {
                 opacity: 1.0;
             }
 
     /* ---------- usermenu ---------------- */
+
+    header nav#menu-wrap
+    {
+        position: relative;
+    }
 
     header ul#usermenu,
     header ul#usermenu ul {
@@ -126,10 +132,14 @@ header, footer, nav, section {
         list-style: none;
 
         position: relative;
-        top: -100px;
-        left: 745px;
+
+        top: 0px;
+        left: 75px;
     }
 
+    header ul#usermenu {
+        display: none;
+    }
         header ul#usermenu ul {
             position: absolute;
             top: 0px;
@@ -154,17 +164,18 @@ header, footer, nav, section {
         header ul#usermenu li {
             float: none;
             display: block;
-            border-color: #cdb8ab;
         }
 
         header ul#usermenu a {
             padding-left: 10px;
+            padding-right: 10px;
             width: 130px;
             display: block;
             white-space: nowrap;
             float: none;
             text-transform: none;
             text-decoration: none;
+            text-align: center;
             border-left: 1px solid #cdb8ab;
             border-right: 1px solid #cdb8ab;
             background: #ebe0d5;
@@ -191,7 +202,7 @@ header, footer, nav, section {
             }
 
         header ul#usermenu ul li:first-child a:after {
-            left: 142px;
+            left: 150px;
             top: 50%;
             margin-top: -6px;
             border-right: 0;
@@ -207,7 +218,7 @@ header, footer, nav, section {
         header ul#usermenu ul li:first-child a:hover:after {
             content: '';
             position: absolute;
-            left: 142px;
+            left: 150px;
             top: 50%;
             border-left: 6px solid #cdb8ab;
             border-right: 6px solid transparent;
@@ -230,6 +241,10 @@ header, footer, nav, section {
     width: 190px;
     height: 33px;
     margin-top: -50px;
+}
+
+.searchbox #query {
+    margin-right: 71px;
 }
 
 .searchbox div#filters {

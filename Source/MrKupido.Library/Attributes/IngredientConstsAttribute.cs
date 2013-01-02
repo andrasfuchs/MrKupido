@@ -43,5 +43,15 @@ namespace MrKupido.Library.Attributes
         public float GrammsPerLiter;
         public float GrammsPerPiece;
         public float KCaloriesPerGramm;
+
+        /// <summary>
+        /// True if it is more like a category not a physical ingredient. Abstract ingredients must have the DefaultChild defined.
+        /// </summary>
+        public bool IsAbstract; 
+        /// <summary>
+        /// The default substitue of the ingredient. For example the default for fat is lard, for oil is sunflower oil.
+        /// This must be set if the IsAbstact is set to true
+        /// </summary>
+        public Type DefaultChild;
     }
 }

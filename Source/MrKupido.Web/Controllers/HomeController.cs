@@ -672,7 +672,7 @@ namespace MrKupido.Web.Controllers
         {
             Session["IgnoreOldBrowser"] = true;
 
-            return Redirect(returnUrl);
+            return String.IsNullOrEmpty(returnUrl) ? (ActionResult)RedirectToRoute("Default", new { language = "hun", controller = "Home", action = "Index" }) : (ActionResult)Redirect(returnUrl);
         }
 
         [HttpPost]

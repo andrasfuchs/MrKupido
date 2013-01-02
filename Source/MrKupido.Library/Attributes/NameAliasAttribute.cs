@@ -13,6 +13,7 @@ namespace MrKupido.Library.Attributes
     /// The default priority is 100, that is the official name of the object, 
     /// lower then 100 represents the everyday used expression(s) of the object,
     /// higher then 100 are the location-specific and/or rarely used expressions.
+    /// Use the ISO 639-3 codes (http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
     /// </summary>
     [AttributeUsage(System.AttributeTargets.Class | System.AttributeTargets.Field | System.AttributeTargets.Method, AllowMultiple = true)]
     public class NameAliasAttribute : Attribute

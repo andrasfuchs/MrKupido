@@ -17,6 +17,7 @@ using DotNetOpenAuth.OpenId.Extensions.AttributeExchange;
 using DotNetOpenAuth.OpenId;
 using MrKupido.Model;
 using MrKupido.Web.Models;
+using System.Globalization;
 
 namespace MrKupido.Web.Controllers
 {
@@ -33,6 +34,8 @@ namespace MrKupido.Web.Controllers
         [HttpGet]
         public ActionResult LogIn()
         {
+            Session["CurrentUser"] = null;
+
             string email = "";
             string id = "";
             FetchResponse openIdFetch = null;
@@ -140,6 +143,14 @@ namespace MrKupido.Web.Controllers
                     {
                         string birthdate = openIdFetch.GetAttributeValue(WellKnownAttributes.BirthDate.WholeBirthDate);
                     }
+
+                    // this one doesn't work for Google
+                    user.AvatarUrl = openIdFetch.GetAttributeValue(WellKnownAttributes.Media.Images.Aspect11);
+
+                    if (String.IsNullOrEmpty(user.AvatarUrl))
+                    {
+                        user.AvatarUrl = "http://profiles.google.com/s2/photos/profile/" + user.Email.Substring(0, user.Email.IndexOf('@')) + "?sz=51";
+                    }
                 }
 
                 if (((string)Session["LoginType"] == "Facebook") && (facebookGraph != null))
@@ -174,8 +185,18 @@ namespace MrKupido.Web.Controllers
 
                     if (user.DateOfBirth == null)
                     {
-                        user.DateOfBirth = DateTime.ParseExact(facebookGraph.Birthday, "MM/dd/yyyy", null);
+                        //user.DateOfBirth = DateTime.ParseExact(facebookGraph.Birthday, "MM/dd/yyyy", null);
+                        //user.DateOfBirth = DateTime.ParseExact(facebookGraph.BirthdayDate, "MM/dd/yyyy", null);
+                        string birthday = facebookGraph.Birthday;
+
+                        if (!String.IsNullOrEmpty(birthday))
+                        {
+                            CultureInfo ci = new CultureInfo(facebookGraph.Locale.Replace('_','-'));
+                            user.DateOfBirth = DateTime.Parse(facebookGraph.Birthday, ci);
+                        }
                     }
+
+                    user.AvatarUrl = "http://graph.facebook.com/" + facebookGraph.Id + "/picture?type=square";
                 }
 
                 if (String.IsNullOrEmpty(user.FullName))
@@ -201,6 +222,7 @@ namespace MrKupido.Web.Controllers
 
                 Session["CurrentUser"] = user;
                 Session["CurrentUser.DisplayName"] = !String.IsNullOrEmpty(user.NickName) ? user.NickName : user.FullName;
+                Session["CurrentUser.AvatarUrl"] = !String.IsNullOrEmpty(user.AvatarUrl) ? user.AvatarUrl : "Content/svg/avatar.svg";
 
                 string returnUrl = (string)Session["ReturnUrl"];
                 if (String.IsNullOrEmpty(returnUrl))
@@ -267,6 +289,8 @@ namespace MrKupido.Web.Controllers
                     fetchRequest.Attributes.Add(new AttributeRequest(WellKnownAttributes.Name.Last, true));
                     fetchRequest.Attributes.Add(new AttributeRequest(WellKnownAttributes.Preferences.Language, true));
                     // but not with these
+                    fetchRequest.Attributes.Add(new AttributeRequest(WellKnownAttributes.Media.Images.Default, true));
+                    fetchRequest.Attributes.Add(new AttributeRequest(WellKnownAttributes.Media.Images.Aspect11, true));
                     fetchRequest.Attributes.Add(new AttributeRequest(WellKnownAttributes.Name.FullName, true));
                     fetchRequest.Attributes.Add(new AttributeRequest(WellKnownAttributes.Person.Gender, true));
                     fetchRequest.Attributes.Add(new AttributeRequest(WellKnownAttributes.BirthDate.WholeBirthDate, true));
@@ -315,7 +339,8 @@ namespace MrKupido.Web.Controllers
 
             Session["CurrentUser.DisplayName"] = !String.IsNullOrEmpty(user.NickName) ? user.NickName : user.FullName;
 
-            return View();
+            //return View();
+            return RedirectToRoute("Default", new { language = "hun", controller = "Home", action = "Index" });
         }
     }
 }

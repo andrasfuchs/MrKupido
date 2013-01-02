@@ -66,6 +66,11 @@ namespace MrKupido.Model
         public Ingredient[] Likes { get; set; }
         public Ingredient[] Dislikes { get; set; }
         public Condition[] Conditions { get; set; }
+
+        [MaxLength(110)]
+        [MinLength(0)]
+        [StringLength(110, MinimumLength = 0)]        
+        public string AvatarUrl { get; set; }
     }
 
     public enum Gender { Unknown, Male, Female }

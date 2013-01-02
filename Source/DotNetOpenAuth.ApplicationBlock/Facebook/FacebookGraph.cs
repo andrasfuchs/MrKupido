@@ -35,6 +35,9 @@ namespace DotNetOpenAuth.ApplicationBlock.Facebook {
         [DataMember(Name = "birthday")]
         public string Birthday { get; set; }
 
+        [DataMember(Name = "birthday_date")]
+        public string BirthdayDate { get; set; }
+
         [DataMember(Name = "gender")]
         public string Gender { get; set; }
 

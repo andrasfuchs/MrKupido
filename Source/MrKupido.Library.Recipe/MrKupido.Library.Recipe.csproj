@@ -79,6 +79,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FeherBor.cs" />
+    <Compile Include="FottRizs.cs" />
+    <Compile Include="Joghurt.cs" />
+    <Compile Include="Mazsola.cs" />
+    <Compile Include="Pudingpor.cs" />
+    <Compile Include="Rum.cs" />
     <Compile Include="Sajt\KaravanFustoltSajt.cs" />
     <Compile Include="TejszinesCsirkemellMathe.cs" />
     <Compile Include="Cukor\PorCukor.cs" />
@@ -116,6 +122,7 @@
     <Compile Include="Tejfol\MilliTejfol.cs" />
     <Compile Include="Tejszin.cs" />
     <Compile Include="TejszinesCsirkemell.cs" />
+    <Compile Include="Teszta.cs" />
     <Compile Include="Turo.cs" />
     <Compile Include="TurosKokuszgolyo.cs" />
     <Compile Include="Vaj.cs" />

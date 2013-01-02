@@ -21,6 +21,8 @@ namespace MrKupido.Processor.Model
         [ScriptIgnore]
         public DateTime? ExpiresAt;
 
+        public string Version { get; protected set; }
+
         [ScriptIgnore]
         public SelectEquipmentDelegate SelectEquipment;
         [ScriptIgnore]
@@ -43,6 +45,12 @@ namespace MrKupido.Processor.Model
         public RecipeTreeNode(Type recipeType)
             : base(recipeType)
         {
+            int bracketStart = LongName.IndexOf('[');
+            int bracketEnd = bracketStart >= 0 ? LongName.IndexOf(']', bracketStart) : -1;
+
+            Version = bracketStart == -1 ? "" : LongName.Substring(bracketStart + 1, bracketEnd - bracketStart - 1);
+            LongName = bracketStart == -1 ? LongName : LongName.Substring(0, bracketStart);
+
             char[] name = LongName.ToCharArray();
             name[0] = Char.ToUpper(name[0]);
             LongName = new string(name);

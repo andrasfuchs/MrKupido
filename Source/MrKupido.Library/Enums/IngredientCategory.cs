@@ -14,7 +14,7 @@ namespace MrKupido.Library
         Unknown = 0,
         [NameAlias("hun", "egyéb")]
         [IconUriFragment("other")]
-        Other = 65536,
+        Other = Int32.MaxValue,
         [NameAlias("hun", "hús")]
         [IconUriFragment("meat")]
         Meat = 1,
@@ -44,6 +44,9 @@ namespace MrKupido.Library
         Spice = 256,
         [NameAlias("eng", "nut")]
         [NameAlias("hun", "mag")]
-        Nut = 512
+        Nut = 512,
+        [NameAlias("eng", "mushroom")]
+        [NameAlias("hun", "gomba")]
+        Mushroom = 1024
     }
 }
