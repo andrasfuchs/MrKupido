@@ -98,23 +98,34 @@ namespace MrKupido.Web.Controllers
         [HttpPost]
         public ActionResult ReportBug(string text)
         {
+            Log("BUGREPORT", "User '{0}' reported the following bug using the version {1}: '{2}'", text);
+            return null;
+        }
+
+        [HttpPost]
+        public ActionResult LogException(string messsage)
+        {
+            Log("EXCEPTION", "User '{0}' caused an exception using the version {1}: '{2}'", messsage);
+            return null;
+        }
+
+        private void Log(string action, string formatterText, string parameters)
+        {
             string username = ViewData["UserState"] == null ? "Anonymous" : ((User)ViewData["UserState"]).FullName;
 
             lock (context)
             {
-                context.Logs.Add(new Log() 
-                { 
-                    UtcTime = DateTime.UtcNow, 
+                context.Logs.Add(new Log()
+                {
+                    UtcTime = DateTime.UtcNow,
                     IPAddress = CurrentSessions[HttpContext.Session.SessionID].IPAddress,
                     SessionId = HttpContext.Session.SessionID,
-                    Action = "BUGREPORT",
-                    Parameters = text,
-                    FormattedMessage = String.Format("User '{0}' reported the following bug using the version {2}: '{1}'", username, text, (Session["WebAppFileVersion"] == null ? "v?" : (string)Session["WebAppFileVersion"]))
+                    Action = action,
+                    Parameters = parameters,
+                    FormattedMessage = String.Format(formatterText, username, (Session["WebAppFileVersion"] == null ? "v?" : (string)Session["WebAppFileVersion"]), parameters)
                 });
                 context.SaveChanges();
             }
-
-            return null;
         }
 
 

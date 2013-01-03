@@ -10,7 +10,7 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("eng", "parsley leaf")]
     [NameAlias("hun", "petrezselyemlevél")]
 
-    //[LeafOf(typeof())]
+    [LeafOf(typeof(Petroselinum))]
     public class Petrezselyem : IngredientBase
     {
         public Petrezselyem(float amount, MeasurementUnit unit = MeasurementUnit.gramm, IngredientState state = IngredientState.Normal)

@@ -1,4 +1,5 @@
 ﻿using MrKupido.Library.Attributes;
+using MrKupido.Library.Nature;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +13,8 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "sertészsír")]
 
     [IngredientConsts(GrammsPerLiter = 1000)]
-
-    //[OilOf(typeof())]
+    
+    //[OilOf(typeof(SusScrofaDomestica))]
     public class Disznozsir : AllatiZsiradek
     {
         public Disznozsir(float amount, MeasurementUnit unit = MeasurementUnit.gramm)

@@ -6,6 +6,8 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Ingredient
 {
+    [NameAlias("eng", "oregano", Priority = 1)]
+    [NameAlias("eng", "dried oregano")]
     [NameAlias("hun", "oregánó", Priority = 1)]
     [NameAlias("hun", "őrölt oregánó")]
 

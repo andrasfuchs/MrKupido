@@ -7,10 +7,10 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Ingredient
 {
+    [NameAlias("eng", "garlic")]
     [NameAlias("hun", "fokhagyma")]
     [NameAlias("hun", "foghagyma", Priority = 200)]
     [NameAlias("hun", "büdös hagyma", Priority = 201)]
-    [NameAlias("eng", "garlic")]
 
     [IngredientConsts(GrammsPerPiece = 5)]
 

@@ -7,6 +7,7 @@ using MrKupido.Library.Nature;
 
 namespace MrKupido.Library.Ingredient
 {
+    [NameAlias("eng", "whole black pepper")]
     [NameAlias("hun", "fekete bors")]
 
     // TODO: GrammsPerPiece

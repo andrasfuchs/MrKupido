@@ -6,6 +6,7 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Ingredient
 {
+    [NameAlias("eng", "black pepper")]
     [NameAlias("hun", "bors", Priority = 1)]
     [NameAlias("hun", "őrölt fekete bors")]
 

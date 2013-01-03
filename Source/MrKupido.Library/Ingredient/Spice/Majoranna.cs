@@ -7,6 +7,7 @@ using MrKupido.Library.Nature;
 
 namespace MrKupido.Library.Ingredient
 {
+    [NameAlias("eng", "marjoram")]
     [NameAlias("hun", "majoránna")]
 
     [LeafOf(typeof(OriganumMajorana))]

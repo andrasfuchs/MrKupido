@@ -10,8 +10,7 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "bazsalikom", Priority = 1)]
     [NameAlias("hun", "őrölt bazsalikom")]
 
-    //[LeafOf(typeof())]
-    public class BazsalikomOrolt : IngredientBase
+    public class BazsalikomOrolt : Bazsalikom
     {
         public BazsalikomOrolt(float amount, MeasurementUnit unit = MeasurementUnit.gramm, IngredientState state = IngredientState.Normal)
             : base(amount, unit, state)

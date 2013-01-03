@@ -12,8 +12,7 @@ namespace MrKupido.Library.Ingredient
 
     [IngredientConsts(Category = ShoppingListCategory.Nut)]
 
-    //[PartOf(typeof())]
-    public class DioOrolt : IngredientBase
+    public class DioOrolt : Diobel
     {
         public DioOrolt(float amount, MeasurementUnit unit = MeasurementUnit.gramm, IngredientState state = IngredientState.Normal)
             : base(amount, unit, state)

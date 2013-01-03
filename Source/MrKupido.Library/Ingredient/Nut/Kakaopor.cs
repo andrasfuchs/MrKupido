@@ -12,8 +12,7 @@ namespace MrKupido.Library.Ingredient
 
     [IngredientConsts(Category = ShoppingListCategory.Nut)]
 
-    //[PartOf(typeof())]
-    public class Kakaopor : IngredientBase
+    public class Kakaopor : Kakaobab
     {
         public Kakaopor(float amount, MeasurementUnit unit = MeasurementUnit.gramm, IngredientState state = IngredientState.Orolt)
             : base(amount, unit, state)

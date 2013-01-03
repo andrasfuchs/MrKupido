@@ -6,11 +6,10 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Ingredient
 {
-    [NameAlias("hun", "tojássárgája")]
     [NameAlias("eng", "egg yolk")]
+    [NameAlias("hun", "tojássárgája")]
 
-    //[PartOf(typeof(Tojas))]
-    public class TojasSargaja : IngredientBase
+    public class TojasSargaja : Tojas
     {
         public TojasSargaja(float amount, MeasurementUnit unit = MeasurementUnit.piece)
             : base(amount, unit)

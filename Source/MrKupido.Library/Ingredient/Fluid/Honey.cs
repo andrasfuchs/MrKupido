@@ -10,7 +10,9 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("eng", "honey")]
     [NameAlias("hun", "méz")]
 
-    //[MilkOf(typeof())]
+    [IngredientConsts(Category = ShoppingListCategory.Other)]
+
+    [MilkOf(typeof(ApisMellifera))]
     public class Honey : IngredientBase
     {
         public Honey(float amount, MeasurementUnit unit = MeasurementUnit.liter)

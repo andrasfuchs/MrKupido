@@ -7,8 +7,8 @@ using MrKupido.Library.Nature;
 
 namespace MrKupido.Library.Ingredient
 {
-    [NameAlias("hun", "csirkemell")]
     [NameAlias("eng", "chicken breast")]
+    [NameAlias("hun", "csirkemell")]
 
     [IngredientConsts(Category = ShoppingListCategory.Meat)]
 

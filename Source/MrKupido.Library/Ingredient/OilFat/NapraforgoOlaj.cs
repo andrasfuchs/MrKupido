@@ -7,6 +7,8 @@ using MrKupido.Library.Nature;
 
 namespace MrKupido.Library.Ingredient
 {
+    [NameAlias("eng", "oil", Priority = 1)]
+    [NameAlias("eng", "sunflower oil")]    
     [NameAlias("hun", "olaj", Priority = 1)]
     [NameAlias("hun", "napraforgó olaj")]
 

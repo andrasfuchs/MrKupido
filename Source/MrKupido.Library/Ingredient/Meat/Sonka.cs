@@ -6,9 +6,12 @@ using MrKupido.Library.Attributes;
 using MrKupido.Library.Nature;
 
 namespace MrKupido.Library.Ingredient
-{    
+{
+    [NameAlias("eng", "ham")]
     [NameAlias("hun", "sonka")]
     [NameAlias("hun", "disznó combjából származó hús", Priority = 200)]
+
+    [IngredientConsts(Category = ShoppingListCategory.Meat)]
 
     [PartOf(typeof(SusScrofaDomestica))]
     public class Sonka : IngredientBase

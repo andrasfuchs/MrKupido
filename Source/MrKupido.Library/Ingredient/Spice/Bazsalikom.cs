@@ -1,4 +1,5 @@
 ﻿using MrKupido.Library.Attributes;
+using MrKupido.Library.Nature;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace MrKupido.Library.Ingredient
     // TODO: GrammsPerPiece
     [IngredientConsts(Category = ShoppingListCategory.Spice, GrammsPerPiece = 3)]
 
-    //[LeafOf(typeof())]
+    [LeafOf(typeof(OcimumBasilicum))]
     public class Bazsalikom : IngredientBase
     {
         public Bazsalikom(float amount, MeasurementUnit unit = MeasurementUnit.piece, IngredientState state = IngredientState.Normal)

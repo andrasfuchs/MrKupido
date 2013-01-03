@@ -7,6 +7,7 @@ using MrKupido.Library.Nature;
 
 namespace MrKupido.Library.Ingredient
 {
+    [NameAlias("eng", "pastry flour")]
     [NameAlias("hun", "rétesliszt")]
 
     //[GristOf(typeof(TriticumAestivum))]

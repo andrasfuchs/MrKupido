@@ -7,11 +7,11 @@ using MrKupido.Library.Nature;
 
 namespace MrKupido.Library.Ingredient
 {
+    [NameAlias("eng", "egg")]
     [NameAlias("hun", "tojás", Priority = 1)]
     [NameAlias("hun", "tyúktojás")]
-    [NameAlias("eng", "egg")]
 
-    [IngredientConsts(GrammsPerPiece = 30)]
+    [IngredientConsts(Category = ShoppingListCategory.Other, GrammsPerPiece = 30)]
 
     [EggOf(typeof(GallusGallusDomesticus))]
     public class Tojas : IngredientBase

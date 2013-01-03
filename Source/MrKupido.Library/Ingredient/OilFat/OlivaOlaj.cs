@@ -7,6 +7,7 @@ using MrKupido.Library.Nature;
 
 namespace MrKupido.Library.Ingredient
 {
+    [NameAlias("eng", "olive oil")]
     [NameAlias("hun", "olívaolaj")]
 
     // TODO: GrammsPerLiter

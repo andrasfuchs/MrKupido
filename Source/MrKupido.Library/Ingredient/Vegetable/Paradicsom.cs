@@ -10,7 +10,7 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("eng", "tomato")]
     [NameAlias("hun", "paradicsom")]
 
-    //[YieldOf(typeof())]
+    [YieldOf(typeof(SolanumLycopersicum))]
     public class Paradicsom : IngredientBase
     {
         public Paradicsom(float amount, MeasurementUnit unit = MeasurementUnit.piece)

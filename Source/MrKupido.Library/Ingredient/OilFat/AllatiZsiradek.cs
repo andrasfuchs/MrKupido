@@ -1,4 +1,5 @@
 ﻿using MrKupido.Library.Attributes;
+using MrKupido.Library.Nature;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace MrKupido.Library.Ingredient
     // TODO: GrammsPerLiter
     [IngredientConsts(GrammsPerLiter = 1000, IsAbstract = true, DefaultChild = typeof(Disznozsir))]
 
-    //[OilOf(typeof())]
+    //[OilOf(typeof(Animalia))]
     public class AllatiZsiradek : IngredientBase
     {
         public AllatiZsiradek(float amount, MeasurementUnit unit = MeasurementUnit.gramm)

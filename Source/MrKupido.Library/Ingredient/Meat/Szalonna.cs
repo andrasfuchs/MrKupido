@@ -7,8 +7,11 @@ using System.Text;
 
 namespace MrKupido.Library.Ingredient
 {
+    [NameAlias("eng", "bacon")]
     [NameAlias("hun", "szalonna")]
     [NameAlias("hun", "disznó bőr alatti zsírjából származó hús", Priority = 200)]
+
+    [IngredientConsts(Category = ShoppingListCategory.Meat)]
 
     [PartOf(typeof(SusScrofaDomestica))]
     public class Szalonna : IngredientBase

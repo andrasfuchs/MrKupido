@@ -7,9 +7,12 @@ using MrKupido.Library.Nature;
 
 namespace MrKupido.Library.Ingredient
 {
+    [NameAlias("eng", "yeast")]
     [NameAlias("hun", "élesztő", Priority = 1)]
     [NameAlias("hun", "élesztőpor", Priority = 2)]
     [NameAlias("hun", "szárított élesztő")]
+
+    [IngredientConsts(Category = ShoppingListCategory.Other)]
 
     [GranulesOf(typeof(SaccharomycesCerevisiae))]
     public class Eleszto : IngredientBase

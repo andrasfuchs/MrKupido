@@ -6,6 +6,7 @@ using System.Text;
 
 namespace MrKupido.Library.Ingredient
 {
+    [NameAlias("eng", "coconut filings")]
     [NameAlias("hun", "kókuszreszelék")]
 
     [IngredientConsts(Category = ShoppingListCategory.Fruit)]
