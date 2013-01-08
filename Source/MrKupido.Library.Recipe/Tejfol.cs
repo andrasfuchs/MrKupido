@@ -9,9 +9,8 @@ using MrKupido.Library.Ingredient;
 
 namespace MrKupido.Library.Recipe
 {
-    [NameAlias("hun", "tejföl")]
-
     [NameAlias("eng", "sour cream")]
+    [NameAlias("hun", "tejföl")]
 
     [IngredientConsts(GrammsPerLiter = 1750)]
     public class Tejfol : RecipeBase

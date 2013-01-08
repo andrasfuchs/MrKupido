@@ -29,27 +29,36 @@ namespace MrKupido.Library.Ingredient
             }
         }
 
+        private string nameOverride;
         public new string Name
         {
+            set
+            {
+                nameOverride = value;
+            }
+
             get
             {
                 if (Ingredients.Length == 0) return base.Name;
-                else return Ingredients[0].Name;
+                else return (nameOverride == null ? Ingredients[0].Name : nameOverride);
             }
         }
 
-        public IngredientGroup(IIngredient[] ingredients) : base(0.0f, MeasurementUnit.none)
+        public IngredientGroup(params IIngredient[] ingredients) : base(0.0f, MeasurementUnit.none)
         {
             this.Category = 0;
 
             AddIngredients(ingredients);
 
-            float amount = 0.0f;
-            foreach (IIngredient i in Ingredients)
+            if (this.Unit != MeasurementUnit.none)
             {
-                amount += i.GetAmount(this.Unit);
+                float amount = 0.0f;
+                foreach (IIngredient i in Ingredients)
+                {
+                    amount += i.GetAmount(this.Unit);
+                }
+                SetAmount(amount, this.Unit);
             }
-            SetAmount(amount, this.Unit);
         }
 
         public IngredientGroup Clone(float amount, MeasurementUnit unit)
@@ -95,6 +104,8 @@ namespace MrKupido.Library.Ingredient
 
         public override string ToString()
         {
+            if (nameOverride != null) return nameOverride;
+
             //StringBuilder sb = new StringBuilder(base.ToString());
             StringBuilder sb = new StringBuilder(Name);
 

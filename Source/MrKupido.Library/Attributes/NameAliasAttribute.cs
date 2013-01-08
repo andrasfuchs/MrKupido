@@ -15,7 +15,7 @@ namespace MrKupido.Library.Attributes
     /// higher then 100 are the location-specific and/or rarely used expressions.
     /// Use the ISO 639-3 codes (http://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
     /// </summary>
-    [AttributeUsage(System.AttributeTargets.Class | System.AttributeTargets.Field | System.AttributeTargets.Method, AllowMultiple = true)]
+    [AttributeUsage(System.AttributeTargets.Class | System.AttributeTargets.Field | System.AttributeTargets.Property | System.AttributeTargets.Method, AllowMultiple = true)]
     public class NameAliasAttribute : Attribute
     {
         public string CultureName { get; private set; }

@@ -13,6 +13,8 @@ namespace MrKupido.Library.Equipment
     {
         public Dimensions Dimensions { get; protected set; }
 
+        [NameAlias("eng", "contents of {}", Priority = 200)]
+        [NameAlias("hun", "{} tartalma")]
         public IIngredient Contents { get; set; }
 
         public Container(float width, float height, float depth)
@@ -39,6 +41,33 @@ namespace MrKupido.Library.Equipment
 
             return true;
         }
+
+        [NameAlias("eng", "mix together", Priority = 200)]
+        [NameAlias("hun", "összekever", Priority = 200)]
+        [NameAlias("hun", "rakd be a(z) {B} a következőket: ({0*}, )")]
+        public bool BerakniMind(params IIngredient[] ingredients)
+        {
+            IngredientGroup contents = null;
+
+            if (this.Contents != null)
+            {
+                List<IIngredient> ings = new List<IIngredient>(ingredients);
+                ings.Add(this.Contents);
+                contents = new IngredientGroup(ings.ToArray());
+            }
+            else
+            {
+                contents = new IngredientGroup(ingredients);
+            }
+
+            contents.Name = this.Name + " tartalma"; // TODO: must be generated dynamically
+
+            this.Contents = contents;
+            this.LastActionDuration = 60 * (uint)ingredients.Length;
+
+            return true;
+        }
+
 
         [NameAlias("eng", "pour out", Priority = 200)]
         [NameAlias("hun", "beönt", Priority = 200)]
@@ -114,7 +143,10 @@ namespace MrKupido.Library.Equipment
             } 
             else 
             {
-                throw new InvalidActionForIngredientException("FolyadekotLeonteni", Contents.Name, Contents.Unit);
+                if (Contents.Unit != MeasurementUnit.liter)
+                {
+                    throw new InvalidActionForIngredientException("FolyadekotLeonteni", Contents.Name, Contents.Unit);
+                }
             }
 
             this.LastActionDuration = 120;

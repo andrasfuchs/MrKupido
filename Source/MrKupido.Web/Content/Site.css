@@ -472,6 +472,16 @@ details li.disabled {
         cursor: default;
     }
 
+details li.text {
+    display: block;
+    float: left;
+    border: 0px;
+    margin: 30px;
+    width: auto;
+    text-align: center;
+    line-height: 30px;
+}
+
 details.alwaysopen summary {
     pointer-events: none;
 }
@@ -573,7 +583,7 @@ details#searchresults div.resultbox div.resulthead span.titlecontent {
     word-wrap: break-word;
 }
 
-details li:not(.disabled):hover, details li:not(.disabled):focus {
+details li:not(.disabled .text):hover, details li:not(.disabled):focus {
     border: 1px solid /*mcd*/ #553e31;
 }
 

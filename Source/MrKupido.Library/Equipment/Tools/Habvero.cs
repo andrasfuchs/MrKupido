@@ -27,5 +27,14 @@ namespace MrKupido.Library.Equipment
 
             return new IngredientGroup(result.ToArray());
         }
+
+        [NameAlias("eng", "mix together", Priority = 200)]
+        [NameAlias("hun", "összekever", Priority = 200)]
+        [NameAlias("hun", "alaposan keverd össze a {0T}")]
+        public IngredientGroup Elkeverni(IngredientGroup ingredients)
+        {
+            return ingredients;
+        }
+
     }
 }
