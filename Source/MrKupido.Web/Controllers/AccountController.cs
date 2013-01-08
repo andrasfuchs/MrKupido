@@ -34,7 +34,15 @@ namespace MrKupido.Web.Controllers
         [HttpGet]
         public ActionResult LogIn()
         {
-            Session["CurrentUser"] = null;
+            if (Session["CurrentUser"] != null)
+            {
+                if ((CurrentSessions != null) && (CurrentSessions[Session.SessionID] != null))
+                {
+                    CurrentSessions[Session.SessionID].User = null;
+                    Session.Abandon();
+                }
+                Session["CurrentUser"] = null;
+            }
 
             string email = "";
             string id = "";
@@ -185,8 +193,6 @@ namespace MrKupido.Web.Controllers
 
                     if (user.DateOfBirth == null)
                     {
-                        //user.DateOfBirth = DateTime.ParseExact(facebookGraph.Birthday, "MM/dd/yyyy", null);
-                        //user.DateOfBirth = DateTime.ParseExact(facebookGraph.BirthdayDate, "MM/dd/yyyy", null);
                         string birthday = facebookGraph.Birthday;
 
                         if (!String.IsNullOrEmpty(birthday))
@@ -198,10 +204,10 @@ namespace MrKupido.Web.Controllers
 
                     user.AvatarUrl = "http://graph.facebook.com/" + facebookGraph.Id + "/picture?type=square";
                 }
-
+                
                 if (String.IsNullOrEmpty(user.FullName))
                 {
-                    if (user.CultureName == "hu")
+                    if ((user.CultureName == "hu") || (user.CultureName == "hu-HU"))
                     {
                         user.FullName = user.LastName + " " + user.FirstName;
                     }
@@ -214,7 +220,10 @@ namespace MrKupido.Web.Controllers
                 if (user.UserId == 0)
                 {
                     context.Users.Add(user);
+                    user.FirstLoginUtc = DateTime.UtcNow;
                 }
+
+                user.LastLoginUtc = DateTime.UtcNow;
 
                 context.SaveChanges();
 

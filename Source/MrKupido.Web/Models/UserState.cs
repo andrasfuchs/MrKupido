@@ -38,10 +38,10 @@ namespace MrKupido.Web.Models
                 {
                     if ((user == null) || (value.UserId != user.UserId))
                     {
-                        OnChanged("LOGIN", value.UserId.ToString());
-
                         user = value;
                         LastActionUTC = DateTime.UtcNow;
+
+                        OnChanged("LOGIN", value.UserId.ToString());
                     }
                 }
             }
@@ -60,7 +60,7 @@ namespace MrKupido.Web.Models
                 StringBuilder sb = new StringBuilder();
                 foreach (string key in value.HttpContext.Request.Params.AllKeys)
                 {
-                    if ((key == "ASP.NET_SessionId") || (key.ToUpper() == key)) continue;
+                    if ((key == "ASP.NET_SessionId") || (key.ToUpper() == key) || key.StartsWith("__")) continue;
                     sb.Append(key);
                     sb.Append(':');
                     sb.Append(value.HttpContext.Request.Params[key]);

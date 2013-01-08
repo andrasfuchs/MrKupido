@@ -71,6 +71,11 @@ namespace MrKupido.Model
         [MinLength(0)]
         [StringLength(110, MinimumLength = 0)]        
         public string AvatarUrl { get; set; }
+
+        [Required]
+        public DateTime FirstLoginUtc { get; set; }        
+        [Required]
+        public DateTime LastLoginUtc { get; set; }
     }
 
     public enum Gender { Unknown, Male, Female }

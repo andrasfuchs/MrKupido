@@ -79,6 +79,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="TejszinesCsirkemellFuchs.cs" />
     <Compile Include="FeherBor.cs" />
     <Compile Include="FottRizs.cs" />
     <Compile Include="Joghurt.cs" />

@@ -110,6 +110,7 @@
     <Compile Include="Equipment\Containers\RoundContainer\Labas.cs" />
     <Compile Include="Equipment\Devices\Hutogep.cs" />
     <Compile Include="Equipment\Devices\Tuzhely.cs" />
+    <Compile Include="Equipment\Devices\Futotest.cs" />
     <Compile Include="Equipment\Materials\Alufolia.cs" />
     <Compile Include="Equipment\Container.cs" />
     <Compile Include="Equipment\Device.cs" />

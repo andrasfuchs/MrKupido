@@ -673,6 +673,16 @@ details#searchresults li div.resultnutrition {
     margin: -30px -5px 0 0;
 }
 
+details#searchresults li div.resultnutritionlevels {
+    float: right;
+    margin: -30px -5px 0 0;
+}
+
+details#searchresults li div.resultnutritionnames {
+    float: right;
+    margin: -30px -133px 0 0;
+}
+
 div#pagingleft {
     float: left;
     width: auto;

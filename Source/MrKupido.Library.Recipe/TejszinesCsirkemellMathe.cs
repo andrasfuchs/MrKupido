@@ -11,6 +11,7 @@ namespace MrKupido.Library.Recipe
     [NameAlias("hun", "tejszínes csirkemell [Máthé módra]")]
 
     //TODO: [Recommend(FootRizs, BurgonyaPure)]
+    [CommercialProductOf("Máthéné Éva")]
     public class TejszinesCsirkemellMathe : TejszinesCsirkemell
     {
         public TejszinesCsirkemellMathe(float amount, MeasurementUnit unit = MeasurementUnit.portion)
@@ -77,12 +78,14 @@ namespace MrKupido.Library.Recipe
             Reszelo reszelo = eg.Use<Reszelo>();
             IIngredient reszeltAlma = reszelo.Lereszelni(alma);
 
+            IIngredient reszeltSajt = reszelo.Lereszelni(new KaravanFustoltSajt(200.0f));
+
             JenaiTal jenai = eg.Use<JenaiTal>();
             jenai.Berakni(new FustoltSzalonna(5, MeasurementUnit.piece));
             jenai.Berakni(tejesCsirkemell);
             jenai.Berakni(reszeltAlma);
             jenai.Beonteni(new Tejszin(0.3f));
-            kez.Raszorni(tejesCsirkemell, new KaravanFustoltSajt(200.0f));
+            kez.Raszorni(tejesCsirkemell, reszeltSajt);
             jenai.Berakni(new FustoltSzalonna(5, MeasurementUnit.piece));
 
             Alufolia alufolia = new Alufolia(29.0f, 1000.0f);

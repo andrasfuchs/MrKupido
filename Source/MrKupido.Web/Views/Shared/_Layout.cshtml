@@ -2,7 +2,6 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width; initial-scale=1.0">
     <title>@ViewBag.Title - Mr. Kupido</title>
     @Styles.Render("~/Content/themes/base/css", "~/Content/css")
     
@@ -83,10 +82,10 @@
         <hr class="single" />
         <footer>
             <p>
-                <a runat="server" href="~/hun">főoldal</a>|<a runat="server" href="~/hun/account/profile">profilom</a>|<a href="#">hírlevél</a>|<a href="#">beállításaim</a>|<a href="#">jogi nyilatkozat</a>
+                <a runat="server" href="~/hun">főoldal</a>|<a runat="server" href="~/hun/account/profile">profilom</a>|<a href="#">beállításaim</a>|<a href="#">jogi nyilatkozat</a>
             </p>
             <p>
-                &copy; 2012 <a href="http://hu.linkedin.com/pub/andras-fuchs/32/355/924">Andras Fuchs</a> All rights reserved</p>
+                &copy; 2012-@DateTime.Now.Year.ToString() <a href="http://hu.linkedin.com/pub/andras-fuchs/32/355/924">Andras Fuchs</a> All rights reserved</p>
         </footer>
     </div>
 

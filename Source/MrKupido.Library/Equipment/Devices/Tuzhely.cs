@@ -6,8 +6,6 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Equipment
 {
-    [IconUriFragment("cooker")]
-
     [NameAlias("eng", "cooker")]
     [NameAlias("hun", "tűzhely")]
     public class Tuzhely : Heater

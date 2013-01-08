@@ -86,9 +86,19 @@ namespace MrKupido.Web
                 }
             }
 
-            if ((Session != null) && (Session["CurrentUser"] == null) && !Request.Url.AbsoluteUri.ToLower().Contains("/account/login"))
+            if ((Session != null) && (Session["CurrentUser"] == null) && !Request.Url.AbsoluteUri.ToLower().Contains("/account/login") && !Request.Url.AbsoluteUri.ToLower().Contains("/home/notsupportedbrowser"))
             {
-                Response.RedirectToRoute("AccountManagement", new { action = "Login", ReturnUrl = Request.Url.AbsolutePath });
+                if (MrKupido.Web.Controllers.BaseController.CurrentSessions.ContainsKey(Session.SessionID) && MrKupido.Web.Controllers.BaseController.CurrentSessions[Session.SessionID].User != null)
+                {
+                    Model.User user = MrKupido.Web.Controllers.BaseController.CurrentSessions[Session.SessionID].User;
+                    Session["CurrentUser"] = user;
+                    Session["CurrentUser.DisplayName"] = !String.IsNullOrEmpty(user.NickName) ? user.NickName : user.FullName;
+                    Session["CurrentUser.AvatarUrl"] = !String.IsNullOrEmpty(user.AvatarUrl) ? user.AvatarUrl : "Content/svg/avatar.svg";
+                }
+                else
+                {
+                    Response.RedirectToRoute("AccountManagement", new { action = "Login", ReturnUrl = Request.Url.AbsolutePath });
+                }
             }
         }
 
@@ -110,17 +120,17 @@ namespace MrKupido.Web
                     return;
 
                 //Redirect HTTP errors to HttpError page
-                Server.Transfer("HttpErrorPage.aspx");
+                //Server.Transfer("HttpErrorPage.aspx");
             }
 
             // For other kinds of errors give the user some information
             // but stay on the default page
-            Response.Write("<h2>Global Page Error</h2>\n");
-            Response.Write("<p>" + exc.Message + "</p>\n");
-            Response.Write("Return to the <a href='Default.aspx'>Default Page</a>\n");
+            //Response.Write("<h2>Global Page Error</h2>\n");
+            //Response.Write("<p>" + exc.Message + "</p>\n");
+            //Response.Write("Return to the <a href='Default.aspx'>Default Page</a>\n");
 
             // Clear the error from the server
-            Server.ClearError();
+            //Server.ClearError();
 
             // Log the exception
             try
@@ -128,7 +138,7 @@ namespace MrKupido.Web
                 RouteData routeData = new RouteData();
                 routeData.Values["controller"] = "Base";
                 routeData.Values["action"] = "LogException";
-                routeData.Values["message"] = exc.Message + Environment.NewLine + exc.StackTrace;
+                Session["LastErrorMessage"] = exc.Message + Environment.NewLine + exc.StackTrace;
                 Response.StatusCode = 500;
                 IController controller = new MrKupido.Web.Controllers.BaseController();
                 var rc = new RequestContext(new HttpContextWrapper(Context), routeData);
@@ -136,7 +146,7 @@ namespace MrKupido.Web
             }
             catch { }
 
-            Server.Transfer("HttpErrorPage.aspx");
+            //Server.Transfer("HttpErrorPage.aspx");
         }
 
     }

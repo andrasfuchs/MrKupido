@@ -11,6 +11,7 @@ using System.Net;
 using System.IO;
 using System.Reflection;
 using System.Diagnostics;
+using System.ComponentModel;
 
 namespace MrKupido.Web.Controllers
 {
@@ -22,7 +23,7 @@ namespace MrKupido.Web.Controllers
         /// <summary>
         /// Contains User state information retrieved from the authentication system
         /// </summary>
-        protected User UserState = new User();
+        //protected User UserState = new User();
 
         /// <summary>
         /// ErrorDisplay control that holds page level error information
@@ -43,21 +44,22 @@ namespace MrKupido.Web.Controllers
                     CurrentSessions[requestContext.HttpContext.Session.SessionID].Changed += new UserStateChangedEventHandler(BaseController_UserStateChanged);
                     CurrentSessions[requestContext.HttpContext.Session.SessionID].SessionID = requestContext.HttpContext.Session.SessionID;
                     CurrentSessions[requestContext.HttpContext.Session.SessionID].IPAddress = GetPublicIP("http://repeater.smartftp.com");
-
                 }
             }
 
 
             // Grab the user's login information from FormsAuth
-            User userState = new User();
+            //User userState = new User();
             if (this.User.Identity != null && this.User.Identity is FormsIdentity)
-                this.UserState = this.UserState.FromJSONString(((FormsIdentity)this.User.Identity).Ticket.UserData);
+            {
+                User loggedInUser = CurrentSessions[requestContext.HttpContext.Session.SessionID].User.FromJSONString(((FormsIdentity)this.User.Identity).Ticket.UserData);
 
-            // have to explicitly add this so Master can see untyped value
-            this.ViewData["UserState"] = this.UserState;
-            //this.ViewData["ErrorDisplay"] = this.ErrorDisplay;
-           
-            CurrentSessions[requestContext.HttpContext.Session.SessionID].User = this.UserState;
+                if ((CurrentSessions[requestContext.HttpContext.Session.SessionID].User == null) || (CurrentSessions[requestContext.HttpContext.Session.SessionID].User.UserId != loggedInUser.UserId))
+                {
+                    CurrentSessions[requestContext.HttpContext.Session.SessionID].User = loggedInUser;
+                }
+            }
+
             CurrentSessions[requestContext.HttpContext.Session.SessionID].RequestContext = requestContext;
 
             if (this.Session["WebAppFileVersion"] == null)
@@ -71,7 +73,8 @@ namespace MrKupido.Web.Controllers
         void BaseController_UserStateChanged(object sender, DateTime utc, string ip, string sessionId, string action, string parameters)
         {
             string fm = "";
-            string username = ViewData["UserState"] == null ? "Anonymous" : ((User)ViewData["UserState"]).FullName;
+            //string username = ViewData["UserState"] == null ? "Anonymous" : ((User)ViewData["UserState"]).FullName;
+            string username = CurrentSessions[sessionId].User == null ? "Anonymous" : CurrentSessions[sessionId].User.FullName;
 
             if (action == "LOGIN")
             {
@@ -80,7 +83,7 @@ namespace MrKupido.Web.Controllers
 
             if (action == "LOGOUT")
             {
-                fm = String.Format("User logged out.");
+                fm = String.Format("User '{0}' logged out.", username);
             }
 
             if (action.StartsWith("URL:"))
@@ -88,11 +91,22 @@ namespace MrKupido.Web.Controllers
                 fm = String.Format("The {0} was requested by '{1}'.", action, username);
             }
 
-            lock (context)
+            Log log = new Log() { UtcTime = utc, IPAddress = ip, SessionId = sessionId, Action = action, Parameters = parameters, FormattedMessage = fm };
+            LogAsync(log);            
+        }
+
+        private static void LogAsync(Log log)
+        {
+            BackgroundWorker bgWorker = new BackgroundWorker();
+            bgWorker.DoWork += (sender, e) =>
             {
-                context.Logs.Add(new Log() { UtcTime = utc, IPAddress = ip, SessionId = sessionId, Action = action, Parameters = parameters, FormattedMessage = fm });
-                context.SaveChanges();
-            }
+                lock (context)
+                {
+                    context.Logs.Add((Log)e.Argument);
+                    context.SaveChanges();
+                }
+            };
+            bgWorker.RunWorkerAsync(log);
         }
 
         [HttpPost]
@@ -103,19 +117,17 @@ namespace MrKupido.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult LogException(string messsage)
+        public ActionResult LogException()
         {
-            Log("EXCEPTION", "User '{0}' caused an exception using the version {1}: '{2}'", messsage);
+            Log("EXCEPTION", "User '{0}' caused an exception using the version {1}: '{2}'", Session["LastErrorMessage"] as string);
             return null;
         }
 
         private void Log(string action, string formatterText, string parameters)
         {
-            string username = ViewData["UserState"] == null ? "Anonymous" : ((User)ViewData["UserState"]).FullName;
+            string username = Session["CurrentUser"] == null ? "Anonymous" : ((User)Session["CurrentUser"]).FullName;
 
-            lock (context)
-            {
-                context.Logs.Add(new Log()
+            Log log = new Log()
                 {
                     UtcTime = DateTime.UtcNow,
                     IPAddress = CurrentSessions[HttpContext.Session.SessionID].IPAddress,
@@ -123,9 +135,10 @@ namespace MrKupido.Web.Controllers
                     Action = action,
                     Parameters = parameters,
                     FormattedMessage = String.Format(formatterText, username, (Session["WebAppFileVersion"] == null ? "v?" : (string)Session["WebAppFileVersion"]), parameters)
-                });
-                context.SaveChanges();
-            }
+                };
+
+
+            LogAsync(log);
         }
 
 
