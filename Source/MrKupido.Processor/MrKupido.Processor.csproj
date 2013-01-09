@@ -110,6 +110,7 @@
     <Compile Include="ILReader\ReadableILStringVisitor.cs" />
     <Compile Include="ILReader\TokenResolver.cs" />
     <Compile Include="Cache\IngredientCache.cs" />
+    <Compile Include="Model\AccentFolderStringComparer.cs" />
     <Compile Include="Model\DynamicMethodHelper.cs" />
     <Compile Include="Model\EquipmentCommand.cs" />
     <Compile Include="Model\EquipmentTreeNode.cs" />

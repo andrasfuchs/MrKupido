@@ -24,7 +24,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "put in", Priority = 200)]
         [NameAlias("hun", "berak", Priority = 200)]
-        [NameAlias("hun", "rakd be a(z) {B} a {0T}")]
+        [NameAlias("hun", "rakd be a(z) {B} a(z) {0T}")]
         public bool Berakni(IIngredient ig)
         {
             // TODO: return if it fits in

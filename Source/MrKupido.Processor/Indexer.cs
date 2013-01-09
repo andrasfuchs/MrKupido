@@ -13,6 +13,7 @@ namespace MrKupido.Processor
     public class Indexer
     {
         private string[] allowedLanguageISOCodes = { "hun", "eng" };
+        private static IComparer<String> accentFolderStringComparer = new AccentFolderStringComparer();
 
         private SortedList<string, TreeNode> classNameIndex = new SortedList<string, TreeNode>();
         private Dictionary<string, SortedList<string, TreeNode>> nameIndex = new Dictionary<string, SortedList<string, TreeNode>>();
@@ -95,11 +96,11 @@ namespace MrKupido.Processor
         public Dictionary<string, TreeNode> QueryByName(string query, string languageISO)
         {
             Dictionary<string, TreeNode> result = new Dictionary<string, TreeNode>();
-            int index = Array.BinarySearch<string>(nameIndex[languageISO].Keys.ToArray(), query);
+            int index = Array.BinarySearch<string>(nameIndex[languageISO].Keys.ToArray(), query, accentFolderStringComparer);
 
             if (index < 0) index = -index - 1;
 
-            while ((index < nameIndex[languageISO].Keys.Count) && (nameIndex[languageISO].Keys[index].StartsWith(query, StringComparison.Ordinal)))
+            while ((index < nameIndex[languageISO].Keys.Count) && (accentFolderStringComparer.Compare(nameIndex[languageISO].Keys[index].Substring(0, query.Length), query) == 0))
             {
                 result.Add(nameIndex[languageISO].Keys[index], nameIndex[languageISO][nameIndex[languageISO].Keys[index]]);
                 index++;

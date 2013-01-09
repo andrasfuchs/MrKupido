@@ -86,27 +86,7 @@
             selectFirst: true,
             autoSelect: true,
             accentFolding: true, /* is it working/necessary */
-            select: function (event, ui) {
-                $.ajax({
-                    url: '@Url.Action("SearchSelected", "Home")',
-                        type: "POST",
-                        dataType: "json",
-                        data: {
-                            selectedValue: ui.item ? ui.item.value : this.value,
-                            wasItemSelected: ui.item != null
-                        },
-                        success: function (data) {
-                            refreshFilters(data);
-                        }, // success
-                        error: function (xhr, textStatus, errorThrown) {
-                            //                              alert("Error");
-                            //                              alert(xhr);
-                            //                              alert(textStatus);
-                            //                              alert(errorThrown);
-                        }
-                    }); // ajax
-                    $(this).val(''); return false;
-                },
+            select: searchKeywordSelected,
             open: function () {
                 $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
             },
@@ -129,6 +109,28 @@
 
     });
 
+    function searchKeywordSelected(event, ui) {
+        $.ajax({
+            url: '@Url.Action("SearchSelected", "Home")',
+            type: "POST",
+            dataType: "json",
+            data: {
+                selectedValue: ui.item ? ui.item.value : this.value,
+                wasItemSelected: ui.item != null
+            },
+            success: function (data) {
+                refreshFilters(data);
+            }, // success
+            error: function (xhr, textStatus, errorThrown) {
+                //                              alert("Error");
+                //                              alert(xhr);
+                //                              alert(textStatus);
+                //                              alert(errorThrown);
+            }
+        }); // ajax
+        $(this).val(''); return false;
+    };
+
         function refreshFilters(filters) {
             ulBody = '';
 
@@ -150,12 +152,13 @@
                 },
                 success: function (data) {
                     refreshFilters(data);
+                    doSearch(6);
                 }, // success
                 error: function (xhr, textStatus, errorThrown) {
-                    //                              alert("Error");
-                    //                              alert(xhr);
-                    //                              alert(textStatus);
-                    //                              alert(errorThrown);
+                                                  //alert("Error");
+                                                  //alert(xhr);
+                                                  //alert(textStatus);
+                                                  //alert(errorThrown);
                 }
             }); // ajax
         }
@@ -171,7 +174,25 @@
         function success(position) {
             var s = document.querySelector('#location');
 
-            s.value = position.coords.latitude + ", " + position.coords.longitude;
+            $.ajax({
+                url: '@Url.Action("GetLocationName", "Home")',
+                type: "POST",
+                dataType: "json",
+                data: {
+                    lat: position.coords.latitude,
+                    lon: position.coords.longitude
+                },
+                success: function (locationText) {
+                    if (locationText == null) {
+                        s.value = Math.round(position.coords.latitude * 100000) / 100000 + ", " + Math.round(position.coords.longitude * 100000) / 100000;
+                    } else {
+                        s.value = locationText;
+                    }
+                }, // success
+                error: function (xhr, textStatus, errorThrown) {
+                    s.value = Math.round(position.coords.latitude * 100000) / 100000 + ", " + Math.round(position.coords.longitude * 100000) / 100000;
+                }
+            }); // ajax
         }
 
         function error(msg) {

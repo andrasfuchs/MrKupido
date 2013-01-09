@@ -72,6 +72,11 @@ namespace MrKupido.Web.Models
                 lastRequest = value;
                 LastActionUTC = DateTime.UtcNow;
             }
+
+            get
+            {
+                return lastRequest;
+            }
         }
     }
 }

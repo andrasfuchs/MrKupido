@@ -49,7 +49,9 @@
                         @if (rsri[i].NetTime >= 99)
                         {
                             <span>++</span>
-                        } else {
+                        }
+                        else
+                        {
                             <span>@rsri[i].NetTime.ToString("00")</span>
                         }
                     </div>
@@ -89,8 +91,10 @@
                         <img runat="server" src="~/Content/svg/icon_photo.svg" alt="0 kép" width="40px" height="45px" />
                     }
                     <div class="versions">
-                        <img runat="server" src="~/Content/svg/versions.svg" alt="11 változat" width="50px" height="45px" />
-                        <span>@rsri[i].SubVersions</span>
+                        <a href="javascript:searchKeywordSelected(null,{item: {value:'R:@rsri[i].UniqueName'}}); doSearch(6);">
+                            <img runat="server" src="~/Content/svg/versions.svg" alt="11 változat" width="50px" height="45px" />
+                            <span>@rsri[i].SubVersions</span>
+                        </a>
                     </div>
                 </div>
                 <div class="resultbody">
@@ -151,10 +155,105 @@
                 </div>
             </div>
             <div class="resultnutritionlevels">
-                <img runat="server" src="~/Content/svg/nutlevel_3.svg" width="30px" height="50px" />
-                <img runat="server" src="~/Content/svg/nutlevel_2.svg" width="30px" height="50px" />
-                <img runat="server" src="~/Content/svg/nutlevel_5.svg" width="30px" height="50px" />
-                <img runat="server" src="~/Content/svg/nutlevel_none.svg" width="30px" height="50px" />
+                @if (!rsri[i].Cals.HasValue)
+                {
+                    <img runat="server" src="~/Content/svg/nutlevel_none.svg" width="30px" height="50px" />
+                }
+                else if (rsri[i].Cals.Value > 4.0f)
+                {
+                        <img runat="server" src="~/Content/svg/nutlevel_5.svg" width="30px" height="50px" />
+                }
+                else if (rsri[i].Cals.Value > 3.0f)
+                {
+                        <img runat="server" src="~/Content/svg/nutlevel_4.svg" width="30px" height="50px" />
+                }
+                else if (rsri[i].Cals.Value > 2.0f)
+                {
+                        <img runat="server" src="~/Content/svg/nutlevel_3.svg" width="30px" height="50px" />
+                }
+                else if (rsri[i].Cals.Value > 1.0f)
+                {
+                        <img runat="server" src="~/Content/svg/nutlevel_2.svg" width="30px" height="50px" />
+                }
+                else
+                {
+                        <img runat="server" src="~/Content/svg/nutlevel_1.svg" width="30px" height="50px" />
+                }
+
+                @if (!rsri[i].Sugar.HasValue)
+                {
+                    <img runat="server" src="~/Content/svg/nutlevel_none.svg" width="30px" height="50px" />
+                }
+                else if (rsri[i].Sugar.Value > 4.0f)
+                {
+                        <img runat="server" src="~/Content/svg/nutlevel_5.svg" width="30px" height="50px" />
+                }
+                else if (rsri[i].Sugar.Value > 3.0f)
+                {
+                        <img runat="server" src="~/Content/svg/nutlevel_4.svg" width="30px" height="50px" />
+                }
+                else if (rsri[i].Sugar.Value > 2.0f)
+                {
+                        <img runat="server" src="~/Content/svg/nutlevel_3.svg" width="30px" height="50px" />
+                }
+                else if (rsri[i].Sugar.Value > 1.0f)
+                {
+                        <img runat="server" src="~/Content/svg/nutlevel_2.svg" width="30px" height="50px" />
+                }
+                else
+                {
+                        <img runat="server" src="~/Content/svg/nutlevel_1.svg" width="30px" height="50px" />
+                }
+
+                @if (!rsri[i].Fat.HasValue)
+                {
+                    <img runat="server" src="~/Content/svg/nutlevel_none.svg" width="30px" height="50px" />
+                }
+                else if (rsri[i].Fat.Value > 4.0f)
+                {
+                        <img runat="server" src="~/Content/svg/nutlevel_5.svg" width="30px" height="50px" />
+                }
+                else if (rsri[i].Fat.Value > 3.0f)
+                {
+                        <img runat="server" src="~/Content/svg/nutlevel_4.svg" width="30px" height="50px" />
+                }
+                else if (rsri[i].Fat.Value > 2.0f)
+                {
+                        <img runat="server" src="~/Content/svg/nutlevel_3.svg" width="30px" height="50px" />
+                }
+                else if (rsri[i].Fat.Value > 1.0f)
+                {
+                        <img runat="server" src="~/Content/svg/nutlevel_2.svg" width="30px" height="50px" />
+                }
+                else
+                {
+                        <img runat="server" src="~/Content/svg/nutlevel_1.svg" width="30px" height="50px" />
+                }
+
+                @if (!rsri[i].Salt.HasValue)
+                {
+                    <img runat="server" src="~/Content/svg/nutlevel_none.svg" width="30px" height="50px" />
+                }
+                else if (rsri[i].Salt.Value > 4.0f)
+                {
+                        <img runat="server" src="~/Content/svg/nutlevel_5.svg" width="30px" height="50px" />
+                }
+                else if (rsri[i].Salt.Value > 3.0f)
+                {
+                        <img runat="server" src="~/Content/svg/nutlevel_4.svg" width="30px" height="50px" />
+                }
+                else if (rsri[i].Salt.Value > 2.0f)
+                {
+                        <img runat="server" src="~/Content/svg/nutlevel_3.svg" width="30px" height="50px" />
+                }
+                else if (rsri[i].Salt.Value > 1.0f)
+                {
+                        <img runat="server" src="~/Content/svg/nutlevel_2.svg" width="30px" height="50px" />
+                }
+                else
+                {
+                        <img runat="server" src="~/Content/svg/nutlevel_1.svg" width="30px" height="50px" />
+                }
             </div>
             <div class="resultnutritionnames">
                 <img runat="server" src="~/Content/svg/nutname_cal_hun.svg" alt="tápérték" width="30px" height="50px" />

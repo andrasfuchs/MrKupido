@@ -13,6 +13,8 @@ namespace MrKupido.Web.Models
 {
     public class RecipeSearchResultItem
     {
+        private static Random rnd = new Random();
+
         public ShoppingListCategory MainCategory;
         public string IconUrl;
         public string DisplayName;
@@ -69,6 +71,10 @@ namespace MrKupido.Web.Models
 
             this.TotalTime = (int)directions.Select(d => d.TimeToComplete).Select(t => t.TotalMinutes).Sum();
             this.NetTime = (int)directions.Where(d => !d.IsPassive).Select(d => d.TimeToComplete).Select(t => t.TotalMinutes).Sum();
+
+            this.Sugar = rnd.Next(5);
+            this.Fat = rnd.Next(5);
+            this.Salt = rnd.Next(5);
         }
 
         public override string ToString()

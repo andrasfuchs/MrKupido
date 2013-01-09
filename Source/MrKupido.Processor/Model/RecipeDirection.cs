@@ -171,7 +171,16 @@ namespace MrKupido.Processor.Model
                             {
                                 case 'T':
                                     vh = VowelHarmonyOf(word, true);
-                                    if (IsVowel(word[word.Length - 1])) word += "t";
+                                    if ((IsVowel(word[word.Length - 1])) 
+                                        || ((word.Length >= 2) && IsVowel(word[word.Length - 2]) &&
+                                            ((word[word.Length - 1] == 'j') || (word[word.Length - 1] == 'l') || (word[word.Length - 1] == 'n') || (word[word.Length - 1] == 'r') 
+                                            || (word[word.Length - 1] == 'n') || (word[word.Length - 1] == 'r') || (word[word.Length - 1] == 's') || (word[word.Length - 1] == 'z')))
+                                        || ((word.Length >= 3) && IsVowel(word[word.Length - 3]) &&
+                                        (((word[word.Length - 2] == 'l') && (word[word.Length - 1] == 'y')) 
+                                        || ((word[word.Length - 2] == 'n') && (word[word.Length - 1] == 'y')) 
+                                        || ((word[word.Length - 2] == 's') && (word[word.Length - 1] == 'z')) 
+                                        || ((word[word.Length - 2] == 'z') && (word[word.Length - 1] == 's'))))
+                                        ) word += "t";
                                     else
                                     {
                                         if (vh == VowelHarmony.Low) word += "ot";
@@ -225,6 +234,7 @@ namespace MrKupido.Processor.Model
                     bool makeAz = false;
                     if (IsVowel(Direction[azIndex + 5])) makeAz = true;
                     if ((Direction[azIndex + 5] == '5') || (Direction[azIndex + 5] == '1')) makeAz = true;
+                    if ((Direction[azIndex + 5] == '1') && Char.IsNumber(Direction[azIndex + 6])) makeAz = false;
 
                     if (makeAz)
                     {

@@ -48,8 +48,8 @@ namespace MrKupido.Web.Controllers
             }
 
 
+            CurrentSessions[requestContext.HttpContext.Session.SessionID].RequestContext = requestContext;
             // Grab the user's login information from FormsAuth
-            //User userState = new User();
             if (this.User.Identity != null && this.User.Identity is FormsIdentity)
             {
                 User loggedInUser = CurrentSessions[requestContext.HttpContext.Session.SessionID].User.FromJSONString(((FormsIdentity)this.User.Identity).Ticket.UserData);
@@ -59,8 +59,6 @@ namespace MrKupido.Web.Controllers
                     CurrentSessions[requestContext.HttpContext.Session.SessionID].User = loggedInUser;
                 }
             }
-
-            CurrentSessions[requestContext.HttpContext.Session.SessionID].RequestContext = requestContext;
 
             if (this.Session["WebAppFileVersion"] == null)
             {
@@ -79,6 +77,7 @@ namespace MrKupido.Web.Controllers
             if (action == "LOGIN")
             {
                 fm = String.Format("User '{0}' logged in.", username);
+                parameters += String.Format(", user-agent: '{0}'", CurrentSessions[sessionId].RequestContext.HttpContext.Request.UserAgent);
             }
 
             if (action == "LOGOUT")

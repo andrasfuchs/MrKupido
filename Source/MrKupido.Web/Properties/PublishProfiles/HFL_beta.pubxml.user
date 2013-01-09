@@ -48,46 +48,46 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/08/2012 16:48:36</publishTime>
     </File>
     <File Include="bin/MrKupido.DataAccess.dll">
-      <publishTime>01/08/2013 21:46:38</publishTime>
+      <publishTime>01/09/2013 21:44:34</publishTime>
     </File>
     <File Include="bin/MrKupido.DataAccess.pdb">
-      <publishTime>01/08/2013 21:46:38</publishTime>
+      <publishTime>01/09/2013 21:44:34</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.dll">
-      <publishTime>01/08/2013 21:46:37</publishTime>
+      <publishTime>01/09/2013 21:44:34</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.pdb">
-      <publishTime>01/08/2013 21:46:37</publishTime>
+      <publishTime>01/09/2013 21:44:34</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.Recipe.dll">
-      <publishTime>01/08/2013 21:46:39</publishTime>
+      <publishTime>01/09/2013 22:42:08</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.Recipe.pdb">
-      <publishTime>01/08/2013 21:46:38</publishTime>
+      <publishTime>01/09/2013 21:44:35</publishTime>
     </File>
     <File Include="bin/MrKupido.Model.dll">
-      <publishTime>01/08/2013 21:46:37</publishTime>
+      <publishTime>01/09/2013 21:44:34</publishTime>
     </File>
     <File Include="bin/MrKupido.Model.pdb">
-      <publishTime>01/08/2013 21:46:37</publishTime>
+      <publishTime>01/09/2013 21:44:34</publishTime>
     </File>
     <File Include="bin/MrKupido.Processor.dll">
-      <publishTime>01/08/2013 21:46:38</publishTime>
+      <publishTime>01/09/2013 21:44:35</publishTime>
     </File>
     <File Include="bin/MrKupido.Processor.pdb">
-      <publishTime>01/08/2013 21:46:38</publishTime>
+      <publishTime>01/09/2013 21:44:35</publishTime>
     </File>
     <File Include="bin/MrKupido.Utils.dll">
-      <publishTime>01/07/2013 13:41:08</publishTime>
+      <publishTime>01/09/2013 21:44:34</publishTime>
     </File>
     <File Include="bin/MrKupido.Utils.pdb">
-      <publishTime>01/07/2013 13:41:08</publishTime>
+      <publishTime>01/09/2013 21:44:34</publishTime>
     </File>
     <File Include="bin/MrKupido.Web.dll">
-      <publishTime>01/08/2013 21:46:40</publishTime>
+      <publishTime>01/09/2013 22:42:09</publishTime>
     </File>
     <File Include="bin/MrKupido.Web.pdb">
-      <publishTime>01/08/2013 21:46:40</publishTime>
+      <publishTime>01/09/2013 22:42:09</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>07/22/2012 09:51:29</publishTime>
@@ -138,16 +138,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/22/2012 09:51:32</publishTime>
     </File>
     <File Include="Content/fonts/Cardo/cardo-regular-webfont.eot">
-      <publishTime>11/10/2012 11:02:20</publishTime>
+      <publishTime>01/09/2013 05:00:12</publishTime>
     </File>
     <File Include="Content/fonts/Cardo/cardo-regular-webfont.svg">
-      <publishTime>11/10/2012 11:02:20</publishTime>
+      <publishTime>01/09/2013 05:00:12</publishTime>
     </File>
     <File Include="Content/fonts/Cardo/cardo-regular-webfont.ttf">
-      <publishTime>11/10/2012 11:02:20</publishTime>
+      <publishTime>01/09/2013 05:00:12</publishTime>
     </File>
     <File Include="Content/fonts/Cardo/cardo-regular-webfont.woff">
-      <publishTime>11/10/2012 11:02:20</publishTime>
+      <publishTime>01/09/2013 05:00:12</publishTime>
     </File>
     <File Include="Content/fonts/Cardo/OFL.txt">
       <publishTime>07/22/2012 15:05:54</publishTime>
@@ -255,7 +255,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/25/2012 09:53:04</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>01/08/2013 21:05:16</publishTime>
+      <publishTime>01/09/2013 10:34:48</publishTime>
+    </File>
+    <File Include="Content/Site.min.css">
+      <publishTime>01/09/2013 21:39:36</publishTime>
     </File>
     <File Include="Content/svg/action_betesz.svg">
       <publishTime>11/18/2012 18:28:54</publishTime>
@@ -791,44 +794,86 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/themes/base/jquery.ui.accordion.css">
       <publishTime>07/22/2012 09:51:25</publishTime>
     </File>
+    <File Include="Content/themes/base/jquery.ui.accordion.min.css">
+      <publishTime>01/09/2013 21:39:57</publishTime>
+    </File>
     <File Include="Content/themes/base/jquery.ui.all.css">
       <publishTime>07/22/2012 09:51:25</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.all.min.css">
+      <publishTime>01/09/2013 21:39:57</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.autocomplete.css">
       <publishTime>07/22/2012 09:51:25</publishTime>
     </File>
+    <File Include="Content/themes/base/jquery.ui.autocomplete.min.css">
+      <publishTime>01/09/2013 21:39:57</publishTime>
+    </File>
     <File Include="Content/themes/base/jquery.ui.base.css">
       <publishTime>07/22/2012 14:16:56</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.base.min.css">
+      <publishTime>01/09/2013 21:39:58</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.button.css">
       <publishTime>07/22/2012 09:51:25</publishTime>
     </File>
+    <File Include="Content/themes/base/jquery.ui.button.min.css">
+      <publishTime>01/09/2013 21:39:58</publishTime>
+    </File>
     <File Include="Content/themes/base/jquery.ui.core.css">
       <publishTime>07/22/2012 09:51:25</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.core.min.css">
+      <publishTime>01/09/2013 21:39:58</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.datepicker.css">
       <publishTime>07/22/2012 09:51:25</publishTime>
     </File>
+    <File Include="Content/themes/base/jquery.ui.datepicker.min.css">
+      <publishTime>01/09/2013 21:39:58</publishTime>
+    </File>
     <File Include="Content/themes/base/jquery.ui.dialog.css">
       <publishTime>07/22/2012 09:51:25</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.dialog.min.css">
+      <publishTime>01/09/2013 21:39:58</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.progressbar.css">
       <publishTime>07/22/2012 09:51:25</publishTime>
     </File>
+    <File Include="Content/themes/base/jquery.ui.progressbar.min.css">
+      <publishTime>01/09/2013 21:39:59</publishTime>
+    </File>
     <File Include="Content/themes/base/jquery.ui.resizable.css">
       <publishTime>07/22/2012 09:51:25</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.resizable.min.css">
+      <publishTime>01/09/2013 21:39:59</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.selectable.css">
       <publishTime>07/22/2012 09:51:25</publishTime>
     </File>
+    <File Include="Content/themes/base/jquery.ui.selectable.min.css">
+      <publishTime>01/09/2013 21:39:59</publishTime>
+    </File>
     <File Include="Content/themes/base/jquery.ui.slider.css">
       <publishTime>07/22/2012 09:51:25</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.slider.min.css">
+      <publishTime>01/09/2013 21:39:59</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.tabs.css">
       <publishTime>07/22/2012 09:51:25</publishTime>
     </File>
+    <File Include="Content/themes/base/jquery.ui.tabs.min.css">
+      <publishTime>01/09/2013 21:39:59</publishTime>
+    </File>
     <File Include="Content/themes/base/jquery.ui.theme.css">
       <publishTime>07/22/2012 09:51:25</publishTime>
+    </File>
+    <File Include="Content/themes/base/jquery.ui.theme.min.css">
+      <publishTime>01/09/2013 21:40:00</publishTime>
     </File>
     <File Include="Error.html">
       <publishTime>01/08/2013 20:23:27</publishTime>
@@ -845,56 +890,113 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="packages.config">
       <publishTime>12/11/2012 16:27:32</publishTime>
     </File>
+    <File Include="Scripts/jquery-1.8.2.intellisense.min.js">
+      <publishTime>01/09/2013 21:13:40</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.8.2.intellisense.min.js.map">
+      <publishTime>01/09/2013 21:13:40</publishTime>
+    </File>
     <File Include="Scripts/jquery-1.8.2.js">
       <publishTime>11/14/2012 12:35:01</publishTime>
     </File>
     <File Include="Scripts/jquery-1.8.2.min.js">
-      <publishTime>11/14/2012 12:35:01</publishTime>
+      <publishTime>01/09/2013 21:35:53</publishTime>
+    </File>
+    <File Include="Scripts/jquery-1.8.2.min.js.map">
+      <publishTime>01/09/2013 21:35:54</publishTime>
     </File>
     <File Include="Scripts/jquery-ui-1.9.1.custom.js">
       <publishTime>11/19/2012 14:00:42</publishTime>
     </File>
     <File Include="Scripts/jquery-ui-1.9.1.custom.min.js">
-      <publishTime>11/19/2012 14:00:42</publishTime>
+      <publishTime>01/09/2013 21:36:33</publishTime>
+    </File>
+    <File Include="Scripts/jquery-ui-1.9.1.custom.min.js.map">
+      <publishTime>01/09/2013 21:36:34</publishTime>
     </File>
     <File Include="Scripts/jquery.unobtrusive-ajax.js">
       <publishTime>07/22/2012 09:51:26</publishTime>
     </File>
     <File Include="Scripts/jquery.unobtrusive-ajax.min.js">
-      <publishTime>07/22/2012 09:51:26</publishTime>
+      <publishTime>01/09/2013 21:36:29</publishTime>
+    </File>
+    <File Include="Scripts/jquery.unobtrusive-ajax.min.js.map">
+      <publishTime>01/09/2013 21:36:30</publishTime>
     </File>
     <File Include="Scripts/jquery.validate-vsdoc.js">
       <publishTime>07/22/2012 09:51:24</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate-vsdoc.min.js">
+      <publishTime>01/09/2013 21:13:41</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate-vsdoc.min.js.map">
+      <publishTime>01/09/2013 21:13:41</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.js">
       <publishTime>07/22/2012 09:51:24</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.min.js">
-      <publishTime>07/22/2012 09:51:24</publishTime>
+      <publishTime>01/09/2013 21:36:19</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.min.js.map">
+      <publishTime>01/09/2013 21:36:20</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.js">
       <publishTime>07/22/2012 09:51:26</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.min.js">
-      <publishTime>07/22/2012 09:51:26</publishTime>
+      <publishTime>01/09/2013 21:36:19</publishTime>
+    </File>
+    <File Include="Scripts/jquery.validate.unobtrusive.min.js.map">
+      <publishTime>01/09/2013 21:36:19</publishTime>
     </File>
     <File Include="Scripts/knockout-2.0.0.debug.js">
       <publishTime>07/22/2012 09:51:32</publishTime>
     </File>
+    <File Include="Scripts/knockout-2.0.0.debug.min.js">
+      <publishTime>01/09/2013 21:13:42</publishTime>
+    </File>
+    <File Include="Scripts/knockout-2.0.0.debug.min.js.map">
+      <publishTime>01/09/2013 21:13:43</publishTime>
+    </File>
     <File Include="Scripts/knockout-2.0.0.js">
       <publishTime>07/22/2012 09:51:32</publishTime>
+    </File>
+    <File Include="Scripts/knockout-2.0.0.min.js">
+      <publishTime>01/09/2013 21:13:43</publishTime>
+    </File>
+    <File Include="Scripts/knockout-2.0.0.min.js.map">
+      <publishTime>01/09/2013 21:13:44</publishTime>
     </File>
     <File Include="Scripts/modernizr-2.0.6-development-only.js">
       <publishTime>07/22/2012 09:51:26</publishTime>
     </File>
+    <File Include="Scripts/modernizr-2.0.6-development-only.min.js">
+      <publishTime>01/09/2013 21:13:44</publishTime>
+    </File>
+    <File Include="Scripts/modernizr-2.0.6-development-only.min.js.map">
+      <publishTime>01/09/2013 21:13:44</publishTime>
+    </File>
     <File Include="Scripts/whatwg_reviewer.js">
       <publishTime>11/01/2012 14:06:38</publishTime>
     </File>
+    <File Include="Scripts/whatwg_reviewer.min.js">
+      <publishTime>01/09/2013 21:13:45</publishTime>
+    </File>
+    <File Include="Scripts/whatwg_reviewer.min.js.map">
+      <publishTime>01/09/2013 21:13:45</publishTime>
+    </File>
     <File Include="Scripts/_references.js">
-      <publishTime>11/14/2012 12:35:02</publishTime>
+      <publishTime>01/09/2013 09:36:26</publishTime>
+    </File>
+    <File Include="Scripts/_references.min.js">
+      <publishTime>01/09/2013 21:13:45</publishTime>
+    </File>
+    <File Include="Scripts/_references.min.js.map">
+      <publishTime>01/09/2013 21:13:46</publishTime>
     </File>
     <File Include="Views/Account/LogIn.cshtml">
-      <publishTime>01/06/2013 10:40:10</publishTime>
+      <publishTime>01/09/2013 11:05:12</publishTime>
     </File>
     <File Include="Views/Account/Profile.cshtml">
       <publishTime>01/02/2013 20:15:44</publishTime>
@@ -909,7 +1011,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/29/2012 14:41:18</publishTime>
     </File>
     <File Include="Views/Home/_RecipeSearchResults.cshtml">
-      <publishTime>01/07/2013 15:41:11</publishTime>
+      <publishTime>01/09/2013 19:21:23</publishTime>
     </File>
     <File Include="Views/Import/Recipe.cshtml">
       <publishTime>11/16/2012 16:32:18</publishTime>
@@ -966,10 +1068,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/22/2012 09:51:18</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>01/06/2013 21:39:40</publishTime>
+      <publishTime>01/09/2013 11:05:04</publishTime>
     </File>
     <File Include="Views/Shared/_SearchHeader.cshtml">
-      <publishTime>01/03/2013 14:15:10</publishTime>
+      <publishTime>01/09/2013 19:50:07</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>07/22/2012 09:51:18</publishTime>
@@ -978,7 +1080,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/22/2012 09:51:18</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>01/08/2013 21:46:42</publishTime>
+      <publishTime>01/09/2013 22:42:13</publishTime>
     </File>
   </ItemGroup>
 </Project>
