@@ -116,7 +116,7 @@ namespace MrKupido.Patcher
                 {
                     MethodReference mr = (Mono.Cecil.MethodReference)instr.Operand;
 
-                    if (mr.DeclaringType.Namespace == "MrKupido.Library.Ingredient")
+                    if ((mr.DeclaringType.Namespace == "MrKupido.Library.Ingredient") || (mr.DeclaringType.Namespace == "MrKupido.Library.Recipe"))
                     {
                         Mono.Cecil.Cil.Instruction interceptionCall = processor.Create(Mono.Cecil.Cil.OpCodes.Call, newIngredientMD);
 

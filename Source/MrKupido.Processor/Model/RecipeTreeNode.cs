@@ -8,6 +8,7 @@ using System.Reflection;
 using MrKupido.Library;
 using MrKupido.Library.Recipe;
 using System.Web.Script.Serialization;
+using MrKupido.Library.Attributes;
 
 namespace MrKupido.Processor.Model
 {
@@ -41,6 +42,9 @@ namespace MrKupido.Processor.Model
         public Type RecipeType { get; private set; }
 
         public bool IsImplemented = false;
+        public bool IsAbtract = false;
+        public bool IsInline = false;
+        public bool IsIngrec = false;
 
         public RecipeTreeNode(Type recipeType)
             : base(recipeType)
@@ -81,6 +85,14 @@ namespace MrKupido.Processor.Model
             if (mi != null)
             {
                 Serve = (ServeDelegate)Delegate.CreateDelegate(typeof(ServeDelegate), mi);
+            }
+
+            IngredientConstsAttribute[] ica = (IngredientConstsAttribute[])recipeType.GetCustomAttributes(typeof(IngredientConstsAttribute), false);
+            if (ica.Length > 0)
+            {
+                IsAbtract = ica[0].IsAbstract;
+                IsInline = ica[0].IsInline;
+                IsIngrec = ica[0].IsIngrec;
             }
         }
 

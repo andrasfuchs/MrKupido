@@ -38,6 +38,8 @@ namespace MrKupido.Web.Models
         public float? Fat;
         public float? Salt;
 
+        public bool IsHidden;
+
         public RecipeSearchResultItem(RecipeTreeNode rtn)
         {
             if (String.IsNullOrEmpty(rtn.ShortName)) throw new MrKupidoException("Recipe '{0}' should have a ShortName defined.", rtn.UniqueName);
@@ -75,6 +77,8 @@ namespace MrKupido.Web.Models
             this.Sugar = rnd.Next(5);
             this.Fat = rnd.Next(5);
             this.Salt = rnd.Next(5);
+
+            this.IsHidden = rtn.IsIngrec || rtn.IsInline;
         }
 
         public override string ToString()

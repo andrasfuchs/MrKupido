@@ -140,6 +140,7 @@
 
             $('#filters').empty();
             $('#filters').append('<ul>' + ulBody + '</ul>');
+            doSearch();
         };
 
         function deleteFilter(filterValue) {
@@ -152,7 +153,6 @@
                 },
                 success: function (data) {
                     refreshFilters(data);
-                    doSearch(6);
                 }, // success
                 error: function (xhr, textStatus, errorThrown) {
                                                   //alert("Error");
@@ -164,8 +164,6 @@
         }
 
         $(document).ready(function () {
-            deleteFilter("");
-
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(success, error);
             }
@@ -270,7 +268,6 @@
             Keresnivaló:</label>
         <input id="query" type="search" placeholder="(hozzávaló, diéta, eszköz)" autofocus />
     </p>
-    <input id="search" type="submit" value="Keresés" onclick="_gaq.push(['_trackEvent', 'Search', 'Search', '+karalábé -pulyka']); doSearch();" style="display: none" />
     <div id="deleteall">
         <input type="button" value="Mindent töröl" onclick="deleteFilter();" />
     </div>

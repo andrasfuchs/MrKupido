@@ -45,13 +45,25 @@ namespace MrKupido.Library.Attributes
         public float KCaloriesPerGramm;
 
         /// <summary>
-        /// True if it is more like a category not a physical ingredient. Abstract ingredients must have the DefaultChild defined.
+        /// True if it is more like a category not a physical ingredient. Abstract ingredients must have the DefaultChild defined 
+        /// and they should be replaced by any of its descendants in the recipe.
+        /// If this set and applied for a recipe, the recipe should not have an implementation.
         /// </summary>
         public bool IsAbstract; 
         /// <summary>
         /// The default substitue of the ingredient. For example the default for fat is lard, for oil is sunflower oil.
-        /// This must be set if the IsAbstact is set to true
+        /// This must be set if the IsAbstact is set to true.
         /// </summary>
         public Type DefaultChild;
+
+        /// <summary>
+        /// True if the recipe should be handled as an inline ingredient, so the making of it must be part of the final recipe. 
+        /// </summary>
+        public bool IsInline;
+
+        /// <summary>
+        /// Ingrecs are recipes which should be handled as ingredients. 
+        /// </summary>
+        public bool IsIngrec;
     }
 }
