@@ -8,23 +8,16 @@ using System.Diagnostics;
 
 namespace MrKupido.Library.Recipe
 {
-    [NameAlias("hun", "receptek")]
-    [NameAlias("eng", "recipes")]
-
-    [IconUriFragment("recipe")]
+    [NameAlias("eng", "recipe")]
+    [NameAlias("hun", "recept")]
 
     public class RecipeBase : IngredientBase, IRecipe
     {
-        //public string Name
-        //{
-        //    get
-        //    {
-        //        return NameAliasAttribute.GetDefaultName(this.GetType());
-        //    }
-        //}
+        public float Portion { get; private set; }
 
         public RecipeBase(float amount) : this(amount, MeasurementUnit.portion)
         {
+            Portion = amount;
         }
 
         public RecipeBase(float amount, MeasurementUnit unit) : base(amount, unit)

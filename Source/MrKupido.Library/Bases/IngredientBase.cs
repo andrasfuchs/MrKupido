@@ -7,8 +7,8 @@ using System.Threading;
 
 namespace MrKupido.Library.Ingredient
 {
-    [NameAlias("hun", "hozzávalók")]
-    [NameAlias("eng", "ingredients")]
+    [NameAlias("eng", "ingredient")]
+    [NameAlias("hun", "hozzávaló")]
 
     public class IngredientBase : MarshalByRefObject, IIngredient
     {

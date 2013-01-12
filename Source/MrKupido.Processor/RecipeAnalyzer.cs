@@ -9,6 +9,7 @@ using System.Reflection;
 using MrKupido.Processor.Model;
 using System.Diagnostics;
 using MrKupido.Library.Ingredient;
+using MrKupido.Library.Recipe;
 
 namespace MrKupido.Processor
 {
@@ -29,14 +30,35 @@ namespace MrKupido.Processor
 
         public static object NewIngredient(object returnedObject)
         {
+            RecipeBase rb = null;
+            RecipeTreeNode rtn = null;
+
+            if (returnedObject is RecipeBase)
+            {
+                rb = ((RecipeBase)returnedObject);
+                string rbTypeName = rb.GetType().Name;
+                rtn = Cache.Recipe.All.FirstOrDefault(tn => tn.RecipeType.Name == rbTypeName);
+            }
+
             if (returnedObject is IngredientBase)
             {
                 IngredientBase ib = (IngredientBase)returnedObject;
 
                 IngredientBase item = ingredients.FirstOrDefault(i => (i.Name == ib.Name) && (i.Unit == ib.Unit));
 
-                if (item == null) ingredients.Add(ib);
-                else item.Add(ib);
+                if (item == null)
+                { 
+                    if ((rtn == null) || (!rtn.IsInline)) ingredients.Add(ib);
+                } else item.Add(ib);
+            }
+
+            if (returnedObject is RecipeBase)
+            {
+                // if the recipe is inline then we need to run it
+                if ((rtn != null) && (rtn.IsInline))
+                {
+                    RunRecipe(rtn, rb.Portion);
+                }
             }
 
             return returnedObject;

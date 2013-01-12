@@ -97,7 +97,7 @@ namespace MrKupido.Web
                 }
                 else
                 {
-                    Response.RedirectToRoute("AccountManagement", new { action = "Login", ReturnUrl = Request.Url.AbsolutePath });
+                    Response.RedirectToRoute("AccountManagement", new { action = "Login", ReturnUrl = Request.HttpMethod != "GET" ? "" : Request.Url.AbsolutePath });
                 }
             }
         }

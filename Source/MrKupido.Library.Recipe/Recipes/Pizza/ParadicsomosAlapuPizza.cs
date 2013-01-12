@@ -18,15 +18,20 @@ namespace MrKupido.Library.Recipe
 
         public static new EquipmentGroup SelectEquipment(float amount)
         {
-            return Pizza.SelectEquipment(amount);
+            EquipmentGroup result = new EquipmentGroup();
+
+            result.Containers.Add(new LaposTanyer());
+
+            result.Tools.Add(new Kez());
+
+            return result;
         }
 
         public static new PreparedIngredients Prepare(float amount, EquipmentGroup eg)
         {
-            PreparedIngredients result = Pizza.Prepare(amount, eg);
+            PreparedIngredients result = new PreparedIngredients();
 
-            IIngredient pizzateszta = result["pizzateszta"];
-            result.Remove("pizzateszta");
+            IIngredient pizzateszta = new Pizza(amount * 1.0f);
 
             IIngredient paradicsomosPizzaszosz = new PizzaParadicsomszosz(0.2f);
             Kez kez = eg.Use<Kez>();
@@ -37,5 +42,20 @@ namespace MrKupido.Library.Recipe
             eg.WashUp();
             return result;
         }
+
+        public static CookedFoodParts Cook(float amount, PreparedIngredients preps, EquipmentGroup eg)
+        {
+            CookedFoodParts cfp = new CookedFoodParts();
+            cfp.Add("pizzateszta", preps["pizzateszta"]);
+            return cfp;
+        }
+
+        public static void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
+        {
+            Kez kez = eg.Use<Kez>();
+            kez.Talalni(food["pizzateszta"], eg.Use<LaposTanyer>());
+            eg.WashUp();
+        }
+
     }
 }

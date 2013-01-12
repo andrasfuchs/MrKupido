@@ -27,6 +27,18 @@ namespace MrKupido.Library.Attributes
 
         public static string[] GetUrls(System.Reflection.MemberInfo mi, string formatString)
         {
+            string miName = mi.ToString();
+
+            if (
+                (miName == "System.Object") || (miName == "System.MarshalByRefObject") || (miName == "System.ValueType") || (miName == "System.Enum")
+                //|| (miName == "MrKupido.Library.Equipment.EquipmentBase") 
+                //|| (miName == "MrKupido.Library.Ingredient.IngredientBase")
+                //|| (miName == "MrKupido.Library.Recipe.RecipeBase")
+                )
+            {
+                return new String[0];
+            }
+
             List<string> result = new List<string>();
 
             IconUriFragmentAttribute classLevelIconUri = null;
@@ -46,7 +58,7 @@ namespace MrKupido.Library.Attributes
                     }
                 }
 
-                memberLevelEngNames = NameAliasAttribute.GetMethodNames(mi.DeclaringType, mi.Name, "eng");
+                memberLevelEngNames = NameAliasAttribute.GetMemberNames(mi.DeclaringType, mi.Name, "eng");
                 mi = mi.DeclaringType;
             }
 
@@ -151,14 +163,14 @@ namespace MrKupido.Library.Attributes
             if ((mi is Type) && (((Type)mi).BaseType != null))
             {
                 result.AddRange(IconUriFragmentAttribute.GetUrls(((Type)mi).BaseType, formatString));
-                result.RemoveAt(result.Count - 1); // remove the default url
+                //if (result.Count > 0) result.RemoveAt(result.Count - 1); // remove the default url
             }
 
             if (result.Count == 0)
             {
                 Trace.TraceWarning("Class '{0}' has no icon url defined.", mi.Name);
             }
-            result.Add(String.Format(formatString, "default"));
+            //result.Add(String.Format(formatString, "default"));
 
             for (int i = 0; i < result.Count(); i++)
             {

@@ -281,6 +281,12 @@ header, footer, nav, section {
         background-color: /*mcl*/ #ebe0d5;
     }
 
+    .searchbox #filters li a.disabled {
+        pointer-events: none;
+        cursor: default;
+        opacity: 0.6;
+    }
+
         .searchbox #filters li a:hover {
             background-color: /*mcm*/ #cdb8ab;
             text-decoration: none;
@@ -297,6 +303,12 @@ header, footer, nav, section {
     float: right;
     height: 50px;
     margin-top: 12px;
+}
+
+.searchbox #deleteall.disabled {
+    pointer-events: none;
+    cursor: default;
+    opacity: 0.6;
 }
 
 article div.tip, article div.question {

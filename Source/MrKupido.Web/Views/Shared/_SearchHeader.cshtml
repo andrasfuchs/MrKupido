@@ -15,7 +15,7 @@
 
 
             if (code == 32 || code == 13 || code == 188 || code == 186) {
-                $("#search").trigger("onclick");
+                doSearch();
             } // missing closing if brace
 
             if (this.value == "") {
@@ -38,12 +38,10 @@
                 // del
                 if (code == 46) {
                     deleteFilter("!first");
-                    $("#search").trigger("onclick");
                 }
                 // backspace
                 if (code == 8) {
                     deleteFilter("!last");
-                    $("#search").trigger("onclick");
                 }
                 e.preventDefault();
             }
@@ -131,93 +129,115 @@
         $(this).val(''); return false;
     };
 
-        function refreshFilters(filters) {
-            ulBody = '';
+    function refreshFilters(filters, invokeDoSearch) {
+        invokeDoSearch = typeof invokeDoSearch !== 'undefined' ? invokeDoSearch : true;
 
-            for (x = 0; x < filters.length; x++) {
-                ulBody += '<li>' + filters[x].Text + ' <a href="javascript:deleteFilter(\'' + filters[x].Value + '\'); doSearch();">x</a></li>';
-            }
+        ulBody = '';
 
-            $('#filters').empty();
-            $('#filters').append('<ul>' + ulBody + '</ul>');
+        for (x = 0; x < filters.length; x++) {
+            ulBody += '<li>' + filters[x].Text + ' <a href="javascript:deleteFilter(\'' + filters[x].Value + '\'); doSearch();">x</a></li>';
+        }
+
+        $('#filters').empty();
+        $('#filters').append('<ul>' + ulBody + '</ul>');
+
+        if (invokeDoSearch)
+        {
+            $("#query").attr('readonly', false);
+            $("div#filters ul li a").removeClass('disabled');
+            $("div#deleteall").removeClass('disabled');
+
             doSearch();
-        };
-
-        function deleteFilter(filterValue) {
-            $.ajax({
-                url: '@Url.Action("DeleteFilter", "Home")',
-                type: "POST",
-                dataType: "json",
-                data: {
-                    value: filterValue
-                },
-                success: function (data) {
-                    refreshFilters(data);
-                }, // success
-                error: function (xhr, textStatus, errorThrown) {
-                                                  //alert("Error");
-                                                  //alert(xhr);
-                                                  //alert(textStatus);
-                                                  //alert(errorThrown);
-                }
-            }); // ajax
+        } else {
+            $("#query").attr('readonly', true);
+            $("div#filters ul li a").addClass('disabled');
+            $("div#deleteall").addClass('disabled');
         }
+    };
 
-        $(document).ready(function () {
+    function deleteFilter(filterValue, invokeDoSearch) {
+        $.ajax({
+            url: '@Url.Action("DeleteFilter", "Home")',
+            type: "POST",
+            dataType: "json",
+            data: {
+                value: filterValue
+            },
+            success: function (data) {
+                refreshFilters(data, invokeDoSearch);
+            }, // success
+            error: function (xhr, textStatus, errorThrown) {
+                //alert("Error");
+                //alert(xhr);
+                //alert(textStatus);
+                //alert(errorThrown);
+            }
+        }); // ajax
+    }
+
+    $(document).ready(function () {
+        var knownLocation = "@(Session["Location"] as string)";
+
+        if (knownLocation == "")
+        {
             if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(success, error);
+                navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError);
             }
-        });
+        } else 
+        {
+            document.querySelector('#location').value = knownLocation;
+        }
+    });
 
-        function success(position) {
-            var s = document.querySelector('#location');
+    function geolocationSuccess(position) {
+        var s = document.querySelector('#location');
 
-            $.ajax({
-                url: '@Url.Action("GetLocationName", "Home")',
-                type: "POST",
-                dataType: "json",
-                data: {
-                    lat: position.coords.latitude,
-                    lon: position.coords.longitude
-                },
-                success: function (locationText) {
-                    if (locationText == null) {
-                        s.value = Math.round(position.coords.latitude * 100000) / 100000 + ", " + Math.round(position.coords.longitude * 100000) / 100000;
-                    } else {
-                        s.value = locationText;
-                    }
-                }, // success
-                error: function (xhr, textStatus, errorThrown) {
+        $.ajax({
+            url: '@Url.Action("GetLocationName", "Home")',
+            type: "POST",
+            dataType: "json",
+            data: {
+                lat: position.coords.latitude,
+                lon: position.coords.longitude
+            },
+            success: function (locationText) {
+                if (locationText == null) {
                     s.value = Math.round(position.coords.latitude * 100000) / 100000 + ", " + Math.round(position.coords.longitude * 100000) / 100000;
+                } else {
+                    s.value = locationText;
                 }
-            }); // ajax
-        }
-
-        function error(msg) {
-            var s = document.querySelector('#location');
-            s.value = "";
-        }
-
-        $(function () {
-            if ($.browser.msie && $.browser.version.substr(0, 1) < 7) {
-                $('li').has('ul').mouseover(function () {
-                    $(this).children('ul').css('visibility', 'visible');
-                }).mouseout(function () {
-                    $(this).children('ul').css('visibility', 'hidden');
-                })
+            }, // success
+            error: function (xhr, textStatus, errorThrown) {
+                s.value = Math.round(position.coords.latitude * 100000) / 100000 + ", " + Math.round(position.coords.longitude * 100000) / 100000;
             }
+        }); // ajax
+    }
+
+    function geolocationError(msg) {
+        var s = document.querySelector('#location');
+        s.value = "";
+    }
+
+    $(function () {
+        if ($.browser.msie && $.browser.version.substr(0, 1) < 7) {
+            $('li').has('ul').mouseover(function () {
+                $(this).children('ul').css('visibility', 'visible');
+            }).mouseout(function () {
+                $(this).children('ul').css('visibility', 'hidden');
+            })
+        }
+    });
+
+    $(document).ready(function () {
+
+        $("#menu-trigger").on("click", function () {
+            $("#usermenu").toggle();
         });
 
-        $(document).ready(function () {
-
-            $("#menu-trigger").on("click", function () {
-                $("#usermenu").toggle();
-            });
-
-            // iPad
-            var isiPad = navigator.userAgent.match(/iPad/i) != null;
-            if (isiPad) $('#menu ul').addClass('no-transition');
-        });
+        // iPad
+        var isiPad = navigator.userAgent.match(/iPad/i) != null;
+        if (isiPad) $('#menu ul').addClass('no-transition');
+    });
 </script>
 
 <a runat="server" href="~/hun">

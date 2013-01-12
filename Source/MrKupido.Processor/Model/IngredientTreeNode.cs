@@ -30,7 +30,7 @@ namespace MrKupido.Processor.Model
                 }
             }
 
-            if (!hasConnectionToTaxonomyTree) Trace.TraceWarning("Class '{0}' has no connection to the taxonomy tree.", ingredientClass.Name);
+            if ((!hasConnectionToTaxonomyTree) && (!ingredientClass.IsAbstract)) Trace.TraceWarning("Class '{0}' has no connection to the taxonomy tree.", ingredientClass.Name);
 
             ShortName = LongName;
             if (hasConnectionToTaxonomyTree && (taxonomyConnectionAttribute != null))

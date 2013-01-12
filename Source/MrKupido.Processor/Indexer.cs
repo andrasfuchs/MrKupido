@@ -62,7 +62,7 @@ namespace MrKupido.Processor
                 AddToIndex(tn);
             }
         }
-
+        
         public TreeNode GetByClassName(string className)
         {
             TreeNode tn = null;
@@ -100,7 +100,7 @@ namespace MrKupido.Processor
 
             if (index < 0) index = -index - 1;
 
-            while ((index < nameIndex[languageISO].Keys.Count) && (accentFolderStringComparer.Compare(nameIndex[languageISO].Keys[index].Substring(0, query.Length), query) == 0))
+            while ((index < nameIndex[languageISO].Keys.Count) && (accentFolderStringComparer.Compare(nameIndex[languageISO].Keys[index].Substring(0, Math.Min(nameIndex[languageISO].Keys[index].Length, query.Length)), query) == 0))
             {
                 result.Add(nameIndex[languageISO].Keys[index], nameIndex[languageISO][nameIndex[languageISO].Keys[index]]);
                 index++;

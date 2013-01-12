@@ -139,6 +139,23 @@ namespace MrKupido.Web.Controllers
             rsr.ItemsPerPage = 6;
             rsr.PageIndex = 1;
 
+            foreach (RecipeSearchResultItem rsri in rsr.Items)
+            {
+                if (filters.FirstOrDefault(f => f.Value == "+ R:" + rsri.UniqueName) != null)
+                {
+                    rsri.IsHidden = false;
+                }
+            }
+
+            for (int i = 0; i < rsr.Items.Count; i++)
+            {
+                if (rsr.Items[i].IsHidden)
+                {
+                    rsr.Items.RemoveAt(i);
+                    i--;
+                }
+            }
+
             Session["RecipeSearchResult"] = rsr;
             return PartialView("_RecipeSearchResultHead", rsr);
         }
@@ -209,6 +226,8 @@ namespace MrKupido.Web.Controllers
                     resp = null;
                 }
             }
+
+            Session["Location"] = result;
 
             return Json(result);
         }

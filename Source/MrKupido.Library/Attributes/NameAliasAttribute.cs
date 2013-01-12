@@ -96,9 +96,25 @@ namespace MrKupido.Library.Attributes
             return names.Values.ToArray();
         }
 
-        public static NameAliasAttribute[] GetMethodNames(Type objType, string methodName, string languageISOCode )
+        public static NameAliasAttribute[] GetMemberNames(Type objType, string memberName, string languageISOCode )
         {
-            System.Reflection.MethodInfo mi = objType.GetMethod(methodName);
+            System.Reflection.MemberInfo mi = objType.GetMethod(memberName);
+            
+            if (mi == null)
+            {
+                mi = objType.GetField(memberName);
+            }
+
+            if (mi == null)
+            {
+                mi = objType.GetProperty(memberName);
+            }
+
+            if (mi == null)
+            {
+                throw new MrKupidoException("Object '{0}' doesn't have a member called '{1}' in the culture '{2}'.", objType, memberName, languageISOCode);
+            }
+
             return GetNameAliases(mi, languageISOCode);
         }
     }

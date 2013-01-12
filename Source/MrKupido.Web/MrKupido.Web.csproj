@@ -226,12 +226,15 @@
     <Content Include="Content\fonts\Tangerine\OFL.txt" />
     <Content Include="Content\fonts\Tangerine\tangerinea-webfont.svg" />
     <Content Include="Content\fonts\Tangerine\tangerinea_bold-webfont.svg" />
-    <Content Include="Content\images\avatar.jpg" />
     <Content Include="Content\images\background.jpg" />
-    <Content Include="Content\images\frame_png.png" />
+    <Content Include="Content\images\browser_android.png" />
+    <Content Include="Content\images\browser_chrome.png" />
+    <Content Include="Content\images\browser_firefox.png" />
+    <Content Include="Content\images\browser_ie.png" />
+    <Content Include="Content\images\browser_opera.png" />
+    <Content Include="Content\images\browser_safari.png" />
     <Content Include="Content\images\mrkupido.ico" />
     <Content Include="Content\images\mrkupidologo.png" />
-    <Content Include="Content\images\tree-icons.png" />
     <Content Include="Content\Site.min.css">
       <DependentUpon>Site.css</DependentUpon>
     </Content>
@@ -247,11 +250,6 @@
     <Content Include="Content\svg\action_superimpose.svg" />
     <Content Include="Content\svg\action_tear.svg" />
     <Content Include="Content\svg\action_water.svg" />
-    <Content Include="Content\svg\browser_android.svg" />
-    <Content Include="Content\svg\browser_firefox.svg" />
-    <Content Include="Content\svg\browser_ie.svg" />
-    <Content Include="Content\svg\browser_opera.svg" />
-    <Content Include="Content\svg\browser_safari.svg" />
     <Content Include="Content\svg\cat_bread.svg" />
     <Content Include="Content\svg\cat_cookies.svg" />
     <Content Include="Content\svg\cat_fish.svg" />
@@ -278,7 +276,7 @@
     <Content Include="Content\svg\e_knife.svg" />
     <Content Include="Content\svg\e_spoon.svg" />
     <Content Include="Content\svg\i_fruit.svg" />
-    <Content Include="Content\svg\i_ingredients.svg" />
+    <Content Include="Content\svg\i_ingredient.svg" />
     <Content Include="Content\svg\i_milk.svg" />
     <Content Include="Content\svg\i_pepper.svg" />
     <Content Include="Content\svg\i_salt.svg" />
@@ -364,7 +362,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\svg\avatar.svg" />
-    <Content Include="Content\svg\browser_chrome.svg" />
     <Content Include="Content\svg\bulb.svg" />
     <Content Include="Content\svg\cat_bread_dark.svg" />
     <Content Include="Content\svg\cat_cookies_dark.svg" />
@@ -643,7 +640,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="1975/10/21" BuildVersion_UpdateFileVersion="False" BuildVersion_BuildVersioningStyle="None.None.None.None" />
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.None" BuildVersion_UpdateFileVersion="False" BuildVersion_StartDate="1975/10/21" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
   <ItemGroup>

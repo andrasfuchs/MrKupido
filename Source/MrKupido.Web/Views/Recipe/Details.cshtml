@@ -2,6 +2,14 @@
 @{
     ViewBag.Title = "Details";
 }
+@section scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            deleteFilter("", false);
+        });
+    </script>
+}
+
 <header>
     @{ Html.RenderPartial("_SearchHeader"); }
 </header>

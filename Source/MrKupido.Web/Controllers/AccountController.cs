@@ -42,6 +42,7 @@ namespace MrKupido.Web.Controllers
                     Session.Abandon();
                 }
                 Session["CurrentUser"] = null;
+                Session["Location"] = null;
             }
 
             string email = "";
