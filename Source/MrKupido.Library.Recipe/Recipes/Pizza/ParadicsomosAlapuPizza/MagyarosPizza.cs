@@ -58,14 +58,14 @@ namespace MrKupido.Library.Recipe
             return result;
         }
 
-        public static CookedFoodParts Cook(float amount, PreparedIngredients preps, EquipmentGroup eg)
+        public static new CookedFoodParts Cook(float amount, PreparedIngredients preps, EquipmentGroup eg)
         {
             CookedFoodParts cfp = new CookedFoodParts();
             cfp.Add("pizzateszta", preps["pizzateszta"]);
             return cfp;
         }
 
-        public static void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
+        public static new void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
             Kez kez = eg.Use<Kez>();
             kez.Talalni(food["pizzateszta"], eg.Use<LaposTanyer>());

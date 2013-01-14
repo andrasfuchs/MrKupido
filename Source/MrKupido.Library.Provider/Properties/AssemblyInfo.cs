@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Mr. Kupido - Data access module")]
-[assembly: AssemblyDescription("Mr. Kupido - Data access module")]
+[assembly: AssemblyTitle("MrKupido.Library.Provider")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Andras Fuchs")]
-[assembly: AssemblyProduct("DataAccess")]
-[assembly: AssemblyCopyright("Copyright © Andras Fuchs 2012-2013")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("MrKupido.Library.Provider")]
+[assembly: AssemblyCopyright("Copyright ©  2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("ca905b8b-aee3-4885-becf-3771292f80fb")]
+[assembly: Guid("b99ad28d-3341-4d0e-a026-4059846b2d20")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.1")]
-[assembly: AssemblyFileVersion("0.1.81.217")]
+[assembly: AssemblyVersion("1.0.0.0")]
+[assembly: AssemblyFileVersion("1.0.0.0")]

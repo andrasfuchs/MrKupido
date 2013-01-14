@@ -8,7 +8,7 @@ namespace MrKupido.Library.Recipe
 {
     [NameAlias("hun", "Karaván füstölt sajt")]
 
-    [CommercialProductOf("Karaván")]
+    [CommercialProductOf()]
     public class KaravanFustoltSajt : Sajt
     {
         public KaravanFustoltSajt(float amount, MeasurementUnit unit = MeasurementUnit.gramm)

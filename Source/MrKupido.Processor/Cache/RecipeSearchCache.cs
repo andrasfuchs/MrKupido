@@ -13,6 +13,8 @@ namespace MrKupido.Processor
 
         public List<RecipeTreeNode> Search(FilterCondition[] filters, string languageISO)
         {
+            List<RecipeTreeNode> result = null;
+
             string filterKey = string.Join(",", filters.Select(f => f.Value).ToArray());
 
             if (!searchResults.ContainsKey(languageISO)) searchResults.Add(languageISO, new SortedList<string, RecipeSearchInstance>());
@@ -38,7 +40,7 @@ namespace MrKupido.Processor
 
                 foreach (FilterCondition fc in filters)
                 {
-                    if (fc.IsNeg) continue; // TODO: implement negative filters
+                    if (fc.IsNeg) continue;
 
                     FilterCondition tempFC = fc;
 
@@ -55,8 +57,46 @@ namespace MrKupido.Processor
                     }
                 }
 
-                searchResults[languageISO][filterKey].Results = q.ToList();
+                result = q.ToList();
 
+
+                // negative filters
+                foreach (FilterCondition fc in filters)
+                {
+                    if (!fc.IsNeg) continue;
+
+                    FilterCondition tempFC = fc;
+
+                    for (int i = 0; i < result.Count(); i++)
+                    {
+
+                        if (tempFC.Node is IngredientTreeNode)
+                        {
+                            if (result[i].GetIngredients(1.0f).Any(ing => ing.GetType() == tempFC.Node.ClassType))
+                            {
+                                result.RemoveAt(i);
+                            }
+                        }
+                        else if (tempFC.Node is RecipeTreeNode)
+                        {
+                            // TODO: implement negative recipe filters
+                        }
+                        else
+                        {
+                            // TODO: implement negative non-ingredient filters
+                        }
+                    }
+
+                }
+
+                // commercial products (level-1 only)
+                foreach (FilterCondition fc in filters)
+                {
+                    result.AddRange(fc.Node.Children.Cast<RecipeTreeNode>().Where(r => r.IsCommercial).ToArray());
+                }
+
+
+                searchResults[languageISO][filterKey].Results = result;
                 searchResults[languageISO][filterKey].SearchFinishedAt = DateTime.Now;
             }
 

@@ -45,6 +45,7 @@ namespace MrKupido.Processor.Model
         public bool IsAbtract = false;
         public bool IsInline = false;
         public bool IsIngrec = false;
+        public bool IsCommercial = false;
 
         public RecipeTreeNode(Type recipeType)
             : base(recipeType)
@@ -93,6 +94,11 @@ namespace MrKupido.Processor.Model
                 IsAbtract = ica[0].IsAbstract;
                 IsInline = ica[0].IsInline;
                 IsIngrec = ica[0].IsIngrec;
+            }
+
+            if (recipeType.GetCustomAttributes(typeof(CommercialProductOfAttribute), false).Length > 0)
+            {
+                IsCommercial = true;
             }
         }
 

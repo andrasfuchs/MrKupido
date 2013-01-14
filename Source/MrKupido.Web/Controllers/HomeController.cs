@@ -136,8 +136,6 @@ namespace MrKupido.Web.Controllers
             List<FilterCondition> filters = (List<FilterCondition>)Session["filters"];
 
             RecipeSearchResult rsr = new RecipeSearchResult(Cache.Search.Search(filters.ToArray(), Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName).ToArray());
-            rsr.ItemsPerPage = 6;
-            rsr.PageIndex = 1;
 
             foreach (RecipeSearchResultItem rsri in rsr.Items)
             {
@@ -147,14 +145,17 @@ namespace MrKupido.Web.Controllers
                 }
             }
 
-            for (int i = 0; i < rsr.Items.Count; i++)
-            {
-                if (rsr.Items[i].IsHidden)
-                {
-                    rsr.Items.RemoveAt(i);
-                    i--;
-                }
-            }
+            //for (int i = 0; i < rsr.Items.Count; i++)
+            //{
+            //    if (rsr.Items[i].IsHidden)
+            //    {
+            //        rsr.Items.RemoveAt(i);
+            //        i--;
+            //    }
+            //}
+
+            rsr.ItemsPerPage = 6;
+            rsr.PageIndex = 1;
 
             Session["RecipeSearchResult"] = rsr;
             return PartialView("_RecipeSearchResultHead", rsr);

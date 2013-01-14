@@ -7,14 +7,13 @@ namespace MrKupido.Library.Attributes
 {
     public class CommercialProductOfAttribute : Attribute
     {
-        public string Brand { get; protected set; }
+        public Type Brand;
+        public Type MadeBy;
+        public Type DistributedBy;
         public string BarCode;
-        public string MadeBy;
-        public string DistributedBy;
 
-        public CommercialProductOfAttribute(string brand)
+        public CommercialProductOfAttribute()
         {
-            this.Brand = brand;
         }
     }
 }

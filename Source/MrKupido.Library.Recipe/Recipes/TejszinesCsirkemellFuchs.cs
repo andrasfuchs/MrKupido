@@ -11,7 +11,6 @@ namespace MrKupido.Library.Recipe
     [NameAlias("hun", "tejszínes csirkemell [Fuchs módra]")]
 
     //TODO: [Recommend(FootRizs, BurgonyaPure)]
-    [CommercialProductOf("Fuchsné Walter Magdolna")]
     public class TejszinesCsirkemellFuchs : TejszinesCsirkemell
     {
         public TejszinesCsirkemellFuchs(float amount, MeasurementUnit unit = MeasurementUnit.portion)

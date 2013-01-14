@@ -79,6 +79,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Recipes\Pizza\ParadicsomosAlapuPizza\MagyarosPizza\MagyarosPizzaPizzaEsTesztahazKecskemet.cs" />
+    <Compile Include="Recipes\Pizza\ParadicsomosAlapuPizza\MagyarosPizza\MagyarosPizzaClubPizzariaKecskemet.cs" />
     <Compile Include="Recipes\TejszinesCsirkemellFuchs.cs" />
     <Compile Include="Ingrecs\FeherBor.cs" />
     <Compile Include="Recipes\FottRizs.cs" />
@@ -130,6 +132,10 @@
     <Compile Include="Ingrecs\Zsemlemorzsa.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MrKupido.Library.Provider\MrKupido.Library.Provider.csproj">
+      <Project>{1341fb74-cf05-4cf0-897f-d181f308848d}</Project>
+      <Name>MrKupido.Library.Provider</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MrKupido.Library\MrKupido.Library.csproj">
       <Project>{44930A70-2BFF-4634-BD17-1ECB20D9C683}</Project>
       <Name>MrKupido.Library</Name>
