@@ -8,6 +8,7 @@ using MrKupido.Processor;
 using System.Text;
 using MrKupido.Library.Attributes;
 using MrKupido.Utils;
+using System.Threading;
 
 namespace MrKupido.Web.Models
 {
@@ -19,6 +20,8 @@ namespace MrKupido.Web.Models
         public string IconUrl;
         public string DisplayName;
         public string UniqueName;
+        public string ParentUniqueName;
+
         public bool IsSelected;
         public int NetTime;
         public int TotalTime;
@@ -29,6 +32,7 @@ namespace MrKupido.Web.Models
         public int SubVersions;
         
         public string MainIngredients;
+        public string CommercialInfo;
         
         public float? Rating;
         public int RatingCount;
@@ -39,6 +43,7 @@ namespace MrKupido.Web.Models
         public float? Salt;
 
         public bool IsHidden;
+        public string CSSClass;
 
         public RecipeSearchResultItem(RecipeTreeNode rtn)
         {
@@ -46,6 +51,8 @@ namespace MrKupido.Web.Models
 
             this.DisplayName = Char.ToUpper(rtn.ShortName[0]) + rtn.ShortName.Substring(1);
             this.UniqueName = rtn.UniqueName;
+            this.ParentUniqueName = rtn.Parent == null ? null : rtn.Parent.UniqueName;
+
             this.SubVersions = TreeNode.GetDescendantCount(rtn);
             if (rtn.IconUrl == null) rtn.IconUrl = PathUtils.GetActualUrl(rtn.IconUrls);
             this.IconUrl = rtn.IconUrl;
@@ -78,7 +85,61 @@ namespace MrKupido.Web.Models
             this.Fat = rnd.Next(5);
             this.Salt = rnd.Next(5);
 
-            this.IsHidden = rtn.IsIngrec || rtn.IsInline;
+            this.IsHidden = rtn.IsIngrec || rtn.IsInline || (rtn.CommercialAttribute != null);
+
+            if (!rtn.IsImplemented) CSSClass = "notimplemented";
+
+            if (rtn.IsAbtract) CSSClass = "abstract";
+
+            if (rtn.CommercialAttribute != null)
+            {
+                ProviderBase pb = null;
+                sb.Clear();
+
+                if (rtn.CommercialAttribute.Brand != null)
+                {
+                    pb = (ProviderBase)Activator.CreateInstance(rtn.CommercialAttribute.Brand, Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName);
+
+                    sb.Append("Márka: ");
+                    sb.Append(pb.BrandName);
+                    sb.Append(", ");
+                }
+
+                if (rtn.CommercialAttribute.MadeBy != null)
+                {
+                    pb = (ProviderBase)Activator.CreateInstance(rtn.CommercialAttribute.MadeBy, Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName);
+
+                    sb.Append("Gyártja: ");
+                    sb.Append(pb.CompanyName);
+                    sb.Append(", ");
+                    sb.Append(pb.Town);
+                    sb.Append(", ");
+                }
+
+                if (rtn.CommercialAttribute.DistributedBy != null)
+                {
+                    pb = (ProviderBase)Activator.CreateInstance(rtn.CommercialAttribute.DistributedBy, Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName);
+
+                    sb.Append("Terjeszti: ");
+                    sb.Append(pb.CompanyName);
+                    sb.Append(", ");
+                    sb.Append(pb.Town);
+                    sb.Append(", ");
+                }
+
+                if (rtn.CommercialAttribute.BarCode != null)
+                {
+                    sb.Append("Vonalkód: ");
+                    sb.Append(rtn.CommercialAttribute.BarCode);
+                    sb.Append(", ");
+                }
+
+                if (sb.Length >= 2) sb.Remove(sb.Length - 2, 2);
+
+                CommercialInfo = sb.ToString();
+
+                CSSClass = "commercial";
+            }
         }
 
         public override string ToString()

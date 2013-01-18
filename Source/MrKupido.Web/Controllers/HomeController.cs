@@ -142,6 +142,15 @@ namespace MrKupido.Web.Controllers
                 if (filters.FirstOrDefault(f => f.Value == "+ R:" + rsri.UniqueName) != null)
                 {
                     rsri.IsHidden = false;
+
+                    // look for its level-1 childen
+                    foreach (RecipeSearchResultItem child in rsr.Items)
+                    {
+                        if (child.ParentUniqueName == rsri.UniqueName)
+                        {
+                            child.IsHidden = false;
+                        }
+                    }
                 }
             }
 

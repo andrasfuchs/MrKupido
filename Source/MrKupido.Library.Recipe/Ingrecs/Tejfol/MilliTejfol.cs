@@ -8,7 +8,7 @@ namespace MrKupido.Library.Recipe
 {
     [NameAlias("hun", "Milli tejföl")]
 
-    [CommercialProductOf()]
+    [CommercialProduct()]
     public class MilliTejfol : Tejfol
     {
         public MilliTejfol(float amount, MeasurementUnit unit = MeasurementUnit.gramm)

@@ -136,6 +136,10 @@
       <Project>{8BD91A7F-5098-4728-BDBD-02E0802D04D2}</Project>
       <Name>MrKupido.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MrKupido.Library.Provider\MrKupido.Library.Provider.csproj">
+      <Project>{1341fb74-cf05-4cf0-897f-d181f308848d}</Project>
+      <Name>MrKupido.Library.Provider</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MrKupido.Library\MrKupido.Library.csproj">
       <Project>{44930A70-2BFF-4634-BD17-1ECB20D9C683}</Project>
       <Name>MrKupido.Library</Name>

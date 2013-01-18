@@ -16,9 +16,9 @@ namespace MrKupido.Processor
             }
         }
 
-        public void Initialize()
+        public void Initialize(string languageISO)
         {
-            EquipmentTreeNode root = TreeNode.BuildTree(Cache.Assemblies, t => new EquipmentTreeNode(t), typeof(MrKupido.Library.Equipment.EquipmentBase));
+            EquipmentTreeNode root = TreeNode.BuildTree(Cache.Assemblies, t => new EquipmentTreeNode(t, languageISO), typeof(MrKupido.Library.Equipment.EquipmentBase));
             Indexer = new Indexer(root);
 
             WasInitialized = true;

@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MrKupido.Library.Attributes;
+using MrKupido.Library.Provider;
 
 namespace MrKupido.Library.Recipe
 {
-    [NameAlias("hun", "koronás kristálycukor")]
+    [NameAlias("hun", "füstölt trappista sajt")]
 
-    [CommercialProductOf()]
-    public class KoronasKristalyCukor : KristalyCukor
+    public class FustrolTrappista : Trappista
     {
-        public KoronasKristalyCukor(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+        public FustrolTrappista(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
             : base(amount, unit)
         {
             RecipeUnknown();

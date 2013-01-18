@@ -12,6 +12,7 @@ namespace MrKupido.Library.Recipe
     [NameAlias("hun", "étkezési cukor", Priority = 201)]
     [NameAlias("hun", "finomított cukor", Priority = 202)]
 
+    //[CommercialProductOf(Brand = typeof(Koronas))]
     [IngredientConsts(IsIngrec = true)]
     public class KristalyCukor : Cukor
     {

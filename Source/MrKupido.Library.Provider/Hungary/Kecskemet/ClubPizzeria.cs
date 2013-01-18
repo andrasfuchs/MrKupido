@@ -10,11 +10,12 @@ namespace MrKupido.Library.Provider
 {
     public class ClubPizzeria : Kecskemet
     {
-        public ClubPizzeria()
+        public ClubPizzeria(string languageISO)
+            : base(languageISO)
         {
             this.CompanyName = "Club pizzéria";
             this.AddressLine = "Jász utca 7.";
-            this.Website = new Uri("http://www.clubpizzeria.com/");
+            this.WebsiteUrl = new Uri("http://www.clubpizzeria.com/");
             this.OrderPhoneNumber = "+36 (20) 559-0009";
             this.Location = new GeoCoordinate(46.908522, 19.67911);
         }

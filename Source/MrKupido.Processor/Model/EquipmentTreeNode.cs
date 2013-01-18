@@ -11,8 +11,8 @@ namespace MrKupido.Processor.Model
     {
         public EquipmentCommand[] ValidCommands { private set; get; }
 
-        public EquipmentTreeNode(Type equipmentClass)
-            : base(equipmentClass)
+        public EquipmentTreeNode(Type equipmentClass, string languageISO)
+            : base(equipmentClass, languageISO)
         {
             List<EquipmentCommand> commands = new List<EquipmentCommand>();
 

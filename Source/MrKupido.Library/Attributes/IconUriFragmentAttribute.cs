@@ -6,6 +6,7 @@ using System.Diagnostics;
 
 namespace MrKupido.Library.Attributes
 {
+    [AttributeUsage(System.AttributeTargets.Class | System.AttributeTargets.Method | System.AttributeTargets.Field, AllowMultiple = false)]
     public class IconUriFragmentAttribute : Attribute
     {
         public string UriFragment { get; private set; }
@@ -71,6 +72,11 @@ namespace MrKupido.Library.Attributes
                 }
             }
             classLevelEngNames = NameAliasAttribute.GetNameAliases(mi, "eng");
+            if (classLevelEngNames.Length == 0)
+            {
+                Trace.TraceWarning("Class '{0}' does not have an english name defined.", mi.Name);
+                classLevelEngNames = null;
+            }
 
 
             // build the 'standard' urls by combining the names above
@@ -158,19 +164,16 @@ namespace MrKupido.Library.Attributes
                 }
             }
 
-            
+
+            string defaultUrl = String.Format(formatString, "default");
+
             // check the base class
             if ((mi is Type) && (((Type)mi).BaseType != null))
             {
                 result.AddRange(IconUriFragmentAttribute.GetUrls(((Type)mi).BaseType, formatString));
-                //if (result.Count > 0) result.RemoveAt(result.Count - 1); // remove the default url
+                if ((result.Count > 0) && (result[result.Count - 1] == defaultUrl)) result.RemoveAt(result.Count - 1); // remove the default url
             }
-
-            if (result.Count == 0)
-            {
-                Trace.TraceWarning("Class '{0}' has no icon url defined.", mi.Name);
-            }
-            //result.Add(String.Format(formatString, "default"));
+            result.Add(defaultUrl);
 
             for (int i = 0; i < result.Count(); i++)
             {

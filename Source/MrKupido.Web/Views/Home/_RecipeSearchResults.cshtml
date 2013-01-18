@@ -5,7 +5,7 @@
     { 
         <li>
             <div class="resultbox">
-                <div class="resulthead">
+                <div class="resulthead @rsri[i].CSSClass">
                     <div class="category">
                         <img runat="server" src="@rsri[i].IconUrl" alt="@rsri[i].MainCategory.ToString()" width="45px" height="30px" />
                     </div>
@@ -45,16 +45,20 @@
                         {
                             <img runat="server" src="~/Content/svg/clock_30.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
                         }
-                        else
+                        else if (rsri[i].NetTime > 0)
                         {
                             <img runat="server" src="~/Content/svg/clock_15.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
+                        }
+                        else
+                        {
+                            <img runat="server" src="~/Content/svg/clock_00.svg" alt="? perc" width="35px" height="35px" />
                         }
 
                         @if (rsri[i].NetTime >= 99)
                         {
                             <span>++</span>
                         }
-                        else
+                        else if (rsri[i].NetTime > 0)
                         {
                             <span>@rsri[i].NetTime.ToString("00")</span>
                         }
@@ -102,7 +106,13 @@
                     </div>
                 </div>
                 <div class="resultbody">
-                    @rsri[i].MainIngredients
+                    @if (rsri[i].CommercialInfo != null)
+                    {
+                        @rsri[i].CommercialInfo
+                    } else 
+                    {
+                        @rsri[i].MainIngredients
+                    }
                 </div>
                 <div class="resultfooter">
                     @if ((rsri[i].RatingCount == 0) || (!rsri[i].Rating.HasValue))

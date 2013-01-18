@@ -7,16 +7,13 @@ using MrKupido.Library.Provider;
 
 namespace MrKupido.Library.Recipe
 {
-    [NameAlias("hun", "Tolle füstölt trappista sajt")]
-
-    [CommercialProductOf(MadeBy = typeof(Tolle))]
-    public class TolleTrappista : Trappista
+    [CommercialProduct(Brand = typeof(Bakony))]
+    public class TrappistaC1 : Trappista
     {
-        public TolleTrappista(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+        public TrappistaC1(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
             : base(amount, unit)
         {
             RecipeUnknown();
         }
     }
-
 }

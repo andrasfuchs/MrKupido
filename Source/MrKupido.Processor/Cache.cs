@@ -32,7 +32,7 @@ namespace MrKupido.Processor
         {
             get
             {
-                if (!ingredientCache.WasInitialized) ingredientCache.Initialize();
+                if (!ingredientCache.WasInitialized) ingredientCache.Initialize("hun");
 
                 return ingredientCache;
             }
@@ -42,7 +42,7 @@ namespace MrKupido.Processor
         {
             get
             {
-                if (!recipeCache.WasInitialized) recipeCache.Initialize();
+                if (!recipeCache.WasInitialized) recipeCache.Initialize("hun");
 
                 return recipeCache;
             }
@@ -60,7 +60,7 @@ namespace MrKupido.Processor
         {
             get
             {
-                if (!equipmentCache.WasInitialized) equipmentCache.Initialize();
+                if (!equipmentCache.WasInitialized) equipmentCache.Initialize("hun");
 
                 return equipmentCache;
             }

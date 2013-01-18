@@ -77,7 +77,7 @@
   <ItemGroup>
     <Compile Include="Action\Active.cs" />
     <Compile Include="Action\Passive.cs" />
-    <Compile Include="Attributes\CommercialProductOfAttribute.cs" />
+    <Compile Include="Attributes\CommercialProductAttribute.cs" />
     <Compile Include="Attributes\ContainsGlutenAttribute.cs" />
     <Compile Include="Attributes\IconUriFragmentAttribute.cs" />
     <Compile Include="Attributes\IngredientConstsAttribute.cs" />

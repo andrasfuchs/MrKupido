@@ -102,7 +102,17 @@ namespace MrKupido.Processor.Model
                     {
                         ops[i] = operands[i].ToString();
                     }
-                }
+
+                    // remove commercial text { }
+                    int beforeStart = ops[i].IndexOf('{');
+                    int afterEnd = ops[i].LastIndexOf('}') + 1;
+
+                    if ((beforeStart >= 0) && (afterEnd >= 0))
+                    {
+                        ops[i] = ops[i].Remove(beforeStart, afterEnd - beforeStart).TrimEnd();
+                    }
+                }                
+
 
                 // ({x*})
                 int starIndex = 0;
@@ -144,15 +154,11 @@ namespace MrKupido.Processor.Model
                     string operand = null;
                     if (Char.IsNumber(operandId))
                     {
-                        object operandObj = operands[Int32.Parse(operandId.ToString())];
-
-                        if (operandObj != null)
-                        {
-                            operand = ((operandObj is IngredientGroup) ? ((IngredientGroup)operandObj).Name : operandObj.ToString());
-                        }
+                         operand = ops[Int32.Parse(operandId.ToString())];
                     }
                     else 
                     {
+                        // {}
                         operand = NameAliasAttribute.GetDefaultName(Operands[0].GetType());
                     }
 

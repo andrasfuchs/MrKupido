@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using MrKupido.Processor.Model;
 using MrKupido.Processor.Models;
+using MrKupido.Library.Attributes;
 
 namespace MrKupido.Processor
 {
@@ -36,7 +37,7 @@ namespace MrKupido.Processor
 
                 // normalize the tree is necessary
 
-                IEnumerable<RecipeTreeNode> q = Cache.Recipe.All.Where(r => r.IsImplemented);
+                IEnumerable<RecipeTreeNode> q = Cache.Recipe.All;//.Where(r => r.IsImplemented || r.CommercialAttribute != null);
 
                 foreach (FilterCondition fc in filters)
                 {
@@ -92,7 +93,13 @@ namespace MrKupido.Processor
                 // commercial products (level-1 only)
                 foreach (FilterCondition fc in filters)
                 {
-                    result.AddRange(fc.Node.Children.Cast<RecipeTreeNode>().Where(r => r.IsCommercial).ToArray());
+                    //foreach (CommercialProductAttribute cpa in ((RecipeTreeNode)fc.Node).CommercialProducts)
+                    //{
+                    //    RecipeTreeNode rtn = new RecipeTreeNode(fc.Node.ClassType);
+                    //    rtn.Parent = fc.Node;
+                    //    rtn.Children = null;
+                    //    rtn.CommercialAttribute = cpa;
+                    //}
                 }
 
 

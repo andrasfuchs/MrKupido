@@ -79,8 +79,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Recipes\Pizza\ParadicsomosAlapuPizza\MagyarosPizza\MagyarosPizzaPizzaEsTesztahazKecskemet.cs" />
-    <Compile Include="Recipes\Pizza\ParadicsomosAlapuPizza\MagyarosPizza\MagyarosPizzaClubPizzariaKecskemet.cs" />
+    <Compile Include="Ingrecs\Sajt\FustoltSajtC1.cs" />
+    <Compile Include="Ingrecs\Sajt\TrappistaC2.cs" />
+    <Compile Include="Ingrecs\Sajt\TrappistaC1.cs" />
+    <Compile Include="Ingrecs\Sajt\Trappista\FustrolTrappistaC1.cs" />
+    <Compile Include="Recipes\Pizza\ParadicsomosAlapuPizza\MagyarosPizzaC2.cs" />
+    <Compile Include="Recipes\Pizza\ParadicsomosAlapuPizza\MagyarosPizzaC1.cs" />
     <Compile Include="Recipes\TejszinesCsirkemellFuchs.cs" />
     <Compile Include="Ingrecs\FeherBor.cs" />
     <Compile Include="Recipes\FottRizs.cs" />
@@ -88,7 +92,7 @@
     <Compile Include="Ingrecs\Mazsola.cs" />
     <Compile Include="Ingrecs\Pudingpor.cs" />
     <Compile Include="Ingrecs\Rum.cs" />
-    <Compile Include="Ingrecs\Sajt\KaravanFustoltSajt.cs" />
+    <Compile Include="Ingrecs\Sajt\FustoltSajt.cs" />
     <Compile Include="Recipes\TejszinesCsirkemellMathe.cs" />
     <Compile Include="Ingrecs\Cukor\PorCukor.cs" />
     <Compile Include="Ingrecs\Cukor\VaniliasCukor.cs" />
@@ -98,7 +102,6 @@
     <Compile Include="Ingrecs\Sutopor.cs" />
     <Compile Include="Ingrecs\Cukor.cs" />
     <Compile Include="Ingrecs\Cukor\KristalyCukor.cs" />
-    <Compile Include="Ingrecs\Cukor\KristalyCukor\KoronasKristalyCukor.cs" />
     <Compile Include="Ingrecs\FelfuttatottEleszto.cs" />
     <Compile Include="Ingrecs\FustoltSzalonna.cs" />
     <Compile Include="Ingrecs\Kolbasz.cs" />
@@ -117,9 +120,7 @@
     <Compile Include="Ingrecs\Sajt\Ementali.cs" />
     <Compile Include="Ingrecs\Sajt\Mascarpone.cs" />
     <Compile Include="Ingrecs\Sajt\Trappista.cs" />
-    <Compile Include="Ingrecs\Sajt\Trappista\BakonyTrappista.cs" />
-    <Compile Include="Ingrecs\Sajt\Trappista\TihanyFustrolTrappista.cs" />
-    <Compile Include="Ingrecs\Sajt\Trappista\TolleTrappista.cs" />
+    <Compile Include="Ingrecs\Sajt\Trappista\FustrolTrappista.cs" />
     <Compile Include="Ingrecs\NaturJoghurt.cs" />
     <Compile Include="Ingrecs\Tejfol.cs" />
     <Compile Include="Ingrecs\Tejfol\MilliTejfol.cs" />

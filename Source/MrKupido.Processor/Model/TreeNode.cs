@@ -18,36 +18,46 @@ namespace MrKupido.Processor.Model
         //protected static MrKupidoContext db = new MrKupidoContext();
 
         [ScriptIgnore]
-        public TreeNode Parent { get; private set; }
+        public TreeNode Parent { get; protected set; }
         [ScriptIgnore]
         public TreeNode[] Children { get; set; }
 
         public char NodeType { get; private set; }
+        public string LanguageISO { get; private set; }
         public string UniqueName { get; protected set; }
         public string ShortName { get; protected set; }
         public string LongName { get; protected set; }
         public string ClassName { get; private set; }
         [ScriptIgnore]
         public Type ClassType { get; private set; }
-        public string FullClassName { get; private set; }
+        public string ClassFullName { get; private set; }
         public bool IsOpen { get; set; }
         public bool IsSelected { get; set; }
         public bool IsDisabled { get; set; }
         public string[] IconUrls { get; private set; }
         public string IconUrl { get; set; }
 
-        public TreeNode(Type nodeClass)
+        public TreeNode(Type nodeClass, string languageISO)
         {
+            LanguageISO = languageISO;
             ClassName = nodeClass.Name;
             ClassType = nodeClass;
-            FullClassName = nodeClass.FullName;
+            ClassFullName = nodeClass.FullName;
             Children = new TreeNode[0];
 
-            string name = NameAliasAttribute.GetDefaultName(nodeClass);
-            int bracketStart = name.IndexOf('[');
-            //int bracketEnd = bracketStart >= 0 ? name.IndexOf(']', bracketStart) : -1;
+            string name = NameAliasAttribute.GetDefaultName(nodeClass, LanguageISO);
+            
+            if (String.IsNullOrEmpty(name))
+            {
+                throw new MrKupidoException("Class '{0}' must have a name defined.", nodeClass.FullName);
+            }
 
-            ShortName = bracketStart == -1 ? name : name.Substring(0, bracketStart);
+            ShortName = name;
+            int bracketStart = name.IndexOf('[');
+            ShortName = bracketStart == -1 ? ShortName : ShortName.Substring(0, bracketStart);
+            bracketStart = ShortName.IndexOf('{');
+            ShortName = bracketStart == -1 ? ShortName : ShortName.Substring(0, bracketStart);
+
             LongName = name;
             UniqueName = LongName.ToUniqueString();
 
@@ -62,10 +72,10 @@ namespace MrKupido.Processor.Model
 
         private static T SetChilden<T>(T root, Dictionary<string, List<Type>> children, Func<Type, T> t2tn) where T : TreeNode
         {
-            if (children.ContainsKey(root.FullClassName))
+            if (children.ContainsKey(root.ClassFullName))
             {
-                root.Children = children[root.FullClassName].ConvertAll<T>(t => t2tn(t)).ToArray();
-                children.Remove(root.FullClassName);
+                root.Children = children[root.ClassFullName].ConvertAll<T>(t => t2tn(t)).ToArray();
+                children.Remove(root.ClassFullName);
 
                 foreach (T node in root.Children)
                 {

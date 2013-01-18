@@ -29,8 +29,10 @@ namespace MrKupido.Library.Attributes
             this.Priority = 100;
         }
 
-        public static string GetDefaultName(Type objType)
+        public static string GetDefaultName(Type objType, string languageISOCode = null)
         {
+            if (languageISOCode == null) languageISOCode = Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName;
+
             string result = null;
             int priority = Int32.MaxValue;
 
@@ -38,7 +40,7 @@ namespace MrKupido.Library.Attributes
             {
                 NameAliasAttribute name = (NameAliasAttribute)attr;
 
-                if (name.CultureName == Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName)
+                if (name.CultureName == languageISOCode)
                 {
                     if (name.Priority == priority)
                     {
@@ -53,6 +55,12 @@ namespace MrKupido.Library.Attributes
                 }
             }
 
+            string commercialShortName = CommercialProductAttribute.GetShortName(objType, languageISOCode);
+            if (String.IsNullOrEmpty(result) && !String.IsNullOrEmpty(commercialShortName) && (objType.BaseType != null))
+            {
+                result = NameAliasAttribute.GetDefaultName(objType.BaseType, languageISOCode) + " {" + commercialShortName + "}";
+            }
+
             if (String.IsNullOrEmpty(result))
             {
                 Trace.TraceWarning("Class '{0}' has no name defined in culture '{1}'.", objType.Name, Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName);
@@ -63,7 +71,7 @@ namespace MrKupido.Library.Attributes
 
         public static NameAliasAttribute[] GetNameAliases(MemberInfo objType, string languageISOCode)
         {
-            return objType.GetCustomAttributes(false).Where(na => (na is NameAliasAttribute) && ((NameAliasAttribute)na).CultureName == languageISOCode).Cast<NameAliasAttribute>().OrderByDescending(na => na.Priority).ToArray();
+            return objType.GetCustomAttributes(typeof(NameAliasAttribute), false).Where(na => ((NameAliasAttribute)na).CultureName == languageISOCode).Cast<NameAliasAttribute>().OrderByDescending(na => na.Priority).ToArray();
         }
 
         public static string GetMethodName(Type objType, string methodName)

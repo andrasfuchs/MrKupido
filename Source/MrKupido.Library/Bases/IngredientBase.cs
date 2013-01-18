@@ -10,6 +10,7 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("eng", "ingredient")]
     [NameAlias("hun", "hozzávaló")]
 
+    [IconUriFragment("default")]
     public class IngredientBase : MarshalByRefObject, IIngredient
     {
         private static Dictionary<string,object> staticInfoObjects = new Dictionary<string,object>();
@@ -181,35 +182,39 @@ namespace MrKupido.Library.Ingredient
             {
                 float amount = GetAmount();
 
-                switch (Unit)
+                if (amount > 0)
                 {
-                    case MeasurementUnit.piece:
-                        amountStr = (amount).ToString("0") + " db";
-                        break;
 
-                    case MeasurementUnit.portion:
-                        amountStr = (amount).ToString("0") + " adag";
-                        break;
+                    switch (Unit)
+                    {
+                        case MeasurementUnit.piece:
+                            amountStr = (amount).ToString("0") + " db";
+                            break;
 
-                    case MeasurementUnit.gramm:
-                        if (amount >= 1000) amountStr = (amount / 1000).ToString("0.0") + " kg";
-                        else if (amount >= 100) amountStr = (amount / 10).ToString("0") + " dkg";
-                        else if (amount >= 10) amountStr = (amount / 10).ToString("0.0") + " dkg";
-                        else amountStr = (amount).ToString("0.00") + " g";
-                        break;
+                        case MeasurementUnit.portion:
+                            amountStr = (amount).ToString("0") + " adag";
+                            break;
 
-                    case MeasurementUnit.liter:
-                        if (amount >= 1) amountStr = (amount).ToString("0.0") + " l";
-                        else if (amount >= 0.1) amountStr = (amount * 10).ToString("0") + " dl";
-                        else if (amount >= 0.01) amountStr = (amount * 10).ToString("0.0") + " dl";
-                        else amountStr = (amount * 100).ToString("0.00") + " cl";
-                        break;
+                        case MeasurementUnit.gramm:
+                            if (amount >= 1000) amountStr = (amount / 1000).ToString("0.0") + " kg";
+                            else if (amount >= 100) amountStr = (amount / 10).ToString("0") + " dkg";
+                            else if (amount >= 10) amountStr = (amount / 10).ToString("0.0") + " dkg";
+                            else amountStr = (amount).ToString("0.00") + " g";
+                            break;
 
-                    default:
-                        break;
+                        case MeasurementUnit.liter:
+                            if (amount >= 1) amountStr = (amount).ToString("0.0") + " l";
+                            else if (amount >= 0.1) amountStr = (amount * 10).ToString("0") + " dl";
+                            else if (amount >= 0.01) amountStr = (amount * 10).ToString("0.0") + " dl";
+                            else amountStr = (amount * 100).ToString("0.00") + " cl";
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    amountStr += " ";
                 }
-
-                if (amount > 0) amountStr += " ";
             }
             catch (AmountUnknownException)
             { 

@@ -8,7 +8,8 @@ namespace MrKupido.Library.Provider
 {
     public class Kecskemet : Hungary
     {
-        public Kecskemet()
+        public Kecskemet(string languageISO)
+            : base(languageISO)
         {
             this.County = "Bács-kiskun";
             this.Town = "Kecskemét";

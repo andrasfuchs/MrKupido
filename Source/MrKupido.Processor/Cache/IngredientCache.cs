@@ -17,9 +17,9 @@ namespace MrKupido.Processor
             }
         }
 
-        public void Initialize()
+        public void Initialize(string languageISO)
         {
-            IngredientTreeNode root = TreeNode.BuildTree(Cache.Assemblies, t => new IngredientTreeNode(t), typeof(MrKupido.Library.Ingredient.IngredientBase), typeof(MrKupido.Library.Recipe.RecipeBase));
+            IngredientTreeNode root = TreeNode.BuildTree(Cache.Assemblies, t => new IngredientTreeNode(t, languageISO), typeof(MrKupido.Library.Ingredient.IngredientBase), typeof(MrKupido.Library.Recipe.RecipeBase));
             Indexer = new Indexer(root);
 
             WasInitialized = true;

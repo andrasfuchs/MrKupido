@@ -16,8 +16,8 @@ namespace MrKupido.Processor.Model
         private NatureRelationAttribute taxonomyConnectionAttribute = null;
         public Type NatureConnectionClassType { set; get; }
 
-        public IngredientTreeNode(Type ingredientClass)
-            : base(ingredientClass)
+        public IngredientTreeNode(Type ingredientClass, string languageISO)
+            : base(ingredientClass, languageISO)
         {
             bool hasConnectionToTaxonomyTree = false;
 

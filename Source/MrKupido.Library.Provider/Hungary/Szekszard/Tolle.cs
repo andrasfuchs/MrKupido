@@ -7,12 +7,13 @@ namespace MrKupido.Library.Provider
 {
     public class Tolle : Szekszard
     {
-        public Tolle()
+        public Tolle(string languageISO)
+            : base(languageISO)
         {
             this.BrandName = "Tolle";
             this.CompanyName = "Tolnatej Zrt.";
             this.AddressLine = " Keselyűsi út 26.";
-            this.Website = new Uri("http://www.tolle.hu/");
+            this.WebsiteUrl = new Uri("http://www.tolle.hu/");
             this.FeedbackPhoneNumber = "+36 (74) 528-240";
         }
     }

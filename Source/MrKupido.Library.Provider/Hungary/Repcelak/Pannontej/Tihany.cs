@@ -7,7 +7,8 @@ namespace MrKupido.Library.Provider
 {
     public class Tihany : PannonTej
     {
-        public Tihany()
+        public Tihany(string languageISO)
+            : base(languageISO)
         {
             this.BrandName = "Tihany";
         }

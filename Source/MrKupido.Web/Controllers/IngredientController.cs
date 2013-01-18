@@ -23,10 +23,10 @@ namespace MrKupido.Web.Controllers
         {
             TreeNode[] result = new TreeNode[4];
 
-            result[0] = TreeNode.BuildTree(Cache.Assemblies, t => new NatureTreeNode(t), typeof(MrKupido.Library.Nature.NatureBase));
+            result[0] = TreeNode.BuildTree(Cache.Assemblies, t => new NatureTreeNode(t, "hun"), typeof(MrKupido.Library.Nature.NatureBase));
             result[1] = Cache.Ingredient["IngredientBase"];
-            result[2] = TreeNode.BuildTree(Cache.Assemblies, t => new RecipeTreeNode(t), typeof(MrKupido.Library.Recipe.RecipeBase));
-            result[3] = TreeNode.BuildTree(Cache.Assemblies, t => new EquipmentTreeNode(t), typeof(MrKupido.Library.Equipment.EquipmentBase));
+            result[2] = TreeNode.BuildTree(Cache.Assemblies, t => new RecipeTreeNode(t, "hun"), typeof(MrKupido.Library.Recipe.RecipeBase));
+            result[3] = TreeNode.BuildTree(Cache.Assemblies, t => new EquipmentTreeNode(t, "hun"), typeof(MrKupido.Library.Equipment.EquipmentBase));
 
             ValidateIconUrls(result);
             //ValidateIconUrls(new TreeNode[] { result[0] });

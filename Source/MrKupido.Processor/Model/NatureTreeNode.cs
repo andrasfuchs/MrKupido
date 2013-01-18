@@ -9,7 +9,7 @@ namespace MrKupido.Processor.Model
     {
         public NatureNodeType Type { set; get; }
 
-        public NatureTreeNode(Type natureClass) : base(natureClass)
+        public NatureTreeNode(Type natureClass, string languageISO) : base(natureClass, languageISO)
         {
             Type = NatureNodeType.None;
 

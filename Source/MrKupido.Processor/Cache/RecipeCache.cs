@@ -34,7 +34,7 @@ namespace MrKupido.Processor
             }
         }
 
-        public void Initialize()
+        public void Initialize(string languageISO)
         {
             if (Indexer != null) return;
 
@@ -61,7 +61,7 @@ namespace MrKupido.Processor
             }
 
             // build the recipe tree
-            RecipeTreeNode recipeRoot = TreeNode.BuildTree(assembliesToCheck.ToArray(), t => new RecipeTreeNode(t), typeof(MrKupido.Library.Recipe.RecipeBase));
+            RecipeTreeNode recipeRoot = TreeNode.BuildTree(assembliesToCheck.ToArray(), t => new RecipeTreeNode(t, languageISO), typeof(MrKupido.Library.Recipe.RecipeBase));
 
             // index the tree
             Indexer = new Indexer(recipeRoot);
@@ -180,7 +180,7 @@ namespace MrKupido.Processor
 
             //object newTypeInstance = dynamicDomain.CreateInstanceFromAndUnwrap(ad.FullName, td.FullName);
 
-            result = new RecipeTreeNode(ass.GetType(td.FullName));
+            result = new RecipeTreeNode(ass.GetType(td.FullName), null);
 
             //assembliesDynamic = dynamicDomain.GetAssemblies().OrderBy(a => a.FullName).ToArray();
             //assemblies = AppDomain.CurrentDomain.GetAssemblies().OrderBy(a => a.FullName).ToArray();

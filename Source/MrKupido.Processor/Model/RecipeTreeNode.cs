@@ -45,10 +45,10 @@ namespace MrKupido.Processor.Model
         public bool IsAbtract = false;
         public bool IsInline = false;
         public bool IsIngrec = false;
-        public bool IsCommercial = false;
+        public CommercialProductAttribute CommercialAttribute = null;
 
-        public RecipeTreeNode(Type recipeType)
-            : base(recipeType)
+        public RecipeTreeNode(Type recipeType, string languageISO)
+            : base(recipeType, languageISO)
         {
             int bracketStart = LongName.IndexOf('[');
             int bracketEnd = bracketStart >= 0 ? LongName.IndexOf(']', bracketStart) : -1;
@@ -96,9 +96,10 @@ namespace MrKupido.Processor.Model
                 IsIngrec = ica[0].IsIngrec;
             }
 
-            if (recipeType.GetCustomAttributes(typeof(CommercialProductOfAttribute), false).Length > 0)
+            CommercialProductAttribute[] commercialAttributes = (CommercialProductAttribute[])recipeType.GetCustomAttributes(typeof(CommercialProductAttribute), false);
+            if (commercialAttributes.Length > 0)
             {
-                IsCommercial = true;
+                CommercialAttribute = commercialAttributes[0];
             }
         }
 
@@ -109,6 +110,8 @@ namespace MrKupido.Processor.Model
         
         public IIngredient[] GetIngredients(float amount)
         {
+            if (!IsImplemented) return new IIngredient[0];
+
             lock (ingredientCache)
             {
                 if (!ingredientCache.ContainsKey(amount))
@@ -127,6 +130,8 @@ namespace MrKupido.Processor.Model
 
         public IDirection[] GetDirections(float amount)
         {
+            if (!IsImplemented) return new IDirection[0];
+
             if (!directionCache.ContainsKey(amount))
             {
                 directionCache.Add(amount, RecipeAnalyzer.GenerateDirections(this, 1.0f));

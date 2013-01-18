@@ -63,16 +63,13 @@ namespace MrKupido.Library.Recipe
 
             foreach (Type desc in typesToCheck)
             {
-                foreach (object attr in desc.GetCustomAttributes(false))
+                foreach (object attr in desc.GetCustomAttributes(typeof(CommercialProductAttribute), false))
                 {
-                    if (attr is CommercialProductOfAttribute)
+                    if (desc != this.GetType())
                     {
-                        if (desc != this.GetType())
-                        {
-                            Trace.TraceWarning("The recipe of '{0}' is unknown, so it is available only as commercial product. Please consider adding its recipe to the library.", this.GetType().Name);
-                        }
-                        return;
+                        Trace.TraceWarning("The recipe of '{0}' is unknown, so it is available only as commercial product. Please consider adding its recipe to the library.", this.GetType().Name);
                     }
+                    return;
                 }
             }
 
