@@ -17,6 +17,15 @@ namespace MrKupido.Processor
             }
         }
 
+        public IngredientTreeNode[] All
+        {
+            get
+            {
+                return Indexer.All.Cast<IngredientTreeNode>().ToArray();
+            }
+        }
+
+
         public void Initialize(string languageISO)
         {
             IngredientTreeNode root = TreeNode.BuildTree(Cache.Assemblies, t => new IngredientTreeNode(t, languageISO), typeof(MrKupido.Library.Ingredient.IngredientBase), typeof(MrKupido.Library.Recipe.RecipeBase));

@@ -233,6 +233,7 @@
     <Content Include="Content\images\browser_ie.png" />
     <Content Include="Content\images\browser_opera.png" />
     <Content Include="Content\images\browser_safari.png" />
+    <Content Include="Content\images\logo_mrkupido_wide.png" />
     <Content Include="Content\images\mrkupido.ico" />
     <Content Include="Content\Site.min.css">
       <DependentUpon>Site.css</DependentUpon>
@@ -315,7 +316,6 @@
     <Content Include="Content\svg\i_ham.svg" />
     <Content Include="Content\svg\i_honey.svg" />
     <Content Include="Content\svg\i_ingredient.svg" />
-    <Content Include="Content\svg\i_ingredients.svg" />
     <Content Include="Content\svg\i_milk.svg" />
     <Content Include="Content\svg\i_onion.svg" />
     <Content Include="Content\svg\i_paprika.svg" />
@@ -499,7 +499,6 @@
     <Content Include="Content\fonts\Tangerine\tangerinea-webfont.ttf" />
     <Content Include="Content\fonts\Tangerine\tangerinea_bold-webfont.eot" />
     <Content Include="Content\fonts\Tangerine\tangerinea_bold-webfont.ttf" />
-    <Content Include="Content\svg\logo_mrkupido_wide.svgz" />
     <None Include="Properties\PublishProfiles\HFL_beta.pubxml" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
@@ -690,7 +689,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.None" BuildVersion_UpdateFileVersion="False" BuildVersion_StartDate="1975/10/21" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="1975/10/21" BuildVersion_UpdateFileVersion="False" BuildVersion_BuildVersioningStyle="None.None.None.None" />
     </VisualStudio>
   </ProjectExtensions>
   <ItemGroup>

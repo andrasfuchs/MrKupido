@@ -31,7 +31,7 @@ namespace MrKupido.Web.Controllers
             result[4] = rtn.GetDirections(1.0f);
             result[5] = rtn.GetNutritions(1.0f);
 
-            foreach (RecipeDirection direction in (RecipeDirection[])result[4])
+            foreach (RecipeDirection direction in (IDirection[])result[4])
             {
                 if (direction.IconUrl == null) direction.IconUrl = PathUtils.GetActualUrl(direction.IconUrls);
 

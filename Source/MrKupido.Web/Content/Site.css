@@ -245,6 +245,14 @@ header, footer, nav, section {
     margin-right: 71px;
 }
 
+.searchbox #querySign {
+    position: absolute;
+    margin-left: 3px;
+    margin-top: 5px;
+    font-size: 24px;
+}
+
+
 .searchbox div#filters {
     float: right;
     width: 540px;
@@ -368,7 +376,7 @@ details summary h2 {
     width: auto;
     text-align: right;
     margin: -35px 10px 10px 0;
-    background: Transparent;
+    background: ;
 }
 
 details summary h3 {
@@ -490,6 +498,9 @@ details li.text {
     width: auto;
     text-align: center;
     line-height: 30px;
+
+    -moz-opacity: 1.0;
+    opacity: 1.0;
 }
 
 details.alwaysopen summary {
@@ -593,7 +604,7 @@ details#searchresults div.resultbox div.resulthead span.titlecontent {
     word-wrap: break-word;
 }
 
-details li:not(.disabled .text):hover, details li:not(.disabled):focus {
+details li:not(.disabled):hover, details li:not(.disabled):focus {
     border: 1px solid /*mcd*/ #553e31;
 }
 

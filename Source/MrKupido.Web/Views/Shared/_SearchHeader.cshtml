@@ -5,7 +5,7 @@
     var lastItemDisplayString = "";
 
     $(function () {
-        $("#query").keyup(function (e) {
+        $("#query").keydown(function (e) {
             lastItemDisplayString = "";
 
             var code = e.which; // recommended to use e.which, it's normalized across browsers
@@ -16,34 +16,53 @@
 
             if (code == 32 || code == 13 || code == 188 || code == 186) {
                 doSearch();
+                e.preventDefault();
             } // missing closing if brace
+
+            // switch to positive query
+            if (code == 107 || code == 189) {
+                $("#querySign").html("+");
+                e.preventDefault();
+            }
+
+            // switch to negative query
+            if (code == 109 || code == 189) {
+                $("#querySign").html("-");
+                e.preventDefault();
+            }
 
             if (this.value == "") {
                 // left or page up
                 if (code == 37 || code == 33) {
                     $("#pageprev").trigger("onclick");
+                    e.preventDefault();
                 }
                 // right or page down
                 if (code == 39 || code == 34) {
                     $("#pagenext").trigger("onclick");
+                    e.preventDefault();
                 }
                 // home
                 if (code == 36) {
                     $("#pagefirst").trigger("onclick");
+                    e.preventDefault();
                 }
                 // end
                 if (code == 35) {
                     $("#pagelast").trigger("onclick");
+                    e.preventDefault();
                 }
                 // del
                 if (code == 46) {
                     deleteFilter("!first");
+                    e.preventDefault();
                 }
                 // backspace
                 if (code == 8) {
                     deleteFilter("!last");
+                    e.preventDefault();
                 }
-                e.preventDefault();
+                
             }
         });
 
@@ -114,7 +133,8 @@
             dataType: "json",
             data: {
                 selectedValue: ui.item ? ui.item.value : this.value,
-                wasItemSelected: ui.item != null
+                wasItemSelected: ui.item != null,
+                isNegative: $("#querySign").html() == "-"
             },
             success: function (data) {
                 refreshFilters(data);
@@ -176,7 +196,7 @@
     }
 
     $(document).ready(function () {
-        var knownLocation = "@(Session["Location"] as string)";
+        var knownLocation = "@(new HtmlString(Session["Location"] as string))";
 
         if (knownLocation == "")
         {
@@ -286,6 +306,7 @@
     <p class="inputfield">
         <label for="query">
             Keresnivaló:</label>
+        <span id="querySign">+</span>
         <input id="query" type="search" placeholder="(hozzávaló, diéta, eszköz)" autofocus />
     </p>
     <div id="deleteall">

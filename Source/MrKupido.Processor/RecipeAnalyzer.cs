@@ -25,7 +25,7 @@ namespace MrKupido.Processor
             ingredients.Clear();
 
             RunRecipe(rtn, amount);
-            
+
             return ingredients.ToArray();
         }
 
@@ -48,17 +48,35 @@ namespace MrKupido.Processor
                 IngredientBase item = ingredients.FirstOrDefault(i => (i.Name == ib.Name) && (i.Unit == ib.Unit));
 
                 if (item == null)
-                { 
-                    if ((rtn == null) || (!rtn.IsInline)) ingredients.Add(ib);
+                {
+                    if ((rtn == null) || (!rtn.IsInline))
+                    {
+                        ingredients.Add(ib);
+                    }
                 } else item.Add(ib);
             }
 
             if (returnedObject is RecipeBase)
             {
-                // if the recipe is inline then we need to run it
+                // if the recipe is inline then we need to run it (without the serving part)
                 if ((rtn != null) && (rtn.IsInline))
                 {
-                    RunRecipe(rtn, rb.Portion);
+                    //RunRecipe(rtn, rb.Portion);
+                    if (rtn.SelectEquipment != null)
+                    {
+                        stage = RecipeStage.EquipmentSelection;
+                        EquipmentGroup eg = rtn.SelectEquipment(rb.Portion);
+                        if (rtn.Prepare != null)
+                        {
+                            stage = RecipeStage.Preparation;
+                            PreparedIngredients preps = rtn.Prepare(rb.Portion, eg);
+                            if (rtn.Cook != null)
+                            {
+                                stage = RecipeStage.Cooking;
+                                CookedFoodParts cfp = rtn.Cook(rb.Portion, preps, eg);
+                            }
+                        }
+                    }
                 }
             }
 

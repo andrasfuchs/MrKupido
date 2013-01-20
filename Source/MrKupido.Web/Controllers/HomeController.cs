@@ -55,7 +55,7 @@ namespace MrKupido.Web.Controllers
         }
 
         [HttpPost]
-        public JsonResult SearchSelected(string selectedValue, bool wasItemSelected)
+        public JsonResult SearchSelected(string selectedValue, bool wasItemSelected, bool isNegative)
         {
             if (Session["filters"] == null) Session["filters"] = new List<FilterCondition>();
 
@@ -64,21 +64,16 @@ namespace MrKupido.Web.Controllers
             TreeNode tn = null;
             if (wasItemSelected)
             {
-                if ((selectedValue[3] != '-') && (selectedValue[3] != '+'))
-                {
-                    selectedValue = selectedValue.Substring(0, 2) + "+_" + selectedValue.Substring(2);
-                }
-
                 char nodeType = selectedValue[0];
 
                 switch (nodeType)
                 {
                     case 'I':
-                        tn = Cache.Ingredient[selectedValue.Substring(4)];
+                        tn = Cache.Ingredient[selectedValue.Substring(2)];
                         break;
 
                     case 'R':
-                        tn = Cache.Recipe[selectedValue.Substring(4)];
+                        tn = Cache.Recipe[selectedValue.Substring(2)];
                         break;
                 }
             }
@@ -86,7 +81,7 @@ namespace MrKupido.Web.Controllers
 
             if (tn != null)
             {
-                FilterCondition fli = new FilterCondition(tn, false);
+                FilterCondition fli = new FilterCondition(tn, isNegative);
 
                 if (filters.Count(f => f.Value == fli.Value) == 0)
                 {

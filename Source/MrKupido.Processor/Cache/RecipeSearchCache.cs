@@ -35,7 +35,7 @@ namespace MrKupido.Processor
 
                 // insert the results into the search tree
 
-                // normalize the tree is necessary
+                // normalize the tree if necessary
 
                 IEnumerable<RecipeTreeNode> q = Cache.Recipe.All;//.Where(r => r.IsImplemented || r.CommercialAttribute != null);
 
@@ -45,17 +45,7 @@ namespace MrKupido.Processor
 
                     FilterCondition tempFC = fc;
 
-                    if (tempFC.Node is IngredientTreeNode)
-                    {
-                        q = q.Where(r => r.GetIngredients(1.0f).Any(i => i.GetType() == tempFC.Node.ClassType));
-                    } else if (tempFC.Node is RecipeTreeNode)
-                    {
-                        q = q.Where(r => (r.ClassType == tempFC.Node.ClassType) || (r.ClassType.IsSubclassOf(tempFC.Node.ClassType)));
-                    }
-                    else 
-                    { 
-                        // TODO: implement non-ingredient filters
-                    }
+                    q = q.Where(r => r.SearchStrings.Any(iun => iun == tempFC.SearchString));
                 }
 
                 result = q.ToList();
@@ -70,38 +60,13 @@ namespace MrKupido.Processor
 
                     for (int i = 0; i < result.Count(); i++)
                     {
-
-                        if (tempFC.Node is IngredientTreeNode)
+                        if (result[i].SearchStrings.Any(iun => iun == tempFC.SearchString))
                         {
-                            if (result[i].GetIngredients(1.0f).Any(ing => ing.GetType() == tempFC.Node.ClassType))
-                            {
-                                result.RemoveAt(i);
-                            }
-                        }
-                        else if (tempFC.Node is RecipeTreeNode)
-                        {
-                            // TODO: implement negative recipe filters
-                        }
-                        else
-                        {
-                            // TODO: implement negative non-ingredient filters
+                            result.RemoveAt(i);
                         }
                     }
 
                 }
-
-                // commercial products (level-1 only)
-                foreach (FilterCondition fc in filters)
-                {
-                    //foreach (CommercialProductAttribute cpa in ((RecipeTreeNode)fc.Node).CommercialProducts)
-                    //{
-                    //    RecipeTreeNode rtn = new RecipeTreeNode(fc.Node.ClassType);
-                    //    rtn.Parent = fc.Node;
-                    //    rtn.Children = null;
-                    //    rtn.CommercialAttribute = cpa;
-                    //}
-                }
-
 
                 searchResults[languageISO][filterKey].Results = result;
                 searchResults[languageISO][filterKey].SearchFinishedAt = DateTime.Now;

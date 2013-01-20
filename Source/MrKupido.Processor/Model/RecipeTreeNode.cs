@@ -9,6 +9,7 @@ using MrKupido.Library;
 using MrKupido.Library.Recipe;
 using System.Web.Script.Serialization;
 using MrKupido.Library.Attributes;
+using MrKupido.Library.Ingredient;
 
 namespace MrKupido.Processor.Model
 {
@@ -40,6 +41,9 @@ namespace MrKupido.Processor.Model
 
         [ScriptIgnore]
         public Type RecipeType { get; private set; }
+
+        [ScriptIgnore]
+        public string[] SearchStrings { get; private set; }
 
         public bool IsImplemented = false;
         public bool IsAbtract = false;
@@ -101,6 +105,8 @@ namespace MrKupido.Processor.Model
             {
                 CommercialAttribute = commercialAttributes[0];
             }
+
+            SearchStrings = new string[0];
         }
 
         public string[] GetTags()
@@ -110,15 +116,59 @@ namespace MrKupido.Processor.Model
         
         public IIngredient[] GetIngredients(float amount)
         {
-            if (!IsImplemented) return new IIngredient[0];
-
             lock (ingredientCache)
             {
                 if (!ingredientCache.ContainsKey(amount))
                 {
-                    ingredientCache.Add(amount, RecipeAnalyzer.GenerateIngredients(this, 1.0f));
+                    if (!IsImplemented)
+                    {
+                        ingredientCache.Add(amount, new IIngredient[0]);
+                    }
+                    else
+                    {
+                        ingredientCache.Add(amount, RecipeAnalyzer.GenerateIngredients(this, 1.0f));
+                    }
                 }
             }
+
+            if (SearchStrings.Length == 0)
+            {
+                List<string> ingredientsForSearch = new List<string>();
+
+                // add this class and its parent
+                ingredientsForSearch.Add(this.NodeType + ":" + this.UniqueName);
+
+                TreeNode currentParent = this.Parent;
+                while (currentParent != null)
+                {
+                    ingredientsForSearch.Add(currentParent.NodeType + ":" + currentParent.UniqueName);
+                    // also add all the grandparents if it's not a commercial product
+                    if (this.CommercialAttribute != null) break;
+
+                    currentParent = currentParent.Parent;
+                }
+
+                // add all ingredients and all of their parents to the ingredientsForSearch collection
+                foreach (IngredientBase ib in ingredientCache[amount])
+                {
+                    IngredientBase currentIb = ib;
+                    string ibTypeFullName = ib.GetType().FullName;
+
+                    TreeNode itn = Cache.Ingredient.All.FirstOrDefault(tn => tn.ClassType.FullName == ibTypeFullName);
+                    if (itn == null) itn = Cache.Recipe.All.FirstOrDefault(tn => tn.ClassType.FullName == ibTypeFullName);
+
+                    while (itn != null)
+                    {
+                        ingredientsForSearch.Add(itn.NodeType + ":" + itn.UniqueName);
+
+                        itn = itn.Parent;
+                    }
+                }
+
+                this.SearchStrings = ingredientsForSearch.ToArray();
+            }
+
+
 
             return ingredientCache[amount];
         }
