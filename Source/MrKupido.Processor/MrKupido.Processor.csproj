@@ -120,6 +120,8 @@
     <Compile Include="Model\NatureTreeNode.cs" />
     <Compile Include="Model\NutritionInfo.cs" />
     <Compile Include="Model\RecipeDirection.cs" />
+    <Compile Include="Model\RecipeDirectionSegment.cs" />
+    <Compile Include="Model\RecipeDirectionSegmentReference.cs" />
     <Compile Include="Model\RecipeMethod.cs" />
     <Compile Include="Model\RecipeSearchInstance.cs" />
     <Compile Include="Model\RecipeTreeNode.cs" />
@@ -147,6 +149,10 @@
     <ProjectReference Include="..\MrKupido.Model\MrKupido.Model.csproj">
       <Project>{35A67DC3-381C-43E3-B424-6C170E216D49}</Project>
       <Name>MrKupido.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MrKupido.Utils\MrKupido.Utils.csproj">
+      <Project>{00dae49e-6106-4252-902d-aacc3d4018d2}</Project>
+      <Name>MrKupido.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -183,12 +183,14 @@
     <Compile Include="Ingredient\Egg\TojasFeherje.cs" />
     <Compile Include="Ingredient\Egg\TojasSargaja.cs" />
     <Compile Include="Interfaces\IDirection.cs" />
+    <Compile Include="Interfaces\IDirectionSegment.cs" />
     <Compile Include="Interfaces\IIngredientContainer.cs" />
     <Compile Include="Interfaces\IEquipment.cs" />
     <Compile Include="Interfaces\IIngredient.cs" />
     <Compile Include="Bases\IngredientBase.cs" />
     <Compile Include="Enums\IngredientCategory.cs" />
     <Compile Include="Interfaces\INutritionInfo.cs" />
+    <Compile Include="Interfaces\RecipeDirectionSegment.cs" />
     <Compile Include="Model\CookedFoodParts.cs" />
     <Compile Include="Model\Dimensions.cs" />
     <Compile Include="Model\EnumToMultilingualString.cs" />

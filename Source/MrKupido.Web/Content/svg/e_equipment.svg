@@ -5,46 +5,51 @@
 	 height="32px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" xml:space="preserve">
 <g id="Layer_1">
 	<g>
-		<path fill="none" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M22.487,23.992
-			c0,0-0.164-0.66,1.178,0c1.341,0.66,0.082,2.364,1.45,2.42c1.368,0.055,2.3-1.21,3.97-1.348"/>
-		<path fill="#CDB8AB" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M12.441,13.13
-			l-2.053,11.082c0,0-5.21,0.88-5.694,3.162c-0.342,1.619-0.228,2.979,1.068,3.575c1.316,0.605,3.34,1.072,8.074-0.633
-			c4.736-1.705,6.57-2.667,7.638-3.52s1.122-1.155,1.122-2.145c0-0.99-0.055-11.853-0.055-11.853l-8.403-0.55L12.441,13.13z"/>
-		<path fill="#CDB8AB" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M22.46,13.652
-			c0,0-1.204,0.742-5.994-2.145C11.675,8.62,7.46,6.2,7.952,5.76c0.492-0.439,2.592-0.87,2.592-0.87l11.26,6.976L22.46,13.652z"/>
-		<polygon fill="#CDB8AB" points="19.668,10.999 18.847,14.643 22.351,13.693 21.804,11.865 		"/>
-		<path fill="#CDB8AB" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M14.175,10.125
-			l-1.692,2.923L18.519,15c0,0,0.807-3.148,1.081-3.781C19.106,11.026,14.175,10.125,14.175,10.125z"/>
+		<path fill="none" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M25.111,24.868
+			c0,0-0.203-0.813,1.461,0c1.662,0.813-0.161,2.097,1.533,2.166c1.697,0.067,1.323-0.214,3.395-0.384"/>
+		<path fill="#CDB8AB" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M15.804,13.399
+			l-0.42,11.164c0,0-11.937-0.166-12.819,3.221c-0.441,1.692,1.21,2.47,2.516,2.876c2.506,0.779,5.292,1.471,11.163-0.628
+			c5.874-2.099,9.004-3.133,9.004-4.351c0-1.219-0.067-14.588-0.067-14.588l-7.358-0.071L15.804,13.399z"/>
+		<path fill="#CDB8AB" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M25.078,13.884
+			c0,0-1.493,0.914-7.434-2.639C11.702,7.691,6.476,4.712,7.085,4.17c0.61-0.541,3.216-1.071,3.216-1.071l13.964,8.585
+			L25.078,13.884z"/>
+		<polygon fill="#CDB8AB" points="21.616,10.619 20.598,15.103 24.943,13.935 24.265,11.685 		"/>
+		<path fill="#CDB8AB" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M19.009,9.656
+			l-3,3.406l4.182,2.48c0,0,2.103-3.077,2.443-3.855C22.021,11.451,19.009,9.656,19.009,9.656z"/>
 		
-			<line fill="#EBE0D5" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="22.46" y1="13.652" x2="18.354" y2="14.89"/>
+			<line fill="#EBE0D5" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="24.921" y1="13.86" x2="20.267" y2="15.408"/>
 		
-			<ellipse fill="#CDB8AB" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="20.653" cy="23.364" rx="0.832" ry="1.182"/>
-		<path fill="none" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M18.929,14.505
-			c0,0-0.319,7.488-0.383,9.02c-0.072,1.746-0.43,3.104-3.99,4.538c-3.647,1.469-7.159,1.732-8.793,0.77
-			c-1.332-0.785-1.113-1.21-1.113-1.21"/>
+			<ellipse fill="#CDB8AB" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="22.838" cy="24.096" rx="1.031" ry="1.453"/>
+		<path fill="none" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M20.512,15.428
+			c0,0-0.21,6.979-0.288,8.865c-0.09,2.148-0.532,3.82-4.947,5.585c-4.525,1.809-9.36,0.885-11.386-0.3
+			c-1.653-0.966-1.383-1.489-1.383-1.489"/>
 		
-			<ellipse fill="#EBE0D5" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="20.681" cy="20.271" rx="0.328" ry="0.426"/>
+			<ellipse fill="#EBE0D5" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="22.872" cy="20.288" rx="0.407" ry="0.523"/>
 		
-			<ellipse fill="#EBE0D5" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="20.681" cy="18.148" rx="0.328" ry="0.426"/>
-		<path fill="#EBE0D5" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M2.692,18.642
-			c0,0,1.1,6.459,3.294,7.719c2.195,1.26,3.972,1.208,5.199,0.919c1.229-0.289,3.058-1.339,3.841-3.202
-			c0.784-1.864,1.646-4.715,1.672-5.687C15.862,18.417,2.692,18.642,2.692,18.642z"/>
+			<ellipse fill="#EBE0D5" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="22.872" cy="17.677" rx="0.407" ry="0.523"/>
+		<path fill="#CDB8AB" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M0.563,19.734
+			c0,0,1.362,6.891,4.086,8.234c2.721,1.343,4.925,1.288,6.447,0.979c1.521-0.308,3.792-1.428,4.764-3.415
+			c0.971-1.988,2.04-5.029,2.073-6.066C16.897,19.494,0.563,19.734,0.563,19.734z"/>
 		
-			<ellipse fill="#CDB8AB" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="9.684" cy="18.224" rx="7.041" ry="2.914"/>
-		<path fill="none" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M10.599,11.215
-			c0,0-3.412,1.91-4.185,4.575c-0.298,1.031-0.28,2.997,1.278,3.605c1.559,0.609,2.198,0.261,2.711-0.296
-			c0.979-1.065,1.541-3.818,0.811-7.561L10.599,11.215z"/>
-		<path fill="none" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M10.74,11.557
-			c0,0-4.161,4.443-3.011,7.766"/>
-		<path fill="none" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M10.831,11.574
-			c0,0-0.563,6.856-2.609,7.97"/>
-		<path fill="none" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M7.269,19.455"/>
-		<path fill="none" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M9.95,11.205"/>
-		<path fill="#553E31" d="M11.444,7.594c-0.09,0.223-1.434,4.066-1.434,4.066l1.313,0.567c0,0,1.223-3.23,1.404-3.765
-			C12.962,7.776,11.608,7.182,11.444,7.594z"/>
-		<path fill="#EBE0D5" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M10.224,0.782
-			L7.952,5.76c0,0,1.332-1.045,4.836,1.128s9.426,5.638,9.672,6.765c0.355-1.375,1.725-5.72,1.725-5.72s-0.036-0.688-0.063-1.045
-			S24.021,6.2,23.966,5.925C23.911,5.65,15.097,0.838,12.989,0.59C10.882,0.343,10.58,0.673,10.224,0.782z"/>
+			<ellipse fill="#EBE0D5" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="9.233" cy="19.336" rx="8.733" ry="3.587"/>
+		
+			<path fill="#CDB8AB" stroke="#553E31" stroke-width="1.0241" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M10.525,10.71c0,0-4.438,2.35-5.443,5.631c-0.387,1.268-0.364,3.689,1.665,4.438c2.027,0.749,2.857,0.321,3.524-0.364
+			c1.275-1.312,2.005-4.699,1.055-9.305L10.525,10.71z"/>
+		
+			<path fill="none" stroke="#553E31" stroke-width="1.0241" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M10.708,11.131c0,0-5.41,5.468-3.913,9.558"/>
+		
+			<path fill="none" stroke="#553E31" stroke-width="1.0241" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M10.828,11.152c0,0-0.731,8.439-3.393,9.81"/>
+		<path fill="none" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M6.239,19.284"/>
+		<path fill="none" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M9.144,10.698"/>
+		<path fill="#553E31" d="M11.624,6.254c-0.115,0.274-1.862,5.004-1.862,5.004l1.707,0.699c0,0,1.589-3.976,1.825-4.633
+			C13.599,6.479,11.839,5.747,11.624,6.254z"/>
+		<path fill="#EBE0D5" stroke="#553E31" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="M8.474,1.348
+			L7.085,4.17c0,0,1.653-1.287,5.997,1.388c4.346,2.674,11.69,6.939,11.996,8.326c0.44-1.692,0.294-3.187,0.294-3.187
+			s-0.046-0.847-0.079-1.287c-0.035-0.44-0.124-0.846-0.192-1.185c-0.068-0.338-10.584-7.27-13.197-7.575
+			C9.29,0.347,8.684,1.036,8.474,1.348z"/>
 	</g>
 </g>
 <g id="Layer_3">

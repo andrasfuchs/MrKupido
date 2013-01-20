@@ -50,7 +50,7 @@ namespace MrKupido.Library.Recipe
             edeny.Varni(30);
 
             NyujtoDeszka nyd = eg.Use<NyujtoDeszka>();
-            teszta = nyd.Nyujtani(teszta, 5);
+            teszta = nyd.Nyujtani(edeny, 5);
 
             Szaggato szaggato = eg.Use<Szaggato>();
             IIngredient tesztadarabok = szaggato.Kiszaggatni(teszta, 40, 10);

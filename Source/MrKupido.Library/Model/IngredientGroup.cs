@@ -11,6 +11,25 @@ namespace MrKupido.Library.Ingredient
 
     public class IngredientGroup : IngredientBase, IIngredient, IEnumerable<IIngredient>
     {
+        private int id;
+        public int Id
+        {
+            set
+            {
+                if (!IconUrl.Contains("{0}")) throw new MrKupidoException("The ID of an ingredientgroup should be set only once.");
+
+                id = value;
+                IconUrl = IconUrl.Replace("{0}", id.ToString("00"));
+            }
+
+            get
+            {
+                return id;
+            }
+        }
+
+        public string IconUrl { get; set; }
+
         private List<IIngredient> ingredients = new List<IIngredient>();
 
         public IIngredient[] Ingredients
@@ -59,6 +78,8 @@ namespace MrKupido.Library.Ingredient
                 }
                 SetAmount(amount, this.Unit);
             }
+
+            IconUrl = "~/Content/svg/inggroup_{0}.svg";
         }
 
         public IngredientGroup Clone(float amount, MeasurementUnit unit)

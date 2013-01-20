@@ -13,12 +13,12 @@
 				S1.667,0.563,1.356,0.737C1.044,0.911,0.889,1.123,1.143,1.471C1.143,1.471,10.057,11.263,11.108,12.307z"/>
 		</defs>
 		<use xlink:href="#XMLID_1_"  overflow="visible" fill="#EBE0D5"/>
-		<clipPath id="XMLID_3_">
+		<clipPath id="XMLID_27_">
 			<use xlink:href="#XMLID_1_"  overflow="visible"/>
 		</clipPath>
-		<polygon clip-path="url(#XMLID_3_)" fill="#EBE0D5" stroke="#553E31" stroke-width="1.2512" stroke-miterlimit="10" points="
+		<polygon clip-path="url(#XMLID_27_)" fill="#EBE0D5" stroke="#553E31" stroke-width="1.2512" stroke-miterlimit="10" points="
 			15.409,12.164 11.225,13.632 15.74,13.206 		"/>
-		<path clip-path="url(#XMLID_3_)" fill="#553E31" d="M11.459,13.001c0,0,2.141,1.043,3.522,2.665
+		<path clip-path="url(#XMLID_27_)" fill="#553E31" d="M11.459,13.001c0,0,2.141,1.043,3.522,2.665
 			c1.382,1.623,2.824,3.41,4.38,5.273c1.596,1.912,3.496,4.311,4.282,5.406c0.817,1.141,1.985,2.82,2.842,3.109
 			c0.856,0.291,1.713,0.426,2.472,0.367c0.759-0.057,1.109-0.193,1.402-0.637c0.291-0.445,0.311-1.023-0.02-1.545
 			c-0.331-0.521,0.272-0.445,0.272-0.445l1.46,1.334l-0.624,2.607c0,0-2.102,0.365-2.082,0.424s-2.238,0.137-2.238,0.137

@@ -18,6 +18,7 @@ namespace MrKupido.Processor
         private static List<IngredientBase> ingredients = new List<IngredientBase>();
         private static List<RecipeDirection> directions = new List<RecipeDirection>();
         private static RecipeStage stage = RecipeStage.Unknown;
+        private static int IdCounter;
 
         public static IIngredient[] GenerateIngredients(RecipeTreeNode rtn, float amount)
         {
@@ -66,11 +67,13 @@ namespace MrKupido.Processor
 
         public static void DirectionGenerator(string assemblyFullName, string methodFullName, object[] parameters, object result)
         {
-            directions.Add(new RecipeDirection(assemblyFullName, methodFullName, parameters, result, stage, 1));
+            directions.Add(new RecipeDirection(ref IdCounter, assemblyFullName, methodFullName, parameters, result, stage, 1));
         }
 
         public static RecipeDirection[] GenerateDirections(RecipeTreeNode rtn, float amount)
         {
+            IdCounter = 0;
+
             directions.Clear();
             
             RunRecipe(rtn, amount);

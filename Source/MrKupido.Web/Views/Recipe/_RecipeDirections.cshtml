@@ -7,10 +7,10 @@ else
 { 
     <ul id="directions">
         @{ 
-            int i = 0;
-            TimeSpan time = new TimeSpan();
-           foreach (MrKupido.Library.IDirection dir in Model)
-           {
+    int i = 0;
+    TimeSpan time = new TimeSpan();
+    foreach (MrKupido.Library.IDirection dir in Model)
+    {
             <li><span class="stage">
                 @if (dir.Stage == MrKupido.Library.RecipeStage.Preparation)
                 {
@@ -27,15 +27,36 @@ else
             </span>
                 <span class="time">@Math.Floor(time.TotalHours).ToString("00"):@time.Minutes.ToString("00")</span>
                 <span class="timer">
-                    <img runat="server" src="~/Content/svg/d_clock@(i++%9).svg" alt="1 perc" width="60px" height="60px" />
-                <span class="action">
-                    <img runat="server" src="@dir.IconUrl" alt="1 perc" width="60px" height="60px" />
+                    <img runat="server" src="~/Content/svg/d_clock@(i++ % 9).svg" alt="1 perc" width="60px" height="60px" />
+                    <span class="action">
+                        <img runat="server" src="@dir.IconUrl" alt="1 perc" width="60px" height="60px" />
+                    </span>
                 </span>
-                </span>
-                <div class="direction"><span class="directioncontent">@dir</span></div>
+                <div class="direction">
+                    <span class="directioncontent">
+                        @foreach (MrKupido.Library.IDirectionSegment segment in dir.DirectionSegments)
+                        {
+                            if (segment is MrKupido.Processor.Model.RecipeDirectionSegmentReference)
+                            {
+                                MrKupido.Processor.Model.RecipeDirectionSegmentReference refSegment = (MrKupido.Processor.Model.RecipeDirectionSegmentReference)segment;
+
+                                if (!String.IsNullOrEmpty(refSegment.IconUrl))
+                                {
+                                    <img runat="server" src="@refSegment.IconUrl" alt="@refSegment.Id" title="@refSegment.Id" width="32px" height="32px"/>
+                                }
+
+                                @refSegment.Text
+                            }
+                            else
+                            {
+                                @segment
+                            }
+                        }
+                    </span>
+                </div>
             </li>
-                time = time + dir.TimeToComplete;
-           }
+                        time = time + dir.TimeToComplete;
+    }
         }
     </ul>
 }

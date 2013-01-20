@@ -98,5 +98,23 @@ namespace MrKupido.Utils
             return result;
         }
 
+        public static bool IsVowel(char letter)
+        {
+            return
+                letter == 'a' ||
+                letter == 'á' ||
+                letter == 'e' ||
+                letter == 'é' ||
+                letter == 'i' ||
+                letter == 'í' ||
+                letter == 'o' ||
+                letter == 'ó' ||
+                letter == 'ö' ||
+                letter == 'ő' ||
+                letter == 'u' ||
+                letter == 'ú' ||
+                letter == 'ü' ||
+                letter == 'ű';
+        }
     }
 }

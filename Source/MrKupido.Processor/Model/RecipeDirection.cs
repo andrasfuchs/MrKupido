@@ -6,6 +6,9 @@ using MrKupido.Library;
 using MrKupido.Library.Ingredient;
 using MrKupido.Library.Attributes;
 using System.Reflection;
+using MrKupido.Library.Equipment;
+using System.Collections;
+using MrKupido.Utils;
 
 namespace MrKupido.Processor.Model
 {
@@ -27,8 +30,9 @@ namespace MrKupido.Processor.Model
         public string[] IconUrls { get; private set; }
         public string IconUrl { get; set; }
         public bool IsPassive { get; private set; }
+        public IDirectionSegment[] DirectionSegments { get; private set; }
 
-        public RecipeDirection(string assemblyName, string command, object[] operands = null, object result = null, RecipeStage stage = RecipeStage.Unknown, int actorIndex = 1)
+        public RecipeDirection(ref int idCounter, string assemblyName, string command, object[] operands = null, object result = null, RecipeStage stage = RecipeStage.Unknown, int actorIndex = 1)
         {
             ActorIndex = actorIndex;
             Stage = stage;
@@ -43,11 +47,23 @@ namespace MrKupido.Processor.Model
                 IEquipment eq = ((IEquipment)operands[0]);
                 ActionDuration = eq.LastActionDuration;
                 TimeToComplete = new TimeSpan(0, 0, (int)eq.LastActionDuration);
+
+                if (eq is Container)
+                {
+                    if (((Container)eq).Id == 0)
+                    {
+                        ((Container)eq).Id = ++idCounter;
+                    }
+                }
             }
 
             if (result is IngredientGroup)
             {
                 Alias = ((IngredientGroup)result).Name;
+                if (((IngredientGroup)result).Id == 0)
+                {
+                    ((IngredientGroup)result).Id = ++idCounter;
+                }
             }
 
 
@@ -61,227 +77,152 @@ namespace MrKupido.Processor.Model
                 IconUrls = IconUriFragmentAttribute.GetUrls(mi, "~/Content/svg/action_{0}.svg");
                 IsPassive = PassiveActionAttribute.IsMethodPassiveAction(mi);
             }
+
+            this.DirectionSegments = GenerateSegments();
         }
 
-        public override string ToString()
+        private RecipeDirectionSegment[] GenerateSegments()
         {
-            StringBuilder sb = new StringBuilder();
-            object[] operands = new object[Operands.Length - 1];
-            Array.Copy(Operands, 1, operands, 0, operands.Length);
+            List<RecipeDirectionSegment> result = new List<RecipeDirectionSegment>();
 
+            // generate direction string
             if (Direction == null)
             {
-                sb.Append(Command);
-
-                sb.Append(' ');
-                if (operands.Length > 0)
+                // there is no directional text defined for the method, so we need only generate a general text (this is mainly for debugging purposes)
+                result.Add(new RecipeDirectionSegment(Command));
+                if (Operands.Length > 0)
                 {
-                    foreach (object operand in operands)
+                    result.Add(new RecipeDirectionSegment(" "));
+
+                    for (int i = 0; i < Operands.Length; i++)
                     {
-                        sb.Append(operand);
-                        sb.Append(", ");
+                        result.Add(new RecipeDirectionSegmentReference(Operands[i]));
+                        if (i < Operands.Length - 1) result.Add(new RecipeDirectionSegment(", "));
                     }
-                    sb.Remove(sb.Length - 3, 2);
                 }
-                sb.Append(' ');
             }
             else
             {
-                string[] ops = new string[operands.Length];
-                for (int i = 0; i < ops.Length; i++)
-                {
-                    if (operands[i] == null)
-                    {
-                        ops[i] = "(null)";
-                    }
-                    else if (operands[i] is IngredientGroup)
-                    {
-                        ops[i] = ((IngredientGroup)operands[i]).Name;
-                    }
-                    else
-                    {
-                        ops[i] = operands[i].ToString();
-                    }
-
-                    // remove commercial text { }
-                    int beforeStart = ops[i].IndexOf('{');
-                    int afterEnd = ops[i].LastIndexOf('}') + 1;
-
-                    if ((beforeStart >= 0) && (afterEnd >= 0))
-                    {
-                        ops[i] = ops[i].Remove(beforeStart, afterEnd - beforeStart).TrimEnd();
-                    }
-                }                
-
-
-                // ({x*})
-                int starIndex = 0;
-                while ((starIndex = Direction.IndexOf("*}")) > 0)
-                {
-                    int operandIndex = Int32.Parse(Direction[starIndex - 1].ToString());
-
-                    int beforeStart = Direction.LastIndexOf('(', starIndex)+1;
-                    string beforeString = Direction.Substring(beforeStart, starIndex - 2 - beforeStart);
-
-                    int afterEnd = Direction.IndexOf(')', starIndex + 2) - 1;
-                    string afterString = Direction.Substring(starIndex + 2, afterEnd - starIndex - 1);
-
-                    Direction = Direction.Remove(beforeStart-1, afterEnd - beforeStart + 3);
-
-                    StringBuilder dirSB = new StringBuilder();
-                    object[] items = (object[])operands[operandIndex];
-                    if (items.Length > 0)
-                    {
-                        foreach (object item in items)
-                        {
-                            dirSB.Append(beforeString);
-                            dirSB.Append(item);
-                            dirSB.Append(afterString);
-                        }
-                        dirSB.Remove(dirSB.Length - afterString.Length, afterString.Length);
-                    }
-
-                    Direction = Direction.Insert(beforeStart - 1, dirSB.ToString());
-                }
-
-                // TODO: special (culture dependent) formatting for {0T} {0N} etc. etc.
+                int clauseStartIndex = 0;
                 int clauseEndIndex = 0;
-                while ((clauseEndIndex = Direction.IndexOf("}")) > 0)
+                while ((clauseStartIndex = Direction.IndexOf("{", clauseStartIndex)) > 0)
                 {
-                    int clauseStartIndex = Direction.LastIndexOf('{', clauseEndIndex);
+                    int textClauseStart = clauseEndIndex;
+                    int textClauseEnd = clauseStartIndex;
 
-                    char operandId = Direction[clauseStartIndex + 1];
-                    string operand = null;
-                    if (Char.IsNumber(operandId))
+                    clauseEndIndex = Direction.IndexOf("}", clauseStartIndex);
+                    bool isIteration = Direction[clauseEndIndex - 1] == '*';
+                    int iterationClauseStart = -1;
+                    int iterationClauseEnd = -1;
+
+
+                    string beforeString = "";
+                    string afterString = "";
+                    if (isIteration)
                     {
-                         operand = ops[Int32.Parse(operandId.ToString())];
+                        // look for the "repeat-before" and "repeat-after" patterns
+                        iterationClauseStart = Direction.LastIndexOf('(', clauseStartIndex);
+                        int beforeStart = iterationClauseStart + 1;
+                        beforeString = Direction.Substring(beforeStart, clauseStartIndex - beforeStart);
+
+                        iterationClauseEnd = Direction.IndexOf(')', clauseEndIndex);
+                        int afterEnd = iterationClauseEnd - 1;
+                        afterString = Direction.Substring(clauseEndIndex + 1, afterEnd - clauseEndIndex);
+
+                        textClauseEnd = beforeStart - 1;
+                    }
+
+                    result.Add(new RecipeDirectionSegment(Direction.Substring(textClauseStart, textClauseEnd - textClauseStart)));
+                    if (clauseEndIndex - clauseStartIndex == 1)
+                    {
+                        // {}
+                        result.Add(new RecipeDirectionSegmentReference(Operands[0]));
                     }
                     else 
                     {
-                        // {}
-                        operand = NameAliasAttribute.GetDefaultName(Operands[0].GetType());
-                    }
-
-                    string word = "";
-                    if (operand != null)
-                    {
                         char affixId = Direction[clauseEndIndex - 1];
-                        if (Char.IsLetter(affixId))
-                        {
-                            string[] words = operand.Split(' ');
-                            word = PrepareForAffix(words[words.Length - 1]);
-                            operand = operand.Remove(operand.Length - word.Length);
-                            VowelHarmony vh = VowelHarmonyOf(word);
+                        if (!Char.IsLetter(affixId)) affixId = Char.MinValue;
 
-                            switch (affixId)
+                        string operandIndexStr = Direction.Substring(clauseStartIndex + 1, clauseEndIndex - clauseStartIndex - 1 - (isIteration || affixId != Char.MinValue ? 1 : 0));
+                        int operandIndex = String.IsNullOrEmpty(operandIndexStr) ? 0 : Int32.Parse(operandIndexStr) + 1;
+                        object operand = Operands[operandIndex];
+
+                        if (isIteration)
+                        {
+                            Array items = (Array)operand;
+
+                            if (items.Length > 0)
                             {
-                                case 'T':
-                                    vh = VowelHarmonyOf(word, true);
-                                    if ((IsVowel(word[word.Length - 1])) 
-                                        || ((word.Length >= 2) && IsVowel(word[word.Length - 2]) &&
-                                            ((word[word.Length - 1] == 'j') || (word[word.Length - 1] == 'l') || (word[word.Length - 1] == 'n') || (word[word.Length - 1] == 'r') 
-                                            || (word[word.Length - 1] == 'n') || (word[word.Length - 1] == 'r') || (word[word.Length - 1] == 's') || (word[word.Length - 1] == 'z')))
-                                        || ((word.Length >= 3) && IsVowel(word[word.Length - 3]) &&
-                                        (((word[word.Length - 2] == 'l') && (word[word.Length - 1] == 'y')) 
-                                        || ((word[word.Length - 2] == 'n') && (word[word.Length - 1] == 'y')) 
-                                        || ((word[word.Length - 2] == 's') && (word[word.Length - 1] == 'z')) 
-                                        || ((word[word.Length - 2] == 'z') && (word[word.Length - 1] == 's'))))
-                                        ) word += "t";
-                                    else
-                                    {
-                                        if (vh == VowelHarmony.Low) word += "ot";
-                                        if (vh == VowelHarmony.HighType1) word += "et";
-                                        if (vh == VowelHarmony.HighType2) word += "öt";
-                                        if (vh == VowelHarmony.Mixed) word += "t";
-                                    }
-                                    break;
-                                case 'R':
-                                    if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) word += "ra";
-                                    if (vh == VowelHarmony.HighType1) word += "re";
-                                    break;
-                                case 'N':
-                                    if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) word += "ban";
-                                    if (vh == VowelHarmony.HighType1) word += "ben";
-                                    break;
-                                case 'B':
-                                    if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) word += "ba";
-                                    if (vh == VowelHarmony.HighType1) word += "be";
-                                    break;
-                                case 'V':
-                                    if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) word += (IsVowel(word[word.Length - 1]) ? "v" : "word[word.Length - 1]") + "al";
-                                    if (vh == VowelHarmony.HighType1) word += (IsVowel(word[word.Length - 1]) ? "v" : "word[word.Length - 1]") + "el";
-                                    break;
-                                case 'L':
-                                    if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) word += "ról";
-                                    if (vh == VowelHarmony.HighType1) word += "ről";
-                                    break;
-                                case 'K':
-                                    if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) word += "ból";
-                                    if (vh == VowelHarmony.HighType1) word += "ből";
-                                    break;
-                                default:
-                                    throw new MrKupidoException("The affix id '{0}' is unknown in the '{1}' string.", affixId, Direction);
+                                foreach (object item in items)
+                                {
+                                    if (!String.IsNullOrEmpty(beforeString)) result.Add(new RecipeDirectionSegment(beforeString));
+                                    result.Add(new RecipeDirectionSegmentReference(item));
+                                    if (!String.IsNullOrEmpty(afterString)) result.Add(new RecipeDirectionSegment(afterString));
+                                }
+                                if (!String.IsNullOrEmpty(afterString)) result.RemoveAt(result.Count - 1);
                             }
                         }
-                    }
-                    else
-                    {
-                        operand = "(null)";
+                        else
+                        {
+                            RecipeDirectionSegmentReference rdsr = new RecipeDirectionSegmentReference(operand);
+
+                            // TODO: special (culture dependent) formatting for {0T} {0N} etc. etc.
+                            if (affixId != Char.MinValue)
+                            {
+                                // only the last word needs affixation
+                                string[] words = rdsr.Text.Split(' ');
+                                string lastWord = PrepareForAffix(words[words.Length - 1]);
+                                lastWord = Affixate(lastWord, affixId);
+
+                                if (lastWord.StartsWith("--"))
+                                {
+                                    lastWord = lastWord.Replace("--", "-");
+                                }
+
+                                // replace the last word
+                                rdsr.Text = rdsr.Text.Remove(rdsr.Text.Length - words[words.Length - 1].Length) + lastWord;
+                            }
+
+                            result.Add(rdsr);
+                        }
                     }
 
-                    Direction = Direction.Remove(clauseStartIndex, clauseEndIndex - clauseStartIndex + 1);
-                    Direction = Direction.Insert(clauseStartIndex, operand + word);
+                    clauseEndIndex = iterationClauseEnd >= 0 ? iterationClauseEnd + 1 : clauseEndIndex + 1;
+                    clauseStartIndex = clauseEndIndex;
                 }
-
-                // a(z) -> a, az
-                int azIndex = 0;
-                while ((azIndex = Direction.IndexOf("a(z)")) > 0)
-                {
-                    bool makeAz = false;
-                    if (IsVowel(Direction[azIndex + 5])) makeAz = true;
-                    if ((Direction[azIndex + 5] == '5') || (Direction[azIndex + 5] == '1')) makeAz = true;
-                    if ((Direction[azIndex + 5] == '1') && Char.IsNumber(Direction[azIndex + 6])) makeAz = false;
-
-                    if (makeAz)
-                    {
-                        Direction = Direction.Remove(azIndex + 3, 1).Remove(azIndex + 1, 1);
-                    }
-                    else
-                    {
-                        Direction = Direction.Remove(azIndex + 1, 3);
-                    }
-                }
-
-                sb.Append(Direction);
+                result.Add(new RecipeDirectionSegment(Direction.Substring(clauseEndIndex)));
             }
 
-            //if (!String.IsNullOrWhiteSpace(Alias))
+            if ((Result != null) && (Result is IngredientGroup) && (!String.IsNullOrEmpty(((IngredientGroup)Result).IconUrl)) && (Result != Operands[Operands.Length - 1]))
+            {
+                IngredientGroup ig = ((IngredientGroup)Result);
+
+                result.Add(new RecipeDirectionSegment(" => "));
+                result.Add(new RecipeDirectionSegmentReference(ig));
+            }
+
+
+            // a(z) -> a, az
+            //int azIndex = 0;
+            //while ((azIndex = text.IndexOf("a(z)")) > 0)
             //{
-            //    sb.Append(" = ");
-            //    sb.Append(Alias);
+            //    bool makeAz = false;
+            //    if (StringUtils.IsVowel(text[azIndex + 5])) makeAz = true;
+            //    if ((text[azIndex + 5] == '5') || (text[azIndex + 5] == '1')) makeAz = true;
+            //    if ((text[azIndex + 5] == '1') && Char.IsNumber(text[azIndex + 6])) makeAz = false;
+
+            //    if (makeAz)
+            //    {
+            //        text = text.Remove(azIndex + 3, 1).Remove(azIndex + 1, 1);
+            //    }
+            //    else
+            //    {
+            //        text = text.Remove(azIndex + 1, 3);
+            //    }
             //}
-            sb[0] = Char.ToUpperInvariant(sb[0]);
 
-            return sb.ToString();
-        }
 
-        private static bool IsVowel(char letter)
-        {
-            return
-                letter == 'a' ||
-                letter == 'á' ||
-                letter == 'e' ||
-                letter == 'é' ||
-                letter == 'i' ||
-                letter == 'í' ||
-                letter == 'o' ||
-                letter == 'ó' ||
-                letter == 'ö' ||
-                letter == 'ő' ||
-                letter == 'u' ||
-                letter == 'ú' ||
-                letter == 'ü' ||
-                letter == 'ű';
+            return result.ToArray();
         }
 
         private static VowelHarmony VowelHarmonyOf(string word, bool separateHighTypes = false)
@@ -325,6 +266,78 @@ namespace MrKupido.Processor.Model
             if (result[result.Length - 1] == 'ü') result[result.Length - 1] = 'ű';
 
             return new String(result);
+        }
+
+        private static string Affixate(string word, char affixId)
+        {
+            string result = word;
+
+            VowelHarmony vh = VowelHarmonyOf(result);
+            switch (affixId)
+            {
+                case 'T':
+                    vh = VowelHarmonyOf(result, true);
+                    if ((StringUtils.IsVowel(result[result.Length - 1]))
+                        || ((result.Length >= 2) && StringUtils.IsVowel(result[result.Length - 2]) &&
+                            ((result[result.Length - 1] == 'j') || (result[result.Length - 1] == 'l') || (result[result.Length - 1] == 'n') || (result[result.Length - 1] == 'r')
+                            || (result[result.Length - 1] == 'n') || (result[result.Length - 1] == 'r') || (result[result.Length - 1] == 's') || (result[result.Length - 1] == 'z')))
+                        || ((result.Length >= 3) && StringUtils.IsVowel(result[result.Length - 3]) &&
+                        (((result[result.Length - 2] == 'l') && (result[result.Length - 1] == 'y'))
+                        || ((result[result.Length - 2] == 'n') && (result[result.Length - 1] == 'y'))
+                        || ((result[result.Length - 2] == 's') && (result[result.Length - 1] == 'z'))
+                        || ((result[result.Length - 2] == 'z') && (result[result.Length - 1] == 's'))))
+                        ) result += "t";
+                    else
+                    {
+                        if (vh == VowelHarmony.Low) result += "ot";
+                        if (vh == VowelHarmony.HighType1) result += "et";
+                        if (vh == VowelHarmony.HighType2) result += "öt";
+                        if (vh == VowelHarmony.Mixed) result += "t";
+                    }
+                    break;
+                case 'R':
+                    if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) result += "ra";
+                    if (vh == VowelHarmony.HighType1) result += "re";
+                    break;
+                case 'N':
+                    if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) result += "ban";
+                    if (vh == VowelHarmony.HighType1) result += "ben";
+                    break;
+                case 'B':
+                    if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) result += "ba";
+                    if (vh == VowelHarmony.HighType1) result += "be";
+                    break;
+                case 'V':
+                    if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) result += (StringUtils.IsVowel(result[result.Length - 1]) ? "v" : "result[result.Length - 1]") + "al";
+                    if (vh == VowelHarmony.HighType1) result += (StringUtils.IsVowel(result[result.Length - 1]) ? "v" : "result[result.Length - 1]") + "el";
+                    break;
+                case 'L':
+                    if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) result += "ról";
+                    if (vh == VowelHarmony.HighType1) result += "ről";
+                    break;
+                case 'K':
+                    if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) result += "ból";
+                    if (vh == VowelHarmony.HighType1) result += "ből";
+                    break;
+                default:
+                    throw new MrKupidoException("The affix id '{0}' is unknown, so the word '{1}' can't be processed.", affixId, word);
+            }
+
+            return result;
+        }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (RecipeDirectionSegment segment in DirectionSegments)
+            {
+                sb.Append(segment.Text);
+            }
+
+            sb[0] = Char.ToUpperInvariant(sb[0]);
+            
+            return sb.ToString();
         }
     }
 }

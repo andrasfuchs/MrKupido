@@ -20,5 +20,7 @@ namespace MrKupido.Library
         uint ActionDuration { get; }
         bool IsPassive { get; }
         string IconUrl { get; }
+
+        IDirectionSegment[] DirectionSegments { get; }
     }
 }

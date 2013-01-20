@@ -45,22 +45,24 @@ namespace MrKupido.Library.Recipe
 
             Edeny edeny1 = eg.Use<Edeny>();
             edeny1.BerakniMind(new Liszt(1000f * amount), new So(6.0f * amount), new Oregano(3.0f * amount), new FeketeBorsOrolt(5.0f * amount));
-            fakanal.Elkeverni((IngredientGroup)edeny1.Contents);
+            fakanal.ElkeverniEdenyben(edeny1);
 
             Bogre bogre = eg.Use<Bogre>();
             bogre.BerakniMind(new Eleszto(14.0f * amount), new Cukor(1.5f * amount), new Viz(0.6f * amount), new OlivaOlaj(0.05f * amount));
-            fakanal.Elkeverni((IngredientGroup)bogre.Contents);
+            fakanal.ElkeverniEdenyben(bogre);
             
 
-            IIngredient pizzateszta = fakanal.Osszekeverni(edeny1.Contents, bogre.Contents);
+            //IIngredient pizzateszta = fakanal.Osszekeverni(edeny1.Contents, bogre.Contents);
+            //IIngredient pizzateszta = fakanal.OsszekeverniEdenyeket(edeny1, bogre);
             
-            Edeny edeny2 = eg.Use<Edeny>();
-            edeny2.Berakni(pizzateszta);
+            //Edeny edeny2 = eg.Use<Edeny>();
+            //edeny2.Berakni(pizzateszta);
+            Edeny edeny2 = (Edeny)fakanal.OsszekeverniEdenyeket(edeny1, bogre);
             edeny2.Varni(45);
-            pizzateszta = edeny2.Kivenni();
+            //IIngredient pizzateszta = edeny2.Kivenni();
 
             NyujtoDeszka nyd = eg.Use<NyujtoDeszka>();
-            pizzateszta = nyd.Nyujtani(pizzateszta, 1);
+            IIngredient pizzateszta = nyd.Nyujtani(edeny2, 1);
 
             result.Add("pizzateszta", pizzateszta);
 

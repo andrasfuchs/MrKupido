@@ -34,6 +34,17 @@ namespace MrKupido.Web.Controllers
             foreach (RecipeDirection direction in (RecipeDirection[])result[4])
             {
                 if (direction.IconUrl == null) direction.IconUrl = PathUtils.GetActualUrl(direction.IconUrls);
+
+                foreach (RecipeDirectionSegment segment in direction.DirectionSegments)
+                {
+                    if (segment is RecipeDirectionSegmentReference)
+                    {
+                        RecipeDirectionSegmentReference rdsr = ((RecipeDirectionSegmentReference)segment);
+                        if (String.IsNullOrEmpty(rdsr.IconUrl)) continue;
+
+                        rdsr.IconUrl = PathUtils.ToAbsolute(rdsr.IconUrl);
+                    }
+                }
             }
 
             //RecipeTreeNode inlineSajt = Cache.Recipe.RenderInline("FuszeresCsirkemell", new string[] { "Sajt" });
