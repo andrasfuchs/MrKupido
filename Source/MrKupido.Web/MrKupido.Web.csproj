@@ -278,6 +278,11 @@
     <Content Include="Content\svg\container_10.svg" />
     <Content Include="Content\svg\container_11.svg" />
     <Content Include="Content\svg\container_12.svg" />
+    <Content Include="Content\svg\crowd_1.svg" />
+    <Content Include="Content\svg\crowd_2.svg" />
+    <Content Include="Content\svg\crowd_3.svg" />
+    <Content Include="Content\svg\crowd_4.svg" />
+    <Content Include="Content\svg\crowd_5.svg" />
     <Content Include="Content\svg\d_clock0.svg" />
     <Content Include="Content\svg\d_clock1.svg" />
     <Content Include="Content\svg\d_clock2.svg" />
@@ -297,6 +302,10 @@
     <Content Include="Content\svg\e_rasper.svg" />
     <Content Include="Content\svg\e_round_shaped_container.svg" />
     <Content Include="Content\svg\e_spoon.svg" />
+    <Content Include="Content\svg\icon_figurebig.svg" />
+    <Content Include="Content\svg\icon_figuresmall.svg" />
+    <Content Include="Content\svg\icon_sliderhandle.svg" />
+    <Content Include="Content\svg\icon_slidersigns.svg" />
     <Content Include="Content\svg\inggroup_01.svg" />
     <Content Include="Content\svg\inggroup_02.svg" />
     <Content Include="Content\svg\inggroup_03.svg" />
@@ -447,7 +456,6 @@
     <Content Include="Content\svg\logo_twitter.svg" />
     <Content Include="Content\svg\logo_wordpress.svg" />
     <Content Include="Content\svg\logo_yahoo.svg" />
-    <Content Include="Content\svg\mrkupidologo.svg" />
     <Content Include="Content\svg\question_mark.svg" />
     <Content Include="Content\svg\stage_cooking.svg" />
     <Content Include="Content\svg\stage_preparation.svg" />
@@ -689,7 +697,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="1975/10/21" BuildVersion_UpdateFileVersion="False" BuildVersion_BuildVersioningStyle="None.None.None.None" />
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.None" BuildVersion_UpdateFileVersion="False" BuildVersion_StartDate="1975/10/21" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
   <ItemGroup>

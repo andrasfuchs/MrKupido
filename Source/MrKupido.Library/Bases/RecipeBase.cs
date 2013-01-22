@@ -11,6 +11,7 @@ namespace MrKupido.Library.Recipe
     [NameAlias("eng", "recipe")]
     [NameAlias("hun", "recept")]
 
+    [IngredientConsts(IsAbstract = true)]
     public class RecipeBase : IngredientBase, IRecipe
     {
         public float Portion { get; private set; }

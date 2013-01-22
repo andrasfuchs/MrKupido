@@ -132,6 +132,7 @@ header, footer, nav, section {
         position: relative;
         top: 0px;
         left: 75px;
+        z-index: 2;
     }
 
     header ul#usermenu {
@@ -376,7 +377,7 @@ details summary h2 {
     width: auto;
     text-align: right;
     margin: -35px 10px 10px 0;
-    background: ;
+    background: transparent;
 }
 
 details summary h3 {
@@ -619,15 +620,15 @@ details li div.resulthead {
 }
 
     details li div.resulthead.commercial {
-        background: #e0e0cc;
+        background: #dfe2ca;
     }
 
     details li div.resulthead.abstract {
-        background: #fdfcee;
+        background: #ece1cd;
     }
 
     details li div.resulthead.notimplemented {
-        background: #f3efe8;
+        background: #e6dbd1;
     }
 
 details li div.resultpictures {
@@ -1403,4 +1404,129 @@ ul#directions span.action img {
     padding: 5px;
     margin-top: -43px;
     margin-left: -70px;
+}
+
+
+
+/* ----------- potion selector ------------ */
+h3.portionselector-trigger {
+    cursor: pointer;
+}
+
+
+div#portionsliderblock img {
+    float: left;
+    margin: 15px 10px 0px 10px;
+}
+
+div#portionsliderblock div#portionsliderandtext
+{
+    float: left;
+    display: inline-block;
+}
+
+div#portionsliderblock input#portionamount {
+    width: 200px;
+    border: 0; 
+    background: #ebe0d5; 
+    color: #553e31; 
+    font-size: 14px;
+    font-family: Cardo, Sans-Serif;
+    text-align: center;
+}
+
+div#portionsliderblock div#portionslider {
+    width: 200px;
+    display: inline-block;
+}
+
+div#portionsliderblock img#portionslidersigns {
+    margin: 5px 0px 0px -2px;
+}
+
+div#portionsliderblock div#portionslider.ui-widget-content {
+    height: 1px;
+    border: 3px solid #cdb8ab;
+    background: #553e31;
+}
+
+div#portionsliderblock .ui-slider .ui-slider-handle { position: absolute; z-index: 2; width: 13px; height: 11px; cursor: default; border: 0px;}
+div#portionsliderblock .ui-slider-horizontal { height: 11px; }
+div#portionsliderblock .ui-slider-horizontal .ui-slider-handle { top: -5.5px; margin-left: -6.5px; }
+div#portionsliderblock .ui-slider-horizontal .ui-state-default { background: url('../Content/svg/icon_sliderhandle.svg') no-repeat scroll 50% 50%; }
+
+div#portioncounterblock img {
+    margin: 15px 10px 0px 10px; 
+}
+
+div#portioncounterblock img.hidden {
+    display: none;
+}
+
+div#portioncounterblock div#portioncountertext {
+    float: left;
+    font-size: 24px;
+    margin: 15px 0px 0px 10px; 
+    width: 45px;
+}
+
+div#portionbuttonblock {
+    float: right;
+    display: inline-block;
+    margin: 15px 10px 5px 5px;
+}
+
+
+div#portionbuttonblock input[type='button'] {
+    width: 15px;
+    height: 15px;
+    padding: 0px;
+    line-height : 0px;
+
+    font-size: 14px;
+    font-family: Cardo, Sans-Serif;
+    font-weight: bold;
+}
+
+    div#portionbuttonblock input#plusbutton {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    div#portionbuttonblock input#minusbutton {
+        position: relative;
+        bottom: 6px;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+
+div#portionselectorwrapper {
+    position: absolute;
+}
+
+div#portionselector {
+    display: none;
+    width: 430px;
+    height: 65px;
+    margin: 0px;
+    padding: 0px 5px 0px 10px;
+    list-style: none;
+    position: relative;
+    top: 0px;
+    left: 430px;
+    z-index: 2;
+    background: #ebe0d5;
+    border: 1px solid #553e31;
+    border-radius: 3px;
+}
+
+div#portionselector:after {
+    content: '';
+    position: absolute;
+    left: 405px;
+    top: -6px;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #553e31;
 }

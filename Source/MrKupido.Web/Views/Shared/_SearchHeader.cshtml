@@ -10,15 +10,6 @@
 
             var code = e.which; // recommended to use e.which, it's normalized across browsers
 
-            // enter
-            if (code == 13) e.preventDefault();
-
-
-            if (code == 32 || code == 13 || code == 188 || code == 186) {
-                doSearch();
-                e.preventDefault();
-            } // missing closing if brace
-
             // switch to positive query
             if (code == 107 || code == 189) {
                 $("#querySign").html("+");
@@ -32,6 +23,11 @@
             }
 
             if (this.value == "") {
+                // space, enter
+                if (code == 32 || code == 13) {
+                    e.preventDefault();
+                }
+
                 // left or page up
                 if (code == 37 || code == 33) {
                     $("#pageprev").trigger("onclick");
@@ -62,7 +58,11 @@
                     deleteFilter("!last");
                     e.preventDefault();
                 }
-                
+            } else {
+                // enter
+                if (code == 13) {
+                    e.preventDefault();
+                }
             }
         });
 
@@ -138,6 +138,7 @@
             },
             success: function (data) {
                 refreshFilters(data);
+                $("#querySign").html("+");
             }, // success
             error: function (xhr, textStatus, errorThrown) {
                 //                              alert("Error");
@@ -236,17 +237,7 @@
     function geolocationError(msg) {
         var s = document.querySelector('#location');
         s.value = "";
-    }
-
-    $(function () {
-        if ($.browser.msie && $.browser.version.substr(0, 1) < 7) {
-            $('li').has('ul').mouseover(function () {
-                $(this).children('ul').css('visibility', 'visible');
-            }).mouseout(function () {
-                $(this).children('ul').css('visibility', 'hidden');
-            })
-        }
-    });
+    }    
 
     $(document).ready(function () {
 
@@ -256,7 +247,7 @@
 
         // iPad
         var isiPad = navigator.userAgent.match(/iPad/i) != null;
-        if (isiPad) $('#menu ul').addClass('no-transition');
+        if (isiPad) $('#usermenu ul').addClass('no-transition');
     });
 </script>
 
@@ -266,7 +257,7 @@
 <div class="userbar">
     @if (Session["CurrentUser"] == null)
     {
-        <span id="login"><a runat="server" href="~/hun/Account/LogIn" onclick="_gaq.push(['_trackEvent', 'Profile', 'Login', '']);">Log in</a></span>
+        <span id="login"><a runat="server" href="~/hun/Account/LogIn">Log in</a></span>
     }
     @if (Session["CurrentUser"] != null)
     {

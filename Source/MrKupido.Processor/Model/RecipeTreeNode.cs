@@ -142,9 +142,6 @@ namespace MrKupido.Processor.Model
                 while (currentParent != null)
                 {
                     ingredientsForSearch.Add(currentParent.NodeType + ":" + currentParent.UniqueName);
-                    // also add all the grandparents if it's not a commercial product
-                    if (this.CommercialAttribute != null) break;
-
                     currentParent = currentParent.Parent;
                 }
 
@@ -163,6 +160,12 @@ namespace MrKupido.Processor.Model
 
                         itn = itn.Parent;
                     }
+                }
+
+                // if this is a commercial product, let's inherit its parent's ingredientlist
+                if ((this.CommercialAttribute != null) && (this.Parent != null) && (this.Parent is RecipeTreeNode))
+                {
+                    ingredientsForSearch.AddRange(((RecipeTreeNode)this.Parent).SearchStrings);
                 }
 
                 this.SearchStrings = ingredientsForSearch.ToArray();

@@ -20,6 +20,42 @@ namespace MrKupido.Web.Controllers
 
         public ActionResult Index()
         {
+            if (Request.Params["q"] != null)
+            {
+                List<FilterCondition> filters = new List<FilterCondition>();
+
+
+                foreach (string q in Request.Params["q"].Split(','))
+                {
+                    string filterString = q.Trim();
+
+                    int colonIndex = filterString.IndexOf(':');
+
+                    if ((colonIndex != 1) && (colonIndex != 2)) continue;
+
+                    char nodeType = filterString[colonIndex-1];
+
+                    TreeNode tn = null;
+                    switch (nodeType)
+                    {
+                        case 'I':
+                            tn = Cache.Ingredient[filterString.Substring(colonIndex+1)];
+                            break;
+
+                        case 'R':
+                            tn = Cache.Recipe[filterString.Substring(colonIndex + 1)];
+                            break;
+                    }
+
+                    if (tn != null)
+                    {
+                        filters.Add(new FilterCondition(tn, filterString[0] == '-'));
+                    }
+                }
+
+                Session["filters"] = filters;
+            }
+
             return View();
         }
 
@@ -132,22 +168,22 @@ namespace MrKupido.Web.Controllers
 
             RecipeSearchResult rsr = new RecipeSearchResult(Cache.Search.Search(filters.ToArray(), Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName).ToArray());
 
-            foreach (RecipeSearchResultItem rsri in rsr.Items)
-            {
-                if (filters.FirstOrDefault(f => f.Value == "+ R:" + rsri.UniqueName) != null)
-                {
-                    rsri.IsHidden = false;
+            //foreach (RecipeSearchResultItem rsri in rsr.Items)
+            //{
+            //    if (filters.FirstOrDefault(f => f.Value == "+ R:" + rsri.UniqueName) != null)
+            //    {
+            //        rsri.IsHidden = false;
 
-                    // look for its level-1 childen
-                    foreach (RecipeSearchResultItem child in rsr.Items)
-                    {
-                        if (child.ParentUniqueName == rsri.UniqueName)
-                        {
-                            child.IsHidden = false;
-                        }
-                    }
-                }
-            }
+            //        // look for its level-1 childen
+            //        foreach (RecipeSearchResultItem child in rsr.Items)
+            //        {
+            //            if (child.ParentUniqueName == rsri.UniqueName)
+            //            {
+            //                child.IsHidden = false;
+            //            }
+            //        }
+            //    }
+            //}
 
             //for (int i = 0; i < rsr.Items.Count; i++)
             //{

@@ -10,7 +10,6 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("eng", "ingredient")]
     [NameAlias("hun", "hozzávaló")]
 
-    [IconUriFragment("default")]
     public class IngredientBase : MarshalByRefObject, IIngredient
     {
         private static Dictionary<string,object> staticInfoObjects = new Dictionary<string,object>();

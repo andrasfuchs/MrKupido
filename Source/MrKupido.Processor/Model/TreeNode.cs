@@ -58,6 +58,7 @@ namespace MrKupido.Processor.Model
             bracketStart = ShortName.IndexOf('{');
             ShortName = bracketStart == -1 ? ShortName : ShortName.Substring(0, bracketStart);
 
+            ShortName = ShortName.TrimEnd();
             LongName = name;
             UniqueName = LongName.ToUniqueString();
 

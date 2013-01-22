@@ -65,7 +65,18 @@ namespace MrKupido.Processor
                             result.RemoveAt(i);
                         }
                     }
+                }
 
+                // remove all the commercial nodes, ingrecs and abstracts which are not among the search filters
+                foreach (RecipeTreeNode rtn in result.ToArray())
+                {
+                    if (!rtn.IsImplemented || rtn.IsIngrec || rtn.IsInline || rtn.IsAbtract || rtn.CommercialAttribute != null)
+                    {
+                        if (!(filters.Any(f => (f.SearchString == rtn.NodeType + ":" + rtn.UniqueName) || ((rtn.Parent != null) && (f.SearchString == rtn.Parent.NodeType + ":" + rtn.Parent.UniqueName)))))
+                        {
+                            result.Remove(rtn);
+                        }
+                    }
                 }
 
                 searchResults[languageISO][filterKey].Results = result;
