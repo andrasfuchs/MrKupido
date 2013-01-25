@@ -126,7 +126,7 @@ namespace MrKupido.Processor.Model
                     }
                     else
                     {
-                        ingredientCache.Add(amount, RecipeAnalyzer.GenerateIngredients(this, 1.0f));
+                        ingredientCache.Add(amount, RecipeAnalyzer.GenerateIngredients(this, amount));
                     }
                 }
             }

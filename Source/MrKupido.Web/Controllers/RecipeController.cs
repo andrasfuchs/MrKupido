@@ -21,8 +21,10 @@ namespace MrKupido.Web.Controllers
         {
             object[] result = new object[7];
 
+            Session["SelectedRecipeId"] = null;
             RecipeTreeNode rtn = Cache.Recipe[id];
             if (rtn == null) return RedirectToAction("Index", "HomeController");
+            Session["SelectedRecipeId"] = id;
 
             result[0] = rtn;
             result[1] = rtn.GetTags();
@@ -50,7 +52,14 @@ namespace MrKupido.Web.Controllers
             //RecipeTreeNode inlineSajt = Cache.Recipe.RenderInline("FuszeresCsirkemell", new string[] { "Sajt" });
 
             return View(result);
-        }        
+        }
 
+
+        [HttpPost]
+        public ActionResult GetIngredients(float portion)        
+        {
+            RecipeTreeNode rtn = Cache.Recipe[(string)Session["SelectedRecipeId"]];
+            return PartialView("_RecipeIngredients", rtn.GetIngredients(portion / 1000.0f));
+        }
     }
 }

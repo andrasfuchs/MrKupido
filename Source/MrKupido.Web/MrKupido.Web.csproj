@@ -540,6 +540,7 @@
     <Content Include="Scripts\whatwg_reviewer.min.js">
       <DependentUpon>whatwg_reviewer.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\wTimer.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Scripts\_references.min.js">
       <DependentUpon>_references.js</DependentUpon>
@@ -697,7 +698,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.None" BuildVersion_UpdateFileVersion="False" BuildVersion_StartDate="1975/10/21" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="1975/10/21" BuildVersion_UpdateFileVersion="False" BuildVersion_BuildVersioningStyle="None.None.None.None" />
     </VisualStudio>
   </ProjectExtensions>
   <ItemGroup>

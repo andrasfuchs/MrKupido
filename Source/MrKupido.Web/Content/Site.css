@@ -50,6 +50,12 @@ body {
     background-image: url('../Content/images/background.jpg');
 }
 
+a.disabled {
+    pointer-events: none;
+    cursor: default;
+}
+
+
 a:link, a:visited {
     text-decoration: none;
     color: /*mcd*/ #553e31;
@@ -1332,37 +1338,100 @@ input[type="search"]::-webkit-search-cancel-button {
                  applying rules they shouldn't
        
 */
-li:not(#foo) > fieldset > div > span > input[type='radio'],
-li:not(#foo) > fieldset > div > span > input[type='checkbox'] {
-    /* Hide the input, but have it still be clickable */
-    -moz-opacity: 0;
-    opacity: 0;
-    float: left;
-    width: 18px;
+
+/* background-image: url('../Content/svg/tick_on.svg'); */
+
+/* Custom checkbox and radio styles */
+
+ul#ingredientlist li.ingredientlistitem
+{
+    margin: 0px 40px 0px 5px;
+    min-width: 240px;
+    max-width: 240px;
 }
 
+ ul#ingredientlist li.ingredientlistitem input
+{
+	padding: 0;
+	margin: 0;
+	height: 32px;
+	width: 32px;
+	float: left;
+	position: absolute;
+	left: 0;
+	opacity: 0;
+}
 
-    li:not(#foo) > fieldset > div > span > input[type='radio'] + label,
-    li:not(#foo) > fieldset > div > span > input[type='checkbox'] + label {
-        margin: 0;
-        clear: none;
-        /* Left padding makes room for image */
-        padding: 5px 0 4px 24px;
-        /* Make look clickable because they are */
-        cursor: pointer;
-        background: url(off.png) left center no-repeat;
-    }
+ul#ingredientlist li.ingredientlistitem label 
+{ 
+	float: left;
+    padding-left: 24px;
+}
 
-    /*
-    Change from unchecked to checked graphic
-*/
-    li:not(#foo) > fieldset > div > span > input[type='radio']:checked + label {
-        background-image: url(radio.png);
-    }
+ul#ingredientlist li.ingredientlistitem input + label
+{
+	/*background: url('../Content/images/gr_custom-inputs.png') 0 -1px no-repeat;*/
+    background: url('../Content/svg/tick_off.svg') 0 0 no-repeat;
+    height: 32px;
+}
 
-    li:not(#foo) > fieldset > div > span > input[type='checkbox']:checked + label {
-        background-image: url(check.png);
-    }
+/* Checked styles */
+/*ul#ingredientlist li.ingredientlistitem input[type=radio]:checked + label 							{ background-position: 0 -241px; }*/
+ul#ingredientlist li.ingredientlistitem input[type=checkbox]:checked + label 							
+{ 
+  background-image: url('../Content/svg/tick_on.svg');
+}
+ul#ingredientlist li.ingredientlistitem input[type=checkbox]:hover:checked + label,
+ul#ingredientlist li.ingredientlistitem input[type=checkbox]:focus:checked + label,
+ul#ingredientlist li.ingredientlistitem input[type=checkbox]:checked + label:hover,
+ul#ingredientlist li.ingredientlistitem input[type=checkbox]:focus:checked + label {
+    background-image: url('../Content/svg/tick_on.svg');
+}
+/*ul#ingredientlist li.ingredientlistitem input[type=radio]:hover:checked + label,
+ul#ingredientlist li.ingredientlistitem input[type=radio]:focus:checked + label,
+ul#ingredientlist li.ingredientlistitem input[type=radio]:checked + label:hover,
+ul#ingredientlist li.ingredientlistitem input[type=radio]:focus:checked + label 						{ background-position: 0 -261px; }*/
+
+/* Hover & Focus styles */
+/*ul#ingredientlist li.ingredientlistitem input[type=checkbox]:hover + label,
+ul#ingredientlist li.ingredientlistitem input[type=checkbox]:focus + label,
+ul#ingredientlist li.ingredientlistitem input[type=checkbox] + label:hover 							{ background-position: 0 -21px; }*/
+/*ul#ingredientlist li.ingredientlistitem input[type=radio]:hover + label,
+ul#ingredientlist li.ingredientlistitem input[type=radio]:focus + label,
+ul#ingredientlist li.ingredientlistitem input[type=radio] + label:hover								{ background-position: 0 -181px; }*/
+
+/* Active styles */
+/*ul#ingredientlist li.ingredientlistitem input[type=checkbox]:active + label,
+ul#ingredientlist li.ingredientlistitem input[type=checkbox] + label:hover:active						{ background-position: 0 -41px; }
+ul#ingredientlist li.ingredientlistitem input[type=radio]:active + label,
+ul#ingredientlist li.ingredientlistitem input[type=radio] + label:hover:active						{ background-position: 0 -201px; }
+ul#ingredientlist li.ingredientlistitem input[type=checkbox]:active:checked + label,
+ul#ingredientlist li.ingredientlistitem input[type=checkbox]:checked + label:hover:active				{ background-position: 0 -121px; }
+ul#ingredientlist li.ingredientlistitem input[type=radio]:active:checked + label,
+ul#ingredientlist li.ingredientlistitem input[type=radio]:checked + label:hover:active				{ background-position: 0 -281px; }*/
+
+/* Disabled styles */
+/*ul#ingredientlist li.ingredientlistitem input[type=checkbox]:disabled + label,
+ul#ingredientlist li.ingredientlistitem input[type=checkbox]:hover:disabled + label,
+ul#ingredientlist li.ingredientlistitem input[type=checkbox]:focus:disabled + label,
+ul#ingredientlist li.ingredientlistitem input[type=checkbox]:disabled + label:hover,
+ul#ingredientlist li.ingredientlistitem input[type=checkbox]:disabled + label:hover:active			{ background-position: 0 -61px; }*/
+/*ul#ingredientlist li.ingredientlistitem input[type=radio]:disabled + label,
+ul#ingredientlist li.ingredientlistitem input[type=radio]:hover:disabled + label,
+ul#ingredientlist li.ingredientlistitem input[type=radio]:focus:disabled + label,
+ul#ingredientlist li.ingredientlistitem input[type=radio]:disabled + label:hover,
+ul#ingredientlist li.ingredientlistitem input[type=radio]:disabled + label:hover:active				{ background-position: 0 -221px; }*/
+/*ul#ingredientlist li.ingredientlistitem input[type=checkbox]:disabled:checked + label,
+ul#ingredientlist li.ingredientlistitem input[type=checkbox]:hover:disabled:checked + label,
+ul#ingredientlist li.ingredientlistitem input[type=checkbox]:focus:disabled:checked + label,
+ul#ingredientlist li.ingredientlistitem input[type=checkbox]:disabled:checked + label:hover,
+ul#ingredientlist li.ingredientlistitem input[type=checkbox]:disabled:checked + label:hover:active	{ background-position: 0 -141px; }*/
+/*ul#ingredientlist li.ingredientlistitem input[type=radio]:disabled:checked + label,
+ul#ingredientlist li.ingredientlistitem input[type=radio]:hover:disabled:checked + label,
+ul#ingredientlist li.ingredientlistitem input[type=radio]:focus:disabled:checked + label,
+ul#ingredientlist li.ingredientlistitem input[type=radio]:disabled:checked + label:hover,
+ul#ingredientlist li.ingredientlistitem input[type=radio]:disabled:checked + label:hover:active		{ background-position: 0 -301px; }*/
+
 
 /* --------------- reviewer ---------------------- */
 
@@ -1404,6 +1473,7 @@ ul#directions span.action img {
     padding: 5px;
     margin-top: -43px;
     margin-left: -70px;
+    cursor: pointer;
 }
 
 

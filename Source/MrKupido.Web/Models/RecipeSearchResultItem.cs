@@ -42,6 +42,7 @@ namespace MrKupido.Web.Models
         public float? Fat;
         public float? Salt;
 
+        public bool IsImplemented;
         public bool IsHidden;
         public string CSSClass;
 
@@ -86,6 +87,7 @@ namespace MrKupido.Web.Models
             this.Salt = rnd.Next(5);
 
             this.IsHidden = rtn.IsIngrec || rtn.IsInline || (rtn.CommercialAttribute != null);
+            this.IsImplemented = rtn.IsImplemented;
 
             if (!rtn.IsImplemented) CSSClass = "notimplemented";
 

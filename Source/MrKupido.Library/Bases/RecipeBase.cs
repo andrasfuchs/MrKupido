@@ -23,6 +23,10 @@ namespace MrKupido.Library.Recipe
 
         public RecipeBase(float amount, MeasurementUnit unit) : base(amount, unit)
         {
+            // TODO: portion size calculation
+            Portion = amount;
+
+
             //EquipmentGroup eg = SelectEquipment(amount);
 
             //PreparedIngredients preps = Prepare(amount, eg);

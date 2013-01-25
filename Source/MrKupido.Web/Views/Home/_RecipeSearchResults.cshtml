@@ -11,7 +11,13 @@
                     </div>
                     <div class="title">
                         <span class="titlecontent">
-                            <a runat="server" href="~/hun/recept/@rsri[i].UniqueName">@rsri[i].DisplayName</a>
+                                
+                            <a runat="server" href="~/hun/recept/@rsri[i].UniqueName" class='@(rsri[i].IsImplemented ? "enabled" : "disabled")'>
+
+                            @rsri[i].DisplayName
+                            
+                            </a>
+                            
                             @if (rsri[i].IsHidden) 
                             { 
                                 <span>*</span>

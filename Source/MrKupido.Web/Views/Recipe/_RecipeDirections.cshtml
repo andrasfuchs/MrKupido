@@ -1,4 +1,66 @@
 ﻿@model MrKupido.Library.IDirection[]
+
+    <script type="text/javascript">
+        function makeStruct(names) {
+            var names = names.split(' ');
+            var count = names.length;
+            function constructor() {
+                for (var i = 0; i < count; i++) {
+                    this[names[i]] = arguments[i];
+                }
+            }
+            return constructor;
+        }
+
+        var DirectionItem = makeStruct("id image timeInSecs");
+
+        var timerCounter = 0;
+        var directionItems;
+
+        var timer = new wTimer({
+            fps: 5,
+            run: function () {
+                timerCounter += 0.2;
+                var currentTimeInSeconds = 0
+
+                if (typeof directionItems == 'undefined') {
+                    directionItems = new Array(100);
+                    $("img[id^='clock_']").each(function (i, item) {
+
+                        directionItems[i] = new DirectionItem(item["id"], item, parseInt(item["id"].substring(6) - currentTimeInSeconds, 10));
+                        currentTimeInSeconds += directionItems[i].timeInSecs;
+                    });
+                }
+
+                currentTimeInSeconds = 0;
+                var currentIndex = 0;
+
+                while ((directionItems[currentIndex] != null) && (directionItems[currentIndex].timeInSecs + currentTimeInSeconds <= timerCounter)) {
+                    directionItems[currentIndex].image["src"] = "./../../Content/svg/d_clock8.svg";
+
+                    currentTimeInSeconds += directionItems[currentIndex].timeInSecs;
+                    currentIndex++;
+                }
+
+                if (directionItems[currentIndex] != null) {
+                    var imgIndex = Math.floor(((timerCounter - currentTimeInSeconds) / directionItems[currentIndex].timeInSecs) * 8 + 1);
+
+                    directionItems[currentIndex].image["src"] = "./../../Content/svg/d_clock" + imgIndex + ".svg";
+                    currentTimeInSeconds += directionItems[currentIndex].timeInSecs;
+                    currentIndex++;
+                }
+
+                while (directionItems[currentIndex] != null) {
+                    directionItems[currentIndex].image["src"] = "./../../Content/svg/d_clock0.svg";
+
+                    currentTimeInSeconds += directionItems[currentIndex].timeInSecs;
+                    currentIndex++;
+                }
+
+            }
+        });
+    </script>
+
 @if (Model == null)
 {
     <span class="unknown">Az étel elkészítése jelenleg ismeretlen</span>
@@ -27,9 +89,9 @@ else
             </span>
                 <span class="time">@Math.Floor(time.TotalHours).ToString("00"):@time.Minutes.ToString("00")</span>
                 <span class="timer">
-                    <img runat="server" src="~/Content/svg/d_clock@(i++ % 9).svg" alt="1 perc" width="60px" height="60px" />
+                    <img runat="server" id="clock_@((time + dir.TimeToComplete).TotalSeconds)" src="~/Content/svg/d_clock0.svg" alt="1 perc" width="60px" height="60px" />
                     <span class="action">
-                        <img runat="server" src="@dir.IconUrl" alt="1 perc" width="60px" height="60px" />
+                        <img runat="server" src="@dir.IconUrl" alt="1 perc" width="60px" height="60px" onclick="javascript: timerCounter = @((time).TotalSeconds); timer.start();" />
                     </span>
                 </span>
                 <div class="direction">
@@ -42,7 +104,7 @@ else
 
                                 if (!String.IsNullOrEmpty(refSegment.IconUrl))
                                 {
-                                    <img runat="server" src="@refSegment.IconUrl" alt="@refSegment.Id" title="@refSegment.Id" width="32px" height="32px"/>
+                                    <img runat="server" src="@refSegment.IconUrl" alt="@refSegment.Id" title="@refSegment.Id" width="32px" height="32px" />
                                 }
 
                                 @refSegment.Text
