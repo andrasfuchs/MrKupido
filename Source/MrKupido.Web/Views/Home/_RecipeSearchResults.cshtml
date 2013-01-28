@@ -38,26 +38,84 @@
                     </div>
                 </div>
                 <div class="resulticons">
+@*                    @if (rsri[i].CSSClass == "commercial")
+                    {
+                        <img runat="server" src="~/Content/svg/type_commercial.svg" width="35px" height="35px" />
+                    } else 
+                    {
+                    *@
+                    <div class="versions">
+                        <a href="javascript:searchKeywordSelected(null,{item: {value:'R:@rsri[i].UniqueName'}}); doSearch(6);">
+                            <img runat="server" src="~/Content/svg/icon_versions.svg" width="50px" height="45px" />
+                            <span>@rsri[i].SubVersions</span>
+                        </a>
+                    </div>
+                    @*}*@
+
+
+                    @if (rsri[i].IsVegetarian)
+                    { 
+                        <img runat="server" src="~/Content/svg/icon_vegetarian.svg" alt="vegetáriánus" width="35px" height="35px" />
+                    }
+                    else
+                    { 
+                        <img runat="server" src="~/Content/svg/icon_vegetarian_disabled.svg" alt="nem vegetáriánus" width="35px" height="35px" />
+                    }
+
+                    @if (rsri[i].IsGlutenFree)
+                    { 
+                        <img runat="server" src="~/Content/svg/icon_glutenfree.svg" alt="gluténmentes" width="35px" height="35px" />
+                    }
+                    else
+                    { 
+                        <img runat="server" src="~/Content/svg/icon_glutenfree_disabled.svg" alt="glutént tartalmaz" width="35px" height="35px" />
+                    }
+
+                    @if (rsri[i].IsLactoseFree)
+                    { 
+                        <img runat="server" src="~/Content/svg/icon_lactosefree.svg" alt="laktózmentes" width="35px" height="35px" />
+                    }
+                    else
+                    { 
+                        <img runat="server" src="~/Content/svg/icon_lactosefree_disabled.svg" alt="laktózt tartalmaz" width="35px" height="35px" />
+                    }
+
+                    @if (String.IsNullOrEmpty(rsri[i].CommercialIconFilename))
+                    {
+
+                    if ((rsri[i].Photos != null) && (rsri[i].Photos.Length > 0))
+                    { 
+                        <img runat="server" src="~/Content/svg/icon_photos.svg" alt="@rsri[i].Photos.Length kép" width="40px" height="45px" />
+                    }
+                    else
+                    { 
+                        <img runat="server" src="~/Content/svg/icon_photos_disabled.svg" alt="0 kép" width="40px" height="45px" />
+                    }
+
                     <div class="preptime">
-                        @if (rsri[i].NetTime >= 45)
+                        @if (rsri[i].NetTime >= 60)
                         {
                             <img runat="server" src="~/Content/svg/clock_60.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
                         }
-                        else if (rsri[i].NetTime >= 30)
+                        else if (rsri[i].NetTime >= 45)
                         {
                             <img runat="server" src="~/Content/svg/clock_45.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
                         }
-                        else if (rsri[i].NetTime >= 15)
+                        else if (rsri[i].NetTime >= 60)
                         {
                             <img runat="server" src="~/Content/svg/clock_30.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
                         }
-                        else if (rsri[i].NetTime > 0)
+                        else if (rsri[i].NetTime >= 15)
                         {
                             <img runat="server" src="~/Content/svg/clock_15.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
                         }
+                        else if (rsri[i].NetTime > 0)
+                        {
+                            <img runat="server" src="~/Content/svg/clock_00.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
+                        }
                         else
                         {
-                            <img runat="server" src="~/Content/svg/clock_00.svg" alt="? perc" width="35px" height="35px" />
+                            <img runat="server" src="~/Content/svg/clock_disabled.svg" alt="? perc" width="35px" height="35px" />
                         }
 
                         @if (rsri[i].NetTime >= 99)
@@ -69,47 +127,13 @@
                             <span>@rsri[i].NetTime.ToString("00")</span>
                         }
                     </div>
-                    @if (rsri[i].IsVegetarian)
-                    { 
-                        <img runat="server" src="~/Content/svg/icon_vegetarian_dark.svg" alt="vegetáriánus" width="35px" height="35px" />
+                    } else 
+                    {
+                        <div class="commerciallogo">
+                            <img runat="server" src="~/Content/images/brand_@(rsri[i].CommercialIconFilename).png" />
+                        </div>
                     }
-                    else
-                    { 
-                        <img runat="server" src="~/Content/svg/icon_vegetarian.svg" alt="nem vegetáriánus" width="35px" height="35px" />
-                    }
-
-                    @if (rsri[i].IsGlutenFree)
-                    { 
-                        <img runat="server" src="~/Content/svg/icon_glutenfree_dark.svg" alt="gluténmentes" width="35px" height="35px" />
-                    }
-                    else
-                    { 
-                        <img runat="server" src="~/Content/svg/icon_glutenfree.svg" alt="glutént tartalmaz" width="35px" height="35px" />
-                    }
-
-                    @if (rsri[i].IsLactoseFree)
-                    { 
-                        <img runat="server" src="~/Content/svg/icon_lactosefree_dark.svg" alt="laktózmentes" width="35px" height="35px" />
-                    }
-                    else
-                    { 
-                        <img runat="server" src="~/Content/svg/icon_lactosefree.svg" alt="laktózt tartalmaz" width="35px" height="35px" />
-                    }
-
-                    @if ((rsri[i].Photos != null) && (rsri[i].Photos.Length > 0))
-                    { 
-                        <img runat="server" src="~/Content/svg/icon_photo_dark.svg" alt="@rsri[i].Photos.Length kép" width="40px" height="45px" />
-                    }
-                    else
-                    { 
-                        <img runat="server" src="~/Content/svg/icon_photo.svg" alt="0 kép" width="40px" height="45px" />
-                    }
-                    <div class="versions">
-                        <a href="javascript:searchKeywordSelected(null,{item: {value:'R:@rsri[i].UniqueName'}}); doSearch(6);">
-                            <img runat="server" src="~/Content/svg/versions.svg" alt="11 változat" width="50px" height="45px" />
-                            <span>@rsri[i].SubVersions</span>
-                        </a>
-                    </div>
+                    
                 </div>
                 <div class="resultbody">
                     @if (rsri[i].CommercialInfo != null)

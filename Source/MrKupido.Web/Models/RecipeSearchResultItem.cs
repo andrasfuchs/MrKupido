@@ -33,6 +33,7 @@ namespace MrKupido.Web.Models
         
         public string MainIngredients;
         public string CommercialInfo;
+        public string CommercialIconFilename;
         
         public float? Rating;
         public int RatingCount;
@@ -105,6 +106,8 @@ namespace MrKupido.Web.Models
                     sb.Append("Márka: ");
                     sb.Append(pb.BrandName);
                     sb.Append(", ");
+
+                    CommercialIconFilename = pb.IconFilename;
                 }
 
                 if (rtn.CommercialAttribute.MadeBy != null)

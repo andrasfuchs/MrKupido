@@ -24,6 +24,7 @@ namespace MrKupido.Library
         public Uri GooglePlusUrl;   // like https://plus.google.com/100649224126585302270
         public Uri WebsiteUrl;
         public Uri PriceDataUrl;
+        public string IconFilename;
 
         public string OrderPhoneNumber;
         public string FeedbackPhoneNumber;

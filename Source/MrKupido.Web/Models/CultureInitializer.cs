@@ -23,8 +23,8 @@ namespace MrKupido.Web.Models
         {
             string cultureName = null;
 
-            if (request.AppRelativeCurrentExecutionFilePath.Contains("/hun/")) cultureName = "hu-HU";
-            if (request.AppRelativeCurrentExecutionFilePath.Contains("/eng/")) cultureName = "en-US";
+            if (request.AppRelativeCurrentExecutionFilePath.Contains("/hun")) cultureName = "hu-HU";
+            if (request.AppRelativeCurrentExecutionFilePath.Contains("/eng")) cultureName = "en-US";
 
             if (String.IsNullOrEmpty(cultureName))
             {

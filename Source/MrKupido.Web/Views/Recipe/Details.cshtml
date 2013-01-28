@@ -2,8 +2,8 @@
 @{
     ViewBag.Title = "Details";
 }
+@Scripts.Render("~/Scripts/wTimer.js")
 @section scripts {
-    <script runat="server" type="text/javascript" src="~/Scripts/wTimer.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             deleteFilter("", false);
@@ -102,18 +102,7 @@
 </header>
 <hr class="single" />
 <article>
-    <div class="tip">
-        <p>
-            <img runat="server" src="~/Content/svg/bulb.svg" alt="Tipp" width="21" height="30" />
-            <span>Szűrőket használva leegyszerűsíthetjük a keresést. Próbálkozz hozzávalóval, diétával vagy az étel nevével.</span>
-        </p>
-    </div>
-    <hr class="single" />
-    <div class="question">
-        <p>
-            <img runat="server" src="~/Content/svg/question_mark.svg" alt="Kérdés" width="16" height="30" />
-            <span><a href="#">Szeretnéd, ha személyre szabott porciókat ajánlanánk? Add meg a magasságod, súlyod és életkorod! >></a></span>
-        </p>
+    <div id="tipsandticks" class="tipsandticks">
     </div>
     <hr class="double" />
     <details id="recipe" open class="alwaysopen">

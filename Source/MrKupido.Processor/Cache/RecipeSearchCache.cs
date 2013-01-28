@@ -63,6 +63,7 @@ namespace MrKupido.Processor
                         if (result[i].SearchStrings.Any(iun => iun == tempFC.SearchString))
                         {
                             result.RemoveAt(i);
+                            i--;
                         }
                     }
                 }

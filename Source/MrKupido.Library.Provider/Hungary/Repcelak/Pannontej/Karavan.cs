@@ -11,6 +11,7 @@ namespace MrKupido.Library.Provider
             : base(languageISO)
         {
             this.BrandName = "Karaván";
+            this.IconFilename = "karavan";
         }
     }
 

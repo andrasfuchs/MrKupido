@@ -257,6 +257,7 @@ header, footer, nav, section {
     margin-left: 3px;
     margin-top: 5px;
     font-size: 24px;
+    cursor: pointer;
 }
 
 
@@ -321,17 +322,18 @@ header, footer, nav, section {
         opacity: 0.6;
     }
 
-article div.tip, article div.question {
+article div.tipsandticks {
     text-align: center;
+    line-height: 32px;
 }
 
-    article div.tip img, article div.question img {
+    article div.tipsandticks img {
         vertical-align: middle;
         margin-top: -8px;
         margin-right: 8px;
     }
 
-    article div.tip span {
+    article div.tipsandticks span {
         padding: 10px;
     }
 
@@ -681,6 +683,14 @@ details#searchresults li {
                 -webkit-text-shadow: -1px -1px 0 /*mcd*/ #553e31, 1px -1px 0 /*mcd*/ #553e31, -1px 1px 0 /*mcd*/ #553e31, 1px 1px 0 /*mcd*/ #553e31;
                 text-shadow: -1px -1px 0 /*mcd*/ #553e31, 1px -1px 0 /*mcd*/ #553e31, -1px 1px 0 /*mcd*/ #553e31, 1px 1px 0 /*mcd*/ #553e31;
             }
+
+        details#searchresults li div.resulticons div.commerciallogo {
+            display: inline-block;
+            position: relative;
+            width: 80px;
+            max-width: 80px;
+            overflow: hidden;
+        }
 
         details#searchresults li div.resulticons div.versions {
             display: inline;

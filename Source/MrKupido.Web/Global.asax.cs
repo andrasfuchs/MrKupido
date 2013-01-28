@@ -93,7 +93,7 @@ namespace MrKupido.Web
                     Model.User user = MrKupido.Web.Controllers.BaseController.CurrentSessions[Session.SessionID].User;
                     Session["CurrentUser"] = user;
                     Session["CurrentUser.DisplayName"] = !String.IsNullOrEmpty(user.NickName) ? user.NickName : user.FullName;
-                    Session["CurrentUser.AvatarUrl"] = !String.IsNullOrEmpty(user.AvatarUrl) ? user.AvatarUrl : "Content/svg/avatar.svg";
+                    Session["CurrentUser.AvatarUrl"] = !String.IsNullOrEmpty(user.AvatarUrl) ? user.AvatarUrl : "Content/svg/icon_avatar.svg";
                 }
                 else
                 {

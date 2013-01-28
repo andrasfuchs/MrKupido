@@ -158,7 +158,7 @@ namespace MrKupido.Web.Controllers
 
                     if (String.IsNullOrEmpty(user.AvatarUrl))
                     {
-                        user.AvatarUrl = "http://profiles.google.com/s2/photos/profile/" + user.Email.Substring(0, user.Email.IndexOf('@')) + "?sz=51";
+                        user.AvatarUrl = "http://profiles.google.com/s2/photos/profile/" + user.Email.Substring(0, user.Email.IndexOf('@')) + "?sz=50";
                     }
                 }
 
@@ -232,7 +232,7 @@ namespace MrKupido.Web.Controllers
 
                 Session["CurrentUser"] = user;
                 Session["CurrentUser.DisplayName"] = !String.IsNullOrEmpty(user.NickName) ? user.NickName : user.FullName;
-                Session["CurrentUser.AvatarUrl"] = !String.IsNullOrEmpty(user.AvatarUrl) ? user.AvatarUrl : "Content/svg/avatar.svg";
+                Session["CurrentUser.AvatarUrl"] = !String.IsNullOrEmpty(user.AvatarUrl) ? user.AvatarUrl : "Content/svg/icon_avatar.svg";
 
                 string returnUrl = (string)Session["ReturnUrl"];
                 if (String.IsNullOrEmpty(returnUrl))

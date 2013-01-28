@@ -24,8 +24,8 @@
 <hr class="space" />
 <details id="searchresults" open>
     <summary>
-        <h1>Találatok</h1>
-        <h2>(@(Model == null ? "0" : Model.Items.Count.ToString()) étel)</h2>
+        <h1>@MrKupido.Web.Resources.Home.RecipeSearchResultsHead.Results</h1>
+        <h2>(@(Model == null ? "0" : Model.Items.Count.ToString()) @MrKupido.Web.Resources.Home.RecipeSearchResultsHead.Recipes)</h2>
     </summary>
     <hr class="space" />
     <div style="display: none">

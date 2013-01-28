@@ -219,6 +219,36 @@
     <Compile Include="Models\UserState.cs" />
     <Compile Include="Models\WikiLocationActicle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Home\RecipeSearchResultsHead.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecipeSearchResultsHead.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Home\RecipeSearchResultsHead.hu.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RecipeSearchResultsHead.hu.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Shared\SearchHeader.hu.Designer.cs">
+      <DependentUpon>SearchHeader.hu.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Shared\SearchHeader.Designer.cs">
+      <DependentUpon>SearchHeader.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Shared\Layout.hu.Designer.cs">
+      <DependentUpon>Layout.hu.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Shared\Layout.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Layout.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\fonts\Cardo\cardo-regular-webfont.svg" />
@@ -266,6 +296,7 @@
     <Content Include="Content\svg\cat_unknown_dark.svg" />
     <Content Include="Content\svg\cat_vegetabledish.svg" />
     <Content Include="Content\svg\clock_00.svg" />
+    <Content Include="Content\svg\clock_disabled.svg" />
     <Content Include="Content\svg\container_01.svg" />
     <Content Include="Content\svg\container_02.svg" />
     <Content Include="Content\svg\container_03.svg" />
@@ -302,10 +333,18 @@
     <Content Include="Content\svg\e_rasper.svg" />
     <Content Include="Content\svg\e_round_shaped_container.svg" />
     <Content Include="Content\svg\e_spoon.svg" />
+    <Content Include="Content\svg\icon_avatar.svg" />
     <Content Include="Content\svg\icon_figurebig.svg" />
     <Content Include="Content\svg\icon_figuresmall.svg" />
+    <Content Include="Content\svg\icon_glutenfree_disabled.svg" />
+    <Content Include="Content\svg\icon_lactozefree.svg" />
+    <Content Include="Content\svg\icon_lactozefree_disabled.svg" />
+    <Content Include="Content\svg\icon_menutrigger.svg" />
+    <Content Include="Content\svg\icon_photos.svg" />
     <Content Include="Content\svg\icon_sliderhandle.svg" />
     <Content Include="Content\svg\icon_slidersigns.svg" />
+    <Content Include="Content\svg\icon_vegetarian_disabled.svg" />
+    <Content Include="Content\svg\icon_versions.svg" />
     <Content Include="Content\svg\inggroup_01.svg" />
     <Content Include="Content\svg\inggroup_02.svg" />
     <Content Include="Content\svg\inggroup_03.svg" />
@@ -365,7 +404,11 @@
     <Content Include="Content\svg\r_pizza.svg" />
     <Content Include="Content\svg\r_recipe.svg" />
     <Content Include="Content\svg\stars_00_light.svg" />
-    <Content Include="Content\svg\usermenu.svg" />
+    <Content Include="Content\svg\tnt_exclamation.svg" />
+    <Content Include="Content\svg\tnt_idea.svg" />
+    <Content Include="Content\svg\tnt_question.svg" />
+    <Content Include="Content\svg\tnt_smile.svg" />
+    <Content Include="Content\svg\type_commercial.svg" />
     <Content Include="Content\themes\base\jquery.ui.accordion.min.css">
       <DependentUpon>jquery.ui.accordion.css</DependentUpon>
     </Content>
@@ -415,8 +458,6 @@
     <Content Include="Hunspellx86.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\svg\avatar.svg" />
-    <Content Include="Content\svg\bulb.svg" />
     <Content Include="Content\svg\cat_bread_dark.svg" />
     <Content Include="Content\svg\cat_cookies_dark.svg" />
     <Content Include="Content\svg\cat_fish_dark.svg" />
@@ -436,19 +477,12 @@
     <Content Include="Content\svg\clock_45.svg" />
     <Content Include="Content\svg\clock_60.svg" />
     <Content Include="Content\svg\frame160x160.svg" />
-    <Content Include="Content\svg\gluten_dark.svg" />
-    <Content Include="Content\svg\gluten_dark_image.svg" />
     <Content Include="Content\svg\h1_bg.svg" />
     <Content Include="Content\svg\hr_double.svg" />
     <Content Include="Content\svg\hr_single.svg" />
     <Content Include="Content\svg\icon_glutenfree.svg" />
-    <Content Include="Content\svg\icon_glutenfree_dark.svg" />
     <Content Include="Content\svg\icon_lactosefree.svg" />
-    <Content Include="Content\svg\icon_lactosefree_dark.svg" />
-    <Content Include="Content\svg\icon_photo.svg" />
-    <Content Include="Content\svg\icon_photo_dark.svg" />
     <Content Include="Content\svg\icon_vegetarian.svg" />
-    <Content Include="Content\svg\icon_vegetarian_dark.svg" />
     <Content Include="Content\svg\logo_facebook.svg" />
     <Content Include="Content\svg\logo_flickr.svg" />
     <Content Include="Content\svg\logo_google.svg" />
@@ -456,7 +490,6 @@
     <Content Include="Content\svg\logo_twitter.svg" />
     <Content Include="Content\svg\logo_wordpress.svg" />
     <Content Include="Content\svg\logo_yahoo.svg" />
-    <Content Include="Content\svg\question_mark.svg" />
     <Content Include="Content\svg\stage_cooking.svg" />
     <Content Include="Content\svg\stage_preparation.svg" />
     <Content Include="Content\svg\stage_serving.svg" />
@@ -473,7 +506,6 @@
     <Content Include="Content\svg\stars_50.svg" />
     <Content Include="Content\svg\tick_off.svg" />
     <Content Include="Content\svg\tick_on.svg" />
-    <Content Include="Content\svg\versions.svg" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -511,6 +543,7 @@
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-ui-1.9.1.custom.js" />
+    <Content Include="Scripts\jquery-ui-autocomplete.selectFirst.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js">
       <DependentUpon>jquery.unobtrusive-ajax.js</DependentUpon>
@@ -698,11 +731,37 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="1975/10/21" BuildVersion_UpdateFileVersion="False" BuildVersion_BuildVersioningStyle="None.None.None.None" />
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.None" BuildVersion_UpdateFileVersion="False" BuildVersion_StartDate="1975/10/21" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
   <ItemGroup>
     <TypeScriptCompile Include="$(ProjectDir)\**\*.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Home\RecipeSearchResultsHead.hu.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecipeSearchResultsHead.hu.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Home\RecipeSearchResultsHead.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecipeSearchResultsHead.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Shared\SearchHeader.hu.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SearchHeader.hu.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Shared\SearchHeader.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SearchHeader.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Shared\Layout.hu.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Layout.hu.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Shared\Layout.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Layout.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Target Name="BeforeBuild">
     <Exec Command="&quot;$(PROGRAMFILES)\Microsoft SDKs\TypeScript\0.8.0.0\tsc&quot; @(TypeScriptCompile ->'&quot;%(fullpath)&quot;', ' ')" />
