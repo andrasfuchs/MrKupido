@@ -6,6 +6,7 @@ using System.Text;
 
 namespace MrKupido.Library.Recipe
 {
+    [NameAlias("eng", "chicken breast with cream")]
     [NameAlias("hun", "tejszínes csirkemell")]
 
     [IngredientConsts(IsAbstract = true, DefaultChild = typeof(TejszinesCsirkemellMathe))]

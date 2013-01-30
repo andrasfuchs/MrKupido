@@ -69,7 +69,7 @@ namespace MrKupido.Web.Controllers
         {
             Session["IgnoreOldBrowser"] = true;
 
-            return String.IsNullOrEmpty(returnUrl) ? (ActionResult)RedirectToRoute("Default", new { language = "hun", controller = "Home", action = "Index" }) : (ActionResult)Redirect(returnUrl);
+            return String.IsNullOrEmpty(returnUrl) ? (ActionResult)RedirectToRoute("Default", new { language = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName, controller = "Home", action = "Index" }) : (ActionResult)Redirect(returnUrl);
         }
 
         [HttpPost]

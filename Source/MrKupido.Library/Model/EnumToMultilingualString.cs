@@ -11,7 +11,7 @@ namespace MrKupido.Library
     {
         public override string ToString()
         {
-            string culture = "hun";
+            string culture = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName;
 
             string result = null;
             int priority = Int32.MaxValue;

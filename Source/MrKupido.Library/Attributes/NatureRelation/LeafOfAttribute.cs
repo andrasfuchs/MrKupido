@@ -6,6 +6,7 @@ using MrKupido.Library.Nature;
 
 namespace MrKupido.Library.Attributes
 {
+    [NameAlias("eng", "leaf of")]
     [NameAlias("hun", "levele")]
 
     [AttributeUsage(System.AttributeTargets.Class)]

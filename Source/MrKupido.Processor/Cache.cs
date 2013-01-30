@@ -10,10 +10,10 @@ namespace MrKupido.Processor
 {
     public static class Cache
     {
-        private static IngredientCache ingredientCache = new IngredientCache();
-        private static RecipeCache recipeCache = new RecipeCache();
-        private static RecipeSearchCache recipeSearchCache = new RecipeSearchCache();
-        private static EquipmentCache equipmentCache = new EquipmentCache();
+        private static Dictionary<string, IngredientCache> ingredientCache = new Dictionary<string, IngredientCache>();
+        private static Dictionary<string, RecipeCache> recipeCache = new Dictionary<string,RecipeCache>();
+        private static Dictionary<string, RecipeSearchCache> recipeSearchCache = new Dictionary<string,RecipeSearchCache>();
+        private static Dictionary<string, EquipmentCache> equipmentCache = new Dictionary<string,EquipmentCache>();
         public static Assembly[] Assemblies { get; private set; }
 
         static Cache()
@@ -32,9 +32,15 @@ namespace MrKupido.Processor
         {
             get
             {
-                if (!ingredientCache.WasInitialized) ingredientCache.Initialize("hun");
+                string language = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName;
 
-                return ingredientCache;
+                if (!ingredientCache.ContainsKey(language))
+                {
+                    ingredientCache.Add(language, new IngredientCache());
+                    ingredientCache[language].Initialize(language);
+                }
+
+                return ingredientCache[language];
             }
         }
         
@@ -42,9 +48,15 @@ namespace MrKupido.Processor
         {
             get
             {
-                if (!recipeCache.WasInitialized) recipeCache.Initialize("hun");
+                string language = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName;
 
-                return recipeCache;
+                if (!recipeCache.ContainsKey(language))
+                {
+                    recipeCache.Add(language, new RecipeCache());
+                    recipeCache[language].Initialize(language);
+                }
+
+                return recipeCache[language];
             }
         }
 
@@ -52,7 +64,14 @@ namespace MrKupido.Processor
         {
             get
             {
-                return recipeSearchCache;
+                string language = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName;
+
+                if (!recipeSearchCache.ContainsKey(language))
+                {
+                    recipeSearchCache.Add(language, new RecipeSearchCache());
+                }
+
+                return recipeSearchCache[language];
             }
         }
 
@@ -60,9 +79,15 @@ namespace MrKupido.Processor
         {
             get
             {
-                if (!equipmentCache.WasInitialized) equipmentCache.Initialize("hun");
+                string language = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName;
 
-                return equipmentCache;
+                if (!equipmentCache.ContainsKey(language))
+                {
+                    equipmentCache.Add(language, new EquipmentCache());
+                    equipmentCache[language].Initialize(language);
+                }
+
+                return equipmentCache[language];
             }
         }
 

@@ -75,7 +75,22 @@ namespace MrKupido.Processor.Model
         {
             if (children.ContainsKey(root.ClassFullName))
             {
-                root.Children = children[root.ClassFullName].ConvertAll<T>(t => t2tn(t)).ToArray();
+                List<TreeNode> tnChildren = new List<TreeNode>();
+
+                foreach (Type t in children[root.ClassFullName])
+                {
+                    try
+                    {
+                        TreeNode child = t2tn(t);
+                        tnChildren.Add(child);
+                    }
+                    catch
+                    {
+                        Trace.TraceError("Could not add the child node '{1}' to the parent node '{0}'.", root.UniqueName, t.FullName);
+                    }
+                }
+
+                root.Children = tnChildren.ToArray();
                 children.Remove(root.ClassFullName);
 
                 foreach (T node in root.Children)
@@ -104,7 +119,7 @@ namespace MrKupido.Processor.Model
             {
                 if (nodeClass == rootType)
                 {
-                    root = t2tn(nodeClass);
+                        root = t2tn(nodeClass);
                 }
                 else
                 {

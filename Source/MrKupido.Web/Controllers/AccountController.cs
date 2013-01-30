@@ -238,7 +238,7 @@ namespace MrKupido.Web.Controllers
                 if (String.IsNullOrEmpty(returnUrl))
                 {
                     //return RedirectToRoute("Default");
-                    return RedirectToRoute("Default", new { language = "hun", controller = "Home", action = "Index" });
+                    return RedirectToRoute("Default", new { language = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName, controller = "Home", action = "Index" });
                 }
                 else
                 {
@@ -350,7 +350,7 @@ namespace MrKupido.Web.Controllers
             Session["CurrentUser.DisplayName"] = !String.IsNullOrEmpty(user.NickName) ? user.NickName : user.FullName;
 
             //return View();
-            return RedirectToRoute("Default", new { language = "hun", controller = "Home", action = "Index" });
+            return RedirectToRoute("Default", new { language = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName, controller = "Home", action = "Index" });
         }
     }
 }

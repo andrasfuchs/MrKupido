@@ -8,6 +8,7 @@ using System.Text;
 
 namespace MrKupido.Library.Recipe
 {
+    [NameAlias("eng", "chicken breast with cream [Fuchs style]")]
     [NameAlias("hun", "tejszínes csirkemell [Fuchs módra]")]
 
     //TODO: [Recommend(FootRizs, BurgonyaPure)]

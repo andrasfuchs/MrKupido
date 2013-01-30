@@ -6,6 +6,7 @@ using MrKupido.Library.Nature;
 
 namespace MrKupido.Library.Attributes
 {
+    [NameAlias("eng", "griest of")]
     [NameAlias("hun", "őrleménye")]
 
     [AttributeUsage(System.AttributeTargets.Class)]

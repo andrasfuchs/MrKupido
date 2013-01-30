@@ -37,7 +37,7 @@ namespace MrKupido.Processor
 
                 // normalize the tree if necessary
 
-                IEnumerable<RecipeTreeNode> q = Cache.Recipe.All;//.Where(r => r.IsImplemented || r.CommercialAttribute != null);
+                IEnumerable<RecipeTreeNode> q = Cache.Recipe.All;
 
                 foreach (FilterCondition fc in filters)
                 {
