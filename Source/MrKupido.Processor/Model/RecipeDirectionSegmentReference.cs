@@ -13,7 +13,8 @@ namespace MrKupido.Processor.Model
         public string IconUrl { get; set; }
         public object Reference { get; private set; }
 
-        public RecipeDirectionSegmentReference(object reference) : base("")
+        public RecipeDirectionSegmentReference(object reference, List<string> seenIngredients)
+            : base("")
         {
             this.Reference = reference;
 
@@ -24,6 +25,21 @@ namespace MrKupido.Processor.Model
             else
             {
                 this.Text = reference.ToString();
+
+                if (reference is IngredientBase)
+                {
+                    IngredientBase ib = (IngredientBase)reference;
+
+                    if (seenIngredients.Contains(ib.ToString(false, false)))
+                    {
+                        this.Text = ib.ToString(false, true);
+                    }
+                    else
+                    {
+                        seenIngredients.Add(ib.ToString(false, false));
+                    }
+                }
+
                 if (reference is Container)
                 {
                     this.Id = ((Container)reference).Id;

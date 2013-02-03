@@ -14,5 +14,13 @@ namespace MrKupido.Library.Equipment
             : base(26.0f * scale, 4.0f)
         {
         }
+
+        [NameAlias("eng", "bake", Priority = 200)]
+        [NameAlias("hun", "kisüt", Priority = 200)]
+        [NameAlias("hun", "süsd ki a(z) {N} az összes {0T} egyenként {1} percig")]
+        public void KisutniOsszeset(IIngredient i, float timeForOne)
+        {
+            LastActionDuration = (uint)Math.Ceiling(i.PieceCount * timeForOne * 60);
+        }
     }
 }

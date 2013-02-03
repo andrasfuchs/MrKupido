@@ -9,6 +9,7 @@ using MrKupido.Library.Provider;
 
 namespace MrKupido.Library.Recipe
 {
+    [NameAlias("eng", "Hungarian pizza")]
     [NameAlias("hun", "magyaros pizza")]
 
     public class MagyarosPizza : ParadicsomosAlapuPizza
@@ -34,23 +35,20 @@ namespace MrKupido.Library.Recipe
         {
             PreparedIngredients result = new PreparedIngredients();
 
-            IIngredient pizzateszta = new ParadicsomosAlapuPizza(amount * 1.0f);
+            IIngredient pizzateszta = new ParadicsomosAlapuPizza(amount * 300.0f);
             result.Remove("pizzateszta");
 
             Kes kes = eg.Use<Kes>();
-            IIngredient szalonna = kes.Feldarabolni(new FustoltSzalonna(50.0f), 1.0f);
-            IIngredient kolbasz = kes.Felkarikazni(new Kolbasz(50.0f), 1.0f);
-            IIngredient hagyma = kes.Felkarikazni(new Hagyma(35.0f), 4.0f);
-            IIngredient paprika = kes.Felkarikazni(new Fuszerpaprika(30.0f), 3.0f);
+            IIngredient szalonna = kes.Feldarabolni(new FustoltSzalonna(150.0f * amount), 75.0f);
+            IIngredient kolbasz = kes.Felkarikazni(new Kolbasz(250.0f * amount), 25.0f);
+            IIngredient hagyma = kes.Felkarikazni(new Hagyma(5.0f * amount), 15.0f);
+            IIngredient paprika = kes.Felkarikazni(new Fuszerpaprika(100.0f * amount), 15.0f);
 
             Reszelo reszelo = eg.Use<Reszelo>();
-            IIngredient sajt = reszelo.Lereszelni(new Sajt(100.0f));
+            IIngredient sajt = reszelo.Lereszelni(new Sajt(100.0f * amount));
 
             Kez kez = eg.Use<Kez>();
-            pizzateszta = kez.Rarakni(pizzateszta, szalonna);
-            pizzateszta = kez.Rarakni(pizzateszta, kolbasz);
-            pizzateszta = kez.Rarakni(pizzateszta, hagyma);
-            pizzateszta = kez.Rarakni(pizzateszta, paprika);
+            pizzateszta = kez.RarakniMind(pizzateszta, szalonna, kolbasz, hagyma, paprika);
             pizzateszta = kez.Raszorni(pizzateszta, sajt);
             
             result.Add("pizzateszta", pizzateszta);

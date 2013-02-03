@@ -43,16 +43,20 @@ namespace MrKupido.Library.Recipe
         {
             PreparedIngredients result = new PreparedIngredients();
 
+            Edeny edeny = eg.Use<Edeny>();
+
             IIngredient fokhagyma = new Fokhagyma(6.0f);
             FokhagymaPres fp = eg.Use<FokhagymaPres>();
-            fokhagyma = fp.Preselni(fokhagyma);
+            fp.Preselni(fokhagyma);
+            edeny.BerakniMind(fokhagyma, new Tej(1.0f));
 
             Fakanal fakanal = eg.Use<Fakanal>();
-            IIngredient tej = fakanal.Osszekeverni(new Tej(1.0f), fokhagyma);
+            //IIngredient tej = fakanal.Osszekeverni(new Tej(1.0f), fokhagyma);
+            //fakanal.OsszekeverniEdenyeket(edeny);
+            fakanal.ElkeverniEdenyben(edeny);
 
-            Edeny edeny = eg.Use<Edeny>();
             edeny.Berakni(new Csirkemell(250 * 10));
-            edeny.Beonteni(tej);
+            //edeny.Beonteni(tej);
             edeny.Varni(8 * 60);
             edeny.FolyadekotLeonteni();            
             IIngredient tejesCsirkemell = edeny.Kivenni();
@@ -81,9 +85,7 @@ namespace MrKupido.Library.Recipe
             IIngredient reszeltSajt = reszelo.Lereszelni(new KaravanFustoltSajt(200.0f));
 
             JenaiTal jenai = eg.Use<JenaiTal>();
-            jenai.Berakni(new FustoltSzalonna(5, MeasurementUnit.piece));
-            jenai.Berakni(tejesCsirkemell);
-            jenai.Berakni(reszeltAlma);
+            jenai.BerakniMind(new FustoltSzalonna(5, MeasurementUnit.piece), tejesCsirkemell, reszeltAlma);
             jenai.Beonteni(new Tejszin(0.3f));
             kez.Raszorni(tejesCsirkemell, reszeltSajt);
             jenai.Berakni(new FustoltSzalonna(5, MeasurementUnit.piece));

@@ -219,6 +219,36 @@
     <Compile Include="Models\UserState.cs" />
     <Compile Include="Models\WikiLocationActicle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Account\Profile.hu.Designer.cs">
+      <DependentUpon>Profile.hu.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Account\Profile.Designer.cs">
+      <DependentUpon>Profile.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Account\LogIn.hu.Designer.cs">
+      <DependentUpon>LogIn.hu.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Account\LogIn.Designer.cs">
+      <DependentUpon>LogIn.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Home\NotSupportedBrowser.Designer.cs">
+      <DependentUpon>NotSupportedBrowser.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Home\Index.Designer.cs">
+      <DependentUpon>Index.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\Home\RecipeSearchResultsHead.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -228,6 +258,41 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RecipeSearchResultsHead.hu.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\Import\RecipeList.Designer.cs">
+      <DependentUpon>RecipeList.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Import\Recipe.Designer.cs">
+      <DependentUpon>Recipe.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Ingredient\Trees.hu.Designer.cs">
+      <DependentUpon>Trees.hu.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Ingredient\Trees.Designer.cs">
+      <DependentUpon>Trees.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Recipe\Details.hu.Designer.cs">
+      <DependentUpon>Details.hu.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Recipe\Details.Designer.cs">
+      <DependentUpon>Details.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Shared\TipsAndTricks.Designer.cs">
+      <DependentUpon>TipsAndTricks.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Resources\Shared\SearchHeader.hu.Designer.cs">
       <DependentUpon>SearchHeader.hu.resx</DependentUpon>
@@ -257,12 +322,17 @@
     <Content Include="Content\fonts\Tangerine\tangerinea-webfont.svg" />
     <Content Include="Content\fonts\Tangerine\tangerinea_bold-webfont.svg" />
     <Content Include="Content\images\background.jpg" />
+    <Content Include="Content\images\brand_bakony.png" />
+    <Content Include="Content\images\brand_karavan.png" />
+    <Content Include="Content\images\brand_tihany.png" />
+    <Content Include="Content\images\brand_tolle.png" />
     <Content Include="Content\images\browser_android.png" />
     <Content Include="Content\images\browser_chrome.png" />
     <Content Include="Content\images\browser_firefox.png" />
     <Content Include="Content\images\browser_ie.png" />
     <Content Include="Content\images\browser_opera.png" />
     <Content Include="Content\images\browser_safari.png" />
+    <Content Include="Content\images\frame160x160.png" />
     <Content Include="Content\images\logo_mrkupido_wide.png" />
     <Content Include="Content\images\mrkupido.ico" />
     <Content Include="Content\Site.min.css">
@@ -329,22 +399,26 @@
     <Content Include="Content\svg\e_fork.svg" />
     <Content Include="Content\svg\e_hand.svg" />
     <Content Include="Content\svg\e_knife.svg" />
+    <Content Include="Content\svg\e_pan.svg" />
     <Content Include="Content\svg\e_providing_board.svg" />
     <Content Include="Content\svg\e_rasper.svg" />
     <Content Include="Content\svg\e_round_shaped_container.svg" />
     <Content Include="Content\svg\e_spoon.svg" />
+    <Content Include="Content\svg\e_wine_glass.svg" />
     <Content Include="Content\svg\icon_avatar.svg" />
     <Content Include="Content\svg\icon_figurebig.svg" />
     <Content Include="Content\svg\icon_figuresmall.svg" />
+    <Content Include="Content\svg\icon_flag.svg" />
     <Content Include="Content\svg\icon_glutenfree_disabled.svg" />
-    <Content Include="Content\svg\icon_lactozefree.svg" />
-    <Content Include="Content\svg\icon_lactozefree_disabled.svg" />
+    <Content Include="Content\svg\icon_lactosefree_disabled.svg" />
     <Content Include="Content\svg\icon_menutrigger.svg" />
     <Content Include="Content\svg\icon_photos.svg" />
+    <Content Include="Content\svg\icon_photos_disabled.svg" />
     <Content Include="Content\svg\icon_sliderhandle.svg" />
     <Content Include="Content\svg\icon_slidersigns.svg" />
     <Content Include="Content\svg\icon_vegetarian_disabled.svg" />
     <Content Include="Content\svg\icon_versions.svg" />
+    <Content Include="Content\svg\icon_versions_disabled.svg" />
     <Content Include="Content\svg\inggroup_01.svg" />
     <Content Include="Content\svg\inggroup_02.svg" />
     <Content Include="Content\svg\inggroup_03.svg" />
@@ -357,21 +431,29 @@
     <Content Include="Content\svg\inggroup_10.svg" />
     <Content Include="Content\svg\inggroup_11.svg" />
     <Content Include="Content\svg\inggroup_12.svg" />
+    <Content Include="Content\svg\i_.svg" />
     <Content Include="Content\svg\i_bacon.svg" />
+    <Content Include="Content\svg\i_black_pepper.svg" />
     <Content Include="Content\svg\i_carrot.svg" />
+    <Content Include="Content\svg\i_cocoa_bean.svg" />
     <Content Include="Content\svg\i_egg.svg" />
-    <Content Include="Content\svg\i_fruit.svg" />
     <Content Include="Content\svg\i_ham.svg" />
     <Content Include="Content\svg\i_honey.svg" />
     <Content Include="Content\svg\i_ingredient.svg" />
     <Content Include="Content\svg\i_milk.svg" />
+    <Content Include="Content\svg\i_mushroom.svg" />
+    <Content Include="Content\svg\i_oil.svg" />
+    <Content Include="Content\svg\i_olive_oil.svg" />
     <Content Include="Content\svg\i_onion.svg" />
     <Content Include="Content\svg\i_paprika.svg" />
     <Content Include="Content\svg\i_pepper.svg" />
+    <Content Include="Content\svg\i_potato.svg" />
+    <Content Include="Content\svg\i_rice.svg" />
     <Content Include="Content\svg\i_salt.svg" />
     <Content Include="Content\svg\i_tomato.svg" />
     <Content Include="Content\svg\i_walnut.svg" />
     <Content Include="Content\svg\i_water.svg" />
+    <Content Include="Content\svg\i_wheat.svg" />
     <Content Include="Content\svg\logo_mrkupido.svg" />
     <Content Include="Content\svg\logo_mrkupido_wide.svg" />
     <Content Include="Content\svg\nutlevel_0.svg" />
@@ -393,6 +475,7 @@
     <Content Include="Content\svg\n_bird.svg" />
     <Content Include="Content\svg\n_fish.svg" />
     <Content Include="Content\svg\n_fungi.svg" />
+    <Content Include="Content\svg\n_insect.svg" />
     <Content Include="Content\svg\n_mineral.svg" />
     <Content Include="Content\svg\n_mushroom.svg" />
     <Content Include="Content\svg\n_nature.svg" />
@@ -401,8 +484,12 @@
     <Content Include="Content\svg\paging_last.svg" />
     <Content Include="Content\svg\paging_next.svg" />
     <Content Include="Content\svg\paging_prev.svg" />
+    <Content Include="Content\svg\r_bread.svg" />
+    <Content Include="Content\svg\r_cake.svg" />
+    <Content Include="Content\svg\r_cheese.svg" />
     <Content Include="Content\svg\r_pizza.svg" />
     <Content Include="Content\svg\r_recipe.svg" />
+    <Content Include="Content\svg\r_soup.svg" />
     <Content Include="Content\svg\stars_00_light.svg" />
     <Content Include="Content\svg\tnt_exclamation.svg" />
     <Content Include="Content\svg\tnt_idea.svg" />
@@ -635,7 +722,7 @@
     <Content Include="Views\Import\_RecipeEditor.cshtml" />
     <Content Include="Views\Home\NotSupportedBrowser.cshtml" />
     <Content Include="Views\Ingredient\_TaxonomyTree.cshtml" />
-    <Content Include="Views\Ingredient\Taxonomy.cshtml" />
+    <Content Include="Views\Ingredient\Trees.cshtml" />
     <Content Include="Views\Ingredient\_IngredientTree.cshtml" />
     <Content Include="Views\Ingredient\_RecipeTree.cshtml" />
     <Content Include="Views\Ingredient\_EquipmentTree.cshtml" />
@@ -738,6 +825,30 @@
     <TypeScriptCompile Include="$(ProjectDir)\**\*.ts" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\Account\Profile.hu.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Profile.hu.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Account\Profile.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Profile.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Account\LogIn.hu.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LogIn.hu.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Account\LogIn.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>LogIn.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Home\NotSupportedBrowser.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NotSupportedBrowser.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Home\Index.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Home\RecipeSearchResultsHead.hu.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RecipeSearchResultsHead.hu.Designer.cs</LastGenOutput>
@@ -745,6 +856,34 @@
     <EmbeddedResource Include="Resources\Home\RecipeSearchResultsHead.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RecipeSearchResultsHead.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Import\RecipeList.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecipeList.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Import\Recipe.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Recipe.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Ingredient\Trees.hu.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Trees.hu.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Ingredient\Trees.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Trees.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Recipe\Details.hu.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Details.hu.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Recipe\Details.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Details.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Shared\TipsAndTricks.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TipsAndTricks.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Shared\SearchHeader.hu.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

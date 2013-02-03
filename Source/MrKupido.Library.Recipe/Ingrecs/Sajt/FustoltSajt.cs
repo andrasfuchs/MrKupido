@@ -7,6 +7,7 @@ using System.Text;
 
 namespace MrKupido.Library.Recipe
 {
+    [NameAlias("eng", "smoked cheese")]
     [NameAlias("hun", "füstölt sajt")]
 
     [IngredientConsts(IsIngrec = true)]

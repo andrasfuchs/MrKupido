@@ -17,6 +17,7 @@ namespace MrKupido.Web.Controllers
 {
     public class HomeController : BaseController
     {
+        private static Dictionary<string, string[]> tipsTricks = new Dictionary<string, string[]>();
 
         public ActionResult Index()
         {
@@ -275,22 +276,27 @@ namespace MrKupido.Web.Controllers
 
         public JsonResult GetTipsNTricks()
         {
-            string[] lines = 
-            { 
-                "Q<a href=\"./hun/account/profile\">Szeretnéd, ha személyre szabott porciókat ajánlanánk? Add meg a magasságod, súlyod és életkorod! >></a>",
-                "BSzűrőket használva leegyszerűsíthetjük a keresést. Próbálkozz hozzávalóval, diétával vagy az étel nevével.",
-                "BKeresés után a PAGE-UP, PAGE-DOWN, HOME, END és kurzor billenyűkkel is tudsz lapozni.",
-                "BHa keresési feltételt szeretnél törölni, akkor azt a DEL (első) vagy BACKSPACE (utolsó elem) lenyomávásal is megteheted.",
-                "BHa a helyszín hibásan jelenik meg, akkor az azért van, mert nem mobilról vagy WiFi-n keresztül csatlakoztál.",
-                "BMinden véleményt szívesen várunk, amit egyszerűen és gyorsan a jobb lenti sarokban tudsz nekünk elküldeni.",
-                "SAmikor Mr. Kupido rántottát csinál, a tojások könyörögnek, hogy őket válasszák.",
-                "SMr. Kupidónak be sem kell dugnia a turmixgépet, mert a turmixgép örömében magától beindul.",
-                "SMr. Kupidónak sosem kell asztalt foglalnia egy étteremben, az étteremnek kell lefoglalnia Mr. Kupidót.",
-                "EA receptek által okozott anyagi és emésztési károkért az oldal készítői nem vállalnak felelőséget!"
-            };
+            if (!tipsTricks.ContainsKey(System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName))
+            {
+                List<string> lines = new List<string>();
+
+                for (int i = 0; i < 100; i++)
+                {
+                    string line = MrKupido.Web.Resources.Shared.TipsAndTricks.ResourceManager.GetString("TipsAndTricks" + i);
+
+                    if (!String.IsNullOrEmpty(line))
+                    {
+                        lines.Add(line);
+                    }
+                }
+
+                tipsTricks.Add(System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName, lines.ToArray());
+            }
+
+            string[] temp = tipsTricks[System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName];
 
             Random rnd = new Random();
-            return Json(lines[rnd.Next(lines.Length)]);
+            return Json(temp[rnd.Next(temp.Length)]);
         }
     }
 }

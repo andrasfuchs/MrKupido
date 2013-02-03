@@ -6,6 +6,7 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Recipe
 {
+    [NameAlias("eng", "Milli sour cream")]
     [NameAlias("hun", "Milli tejföl")]
 
     [CommercialProduct()]

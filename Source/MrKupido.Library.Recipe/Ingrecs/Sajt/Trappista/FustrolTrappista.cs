@@ -7,6 +7,7 @@ using MrKupido.Library.Provider;
 
 namespace MrKupido.Library.Recipe
 {
+    [NameAlias("eng", "smoked Trappist cheese")]
     [NameAlias("hun", "füstölt trappista sajt")]
 
     public class FustrolTrappista : Trappista

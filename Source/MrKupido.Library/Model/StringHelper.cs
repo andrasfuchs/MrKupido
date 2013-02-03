@@ -8,7 +8,7 @@ namespace MrKupido.Library
 {
     public static class StringHelper
     {
-        private static string allowedCharacters = "abcdefghijklmnopqrstouvwxyz-$+()[]{}";
+        private static string allowedCharacters = "abcdefghijklmnopqrstouvwxyz-$+()[]{}'";
 
         /// <summary>
         /// Unique string is used for URL identification

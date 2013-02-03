@@ -6,6 +6,7 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Recipe
 {
+    [NameAlias("eng", "smoked bacon")]
     [NameAlias("hun", "füstölt szalonna")]
 
     [IngredientConsts(GrammsPerPiece=3.0f, IsIngrec = true)]

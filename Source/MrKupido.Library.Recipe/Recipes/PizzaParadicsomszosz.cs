@@ -6,6 +6,7 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Recipe
 {
+    [NameAlias("eng", "tomato sauce for pizza")]
     [NameAlias("hun", "paradicsomos pizzaszósz", Priority = 1)]
     [NameAlias("hun", "paradicsomszósz pizzához")]
 

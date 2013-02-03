@@ -8,6 +8,7 @@ using MrKupido.Library.Ingredient;
 
 namespace MrKupido.Library.Recipe
 {
+    [NameAlias("eng", "Hawaii pizza")]
     [NameAlias("hun", "hawaii pizza")]
 
     public class HawaiiPizza : ParadicsomosAlapuPizza

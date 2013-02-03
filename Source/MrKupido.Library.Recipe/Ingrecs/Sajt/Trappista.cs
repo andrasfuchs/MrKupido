@@ -7,6 +7,7 @@ using MrKupido.Library.Provider;
 
 namespace MrKupido.Library.Recipe
 {
+    [NameAlias("eng", "trappist cheese")]
     [NameAlias("hun", "trappista sajt")]
 
     [IngredientConsts(IsIngrec = true)]

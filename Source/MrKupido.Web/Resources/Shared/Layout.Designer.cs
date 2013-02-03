@@ -88,6 +88,15 @@ namespace MrKupido.Web.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mr. Kupido.
+        /// </summary>
+        public static string PageTitle {
+            get {
+                return ResourceManager.GetString("PageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to my profile.
         /// </summary>
         public static string Profile {

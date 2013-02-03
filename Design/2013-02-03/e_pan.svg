@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="32px"
+	 height="32px" viewBox="0 0 32 32" enable-background="new 0 0 32 32" xml:space="preserve">
+<g id="Layer_1">
+	<g>
+		
+			<path fill="#EBE0D5" stroke="#553E31" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M26.984,20.44c0,8.122-5.864,11.159-13.101,11.159c-7.232,0-13.097-3.037-13.097-11.159"/>
+		
+			<path fill="#EBE0D5" stroke="#553E31" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M16.25,15.685c0,0,3.896-3.729,4.787-5.082c0.859-1.307,3.716-6.262,6.533-9.162c0.671-0.688,0.804-0.935,1.417-1.013
+			c0.608-0.075,1.165,0,1.558,0.255c0.517,0.334,0.682,0.754,0.668,1.134c-0.015,0.32,0.071,0.541-0.688,1.392
+			c0,0-3.922,4.801-4.72,5.699c-0.805,0.899-1.458,1.83-1.702,2.526c-0.249,0.688-0.129,2.27-0.314,3.559
+			c-0.188,1.291-0.899,2.104-1.76,2.83l-0.575,0.229L16.25,15.685z"/>
+		<path fill="#553E31" d="M27.379,3.508c0,0,0.346-0.471,0.642-0.834c0.286-0.37,0.688-0.917,0.965-1.046
+			c0.277-0.119,0.591,0.006,0.66,0.072c0.067,0.068,0.175,0.416,0.004,0.68s-0.687,0.919-0.888,1.152
+			c-0.203,0.231-0.26,0.396-0.634,0.6C27.752,4.339,27.207,3.8,27.379,3.508z"/>
+		<g>
+			<defs>
+				<ellipse id="XMLID_34_" cx="13.886" cy="20.44" rx="13.099" ry="7.422"/>
+			</defs>
+			<use xlink:href="#XMLID_34_"  overflow="visible" fill="#CDB8AB"/>
+			<clipPath id="XMLID_35_">
+				<use xlink:href="#XMLID_34_"  overflow="visible"/>
+			</clipPath>
+			
+				<ellipse clip-path="url(#XMLID_35_)" fill="none" stroke="#553E31" stroke-width="0.75" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" cx="13.886" cy="23.448" rx="11.391" ry="6.52"/>
+			
+				<use xlink:href="#XMLID_34_"  overflow="visible" fill="none" stroke="#553E31" stroke-width="0.8" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"/>
+		</g>
+	</g>
+</g>
+<g id="Layer_3">
+</g>
+</svg>

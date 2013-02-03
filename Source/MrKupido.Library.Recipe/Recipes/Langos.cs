@@ -8,6 +8,7 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Recipe
 {
+    [NameAlias("eng", "scone")]
     [NameAlias("hun", "lángos")]
 
     public class Langos : RecipeBase
@@ -42,18 +43,20 @@ namespace MrKupido.Library.Recipe
             IIngredient felfuttatottEleszto = new FelfuttatottEleszto(30f * amount);
 
             Kez kez = eg.Use<Kez>();
-            IIngredient teszta = kez.Osszegyurni(new Liszt(1000f * amount), felfuttatottEleszto, new Tejfol(0.2f * amount), new So(15f * amount), new Viz(0.5f * amount));
+            //IIngredient teszta = kez.Osszegyurni(new Liszt(1000f * amount), felfuttatottEleszto, new Tejfol(0.2f * amount), new So(15f * amount), new Viz(0.5f * amount));
             
             Edeny edeny = eg.Use<Edeny>();
-            edeny.Berakni(teszta);
+            //edeny.Berakni(teszta);
+            edeny.BerakniMind(new Liszt(1000f * amount), felfuttatottEleszto, new Tejfol(0.2f * amount), new So(15f * amount), new Viz(0.5f * amount));
+            kez.OsszegyurniEdenyben(edeny);
             edeny.Lefedni(edeny.Fedo);
             edeny.Varni(30);
 
             NyujtoDeszka nyd = eg.Use<NyujtoDeszka>();
-            teszta = nyd.Nyujtani(edeny, 5);
+            IIngredient teszta = nyd.Nyujtani(edeny, 5);
 
             Szaggato szaggato = eg.Use<Szaggato>();
-            IIngredient tesztadarabok = szaggato.Kiszaggatni(teszta, 40, 10);
+            IIngredient tesztadarabok = szaggato.Kiszaggatni(teszta, 250, 200);
 
             result.Add("tesztadarabok", tesztadarabok);
 
@@ -66,24 +69,16 @@ namespace MrKupido.Library.Recipe
             CookedFoodParts cfp = new CookedFoodParts();
 
             Serpenyo serpenyo = eg.Use<Serpenyo>();
-            serpenyo.Berakni(new IngredientGroup(new IIngredient[] { new NapraforgoOlaj(0.1f) }));
+            serpenyo.Berakni(new NapraforgoOlaj(0.5f));
 
             Tuzhely tuzhely = eg.Use<Tuzhely>();
-            tuzhely.Behelyezni(serpenyo);
+            tuzhely.Rahelyezni(serpenyo);
             tuzhely.Homerseklet(350);
 
-            Edeny edeny = eg.Use<Edeny>();
+            IIngredient langosok = preps["tesztadarabok"];
+            serpenyo.KisutniOsszeset(langosok, 3.5f);
 
-            bool mindbefert = false;
-            do
-            {
-                mindbefert = serpenyo.Berakni(preps["tesztadarabok"]);
-                serpenyo.Varni(5);
-
-                edeny.Berakni(serpenyo.Kivenni());
-            } while (!mindbefert);
-
-            cfp.Add("osszeslangos", edeny.Contents);
+            cfp.Add("osszeslangos", langosok);
 
             eg.WashUp();
             return cfp;

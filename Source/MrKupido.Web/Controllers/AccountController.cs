@@ -18,9 +18,13 @@ using DotNetOpenAuth.OpenId;
 using MrKupido.Model;
 using MrKupido.Web.Models;
 using System.Globalization;
+using MrKupido.Library.Attributes;
 
 namespace MrKupido.Web.Controllers
 {
+    [NameAlias("eng", "account")]
+    [NameAlias("hun", "fiok")]
+
     public class AccountController : BaseController
     {
         private static MrKupido.DataAccess.MrKupidoContext context = new MrKupido.DataAccess.MrKupidoContext("Name=MrKupidoContext");
@@ -30,6 +34,9 @@ namespace MrKupido.Web.Controllers
             ClientIdentifier = ConfigurationManager.AppSettings["FacebookAppID"],
             ClientCredentialApplicator = ClientCredentialApplicator.PostParameter(ConfigurationManager.AppSettings["FacebookAppSecret"])
         };
+
+        [NameAlias("eng", "login")]
+        [NameAlias("hun", "bejelentkezes")]
 
         [HttpGet]
         public ActionResult LogIn()

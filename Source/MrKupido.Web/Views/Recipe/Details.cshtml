@@ -1,6 +1,6 @@
 ﻿@model object[]
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = MrKupido.Web.Resources.Recipe.Details.PageTitle + " - " + MrKupido.Web.Resources.Shared.Layout.PageTitle; ;
 }
 @Scripts.Render("~/Scripts/wTimer.js")
 @section scripts {
@@ -124,8 +124,8 @@
             </div>
             <hr />
             <div id="equipmentlist">
-                <h2>Szükséges eszközök</h2>
-                <h3>(2 eszközöd nincs)</h3>
+                <h2>@MrKupido.Web.Resources.Recipe.Details.NecessaryEquipment</h2>
+                <h3>@String.Format(MrKupido.Web.Resources.Recipe.Details.EquipmentMissing, 2)</h3>
                 <div id="_RecipeEquipments">
                     @*@{ Html.RenderPartial("_RecipeEquipments", (MrKupido.Library.IEquipment[])Model[2]); }*@
                 </div>
@@ -133,8 +133,8 @@
         </div>
         <hr />
         <div id="ingredientlist">
-            <h2>Hozzávalók</h2>
-            <h3 class="portionselector-trigger">(1 főre)</h3>
+            <h2>@MrKupido.Web.Resources.Recipe.Details.Ingredients</h2>
+            <h3 class="portionselector-trigger">@String.Format(MrKupido.Web.Resources.Recipe.Details.PortionHint, 3)</h3>
             <div id="portionselectorwrapper">
                 <div id="portionselector">
                     <div id="portionsliderblock">
@@ -169,8 +169,8 @@
         </div>
         <hr />
         <div id="directionlist">
-            <h2>Elkészítés</h2>
-            <h3>(egyedül)</h3>
+            <h2>@MrKupido.Web.Resources.Recipe.Details.Directions</h2>
+            <h3>@MrKupido.Web.Resources.Recipe.Details.ChefNumberOne</h3>
             <div id="_RecipeDirections">
                 @{ Html.RenderPartial("_RecipeDirections", (MrKupido.Library.IDirection[])Model[4], new ViewDataDictionary()); }
             </div>
@@ -178,15 +178,15 @@
         <div style="display: none">
             <hr />
             <div id="serving">
-                <h2>Tálalás</h2>
+                <h2>@MrKupido.Web.Resources.Recipe.Details.Serving</h2>
                 <div id="_RecipeServing">
                     @*@{ Html.RenderPartial("_RecipeServing", (MrKupido.Library.EquipmentGroup)Model[5]); }*@
                 </div>
             </div>
             <hr />
             <div id="nutritionlist">
-                <h2>Tápanyag táblázat (1 főre)</h2>
-                <h3>(részeletes)</h3>
+                <h2>@MrKupido.Web.Resources.Recipe.Details.NutritionList</h2>
+                <h3>@MrKupido.Web.Resources.Recipe.Details.NutritionListDetailed</h3>
                 <div id="_RecipeNutritions">
                     @*@{ Html.RenderPartial("_RecipeNutritions", (MrKupido.Library.INutritionInfo[])Model[6]); }*@
                 </div>

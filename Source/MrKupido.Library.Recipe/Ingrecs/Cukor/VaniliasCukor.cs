@@ -6,6 +6,7 @@ using System.Text;
 
 namespace MrKupido.Library.Recipe
 {
+    [NameAlias("eng", "vanilla sugar")]
     [NameAlias("hun", "vaníliás cukor")]
 
     [IngredientConsts(IsIngrec = true)]

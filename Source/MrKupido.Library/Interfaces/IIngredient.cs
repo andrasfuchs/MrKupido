@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MrKupido.Library
 {
-    public interface IIngredient
+    public interface IIngredient : ICloneable
     {
         string Name { get; }
 
@@ -13,7 +13,9 @@ namespace MrKupido.Library
 
         MeasurementUnit Unit { get; }
 
-        IngredientState State { get; }
+        IngredientState State { get; set;  }
+        
+        int PieceCount { get; set; }
 
         float GetAmount();
 

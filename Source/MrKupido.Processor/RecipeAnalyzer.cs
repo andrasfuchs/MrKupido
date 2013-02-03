@@ -16,13 +16,16 @@ namespace MrKupido.Processor
     public class RecipeAnalyzer
     {
         private static List<IngredientBase> ingredients = new List<IngredientBase>();
+        private static List<string> seenIngredients = new List<string>();
         private static List<RecipeDirection> directions = new List<RecipeDirection>();
-        private static RecipeStage stage = RecipeStage.Unknown;
+        private static RecipeStage stage = RecipeStage.Unknown;        
         private static int IdCounter;
+        private static List<object> tempParameters = new List<object>();
 
         public static IIngredient[] GenerateIngredients(RecipeTreeNode rtn, float amount)
         {
             ingredients.Clear();
+            seenIngredients.Clear();
 
             RunRecipe(rtn, amount);
 
@@ -43,7 +46,7 @@ namespace MrKupido.Processor
 
             if (returnedObject is IngredientBase)
             {
-                IngredientBase ib = (IngredientBase)returnedObject;
+                IngredientBase ib = (IngredientBase)((IngredientBase)returnedObject).Clone();
 
                 IngredientBase item = ingredients.FirstOrDefault(i => (i.Name == ib.Name) && (i.Unit == ib.Unit));
 
@@ -83,9 +86,26 @@ namespace MrKupido.Processor
             return returnedObject;
         }
 
-        public static void DirectionGenerator(string assemblyFullName, string methodFullName, object[] parameters, object result)
+        public static void DirectionGeneratorAfter(string assemblyFullName, string methodFullName, object[] parameters, object result)
         {
-            directions.Add(new RecipeDirection(ref IdCounter, assemblyFullName, methodFullName, parameters, result, stage, 1));
+            directions.Add(new RecipeDirection(ref IdCounter, assemblyFullName, methodFullName, tempParameters.ToArray(), result, stage, 1, seenIngredients));
+        }
+
+        public static void DirectionGeneratorBefore(string assemblyFullName, string methodFullName, object[] parameters)
+        {
+            tempParameters.Clear();
+
+            foreach (object p in parameters)
+            {
+                if (p is IngredientBase)
+                {
+                    tempParameters.Add(((IngredientBase)p).Clone());
+                }
+                else
+                {
+                    tempParameters.Add(p);
+                }
+            }
         }
 
         public static RecipeDirection[] GenerateDirections(RecipeTreeNode rtn, float amount)
@@ -93,6 +113,7 @@ namespace MrKupido.Processor
             IdCounter = 0;
 
             directions.Clear();
+            seenIngredients.Clear();
             
             RunRecipe(rtn, amount);
 

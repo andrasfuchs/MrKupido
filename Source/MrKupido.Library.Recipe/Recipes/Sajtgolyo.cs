@@ -8,6 +8,7 @@ using MrKupido.Library.Equipment;
 
 namespace MrKupido.Library.Recipe
 {
+    [NameAlias("eng", "cheese ball")]
     [NameAlias("hun", "sajtgolyó")]
 
     public class Sajtgolyo : RecipeBase
@@ -43,8 +44,7 @@ namespace MrKupido.Library.Recipe
             PreparedIngredients result = new PreparedIngredients();
 
             Labas labas = eg.Use<Labas>();
-            labas.Berakni(new Burgonya(2.0f));
-            labas.Berakni(new Viz(0.5f));
+            labas.BerakniMind(new Burgonya(2.0f), new Viz(0.5f));
 
             Tuzhely tuzhely = eg.Use<Tuzhely>();
             tuzhely.Behelyezni(labas);
@@ -56,13 +56,14 @@ namespace MrKupido.Library.Recipe
             IIngredient burgonya = labas.Kivenni();
             KrumpliPucolo kp = eg.Use<KrumpliPucolo>();
             burgonya = kp.Meghamozni(burgonya);
+            burgonya.ChangeUnitTo(MeasurementUnit.gramm);
 
             BurgonyaPres bp = eg.Use<BurgonyaPres>();
-            burgonya = bp.Preselni(burgonya);
+            bp.Preselni(burgonya);
 
             IIngredient fokhagyma = new Fokhagyma(1.0f);
             FokhagymaPres fp = eg.Use<FokhagymaPres>();
-            fokhagyma = fp.Preselni(fokhagyma);
+            fp.Preselni(fokhagyma);
 
             Reszelo reszelo = eg.Use<Reszelo>();
             IIngredient sajt = reszelo.Lereszelni(new Sajt(70.0f));

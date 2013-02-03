@@ -6,6 +6,7 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Recipe
 {
+    [NameAlias("eng", "baker's yeast")]
     [NameAlias("hun", "felfuttatott élesztő")]
 
     [IngredientConsts(IsIngrec = true)]

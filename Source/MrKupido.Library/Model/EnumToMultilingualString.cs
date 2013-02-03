@@ -4,31 +4,31 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel;
 using MrKupido.Library.Attributes;
+using System.Globalization;
 
 namespace MrKupido.Library
 {
-    public class EnumToMultilingualString : TypeConverter
+    public class EnumToMultilingualString : TypeConverter       
     {
-        public override string ToString()
+        // Overrides the ConvertTo method of TypeConverter.
+        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
-            string culture = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName;
-
-            string result = null;
-            int priority = Int32.MaxValue;
-
-            Attribute[] attributes = System.Attribute.GetCustomAttributes(this.GetType());
-            foreach (Attribute attribute in attributes)
+            if (destinationType == typeof(string))
             {
-                if (attribute is NameAliasAttribute)
+                string result = null;
+                int priority = Int32.MaxValue;
+
+                foreach (Attribute attribute in NameAliasAttribute.GetMemberNames(value.GetType(), value.ToString(), culture.ThreeLetterISOLanguageName))
                 {
                     NameAliasAttribute naa = (NameAliasAttribute)attribute;
-                    if ((naa.CultureName == culture) && (naa.Priority < priority)) result = naa.Name;
+                    if ((naa.CultureName == culture.ThreeLetterISOLanguageName) && (naa.Priority < priority)) result = naa.Name;
                 }
+
+                if (result != null) return result;
+
+                throw new CultureNotSupportedException(value.GetType().Name, culture.ThreeLetterISOLanguageName);
             }
-
-            if (result != null) return result;
-
-            throw new CultureNotSupportedException(this.GetType().Name, culture);
+            return base.ConvertTo(context, culture, value, destinationType);
         }
     }
 }

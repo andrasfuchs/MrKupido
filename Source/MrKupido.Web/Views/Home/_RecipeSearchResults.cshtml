@@ -1,4 +1,19 @@
 ﻿@model MrKupido.Web.Models.RecipeSearchResultItem[]
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('div.resultbox').hover(
+            function () {
+                $(this).find("div.dogear img:first").removeClass("dogear dogear_hidden").addClass("dogear");
+                $(this).find("div.dogear img:last").removeClass("dogear dogear_hidden").addClass("dogear_hidden");
+            }, function () {
+                $(this).find("div.dogear img:first").removeClass("dogear dogear_hidden").addClass("dogear_hidden");
+                $(this).find("div.dogear img:last").removeClass("dogear dogear_hidden").addClass("dogear");
+            });
+    });
+</script>
+
 <ul>
     @{MrKupido.Web.Models.RecipeSearchResultItem[] rsri = (Model == null ? new MrKupido.Web.Models.RecipeSearchResultItem[0] : Model);}
     @for (int i = 0; i < rsri.Length; i++)
@@ -7,12 +22,12 @@
             <div class="resultbox">
                 <div class="resulthead @rsri[i].CSSClass">
                     <div class="category">
-                        <img runat="server" src="@rsri[i].IconUrl" alt="@rsri[i].MainCategory.ToString()" width="45px" height="30px" />
+                        <img runat="server" src="@rsri[i].IconUrl" alt="@rsri[i].MainCategory.ToString()" width="32px" height="32px" />
                     </div>
                     <div class="title">
                         <span class="titlecontent">
                                 
-                            <a runat="server" href="~/hun/recept/@rsri[i].UniqueName" class='@(rsri[i].IsImplemented ? "enabled" : "disabled")'>
+                            <a runat="server" href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/@(System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName == "hun" ? "recept" : "recipe")/@rsri[i].UniqueName" class='@(rsri[i].IsImplemented ? "enabled" : "disabled")'>
 
                             @rsri[i].DisplayName
                             
@@ -24,17 +39,12 @@
                             }
                         </span>
                     </div>
-                    <div class="tick">
-                        @if (rsri[i].IsSelected)
-                        { 
-                            <a href="#">
-                                <img runat="server" src="~/Content/svg/tick_on.svg" alt="töröl" width="25px" height="25px" /></a>
-                        }
-                        else
-                        {
-                            <a href="#">
-                                <img runat="server" src="~/Content/svg/tick_off.svg" alt="kiválaszt" width="25px" height="25px" /></a>
-                        }
+                    <div class="flag">
+                        <a href="#">
+                            @*<img class="dogear_hidden" runat="server" src="~/Content/svg/icon_dogear_selected.svg" width="31px" height="31px" />
+                            <img class="dogear" runat="server" src="~/Content/svg/icon_dogear.svg" width="31px" height="31px" />*@
+                            <img class="flag" runat="server" src="~/Content/svg/icon_flag.svg" width="40px" height="23px" />
+                        </a>
                     </div>
                 </div>
                 <div class="resulticons">
@@ -44,12 +54,19 @@
                     } else 
                     {
                     *@
+
+
                     <div class="versions">
-                        <a href="javascript:searchKeywordSelected(null,{item: {value:'R:@rsri[i].UniqueName'}}); doSearch(6);">
-                            <img runat="server" src="~/Content/svg/icon_versions.svg" width="50px" height="45px" />
-                            <span>@rsri[i].SubVersions</span>
-                        </a>
+                    @if (rsri[i].SubVersions > 0)
+                    {
+                        <a href="javascript:searchKeywordSelected(null,{item: {value:'R:@rsri[i].UniqueName'}}); doSearch();"><img runat="server" src="~/Content/svg/icon_versions.svg" width="50px" height="45px" /><span>@rsri[i].SubVersions</span></a>
+                    } else 
+                    {
+                        <img runat="server" src="~/Content/svg/icon_versions_disabled.svg" width="50px" height="45px" />
+                    }
                     </div>
+                    
+                    
                     @*}*@
 
 
@@ -118,7 +135,7 @@
                             <img runat="server" src="~/Content/svg/clock_disabled.svg" alt="? perc" width="35px" height="35px" />
                         }
 
-                        @if (rsri[i].NetTime >= 99)
+                        @if (rsri[i].NetTime >= 199)
                         {
                             <span>++</span>
                         }

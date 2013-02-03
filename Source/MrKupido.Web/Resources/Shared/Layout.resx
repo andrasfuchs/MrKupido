@@ -126,6 +126,9 @@
   <data name="Homepage" xml:space="preserve">
     <value>home</value>
   </data>
+  <data name="PageTitle" xml:space="preserve">
+    <value>Mr. Kupido</value>
+  </data>
   <data name="Profile" xml:space="preserve">
     <value>my profile</value>
   </data>

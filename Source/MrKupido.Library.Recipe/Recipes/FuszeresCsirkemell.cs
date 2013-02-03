@@ -9,6 +9,7 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Recipe
 {
+    [NameAlias("eng", "spicey chicken breast")]
     [NameAlias("hun", "fűszeres csirkemell")]
 
     public class FuszeresCsirkemell : RecipeBase
@@ -50,11 +51,11 @@ namespace MrKupido.Library.Recipe
             IngredientGroup fuszeresliszt = fakanal.Osszekeverni(new Liszt(70.0f * amount), new So(5.0f * amount), new Fuszerpaprika(5.0f * amount), new FeketeBors(3.0f * amount), new Majoranna(3.0f * amount));
             csirkemell = kez.Megforgatni(csirkemell, fuszeresliszt);
 
-            IngredientGroup hagyma = knife.Felkarikazni(new Hagyma(1.0f * amount, MeasurementUnit.piece), 5.0f);
+            IIngredient hagyma = knife.Felkarikazni(new Hagyma(1.0f * amount, MeasurementUnit.piece), 5.0f);
             IngredientGroup tejfol = fakanal.Osszekeverni(new Tejfol(0.2f * amount), new NapraforgoOlaj(0.1f * amount));
 
             Reszelo reszelo = eg.Use<Reszelo>();
-            IngredientGroup sajt = reszelo.Lereszelni(new Sajt(100.0f * amount));
+            IIngredient sajt = reszelo.Lereszelni(new Sajt(100.0f * amount));
 
             result.Add("csirkemell", csirkemell);
             result.Add("hagyma", hagyma);

@@ -20,6 +20,8 @@ namespace MrKupido.Library.Ingredient
 
         public IngredientState State { get; set; }
 
+        public int PieceCount { get; set; }
+
         public string Name
         {
             get
@@ -44,6 +46,7 @@ namespace MrKupido.Library.Ingredient
             this.Unit = unit;
             this.SetAmount(amount, unit);
             this.State = state;
+            this.PieceCount = 1;
 
             foreach (object icaObj in this.GetType().GetCustomAttributes(typeof(IngredientConstsAttribute), true))
             {
@@ -156,7 +159,10 @@ namespace MrKupido.Library.Ingredient
                 amount /= this.KCaloriesPerGramm.Value;
             }
 
-            SetAmount(amount, unit);
+            if (!this.amounts.ContainsKey((int)unit))
+            {
+                SetAmount(amount, unit);
+            }
 
             this.Unit = unit;
         }
@@ -175,52 +181,75 @@ namespace MrKupido.Library.Ingredient
 
         public override string ToString()
         {
+            return ToString(true, true);
+        }
+
+        public virtual string ToString(bool includeAmount, bool includeState)
+        {
             string amountStr = "";
 
-            try
+            if (includeAmount)
             {
-                float amount = GetAmount();
-
-                if (amount > 0)
+                try
                 {
+                    float amount = GetAmount();
 
-                    switch (Unit)
+                    if (amount > 0)
                     {
-                        case MeasurementUnit.piece:
-                            amountStr = (amount).ToString("0") + " db";
-                            break;
 
-                        case MeasurementUnit.portion:
-                            amountStr = (amount).ToString("0") + " adag";
-                            break;
+                        switch (Unit)
+                        {
+                            case MeasurementUnit.piece:
+                                amountStr = (amount).ToString("0") + " db";
+                                break;
 
-                        case MeasurementUnit.gramm:
-                            if (amount >= 1000) amountStr = (amount / 1000).ToString("0.0") + " kg";
-                            else if (amount >= 100) amountStr = (amount / 10).ToString("0") + " dkg";
-                            else if (amount >= 10) amountStr = (amount / 10).ToString("0.0") + " dkg";
-                            else amountStr = (amount).ToString("0.00") + " g";
-                            break;
+                            case MeasurementUnit.portion:
+                                amountStr = (amount).ToString("0") + " adag";
+                                break;
 
-                        case MeasurementUnit.liter:
-                            if (amount >= 1) amountStr = (amount).ToString("0.0") + " l";
-                            else if (amount >= 0.1) amountStr = (amount * 10).ToString("0") + " dl";
-                            else if (amount >= 0.01) amountStr = (amount * 10).ToString("0.0") + " dl";
-                            else amountStr = (amount * 100).ToString("0.00") + " cl";
-                            break;
+                            case MeasurementUnit.gramm:
+                                if (amount >= 1000) amountStr = (amount / 1000).ToString("0.0") + " kg";
+                                else if (amount >= 100) amountStr = (amount / 10).ToString("0") + " dkg";
+                                else if (amount >= 10) amountStr = (amount / 10).ToString("0.0") + " dkg";
+                                else amountStr = (amount).ToString("0.00") + " g";
+                                break;
 
-                        default:
-                            break;
+                            case MeasurementUnit.liter:
+                                if (amount >= 1) amountStr = (amount).ToString("0.0") + " l";
+                                else if (amount >= 0.1) amountStr = (amount * 10).ToString("0") + " dl";
+                                else if (amount >= 0.01) amountStr = (amount * 10).ToString("0.0") + " dl";
+                                else amountStr = (amount * 100).ToString("0.00") + " cl";
+                                break;
+
+                            default:
+                                break;
+                        }
+
+                        amountStr += " ";
                     }
-
-                    amountStr += " ";
+                }
+                catch (AmountUnknownException)
+                {
+                    // NOTE: that's fine for now, we do not calculate the amount for ingredient groups for the moment
                 }
             }
-            catch (AmountUnknownException)
-            { 
-                // NOTE: that's fine for now, we do not calculate the amount for ingredient groups for the moment
+
+            string stateStr = "";
+
+            if (includeState)
+            {
+                if (State != IngredientState.Normal)
+                {
+                    stateStr = new EnumToMultilingualString().ConvertToString(State) + " ";
+                }
             }
 
-            return amountStr + Name;
+            return amountStr + stateStr + Name;
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }

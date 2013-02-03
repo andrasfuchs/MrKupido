@@ -3,6 +3,7 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Recipe
 {
+    [NameAlias("eng", "plain yogurt")]
     [NameAlias("hun", "natúr joghurt")]
 
     [IngredientConsts(IsIngrec = true)]

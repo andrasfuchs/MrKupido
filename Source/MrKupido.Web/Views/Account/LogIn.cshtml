@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Mr. Kupido - Log in";
+    ViewBag.Title = MrKupido.Web.Resources.Account.LogIn.PageTitle + " - " + MrKupido.Web.Resources.Shared.Layout.PageTitle;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <header class="nosearch">
@@ -13,36 +13,26 @@
     <details id="login" open class="alwaysopen">
         <summary>
             <h1>
-                Bejelentkezés</h1>
+                @MrKupido.Web.Resources.Account.LogIn.LogInHeader</h1>
             <h2>
                 
             </h2>
         </summary>
         <br/>
         <ul>
-            <li><a href="javascript:$('#loginIdentifier').val('https://www.google.com/accounts/o8/id'); $('#openIdForm').submit();">Log in with
+            <li><a href="javascript:$('#loginIdentifier').val('https://www.google.com/accounts/o8/id'); $('#openIdForm').submit();">@MrKupido.Web.Resources.Account.LogIn.LogInWith
                 <img runat="server" src="~/Content/svg/logo_google.svg" alt="Google" width="270px" /></a> </li>
-            <li><a href="javascript:$('#loginIdentifier').val('Facebook'); $('#openIdForm').submit();">Connect with
+            <li><a href="javascript:$('#loginIdentifier').val('Facebook'); $('#openIdForm').submit();">@MrKupido.Web.Resources.Account.LogIn.ConnectWith
                 <img runat="server" src="~/Content/svg/logo_facebook.svg" alt="Facebook" width="270px" /></a> </li>
-            <li class="disabled"><a href="@Url.Action("LogIn", "Account", new { loginIdentifier = "https://me.yahoo.com" })">Log in with
+            <li class="disabled"><a href="@Url.Action("LogIn", "Account", new { loginIdentifier = "https://me.yahoo.com" })">@MrKupido.Web.Resources.Account.LogIn.LogInWith
                 <img runat="server" src="~/Content/svg/logo_yahoo.svg" alt="Yahoo!" width="270px" /></a> </li>
-            <li class="disabled"><a href="@Url.Action("LogIn", "Account", new { loginIdentifier = "http://matt.wordpress.com/" })">Log in with
+            <li class="disabled"><a href="@Url.Action("LogIn", "Account", new { loginIdentifier = "http://matt.wordpress.com/" })">@MrKupido.Web.Resources.Account.LogIn.LogInWith
                 <img runat="server" src="~/Content/svg/logo_wordpress.svg" alt="Wordpress" width="270px" /></a> </li>
-            <li class="disabled"><a href="@Url.Action("LogIn", "Account", new { loginIdentifier = "http://www.flickr.com/username" })">Log in with
+            <li class="disabled"><a href="@Url.Action("LogIn", "Account", new { loginIdentifier = "http://www.flickr.com/username" })">@MrKupido.Web.Resources.Account.LogIn.LogInWith
                 <img runat="server" src="~/Content/svg/logo_flickr.svg" alt="Flickr" width="270px" /></a> </li>
-            <li class="disabled"><a href="@Url.Action("LogIn", "Account", new { loginIdentifier = "http://www.flickr.com/username" })">Log in with
+            <li class="disabled"><a href="@Url.Action("LogIn", "Account", new { loginIdentifier = "http://www.flickr.com/username" })">@MrKupido.Web.Resources.Account.LogIn.LogInWith
                 <img runat="server" src="~/Content/svg/logo_twitter.svg" alt="Twitter" width="270px" /></a> </li>
         </ul>
-@*        <div class="openidoption">
-            <br />
-            VAGY<br />
-            <br />
-            add meg az OpenID címed manuálisan</div>
-        <div class="openid">
-            <img runat="server" src="~/Content/svg/logo_openid.svg" alt="OpenID" width="270px" />
-            <input type="text" name="loginIdentifier" placeholder="(like https://www.google.com/accounts/o8/id)" />
-            <input type="button" value="Log in" onclick="javascript:$('#openIdForm').submit();" />
-        </div>*@
     </details>
 
 }

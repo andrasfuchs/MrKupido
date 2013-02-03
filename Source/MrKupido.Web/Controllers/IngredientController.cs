@@ -19,7 +19,7 @@ namespace MrKupido.Web.Controllers
 {
     public class IngredientController : BaseController
     {
-        public ActionResult Taxonomy()
+        public ActionResult Trees()
         {
             TreeNode[] result = new TreeNode[4];
 

@@ -15,7 +15,8 @@ namespace MrKupido.Library.Equipment
         private IEquipment contents;
 
         [NameAlias("eng", "put in", Priority = 200)]
-        [NameAlias("hun", "helyezd be a(z) {B} a {0T}")]
+        [NameAlias("hun", "behelyez", Priority = 200)]
+        [NameAlias("hun", "helyezd be a(z) {B} a(z) {0T}")]
         public void Behelyezni(IEquipment contents)
         {
             if (this.contents != null) throw new MrKupidoException("The device '{0}' already has a '{1}' in it. Remove it before putting something other in it.", this.Name, this.contents.Name);
@@ -23,7 +24,18 @@ namespace MrKupido.Library.Equipment
             this.contents = contents;
         }
 
+        [NameAlias("eng", "put on", Priority = 200)]
+        [NameAlias("hun", "ráhelyez", Priority = 200)]
+        [NameAlias("hun", "helyezd rá a(z) {R} a(z) {0T}")]
+        public void Rahelyezni(IEquipment contents)
+        {
+            if (this.contents != null) throw new MrKupidoException("The device '{0}' already has a '{1}' on it. Remove it before putting something other on it.", this.Name, this.contents.Name);
+
+            this.contents = contents;
+        }
+
         [NameAlias("eng", "pull out", Priority = 200)]
+        [NameAlias("hun", "kiemel", Priority = 200)]
         [NameAlias("hun", "emeld ki a(z) {K} a tartalmát")]
         public IEquipment Kiemelni(Type equipmentType)
         {

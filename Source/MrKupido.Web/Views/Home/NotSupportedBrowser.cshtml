@@ -1,6 +1,6 @@
 ﻿@model  MrKupido.Web.Models.OldBrowserData
 @{
-    ViewBag.Title = "Unsupported browser (" + Model.BrowserName + " v" + Model.BrowserVersion + ")- Mr. Kupido";
+    ViewBag.Title = MrKupido.Web.Resources.Account.LogIn.PageTitle + " (" + Model.BrowserName + " v" + Model.BrowserVersion + ") - " + MrKupido.Web.Resources.Shared.Layout.PageTitle;
 }
 <header class="nosearch">
     <a runat="server" href="~/">

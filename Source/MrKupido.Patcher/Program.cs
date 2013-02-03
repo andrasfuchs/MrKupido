@@ -12,7 +12,7 @@ namespace MrKupido.Patcher
     {
         static int Main(string[] args)
         {
-            if (args.Length != 5)
+            if (args.Length != 6)
             {
                 Console.WriteLine("Usage: mrkupido.patcher.exe <dll to patch> <interception dll> <interception type name> <new ingredient method name> <direction generator method name>");
                 Console.ReadKey();
@@ -62,16 +62,22 @@ namespace MrKupido.Patcher
                 return -7;
             }
 
-            MethodDefinition directionGeneratorMD = interTD.Methods.FirstOrDefault(m => m.Name == args[4]);
-            if (directionGeneratorMD == null)
+            MethodDefinition directionGeneratorAfterMD = interTD.Methods.FirstOrDefault(m => m.Name == args[4]);
+            if (directionGeneratorAfterMD == null)
             {
                 Console.WriteLine("The method '{0}' was not found in type '{1}' and assembly '{2}'.", args[4], args[2], args[1]);
                 return -8;
             }
 
+            MethodDefinition directionGeneratorBeforeMD = interTD.Methods.FirstOrDefault(m => m.Name == args[5]);
+            if (directionGeneratorBeforeMD == null)
+            {
+                Console.WriteLine("The method '{0}' was not found in type '{1}' and assembly '{2}'.", args[5], args[2], args[1]);
+                return -9;
+            }
 
             Console.Write("Patching...");
-            PatchAssembly(patchAD, newIngredientMD, directionGeneratorMD);
+            PatchAssembly(patchAD, newIngredientMD, directionGeneratorBeforeMD, directionGeneratorAfterMD);
             patchInfo.Fields[0].Constant = File.GetLastWriteTime(args[0]).ToString("yyyy-MM-dd HH:mm:ss");
 
             if (File.Exists(args[0] + ".orig.dll")) File.Delete(args[0] + ".orig.dll");
@@ -83,7 +89,7 @@ namespace MrKupido.Patcher
             return 0;
         }
 
-        private static void PatchAssembly(AssemblyDefinition patchAD, MethodDefinition newIngredientMD, MethodReference directionGeneratorMD)
+        private static void PatchAssembly(AssemblyDefinition patchAD, MethodDefinition newIngredientMD, MethodReference directionGeneratorBeforeMD, MethodReference directionGeneratorAfterMD)
         {
             // collect all the classes which are descendants of RecipeBase
             foreach (TypeDefinition td in patchAD.MainModule.Types)
@@ -94,15 +100,16 @@ namespace MrKupido.Patcher
                 foreach (MethodDefinition md in td.Methods)
                 //foreach (MethodDefinition md in td.Methods.Where(md => md.DeclaringType.Name == "FuszeresCsirkemell"))
                 {
-                    PatchMethod(md, newIngredientMD, directionGeneratorMD);
+                    PatchMethod(md, newIngredientMD, directionGeneratorBeforeMD, directionGeneratorAfterMD);
                 }
             }
         }
 
-        private static void PatchMethod(MethodDefinition md, MethodReference newIngredientMD, MethodReference directionGeneratorMD)
+        private static void PatchMethod(MethodDefinition md, MethodReference newIngredientMD, MethodReference directionGeneratorBeforeMD, MethodReference directionGeneratorAfterMD)
         {
             newIngredientMD = md.Module.Import(newIngredientMD);
-            directionGeneratorMD = md.Module.Import(directionGeneratorMD);
+            directionGeneratorAfterMD = md.Module.Import(directionGeneratorAfterMD);
+            directionGeneratorBeforeMD = md.Module.Import(directionGeneratorBeforeMD);
 
             md.Body.SimplifyMacros();
 
@@ -134,6 +141,8 @@ namespace MrKupido.Patcher
                     {
                         Mono.Cecil.Cil.VariableDefinition[] nvs = new Mono.Cecil.Cil.VariableDefinition[mr.Parameters.Count + 1];
 
+                        // BEFORE the instruction
+
                         // instance variable
                         nvs[0] = new Mono.Cecil.Cil.VariableDefinition(mr.DeclaringType);
                         md.Body.Variables.Add(nvs[0]);
@@ -161,11 +170,72 @@ namespace MrKupido.Patcher
                             processor.InsertBefore(instr, ii);
                         }
 
-                        i = md.Body.Instructions.IndexOf(instr);
 
+
+                        // parameter array creation
+                        ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldc_I4, nvs.Length);
+                        processor.InsertBefore(instr, ii);
+
+                        TypeReference objectTypeRef = directionGeneratorAfterMD.Parameters[3].ParameterType.GetElementType(); // this MUST reference the 'object' type
+
+                        ii = processor.Create(Mono.Cecil.Cil.OpCodes.Newarr, objectTypeRef);
+                        processor.InsertBefore(instr, ii);
+
+                        Mono.Cecil.Cil.VariableDefinition arrayVar = new Mono.Cecil.Cil.VariableDefinition(objectTypeRef);
+                        md.Body.Variables.Add(arrayVar);
+
+                        ii = processor.Create(Mono.Cecil.Cil.OpCodes.Stloc_S, arrayVar);
+                        processor.InsertBefore(instr, ii);
+
+
+                        for (int j = 0; j < nvs.Length; j++)
+                        {
+                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldloc_S, arrayVar);
+                            processor.InsertBefore(instr, ii);
+
+                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldc_I4, j);
+                            processor.InsertBefore(instr, ii);
+
+                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldloc_S, nvs[j]);
+                            processor.InsertBefore(instr, ii);
+
+                            // do the boxing if necessary
+                            if (nvs[j].VariableType.IsValueType)
+                            {
+                                ii = processor.Create(Mono.Cecil.Cil.OpCodes.Box, nvs[j].VariableType);
+                                processor.InsertBefore(instr, ii);
+                            }
+
+                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Stelem_Ref);
+                            processor.InsertBefore(instr, ii);
+                        }
+                        // end of parameter array creation
+
+
+                        if (directionGeneratorBeforeMD != null)
+                        {
+                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldstr, mr.Module.AssemblyResolver.Resolve(mr.DeclaringType.Scope.Name).FullName);
+                            processor.InsertBefore(instr, ii);
+
+                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldstr, mr.DeclaringType.FullName + " " + mr.Name);
+                            processor.InsertBefore(instr, ii);
+
+                            // load the parameter array to the stack
+                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldloc_S, arrayVar);
+                            processor.InsertBefore(instr, ii);
+
+                            // insert the 'direction generator before' method call
+                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Call, directionGeneratorBeforeMD);
+                            processor.InsertBefore(instr, ii);
+                        }
+
+
+                        // AT the instruction
+                        i = md.Body.Instructions.IndexOf(instr);
 
                         Mono.Cecil.Cil.VariableDefinition result = null;
 
+                        // get the result from the stack (and put it back)
                         if (mr.ReturnType.FullName != "System.Void")
                         {
                             // we need to store the return value
@@ -179,89 +249,43 @@ namespace MrKupido.Patcher
                             processor.InsertBefore(instrNext, ii);
                         }
 
-                        ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldc_I4, nvs.Length);
-                        processor.InsertBefore(instrNext, ii);
 
-                        TypeReference objectTypeRef = directionGeneratorMD.Parameters[3].ParameterType.GetElementType(); // this MUST reference the 'object' type
-
-                        ii = processor.Create(Mono.Cecil.Cil.OpCodes.Newarr, objectTypeRef);
-                        processor.InsertBefore(instrNext, ii);
-
-                        Mono.Cecil.Cil.VariableDefinition arrayVar = new Mono.Cecil.Cil.VariableDefinition(objectTypeRef);
-                        md.Body.Variables.Add(arrayVar);
-
-                        ii = processor.Create(Mono.Cecil.Cil.OpCodes.Stloc_S, arrayVar);
-                        processor.InsertBefore(instrNext, ii);
-
-
-                        for (int j = 0; j < nvs.Length; j++)
+                        // AFTER the instruction
+                        if (directionGeneratorAfterMD != null)
                         {
+                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldstr, mr.Module.AssemblyResolver.Resolve(mr.DeclaringType.Scope.Name).FullName);
+                            processor.InsertBefore(instrNext, ii);
+
+                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldstr, mr.DeclaringType.FullName + " " + mr.Name);
+                            processor.InsertBefore(instrNext, ii);
+
+                            // load the parameter array to the stack
                             ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldloc_S, arrayVar);
                             processor.InsertBefore(instrNext, ii);
 
-                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldc_I4, j);
-                            processor.InsertBefore(instrNext, ii);
-
-                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldloc_S, nvs[j]);
-                            processor.InsertBefore(instrNext, ii);
-
-                            // do the boxing if necessary
-                            if (nvs[j].VariableType.IsValueType)
+                            // load the result value to the stack
+                            if (mr.ReturnType.FullName != "System.Void")
                             {
-                                ii = processor.Create(Mono.Cecil.Cil.OpCodes.Box, nvs[j].VariableType);
+                                ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldloc_S, result);
+                                processor.InsertBefore(instrNext, ii);
+
+                                // do the boxing if necessary
+                                if (result.VariableType.IsValueType)
+                                {
+                                    ii = processor.Create(Mono.Cecil.Cil.OpCodes.Box, result.VariableType);
+                                    processor.InsertBefore(instrNext, ii);
+                                }
+                            }
+                            else
+                            {
+                                ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldnull);
                                 processor.InsertBefore(instrNext, ii);
                             }
 
-                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Stelem_Ref);
+                            // insert the 'direction generator after' method call
+                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Call, directionGeneratorAfterMD);
                             processor.InsertBefore(instrNext, ii);
                         }
-
-                        ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldstr, mr.Module.AssemblyResolver.Resolve(mr.DeclaringType.Scope.Name).FullName);
-                        processor.InsertBefore(instrNext, ii);
-
-                        ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldstr, mr.DeclaringType.FullName + " " + mr.Name);
-                        processor.InsertBefore(instrNext, ii);
-
-                        // this is the good one
-                        //ii = processor.Create(instr.Previous.OpCode, md.Body.Variables[((Mono.Cecil.Cil.VariableReference)instr.Previous.Operand).Index]);
-                        //ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldloc, md.Body.Variables[0]);
-                        //processor.InsertBefore(instrNext, ii);
-                        //MethodReference mref = new MethodReference("get_LastActionDuration", directionGeneratorMD.Parameters[2].ParameterType, new TypeReference(mr.DeclaringType.Namespace, "EquipmentBase", mr.DeclaringType.Module, mr.DeclaringType.Scope));
-                        //mref.HasThis = true;
-                        //ii = processor.Create(instr.OpCode, mref);
-                        //processor.InsertBefore(instrNext, ii);
-
-                        // not good, it is a static call (we need virtual instance)
-                        //ii = processor.Create(instr.OpCode, new MethodReference("get_LastActionDuration", directionGeneratorMD.Parameters[2].ParameterType, new TypeReference(mr.DeclaringType.Namespace, "EquipmentBase", mr.DeclaringType.Module, mr.DeclaringType.Scope)));
-                        //processor.InsertBefore(instrNext, ii);
-
-                        // not good, temporary replacement
-                        //ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldc_I4, 60);
-                        //processor.InsertBefore(instrNext, ii);
-
-                        ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldloc_S, arrayVar);
-                        processor.InsertBefore(instrNext, ii);
-
-                        if (mr.ReturnType.FullName != "System.Void")
-                        {
-                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldloc_S, result);
-                            processor.InsertBefore(instrNext, ii);
-
-                            // do the boxing if necessary
-                            if (result.VariableType.IsValueType)
-                            {
-                                ii = processor.Create(Mono.Cecil.Cil.OpCodes.Box, result.VariableType);
-                                processor.InsertBefore(instrNext, ii);
-                            }
-                        }
-                        else
-                        {
-                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldnull);
-                            processor.InsertBefore(instrNext, ii);
-                        }
-
-                        ii = processor.Create(Mono.Cecil.Cil.OpCodes.Call, directionGeneratorMD);
-                        processor.InsertBefore(instrNext, ii);
 
                         i = md.Body.Instructions.IndexOf(instrNext) - 1;
                     }

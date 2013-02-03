@@ -8,6 +8,7 @@ using System.Text;
 
 namespace MrKupido.Library.Recipe
 {
+    [NameAlias("eng", "cottage cheese coconut ball")]
     [NameAlias("hun", "túrós kókuszgolyó")]
 
     public class TurosKokuszgolyo : RecipeBase
@@ -36,7 +37,7 @@ namespace MrKupido.Library.Recipe
 
             Reszelo reszelo = eg.Use<Reszelo>();
 
-            IngredientGroup citromHej = reszelo.Lereszelni(new CitromHej(5.0f * amount));
+            IIngredient citromHej = reszelo.Lereszelni(new CitromHej(5.0f * amount));
 
             result.Add("citromhej", citromHej);
 

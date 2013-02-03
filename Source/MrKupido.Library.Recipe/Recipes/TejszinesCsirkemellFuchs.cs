@@ -51,10 +51,7 @@ namespace MrKupido.Library.Recipe
             IIngredient reszeltSajt = reszelo.Lereszelni(new KaravanFustoltSajt(100.0f));
 
             Edeny edeny = eg.Use<Edeny>();
-            edeny.Berakni(new Liszt(250.0f));
-            edeny.Berakni(new So(20.0f));
-            edeny.Berakni(new Tojas(2.0f));
-            edeny.Berakni(reszeltSajt);
+            edeny.BerakniMind(new Liszt(250.0f), new So(20.0f), new Tojas(2.0f), reszeltSajt);
 
             IIngredient csirkemell = new Csirkemell(250 * 10);
 

@@ -32,7 +32,7 @@ namespace MrKupido.Processor.Model
         public bool IsPassive { get; private set; }
         public IDirectionSegment[] DirectionSegments { get; private set; }
 
-        public RecipeDirection(ref int idCounter, string assemblyName, string command, object[] operands = null, object result = null, RecipeStage stage = RecipeStage.Unknown, int actorIndex = 1)
+        public RecipeDirection(ref int idCounter, string assemblyName, string command, object[] operands = null, object result = null, RecipeStage stage = RecipeStage.Unknown, int actorIndex = 1, List<string> seenIngredients = null)
         {
             ActorIndex = actorIndex;
             Stage = stage;
@@ -57,12 +57,12 @@ namespace MrKupido.Processor.Model
                 }
             }
 
-            if (result is IngredientGroup)
+            if (Result is IngredientGroup)
             {
-                Alias = ((IngredientGroup)result).Name;
-                if (((IngredientGroup)result).Id == 0)
+                Alias = ((IngredientGroup)Result).Name;
+                if (((IngredientGroup)Result).Id == 0)
                 {
-                    ((IngredientGroup)result).Id = ++idCounter;
+                    ((IngredientGroup)Result).Id = ++idCounter;
                 }
             }
 
@@ -78,10 +78,10 @@ namespace MrKupido.Processor.Model
                 IsPassive = PassiveActionAttribute.IsMethodPassiveAction(mi);
             }
 
-            this.DirectionSegments = GenerateSegments();
+            this.DirectionSegments = GenerateSegments(seenIngredients);
         }
 
-        private RecipeDirectionSegment[] GenerateSegments()
+        private RecipeDirectionSegment[] GenerateSegments(List<string> seenIngredients)
         {
             List<RecipeDirectionSegment> result = new List<RecipeDirectionSegment>();
 
@@ -96,7 +96,7 @@ namespace MrKupido.Processor.Model
 
                     for (int i = 0; i < Operands.Length; i++)
                     {
-                        result.Add(new RecipeDirectionSegmentReference(Operands[i]));
+                        result.Add(new RecipeDirectionSegmentReference(Operands[i], seenIngredients));
                         if (i < Operands.Length - 1) result.Add(new RecipeDirectionSegment(", "));
                     }
                 }
@@ -136,7 +136,7 @@ namespace MrKupido.Processor.Model
                     if (clauseEndIndex - clauseStartIndex == 1)
                     {
                         // {}
-                        result.Add(new RecipeDirectionSegmentReference(Operands[0]));
+                        result.Add(new RecipeDirectionSegmentReference(Operands[0], seenIngredients));
                     }
                     else 
                     {
@@ -149,6 +149,8 @@ namespace MrKupido.Processor.Model
 
                         if (isIteration)
                         {
+                            if (!(operand is Array)) throw new MrKupidoException("If you use the {0*} clause in the action, you must pass an array as a parameter. The parameter number " + (operandIndex - 1) + " is not an array.");
+
                             Array items = (Array)operand;
 
                             if (items.Length > 0)
@@ -156,7 +158,7 @@ namespace MrKupido.Processor.Model
                                 foreach (object item in items)
                                 {
                                     if (!String.IsNullOrEmpty(beforeString)) result.Add(new RecipeDirectionSegment(beforeString));
-                                    result.Add(new RecipeDirectionSegmentReference(item));
+                                    result.Add(new RecipeDirectionSegmentReference(item, seenIngredients));
                                     if (!String.IsNullOrEmpty(afterString)) result.Add(new RecipeDirectionSegment(afterString));
                                 }
                                 if (!String.IsNullOrEmpty(afterString)) result.RemoveAt(result.Count - 1);
@@ -164,7 +166,7 @@ namespace MrKupido.Processor.Model
                         }
                         else
                         {
-                            RecipeDirectionSegmentReference rdsr = new RecipeDirectionSegmentReference(operand);
+                            RecipeDirectionSegmentReference rdsr = new RecipeDirectionSegmentReference(operand, seenIngredients);
 
                             // TODO: special (culture dependent) formatting for {0T} {0N} etc. etc.
                             if (affixId != Char.MinValue)
@@ -198,7 +200,7 @@ namespace MrKupido.Processor.Model
                 IngredientGroup ig = ((IngredientGroup)Result);
 
                 result.Add(new RecipeDirectionSegment(" => "));
-                result.Add(new RecipeDirectionSegmentReference(ig));
+                result.Add(new RecipeDirectionSegmentReference(ig, seenIngredients));
             }
 
 
@@ -220,7 +222,10 @@ namespace MrKupido.Processor.Model
             //        text = text.Remove(azIndex + 1, 3);
             //    }
             //}
-
+            foreach (IDirectionSegment rdsr in result)
+            {
+                if ((rdsr is RecipeDirectionSegmentReference) && (rdsr.Text == "--")) ((RecipeDirectionSegmentReference)rdsr).Text = "";
+            }
 
             return result.ToArray();
         }

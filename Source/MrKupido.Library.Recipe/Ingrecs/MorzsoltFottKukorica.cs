@@ -6,7 +6,8 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Recipe
 {
-    [NameAlias("hun", "morzsolt főtt szalonna")]
+    [NameAlias("eng", "crumbled cooked corn")]
+    [NameAlias("hun", "morzsolt főtt kukoria")]
 
     [IngredientConsts(IsIngrec = true)]
     public class MorzsoltFottKukorica : RecipeBase

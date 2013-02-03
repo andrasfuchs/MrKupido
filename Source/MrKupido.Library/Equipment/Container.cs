@@ -62,8 +62,8 @@ namespace MrKupido.Library.Equipment
             return true;
         }
 
-        [NameAlias("eng", "mix together", Priority = 200)]
-        [NameAlias("hun", "összekever", Priority = 200)]
+        [NameAlias("eng", "put in", Priority = 200)]
+        [NameAlias("hun", "berak", Priority = 200)]
         [NameAlias("hun", "rakd be a(z) {B} a következőket: ({0*}, )")]
         public bool BerakniMind(params IIngredient[] ingredients)
         {
@@ -119,6 +119,11 @@ namespace MrKupido.Library.Equipment
 
             this.LastActionDuration = 60;
 
+            if ((i is IngredientGroup) && ((IngredientGroup)i).Ingredients.Length == 1)
+            {
+                return ((IngredientGroup)i).Ingredients[0];
+            }
+
             return i;
         }
 
@@ -150,15 +155,15 @@ namespace MrKupido.Library.Equipment
         [NameAlias("eng", "pour off", Priority = 200)]
         [NameAlias("hun", "leönt", Priority = 200)]
         [NameAlias("hun", "öntsd le a folyadékot a(z) {L}")]
-        public IngredientGroup FolyadekotLeonteni() 
+        public void FolyadekotLeonteni() 
         {
-            List<IIngredient> result = new List<IIngredient>();
+            List<IIngredient> newContent = new List<IIngredient>();
 
             if (Contents is IngredientGroup)
             {
                 foreach (IIngredient i in ((IngredientGroup)Contents).Ingredients)
                 {
-                    if (i.Unit != MeasurementUnit.liter) result.Add(i);
+                    if (i.Unit != MeasurementUnit.liter) newContent.Add(i);
                 }
             } 
             else 
@@ -171,7 +176,46 @@ namespace MrKupido.Library.Equipment
 
             this.LastActionDuration = 120;
 
-            return new IngredientGroup(result.ToArray());
+            this.Contents = new IngredientGroup(newContent.ToArray());
         }
+
+        [NameAlias("eng", "pour off", Priority = 200)]
+        [NameAlias("hun", "átönt", Priority = 200)]
+        [NameAlias("hun", "öntsd át a folyadékot a(z) {L} a(z) {0B}")]
+        public void FolyadekotAtonteni(Container c)
+        {
+            List<IIngredient> newContent = new List<IIngredient>();
+            List<IIngredient> liquids = new List<IIngredient>();
+
+            if (Contents is IngredientGroup)
+            {
+                foreach (IIngredient i in ((IngredientGroup)Contents).Ingredients)
+                {
+                    if (i.Unit != MeasurementUnit.liter)
+                    {
+                        newContent.Add(i);
+                    }
+                    else 
+                    {
+                        liquids.Add(i);
+                    }
+                }
+            }
+            else
+            {
+                if (Contents.Unit != MeasurementUnit.liter)
+                {
+                    throw new InvalidActionForIngredientException("FolyadekotLeonteni", Contents.Name, Contents.Unit);
+                }
+            }
+
+            this.LastActionDuration = 120;
+
+            this.Contents = new IngredientGroup(newContent.ToArray());
+
+            liquids.Add(c.Contents);
+            c.Contents = new IngredientGroup(liquids.ToArray());
+        }
+    
     }
 }

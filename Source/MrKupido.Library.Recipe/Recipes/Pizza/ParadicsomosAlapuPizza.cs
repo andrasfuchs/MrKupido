@@ -7,7 +7,8 @@ using MrKupido.Library.Equipment;
 
 namespace MrKupido.Library.Recipe
 {
-    [NameAlias("hun", "pizza (paradicsomos)")]
+    [NameAlias("eng", "tomato-based pizza")]
+    [NameAlias("hun", "paradicsomos alapú pizza")]
 
     [IngredientConsts(IsInline = true)]
     public class ParadicsomosAlapuPizza : Pizza

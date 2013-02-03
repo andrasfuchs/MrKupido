@@ -19,6 +19,14 @@ namespace MrKupido.Library.Equipment
             return new IngredientGroup(ingredients);
         }
 
+        [NameAlias("eng", "crumple", Priority = 200)]
+        [NameAlias("hun", "összegyúr", Priority = 200)]
+        [NameAlias("hun", "gyúrd össze a(z) {0} tartalmát")]
+        public void OsszegyurniEdenyben(Container container)
+        {            
+        }
+
+
         [NameAlias("eng", "knead to balls", Priority = 200)]
         [NameAlias("hun", "golyóvá gyúr", Priority = 200)]
         [NameAlias("hun", "gyúrd golyóvá a(z) {0T}")]
@@ -33,7 +41,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "tear", Priority = 200)]
         [NameAlias("hun", "szaggat", Priority = 200)]
-        [NameAlias("hun", "szaggass {1} grammos darabokat a(z) {0B}")]
+        [NameAlias("hun", "szaggass {1} grammos darabokat a(z) {0K}")]
         public IngredientGroup Kiszaggatni(IIngredient i, float weight)
         {
             if ((!(i is IngredientBase)) || (i.Unit != MeasurementUnit.gramm)) throw new InvalidActionForIngredientException("Kiszaggatni", i.Name, i.Unit);
@@ -83,6 +91,31 @@ namespace MrKupido.Library.Equipment
 
             return new IngredientGroup(new IIngredient[] { iOnTo, i });
         }
+
+        [NameAlias("eng", "superimpose", Priority = 200)]
+        [NameAlias("hun", "rárak", Priority = 200)]
+        [NameAlias("hun", "rakd rá a(z) {0R} a következőket: ({1*}, )")]
+        public IIngredient RarakniMind(IIngredient iOnTo, params IIngredient[] ingredients)
+        {
+            if (ingredients.Length == 0) return iOnTo;
+
+            foreach (IIngredient i in ingredients)
+            {
+                if ((i.Unit != MeasurementUnit.piece) && (i.Unit != MeasurementUnit.gramm)) throw new InvalidActionForIngredientException("Rarakni", i.Name, i.Unit);
+            }
+
+
+            List<IIngredient> ings = new List<IIngredient>();
+
+            ings.Add(iOnTo);
+            foreach (IIngredient i in ingredients)
+            {
+                //ings.Add(i);
+            }
+
+            return new IngredientGroup(ings.ToArray());
+        }
+
 
         [NameAlias("eng", "pour on", Priority = 200)]
         [NameAlias("hun", "ráönt", Priority = 200)]

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Profile";
+    ViewBag.Title = MrKupido.Web.Resources.Account.Profile.PageTitle + " - " + MrKupido.Web.Resources.Shared.Layout.PageTitle; 
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <header class="nosearch">
@@ -13,16 +13,14 @@
     <div id="profile">
         <details id="basicinfo" open class="alwaysopen">
             <summary>
-                <h1>Általános információk</h1>
-                <h2>
-                    <a href="#">Miért érdemes kitöltenem?</a>
-                </h2>
+                <h1>@MrKupido.Web.Resources.Account.Profile.General</h1>
+                <h2></h2>
             </summary>
             <ul>
                 <li>
                     <div class="label">
                         <label for="email">
-                            Az e-mail címem:</label>
+                            @MrKupido.Web.Resources.Account.Profile.Email:</label>
                     </div>
                     <div class="input">
                         <input type="email" id="email" name="email" required disabled value='@(((MrKupido.Model.User)Session["CurrentUser"]).Email)'/>
@@ -31,7 +29,7 @@
                 <li>
                     <div class="label">
                         <label for="lastname">
-                            Vezetéknevem:</label>
+                            @MrKupido.Web.Resources.Account.Profile.LastName:</label>
                     </div>
                     <div class="input">
                         <input type="text" id="lastname" name="lastname" required value='@(((MrKupido.Model.User)Session["CurrentUser"]).LastName)'/>
@@ -40,7 +38,7 @@
                 <li>
                     <div class="label">
                         <label for="firstname">
-                            Keresztnevem:</label>
+                            @MrKupido.Web.Resources.Account.Profile.FirstName:</label>
                     </div>
                     <div class="input">
                         <input type="text" id="firstname" name="firstname" required value='@(((MrKupido.Model.User)Session["CurrentUser"]).FirstName)'/>
@@ -49,7 +47,7 @@
                 <li>
                     <div class="label">
                         <label for="nickname">
-                            Becenevem:</label>
+                            @MrKupido.Web.Resources.Account.Profile.NickName:</label>
                     </div>
                     <div class="input">
                         <input type="text" id="nickname" name="nickname" required value='@(((MrKupido.Model.User)Session["CurrentUser"]).NickName)'/>
@@ -57,19 +55,46 @@
                 </li>
             </ul>
         </details>
-        <hr class="single" />
+        <hr />
+        <details id="physicalinfo" open>
+            <summary>
+                <h1>@MrKupido.Web.Resources.Account.Profile.Physical</h1>
+                <h2>
+                    <a href="#">@MrKupido.Web.Resources.Account.Profile.PhysicalWhy</a>
+                </h2>
+            </summary>
+            <ul>
+                <li>
+                    <div class="label">
+                        <label for="height">
+                            @MrKupido.Web.Resources.Account.Profile.Height:</label>
+                    </div>
+                    <div class="input">
+                        <input type="text" id="height" name="height" disabled value='@(((MrKupido.Model.User)Session["CurrentUser"]).Height != 0 ? ((MrKupido.Model.User)Session["CurrentUser"]).Height.ToString("0.00 m") : MrKupido.Web.Resources.Account.Profile.Unknown)'/>
+                    </div>
+                </li>
+                <li>
+                    <div class="label">
+                        <label for="weight">
+                            @MrKupido.Web.Resources.Account.Profile.Weight:</label>
+                    </div>
+                    <div class="input">
+                        <input type="text" id="weight" name="weight" disabled value='@(((MrKupido.Model.User)Session["CurrentUser"]).Weight != 0 ? ((MrKupido.Model.User)Session["CurrentUser"]).Weight.ToString("0.00 kg") : MrKupido.Web.Resources.Account.Profile.Unknown)'/>
+                    </div>
+                </li>
+                <li>
+                    <div class="label">
+                        <label for="dateofbirth">
+                            @MrKupido.Web.Resources.Account.Profile.DateOfBirth:</label>
+                    </div>
+                    <div class="input">
+                        <input type="text" id="dateofbirth" name="dateofbirth" disabled value='@(((MrKupido.Model.User)Session["CurrentUser"]).DateOfBirth.HasValue ? ((MrKupido.Model.User)Session["CurrentUser"]).DateOfBirth.Value.ToString("yyyy-MM-dd") : MrKupido.Web.Resources.Account.Profile.Unknown)'/>
+                    </div>
+                </li>
+            </ul>
+        </details>
+        <hr />
         <div style="display: none">
-            <details id="physicalinfo">
-                <summary>
-                    <h1>Fizikai tulajdonságok</h1>
-                    <h2>
-                        <a href="#">Hol használjuk ezt?</a>
-                    </h2>
-                </summary>
-                <ul>
-                    <li></li>
-                </ul>
-            </details>
             <details id="likes">
                 <summary>
                     <h1>Mit szeretsz és mit nem?</h1>
@@ -81,6 +106,7 @@
                     <li></li>
                 </ul>
             </details>
+            <hr class="single" />
             <details id="conditions">
                 <summary>
                     <h1>Egészségügyi állapot</h1>
@@ -92,6 +118,7 @@
                     <li></li>
                 </ul>
             </details>
+            <hr class="single" />
             <details id="advanced">
                 <summary>
                     <h1>Haladó beállítások</h1>
@@ -120,7 +147,7 @@
         </div>
     </div>
     <div class="formbuttons">
-        <input type="submit" value="Mentés" />
+        <input type="submit" value="@MrKupido.Web.Resources.Account.Profile.Save" />
     </div>
 
 }
