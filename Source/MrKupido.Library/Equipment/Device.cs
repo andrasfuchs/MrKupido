@@ -22,6 +22,8 @@ namespace MrKupido.Library.Equipment
             if (this.contents != null) throw new MrKupidoException("The device '{0}' already has a '{1}' in it. Remove it before putting something other in it.", this.Name, this.contents.Name);
 
             this.contents = contents;
+
+            this.LastActionDuration = 10;
         }
 
         [NameAlias("eng", "put on", Priority = 200)]
@@ -32,6 +34,8 @@ namespace MrKupido.Library.Equipment
             if (this.contents != null) throw new MrKupidoException("The device '{0}' already has a '{1}' on it. Remove it before putting something other on it.", this.Name, this.contents.Name);
 
             this.contents = contents;
+
+            this.LastActionDuration = 10;
         }
 
         [NameAlias("eng", "pull out", Priority = 200)]
@@ -46,6 +50,8 @@ namespace MrKupido.Library.Equipment
             IEquipment result = this.contents;
 
             this.contents = null;
+
+            this.LastActionDuration = 10;
 
             return result;
         }

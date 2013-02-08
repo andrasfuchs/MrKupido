@@ -7,6 +7,37 @@
 
         $(document).ready(function () {
             deleteFilter("");
+
+            // show tips and tricks
+            $.ajax({
+                url: '@Url.Action("GetTipsNTricks", "Home")',
+                type: "POST",
+                dataType: "json",
+                data: {},
+                success: function (tipsAndTricksText) {
+                    var htmlStr = "";
+
+                    if (tipsAndTricksText[0] == "B") {
+                        htmlStr += "<img runat=\"server\" src=\"./Content/svg/tnt_idea.svg\" width=\"24\" height=\"32\" />";
+                    } else if (tipsAndTricksText[0] == "Q") {
+                        htmlStr += "<img runat=\"server\" src=\"./Content/svg/tnt_question.svg\" width=\"24\" height=\"32\" />";
+                    } else if (tipsAndTricksText[0] == "S") {
+                        htmlStr += "<img runat=\"server\" src=\"./Content/svg/tnt_smile.svg\" width=\"24\" height=\"32\" />";
+                    } else if (tipsAndTricksText[0] == "E") {
+                        htmlStr += "<img runat=\"server\" src=\"./Content/svg/tnt_exclamation.svg\" width=\"24\" height=\"32\" />";
+                    }
+
+                    htmlStr += "<span>";
+                    htmlStr += tipsAndTricksText.substring(1);
+                    htmlStr += "</span>";
+
+                    $("#tipsandticks").html(htmlStr);
+                    $("#tipsandticks").show();
+                }, // success
+                error: function (xhr, textStatus, errorThrown) {
+                    $("#tipsandticks").hide();
+                }
+            }); // ajax
         });
 
         function doSearch(maxResult) {

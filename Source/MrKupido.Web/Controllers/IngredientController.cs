@@ -43,9 +43,6 @@ namespace MrKupido.Web.Controllers
 
             foreach (TreeNode tn in tns)
             {
-                if (tn.IconUrl == null) tn.IconUrl = PathUtils.GetActualUrl(tn.IconUrls);
-                tn.IconUrl = tn.IconUrl;
-
                 ValidateIconUrls(tn.Children);
             }
         }

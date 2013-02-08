@@ -39,20 +39,20 @@ namespace MrKupido.Processor
             all.Add(node);
 
             if (classNameIndex.ContainsKey(node.ClassName)) throw new MrKupidoException("Class-name index already has an item with the key '{0}'", node.ClassName);
-            classNameIndex.Add(node.ClassName, node);
+            classNameIndex.Add(node.ClassFullName, node);
 
             foreach (string languageISO in allowedLanguageISOCodes)
             {
                 if ((!nameIndex.ContainsKey(languageISO)) || (nameIndex[languageISO] == null)) nameIndex[languageISO] = new SortedList<string, TreeNode>();
                 if ((!uniqueNameIndex.ContainsKey(languageISO)) || (uniqueNameIndex[languageISO] == null)) uniqueNameIndex[languageISO] = new SortedList<string, TreeNode>();
 
-                foreach (NameAliasAttribute name in NameAliasAttribute.GetNameAliases(node.ClassType, languageISO))
+                foreach (NameAliasAttribute name in NameAliasAttribute.GetNames(node.ClassType, null, languageISO))
                 {
                     if (nameIndex.ContainsKey(name.Name)) throw new MrKupidoException("Name index already has an item with the key '{0}'", name.Name);
                     nameIndex[languageISO].Add(name.Name, node);
 
                     string uniqueName = name.Name.ToUniqueString();
-                    if (classNameIndex.ContainsKey(uniqueName)) throw new MrKupidoException("Unique-name index already has an item with the key '{0}'", uniqueName);
+                    if (uniqueNameIndex.ContainsKey(uniqueName)) throw new MrKupidoException("Unique-name index already has an item with the key '{0}'", uniqueName);
                     uniqueNameIndex[languageISO].Add(uniqueName, node);
                 }
             }
@@ -86,7 +86,7 @@ namespace MrKupido.Processor
         public TreeNode GetByName(string name, string languageISO)
         {
             TreeNode tn = null;
-            uniqueNameIndex[languageISO].TryGetValue(name, out tn);
+            nameIndex[languageISO].TryGetValue(name, out tn);
 
             if (tn == null) Trace.TraceError("The class with name '{0}' was not found in the tree.", name);
 

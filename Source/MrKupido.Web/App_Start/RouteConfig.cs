@@ -21,24 +21,6 @@ namespace MrKupido.Web
             );
 
             routes.MapRoute(
-                name: "AccountManagement",
-                url: "{language}/account/{action}",
-                defaults: new { language = "hun", controller = "Account", action = "Profile" }
-            );
-
-            routes.MapRoute(
-                name: "Admin",
-                url: "{language}/admin/{controller}/{action}/{id}",
-                defaults: new { language = "hun", controller = "Ingredient", action = "Index", id = UrlParameter.Optional,  }
-            );
-
-            routes.MapRoute(
-                name: "OldBrowser",
-                url: "hun/home/notsupportedbrowser",
-                defaults: new { language = "hun", controller = "Home", action = "NotSupportedBrowser" }
-            );
-
-            routes.MapRoute(
                 name: "RecipeHun",
                 url: "hun/recept/{id}",
                 defaults: new { language = "hun", controller = "Recipe", action = "Details" }
@@ -53,7 +35,7 @@ namespace MrKupido.Web
             routes.MapRoute(
                 name: "Default",
                 url: "{language}/{controller}/{action}/{id}",
-                defaults: new { language = "hun", controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { language = "xxx", controller = "Home", action = "Index", id = UrlParameter.Optional }
             );        
 
         }

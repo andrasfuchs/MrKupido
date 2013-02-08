@@ -35,7 +35,7 @@ namespace MrKupido.Processor.Model
             ShortName = LongName;
             if (hasConnectionToTaxonomyTree && (taxonomyConnectionAttribute != null))
             {
-                LongName += " [" + NameAliasAttribute.GetDefaultName(taxonomyConnectionAttribute.NatureClass) + " " + NameAliasAttribute.GetDefaultName(taxonomyConnectionAttribute.GetType()) + "]";
+                LongName += " [" + NameAliasAttribute.GetName(taxonomyConnectionAttribute.NatureClass) + " " + NameAliasAttribute.GetName(taxonomyConnectionAttribute.GetType()) + "]";
             }
 
             //Ingredient dbIngredient = db.Ingredients.Where(i => i.ClassName == ingredientClass.Name).FirstOrDefault();

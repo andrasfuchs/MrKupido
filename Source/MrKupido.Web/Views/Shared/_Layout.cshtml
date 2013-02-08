@@ -52,10 +52,10 @@
                     $('input#reviewCommentText').val("");
                 }, // success
                 error: function (xhr, textStatus, errorThrown) {
-                    alert("Error");
-                    alert(xhr);
-                    alert(textStatus);
-                    alert(errorThrown);
+                    //alert("Error");
+                    //alert(xhr);
+                    //alert(textStatus);
+                    //alert(errorThrown);
                 }
             });    // ajax
 
@@ -95,10 +95,10 @@
 
 
     <div id="reviewer" class="on">
-        <span id="reviewSection">Ird ide, hogy szerinted mi nem stimmel az oldalon:</span>
-        @{ string placeHolderText = "(minimum 15 karakter) - v" + (Session["WebAppFileVersion"] as string); }
+        <span id="reviewSection">@MrKupido.Web.Resources.Shared.Layout.ReviewText</span>
+        @{ string placeHolderText = MrKupido.Web.Resources.Shared.Layout.ReviewPlaceholder + " v" + (Session["WebAppFileVersion"] as string); }
         <input id="reviewCommentText" placeholder='@placeHolderText' size="60" onkeydown="javascript:reviewCommentChanged(event);">
-        <input id="reviewCommentButton" value="Vélemény elküldése" type="button" disabled="disabled" onclick="javascript:submitReviewComment();">
+        <input id="reviewCommentButton" value="@MrKupido.Web.Resources.Shared.Layout.ReviewButton" type="button" disabled="disabled" onclick="javascript:submitReviewComment();">
     </div>
 
 </body>

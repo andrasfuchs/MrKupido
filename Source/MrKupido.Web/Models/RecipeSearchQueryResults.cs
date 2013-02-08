@@ -23,7 +23,6 @@ namespace MrKupido.Web.Models
             this.SearchString = displayString;
             this.UniqueName = treeNode.UniqueName;
             this.NodeType = treeNode.NodeType;
-            if (treeNode.IconUrl == null) treeNode.IconUrl = PathUtils.GetActualUrl(treeNode.IconUrls);
             this.IconUrl = treeNode.IconUrl;
         }
     }

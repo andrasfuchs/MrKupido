@@ -61,7 +61,7 @@ namespace MrKupido.Web.Resources.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cook your recipes, follow your diet.
+        ///   Looks up a localized string similar to Delicious like hell.
         /// </summary>
         public static string PageTitle {
             get {

@@ -18,6 +18,8 @@ namespace MrKupido.Library.Attributes
     [AttributeUsage(System.AttributeTargets.Class | System.AttributeTargets.Field | System.AttributeTargets.Property | System.AttributeTargets.Method, AllowMultiple = true)]
     public class NameAliasAttribute : Attribute
     {
+        private static Dictionary<string, string> cache = new Dictionary<string, string>();
+
         public string CultureName { get; private set; }
         public string Name { get; private set; }
         public int Priority;
@@ -29,101 +31,116 @@ namespace MrKupido.Library.Attributes
             this.Priority = 100;
         }
 
-        public static string GetDefaultName(Type objType, string languageISOCode = null)
+        public static string GetName(Type objType, string memberName = null, string languageISOCode = null, int? targetPriority = null)
         {
-            if (languageISOCode == null) languageISOCode = Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName;
-
             string result = null;
-            int priority = Int32.MaxValue;
+            string cacheKey = languageISOCode + "-" + objType.FullName + "-" + (memberName == null ? "" : memberName) + "-" + (targetPriority.HasValue ? targetPriority.Value : 0);
 
-            foreach (object attr in objType.GetCustomAttributes(typeof(NameAliasAttribute),false))
+            if (cache.ContainsKey(cacheKey))
             {
-                NameAliasAttribute name = (NameAliasAttribute)attr;
+                return cache[cacheKey];
+            }
+            else
+            {
+                NameAliasAttribute[] names = GetNames(objType, memberName, languageISOCode);
 
-                if (name.CultureName == languageISOCode)
+                if (names.Length > 0)
                 {
-                    if (name.Priority == priority)
+                    if (targetPriority.HasValue)
                     {
-                        throw new MrKupidoException("Class '{0}' has more then one name alias with the same priority.", objType.Name);
+                        NameAliasAttribute naa = names.FirstOrDefault(att => att.Priority == targetPriority);
+                        if (naa != null)
+                        {
+                            result = naa.Name;
+                        }
                     }
 
-                    if (name.Priority < priority)
+                    if (result == null)
                     {
-                        result = name.Name;
-                        priority = name.Priority;
+                        result = names[0].Name;
                     }
                 }
+
+                string commercialShortName = CommercialProductAttribute.GetShortName(objType, languageISOCode);
+                if (String.IsNullOrEmpty(result) && !String.IsNullOrEmpty(commercialShortName) && (objType.BaseType != null))
+                {
+                    result = NameAliasAttribute.GetName(objType.BaseType, memberName, languageISOCode, targetPriority) + " {" + commercialShortName + "}";
+                }
+
+                cache[cacheKey] = result;
             }
 
-            string commercialShortName = CommercialProductAttribute.GetShortName(objType, languageISOCode);
-            if (String.IsNullOrEmpty(result) && !String.IsNullOrEmpty(commercialShortName) && (objType.BaseType != null))
-            {
-                result = NameAliasAttribute.GetDefaultName(objType.BaseType, languageISOCode) + " {" + commercialShortName + "}";
-            }
 
-            if (String.IsNullOrEmpty(result))
-            {
-                Trace.TraceWarning("Class '{0}' has no name defined in culture '{1}'.", objType.Name, Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName);
-            }
+            // TODO: implement caching here
 
             return result;
         }
 
-        public static NameAliasAttribute[] GetNameAliases(MemberInfo objType, string languageISOCode)
+        public static NameAliasAttribute[] GetNames(Type objType, string memberName = null, string languageISOCode = null)
         {
-            return objType.GetCustomAttributes(typeof(NameAliasAttribute), false).Where(na => ((NameAliasAttribute)na).CultureName == languageISOCode).Cast<NameAliasAttribute>().OrderByDescending(na => na.Priority).ToArray();
-        }
+            if (languageISOCode == null) languageISOCode = Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName;
 
-        public static string GetMethodName(Type objType, string methodName)
-        {
-            string[] names = GetMethodNames(objType, methodName);
+            System.Reflection.MemberInfo mi = null;
 
-            return ((names != null) && (names.Length > 0) ? names[0] : null);
-        }
-
-        public static string[] GetMethodNames(Type objType, string methodName)
-        {
-            SortedDictionary<int, string> names = new SortedDictionary<int, string>();
-
-            System.Reflection.MethodInfo mi = objType.GetMethod(methodName);
-            foreach (NameAliasAttribute name in GetNameAliases(mi, Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName))
+            if (memberName != null)
             {
-                if (names.ContainsKey(name.Priority))
+                if (mi == null)
                 {
-                    throw new MrKupidoException("The method '{1}' of the class '{0}' has more then one name alias with the same priority.", objType.Name, mi.Name);
+                    mi = objType.GetField(memberName);
                 }
 
-                names.Add(name.Priority, name.Name);
-            }
+                if (mi == null)
+                {
+                    mi = objType.GetProperty(memberName);
+                }
 
-            if (names.Count == 0)
-            {
-                Trace.TraceWarning("The method '{1}' of the class '{0}' has no name defined in culture '{2}'.", objType.Name, mi.Name, Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName);
-            }
+                if (mi == null)
+                {
+                    mi = objType.GetMethod(memberName);
+                }
 
-            return names.Values.ToArray();
-        }
-
-        public static NameAliasAttribute[] GetMemberNames(Type objType, string memberName, string languageISOCode )
-        {
-            System.Reflection.MemberInfo mi = objType.GetMethod(memberName);
-            
-            if (mi == null)
-            {
-                mi = objType.GetField(memberName);
+                if (mi == null)
+                {
+                    throw new MrKupidoException("Object '{0}' doesn't have a member called '{1}' in the culture '{2}'.", objType, memberName, languageISOCode);
+                }
             }
 
             if (mi == null)
             {
-                mi = objType.GetProperty(memberName);
+                mi = objType;
             }
 
-            if (mi == null)
+            NameAliasAttribute[] names = mi.GetCustomAttributes(typeof(NameAliasAttribute), false).Where(na => ((NameAliasAttribute)na).CultureName == languageISOCode).Cast<NameAliasAttribute>().OrderBy(na => na.Priority).ToArray();
+
+            if (names.Length == 0)
             {
-                throw new MrKupidoException("Object '{0}' doesn't have a member called '{1}' in the culture '{2}'.", objType, memberName, languageISOCode);
+                if (memberName == null)
+                {
+                    Trace.TraceWarning("The class '{0}' has no name defined in culture '{1}'.", objType.FullName, languageISOCode);
+                }
+                else
+                {
+                    Trace.TraceWarning("The member '{1}' of the class '{0}' has no name defined in culture '{2}'.", objType.FullName, mi.Name, languageISOCode);
+                }
+            }
+            else
+            {
+
+                for (int i = 0; i < names.Length - 1; i++)
+                {
+                    if (names[i].Priority == names[i + 1].Priority)
+                    {
+                        throw new MrKupidoException("The member '{1}' of the class '{0}' has more then one name aliases with the same priority in culture '{2}'.", objType.Name, mi.Name, languageISOCode);
+                    }
+                }
+
+                if ((names[0].Priority <= 0) || (names[names.Length - 1].Priority >= 1000))
+                {
+                    throw new MrKupidoException("The member '{1}' of the class '{0}' has a name aliases with a priority value outside of the [1..999] interval in culture '{2}'.", objType.Name, mi.Name, languageISOCode);
+                }
             }
 
-            return GetNameAliases(mi, languageISOCode);
+            return names;
         }
     }
 }

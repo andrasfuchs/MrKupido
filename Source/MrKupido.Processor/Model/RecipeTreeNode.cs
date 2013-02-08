@@ -113,21 +113,18 @@ namespace MrKupido.Processor.Model
         {
             return new string[0];
         }
-        
-        public IIngredient[] GetIngredients(float amount)
+
+        public IIngredient[] GetIngredients(float amount, int multiplier)
         {
+            float am = amount * multiplier;
+
+            if (!IsImplemented) return new IIngredient[0];
+            
             lock (ingredientCache)
             {
-                if (!ingredientCache.ContainsKey(amount))
+                if (!ingredientCache.ContainsKey(am))
                 {
-                    if (!IsImplemented)
-                    {
-                        ingredientCache.Add(amount, new IIngredient[0]);
-                    }
-                    else
-                    {
-                        ingredientCache.Add(amount, RecipeAnalyzer.GenerateIngredients(this, amount));
-                    }
+                    ingredientCache.Add(am, RecipeAnalyzer.GenerateIngredients(this, am));
                 }
             }
 
@@ -146,7 +143,7 @@ namespace MrKupido.Processor.Model
                 }
 
                 // add all ingredients and all of their parents to the ingredientsForSearch collection
-                foreach (IngredientBase ib in ingredientCache[amount])
+                foreach (IngredientBase ib in ingredientCache[am])
                 {
                     IngredientBase currentIb = ib;
                     string ibTypeFullName = ib.GetType().FullName;
@@ -173,27 +170,29 @@ namespace MrKupido.Processor.Model
 
 
 
-            return ingredientCache[amount];
+            return ingredientCache[am];
         }
 
-        public IEquipment[] GetEquipments(float amount)
+        public IEquipment[] GetEquipments(float amount, int multiplier)
         {
             return new MrKupido.Library.Equipment.EquipmentBase[0];
         }
 
-        public IDirection[] GetDirections(float amount)
+        public IDirection[] GetDirections(float amount, int multiplier)
         {
+            float am = amount * multiplier;
+
             if (!IsImplemented) return new IDirection[0];
 
-            if (!directionCache.ContainsKey(amount))
+            if (!directionCache.ContainsKey(am))
             {
-                directionCache.Add(amount, RecipeAnalyzer.GenerateDirections(this, 1.0f));
+                directionCache.Add(am, RecipeAnalyzer.GenerateDirections(this, am));
             }
 
-            return directionCache[amount];
+            return directionCache[am];
         }
 
-        public INutritionInfo[] GetNutritions(float amount)
+        public INutritionInfo[] GetNutritions(float amount, int multiplier)
         {
             return new NutritionInfo[0];
         }

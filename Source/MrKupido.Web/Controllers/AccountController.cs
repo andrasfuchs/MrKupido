@@ -22,9 +22,6 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Web.Controllers
 {
-    [NameAlias("eng", "account")]
-    [NameAlias("hun", "fiok")]
-
     public class AccountController : BaseController
     {
         private static MrKupido.DataAccess.MrKupidoContext context = new MrKupido.DataAccess.MrKupidoContext("Name=MrKupidoContext");
@@ -35,23 +32,9 @@ namespace MrKupido.Web.Controllers
             ClientCredentialApplicator = ClientCredentialApplicator.PostParameter(ConfigurationManager.AppSettings["FacebookAppSecret"])
         };
 
-        [NameAlias("eng", "login")]
-        [NameAlias("hun", "bejelentkezes")]
-
         [HttpGet]
         public ActionResult LogIn()
         {
-            if (Session["CurrentUser"] != null)
-            {
-                if ((CurrentSessions != null) && (CurrentSessions[Session.SessionID] != null))
-                {
-                    CurrentSessions[Session.SessionID].User = null;
-                    Session.Abandon();
-                }
-                Session["CurrentUser"] = null;
-                Session["Location"] = null;
-            }
-
             string email = "";
             string id = "";
             FetchResponse openIdFetch = null;
@@ -237,14 +220,11 @@ namespace MrKupido.Web.Controllers
 
                 this.IssueAuthTicket(user.UserId.ToString(), user, true);
 
-                Session["CurrentUser"] = user;
-                Session["CurrentUser.DisplayName"] = !String.IsNullOrEmpty(user.NickName) ? user.NickName : user.FullName;
-                Session["CurrentUser.AvatarUrl"] = !String.IsNullOrEmpty(user.AvatarUrl) ? user.AvatarUrl : "Content/svg/icon_avatar.svg";
+                Session.SetCurrentUser(user);
 
                 string returnUrl = (string)Session["ReturnUrl"];
                 if (String.IsNullOrEmpty(returnUrl))
                 {
-                    //return RedirectToRoute("Default");
                     return RedirectToRoute("Default", new { language = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName, controller = "Home", action = "Index" });
                 }
                 else
@@ -258,6 +238,17 @@ namespace MrKupido.Web.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public ActionResult LogOut()
+        {
+            FormsAuthentication.SignOut();
+            Session.SetCurrentUser(null);
+            Session.Abandon();
+
+            return RedirectToRoute("Default", new { language = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName, controller = "Account", action = "LogIn" });
+        }
+
 
         /// <summary>
         /// Issues an authentication issue from a userState instance
@@ -335,7 +326,7 @@ namespace MrKupido.Web.Controllers
         [HttpGet]
         public new ActionResult Profile()
         {
-            if (Session["CurrentUser"] == null)
+            if (Session.GetCurrentUser() == null)
             {
                 return RedirectToAction("LogIn");
             }
@@ -346,7 +337,7 @@ namespace MrKupido.Web.Controllers
         [HttpPost]
         public new ActionResult Profile(string userId)
         {
-            User user = (User)Session["CurrentUser"];
+            User user = Session.GetCurrentUser();
 
             user.LastName = Request.Form["lastname"];
             user.FirstName = Request.Form["firstname"];
@@ -354,9 +345,6 @@ namespace MrKupido.Web.Controllers
 
             context.SaveChanges();
 
-            Session["CurrentUser.DisplayName"] = !String.IsNullOrEmpty(user.NickName) ? user.NickName : user.FullName;
-
-            //return View();
             return RedirectToRoute("Default", new { language = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName, controller = "Home", action = "Index" });
         }
     }

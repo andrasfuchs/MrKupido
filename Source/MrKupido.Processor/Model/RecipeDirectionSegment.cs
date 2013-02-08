@@ -20,5 +20,10 @@ namespace MrKupido.Processor.Model
         {
             return this.Text;
         }
+
+        public virtual string TextOnly()
+        {
+            return this.Text;
+        }
     }
 }

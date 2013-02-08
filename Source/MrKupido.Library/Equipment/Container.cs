@@ -13,25 +13,8 @@ namespace MrKupido.Library.Equipment
     {
         public Dimensions Dimensions { get; protected set; }
 
-        private int id;
-        public int Id
-        {
-            set
-            {
-                if (!IconUrl.Contains("{0}")) throw new MrKupidoException("The ID of an container should be set only once.");
-
-                id = value;
-                IconUrl = IconUrl.Replace("{0}", id.ToString("00"));
-            }
-
-            get
-            {
-                return id;
-            }
-        }
+        public int Id { get; set; }
         
-        public string IconUrl { get; set; }
-
         [NameAlias("eng", "contents of {}", Priority = 200)]
         [NameAlias("hun", "{} tartalma")]
         public IIngredient Contents { get; set; }
@@ -39,7 +22,6 @@ namespace MrKupido.Library.Equipment
         public Container(float width, float height, float depth)
         {
             this.Dimensions = new Dimensions(width, height, depth);
-            this.IconUrl = "~/Content/svg/container_{0}.svg";
         }
 
         [NameAlias("eng", "put in", Priority = 200)]
@@ -141,7 +123,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "fedd le a(z) {T} {0V}")]
         public void Lefedni(Material material) 
         {
-            this.LastActionDuration = 60;
+            this.LastActionDuration = 5;
         }
 
         [NameAlias("eng", "take off", Priority = 200)]
@@ -149,7 +131,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "vedd le a fedőt")]
         public void FedotLevenni() 
         {
-            this.LastActionDuration = 60;
+            this.LastActionDuration = 5;
         }
 
         [NameAlias("eng", "pour off", Priority = 200)]

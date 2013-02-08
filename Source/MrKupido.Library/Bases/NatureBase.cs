@@ -15,7 +15,7 @@ namespace MrKupido.Library.Nature
         {
             get
             {
-                return NameAliasAttribute.GetDefaultName(this.GetType());
+                return NameAliasAttribute.GetName(this.GetType());
             }
         }
 

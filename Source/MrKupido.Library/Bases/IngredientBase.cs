@@ -22,11 +22,18 @@ namespace MrKupido.Library.Ingredient
 
         public int PieceCount { get; set; }
 
+        private string name;
+        
         public string Name
         {
             get
             {
-                return NameAliasAttribute.GetDefaultName(this.GetType());
+                if (name == null)
+                {
+                    name = NameAliasAttribute.GetName(this.GetType());
+                }
+
+                return name;
             }
         }
 

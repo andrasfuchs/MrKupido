@@ -104,7 +104,12 @@ else
 
                                 if (!String.IsNullOrEmpty(refSegment.IconUrl))
                                 {
-                                        <img runat="server" src="@refSegment.IconUrl" alt="@refSegment.Id" title="@refSegment.Id" width="32px" height="32px" />
+                                        <img runat="server" src="@refSegment.IconUrl" alt="@refSegment.IconAlt" title="@refSegment.IconAlt" width="32px" height="32px" />
+                                }
+
+                                if (refSegment.Id > 0)
+                                {
+                                    <span>@refSegment.Id</span>
                                 }
 
                                 @refSegment.Text

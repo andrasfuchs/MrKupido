@@ -68,13 +68,12 @@ namespace MrKupido.Processor
 
             WasInitialized = true;
 
-            // this is need for the SearchStrings property
+            // this is needed for the SearchStrings property
             foreach (RecipeTreeNode rtn in Indexer.All)
             {
-                // this is need for the SearchStrings property
                 if (rtn.SearchStrings.Length == 0)
                 {
-                    rtn.GetIngredients(1.0f);
+                    rtn.GetIngredients(1.0f, 1);
                 }
             }
         }

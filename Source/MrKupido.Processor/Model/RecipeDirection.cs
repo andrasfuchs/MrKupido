@@ -32,6 +32,8 @@ namespace MrKupido.Processor.Model
         public bool IsPassive { get; private set; }
         public IDirectionSegment[] DirectionSegments { get; private set; }
 
+        private string[] correctionReplacements = { "tált", "tálat", "olajt", "olajat" };
+
         public RecipeDirection(ref int idCounter, string assemblyName, string command, object[] operands = null, object result = null, RecipeStage stage = RecipeStage.Unknown, int actorIndex = 1, List<string> seenIngredients = null)
         {
             ActorIndex = actorIndex;
@@ -71,7 +73,7 @@ namespace MrKupido.Processor.Model
             if (ids.Length == 2)
             {
                 DirectionType = Assembly.Load(AssemblyName).GetType(ids[0]);
-                Direction = NameAliasAttribute.GetMethodName(DirectionType, ids[1]);
+                Direction = NameAliasAttribute.GetName(DirectionType, ids[1], targetPriority: 100);
                 MemberInfo mi = DirectionType.GetMember(ids[1])[0];
 
                 IconUrls = IconUriFragmentAttribute.GetUrls(mi, "~/Content/svg/action_{0}.svg");
@@ -172,13 +174,13 @@ namespace MrKupido.Processor.Model
                             if (affixId != Char.MinValue)
                             {
                                 // only the last word needs affixation
-                                string[] words = rdsr.Text.Split(' ');
+                                string[] words = rdsr.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                                 string lastWord = PrepareForAffix(words[words.Length - 1]);
                                 lastWord = Affixate(lastWord, affixId);
 
-                                if (lastWord.StartsWith("--"))
+                                if (!String.IsNullOrEmpty(rdsr.IconAlt) && (lastWord.StartsWith(rdsr.IconAlt)))
                                 {
-                                    lastWord = lastWord.Replace("--", "-");
+                                    lastWord = lastWord.Replace(rdsr.IconAlt, "-");
                                 }
 
                                 // replace the last word
@@ -200,32 +202,70 @@ namespace MrKupido.Processor.Model
                 IngredientGroup ig = ((IngredientGroup)Result);
 
                 result.Add(new RecipeDirectionSegment(" => "));
-                result.Add(new RecipeDirectionSegmentReference(ig, seenIngredients));
+
+                RecipeDirectionSegmentReference rdsr = new RecipeDirectionSegmentReference(ig, seenIngredients);
+                if (!String.IsNullOrEmpty(rdsr.IconAlt) && (rdsr.Text.StartsWith(rdsr.IconAlt)))
+                {
+                    rdsr.Text = rdsr.Text.Replace(rdsr.IconAlt, "-");
+                    if (rdsr.Text == "-") rdsr.Text = "";
+                }
+
+                result.Add(rdsr);
             }
 
 
             // a(z) -> a, az
-            //int azIndex = 0;
-            //while ((azIndex = text.IndexOf("a(z)")) > 0)
-            //{
-            //    bool makeAz = false;
-            //    if (StringUtils.IsVowel(text[azIndex + 5])) makeAz = true;
-            //    if ((text[azIndex + 5] == '5') || (text[azIndex + 5] == '1')) makeAz = true;
-            //    if ((text[azIndex + 5] == '1') && Char.IsNumber(text[azIndex + 6])) makeAz = false;
+            int azIndex = 0;
+            int segmentIndex = 0;
 
-            //    if (makeAz)
-            //    {
-            //        text = text.Remove(azIndex + 3, 1).Remove(azIndex + 1, 1);
-            //    }
-            //    else
-            //    {
-            //        text = text.Remove(azIndex + 1, 3);
-            //    }
-            //}
-            foreach (IDirectionSegment rdsr in result)
+            while (segmentIndex < result.Count)
             {
-                if ((rdsr is RecipeDirectionSegmentReference) && (rdsr.Text == "--")) ((RecipeDirectionSegmentReference)rdsr).Text = "";
+                while ((azIndex = result[segmentIndex].TextOnly().IndexOf("a(z)")) > 0)
+                {
+                    bool makeAz = false;
+
+                    int charToCheckIndex = azIndex + 5;
+                    int charToCheckSegmentIndex = segmentIndex;
+                    if (charToCheckIndex >= result[segmentIndex].TextOnly().Length)
+                    {
+                        charToCheckSegmentIndex++;
+                        charToCheckIndex -= result[segmentIndex].TextOnly().Length;
+                    }
+                    char charToCheck = result[charToCheckSegmentIndex].TextOnly()[charToCheckIndex];
+
+                    if (StringUtils.IsVowel(charToCheck)) makeAz = true;
+                    //if ((charToCheck == '5') || (charToCheck == '1')) makeAz = true;
+                    //if ((charToCheck == '1') && Char.IsNumber(result[charToCheckSegmentIndex].TextOnly()[charToCheckIndex + 1])) makeAz = false;
+
+                    if (makeAz)
+                    {
+                        result[segmentIndex].Text = result[segmentIndex].Text.Remove(azIndex + 3, 1).Remove(azIndex + 1, 1);
+                    }
+                    else
+                    {
+                        result[segmentIndex].Text = result[segmentIndex].Text.Remove(azIndex + 1, 3);
+                    }
+                }
+
+                segmentIndex++;
             }
+
+
+            // replace the word which are irregular
+            foreach (RecipeDirectionSegment segment in result)
+            {
+                segment.Text = " " + segment.Text + " ";
+
+                for (int i = 0; i < correctionReplacements.Length / 2; i++)
+                {
+                    segment.Text = segment.Text.Replace(" " + correctionReplacements[i * 2] + " ", " " + correctionReplacements[i * 2 + 1] + " ");
+                }
+
+                segment.Text = segment.Text.Substring(1, segment.Text.Length - 2);
+            }
+
+
+            result[0].Text = Char.ToUpper(result[0].Text[0]) + result[0].Text.Substring(1);
 
             return result.ToArray();
         }

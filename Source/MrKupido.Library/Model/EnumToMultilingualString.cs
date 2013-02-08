@@ -10,21 +10,44 @@ namespace MrKupido.Library
 {
     public class EnumToMultilingualString : TypeConverter       
     {
+        private static Dictionary<string, string> cache = new Dictionary<string, string>();
+
         // Overrides the ConvertTo method of TypeConverter.
         public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
         {
             if (destinationType == typeof(string))
             {
-                string result = null;
-                int priority = Int32.MaxValue;
+                Type valueType = value.GetType();
+                string valueStr = value.ToString();
+                string cacheKey = culture.ThreeLetterISOLanguageName + "-" + valueType.FullName + "-" + valueStr;
 
-                foreach (Attribute attribute in NameAliasAttribute.GetMemberNames(value.GetType(), value.ToString(), culture.ThreeLetterISOLanguageName))
+                if (cache.ContainsKey(cacheKey))
                 {
-                    NameAliasAttribute naa = (NameAliasAttribute)attribute;
-                    if ((naa.CultureName == culture.ThreeLetterISOLanguageName) && (naa.Priority < priority)) result = naa.Name;
+                    return cache[cacheKey];
                 }
+                else
+                {
 
-                if (result != null) return result;
+                    string result = null;
+                    int priority = Int32.MaxValue;
+
+                    foreach (Attribute attribute in NameAliasAttribute.GetNames(valueType, valueStr, culture.ThreeLetterISOLanguageName))
+                    {
+                        NameAliasAttribute naa = (NameAliasAttribute)attribute;
+                        if ((naa.CultureName == culture.ThreeLetterISOLanguageName) && (naa.Priority < priority))
+                        {
+                            result = naa.Name;
+                            priority = naa.Priority;
+                        }
+                    }
+
+                    if (result != null)
+                    {
+                        cache.Add(cacheKey, result);
+
+                        return result;
+                    }
+                }
 
                 throw new CultureNotSupportedException(value.GetType().Name, culture.ThreeLetterISOLanguageName);
             }

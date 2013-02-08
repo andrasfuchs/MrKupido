@@ -26,7 +26,7 @@ namespace MrKupido.Processor.Model
                 EquipmentCommand ec = new EquipmentCommand();
 
                 ec.Method = mi;
-                ec.Names = NameAliasAttribute.GetMethodNames(equipmentClass, mi.Name);
+                ec.Names = NameAliasAttribute.GetNames(equipmentClass, mi.Name).Select(att => att.Name).ToArray();
 
                 commands.Add(ec);
             }

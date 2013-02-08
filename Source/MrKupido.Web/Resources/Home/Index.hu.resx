@@ -117,31 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AllRightsReserved" xml:space="preserve">
-    <value>All rights reserved</value>
-  </data>
-  <data name="Disclaimer" xml:space="preserve">
-    <value>disclaimer</value>
-  </data>
-  <data name="Homepage" xml:space="preserve">
-    <value>home</value>
-  </data>
   <data name="PageTitle" xml:space="preserve">
-    <value>Mr. Kupido</value>
-  </data>
-  <data name="Profile" xml:space="preserve">
-    <value>my profile</value>
-  </data>
-  <data name="ReviewButton" xml:space="preserve">
-    <value>Send</value>
-  </data>
-  <data name="ReviewPlaceholder" xml:space="preserve">
-    <value>(at least 15 characters) -</value>
-  </data>
-  <data name="ReviewText" xml:space="preserve">
-    <value>Your feedback:</value>
-  </data>
-  <data name="Settings" xml:space="preserve">
-    <value>settings</value>
+    <value>Ördögien finom</value>
   </data>
 </root>

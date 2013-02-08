@@ -41,8 +41,6 @@
                     </div>
                     <div class="flag">
                         <a href="#">
-                            @*<img class="dogear_hidden" runat="server" src="~/Content/svg/icon_dogear_selected.svg" width="31px" height="31px" />
-                            <img class="dogear" runat="server" src="~/Content/svg/icon_dogear.svg" width="31px" height="31px" />*@
                             <img class="flag" runat="server" src="~/Content/svg/icon_flag.svg" width="40px" height="23px" />
                         </a>
                     </div>
@@ -114,17 +112,33 @@
                         {
                             <img runat="server" src="~/Content/svg/clock_60.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
                         }
+                        else if (rsri[i].NetTime >= 52)
+                        {
+                            <img runat="server" src="~/Content/svg/clock_52.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
+                        }
                         else if (rsri[i].NetTime >= 45)
                         {
                             <img runat="server" src="~/Content/svg/clock_45.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
                         }
-                        else if (rsri[i].NetTime >= 60)
+                        else if (rsri[i].NetTime >= 37)
+                        {
+                            <img runat="server" src="~/Content/svg/clock_37.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
+                        }
+                        else if (rsri[i].NetTime >= 30)
                         {
                             <img runat="server" src="~/Content/svg/clock_30.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
+                        }
+                        else if (rsri[i].NetTime >= 22)
+                        {
+                            <img runat="server" src="~/Content/svg/clock_22.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
                         }
                         else if (rsri[i].NetTime >= 15)
                         {
                             <img runat="server" src="~/Content/svg/clock_15.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
+                        }
+                        else if (rsri[i].NetTime >= 7)
+                        {
+                            <img runat="server" src="~/Content/svg/clock_07.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
                         }
                         else if (rsri[i].NetTime > 0)
                         {
@@ -144,7 +158,8 @@
                             <span>@rsri[i].NetTime.ToString("00")</span>
                         }
                     </div>
-                    } else 
+                    }
+                    else
                     {
                         <div class="commerciallogo">
                             <img runat="server" src="~/Content/images/brand_@(rsri[i].CommercialIconFilename).png" />
@@ -156,7 +171,8 @@
                     @if (rsri[i].CommercialInfo != null)
                     {
                         @rsri[i].CommercialInfo
-                    } else 
+                    }
+                    else
                     {
                         @rsri[i].MainIngredients
                     }

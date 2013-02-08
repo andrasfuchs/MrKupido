@@ -129,6 +129,15 @@
   <data name="Profile" xml:space="preserve">
     <value>profilom</value>
   </data>
+  <data name="ReviewButton" xml:space="preserve">
+    <value>Vélemény elküldése</value>
+  </data>
+  <data name="ReviewPlaceholder" xml:space="preserve">
+    <value>(minimum 15 karakter) -</value>
+  </data>
+  <data name="ReviewText" xml:space="preserve">
+    <value>Ird ide, hogy szerinted mi nem stimmel az oldalon:</value>
+  </data>
   <data name="Settings" xml:space="preserve">
     <value>beállítások</value>
   </data>

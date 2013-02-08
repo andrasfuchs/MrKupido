@@ -59,7 +59,7 @@ namespace MrKupido.Library.Attributes
                     }
                 }
 
-                memberLevelEngNames = NameAliasAttribute.GetMemberNames(mi.DeclaringType, mi.Name, "eng");
+                memberLevelEngNames = NameAliasAttribute.GetNames(mi.DeclaringType, mi.Name, "eng");
                 mi = mi.DeclaringType;
             }
 
@@ -71,7 +71,8 @@ namespace MrKupido.Library.Attributes
                     classLevelIconUri = attr;
                 }
             }
-            classLevelEngNames = NameAliasAttribute.GetNameAliases(mi, "eng");
+            
+            classLevelEngNames = NameAliasAttribute.GetNames((Type)mi, null, "eng");
             if (classLevelEngNames.Length == 0)
             {
                 Trace.TraceWarning("Class '{0}' does not have an english name defined.", mi.Name);

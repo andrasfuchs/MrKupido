@@ -97,6 +97,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -215,6 +216,7 @@
     <Compile Include="Models\RecipeSearchQueryResults.cs" />
     <Compile Include="Models\RecipeSearchResultItem.cs" />
     <Compile Include="Models\RecipeSearchResult.cs" />
+    <Compile Include="Models\SessionExtension.cs" />
     <Compile Include="Models\UserJSONStringify.cs" />
     <Compile Include="Models\UserState.cs" />
     <Compile Include="Models\WikiLocationActicle.cs" />
@@ -236,6 +238,11 @@
     </Compile>
     <Compile Include="Resources\Account\LogIn.Designer.cs">
       <DependentUpon>LogIn.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Home\Index.hu.Designer.cs">
+      <DependentUpon>Index.hu.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -840,6 +847,10 @@
     <EmbeddedResource Include="Resources\Account\LogIn.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>LogIn.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Home\Index.hu.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.hu.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Home\NotSupportedBrowser.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

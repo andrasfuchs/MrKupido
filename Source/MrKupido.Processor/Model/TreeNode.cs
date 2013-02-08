@@ -9,6 +9,7 @@ using MrKupido.Library.Attributes;
 using MrKupido.DataAccess;
 using MrKupido.Library;
 using System.Web.Script.Serialization;
+using MrKupido.Utils;
 
 namespace MrKupido.Processor.Model
 {
@@ -35,7 +36,25 @@ namespace MrKupido.Processor.Model
         public bool IsSelected { get; set; }
         public bool IsDisabled { get; set; }
         public string[] IconUrls { get; private set; }
-        public string IconUrl { get; set; }
+
+        private string iconUrl;
+        public string IconUrl
+        {
+            get
+            {
+                if (this.iconUrl == null)
+                {
+                    this.iconUrl = PathUtils.GetActualUrl(this.IconUrls);
+                }
+
+                return this.iconUrl;
+            }
+
+            private set
+            {
+                this.iconUrl = value;
+            }
+        }
 
         public TreeNode(Type nodeClass, string languageISO)
         {
@@ -45,7 +64,7 @@ namespace MrKupido.Processor.Model
             ClassFullName = nodeClass.FullName;
             Children = new TreeNode[0];
 
-            string name = NameAliasAttribute.GetDefaultName(nodeClass, LanguageISO);
+            string name = NameAliasAttribute.GetName(nodeClass, languageISOCode: LanguageISO);
             
             if (String.IsNullOrEmpty(name))
             {

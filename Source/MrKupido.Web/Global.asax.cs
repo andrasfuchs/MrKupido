@@ -6,9 +6,9 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using MrKupido.Web.Models;
 using System.Reflection;
 using MrKupido.Utils;
+using MrKupido.Web.Models;
 
 namespace MrKupido.Web
 {
@@ -36,7 +36,33 @@ namespace MrKupido.Web
                 || Request.AppRelativeCurrentExecutionFilePath.Contains("/Scripts/")
                 || Request.AppRelativeCurrentExecutionFilePath.Contains("/bundles/")) return;
 
-            CultureInitializer.InitializeCulture(Request);
+            HttpContextBase currentContext = new HttpContextWrapper(HttpContext.Current);
+            RouteData routeData = RouteTable.Routes.GetRouteData(currentContext);
+            
+            // check if the language is present and supported
+            string language = routeData.Values["language"].ToString();
+
+            if (language == "xxx")
+            {
+                // current language
+                language = System.Threading.Thread.CurrentThread.CurrentCulture.ThreeLetterISOLanguageName;
+            }
+
+            if ((language != "eng") && (language != "hun"))
+            {
+                // default language
+                language = "eng";
+            }
+
+            if (language != routeData.Values["language"].ToString())
+            {
+                routeData.Values["language"] = language;
+                Response.RedirectToRoute(routeData.Values);
+                return;
+            }
+            //
+
+            CultureInitializer.InitializeCulture(Request, language);
 
             if (!(Request.Url.AbsoluteUri.Contains("notsupportedbrowser") || Request.Url.AbsoluteUri.Contains("IgnoreOldBrowser")))
             {
@@ -79,27 +105,34 @@ namespace MrKupido.Web
                     obd.UpdateUrl = "https://play.google.com/store/apps/details?id=org.mozilla.firefox";
                 }
 
-                //lblOldBrowser.Text = String.Format(lblOldBrowser.Text, browser.Browser + " " + browser.Version, obd.UpdateURL);
                 if ((obd.UpdateUrl != null) && (Session != null) && (Session["IgnoreOldBrowser"] == null))
                 {
-                    Response.RedirectToRoute("OldBrowser", new { browserName = obd.BrowserName, browserVersion = obd.BrowserVersion, returnURL = obd.ReturnUrl, updateURL = obd.UpdateUrl });
+                    routeData.Values["controller"] = "Home";
+                    routeData.Values["action"] = "NotSupportedBrowser";
+                    routeData.Values.Add("browserName", obd.BrowserName);
+                    routeData.Values.Add("browserVersion", obd.BrowserVersion);
+                    routeData.Values.Add("returnURL", obd.ReturnUrl);
+                    routeData.Values.Add("updateURL", obd.UpdateUrl);
+
+                    Response.RedirectToRoute(routeData.Values);
+                    return;
                 }
             }
 
-            if ((Session != null) && (Session["CurrentUser"] == null) && !Request.Url.AbsoluteUri.ToLower().Contains("/account/login") && !Request.Url.AbsoluteUri.ToLower().Contains("/home/notsupportedbrowser"))
-            {
-                if (MrKupido.Web.Controllers.BaseController.CurrentSessions.ContainsKey(Session.SessionID) && MrKupido.Web.Controllers.BaseController.CurrentSessions[Session.SessionID].User != null)
-                {
-                    Model.User user = MrKupido.Web.Controllers.BaseController.CurrentSessions[Session.SessionID].User;
-                    Session["CurrentUser"] = user;
-                    Session["CurrentUser.DisplayName"] = !String.IsNullOrEmpty(user.NickName) ? user.NickName : user.FullName;
-                    Session["CurrentUser.AvatarUrl"] = !String.IsNullOrEmpty(user.AvatarUrl) ? user.AvatarUrl : "Content/svg/icon_avatar.svg";
-                }
-                else
-                {
-                    Response.RedirectToRoute("AccountManagement", new { action = "Login", ReturnUrl = Request.HttpMethod != "GET" ? "" : Request.Url.AbsolutePath });
-                }
-            }
+            //if ((Session != null) && (Session["CurrentUser"] == null) && !Request.Url.AbsoluteUri.ToLower().Contains("/account/login") && !Request.Url.AbsoluteUri.ToLower().Contains("/home/notsupportedbrowser"))
+            //{
+            //    if (MrKupido.Web.Controllers.BaseController.CurrentSessions.ContainsKey(Session.SessionID) && MrKupido.Web.Controllers.BaseController.CurrentSessions[Session.SessionID].User != null)
+            //    {
+            //        Model.User user = MrKupido.Web.Controllers.BaseController.CurrentSessions[Session.SessionID].User;
+            //        Session.CurrentUser(); //["CurrentUser"] = user;
+            //        Session["CurrentUser.DisplayName"] = !String.IsNullOrEmpty(user.NickName) ? user.NickName : user.FullName;
+            //        Session["CurrentUser.AvatarUrl"] = !String.IsNullOrEmpty(user.AvatarUrl) ? user.AvatarUrl : "Content/svg/icon_avatar.svg";
+            //    }
+            //    else
+            //    {
+            //        Response.RedirectToRoute("AccountManagement", new { action = "Login", ReturnUrl = Request.HttpMethod != "GET" ? "" : Request.Url.AbsolutePath });
+            //    }
+            //}
         }
 
         protected void Application_Error(object sender, EventArgs e)

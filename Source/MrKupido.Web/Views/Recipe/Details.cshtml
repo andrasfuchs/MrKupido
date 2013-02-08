@@ -10,7 +10,7 @@
 
             $(".portionselector-trigger").on("click", function (e) {
                 $("#portionselector").toggle();
-                refreshIngredients();
+                refreshAll();
                 e.preventDefault();
             });
         });
@@ -74,25 +74,65 @@
     </script>
 
     <script type="text/javascript">
-        function refreshIngredients() {
+        function refreshAll() {
+            var portion = $("#portionslider").slider("value");
+            var multiplier = parseInt($("#portioncountervalue").html(), 10);
+
+            $.ajax({
+                url: '@Url.Action("GetNewStrings", "Recipe")',
+                type: "POST",
+                dataType: "html",
+                data: {
+                    portion: portion,
+                    multiplier: multiplier
+                },
+                success: function (json) {
+                    var data = $.parseJSON(json);
+                    $('div#equipmentlist h3').html(data[0]);
+                    $('div#ingredientlist h3').html(data[1]);
+                    $('div#directionlist h3').html(data[2]);
+                }, // success
+                error: function (xhr, textStatus, errorThrown) {
+                }
+            });   // ajax
+
             $.ajax({
                 url: '@Url.Action("GetIngredients", "Recipe")',
                 type: "POST",
                 dataType: "html",
                 data: {
-                    portion: (parseInt($("#portioncountervalue").html(), 10) * $("#portionslider").slider("value"))
+                    portion: portion,
+                    multiplier: multiplier
                 },
                 success: function (data) {
                     $('div#_RecipeIngredients').html(data);
                 }, // success
                 error: function (xhr, textStatus, errorThrown) {
-                    //alert("Error");
-                    //alert(xhr);
-                    //alert(textStatus);
-                    //alert(errorThrown);
+                    console.log("Error");
+                    console.log(xhr);
+                    console.log(textStatus);
+                    console.log(errorThrown);
                 }
             });   // ajax
-            $("#query").focus();
+
+            $.ajax({
+                url: '@Url.Action("GetDirections", "Recipe")',
+                type: "POST",
+                dataType: "html",
+                data: {
+                    portion: portion,
+                    multiplier: multiplier
+                },
+                success: function (data) {
+                    $('div#_RecipeDirections').html(data);
+                }, // success
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("Error");
+                    console.log(xhr);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                }
+            });   // ajax
         }
     </script>
 }
@@ -102,9 +142,6 @@
 </header>
 <hr class="single" />
 <article>
-    <div id="tipsandticks" class="tipsandticks">
-    </div>
-    <hr class="double" />
     <details id="recipe" open class="alwaysopen">
         <summary>
             <h1>
@@ -134,7 +171,7 @@
         <hr />
         <div id="ingredientlist">
             <h2>@MrKupido.Web.Resources.Recipe.Details.Ingredients</h2>
-            <h3 class="portionselector-trigger">@String.Format(MrKupido.Web.Resources.Recipe.Details.PortionHint, 3)</h3>
+            <h3 class="portionselector-trigger">@String.Format(MrKupido.Web.Resources.Recipe.Details.PortionHint, 1)</h3>
             <div id="portionselectorwrapper">
                 <div id="portionselector">
                     <div id="portionsliderblock">

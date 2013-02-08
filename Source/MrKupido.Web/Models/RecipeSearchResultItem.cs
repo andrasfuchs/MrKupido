@@ -9,6 +9,7 @@ using System.Text;
 using MrKupido.Library.Attributes;
 using MrKupido.Utils;
 using System.Threading;
+using System.Diagnostics;
 
 namespace MrKupido.Web.Models
 {
@@ -52,15 +53,19 @@ namespace MrKupido.Web.Models
             if (String.IsNullOrEmpty(rtn.ShortName)) throw new MrKupidoException("Recipe '{0}' should have a ShortName defined.", rtn.UniqueName);
 
             this.DisplayName = Char.ToUpper(rtn.ShortName[0]) + rtn.ShortName.Substring(1);
+            if (this.DisplayName.Length > 40)
+            {
+                Trace.TraceWarning("The display name of the recipe should be not longer than 40 characters. '{0}' is longer than that.", this.DisplayName);
+            }
+
             this.UniqueName = rtn.UniqueName;
             this.ParentUniqueName = rtn.Parent == null ? null : rtn.Parent.UniqueName;
 
             this.SubVersions = TreeNode.GetDescendantCount(rtn);
-            if (rtn.IconUrl == null) rtn.IconUrl = PathUtils.GetActualUrl(rtn.IconUrls);
             this.IconUrl = rtn.IconUrl;
 
             StringBuilder sb = new StringBuilder();
-            foreach (IIngredient i in rtn.GetIngredients(1.0f))
+            foreach (IIngredient i in rtn.GetIngredients(1.0f, 1))
             {
                 if ((this.MainCategory == ShoppingListCategory.Unknown) && (i.Category.HasValue))
                 {
@@ -78,7 +83,7 @@ namespace MrKupido.Web.Models
                 this.IconUrl = PathUtils.GetActualUrl(IconUriFragmentAttribute.GetUrls(this.MainCategory.GetType(), "~/Content/svg/cat_{0}.svg", this.MainCategory.ToString()));
             }
 
-            IDirection[] directions = rtn.GetDirections(1.0f);
+            IDirection[] directions = rtn.GetDirections(1.0f, 1);
 
             this.TotalTime = (int)directions.Select(d => d.TimeToComplete).Select(t => t.TotalMinutes).Sum();
             this.NetTime = (int)directions.Where(d => !d.IsPassive).Select(d => d.TimeToComplete).Select(t => t.TotalMinutes).Sum();

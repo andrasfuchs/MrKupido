@@ -1,4 +1,5 @@
-﻿@section Scripts {
+﻿@using MrKupido.Web.Models
+@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
 
@@ -211,38 +212,6 @@
         } else {
             document.querySelector('#location').value = knownLocation;
         }
-
-
-        // show tips and tricks
-        $.ajax({
-            url: '@Url.Action("GetTipsNTricks", "Home")',
-            type: "POST",
-            dataType: "json",
-            data: {},
-            success: function (tipsAndTricksText) {
-                var htmlStr = "";
-
-                if (tipsAndTricksText[0] == "B") {
-                    htmlStr += "<img runat=\"server\" src=\"./Content/svg/tnt_idea.svg\" width=\"24\" height=\"32\" />";
-                } else if (tipsAndTricksText[0] == "Q") {
-                    htmlStr += "<img runat=\"server\" src=\"./Content/svg/tnt_question.svg\" width=\"24\" height=\"32\" />";
-                } else if (tipsAndTricksText[0] == "S") {
-                    htmlStr += "<img runat=\"server\" src=\"./Content/svg/tnt_smile.svg\" width=\"24\" height=\"32\" />";
-                } else if (tipsAndTricksText[0] == "E") {
-                    htmlStr += "<img runat=\"server\" src=\"./Content/svg/tnt_exclamation.svg\" width=\"24\" height=\"32\" />";
-                }
-
-                htmlStr += "<span>";
-                htmlStr += tipsAndTricksText.substring(1);
-                htmlStr += "</span>";
-
-                $("#tipsandticks").html(htmlStr);
-                $("#tipsandticks").show();
-            }, // success
-            error: function (xhr, textStatus, errorThrown) {
-                $("#tipsandticks").hide();
-            }
-        });
     });
 
         function geolocationSuccess(position) {
@@ -290,14 +259,14 @@
     <img runat="server" src="~/Content/svg/logo_mrkupido.svg" alt="Mr. Kupido" width="200" height="152" />
 </a>
 <div class="userbar">
-    @if (Session["CurrentUser"] == null)
+    @if (Session.GetCurrentUser() == null)
     {
         <span id="login"><a runat="server" href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/Account/LogIn">@MrKupido.Web.Resources.Shared.SearchHeader.Login</a></span>
     }
-    @if (Session["CurrentUser"] != null)
+    @if (Session.GetCurrentUser() != null)
     {
-        <span id="name"><a runat="server" href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/Account/Profile">@Session["CurrentUser.DisplayName"]</a></span><span id="messages" style="display: none">0</span>
-        <img runat="server" src="@Session["CurrentUser.AvatarUrl"]" alt="Avatar" width="51" height="51" />
+        <span id="name"><a runat="server" href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/Account/Profile">@Session.GetCurrentUserDisplayName()</a></span><span id="messages" style="display: none">0</span>
+        <img runat="server" src="@Session.GetCurrentUserAvatarUrl()" alt="Avatar" width="51" height="51" />
         <img runat="server" id="menu-trigger" src="~/Content/svg/icon_menutrigger.svg" alt="Menu" width="11" height="9" />
         <nav id="menu-wrap">
             <ul id="usermenu">
@@ -313,7 +282,7 @@
                 <li><a href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/ingredient/trees">@MrKupido.Web.Resources.Shared.SearchHeader.Taxonomy</a></li>
                 <li><a href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/import/recipelist">@MrKupido.Web.Resources.Shared.SearchHeader.Import</a></li>
                 <li><a href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/help/firsttime">@MrKupido.Web.Resources.Shared.SearchHeader.Help</a></li>
-                <li><a href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/account/login">@MrKupido.Web.Resources.Shared.SearchHeader.Logout</a></li>
+                <li><a href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/account/logout">@MrKupido.Web.Resources.Shared.SearchHeader.Logout</a></li>
             </ul>
         </nav>
 

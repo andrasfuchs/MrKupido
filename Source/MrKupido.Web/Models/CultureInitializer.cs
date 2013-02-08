@@ -19,12 +19,22 @@ namespace MrKupido.Web.Models
 {
     public static class CultureInitializer
     {
-        public static string InitializeCulture(HttpRequest request)
+        public static string InitializeCulture(HttpRequest request, string routeLanguage)
         {
             string cultureName = null;
 
-            if (request.AppRelativeCurrentExecutionFilePath.Contains("/hun")) cultureName = "hu-HU";
-            if (request.AppRelativeCurrentExecutionFilePath.Contains("/eng")) cultureName = "en-US";
+            if (routeLanguage == "hun")
+            {
+                cultureName = "hu-HU";
+            }
+            else if (routeLanguage == "eng")
+            {
+                cultureName = "en-US";
+            }
+            else
+            {
+                cultureName = "en-US";
+            }
 
             if (String.IsNullOrEmpty(cultureName))
             {

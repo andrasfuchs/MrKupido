@@ -70,7 +70,16 @@ namespace MrKupido.Web.Models
 
         public RecipeSearchResult(RecipeTreeNode[] results)
         {
-            Items = results.Select(r => new RecipeSearchResultItem(r)).ToList();
+            //Items = results.Select(r => new RecipeSearchResultItem(r)).ToList();
+            
+            if (Items == null) Items = new List<RecipeSearchResultItem>();
+            
+            Items.Clear();
+            
+            foreach (RecipeTreeNode rtn in results)
+            {
+                Items.Add(new RecipeSearchResultItem(rtn));
+            }
 
             // TODO: build category groups
         }
