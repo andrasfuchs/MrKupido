@@ -2,9 +2,9 @@
 @{
     ViewBag.Title = MrKupido.Web.Resources.Import.Recipe.PageTitle + " - " + MrKupido.Web.Resources.Shared.Layout.PageTitle; ;
 }
-
-@section scripts {
-<script type="text/javascript">
+@using MrKupido.Web.Models
+@this.ScriptBlock(
+@<script type="text/javascript">
 
     var uniqueName = '@(((MrKupido.Model.ImportedRecipe)Model[0]).UniqueName)';
     var $textChanged = false;
@@ -58,7 +58,8 @@
         });
     };
 </script>
-}
+)
+
 <header class="nosearch">
     <a runat="server" href="~/">
         <img runat="server" src="~/Content/svg/logo_mrkupido_wide.svg" alt="Mr. Kupido" width="600" height="157" />
@@ -68,8 +69,7 @@
 
 <details id="importrecipe" open class="alwaysopen">
     <summary>
-        <h1>
-            Recept importálás</h1>
+        <h1>Recept importálás</h1>
         <hr class="single" />
         <h3>
             @{ string name = ((MrKupido.Model.ImportedRecipe)Model[0]).DisplayName;}
@@ -77,29 +77,25 @@
         <hr class="single" />
     </summary>
     <div id="ingredientlist" class="boxed">
-        <h2>
-            1. Módosítsd a hozzávalók listáját</h2>
+        <h2>1. Módosítsd a hozzávalók listáját</h2>
         <div id="_IngredientList">
             @{ Html.RenderPartial("_IngredientList", Model[1]); }
         </div>
     </div>
     <div id="ingredienttable" class="boxed">
-        <h2>
-            2. Ellenőrízd, hogy minden összetevő helyesen szerepel-e a táblában</h2>
+        <h2>2. Ellenőrízd, hogy minden összetevő helyesen szerepel-e a táblában</h2>
         <div id="_IngredientTable">
             @{ Html.RenderPartial("_IngredientTable", null, new ViewDataDictionary()); }
         </div>
     </div>
     <div id="originalrecipe" class="boxed">
-        <h2>
-            3. A recept eredeti szövege</h2>
+        <h2>3. A recept eredeti szövege</h2>
 
         <div id="_OriginalRecipe">
             @{ Html.RenderPartial("_OriginalRecipe", Model[2]); }
         </div>
     </div>
-        <h2>
-            4. Ird át úgy a receptet, hogy ne legyen benne értelmezhetetlen kifejezés</h2>
+    <h2>4. Ird át úgy a receptet, hogy ne legyen benne értelmezhetetlen kifejezés</h2>
     <div id="recipeeditor" class="boxed">
         <div id="_RecipeEditor">
             @{ Html.RenderPartial("_RecipeEditor", Model[3]); }
@@ -111,14 +107,13 @@
         </div>
     </div>
     <div id="recipecode" class="boxed">
-        <h2>
-            5. A generált programkód, amit be lehet illeszteni</h2>
+        <h2>5. A generált programkód, amit be lehet illeszteni</h2>
         <div id="_RecipeCode">
             @{ Html.RenderPartial("_RecipeCode", null, new ViewDataDictionary()); }
         </div>
     </div>
     <hr class="single" />
     <div class="formbuttons">
-        <input id="savebutton" type="button" title="Save" value="Save changes" onclick="javascript:saveRecipe();"/>
+        <input id="savebutton" type="button" title="Save" value="Save changes" onclick="javascript: saveRecipe();" />
     </div>
 </details>

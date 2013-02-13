@@ -24,9 +24,12 @@ namespace MrKupido.Web.Controllers
 
             Session["SelectedRecipeId"] = null;
             RecipeTreeNode rtn = Cache.Recipe[id];
-            if (rtn == null) return RedirectToAction("Index", "HomeController");
+            if (rtn == null)
+            {
+                return RedirectToRoute("Default", new { language = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName, controller = "Home", action = "RecipeNotAvailableYet", lan = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName, un = id });
+            }
             Session["SelectedRecipeId"] = id;
-
+            
             result[0] = rtn;
             result[1] = rtn.GetTags();
             result[2] = rtn.GetEquipments(1.0f, 1);
@@ -65,7 +68,6 @@ namespace MrKupido.Web.Controllers
                 }
             }
         }
-
 
         [HttpPost]
         public JsonResult GetNewStrings(float portion, int multiplier)

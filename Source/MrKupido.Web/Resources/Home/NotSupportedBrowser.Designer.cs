@@ -61,11 +61,38 @@ namespace MrKupido.Web.Resources.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to I&apos;ll take the risk, let me in &gt;&gt;.
+        /// </summary>
+        public static string IgnoreWarningButton {
+            get {
+                return ResourceManager.GetString("IgnoreWarningButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unsupported browser.
         /// </summary>
         public static string PageTitle {
             get {
                 return ResourceManager.GetString("PageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update your browser.
+        /// </summary>
+        public static string WarningHead {
+            get {
+                return ResourceManager.GetString("WarningHead", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please update your browser by clicking on one of the buttons below!.
+        /// </summary>
+        public static string WarningSummary {
+            get {
+                return ResourceManager.GetString("WarningSummary", resourceCulture);
             }
         }
     }

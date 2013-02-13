@@ -4,9 +4,6 @@
 main color light        mcl         #ebe0d5
 main color medium       mcm         #cdb8ab
 main color dark         mcd         #553e31
-frame color light       fcl         #f4ede5
-frame color dark        fcd         #e4d7cd
-frame color content     fcc         #d2bfb3
 background              bgc         #fffcf5
 
 */
@@ -120,16 +117,20 @@ header, footer, nav, section {
                 vertical-align: top;
             }
 
-        header .userbar img#menu-trigger {
-            cursor: pointer;
-            display: inline-block;
-            vertical-align: super;
-            opacity: 0.4;
-        }
+    header img#avatar {
+        margin-left: -53px;
+    }
 
-            header .userbar img#menu-trigger:hover {
-                opacity: 1.0;
-            }
+    header .userbar img#menu-trigger {
+        cursor: pointer;
+        display: inline-block;
+        vertical-align: super;
+        opacity: 0.4;
+    }
+
+        header .userbar img#menu-trigger:hover {
+            opacity: 1.0;
+        }
 
     /* ---------- usermenu ---------------- */
 
@@ -498,14 +499,20 @@ details li.empty {
 }
 
 details li.disabled {
-    -moz-opacity: 0.3;
-    opacity: 0.3;
+    /*-moz-opacity: 0.3;
+    opacity: 0.3;*/
+    border-color: #ebe0d5;
 }
 
     details li.disabled a {
         pointer-events: none;
         cursor: default;
     }
+
+details li.loading {
+    background-color: #ebe0d5;
+    border-width: 0px;
+}
 
 details li.text {
     display: block;
@@ -628,7 +635,7 @@ details#recipe div#directionlist li {
             font-weight: bold;
             width: 32px;
             text-align: center;
-            z-index: 3;            
+            z-index: 3;
             -webkit-text-shadow: 0px 0px 0 #fffcf5, -1px -1px 0 #fffcf5, 1px -1px 0 #fffcf5, -1px 1px 0 #fffcf5, 1px 1px 0 #fffcf5;
             text-shadow: 0px 0px 0 #fffcf5, -1px -1px 0 #fffcf5, 1px -1px 0 #fffcf5, -1px 1px 0 #fffcf5, 1px 1px 0 #fffcf5;
         }
@@ -823,20 +830,20 @@ div#profile details li {
 
     div#profile details li div.label {
         float: left;
-        width: 380px;
+        width: 300px;
         text-align: right;
     }
 
     div#profile details li div.input {
         float: right;
-        width: 380px;
+        width: 460px;
         text-align: left;
     }
 
         div#profile details li div.input input {
             -moz-appearance: none;
             -webkit-appearance: none;
-            width: 300px;
+            width: 380px;
             font-size: 20px;
             font-family: Cardo, Sans-Serif;
             vertical-align: super;
@@ -858,6 +865,7 @@ div#profile details li {
                 color: /*mcd*/ #553e31;
                 background-color: /*mcm*/ #cdb8ab;
             }
+
 
 details li div.title {
     display: inline-block;
@@ -1382,6 +1390,10 @@ div.css-treeview img {
         vertical-align: bottom;
     }
 
+.ui-helper-hidden-accessible {
+    display: none;
+}
+
 /* ---------------- search input ------------------------ */
 
 input[type="search"]::-webkit-search-cancel-button {
@@ -1416,6 +1428,7 @@ ul#ingredientlist li.ingredientlistitem {
     max-width: 240px;
 }
 
+    div#profile div#language input,
     ul#ingredientlist li.ingredientlistitem input {
         padding: 0;
         margin: 0;
@@ -1426,34 +1439,35 @@ ul#ingredientlist li.ingredientlistitem {
         left: 0;
         opacity: 0;
     }
-
+    
+    div#profile div#language label,
     ul#ingredientlist li.ingredientlistitem label {
         float: left;
         padding-left: 24px;
+        padding-right: 10px;
     }
 
-    ul#ingredientlist li.ingredientlistitem input + label {
-        /*background: url('../Content/images/gr_custom-inputs.png') 0 -1px no-repeat;*/
-        background: url('../Content/svg/tick_off.svg') 0 0 no-repeat;
-        height: 32px;
-    }
+/* Checked styles */
+input[type=radio]:checked + label,
+input[type=checkbox]:checked + label {
+    background-image: url('../Content/svg/tick_on.svg');
+}
 
-    /* Checked styles */
-    /*ul#ingredientlist li.ingredientlistitem input[type=radio]:checked + label 							{ background-position: 0 -241px; }*/
-    ul#ingredientlist li.ingredientlistitem input[type=checkbox]:checked + label {
+    input[type=radio]:hover:checked + label,
+    input[type=radio]:focus:checked + label,
+    input[type=radio]:checked + label:hover,
+    input[type=radio]:focus:checked + label,
+    input[type=checkbox]:hover:checked + label,
+    input[type=checkbox]:focus:checked + label,
+    input[type=checkbox]:checked + label:hover,
+    input[type=checkbox]:focus:checked + label {
         background-image: url('../Content/svg/tick_on.svg');
     }
 
-        ul#ingredientlist li.ingredientlistitem input[type=checkbox]:hover:checked + label,
-        ul#ingredientlist li.ingredientlistitem input[type=checkbox]:focus:checked + label,
-        ul#ingredientlist li.ingredientlistitem input[type=checkbox]:checked + label:hover,
-        ul#ingredientlist li.ingredientlistitem input[type=checkbox]:focus:checked + label {
-            background-image: url('../Content/svg/tick_on.svg');
-        }
-/*ul#ingredientlist li.ingredientlistitem input[type=radio]:hover:checked + label,
-ul#ingredientlist li.ingredientlistitem input[type=radio]:focus:checked + label,
-ul#ingredientlist li.ingredientlistitem input[type=radio]:checked + label:hover,
-ul#ingredientlist li.ingredientlistitem input[type=radio]:focus:checked + label 						{ background-position: 0 -261px; }*/
+input + label {
+    background: url('../Content/svg/tick_off.svg') 0 0 no-repeat;
+    height: 32px;
+}
 
 /* Hover & Focus styles */
 /*ul#ingredientlist li.ingredientlistitem input[type=checkbox]:hover + label,

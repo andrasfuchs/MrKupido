@@ -1,19 +1,5 @@
 ﻿@model MrKupido.Web.Models.RecipeSearchResultItem[]
-
-<script type="text/javascript">
-
-    $(document).ready(function () {
-        $('div.resultbox').hover(
-            function () {
-                $(this).find("div.dogear img:first").removeClass("dogear dogear_hidden").addClass("dogear");
-                $(this).find("div.dogear img:last").removeClass("dogear dogear_hidden").addClass("dogear_hidden");
-            }, function () {
-                $(this).find("div.dogear img:first").removeClass("dogear dogear_hidden").addClass("dogear_hidden");
-                $(this).find("div.dogear img:last").removeClass("dogear dogear_hidden").addClass("dogear");
-            });
-    });
-</script>
-
+@using MrKupido.Web.Models
 <ul>
     @{MrKupido.Web.Models.RecipeSearchResultItem[] rsri = (Model == null ? new MrKupido.Web.Models.RecipeSearchResultItem[0] : Model);}
     @for (int i = 0; i < rsri.Length; i++)
@@ -26,14 +12,14 @@
                     </div>
                     <div class="title">
                         <span class="titlecontent">
-                                
+
                             <a runat="server" href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/@(System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName == "hun" ? "recept" : "recipe")/@rsri[i].UniqueName" class='@(rsri[i].IsImplemented ? "enabled" : "disabled")'>
 
-                            @rsri[i].DisplayName
-                            
+                                @rsri[i].DisplayName
+
                             </a>
-                            
-                            @if (rsri[i].IsHidden) 
+
+                            @if (rsri[i].IsHidden)
                             { 
                                 <span>*</span>
                             }
@@ -46,7 +32,7 @@
                     </div>
                 </div>
                 <div class="resulticons">
-@*                    @if (rsri[i].CSSClass == "commercial")
+                    @*                    @if (rsri[i].CSSClass == "commercial")
                     {
                         <img runat="server" src="~/Content/svg/type_commercial.svg" width="35px" height="35px" />
                     } else 
@@ -55,16 +41,18 @@
 
 
                     <div class="versions">
-                    @if (rsri[i].SubVersions > 0)
-                    {
-                        <a href="javascript:searchKeywordSelected(null,{item: {value:'R:@rsri[i].UniqueName'}}); doSearch();"><img runat="server" src="~/Content/svg/icon_versions.svg" width="50px" height="45px" /><span>@rsri[i].SubVersions</span></a>
-                    } else 
-                    {
-                        <img runat="server" src="~/Content/svg/icon_versions_disabled.svg" width="50px" height="45px" />
-                    }
+                        @if (rsri[i].SubVersions > 0)
+                        {
+                            <a href="javascript:searchKeywordSelected(null,{item: {value:'R:@rsri[i].UniqueName'}}); doSearch();">
+                                <img runat="server" src="~/Content/svg/icon_versions.svg" width="50px" height="45px" /><span>@rsri[i].SubVersions</span></a>
+                        }
+                        else
+                        {
+                            <img runat="server" src="~/Content/svg/icon_versions_disabled.svg" width="50px" height="45px" />
+                        }
                     </div>
-                    
-                    
+
+
                     @*}*@
 
 
@@ -98,66 +86,66 @@
                     @if (String.IsNullOrEmpty(rsri[i].CommercialIconFilename))
                     {
 
-                    if ((rsri[i].Photos != null) && (rsri[i].Photos.Length > 0))
-                    { 
+                        if ((rsri[i].Photos != null) && (rsri[i].Photos.Length > 0))
+                        { 
                         <img runat="server" src="~/Content/svg/icon_photos.svg" alt="@rsri[i].Photos.Length kép" width="40px" height="45px" />
-                    }
-                    else
-                    { 
-                        <img runat="server" src="~/Content/svg/icon_photos_disabled.svg" alt="0 kép" width="40px" height="45px" />
-                    }
-
-                    <div class="preptime">
-                        @if (rsri[i].NetTime >= 60)
-                        {
-                            <img runat="server" src="~/Content/svg/clock_60.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
-                        }
-                        else if (rsri[i].NetTime >= 52)
-                        {
-                            <img runat="server" src="~/Content/svg/clock_52.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
-                        }
-                        else if (rsri[i].NetTime >= 45)
-                        {
-                            <img runat="server" src="~/Content/svg/clock_45.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
-                        }
-                        else if (rsri[i].NetTime >= 37)
-                        {
-                            <img runat="server" src="~/Content/svg/clock_37.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
-                        }
-                        else if (rsri[i].NetTime >= 30)
-                        {
-                            <img runat="server" src="~/Content/svg/clock_30.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
-                        }
-                        else if (rsri[i].NetTime >= 22)
-                        {
-                            <img runat="server" src="~/Content/svg/clock_22.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
-                        }
-                        else if (rsri[i].NetTime >= 15)
-                        {
-                            <img runat="server" src="~/Content/svg/clock_15.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
-                        }
-                        else if (rsri[i].NetTime >= 7)
-                        {
-                            <img runat="server" src="~/Content/svg/clock_07.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
-                        }
-                        else if (rsri[i].NetTime > 0)
-                        {
-                            <img runat="server" src="~/Content/svg/clock_00.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
                         }
                         else
-                        {
-                            <img runat="server" src="~/Content/svg/clock_disabled.svg" alt="? perc" width="35px" height="35px" />
+                        { 
+                        <img runat="server" src="~/Content/svg/icon_photos_disabled.svg" alt="0 kép" width="40px" height="45px" />
                         }
 
-                        @if (rsri[i].NetTime >= 199)
-                        {
-                            <span>++</span>
-                        }
-                        else if (rsri[i].NetTime > 0)
-                        {
-                            <span>@rsri[i].NetTime.ToString("00")</span>
-                        }
-                    </div>
+                        <div class="preptime">
+                            @if (rsri[i].NetTime >= 60)
+                            {
+                                <img runat="server" src="~/Content/svg/clock_60.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
+                            }
+                            else if (rsri[i].NetTime >= 52)
+                            {
+                                <img runat="server" src="~/Content/svg/clock_52.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
+                            }
+                            else if (rsri[i].NetTime >= 45)
+                            {
+                                <img runat="server" src="~/Content/svg/clock_45.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
+                            }
+                            else if (rsri[i].NetTime >= 37)
+                            {
+                                <img runat="server" src="~/Content/svg/clock_37.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
+                            }
+                            else if (rsri[i].NetTime >= 30)
+                            {
+                                <img runat="server" src="~/Content/svg/clock_30.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
+                            }
+                            else if (rsri[i].NetTime >= 22)
+                            {
+                                <img runat="server" src="~/Content/svg/clock_22.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
+                            }
+                            else if (rsri[i].NetTime >= 15)
+                            {
+                                <img runat="server" src="~/Content/svg/clock_15.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
+                            }
+                            else if (rsri[i].NetTime >= 7)
+                            {
+                                <img runat="server" src="~/Content/svg/clock_07.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
+                            }
+                            else if (rsri[i].NetTime > 0)
+                            {
+                                <img runat="server" src="~/Content/svg/clock_00.svg" alt="@rsri[i].NetTime perc" width="35px" height="35px" />
+                            }
+                            else
+                            {
+                                <img runat="server" src="~/Content/svg/clock_disabled.svg" alt="? perc" width="35px" height="35px" />
+                            }
+
+                            @if (rsri[i].NetTime >= 199)
+                            {
+                                <span>++</span>
+                            }
+                            else if (rsri[i].NetTime > 0)
+                            {
+                                <span>@rsri[i].NetTime.ToString("00")</span>
+                            }
+                        </div>
                     }
                     else
                     {
@@ -165,7 +153,7 @@
                             <img runat="server" src="~/Content/images/brand_@(rsri[i].CommercialIconFilename).png" />
                         </div>
                     }
-                    
+
                 </div>
                 <div class="resultbody">
                     @if (rsri[i].CommercialInfo != null)
@@ -238,23 +226,23 @@
                 }
                 else if (rsri[i].Cals.Value > 4.0f)
                 {
-                        <img runat="server" src="~/Content/svg/nutlevel_5.svg" width="30px" height="50px" />
+                    <img runat="server" src="~/Content/svg/nutlevel_5.svg" width="30px" height="50px" />
                 }
                 else if (rsri[i].Cals.Value > 3.0f)
                 {
-                        <img runat="server" src="~/Content/svg/nutlevel_4.svg" width="30px" height="50px" />
+                    <img runat="server" src="~/Content/svg/nutlevel_4.svg" width="30px" height="50px" />
                 }
                 else if (rsri[i].Cals.Value > 2.0f)
                 {
-                        <img runat="server" src="~/Content/svg/nutlevel_3.svg" width="30px" height="50px" />
+                    <img runat="server" src="~/Content/svg/nutlevel_3.svg" width="30px" height="50px" />
                 }
                 else if (rsri[i].Cals.Value > 1.0f)
                 {
-                        <img runat="server" src="~/Content/svg/nutlevel_2.svg" width="30px" height="50px" />
+                    <img runat="server" src="~/Content/svg/nutlevel_2.svg" width="30px" height="50px" />
                 }
                 else
                 {
-                        <img runat="server" src="~/Content/svg/nutlevel_1.svg" width="30px" height="50px" />
+                    <img runat="server" src="~/Content/svg/nutlevel_1.svg" width="30px" height="50px" />
                 }
 
                 @if (!rsri[i].Sugar.HasValue)
@@ -263,23 +251,23 @@
                 }
                 else if (rsri[i].Sugar.Value > 4.0f)
                 {
-                        <img runat="server" src="~/Content/svg/nutlevel_5.svg" width="30px" height="50px" />
+                    <img runat="server" src="~/Content/svg/nutlevel_5.svg" width="30px" height="50px" />
                 }
                 else if (rsri[i].Sugar.Value > 3.0f)
                 {
-                        <img runat="server" src="~/Content/svg/nutlevel_4.svg" width="30px" height="50px" />
+                    <img runat="server" src="~/Content/svg/nutlevel_4.svg" width="30px" height="50px" />
                 }
                 else if (rsri[i].Sugar.Value > 2.0f)
                 {
-                        <img runat="server" src="~/Content/svg/nutlevel_3.svg" width="30px" height="50px" />
+                    <img runat="server" src="~/Content/svg/nutlevel_3.svg" width="30px" height="50px" />
                 }
                 else if (rsri[i].Sugar.Value > 1.0f)
                 {
-                        <img runat="server" src="~/Content/svg/nutlevel_2.svg" width="30px" height="50px" />
+                    <img runat="server" src="~/Content/svg/nutlevel_2.svg" width="30px" height="50px" />
                 }
                 else
                 {
-                        <img runat="server" src="~/Content/svg/nutlevel_1.svg" width="30px" height="50px" />
+                    <img runat="server" src="~/Content/svg/nutlevel_1.svg" width="30px" height="50px" />
                 }
 
                 @if (!rsri[i].Fat.HasValue)
@@ -288,23 +276,23 @@
                 }
                 else if (rsri[i].Fat.Value > 4.0f)
                 {
-                        <img runat="server" src="~/Content/svg/nutlevel_5.svg" width="30px" height="50px" />
+                    <img runat="server" src="~/Content/svg/nutlevel_5.svg" width="30px" height="50px" />
                 }
                 else if (rsri[i].Fat.Value > 3.0f)
                 {
-                        <img runat="server" src="~/Content/svg/nutlevel_4.svg" width="30px" height="50px" />
+                    <img runat="server" src="~/Content/svg/nutlevel_4.svg" width="30px" height="50px" />
                 }
                 else if (rsri[i].Fat.Value > 2.0f)
                 {
-                        <img runat="server" src="~/Content/svg/nutlevel_3.svg" width="30px" height="50px" />
+                    <img runat="server" src="~/Content/svg/nutlevel_3.svg" width="30px" height="50px" />
                 }
                 else if (rsri[i].Fat.Value > 1.0f)
                 {
-                        <img runat="server" src="~/Content/svg/nutlevel_2.svg" width="30px" height="50px" />
+                    <img runat="server" src="~/Content/svg/nutlevel_2.svg" width="30px" height="50px" />
                 }
                 else
                 {
-                        <img runat="server" src="~/Content/svg/nutlevel_1.svg" width="30px" height="50px" />
+                    <img runat="server" src="~/Content/svg/nutlevel_1.svg" width="30px" height="50px" />
                 }
 
                 @if (!rsri[i].Salt.HasValue)
@@ -313,23 +301,23 @@
                 }
                 else if (rsri[i].Salt.Value > 4.0f)
                 {
-                        <img runat="server" src="~/Content/svg/nutlevel_5.svg" width="30px" height="50px" />
+                    <img runat="server" src="~/Content/svg/nutlevel_5.svg" width="30px" height="50px" />
                 }
                 else if (rsri[i].Salt.Value > 3.0f)
                 {
-                        <img runat="server" src="~/Content/svg/nutlevel_4.svg" width="30px" height="50px" />
+                    <img runat="server" src="~/Content/svg/nutlevel_4.svg" width="30px" height="50px" />
                 }
                 else if (rsri[i].Salt.Value > 2.0f)
                 {
-                        <img runat="server" src="~/Content/svg/nutlevel_3.svg" width="30px" height="50px" />
+                    <img runat="server" src="~/Content/svg/nutlevel_3.svg" width="30px" height="50px" />
                 }
                 else if (rsri[i].Salt.Value > 1.0f)
                 {
-                        <img runat="server" src="~/Content/svg/nutlevel_2.svg" width="30px" height="50px" />
+                    <img runat="server" src="~/Content/svg/nutlevel_2.svg" width="30px" height="50px" />
                 }
                 else
                 {
-                        <img runat="server" src="~/Content/svg/nutlevel_1.svg" width="30px" height="50px" />
+                    <img runat="server" src="~/Content/svg/nutlevel_1.svg" width="30px" height="50px" />
                 }
             </div>
             <div class="resultnutritionnames">

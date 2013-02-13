@@ -227,9 +227,11 @@ namespace MrKupido.Web.Controllers
             }
 
             Session["RecipeSearchResult"] = rsr;
+
             return PartialView("_RecipeSearchResultHead", rsr);
         }
 
+        [HttpPost]
         public JsonResult GetLocationName(string lat, string lon)
         {
             string result = null;
@@ -274,6 +276,7 @@ namespace MrKupido.Web.Controllers
             return Json(result);
         }
 
+        [HttpPost]
         public JsonResult GetTipsNTricks()
         {
             if (!tipsTricks.ContainsKey(System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName))
@@ -297,6 +300,39 @@ namespace MrKupido.Web.Controllers
 
             Random rnd = new Random();
             return Json(temp[rnd.Next(temp.Length)]);
+        }
+
+        public ActionResult RecipeNotAvailableYet(string lan, string un)
+        {
+            Log("NORECIPE", "Recipe '{2}' is not available yet.", lan + "|" + un);
+
+            return View();
+        }
+
+        public ActionResult FindRecipeInLanguage(string language, string id, string originalLanguage)
+        {
+            RecipeTreeNode targetRtn = null;
+            RecipeTreeNode rtn = Cache.GetRecipeCache(originalLanguage)[id];
+
+            if (rtn != null)
+            {
+                // we have the recipe, so let's find out if it has a translation in the target language
+                targetRtn = Cache.GetRecipeCache(language)[rtn.ClassFullName];
+            }
+
+            if (targetRtn != null)
+            {
+                return RedirectToRoute("Recipe" + language, new { language = language, controller = "Recipe", action = "Details", id = targetRtn.UniqueName });
+            }
+            else if (rtn != null)
+            {
+                //CultureInitializer.InitializeCulture(null, originalLanguage);
+                return RedirectToRoute("Recipe" + originalLanguage, new { language = originalLanguage, controller = "Recipe", action = "Details", id = rtn.UniqueName });
+            }
+            else
+            {
+                return RedirectToRoute("Default", new { language = language, controller = "Home", action = "RecipeNotAvailableYet", lan = originalLanguage, un = id });
+            }
         }
     }
 }

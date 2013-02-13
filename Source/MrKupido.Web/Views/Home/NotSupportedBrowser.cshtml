@@ -1,6 +1,6 @@
 ﻿@model  MrKupido.Web.Models.OldBrowserData
 @{
-    ViewBag.Title = MrKupido.Web.Resources.Account.LogIn.PageTitle + " (" + Model.BrowserName + " v" + Model.BrowserVersion + ") - " + MrKupido.Web.Resources.Shared.Layout.PageTitle;
+    ViewBag.Title = MrKupido.Web.Resources.Home.NotSupportedBrowser.PageTitle + " (" + Model.BrowserName + " v" + Model.BrowserVersion + ") - " + MrKupido.Web.Resources.Shared.Layout.PageTitle;
 }
 <header class="nosearch">
     <a runat="server" href="~/">
@@ -10,8 +10,8 @@
 <div>
     <details id="browser" open class="alwaysopen">
         <summary>
-            <h1>Böngészö frissítés</h1>
-            <h3>Kérlek frissítsd a böngésződet az alábbi címek valamelyikén!</h3>
+            <h1>@MrKupido.Web.Resources.Home.NotSupportedBrowser.WarningHead</h1>
+            <h3>@MrKupido.Web.Resources.Home.NotSupportedBrowser.WarningSummary</h3>
         </summary>
         <hr class="space" />
         <ul>
@@ -44,6 +44,6 @@
 <div class="formbuttons">
     @using (Html.BeginForm("IgnoreOldBrowser", "Home", new { returnUrl = Model.ReturnUrl }))
     {
-        <input type="submit" value="Továbblépek frissítés nélkül >>" />
+        <input type="submit" value="@MrKupido.Web.Resources.Home.NotSupportedBrowser.IgnoreWarningButton" />
     }
 </div>

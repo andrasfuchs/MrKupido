@@ -116,9 +116,7 @@ namespace MrKupido.Processor.Model
 
         public IIngredient[] GetIngredients(float amount, int multiplier)
         {
-            float am = amount * multiplier;
-
-            if (!IsImplemented) return new IIngredient[0];
+            float am = amount * multiplier;            
             
             lock (ingredientCache)
             {
@@ -181,8 +179,6 @@ namespace MrKupido.Processor.Model
         public IDirection[] GetDirections(float amount, int multiplier)
         {
             float am = amount * multiplier;
-
-            if (!IsImplemented) return new IDirection[0];
 
             if (!directionCache.ContainsKey(am))
             {

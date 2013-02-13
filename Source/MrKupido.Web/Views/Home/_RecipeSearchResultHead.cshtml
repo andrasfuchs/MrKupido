@@ -1,26 +1,35 @@
 ﻿@model MrKupido.Web.Models.RecipeSearchResult
+@using MrKupido.Web.Models
+@this.ScriptBlock(
+@<script type="text/javascript">
+     function doPaging(actionName, index, total) {
 
-<script type="text/javascript">
-    function doPaging(actionName) {
-        $.ajax({
-            url: '@Url.Action("RefreshRecipeResults", "Home")',
+         if ((actionName == "first") && (index == 1)) return;
+         if ((actionName == "prev") && (index == 1)) return;
+
+         if ((actionName == "next") && (index == total)) return;
+         if ((actionName == "last") && (index == total)) return;
+
+         hideAllResults();
+         $.ajax({
+             url: '@Url.Action("RefreshRecipeResults", "Home")',
             type: "POST",
             dataType: "html",
             data: {
                 actionName: actionName
             },
             success: function (data) {
-                $('div#_RecipeSearchResults').html(data);
+                $("details#searchresults li").promise().done(function () {
+                    $('div#_RecipeSearchResults').html(data);
+                    showAllResults();
+                });
             }, // success
             error: function (xhr, textStatus, errorThrown) {
-                //                                                  alert("Error");
-                //                                                  alert(xhr);
-                //                                                  alert(textStatus);
-                //                                                  alert(errorThrown);
             }
         });   // ajax
     }
 </script>
+)
 <hr class="space" />
 <details id="searchresults" open>
     <summary>
@@ -28,55 +37,18 @@
         <h2>(@(Model == null ? "0" : Model.Items.Count.ToString()) @MrKupido.Web.Resources.Home.RecipeSearchResultsHead.Recipes)</h2>
     </summary>
     <hr class="space" />
-    <div style="display: none">
-        <div class="filters">
-            <figure>
-                <a id="filter01" href="#">
-                    <img runat="server" src="~/Content/svg/cat_maindish.svg" alt="előétel" width="45" height="30" /><figcaption>főétel (+11)</figcaption>
-                </a>
-            </figure>
-            <figure>
-                <a id="filter02" href="#">
-                    <img runat="server" src="~/Content/svg/cat_soup_dark.svg" alt="kenyér" width="45" height="30" /><figcaption>leves (-5)</figcaption></a>
-            </figure>
-            <figure>
-                <a id="filter03" href="#">
-                    <img runat="server" src="~/Content/svg/cat_vegetabledish_dark.svg" alt="sütemény" width="45" height="30" /><figcaption>főzelék (-7)</figcaption></a>
-            </figure>
-            <figure>
-                <a id="filter04" href="#">
-                    <img runat="server" src="~/Content/svg/cat_fish.svg" alt="desszert" width="45" height="30" /><figcaption>hal (+3)</figcaption></a>
-            </figure>
-            <figure>
-                <a id="filter05" href="#">
-                    <img runat="server" src="~/Content/svg/cat_meat.svg" alt="ital" width="45" height="30" /><figcaption>hús (+1)</figcaption></a>
-            </figure>
-            <figure>
-                <a id="filter06" href="#">
-                    <img runat="server" src="~/Content/svg/cat_pasta_dark.svg" alt="ital" width="45px" height="30px" /><figcaption>tészta (-1)</figcaption></a>
-            </figure>
-            <figure>
-                <a id="filter07" href="#">
-                    <img runat="server" src="~/Content/svg/cat_pizza_dark.svg" alt="ital" width="45px" height="30px" /><figcaption>pizza (-3)</figcaption></a>
-            </figure>
-        </div>
-        <div class="sortorderselect">
-            <a href="javascript:doPaging('sortBy:name')">név</a> - <a href="javascript:doPaging('sortBy:time')">idö</a> - <a href="javascript:doPaging('sortBy:rating')" class="selected">értékelés</a> - <a href="javascript:doPaging('sortBy:type')">típus</a>
-        </div>
-        <hr class="space" />
-    </div>
     @{ Html.RenderPartial("_RecipeSearchResults", (Model == null ? null : Model.GetCurrentPage())); }
     @if (Model != null)
     {
         <div id="paging">
             <div id="pagingleft">
-                <img runat="server" id="pagefirst" src="~/Content/svg/paging_first.svg" alt="első oldal" width="21" height="18" onclick="javascript:doPaging('first')" />
-                <img runat="server" id="pageprev" src="~/Content/svg/paging_prev.svg" alt="előző oldal" width="15" height="18" onclick="javascript:doPaging('prev')" />
+                <img runat="server" id="pagefirst" src="~/Content/svg/paging_first.svg" alt="első oldal" width="21" height="18" onclick="javascript:doPaging('first', @Model.PageIndex, @Model.PageNumber)" />
+                <img runat="server" id="pageprev" src="~/Content/svg/paging_prev.svg" alt="előző oldal" width="15" height="18" onclick="javascript:doPaging('prev', @Model.PageIndex, @Model.PageNumber)" />
             </div>
             <div id="pagingnumber">@Model.PageIndex.ToString() / @Model.PageNumber.ToString()</div>
             <div id="pagingright">
-                <img runat="server" id="pagenext" src="~/Content/svg/paging_next.svg" alt="következő oldal" width="15" height="18" onclick="javascript:doPaging('next')" />
-                <img runat="server" id="pagelast" src="~/Content/svg/paging_last.svg" alt="utolsó oldal" width="21" height="18" onclick="javascript:doPaging('last')" />
+                <img runat="server" id="pagenext" src="~/Content/svg/paging_next.svg" alt="következő oldal" width="15" height="18" onclick="javascript:doPaging('next', @Model.PageIndex, @Model.PageNumber)" />
+                <img runat="server" id="pagelast" src="~/Content/svg/paging_last.svg" alt="utolsó oldal" width="21" height="18" onclick="javascript:doPaging('last', @Model.PageIndex, @Model.PageNumber)" />
             </div>
         </div>
     }

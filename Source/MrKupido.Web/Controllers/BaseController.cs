@@ -174,7 +174,7 @@ namespace MrKupido.Web.Controllers
             return null;
         }
 
-        private void Log(string action, string formatterText, string parameters)
+        protected void Log(string action, string formatterText, string parameters)
         {
             string username = Session.GetCurrentUser() == null ? "Anonymous" : Session.GetCurrentUser().FullName;
 

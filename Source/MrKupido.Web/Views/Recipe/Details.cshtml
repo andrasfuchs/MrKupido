@@ -1,85 +1,81 @@
 ﻿@model object[]
 @{
-    ViewBag.Title = MrKupido.Web.Resources.Recipe.Details.PageTitle + " - " + MrKupido.Web.Resources.Shared.Layout.PageTitle; ;
+    ViewBag.Title = String.Format(MrKupido.Web.Resources.Recipe.Details.PageTitle, ((MrKupido.Processor.Model.RecipeTreeNode)Model[0]).LongName) + " - " + MrKupido.Web.Resources.Shared.Layout.PageTitle; ;
 }
-@Scripts.Render("~/Scripts/wTimer.js")
-@section scripts {
-    <script type="text/javascript">
-        $(document).ready(function () {
-            deleteFilter("", false);
+@using MrKupido.Web.Models
+@this.ScriptBlock(
+    @<script type="text/javascript">
+         $(document).ready(function () {
+             deleteFilter("", false);
 
-            $(".portionselector-trigger").on("click", function (e) {
-                $("#portionselector").toggle();
-                refreshAll();
-                e.preventDefault();
-            });
-        });
-    </script>
+             $(".portionselector-trigger").on("click", function (e) {
+                 $("#portionselector").toggle();
+                 refreshAll();
+                 e.preventDefault();
+             });
+         });
 
-    <script type="text/javascript">
-        $(function () {
-            $("#portionslider").slider({
-                value: 1000,
-                min: 500,
-                max: 1500,
-                step: 250,
-                slide: function (event, ui) {
-                    $("#portionamount").val(ui.value + " kcal");
-                }
-            });
-            $("#portionamount").val($("#portionslider").slider("value") + " kcal");
-        });
+         $(function () {
+             $("#portionslider").slider({
+                 value: 1000,
+                 min: 500,
+                 max: 1500,
+                 step: 250,
+                 slide: function (event, ui) {
+                     $("#portionamount").val(ui.value + " kcal");
+                 }
+             });
+             $("#portionamount").val($("#portionslider").slider("value") + " kcal");
+         });
 
-        function portionAdd() {
-            var counterValue = parseInt($("#portioncountervalue").html(), 10);
+         function portionAdd() {
+             var counterValue = parseInt($("#portioncountervalue").html(), 10);
 
-            if (counterValue < 99) {
-                counterValue++;
-            }
+             if (counterValue < 99) {
+                 counterValue++;
+             }
 
-            refreshPortionValue(counterValue);
-        }
+             refreshPortionValue(counterValue);
+         }
 
-        function portionSubtract() {
-            var counterValue = parseInt($("#portioncountervalue").html(), 10);
+         function portionSubtract() {
+             var counterValue = parseInt($("#portioncountervalue").html(), 10);
 
-            if (counterValue > 1) {
-                counterValue--;
-            }
+             if (counterValue > 1) {
+                 counterValue--;
+             }
 
-            refreshPortionValue(counterValue);
-        }
+             refreshPortionValue(counterValue);
+         }
 
-        function refreshPortionValue(counterValue) {
-            $("#portioncountervalue").html(counterValue);
+         function refreshPortionValue(counterValue) {
+             $("#portioncountervalue").html(counterValue);
 
-            $("#portionimage_1").addClass("hidden");
-            $("#portionimage_2").addClass("hidden");
-            $("#portionimage_3").addClass("hidden");
-            $("#portionimage_4").addClass("hidden");
-            $("#portionimage_5").addClass("hidden");
+             $("#portionimage_1").addClass("hidden");
+             $("#portionimage_2").addClass("hidden");
+             $("#portionimage_3").addClass("hidden");
+             $("#portionimage_4").addClass("hidden");
+             $("#portionimage_5").addClass("hidden");
 
-            if (counterValue == 1) {
-                $("#portionimage_1").removeClass("hidden");
-            } else if (counterValue == 2) {
-                $("#portionimage_2").removeClass("hidden");
-            } else if (counterValue == 3) {
-                $("#portionimage_3").removeClass("hidden");
-            } else if (counterValue == 4) {
-                $("#portionimage_4").removeClass("hidden");
-            } else {
-                $("#portionimage_5").removeClass("hidden");
-            }
-        }
-    </script>
+             if (counterValue == 1) {
+                 $("#portionimage_1").removeClass("hidden");
+             } else if (counterValue == 2) {
+                 $("#portionimage_2").removeClass("hidden");
+             } else if (counterValue == 3) {
+                 $("#portionimage_3").removeClass("hidden");
+             } else if (counterValue == 4) {
+                 $("#portionimage_4").removeClass("hidden");
+             } else {
+                 $("#portionimage_5").removeClass("hidden");
+             }
+         }
 
-    <script type="text/javascript">
-        function refreshAll() {
-            var portion = $("#portionslider").slider("value");
-            var multiplier = parseInt($("#portioncountervalue").html(), 10);
+         function refreshAll() {
+             var portion = $("#portionslider").slider("value");
+             var multiplier = parseInt($("#portioncountervalue").html(), 10);
 
-            $.ajax({
-                url: '@Url.Action("GetNewStrings", "Recipe")',
+             $.ajax({
+                 url: '@Url.Action("GetNewStrings", "Recipe")',
                 type: "POST",
                 dataType: "html",
                 data: {
@@ -135,7 +131,7 @@
             });   // ajax
         }
     </script>
-}
+)
 
 <header>
     @{ Html.RenderPartial("_SearchHeader"); }

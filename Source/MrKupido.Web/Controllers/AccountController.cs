@@ -195,10 +195,15 @@ namespace MrKupido.Web.Controllers
 
                     user.AvatarUrl = "http://graph.facebook.com/" + facebookGraph.Id + "/picture?type=square";
                 }
-                
+
+                user.CultureName = user.CultureName.Replace("_", "-");
+                if (user.CultureName == "hu") user.CultureName = "hu-HU";
+                if (user.CultureName == "en") user.CultureName = "en-GB";
+                if (user.CultureName == "en-US") user.CultureName = "en-GB";
+
                 if (String.IsNullOrEmpty(user.FullName))
                 {
-                    if ((user.CultureName == "hu") || (user.CultureName == "hu-HU"))
+                    if (user.CultureName == "hu-HU")
                     {
                         user.FullName = user.LastName + " " + user.FirstName;
                     }
@@ -207,6 +212,7 @@ namespace MrKupido.Web.Controllers
                         user.FullName = user.FirstName + " " + user.LastName;
                     }
                 }
+                System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(user.CultureName);
 
                 if (user.UserId == 0)
                 {
@@ -337,13 +343,25 @@ namespace MrKupido.Web.Controllers
         [HttpPost]
         public new ActionResult Profile(string userId)
         {
-            User user = Session.GetCurrentUser();
+            User sessionUser = Session.GetCurrentUser();
+
+            User user = context.Users.First(u => u.UserId == sessionUser.UserId);
 
             user.LastName = Request.Form["lastname"];
             user.FirstName = Request.Form["firstname"];
             user.NickName = Request.Form["nickname"];
 
+            user.CultureName = Request.Form["language"];
+
+            user.Height = String.IsNullOrEmpty(Request.Form["height"]) ? 0 : Single.Parse(Request.Form["height"].Substring(0, Request.Form["height"].Length - 3)) / 100;
+            user.Weight = String.IsNullOrEmpty(Request.Form["weight"]) ? 0 : Single.Parse(Request.Form["weight"].Substring(0, Request.Form["weight"].Length - 3));
+            user.DateOfBirth = String.IsNullOrEmpty(Request.Form["dateofbirth"]) ? (DateTime?)null : DateTime.ParseExact(Request.Form["dateofbirth"], "yyyy-MM-dd", System.Threading.Thread.CurrentThread.CurrentUICulture);
+            
             context.SaveChanges();
+
+            Session.SetCurrentUser(user);
+
+            System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(user.CultureName);
 
             return RedirectToRoute("Default", new { language = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName, controller = "Home", action = "Index" });
         }

@@ -34,6 +34,7 @@ namespace MrKupido.Library.Attributes
         public static string GetName(Type objType, string memberName = null, string languageISOCode = null, int? targetPriority = null)
         {
             string result = null;
+            if (languageISOCode == null) languageISOCode = Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName;
             string cacheKey = languageISOCode + "-" + objType.FullName + "-" + (memberName == null ? "" : memberName) + "-" + (targetPriority.HasValue ? targetPriority.Value : 0);
 
             if (cache.ContainsKey(cacheKey))

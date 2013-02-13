@@ -6,6 +6,7 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Nature
 {
+    [NameAlias("eng", "pig")]
     [NameAlias("hun", "disznó", Priority = 1)]
     [NameAlias("hun", "sertés", Priority = 2)]
     [NameAlias("hun", "házisertés")]

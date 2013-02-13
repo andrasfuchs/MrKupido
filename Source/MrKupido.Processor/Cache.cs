@@ -100,5 +100,10 @@ namespace MrKupido.Processor
 
             return result;
         }
+
+        public static RecipeCache GetRecipeCache(string language)
+        {
+            return recipeCache[language];
+        }
     }
 }

@@ -1,77 +1,74 @@
 ﻿@using MrKupido.Web.Models
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+@this.ScriptBlock(
+    @<script type="text/javascript">
+        var lastItemDisplayString = "";
 
-<script type="text/javascript">
-    var lastItemDisplayString = "";
+        $(function () {
+            $("#query").keydown(function (e) {
+                lastItemDisplayString = "";
 
-    $(function () {
-        $("#query").keydown(function (e) {
-            lastItemDisplayString = "";
+                var code = e.which; // recommended to use e.which, it's normalized across browsers
 
-            var code = e.which; // recommended to use e.which, it's normalized across browsers
-
-            // switch to positive query
-            if (code == 107 || code == 189 || code == 187) {
-                $("#querySign").html("+");
-                e.preventDefault();
-            }
-
-            // switch to negative query
-            if (code == 109 || code == 189) {
-                $("#querySign").html("-");
-                e.preventDefault();
-            }
-
-            if (this.value == "") {
-                // space, enter
-                if (code == 32 || code == 13) {
+                // switch to positive query
+                if (code == 107 || code == 189 || code == 187) {
+                    $("#querySign").html("+");
                     e.preventDefault();
                 }
 
-                // left or page up
-                if (code == 37 || code == 33) {
-                    $("#pageprev").trigger("onclick");
+                // switch to negative query
+                if (code == 109 || code == 189) {
+                    $("#querySign").html("-");
                     e.preventDefault();
                 }
-                // right or page down
-                if (code == 39 || code == 34) {
-                    $("#pagenext").trigger("onclick");
-                    e.preventDefault();
-                }
-                // home
-                if (code == 36) {
-                    $("#pagefirst").trigger("onclick");
-                    e.preventDefault();
-                }
-                // end
-                if (code == 35) {
-                    $("#pagelast").trigger("onclick");
-                    e.preventDefault();
-                }
-                // del
-                if (code == 46) {
-                    deleteFilter("!first");
-                    e.preventDefault();
-                }
-                // backspace
-                if (code == 8) {
-                    deleteFilter("!last");
-                    e.preventDefault();
-                }
-            } else {
-                // enter
-                if (code == 13) {
-                    e.preventDefault();
-                }
-            }
-        });
 
-        $("#query").autocomplete({
-            source: function (request, response) {
-                $.ajax({
-                    url: '@Url.Action("SearchAutocomplete", "Home")',
+                if (this.value == "") {
+                    // space, enter
+                    if (code == 32 || code == 13) {
+                        e.preventDefault();
+                    }
+
+                    // left or page up
+                    if (code == 37 || code == 33) {
+                        $("#pageprev").trigger("onclick");
+                        e.preventDefault();
+                    }
+                    // right or page down
+                    if (code == 39 || code == 34) {
+                        $("#pagenext").trigger("onclick");
+                        e.preventDefault();
+                    }
+                    // home
+                    if (code == 36) {
+                        $("#pagefirst").trigger("onclick");
+                        e.preventDefault();
+                    }
+                    // end
+                    if (code == 35) {
+                        $("#pagelast").trigger("onclick");
+                        e.preventDefault();
+                    }
+                    // del
+                    if (code == 46) {
+                        deleteFilter("!first");
+                        e.preventDefault();
+                    }
+                    // backspace
+                    if (code == 8) {
+                        deleteFilter("!last");
+                        e.preventDefault();
+                    }
+                } else {
+                    // enter
+                    if (code == 13) {
+                        e.preventDefault();
+                    }
+                }
+            });
+
+            $("#query").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '@Url.Action("SearchAutocomplete", "Home")',
                     type: "POST",
                     dataType: "json",
                     data: {
@@ -93,18 +90,13 @@
                         ); // response
                     }, // success
                     error: function (xhr, textStatus, errorThrown) {
-                        //alert("Error");
-                        //alert(xhr);
-                        //alert(textStatus);
-                        //alert(errorThrown);
-                    }
+                    } // error
                 }); // ajax
             },
             minLength: 2,
             delay: 200,
-            selectFirst: true,
             autoSelect: true,
-            accentFolding: true, /* is it working/necessary */
+            autoFocus: true,
             select: searchKeywordSelected,
             open: function () {
                 $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
@@ -143,11 +135,7 @@
                 $("#querySign").html("+");
             }, // success
             error: function (xhr, textStatus, errorThrown) {
-                //                              alert("Error");
-                //                              alert(xhr);
-                //                              alert(textStatus);
-                //                              alert(errorThrown);
-            }
+            } // error
         }); // ajax
         $(this).val(''); return false;
     };
@@ -189,11 +177,7 @@
                 refreshFilters(data, invokeDoSearch);
             }, // success
             error: function (xhr, textStatus, errorThrown) {
-                //alert("Error");
-                //alert(xhr);
-                //alert(textStatus);
-                //alert(errorThrown);
-            }
+            } // error
         }); // ajax
     }
 
@@ -219,41 +203,55 @@
 
             $.ajax({
                 url: '@Url.Action("GetLocationName", "Home")',
-            type: "POST",
-            dataType: "json",
-            data: {
-                lat: position.coords.latitude,
-                lon: position.coords.longitude
-            },
-            success: function (locationText) {
-                if (locationText == null) {
+                type: "POST",
+                dataType: "json",
+                data: {
+                    lat: position.coords.latitude,
+                    lon: position.coords.longitude
+                },
+                success: function (locationText) {
+                    if (locationText == null) {
+                        s.value = Math.round(position.coords.latitude * 100000) / 100000 + ", " + Math.round(position.coords.longitude * 100000) / 100000;
+                    } else {
+                        s.value = locationText;
+                    }
+                }, // success
+                error: function (xhr, textStatus, errorThrown) {
                     s.value = Math.round(position.coords.latitude * 100000) / 100000 + ", " + Math.round(position.coords.longitude * 100000) / 100000;
-                } else {
-                    s.value = locationText;
                 }
-            }, // success
-            error: function (xhr, textStatus, errorThrown) {
-                s.value = Math.round(position.coords.latitude * 100000) / 100000 + ", " + Math.round(position.coords.longitude * 100000) / 100000;
+            }); // ajax
+        }
+
+        function geolocationError(msg) {
+            var s = document.querySelector('#location');
+            s.value = "";
+        }
+
+        $(document).ready(function () {
+
+            $("#menu-trigger").on("click", function () {
+                $("#usermenu").toggle();
+            });
+
+            // iPad
+            var isiPad = navigator.userAgent.match(/iPad/i) != null;
+            if (isiPad) $('#usermenu ul').addClass('no-transition');
+
+            // get the profile pic
+            var avatarImg = $("img#avatar");
+            var originalSrc = avatarImg.attr("src");
+
+            if ("@(Session.IsAvatarCached().ToString().ToLower())" == "false") {
+                avatarImg.css({ opacity: 0.0 }).attr("src", "@Session.GetCurrentUserAvatarUrl(true)").load(function () {
+                    if (this.complete && typeof this.naturalWidth != "undefined" && this.naturalWidth != 0) {
+                        $(this).stop().animate({ opacity: '1' }, 1500);
+                        $.isAvatarCached = true;
+                    }
+                });
             }
-        }); // ajax
-    }
-
-    function geolocationError(msg) {
-        var s = document.querySelector('#location');
-        s.value = "";
-    }
-
-    $(document).ready(function () {
-
-        $("#menu-trigger").on("click", function () {
-            $("#usermenu").toggle();
         });
-
-        // iPad
-        var isiPad = navigator.userAgent.match(/iPad/i) != null;
-        if (isiPad) $('#usermenu ul').addClass('no-transition');
-    });
-</script>
+    </script>
+)
 
 <a runat="server" href="~/hun">
     <img runat="server" src="~/Content/svg/logo_mrkupido.svg" alt="Mr. Kupido" width="200" height="152" />
@@ -262,11 +260,13 @@
     @if (Session.GetCurrentUser() == null)
     {
         <span id="login"><a runat="server" href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/Account/LogIn">@MrKupido.Web.Resources.Shared.SearchHeader.Login</a></span>
+        <img runat="server" src="~/Content/svg/icon_avatar.svg" alt="Avatar" width="50" height="50" />
     }
     @if (Session.GetCurrentUser() != null)
     {
         <span id="name"><a runat="server" href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/Account/Profile">@Session.GetCurrentUserDisplayName()</a></span><span id="messages" style="display: none">0</span>
-        <img runat="server" src="@Session.GetCurrentUserAvatarUrl()" alt="Avatar" width="51" height="51" />
+        <img runat="server" src="~/Content/svg/icon_avatar.svg" alt="Avatar" width="50" height="50" />
+        <img runat="server" id="avatar" src="@(Session.IsAvatarCached() ? Session.GetCurrentUserAvatarUrl(false) : "~/Content/svg/icon_avatar.svg")" alt="Avatar" width="50" height="50" />
         <img runat="server" id="menu-trigger" src="~/Content/svg/icon_menutrigger.svg" alt="Menu" width="11" height="9" />
         <nav id="menu-wrap">
             <ul id="usermenu">
@@ -281,15 +281,11 @@
                 <li><a href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/account/profile">@MrKupido.Web.Resources.Shared.SearchHeader.Profile</a></li>
                 <li><a href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/ingredient/trees">@MrKupido.Web.Resources.Shared.SearchHeader.Taxonomy</a></li>
                 <li><a href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/import/recipelist">@MrKupido.Web.Resources.Shared.SearchHeader.Import</a></li>
-                <li><a href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/help/firsttime">@MrKupido.Web.Resources.Shared.SearchHeader.Help</a></li>
+                <li><a href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/help">@MrKupido.Web.Resources.Shared.SearchHeader.Help</a></li>
                 <li><a href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/account/logout">@MrKupido.Web.Resources.Shared.SearchHeader.Logout</a></li>
             </ul>
         </nav>
 
-    }
-    else
-    { 
-        <img runat="server" src="~/Content/svg/icon_avatar.svg" alt="Avatar" width="50" height="50" />
     }
 </div>
 <div class="searchbox">

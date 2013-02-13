@@ -45,7 +45,7 @@ namespace MrKupido.Web
             if (language == "xxx")
             {
                 // current language
-                language = System.Threading.Thread.CurrentThread.CurrentCulture.ThreeLetterISOLanguageName;
+                language = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName;
             }
 
             if ((language != "eng") && (language != "hun"))
@@ -54,13 +54,30 @@ namespace MrKupido.Web
                 language = "eng";
             }
 
+
             if (language != routeData.Values["language"].ToString())
             {
+                // we need to change the language
+                // effectively this means that if there was no language defining part in the url, we redirect to an url with that part included
+
                 routeData.Values["language"] = language;
                 Response.RedirectToRoute(routeData.Values);
                 return;
             }
             //
+
+
+            // we have a special redirection for the recipes
+            // typically if you have a culture language like 'spa' and enter a recipe url with something else like 'eng'
+            // we should look for the Spanish version of the originally English recipe first
+            if (((((NamedRoute)routeData.Route).Name == "RecipeEng") && (System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName != "eng"))
+                || ((((NamedRoute)routeData.Route).Name == "RecipeHun") && (System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName != "hun"))
+                || ((((NamedRoute)routeData.Route).Name == "RecipeDeu") && (System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName != "deu"))
+                || ((((NamedRoute)routeData.Route).Name == "RecipeSpa") && (System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName != "spa")))
+            {
+                Response.RedirectToRoute("Default", new { language = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName, controller = "Home", action = "FindRecipeInLanguage", id = routeData.Values["id"], originalLanguage = language });
+                return;
+            }
 
             CultureInitializer.InitializeCulture(Request, language);
 
@@ -118,21 +135,6 @@ namespace MrKupido.Web
                     return;
                 }
             }
-
-            //if ((Session != null) && (Session["CurrentUser"] == null) && !Request.Url.AbsoluteUri.ToLower().Contains("/account/login") && !Request.Url.AbsoluteUri.ToLower().Contains("/home/notsupportedbrowser"))
-            //{
-            //    if (MrKupido.Web.Controllers.BaseController.CurrentSessions.ContainsKey(Session.SessionID) && MrKupido.Web.Controllers.BaseController.CurrentSessions[Session.SessionID].User != null)
-            //    {
-            //        Model.User user = MrKupido.Web.Controllers.BaseController.CurrentSessions[Session.SessionID].User;
-            //        Session.CurrentUser(); //["CurrentUser"] = user;
-            //        Session["CurrentUser.DisplayName"] = !String.IsNullOrEmpty(user.NickName) ? user.NickName : user.FullName;
-            //        Session["CurrentUser.AvatarUrl"] = !String.IsNullOrEmpty(user.AvatarUrl) ? user.AvatarUrl : "Content/svg/icon_avatar.svg";
-            //    }
-            //    else
-            //    {
-            //        Response.RedirectToRoute("AccountManagement", new { action = "Login", ReturnUrl = Request.HttpMethod != "GET" ? "" : Request.Url.AbsolutePath });
-            //    }
-            //}
         }
 
         protected void Application_Error(object sender, EventArgs e)

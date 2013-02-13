@@ -148,7 +148,7 @@
     <value>(egyszerű)</value>
   </data>
   <data name="PageTitle" xml:space="preserve">
-    <value>Recipe details</value>
+    <value>{0} recept</value>
   </data>
   <data name="PortionHint" xml:space="preserve">
     <value>({0} főre)</value>

@@ -29,6 +29,7 @@ namespace MrKupido.Processor
             seenIngredients.Clear();
 
             ignoreDirections = true;
+            
             RunRecipe(rtn, amount);
 
             return ingredients.ToArray();
@@ -143,6 +144,8 @@ namespace MrKupido.Processor
 
         private static void RunRecipe(RecipeTreeNode rtn, float amount)
         {
+            if (!rtn.IsImplemented) return;
+
             if (rtn.SelectEquipment != null)
             {
                 stage = RecipeStage.EquipmentSelection;

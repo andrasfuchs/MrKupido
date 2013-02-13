@@ -211,14 +211,17 @@
     </Compile>
     <Compile Include="Models\CultureInitializer.cs" />
     <Compile Include="Models\IngredientAmountExt.cs" />
+    <Compile Include="Models\NamedRoute.cs" />
     <Compile Include="Models\OldBrowserData.cs" />
     <Compile Include="Models\RecipeCategoryGroup.cs" />
     <Compile Include="Models\RecipeSearchQueryResults.cs" />
     <Compile Include="Models\RecipeSearchResultItem.cs" />
     <Compile Include="Models\RecipeSearchResult.cs" />
+    <Compile Include="Models\RouteCollectionExtensions.cs" />
     <Compile Include="Models\SessionExtension.cs" />
     <Compile Include="Models\UserJSONStringify.cs" />
     <Compile Include="Models\UserState.cs" />
+    <Compile Include="Models\ViewPageExtensions.cs" />
     <Compile Include="Models\WikiLocationActicle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Account\Profile.hu.Designer.cs">
@@ -238,6 +241,21 @@
     </Compile>
     <Compile Include="Resources\Account\LogIn.Designer.cs">
       <DependentUpon>LogIn.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Home\NotSupportedBrowser.hu.Designer.cs">
+      <DependentUpon>NotSupportedBrowser.hu.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Home\RecipeNotAvailableYet.hu.Designer.cs">
+      <DependentUpon>RecipeNotAvailableYet.hu.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Home\RecipeNotAvailableYet.Designer.cs">
+      <DependentUpon>RecipeNotAvailableYet.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -345,19 +363,27 @@
     <Content Include="Content\Site.min.css">
       <DependentUpon>Site.css</DependentUpon>
     </Content>
+    <Content Include="Content\svg\action_chop.svg" />
+    <Content Include="Content\svg\action_circle.svg" />
     <Content Include="Content\svg\action_cover.svg" />
     <Content Include="Content\svg\action_default.svg" />
+    <Content Include="Content\svg\action_dismember.svg" />
     <Content Include="Content\svg\action_mix.svg" />
     <Content Include="Content\svg\action_mix_together.svg" />
     <Content Include="Content\svg\action_plow.svg" />
     <Content Include="Content\svg\action_pour_on.svg" />
     <Content Include="Content\svg\action_preheat.svg" />
+    <Content Include="Content\svg\action_pull_out.svg" />
     <Content Include="Content\svg\action_put_in.svg" />
+    <Content Include="Content\svg\action_put_on.svg" />
+    <Content Include="Content\svg\action_rasp.svg" />
     <Content Include="Content\svg\action_roll_out.svg" />
     <Content Include="Content\svg\action_separate.svg" />
+    <Content Include="Content\svg\action_serve.svg" />
     <Content Include="Content\svg\action_sprinkle.svg" />
     <Content Include="Content\svg\action_strech.svg" />
     <Content Include="Content\svg\action_superimpose.svg" />
+    <Content Include="Content\svg\action_take_off.svg" />
     <Content Include="Content\svg\action_tear.svg" />
     <Content Include="Content\svg\action_wait.svg" />
     <Content Include="Content\svg\action_water.svg" />
@@ -373,6 +399,10 @@
     <Content Include="Content\svg\cat_unknown_dark.svg" />
     <Content Include="Content\svg\cat_vegetabledish.svg" />
     <Content Include="Content\svg\clock_00.svg" />
+    <Content Include="Content\svg\clock_07.svg" />
+    <Content Include="Content\svg\clock_22.svg" />
+    <Content Include="Content\svg\clock_37.svg" />
+    <Content Include="Content\svg\clock_52.svg" />
     <Content Include="Content\svg\clock_disabled.svg" />
     <Content Include="Content\svg\container_01.svg" />
     <Content Include="Content\svg\container_02.svg" />
@@ -400,17 +430,21 @@
     <Content Include="Content\svg\d_clock6.svg" />
     <Content Include="Content\svg\d_clock7.svg" />
     <Content Include="Content\svg\d_clock8.svg" />
+    <Content Include="Content\svg\e_casserole.svg" />
     <Content Include="Content\svg\e_cover.svg" />
     <Content Include="Content\svg\e_egg-beater.svg" />
     <Content Include="Content\svg\e_equipment.svg" />
+    <Content Include="Content\svg\e_flat_plate.svg" />
     <Content Include="Content\svg\e_fork.svg" />
     <Content Include="Content\svg\e_hand.svg" />
     <Content Include="Content\svg\e_knife.svg" />
+    <Content Include="Content\svg\e_mug.svg" />
     <Content Include="Content\svg\e_pan.svg" />
     <Content Include="Content\svg\e_providing_board.svg" />
     <Content Include="Content\svg\e_rasper.svg" />
     <Content Include="Content\svg\e_round_shaped_container.svg" />
     <Content Include="Content\svg\e_spoon.svg" />
+    <Content Include="Content\svg\e_tray.svg" />
     <Content Include="Content\svg\e_wine_glass.svg" />
     <Content Include="Content\svg\icon_avatar.svg" />
     <Content Include="Content\svg\icon_figurebig.svg" />
@@ -443,6 +477,7 @@
     <Content Include="Content\svg\i_black_pepper.svg" />
     <Content Include="Content\svg\i_carrot.svg" />
     <Content Include="Content\svg\i_cocoa_bean.svg" />
+    <Content Include="Content\svg\i_corn.svg" />
     <Content Include="Content\svg\i_egg.svg" />
     <Content Include="Content\svg\i_ham.svg" />
     <Content Include="Content\svg\i_honey.svg" />
@@ -480,12 +515,14 @@
     <Content Include="Content\svg\nutname_sugar_hun.svg" />
     <Content Include="Content\svg\n_animal.svg" />
     <Content Include="Content\svg\n_bird.svg" />
+    <Content Include="Content\svg\n_cow.svg" />
     <Content Include="Content\svg\n_fish.svg" />
     <Content Include="Content\svg\n_fungi.svg" />
     <Content Include="Content\svg\n_insect.svg" />
     <Content Include="Content\svg\n_mineral.svg" />
     <Content Include="Content\svg\n_mushroom.svg" />
     <Content Include="Content\svg\n_nature.svg" />
+    <Content Include="Content\svg\n_pig.svg" />
     <Content Include="Content\svg\n_plant.svg" />
     <Content Include="Content\svg\paging_first.svg" />
     <Content Include="Content\svg\paging_last.svg" />
@@ -633,11 +670,9 @@
     <Content Include="Content\fonts\Tangerine\tangerinea-webfont.ttf" />
     <Content Include="Content\fonts\Tangerine\tangerinea_bold-webfont.eot" />
     <Content Include="Content\fonts\Tangerine\tangerinea_bold-webfont.ttf" />
+    <Content Include="Content\Web.config" />
     <None Include="Properties\PublishProfiles\HFL_beta.pubxml" />
-    <None Include="Scripts\jquery-1.8.2.intellisense.js" />
-    <Content Include="Scripts\jquery-1.8.2.js" />
-    <Content Include="Scripts\jquery-ui-1.9.1.custom.js" />
-    <Content Include="Scripts\jquery-ui-autocomplete.selectFirst.js" />
+    <Content Include="Resources\Web.config" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js">
       <DependentUpon>jquery.unobtrusive-ajax.js</DependentUpon>
@@ -654,20 +689,14 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js">
       <DependentUpon>jquery.validate.unobtrusive.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\knockout-2.0.0.debug.js" />
-    <Content Include="Scripts\knockout-2.0.0.debug.min.js">
-      <DependentUpon>knockout-2.0.0.debug.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\knockout-2.0.0.js" />
-    <Content Include="Scripts\knockout-2.0.0.min.js">
-      <DependentUpon>knockout-2.0.0.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\modernizr-2.0.6-development-only.js" />
     <Content Include="Scripts\whatwg_reviewer.js" />
     <Content Include="Scripts\whatwg_reviewer.min.js">
       <DependentUpon>whatwg_reviewer.js</DependentUpon>
     </Content>
     <Content Include="Scripts\wTimer.js" />
+    <Content Include="Scripts\wTimer.min.js">
+      <DependentUpon>wTimer.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\_references.js" />
     <Content Include="Scripts\_references.min.js">
       <DependentUpon>_references.js</DependentUpon>
@@ -681,12 +710,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Scripts\jquery.validate-vsdoc.min.js.map">
       <DependentUpon>jquery.validate-vsdoc.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\knockout-2.0.0.debug.min.js.map">
-      <DependentUpon>knockout-2.0.0.debug.js</DependentUpon>
-    </Content>
-    <Content Include="Scripts\knockout-2.0.0.min.js.map">
-      <DependentUpon>knockout-2.0.0.js</DependentUpon>
     </Content>
     <Content Include="Scripts\whatwg_reviewer.min.js.map">
       <DependentUpon>whatwg_reviewer.js</DependentUpon>
@@ -703,6 +726,11 @@
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js.map">
       <DependentUpon>jquery.unobtrusive-ajax.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\Web.config" />
+    <Content Include="Scripts\wTimer.min.js.map">
+      <DependentUpon>wTimer.js</DependentUpon>
+    </Content>
+    <Content Include="Views\Home\RecipeNotAvailableYet.cshtml" />
     <None Include="Web.Debug_at_localhost.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -712,6 +740,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts.del\" />
     <Folder Include="Scripts\TypeScript\" />
   </ItemGroup>
   <ItemGroup>
@@ -848,6 +877,18 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>LogIn.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Home\NotSupportedBrowser.hu.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NotSupportedBrowser.hu.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Home\RecipeNotAvailableYet.hu.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecipeNotAvailableYet.hu.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Home\RecipeNotAvailableYet.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecipeNotAvailableYet.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Home\Index.hu.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Index.hu.Designer.cs</LastGenOutput>
@@ -887,10 +928,12 @@
     <EmbeddedResource Include="Resources\Recipe\Details.hu.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Details.hu.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Recipe\Details.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Details.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Shared\TipsAndTricks.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

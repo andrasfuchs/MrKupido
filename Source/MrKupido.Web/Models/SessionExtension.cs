@@ -39,10 +39,17 @@ namespace MrKupido.Web.Models
             return (!String.IsNullOrEmpty(user.NickName) ? user.NickName : user.FullName);
         }
 
-        public static string GetCurrentUserAvatarUrl(this HttpSessionStateBase session)
+        public static string GetCurrentUserAvatarUrl(this HttpSessionStateBase session, bool displayAvatar)
         {
             User user = GetCurrentUser(session);
-            return (!String.IsNullOrEmpty(user.AvatarUrl) ? user.AvatarUrl : "Content/svg/icon_avatar.svg");
+            isAvatarCached |= displayAvatar;
+            return ((user != null) && !String.IsNullOrEmpty(user.AvatarUrl) ? user.AvatarUrl : "Content/svg/icon_avatar.svg");
+        }
+
+        private static bool isAvatarCached = false;
+        public static bool IsAvatarCached(this HttpSessionStateBase session)
+        {
+            return isAvatarCached;
         }
     }
 }

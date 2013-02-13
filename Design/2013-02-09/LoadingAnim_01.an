@@ -1,0 +1,52 @@
+{
+
+	"HTMLFileName":"LoadingAnim_01.html",
+	"pref__general__AutoKeyframeProperties":"true",
+	"ModelData":"{\
+\"stage\": {\
+   \"timelines\": {\
+      \"Default Timeline\": {\
+            \"ElementKeyframes\": {\
+                \"${_n_fungi}\": [], \
+                \"${_Stage}\": []\
+            }\
+      }\
+   }},\
+\"Preloader\": {\
+   \"timelines\": {\
+\
+   }},\
+\"Down-level\": {\
+   \"timelines\": {\
+\
+   }}\
+}",
+	"pref__general__FilterNonAnimatedElements":"false",
+	"PubChromeFrameInstallerPrompt":"none",
+	"PubUseChromeFrameInstaller":"false",
+	"pref__general__AutoKeyframePropertiesArmed":"true",
+	"symbol_stage":{
+		"element_${_n_fungi}":{
+			"timelineColor2":"0x81aa62",
+			"timelineColor3":"0x5b6c4d",
+			"animationEnabled":"true",
+			"timelineColor":"0x91c767"},
+		"defaultStageParentHeight":"400px",
+		"dummyStageParentHeight":"400px",
+		"defaultStageParentWidth":"550px",
+		"element_${_Stage}":{
+			"timelineColor2":"0xcbbd71",
+			"timelineColor3":"0x7b7652",
+			"timelineColor":"0xeedf79"},
+		"dummyStageParentWidth":"550px"},
+	"TransitionIdCounter":"10",
+	"CompZoomFactor":"100",
+	"StageZoomFactor":"100",
+	"pixelsPerMs":"0.2",
+	"PubStaticHTMLContent":"true",
+	"usedBOM":"false",
+	"nextElementColorIndex":"3",
+	"pref__general__GenerateSmoothTransitions":"true",
+	"viewStartY":"0",
+	"stage-Default Timeline_playhead_ms":"2000",
+	"stage-Default Timeline_mark_ms":"1000"}

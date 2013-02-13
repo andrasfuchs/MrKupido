@@ -1,5 +1,46 @@
 ﻿@model IEnumerable<MrKupido.Model.IngredientAmount>
 @using MrKupido.Web.Models
+@this.ScriptBlock(
+@<script type="text/javascript">
+
+
+    $("a.add").click(function (event) {
+        event.preventDefault();
+
+        $("div#createIngredient_" + $(this).attr('href')).dialog("open");
+    });
+
+    $("div.createIngredient").dialog({ modal: true, resizable: false, autoOpen: false, buttons: [
+                {
+                    text: "Save",
+                    click: function () {
+                        $(this).dialog("option", "title", "Mentés folyamatban...");
+                        var index = $(this).children("input.index").val();
+
+                        $.ajax({
+                            url: 'CreateIngredient',
+                            data: JSON.stringify(
+                            {
+                                nameHun: $(this).children("input.nameHun").val(),
+                                uniqueNameHun: $(this).children("input.uniqueNameHun").val(),
+                                nameEng: $(this).children("input.nameEng").val(),
+                                uniqueNameEng: $(this).children("input.uniqueNameEng").val()
+                            }),
+                            success: function (result) {
+                                $("div#createIngredient_" + index).dialog("close");
+                                $("div#createIngredient_" + index).dialog("option", "title", "Új hozzávaló hozzáadása");
+                            }
+                        });
+                    }
+                },
+                {
+                    text: "Cancel",
+                    click: function () { $(this).dialog("close"); }
+                }
+            ]
+    });
+</script>
+)
 <table id="ingredienttable" class="wide">
     <thead>
         <tr>
@@ -101,42 +142,3 @@
         </tr>
     </tfoot>
 </table>
-<script type="text/javascript">
-
-
-    $("a.add").click(function (event) {
-        event.preventDefault();
-
-        $("div#createIngredient_" + $(this).attr('href')).dialog("open");
-    });
-
-    $("div.createIngredient").dialog({ modal: true, resizable: false, autoOpen: false, buttons: [
-                {
-                    text: "Save",
-                    click: function () {
-                        $(this).dialog("option", "title", "Mentés folyamatban...");
-                        var index = $(this).children("input.index").val();
-
-                        $.ajax({
-                            url: 'CreateIngredient',
-                            data: JSON.stringify(
-                            {
-                                nameHun: $(this).children("input.nameHun").val(),
-                                uniqueNameHun: $(this).children("input.uniqueNameHun").val(),
-                                nameEng: $(this).children("input.nameEng").val(),
-                                uniqueNameEng: $(this).children("input.uniqueNameEng").val()
-                            }),
-                            success: function (result) {
-                                $("div#createIngredient_" + index).dialog("close");
-                                $("div#createIngredient_" + index).dialog("option", "title", "Új hozzávaló hozzáadása");
-                            }
-                        });
-                    }
-                },
-                {
-                    text: "Cancel",
-                    click: function () { $(this).dialog("close"); }
-                }
-            ]
-    });
-</script>

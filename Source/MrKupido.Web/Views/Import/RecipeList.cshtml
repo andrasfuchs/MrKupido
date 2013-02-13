@@ -1,9 +1,9 @@
 ﻿@{
     ViewBag.Title = MrKupido.Web.Resources.Import.RecipeList.PageTitle + " - " + MrKupido.Web.Resources.Shared.Layout.PageTitle; ;
 }
-
-@section scripts {
-<script type="text/javascript">
+@using MrKupido.Web.Models
+@this.ScriptBlock(
+@<script type="text/javascript">
     var $textChanged = false;
     var $prevRecipeUniqueName = "";
     var $recipeUniqueName = "";
@@ -38,7 +38,7 @@
         $('select#language').trigger('change');
     });
 </script>
-}
+)
 
 <header class="nosearch">
     <a runat="server" href="~/">

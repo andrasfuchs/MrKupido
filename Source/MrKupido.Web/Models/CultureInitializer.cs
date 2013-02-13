@@ -29,22 +29,22 @@ namespace MrKupido.Web.Models
             }
             else if (routeLanguage == "eng")
             {
-                cultureName = "en-US";
+                cultureName = "en-GB";
             }
             else
             {
-                cultureName = "en-US";
+                cultureName = "en-GB";
             }
 
             if (String.IsNullOrEmpty(cultureName))
             {
-                cultureName = Thread.CurrentThread.CurrentCulture.Name;
+                cultureName = Thread.CurrentThread.CurrentUICulture.Name;
             }
 
-            if ("en-US,hu-HU".IndexOf(cultureName, StringComparison.InvariantCultureIgnoreCase) == -1) cultureName = "en-US";
+            if ("en-GB,hu-HU".IndexOf(cultureName, StringComparison.InvariantCultureIgnoreCase) == -1) cultureName = "en-GB";
 
 
-            if (Thread.CurrentThread.CurrentCulture.Name != cultureName)
+            if ((Thread.CurrentThread.CurrentCulture.Name != cultureName) || (Thread.CurrentThread.CurrentUICulture.Name != cultureName))
             {
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo(cultureName);
                 Thread.CurrentThread.CurrentCulture = CultureInfo.CreateSpecificCulture(cultureName);

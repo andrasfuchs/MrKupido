@@ -44,5 +44,6 @@ wTimer.prototype =
     stop: function () {
         clearTimeout(this.timer);
         this.timer = null;
+        this.timeInit = null;
     }
 }

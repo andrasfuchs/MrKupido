@@ -1,16 +1,27 @@
-﻿@{
+﻿@using MrKupido.Web.Models
+@{
     ViewBag.Title = MrKupido.Web.Resources.Home.Index.PageTitle + " - " + MrKupido.Web.Resources.Shared.Layout.PageTitle; ;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@section scripts {
-    <script type="text/javascript">
+@this.ScriptBlock(
+    @<script type="text/javascript">
 
-        $(document).ready(function () {
-            deleteFilter("");
+         var tipsTimer = new wTimer({
+             fps: 0.05,
+             run: function () {
+                 nextTipsAndTricks();
+             }
+         });
 
-            // show tips and tricks
-            $.ajax({
-                url: '@Url.Action("GetTipsNTricks", "Home")',
+         $(document).ready(function () {
+             deleteFilter("");
+             tipsTimer.start();
+         });
+
+         function nextTipsAndTricks() {
+             // show tips and tricks
+             $.ajax({
+                 url: '@Url.Action("GetTipsNTricks", "Home")',
                 type: "POST",
                 dataType: "json",
                 data: {},
@@ -31,37 +42,110 @@
                     htmlStr += tipsAndTricksText.substring(1);
                     htmlStr += "</span>";
 
-                    $("#tipsandticks").html(htmlStr);
-                    $("#tipsandticks").show();
+                    if ($("#tipsandticks").html().length > 10) {
+                        $("#tipsandticks").animate({ opacity: '0' }, 1000, function () {
+                            $("#tipsandticks").html(htmlStr).animate({ opacity: '1' }, 1000);
+                        });
+                    } else {
+                        $("#tipsandticks").css({ opacity: 0.0 }).html(htmlStr).animate({ opacity: '1' }, 1000)
+                    }
                 }, // success
                 error: function (xhr, textStatus, errorThrown) {
                     $("#tipsandticks").hide();
                 }
             }); // ajax
-        });
+         }
 
-        function doSearch(maxResult) {
-            $.ajax({
-                url: '@Url.Action("Search", "Home")',
+         var loadingTimer = null;
+         var loadingTimerCounter = 0;
+
+         function loadingStart() {
+             if (loadingTimer == null) {
+                 loadingTimer = new wTimer({
+                     fps: 4,
+                     run: function () {
+                         loadingNextStep(loadingTimerCounter);
+                         loadingTimerCounter = (loadingTimerCounter + 1);
+                         if (loadingTimerCounter >= 6) loadingTimerCounter %= 6;
+                     }
+                 });
+             }
+
+             $("details#searchresults ul").html("<li class='disabled loading'></li><li class='disabled loading'></li><li class='disabled loading'></li><li class='disabled loading'></li><li class='disabled loading'></li><li class='disabled loading'></li>");
+             $("details#searchresults li").css({ opacity: 0.0 })
+             loadingTimerCounter = -6;
+             loadingTimer.start();
+         }
+
+         function loadingStop() {
+             loadingTimer.stop();
+             loadingTimer.run = null;
+             loadingTimer = null;
+         }
+
+         function loadingNextStep(index) {
+             var cardOrder = new Array(0, 0, 0, 0, 0, 0, 1, 2, 3, 6, 5, 4, 1, 2, 3, 6, 5, 4, 1, 2, 3, 6, 5, 4);
+             index += 12;
+             
+             var selectorAll = "details#searchresults li";
+
+             var selector = selectorAll + ":nth-child(" + cardOrder[index] + ")";
+             $(selector).css({ opacity: 0.40 });
+
+             index--;
+             var selector = selectorAll + ":nth-child(" + cardOrder[index] + ")";
+             $(selector).animate({ opacity: '0.30' }, 250, "easeInOutCubic");
+
+             index--;
+             var selector = selectorAll + ":nth-child(" + cardOrder[index] + ")";
+             $(selector).animate({ opacity: '0.20' }, 250, "easeInOutCubic");
+
+             index--;
+             var selector = selectorAll + ":nth-child(" + cardOrder[index] + ")";
+             $(selector).animate({ opacity: '0.10' }, 250, "easeInOutCubic");
+
+             index--;
+             var selector = selectorAll + ":nth-child(" + cardOrder[index] + ")";
+             $(selector).animate({ opacity: '0.00' }, 250, "easeInOutCubic");
+         }
+
+         var animateHide = false;
+
+         function hideAllResults() {
+             $("details#searchresults li").css({ opacity: 1.0 }).animate({ opacity: '0' }, animateHide ? 750 : 150, "easeInOutCubic").promise().done(function()
+             {
+                 loadingStart();
+             });
+             animateHide = true;
+         }
+
+         function showAllResults() {
+             loadingStop();
+             $("details#searchresults li").css({ opacity: 0.0 }).animate({ opacity: '1' }, 750, "easeInOutCubic");
+         }
+
+         function doSearch(maxResult) {
+             hideAllResults();
+             $.ajax({
+                 url: '@Url.Action("Search", "Home")',
                 type: "POST",
                 dataType: "html",
                 data: {
                     maxResult: maxResult
                 },
                 success: function (data) {
-                    $('div#_RecipeSearchResults').html(data);
+                    $("details#searchresults li").promise().done(function () {
+                        $('div#_RecipeSearchResults').html(data);
+                        showAllResults();
+                    });
                 }, // success
                 error: function (xhr, textStatus, errorThrown) {
-                    //                                                  alert("Error");
-                    //                                                  alert(xhr);
-                    //                                                  alert(textStatus);
-                    //                                                  alert(errorThrown);
-                }
+                } // error
             });   // ajax
             $("#query").focus();
         }
     </script>
-}
+)
 <header>
     @{ Html.RenderPartial("_SearchHeader"); }
 </header>
@@ -69,163 +153,6 @@
 
     <hr class="single" />
     <div id="tipsandticks" class="tipsandticks">
-    </div>
-    <div style="display: none">
-        <hr class="double" />
-        <details id="mymenu">
-            <summary>
-                <h1>Saját menüm</h1>
-                <h2>(4 étel)</h2>
-            </summary>
-            <ul>
-                <li>
-                    <div class="resulthead">
-                        <div class="category">
-                            <img runat="server" src="~/Content/svg/cat_maindish.svg" alt="Sertés" width="45px" height="30px" />
-                        </div>
-                        <div class="title">
-                            Paprikás krumpli
-                        </div>
-                        <div class="tick">
-                            <a href="#">
-                                <img runat="server" src="~/Content/svg/tick_on.svg" alt="Töröl" width="25px" height="25px" /></a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="resulthead">
-                        <div class="category">
-                            <img runat="server" src="~/Content/svg/cat_maindish.svg" alt="Sertés" width="45px" height="30px" />
-                        </div>
-                        <div class="title">
-                            Bundáskenyér
-                        </div>
-                        <div class="tick">
-                            <a href="#">
-                                <img runat="server" src="~/Content/svg/tick_on.svg" alt="Töröl" width="25px" height="25px" /></a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="resulthead">
-                        <div class="category">
-                            <img runat="server" src="~/Content/svg/cat_maindish.svg" alt="Sertés" width="45px" height="30px" />
-                        </div>
-                        <div class="title">
-                            Csirkecomb mustármártásban
-                        </div>
-                        <div class="tick">
-                            <a href="#">
-                                <img runat="server" src="~/Content/svg/tick_on.svg" alt="Töröl" width="25px" height="25px" /></a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="resulthead">
-                        <div class="category">
-                            <img runat="server" src="~/Content/svg/cat_maindish.svg" alt="Sertés" width="45px" height="30px" />
-                        </div>
-                        <div class="title">
-                            Gombás sült csirkecomb
-                        </div>
-                        <div class="tick">
-                            <a href="#">
-                                <img runat="server" src="~/Content/svg/tick_on.svg" alt="Töröl" width="25px" height="25px" /></a>
-                        </div>
-                    </div>
-                </li>
-                <li class="disabled"></li>
-                <li class="disabled"></li>
-                <li class="disabled"></li>
-                <li class="disabled"></li>
-                <li class="disabled"></li>
-            </ul>
-        </details>
-        <hr class="double" />
-        <details id="recommendations">
-            <summary>
-                <h1>Ajánlásaink</h1>
-                <h2>(15 étel)</h2>
-            </summary>
-            <ul>
-                <li>
-                    <div class="resultbox">
-                        <div class="resulthead">
-                            <div class="category">
-                                <img runat="server" src="~/Content/svg/cat_maindish.svg" alt="Sertés" width="45" height="30" />
-                            </div>
-                            <div class="title">
-                                Sajtban sült tojás
-                            </div>
-                            <div class="tick">
-                                <a href="#">
-                                    <img runat="server" src="~/Content/svg/tick_off.svg" alt="Töröl" width="25" height="25" /></a>
-                            </div>
-                        </div>
-                        <div class="resultpictures">
-                            @*                            <img runat="server" src="~/Content/recipe_images/sajtban-sult-tojas_01.jpg" alt="Sajtban sült tojás - kép 01" width="100" />
-                            <img runat="server" src="~/Content/recipe_images/sajtban-sult-tojas_02.jpg" alt="Sajtban sült tojás - kép 02" width="100" />*@
-                        </div>
-                        <div class="resultbody">
-                            <div class="resultfooter">
-                                <img runat="server" src="~/Content/svg/stars_35.svg" alt="3.5 csillag" width="111" height="20" />
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="resultbox">
-                        <div class="resulthead">
-                            <div class="category">
-                                <img runat="server" src="~/Content/svg/cat_maindish.svg" alt="Sertés" width="45" height="30" />
-                            </div>
-                            <div class="title">
-                                Cézár saláta
-                            </div>
-                            <div class="tick">
-                                <a href="#">
-                                    <img runat="server" src="~/Content/svg/tick_off.svg" alt="Töröl" width="25" height="25" /></a>
-                            </div>
-                        </div>
-                        <div class="resultpictures">
-                            @*                            <img runat="server" src="~/Content/recipe_images/cezar-salata_01.jpg" alt="Cézár saláta - kép 01" width="100" />
-                            <img runat="server" src="~/Content/recipe_images/cezar-salata_02.jpg" alt="Cézár saláta - kép 02" width="100" />*@
-                        </div>
-                        <div class="resultbody">
-                            <div class="resultfooter">
-                                <img runat="server" src="~/Content/svg/stars_45.svg" alt="4.5 csillag" width="111" height="20" />
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="resultbox">
-                        <div class="resulthead">
-                            <div class="category">
-                                <img runat="server" src="~/Content/svg/cat_maindish.svg" alt="Sertés" width="45" height="30" />
-                            </div>
-                            <div class="title">
-                                Pizza
-                            </div>
-                            <div class="tick">
-                                <a href="#">
-                                    <img runat="server" src="~/Content/svg/tick_off.svg" alt="Töröl" width="25" height="25" /></a>
-                            </div>
-                        </div>
-                        <div class="resultpictures">
-                            @*                            <img runat="server" src="~/Content/recipe_images/pizza_01.jpg" alt="Pizza - kép 01" width="100" />
-                            <img runat="server" src="~/Content/recipe_images/pizza_02.jpg" alt="Pizza - kép 02" width="100" />*@
-                        </div>
-                        <div class="resultbody">
-                            <div class="resultfooter">
-                                <img runat="server" src="~/Content/svg/stars_50.svg" alt="2.5 csillag" width="111" height="20" />
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </details>
-        <hr class="double" />
     </div>
     <div id="_RecipeSearchResults">
         @{ Html.RenderPartial("_RecipeSearchResultHead"); }

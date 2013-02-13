@@ -167,6 +167,7 @@
     <Compile Include="Ingredient\Fruit\Kokusz.cs" />
     <Compile Include="Ingredient\Fruit\KokuszBel.cs" />
     <Compile Include="Ingredient\Fruit\KokuszReszelek.cs" />
+    <Compile Include="Ingredient\Vegetable\Kukorica.cs" />
     <Compile Include="Ingredient\Vegetable\Paprika.cs" />
     <Compile Include="Ingredient\Vegetable\Paradicsom.cs" />
     <Compile Include="Ingredient\Spice\Petrezselyem.cs" />

@@ -132,6 +132,21 @@
   <data name="Height" xml:space="preserve">
     <value>Height</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="LanguageDeu" xml:space="preserve">
+    <value>German</value>
+  </data>
+  <data name="LanguageEng" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="LanguageHun" xml:space="preserve">
+    <value>Hungarian</value>
+  </data>
+  <data name="LanguageSpa" xml:space="preserve">
+    <value>Spanish</value>
+  </data>
   <data name="LastName" xml:space="preserve">
     <value>Surname</value>
   </data>

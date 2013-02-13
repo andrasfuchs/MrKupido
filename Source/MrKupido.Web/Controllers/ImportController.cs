@@ -48,7 +48,7 @@ namespace MrKupido.Web.Controllers
 
         public ActionResult Recipe(string id)
         {
-            ImportedRecipe importedRecipe = db.ImportedRecipes.FirstOrDefault(r => (r.UniqueName == id) && (r.Language == System.Threading.Thread.CurrentThread.CurrentCulture.ThreeLetterISOLanguageName));
+            ImportedRecipe importedRecipe = db.ImportedRecipes.FirstOrDefault(r => (r.UniqueName == id) && (r.Language == System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName));
             if (importedRecipe == null) return RedirectToAction("Index", "HomeController");
 
             DataContractJsonSerializer dcjs = new DataContractJsonSerializer(typeof(string[]));
@@ -139,7 +139,7 @@ namespace MrKupido.Web.Controllers
             result.Clear();
 
             // use openoffice (hunspell)
-            string culture = System.Threading.Thread.CurrentThread.CurrentCulture.Name.Replace("-", "_");
+            string culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.Replace("-", "_");
             string hunspellFilename = Path.GetFullPath(@".\" + culture + @"\") + culture;
             hunspellFilename = Server.MapPath(@"~\Content\spelling\" + culture + @"\") + culture;
             Hunspell hunspell = new Hunspell(hunspellFilename + ".aff", hunspellFilename + ".dic");

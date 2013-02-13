@@ -132,6 +132,21 @@
   <data name="Height" xml:space="preserve">
     <value>Magasságom</value>
   </data>
+  <data name="Language" xml:space="preserve">
+    <value>Nyelv</value>
+  </data>
+  <data name="LanguageDeu" xml:space="preserve">
+    <value>Német</value>
+  </data>
+  <data name="LanguageEng" xml:space="preserve">
+    <value>Angol</value>
+  </data>
+  <data name="LanguageHun" xml:space="preserve">
+    <value>Magyar</value>
+  </data>
+  <data name="LanguageSpa" xml:space="preserve">
+    <value>Spanyol</value>
+  </data>
   <data name="LastName" xml:space="preserve">
     <value>Vezetéknevem</value>
   </data>

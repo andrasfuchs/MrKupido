@@ -30,6 +30,8 @@ namespace MrKupido.Processor
         {
             get
             {
+                if (!this.WasInitialized) return new RecipeTreeNode[0];
+
                 return Indexer.All.Cast<RecipeTreeNode>().ToArray();
             }
         }
@@ -37,6 +39,8 @@ namespace MrKupido.Processor
         public void Initialize(string languageISO)
         {
             if (Indexer != null) return;
+
+            this.language = languageISO;
 
             // check if the assemblies are patched already and they are up-to-date
             List<Assembly> assembliesToCheck = new List<Assembly>();
@@ -64,7 +68,7 @@ namespace MrKupido.Processor
             RecipeTreeNode recipeRoot = TreeNode.BuildTree(assembliesToCheck.ToArray(), t => new RecipeTreeNode(t, languageISO), typeof(MrKupido.Library.Recipe.RecipeBase));
 
             // index the tree
-            Indexer = new Indexer(recipeRoot);
+            Indexer = new Indexer(recipeRoot, languageISO);
 
             WasInitialized = true;
 

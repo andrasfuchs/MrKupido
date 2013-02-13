@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = MrKupido.Web.Resources.Home.RecipeNotAvailableYet.PageTitle + " - " + MrKupido.Web.Resources.Shared.Layout.PageTitle;
+}
+<header class="nosearch">
+    <a runat="server" href="~/">
+        <img runat="server" src="~/Content/images/logo_mrkupido_wide.png" alt="Mr. Kupido" width="600" height="157" />
+    </a>
+</header>
+<div>
+    <details id="browser" open class="alwaysopen">
+        <summary>
+            <h1>@MrKupido.Web.Resources.Home.RecipeNotAvailableYet.ErrorHead</h1>
+            <h3>@MrKupido.Web.Resources.Home.RecipeNotAvailableYet.ErrorSummary</h3>
+        </summary>
+        <hr class="space" />        
+    </details>
+</div>
+<div class="formbuttons">
+    <input type="button" value="@MrKupido.Web.Resources.Home.RecipeNotAvailableYet.HomeButton" onclick="window.location='../../@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName'" />
+    @using (Html.BeginForm("IgnoreOldBrowser", "Home", new { }))
+    {
+        <input type="submit" value="@MrKupido.Web.Resources.Home.RecipeNotAvailableYet.UploadRecipeButton" />
+    }
+</div>

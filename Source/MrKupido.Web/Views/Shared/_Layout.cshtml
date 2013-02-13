@@ -1,47 +1,17 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/themes/base/css", "~/Content/css")
-    
-    @Scripts.Render("~/bundles/modernizr")
-    <link rel="icon" type="image/ico" runat="server" href="~/Content/images/mrkupido.ico">
+﻿@using MrKupido.Web.Models
+@this.ScriptBlock(
+    @<script type="text/javascript">
 
-    <!-- IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-	    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
+         /* Downloaded from http://www.whatwg.org/specs/web-apps/current-work/reviewer.js */
 
-    <script type="text/javascript">
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-34057275-1']);
-        _gaq.push(['_setDomainName', 'mrkupido.com']);
-        _gaq.push(['_trackPageview']);
+         function submitReviewComment() {
+             var textField = document.getElementById('reviewCommentText');
+             var text = textField.value;
 
-        (function () {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
-</head>
-<body>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryui")
+             if ((!text) || (text.length <= 15)) return;
 
-    <script type="text/javascript">
-
-        /* Downloaded from http://www.whatwg.org/specs/web-apps/current-work/reviewer.js */
-
-        function submitReviewComment() {
-            var textField = document.getElementById('reviewCommentText');
-            var text = textField.value;
-
-            if ((!text) || (text.length <= 15)) return;
-
-            $.ajax({
-                url: '@Url.Action("ReportBug", "Base")',
+             $.ajax({
+                 url: '@Url.Action("ReportBug", "Base")',
                 type: "POST",
                 dataType: "html",
                 data: {
@@ -75,8 +45,41 @@
             if (event.keyCode == 13) { submitReviewComment() };
         }
     </script>
+)
 
-    @RenderSection("scripts", required: false)
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+   
+    <link runat="server" href="~/Content/themes/base/jquery.ui.autocomplete.css" rel="stylesheet" type="text/css">
+    <link runat="server" href="~/Content/themes/base/jquery.ui.slider.css" rel="stylesheet" type="text/css">
+    <link runat="server" href="~/Content/themes/base/jquery.ui.theme.css" rel="stylesheet" type="text/css">
+    @Styles.Render("~/Content/css")
+
+    <link rel="icon" type="image/ico" runat="server" href="~/Content/images/mrkupido.ico">
+
+    <!-- IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+	    <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+    <script type="text/javascript" async>
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-34057275-1']);
+        _gaq.push(['_setDomainName', 'mrkupido.com']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+</head>
+<body>
+
     <div class="wrapper">
         @RenderBody()
         <hr class="single" />
@@ -88,7 +91,8 @@
                 |<a href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/help/disclaimer">@MrKupido.Web.Resources.Shared.Layout.Disclaimer</a>
             </p>
             <p>
-                &copy; 2012-@DateTime.Now.Year.ToString() <a href="http://hu.linkedin.com/pub/andras-fuchs/32/355/924">Andras Fuchs</a> @MrKupido.Web.Resources.Shared.Layout.AllRightsReserved</p>
+                &copy; 2012-@DateTime.Now.Year.ToString() <a href="http://hu.linkedin.com/pub/andras-fuchs/32/355/924">Andras Fuchs</a> @MrKupido.Web.Resources.Shared.Layout.AllRightsReserved
+            </p>
         </footer>
     </div>
 
@@ -98,8 +102,16 @@
         <span id="reviewSection">@MrKupido.Web.Resources.Shared.Layout.ReviewText</span>
         @{ string placeHolderText = MrKupido.Web.Resources.Shared.Layout.ReviewPlaceholder + " v" + (Session["WebAppFileVersion"] as string); }
         <input id="reviewCommentText" placeholder='@placeHolderText' size="60" onkeydown="javascript:reviewCommentChanged(event);">
-        <input id="reviewCommentButton" value="@MrKupido.Web.Resources.Shared.Layout.ReviewButton" type="button" disabled="disabled" onclick="javascript:submitReviewComment();">
+        <input id="reviewCommentButton" value="@MrKupido.Web.Resources.Shared.Layout.ReviewButton" type="button" disabled="disabled" onclick="javascript: submitReviewComment();">
     </div>
+
+
+@*    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>*@
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+
+    @Scripts.Render("~/Scripts/wTimer.js")
+    @this.WriteScriptBlocks()
 
 </body>
 </html>

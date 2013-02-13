@@ -20,6 +20,8 @@ namespace MrKupido.Processor
         private Dictionary<string, SortedList<string, TreeNode>> uniqueNameIndex = new Dictionary<string, SortedList<string, TreeNode>>();
 
         private List<TreeNode> all = new List<TreeNode>();
+        public string LanguageISO { get; private set; }
+
         public TreeNode[] All 
         { 
             get
@@ -28,14 +30,18 @@ namespace MrKupido.Processor
             }
         }
 
-        public Indexer(TreeNode root)
+        public Indexer(TreeNode root, string languageISO)
         {
+            this.LanguageISO = languageISO;
+
             all.Clear();
             AddToIndex(root);
         }
 
         private void AddToIndex(TreeNode node)
         {
+            if (node.LanguageISO != this.LanguageISO) return;
+
             all.Add(node);
 
             if (classNameIndex.ContainsKey(node.ClassName)) throw new MrKupidoException("Class-name index already has an item with the key '{0}'", node.ClassName);

@@ -10,7 +10,8 @@
 </header>
 @using (Html.BeginForm("Profile", "Account", FormMethod.Post, new { @id = "profileForm" }))
 {
-
+    MrKupido.Model.User user = Session.GetCurrentUser();
+        
     <div id="profile">
         <details id="basicinfo" open class="alwaysopen">
             <summary>
@@ -20,11 +21,29 @@
             <ul>
                 <li>
                     <div class="label">
+                        <label for="language">
+                            @MrKupido.Web.Resources.Account.Profile.Language:</label>
+                    </div>
+                    <div id="language" class="input">
+                        <input id="languageHun" name="language" type="radio" value="hu-HU" @(user.CultureName == "hu-HU" ? "checked" : "")/><label for="languageHun">@MrKupido.Web.Resources.Account.Profile.LanguageHun</label>
+                        <input id="languageEng" name="language" type="radio" value="en-GB" @(user.CultureName == "en-GB" ? "checked" : "")/><label for="languageEng">@MrKupido.Web.Resources.Account.Profile.LanguageEng</label>
+                        <input id="languageDeu" name="language" type="radio" value="de-DE" @(user.CultureName == "de-DE" ? "checked" : "")/><label for="languageDeu">@MrKupido.Web.Resources.Account.Profile.LanguageDeu</label>
+                        <input id="languageSpa" name="language" type="radio" value="es-ES" @(user.CultureName == "es-ES" ? "checked" : "")/><label for="languageSpa">@MrKupido.Web.Resources.Account.Profile.LanguageSpa</label>
+@*
+                        <input id="languageHun" name="language" type="checkbox" value="hu-HU" @(user.CultureName == "hu-HU" ? "checked" : "")/><label for="languageHun">@MrKupido.Web.Resources.Account.Profile.LanguageHun</label>
+                        <input id="languageEng" name="language" type="checkbox" value="en-GB" @(user.CultureName == "en-GB" ? "checked" : "")/><label for="languageEng">@MrKupido.Web.Resources.Account.Profile.LanguageEng</label>
+                        <input id="languageDeu" name="language" type="checkbox" value="de-DE" @(user.CultureName == "de-DE" ? "checked" : "")/><label for="languageDeu">@MrKupido.Web.Resources.Account.Profile.LanguageDeu</label>
+                        <input id="languageSpa" name="language" type="checkbox" value="es-ES" @(user.CultureName == "es-ES" ? "checked" : "")/><label for="languageSpa">@MrKupido.Web.Resources.Account.Profile.LanguageSpa</label>
+*@
+                    </div>
+                </li>
+                <li>
+                    <div class="label">
                         <label for="email">
                             @MrKupido.Web.Resources.Account.Profile.Email:</label>
                     </div>
                     <div class="input">
-                        <input type="email" id="email" name="email" required disabled value='@(Session.GetCurrentUser().Email)'/>
+                        <input type="email" id="email" name="email" autocomplete="off" required disabled value='@(user.Email)'/>
                     </div>
                 </li>
                 <li>
@@ -33,7 +52,7 @@
                             @MrKupido.Web.Resources.Account.Profile.LastName:</label>
                     </div>
                     <div class="input">
-                        <input type="text" id="lastname" name="lastname" required value='@(Session.GetCurrentUser().LastName)'/>
+                        <input type="text" id="lastname" name="lastname" autocomplete="off" required pattern="[a-zA-Z\u00E0-\u00FC]+" value='@(user.LastName)'/>
                     </div>
                 </li>
                 <li>
@@ -42,7 +61,7 @@
                             @MrKupido.Web.Resources.Account.Profile.FirstName:</label>
                     </div>
                     <div class="input">
-                        <input type="text" id="firstname" name="firstname" required value='@(Session.GetCurrentUser().FirstName)'/>
+                        <input type="text" id="firstname" name="firstname" autocomplete="off" required pattern="[a-zA-Z\u00E0-\u00FC]+" value='@(user.FirstName)'/>
                     </div>
                 </li>
                 <li>
@@ -51,7 +70,7 @@
                             @MrKupido.Web.Resources.Account.Profile.NickName:</label>
                     </div>
                     <div class="input">
-                        <input type="text" id="nickname" name="nickname" required value='@(Session.GetCurrentUser().NickName)'/>
+                        <input type="text" id="nickname" name="nickname" autocomplete="off" required pattern="[a-zA-Z0-9\u00E0-\u00FC]+" value='@(user.NickName)'/>
                     </div>
                 </li>
             </ul>
@@ -61,7 +80,7 @@
             <summary>
                 <h1>@MrKupido.Web.Resources.Account.Profile.Physical</h1>
                 <h2>
-                    <a href="#">@MrKupido.Web.Resources.Account.Profile.PhysicalWhy</a>
+                    <a href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/help/defaultportionsize">@MrKupido.Web.Resources.Account.Profile.PhysicalWhy</a>
                 </h2>
             </summary>
             <ul>
@@ -71,7 +90,7 @@
                             @MrKupido.Web.Resources.Account.Profile.Height:</label>
                     </div>
                     <div class="input">
-                        <input type="text" id="height" name="height" disabled value='@(Session.GetCurrentUser().Height != 0 ? Session.GetCurrentUser().Height.ToString("0.00 m") : MrKupido.Web.Resources.Account.Profile.Unknown)'/>
+                        <input type="text" id="height" name="height" autocomplete="off" placeholder="165 cm" pattern="[0-9]+ cm" value='@(user.Height != 0 ? (user.Height * 100).ToString("0 cm") : "")'/>
                     </div>
                 </li>
                 <li>
@@ -80,7 +99,7 @@
                             @MrKupido.Web.Resources.Account.Profile.Weight:</label>
                     </div>
                     <div class="input">
-                        <input type="text" id="weight" name="weight" disabled value='@(Session.GetCurrentUser().Weight != 0 ? Session.GetCurrentUser().Weight.ToString("0.00 kg") : MrKupido.Web.Resources.Account.Profile.Unknown)'/>
+                        <input type="text" id="weight" name="weight" autocomplete="off" placeholder="@((61.50f).ToString("0.00")) kg" pattern="[0-9.,]+ kg" value='@(user.Weight != 0 ? user.Weight.ToString("0.00 kg") : "")'/>
                     </div>
                 </li>
                 <li>
@@ -89,7 +108,7 @@
                             @MrKupido.Web.Resources.Account.Profile.DateOfBirth:</label>
                     </div>
                     <div class="input">
-                        <input type="text" id="dateofbirth" name="dateofbirth" disabled value='@(Session.GetCurrentUser().DateOfBirth.HasValue ? Session.GetCurrentUser().DateOfBirth.Value.ToString("yyyy-MM-dd") : MrKupido.Web.Resources.Account.Profile.Unknown)'/>
+                        <input type="text" id="dateofbirth" name="dateofbirth" autocomplete="off" placeholder="1975-05-24" pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" value='@(user.DateOfBirth.HasValue ? user.DateOfBirth.Value.ToString("yyyy-MM-dd") : "")'/>
                     </div>
                 </li>
             </ul>
@@ -140,7 +159,7 @@
                                 A GitHub felhasználónevem:</label>
                         </div>
                         <div class="input">
-                            <input type="text" id="githubuser" name="githubuser" required value='@(Session.GetCurrentUser().FullName)'/>
+                            <input type="text" id="githubuser" name="githubuser" required value='@(user.FullName)'/>
                         </div>
                     </li>
                 </ul>

@@ -1,65 +1,67 @@
 ﻿@model MrKupido.Library.IDirection[]
+@using MrKupido.Web.Models
+@this.ScriptBlock(
+    @<script type="text/javascript">
+         function makeStruct(names) {
+             var names = names.split(' ');
+             var count = names.length;
+             function constructor() {
+                 for (var i = 0; i < count; i++) {
+                     this[names[i]] = arguments[i];
+                 }
+             }
+             return constructor;
+         }
 
-    <script type="text/javascript">
-        function makeStruct(names) {
-            var names = names.split(' ');
-            var count = names.length;
-            function constructor() {
-                for (var i = 0; i < count; i++) {
-                    this[names[i]] = arguments[i];
-                }
-            }
-            return constructor;
-        }
+         var DirectionItem = makeStruct("id image timeInSecs");
 
-        var DirectionItem = makeStruct("id image timeInSecs");
+         var timerCounter = 0;
+         var directionItems;
 
-        var timerCounter = 0;
-        var directionItems;
+         var timer = new wTimer({
+             fps: 5,
+             run: function () {
+                 timerCounter += 0.2;
+                 var currentTimeInSeconds = 0
 
-        var timer = new wTimer({
-            fps: 5,
-            run: function () {
-                timerCounter += 0.2;
-                var currentTimeInSeconds = 0
+                 if (typeof directionItems == 'undefined') {
+                     directionItems = new Array(100);
+                     $("img[id^='clock_']").each(function (i, item) {
 
-                if (typeof directionItems == 'undefined') {
-                    directionItems = new Array(100);
-                    $("img[id^='clock_']").each(function (i, item) {
+                         directionItems[i] = new DirectionItem(item["id"], item, parseInt(item["id"].substring(6) - currentTimeInSeconds, 10));
+                         currentTimeInSeconds += directionItems[i].timeInSecs;
+                     });
+                 }
 
-                        directionItems[i] = new DirectionItem(item["id"], item, parseInt(item["id"].substring(6) - currentTimeInSeconds, 10));
-                        currentTimeInSeconds += directionItems[i].timeInSecs;
-                    });
-                }
+                 currentTimeInSeconds = 0;
+                 var currentIndex = 0;
 
-                currentTimeInSeconds = 0;
-                var currentIndex = 0;
+                 while ((directionItems[currentIndex] != null) && (directionItems[currentIndex].timeInSecs + currentTimeInSeconds <= timerCounter)) {
+                     directionItems[currentIndex].image["src"] = "./../../Content/svg/d_clock8.svg";
 
-                while ((directionItems[currentIndex] != null) && (directionItems[currentIndex].timeInSecs + currentTimeInSeconds <= timerCounter)) {
-                    directionItems[currentIndex].image["src"] = "./../../Content/svg/d_clock8.svg";
+                     currentTimeInSeconds += directionItems[currentIndex].timeInSecs;
+                     currentIndex++;
+                 }
 
-                    currentTimeInSeconds += directionItems[currentIndex].timeInSecs;
-                    currentIndex++;
-                }
+                 if (directionItems[currentIndex] != null) {
+                     var imgIndex = Math.floor(((timerCounter - currentTimeInSeconds) / directionItems[currentIndex].timeInSecs) * 8 + 1);
 
-                if (directionItems[currentIndex] != null) {
-                    var imgIndex = Math.floor(((timerCounter - currentTimeInSeconds) / directionItems[currentIndex].timeInSecs) * 8 + 1);
+                     directionItems[currentIndex].image["src"] = "./../../Content/svg/d_clock" + imgIndex + ".svg";
+                     currentTimeInSeconds += directionItems[currentIndex].timeInSecs;
+                     currentIndex++;
+                 }
 
-                    directionItems[currentIndex].image["src"] = "./../../Content/svg/d_clock" + imgIndex + ".svg";
-                    currentTimeInSeconds += directionItems[currentIndex].timeInSecs;
-                    currentIndex++;
-                }
+                 while (directionItems[currentIndex] != null) {
+                     directionItems[currentIndex].image["src"] = "./../../Content/svg/d_clock0.svg";
 
-                while (directionItems[currentIndex] != null) {
-                    directionItems[currentIndex].image["src"] = "./../../Content/svg/d_clock0.svg";
+                     currentTimeInSeconds += directionItems[currentIndex].timeInSecs;
+                     currentIndex++;
+                 }
 
-                    currentTimeInSeconds += directionItems[currentIndex].timeInSecs;
-                    currentIndex++;
-                }
-
-            }
-        });
+             }
+         });
     </script>
+)
 
 @if (Model == null)
 {
@@ -104,19 +106,19 @@ else
 
                                 if (!String.IsNullOrEmpty(refSegment.IconUrl))
                                 {
-                                        <img runat="server" src="@refSegment.IconUrl" alt="@refSegment.IconAlt" title="@refSegment.IconAlt" width="32px" height="32px" />
+                            <img runat="server" src="@refSegment.IconUrl" alt="@refSegment.IconAlt" title="@refSegment.IconAlt" width="32px" height="32px" />
                                 }
 
                                 if (refSegment.Id > 0)
                                 {
-                                    <span>@refSegment.Id</span>
+                            <span>@refSegment.Id</span>
                                 }
 
-                                @refSegment.Text
+                            @refSegment.Text
                             }
                             else
                             {
-                                @segment
+                            @segment
                             }
                         }
                     </span>
