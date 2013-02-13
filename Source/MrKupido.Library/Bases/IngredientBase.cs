@@ -10,7 +10,7 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("eng", "ingredient")]
     [NameAlias("hun", "hozzávaló")]
 
-    public class IngredientBase : MarshalByRefObject, IIngredient
+    public class IngredientBase : NamedObject, IIngredient
     {
         private static Dictionary<string,object> staticInfoObjects = new Dictionary<string,object>();
 
@@ -21,21 +21,6 @@ namespace MrKupido.Library.Ingredient
         public IngredientState State { get; set; }
 
         public int PieceCount { get; set; }
-
-        private string name;
-        
-        public string Name
-        {
-            get
-            {
-                if (name == null)
-                {
-                    name = NameAliasAttribute.GetName(this.GetType());
-                }
-
-                return name;
-            }
-        }
 
         public ShoppingListCategory? Category { get; protected set; }
 
@@ -186,12 +171,12 @@ namespace MrKupido.Library.Ingredient
             this.SetAmount(amount1 + amount2, this.Unit);
         }
 
-        public override string ToString()
+        public virtual string ToString(string languageISO)
         {
-            return ToString(true, true);
+            return ToString(languageISO, true, true);
         }
 
-        public virtual string ToString(bool includeAmount, bool includeState)
+        public virtual string ToString(string languageISO, bool includeAmount, bool includeState)
         {
             string amountStr = "";
 
@@ -251,7 +236,7 @@ namespace MrKupido.Library.Ingredient
                 }
             }
 
-            return amountStr + stateStr + Name;
+            return amountStr + stateStr + this.GetName(languageISO);
         }
 
         public object Clone()

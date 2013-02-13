@@ -103,6 +103,9 @@
             },
             close: function () {
                 $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+            },
+            focus: function(event, ui) {
+                event.preventDefault();
             }
         })
 
@@ -120,25 +123,25 @@
 
     });
 
-    function searchKeywordSelected(event, ui) {
-        $.ajax({
-            url: '@Url.Action("SearchSelected", "Home")',
-            type: "POST",
-            dataType: "json",
-            data: {
-                selectedValue: ui.item ? ui.item.value : this.value,
-                wasItemSelected: ui.item != null,
-                isNegative: $("#querySign").html() == "-"
-            },
-            success: function (data) {
-                refreshFilters(data);
-                $("#querySign").html("+");
-            }, // success
-            error: function (xhr, textStatus, errorThrown) {
-            } // error
-        }); // ajax
-        $(this).val(''); return false;
-    };
+         function searchKeywordSelected(event, ui) {
+             $.ajax({
+                 url: '@Url.Action("SearchSelected", "Home")',
+                 type: "POST",
+                 dataType: "json",
+                 data: {
+                     selectedValue: ui.item ? ui.item.value : this.value,
+                     wasItemSelected: ui.item != null,
+                     isNegative: $("#querySign").html() == "-"
+                 },
+                 success: function (data) {
+                     refreshFilters(data);
+                     $("#querySign").html("+");
+                 }, // success
+                 error: function (xhr, textStatus, errorThrown) {
+                 } // error
+             }); // ajax
+             $(this).val(''); return false;
+         };
 
     function refreshFilters(filters, invokeDoSearch) {
         invokeDoSearch = typeof invokeDoSearch !== 'undefined' ? invokeDoSearch : true;
@@ -253,18 +256,18 @@
     </script>
 )
 
-<a runat="server" href="~/hun">
+<a runat="server" href="~/@Session["Language"]">
     <img runat="server" src="~/Content/svg/logo_mrkupido.svg" alt="Mr. Kupido" width="200" height="152" />
 </a>
 <div class="userbar">
     @if (Session.GetCurrentUser() == null)
     {
-        <span id="login"><a runat="server" href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/Account/LogIn">@MrKupido.Web.Resources.Shared.SearchHeader.Login</a></span>
+        <span id="login"><a runat="server" href="~/@Session["Language"]/Account/LogIn">@MrKupido.Web.Resources.Shared.SearchHeader.Login</a></span>
         <img runat="server" src="~/Content/svg/icon_avatar.svg" alt="Avatar" width="50" height="50" />
     }
     @if (Session.GetCurrentUser() != null)
     {
-        <span id="name"><a runat="server" href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/Account/Profile">@Session.GetCurrentUserDisplayName()</a></span><span id="messages" style="display: none">0</span>
+        <span id="name"><a runat="server" href="~/@Session["Language"]/Account/Profile">@Session.GetCurrentUserDisplayName()</a></span><span id="messages" style="display: none">0</span>
         <img runat="server" src="~/Content/svg/icon_avatar.svg" alt="Avatar" width="50" height="50" />
         <img runat="server" id="avatar" src="@(Session.IsAvatarCached() ? Session.GetCurrentUserAvatarUrl(false) : "~/Content/svg/icon_avatar.svg")" alt="Avatar" width="50" height="50" />
         <img runat="server" id="menu-trigger" src="~/Content/svg/icon_menutrigger.svg" alt="Menu" width="11" height="9" />
@@ -278,11 +281,11 @@
                         <li><a href="~/spa" style="text-decoration: line-through;">@MrKupido.Web.Resources.Shared.SearchHeader.LanguageSpa</a></li>
                     </ul>
                 </li>
-                <li><a href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/account/profile">@MrKupido.Web.Resources.Shared.SearchHeader.Profile</a></li>
-                <li><a href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/ingredient/trees">@MrKupido.Web.Resources.Shared.SearchHeader.Taxonomy</a></li>
-                <li><a href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/import/recipelist">@MrKupido.Web.Resources.Shared.SearchHeader.Import</a></li>
-                <li><a href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/help">@MrKupido.Web.Resources.Shared.SearchHeader.Help</a></li>
-                <li><a href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/account/logout">@MrKupido.Web.Resources.Shared.SearchHeader.Logout</a></li>
+                <li><a href="~/@Session["Language"]/account/profile">@MrKupido.Web.Resources.Shared.SearchHeader.Profile</a></li>
+                <li><a href="~/@Session["Language"]/ingredient/trees">@MrKupido.Web.Resources.Shared.SearchHeader.Taxonomy</a></li>
+                <li><a href="~/@Session["Language"]/import/recipelist">@MrKupido.Web.Resources.Shared.SearchHeader.Import</a></li>
+                <li><a href="~/@Session["Language"]/help">@MrKupido.Web.Resources.Shared.SearchHeader.Help</a></li>
+                <li><a href="~/@Session["Language"]/account/logout">@MrKupido.Web.Resources.Shared.SearchHeader.Logout</a></li>
             </ul>
         </nav>
 

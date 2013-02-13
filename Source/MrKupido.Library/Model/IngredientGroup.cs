@@ -49,19 +49,6 @@ namespace MrKupido.Library.Ingredient
         }
 
         private string nameOverride;
-        public new string Name
-        {
-            set
-            {
-                nameOverride = value;
-            }
-
-            get
-            {
-                if (Ingredients.Length == 0) return base.Name;
-                else return (nameOverride == null ? Ingredients[0].Name : nameOverride);
-            }
-        }
 
         public IngredientGroup(params IIngredient[] ingredients) : base(0.0f, MeasurementUnit.none)
         {
@@ -123,12 +110,23 @@ namespace MrKupido.Library.Ingredient
             }
         }
 
-        public override string ToString()
+        public void SetName(string value)
+        {
+            nameOverride = value;
+        }
+
+
+        public override string GetName(string languageISO)
+        {
+            if (Ingredients.Length == 0) return base.GetName(languageISO);
+            else return (nameOverride == null ? Ingredients[0].GetName(languageISO) : nameOverride);
+        }
+
+        public override string ToString(string languageISO)
         {
             if (nameOverride != null) return nameOverride;
 
-            //StringBuilder sb = new StringBuilder(base.ToString());
-            StringBuilder sb = new StringBuilder(Name);
+            StringBuilder sb = new StringBuilder(this.GetName(languageISO));
 
             if (ingredients.Count() > 0)
             {

@@ -114,10 +114,40 @@ namespace MrKupido.Processor.Model
             return new string[0];
         }
 
-        public IIngredient[] GetIngredients(float amount, int multiplier)
+        public RuntimeIngredient[] GetIngredients(float amount, int multiplier)
         {
-            float am = amount * multiplier;            
-            
+            List<RuntimeIngredient> result = new List<RuntimeIngredient>();
+
+            IIngredient[] ingredients = GetRecipeIngredients(amount, multiplier);
+
+            foreach (IngredientBase i in ingredients)
+            {
+                string classFullName = i.GetType().FullName;
+
+                RecipeTreeNode rtn = Cache.Recipe[classFullName];
+                if (rtn != null)
+                {
+                    result.Add(new RuntimeIngredient(i, rtn));
+                    continue;
+                }
+
+                IngredientTreeNode itn = Cache.Ingredient[classFullName];
+                if (itn != null)
+                {
+                    result.Add(new RuntimeIngredient(i, itn));
+                    continue;
+                }
+
+                throw new MrKupidoException("Ingredient '{0}' was not found eighter in the ingredients or recipes trees.");
+            }
+
+            return result.ToArray();
+        }
+
+        private IIngredient[] GetRecipeIngredients(float amount, int multiplier)
+        {
+            float am = amount * multiplier;     
+                   
             lock (ingredientCache)
             {
                 if (!ingredientCache.ContainsKey(am))

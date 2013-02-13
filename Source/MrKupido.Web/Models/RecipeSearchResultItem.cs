@@ -65,14 +65,14 @@ namespace MrKupido.Web.Models
             this.IconUrl = rtn.IconUrl;
 
             StringBuilder sb = new StringBuilder();
-            foreach (IIngredient i in rtn.GetIngredients(1.0f, 1))
+            foreach (RuntimeIngredient i in rtn.GetIngredients(1.0f, 1))
             {
-                if ((this.MainCategory == ShoppingListCategory.Unknown) && (i.Category.HasValue))
+                if ((this.MainCategory == ShoppingListCategory.Unknown) && (i.Ingredient.Category.HasValue))
                 {
-                    this.MainCategory = i.Category.Value;
+                    this.MainCategory = i.Ingredient.Category.Value;
                 }
 
-                sb.Append(i.Name);
+                sb.Append(i.Ingredient.GetName(rtn.LanguageISO));
                 sb.Append(", ");
             }
             if (sb.Length >= 2) sb.Remove(sb.Length - 2, 2);
@@ -106,7 +106,7 @@ namespace MrKupido.Web.Models
 
                 if (rtn.CommercialAttribute.Brand != null)
                 {
-                    pb = (ProviderBase)Activator.CreateInstance(rtn.CommercialAttribute.Brand, Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName);
+                    pb = (ProviderBase)Activator.CreateInstance(rtn.CommercialAttribute.Brand, rtn.LanguageISO);
 
                     sb.Append("Márka: ");
                     sb.Append(pb.BrandName);
@@ -117,7 +117,7 @@ namespace MrKupido.Web.Models
 
                 if (rtn.CommercialAttribute.MadeBy != null)
                 {
-                    pb = (ProviderBase)Activator.CreateInstance(rtn.CommercialAttribute.MadeBy, Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName);
+                    pb = (ProviderBase)Activator.CreateInstance(rtn.CommercialAttribute.MadeBy, rtn.LanguageISO);
 
                     sb.Append("Gyártja: ");
                     sb.Append(pb.CompanyName);
@@ -128,7 +128,7 @@ namespace MrKupido.Web.Models
 
                 if (rtn.CommercialAttribute.DistributedBy != null)
                 {
-                    pb = (ProviderBase)Activator.CreateInstance(rtn.CommercialAttribute.DistributedBy, Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName);
+                    pb = (ProviderBase)Activator.CreateInstance(rtn.CommercialAttribute.DistributedBy, rtn.LanguageISO);
 
                     sb.Append("Terjeszti: ");
                     sb.Append(pb.CompanyName);

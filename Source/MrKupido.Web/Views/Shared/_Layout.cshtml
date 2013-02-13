@@ -85,10 +85,10 @@
         <hr class="single" />
         <footer>
             <p>
-                <a runat="server" href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName">@MrKupido.Web.Resources.Shared.Layout.Homepage</a>
-                |<a runat="server" href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/account/profile">@MrKupido.Web.Resources.Shared.Layout.Profile</a>
-                |<a href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/account/settings">@MrKupido.Web.Resources.Shared.Layout.Settings</a>
-                |<a href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/help/disclaimer">@MrKupido.Web.Resources.Shared.Layout.Disclaimer</a>
+                <a runat="server" href="~/@Session["Language"]">@MrKupido.Web.Resources.Shared.Layout.Homepage</a>
+                |<a runat="server" href="~/@Session["Language"]/account/profile">@MrKupido.Web.Resources.Shared.Layout.Profile</a>
+                |<a href="~/@Session["Language"]/account/settings">@MrKupido.Web.Resources.Shared.Layout.Settings</a>
+                |<a href="~/@Session["Language"]/help/disclaimer">@MrKupido.Web.Resources.Shared.Layout.Disclaimer</a>
             </p>
             <p>
                 &copy; 2012-@DateTime.Now.Year.ToString() <a href="http://hu.linkedin.com/pub/andras-fuchs/32/355/924">Andras Fuchs</a> @MrKupido.Web.Resources.Shared.Layout.AllRightsReserved

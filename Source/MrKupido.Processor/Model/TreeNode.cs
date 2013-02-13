@@ -64,7 +64,7 @@ namespace MrKupido.Processor.Model
             ClassFullName = nodeClass.FullName;
             Children = new TreeNode[0];
 
-            string name = NameAliasAttribute.GetName(nodeClass, languageISOCode: LanguageISO);
+            string name = NameAliasAttribute.GetName(languageISO, nodeClass);
             
             if (String.IsNullOrEmpty(name))
             {

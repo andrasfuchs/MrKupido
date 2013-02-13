@@ -76,11 +76,11 @@
             </ul>
         </details>
         <hr />
-        <details id="physicalinfo" open>
+        <details id="physicalinfo" open class="alwaysopen">
             <summary>
                 <h1>@MrKupido.Web.Resources.Account.Profile.Physical</h1>
                 <h2>
-                    <a href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/help/defaultportionsize">@MrKupido.Web.Resources.Account.Profile.PhysicalWhy</a>
+                    <a href="~/@Session["Language"]/help/defaultportionsize">@MrKupido.Web.Resources.Account.Profile.PhysicalWhy</a>
                 </h2>
             </summary>
             <ul>
@@ -115,7 +115,7 @@
         </details>
         <hr />
         <div style="display: none">
-            <details id="likes">
+            <details id="likes" class="alwaysopen">
                 <summary>
                     <h1>Mit szeretsz és mit nem?</h1>
                     <h2>
@@ -127,7 +127,7 @@
                 </ul>
             </details>
             <hr class="single" />
-            <details id="conditions">
+            <details id="conditions" class="alwaysopen">
                 <summary>
                     <h1>Egészségügyi állapot</h1>
                     <h2>
@@ -139,7 +139,7 @@
                 </ul>
             </details>
             <hr class="single" />
-            <details id="advanced">
+            <details id="advanced" class="alwaysopen">
                 <summary>
                     <h1>Haladó beállítások</h1>
                 </summary>

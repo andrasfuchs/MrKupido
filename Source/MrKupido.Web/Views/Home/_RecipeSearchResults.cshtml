@@ -13,7 +13,7 @@
                     <div class="title">
                         <span class="titlecontent">
 
-                            <a runat="server" href="~/@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName/@(System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName == "hun" ? "recept" : "recipe")/@rsri[i].UniqueName" class='@(rsri[i].IsImplemented ? "enabled" : "disabled")'>
+                            <a runat="server" href="~/@Session["Language"]/@((string)Session["Language"] == "hun" ? "recept" : "recipe")/@rsri[i].UniqueName" class='@(rsri[i].IsImplemented ? "enabled" : "disabled")'>
 
                                 @rsri[i].DisplayName
 
@@ -32,14 +32,20 @@
                     </div>
                 </div>
                 <div class="resulticons">
-                    @*                    @if (rsri[i].CSSClass == "commercial")
+                    @if (rsri[i].CSSClass == "commercial")
                     {
-                        <img runat="server" src="~/Content/svg/type_commercial.svg" width="35px" height="35px" />
+                        if (String.IsNullOrEmpty(rsri[i].CommercialIconFilename))
+                        {
+                            // this must be an item to order from restaurants
+                            <img runat="server" src="~/Content/svg/type_orderable.svg" width="35px" height="35px" />
+                        } else
+                        {
+                            // this must be an item to buy in stores
+                            <img runat="server" src="~/Content/svg/type_commercial.svg" width="35px" height="35px" />
+                        }
                     } else 
                     {
-                    *@
-
-
+                    
                     <div class="versions">
                         @if (rsri[i].SubVersions > 0)
                         {
@@ -53,7 +59,7 @@
                     </div>
 
 
-                    @*}*@
+                    }
 
 
                     @if (rsri[i].IsVegetarian)

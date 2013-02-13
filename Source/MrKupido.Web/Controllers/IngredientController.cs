@@ -23,10 +23,11 @@ namespace MrKupido.Web.Controllers
         {
             TreeNode[] result = new TreeNode[4];
 
-            result[0] = TreeNode.BuildTree(Cache.Assemblies, t => new NatureTreeNode(t, System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName), typeof(MrKupido.Library.Nature.NatureBase));
-            result[1] = Cache.Ingredient["MrKupido.Library.Ingredient.IngredientBase"];
-            result[2] = TreeNode.BuildTree(Cache.Assemblies, t => new RecipeTreeNode(t, System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName), typeof(MrKupido.Library.Recipe.RecipeBase));
-            result[3] = TreeNode.BuildTree(Cache.Assemblies, t => new EquipmentTreeNode(t, System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName), typeof(MrKupido.Library.Equipment.EquipmentBase));
+            result[0] = TreeNode.BuildTree(Cache.Assemblies, t => new NatureTreeNode(t, (string)Session["Language"]), typeof(MrKupido.Library.Nature.NatureBase));
+            //result[1] = Cache.Ingredient["MrKupido.Library.Ingredient.IngredientBase"];
+            result[1] = TreeNode.BuildTree(Cache.Assemblies, t => new IngredientTreeNode(t, (string)Session["Language"]), typeof(MrKupido.Library.Ingredient.IngredientBase));
+            result[2] = TreeNode.BuildTree(Cache.Assemblies, t => new RecipeTreeNode(t, (string)Session["Language"]), typeof(MrKupido.Library.Recipe.RecipeBase));
+            result[3] = TreeNode.BuildTree(Cache.Assemblies, t => new EquipmentTreeNode(t, (string)Session["Language"]), typeof(MrKupido.Library.Equipment.EquipmentBase));
 
             ValidateIconUrls(result);
 

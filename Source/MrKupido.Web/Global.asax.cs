@@ -41,11 +41,12 @@ namespace MrKupido.Web
             
             // check if the language is present and supported
             string language = routeData.Values["language"].ToString();
+            string sessionLanguage = Session["Language"] == null ? System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName : (string)Session["Language"];
 
             if (language == "xxx")
             {
                 // current language
-                language = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName;
+                language = sessionLanguage;
             }
 
             if ((language != "eng") && (language != "hun"))
@@ -62,6 +63,7 @@ namespace MrKupido.Web
 
                 routeData.Values["language"] = language;
                 Response.RedirectToRoute(routeData.Values);
+                Response.End();
                 return;
             }
             //
@@ -70,16 +72,17 @@ namespace MrKupido.Web
             // we have a special redirection for the recipes
             // typically if you have a culture language like 'spa' and enter a recipe url with something else like 'eng'
             // we should look for the Spanish version of the originally English recipe first
-            if (((((NamedRoute)routeData.Route).Name == "RecipeEng") && (System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName != "eng"))
-                || ((((NamedRoute)routeData.Route).Name == "RecipeHun") && (System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName != "hun"))
-                || ((((NamedRoute)routeData.Route).Name == "RecipeDeu") && (System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName != "deu"))
-                || ((((NamedRoute)routeData.Route).Name == "RecipeSpa") && (System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName != "spa")))
+            if (((((NamedRoute)routeData.Route).Name == "RecipeEng") && (sessionLanguage != "eng"))
+                || ((((NamedRoute)routeData.Route).Name == "RecipeHun") && (sessionLanguage != "hun"))
+                || ((((NamedRoute)routeData.Route).Name == "RecipeDeu") && (sessionLanguage != "deu"))
+                || ((((NamedRoute)routeData.Route).Name == "RecipeSpa") && (sessionLanguage != "spa")))
             {
-                Response.RedirectToRoute("Default", new { language = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName, controller = "Home", action = "FindRecipeInLanguage", id = routeData.Values["id"], originalLanguage = language });
+                Response.RedirectToRoute("Default", new { language = sessionLanguage, controller = "Home", action = "FindRecipeInLanguage", id = routeData.Values["id"], originalLanguage = language });
+                Response.End();
                 return;
             }
 
-            CultureInitializer.InitializeCulture(Request, language);
+            CultureInitializer.InitializeCulture(Request, new HttpSessionStateWrapper(Session), language);
 
             if (!(Request.Url.AbsoluteUri.Contains("notsupportedbrowser") || Request.Url.AbsoluteUri.Contains("IgnoreOldBrowser")))
             {
@@ -132,6 +135,7 @@ namespace MrKupido.Web
                     routeData.Values.Add("updateURL", obd.UpdateUrl);
 
                     Response.RedirectToRoute(routeData.Values);
+                    Response.End();
                     return;
                 }
             }

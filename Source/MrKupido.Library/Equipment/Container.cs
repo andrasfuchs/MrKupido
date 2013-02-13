@@ -15,8 +15,6 @@ namespace MrKupido.Library.Equipment
 
         public int Id { get; set; }
         
-        [NameAlias("eng", "contents of {}", Priority = 200)]
-        [NameAlias("hun", "{} tartalma")]
         public IIngredient Contents { get; set; }
 
         public Container(float width, float height, float depth)
@@ -61,8 +59,6 @@ namespace MrKupido.Library.Equipment
             {
                 contents = new IngredientGroup(ingredients);
             }
-
-            contents.Name = this.Name + " tartalma"; // TODO: must be generated dynamically
 
             this.Contents = contents;
             this.LastActionDuration = 60 * (uint)ingredients.Length;

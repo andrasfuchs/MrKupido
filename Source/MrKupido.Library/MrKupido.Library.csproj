@@ -100,6 +100,7 @@
     <Compile Include="Attributes\NatureRelation\RootOfAttribute.cs" />
     <Compile Include="Attributes\NatureRelation\YieldOfAttribute.cs" />
     <Compile Include="Bases\EquipmentBase.cs" />
+    <Compile Include="Bases\NamedObject.cs" />
     <Compile Include="Bases\ProviderBase.cs" />
     <Compile Include="Enums\ElementCategory.cs" />
     <Compile Include="Enums\IngredientState.cs" />

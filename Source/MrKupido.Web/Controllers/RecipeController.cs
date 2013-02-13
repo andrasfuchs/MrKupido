@@ -26,7 +26,7 @@ namespace MrKupido.Web.Controllers
             RecipeTreeNode rtn = Cache.Recipe[id];
             if (rtn == null)
             {
-                return RedirectToRoute("Default", new { language = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName, controller = "Home", action = "RecipeNotAvailableYet", lan = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName, un = id });
+                return RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Home", action = "RecipeNotAvailableYet", lan = (string)Session["Language"], un = id });
             }
             Session["SelectedRecipeId"] = id;
             

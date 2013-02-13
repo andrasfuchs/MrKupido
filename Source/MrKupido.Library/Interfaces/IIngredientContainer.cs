@@ -7,8 +7,6 @@ namespace MrKupido.Library
 {
     public interface IIngredientContainer
     {
-        string Name { get; }
-
         Dimensions Dimensions { get; }
 
         IIngredient Contents { get; }
@@ -18,6 +16,8 @@ namespace MrKupido.Library
         IIngredient Kivenni();
 
         void Varni(int minutes);
+
+        string GetName(string languageISO);
     }
 }
 

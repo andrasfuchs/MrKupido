@@ -31,10 +31,10 @@ namespace MrKupido.Library.Attributes
             this.Priority = 100;
         }
 
-        public static string GetName(Type objType, string memberName = null, string languageISOCode = null, int? targetPriority = null)
+        public static string GetName(string languageISOCode, Type objType, string memberName = null, int? targetPriority = null)
         {
             string result = null;
-            if (languageISOCode == null) languageISOCode = Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName;
+            //if (languageISOCode == null) languageISOCode = Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName;
             string cacheKey = languageISOCode + "-" + objType.FullName + "-" + (memberName == null ? "" : memberName) + "-" + (targetPriority.HasValue ? targetPriority.Value : 0);
 
             if (cache.ContainsKey(cacheKey))
@@ -65,7 +65,7 @@ namespace MrKupido.Library.Attributes
                 string commercialShortName = CommercialProductAttribute.GetShortName(objType, languageISOCode);
                 if (String.IsNullOrEmpty(result) && !String.IsNullOrEmpty(commercialShortName) && (objType.BaseType != null))
                 {
-                    result = NameAliasAttribute.GetName(objType.BaseType, memberName, languageISOCode, targetPriority) + " {" + commercialShortName + "}";
+                    result = NameAliasAttribute.GetName(languageISOCode, objType.BaseType, memberName, targetPriority) + " {" + commercialShortName + "}";
                 }
 
                 cache[cacheKey] = result;

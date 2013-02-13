@@ -35,10 +35,10 @@ namespace MrKupido.Processor.Model
             ShortName = LongName;
             if (hasConnectionToTaxonomyTree && (taxonomyConnectionAttribute != null))
             {
-                LongName += " [" + NameAliasAttribute.GetName(taxonomyConnectionAttribute.NatureClass) + " " + NameAliasAttribute.GetName(taxonomyConnectionAttribute.GetType()) + "]";
+                LongName += " [" + NameAliasAttribute.GetName(this.LanguageISO, taxonomyConnectionAttribute.NatureClass) + " " + NameAliasAttribute.GetName(this.LanguageISO, taxonomyConnectionAttribute.GetType()) + "]";
             }
 
-            //Ingredient dbIngredient = db.Ingredients.Where(i => i.ClassName == ingredientClass.Name).FirstOrDefault();
+            
         }
     }
 }

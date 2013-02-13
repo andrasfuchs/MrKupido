@@ -7,6 +7,7 @@ namespace MrKupido.Library
 {
     public interface IIngredient : ICloneable
     {
+        [Obsolete]
         string Name { get; }
 
         ShoppingListCategory? Category { get; }
@@ -22,5 +23,7 @@ namespace MrKupido.Library
         float GetAmount(MeasurementUnit unit);
 
         void ChangeUnitTo(MeasurementUnit unit);
+
+        string GetName(string languageISO);
     }
 }

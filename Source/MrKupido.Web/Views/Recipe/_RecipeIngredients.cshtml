@@ -1,4 +1,4 @@
-﻿@model MrKupido.Library.IIngredient[]
+﻿@model MrKupido.Processor.Model.RuntimeIngredient[]
 @if (Model == null)
 {
     <span class="unknown">A hozzávalók jelenleg ismeretlenek</span>
@@ -6,11 +6,11 @@
 else
 { 
     <ul id="ingredientlist">
-        @foreach (MrKupido.Library.IIngredient ing in Model)
+        @foreach (MrKupido.Processor.Model.RuntimeIngredient ing in Model)
         { 
             <li class="ingredientlistitem">
-                <input type="checkbox" id="ing_@ing.Name" name="@ing.Name" value="@ing.Name" checked="checked">
-                <label for="ing_@ing.Name">@ing</label>
+                <input type="checkbox" id="ing_@ing.TreeNode.UniqueName" name="@ing.TreeNode.UniqueName" value="@ing.TreeNode.UniqueName" checked="checked">
+                <label for="ing_@ing.TreeNode.UniqueName">@ing.Ingredient.ToString((string)Session["Language"], true, true)</label>
                 <a href="#" style="display: none;"><img runat="server" id="ing-menu-trigger" src="~/Content/svg/icon_menutrigger.svg" alt="Menu" width="11" height="9" /></a>
             </li>
         }

@@ -125,6 +125,7 @@
     <Compile Include="Model\RecipeMethod.cs" />
     <Compile Include="Model\RecipeSearchInstance.cs" />
     <Compile Include="Model\RecipeTreeNode.cs" />
+    <Compile Include="Model\RuntimeIngredient.cs" />
     <Compile Include="Model\TreeNode.cs" />
     <Compile Include="RecipeAnalyzer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

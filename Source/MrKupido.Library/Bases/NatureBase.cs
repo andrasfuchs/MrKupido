@@ -9,19 +9,7 @@ namespace MrKupido.Library.Nature
     [NameAlias("eng", "nature")]
     [NameAlias("hun", "természet")]
 
-    public class NatureBase
+    public class NatureBase : NamedObject
     {
-        public string Name
-        {
-            get
-            {
-                return NameAliasAttribute.GetName(this.GetType());
-            }
-        }
-
-        public override string ToString()
-        {
-            return Name;
-        }
     }
 }

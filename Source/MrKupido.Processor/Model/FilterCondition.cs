@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using MrKupido.Processor.Model;
 
-namespace MrKupido.Processor.Models
+namespace MrKupido.Processor.Model
 {
     public class FilterCondition
     {

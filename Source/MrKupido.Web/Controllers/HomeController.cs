@@ -6,7 +6,6 @@ using System.Web.Mvc;
 using MrKupido.Web.Models;
 using MrKupido.Processor;
 using MrKupido.Processor.Model;
-using MrKupido.Processor.Models;
 using System.Threading;
 using System.Net;
 using System.IO;
@@ -70,7 +69,7 @@ namespace MrKupido.Web.Controllers
         {
             Session["IgnoreOldBrowser"] = true;
 
-            return String.IsNullOrEmpty(returnUrl) ? (ActionResult)RedirectToRoute("Default", new { language = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName, controller = "Home", action = "Index" }) : (ActionResult)Redirect(returnUrl);
+            return String.IsNullOrEmpty(returnUrl) ? (ActionResult)RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Home", action = "Index" }) : (ActionResult)Redirect(returnUrl);
         }
 
         [HttpPost]
@@ -167,7 +166,7 @@ namespace MrKupido.Web.Controllers
             if (Session["filters"] == null) Session["filters"] = new List<FilterCondition>();
             List<FilterCondition> filters = (List<FilterCondition>)Session["filters"];
 
-            RecipeSearchResult rsr = new RecipeSearchResult(Cache.Search.Search(filters.ToArray(), Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName).ToArray());
+            RecipeSearchResult rsr = new RecipeSearchResult(Cache.Search.Search(filters.ToArray(), (string)Session["Language"]).ToArray());
 
             //foreach (RecipeSearchResultItem rsri in rsr.Items)
             //{
@@ -279,7 +278,7 @@ namespace MrKupido.Web.Controllers
         [HttpPost]
         public JsonResult GetTipsNTricks()
         {
-            if (!tipsTricks.ContainsKey(System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName))
+            if (!tipsTricks.ContainsKey((string)Session["Language"]))
             {
                 List<string> lines = new List<string>();
 
@@ -293,10 +292,10 @@ namespace MrKupido.Web.Controllers
                     }
                 }
 
-                tipsTricks.Add(System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName, lines.ToArray());
+                tipsTricks.Add((string)Session["Language"], lines.ToArray());
             }
 
-            string[] temp = tipsTricks[System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName];
+            string[] temp = tipsTricks[(string)Session["Language"]];
 
             Random rnd = new Random();
             return Json(temp[rnd.Next(temp.Length)]);
@@ -326,7 +325,7 @@ namespace MrKupido.Web.Controllers
             }
             else if (rtn != null)
             {
-                //CultureInitializer.InitializeCulture(null, originalLanguage);
+                CultureInitializer.InitializeCulture(null, Session, originalLanguage);
                 return RedirectToRoute("Recipe" + originalLanguage, new { language = originalLanguage, controller = "Recipe", action = "Details", id = rtn.UniqueName });
             }
             else

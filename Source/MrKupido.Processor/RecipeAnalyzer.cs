@@ -22,6 +22,7 @@ namespace MrKupido.Processor
         private static int IdCounter;
         private static List<object> tempParameters = new List<object>();
         private static bool ignoreDirections = false;
+        private static string languageISO = "";
 
         public static IIngredient[] GenerateIngredients(RecipeTreeNode rtn, float amount)
         {
@@ -93,7 +94,7 @@ namespace MrKupido.Processor
         {
             if (ignoreDirections) return;
 
-            directions.Add(new RecipeDirection(ref IdCounter, assemblyFullName, methodFullName, tempParameters.ToArray(), result, stage, 1, seenIngredients));
+            directions.Add(new RecipeDirection(languageISO, ref IdCounter, assemblyFullName, methodFullName, tempParameters.ToArray(), result, stage, 1, seenIngredients));
         }
 
         public static void DirectionGeneratorBefore(string assemblyFullName, string methodFullName, object[] parameters)
@@ -146,6 +147,7 @@ namespace MrKupido.Processor
         {
             if (!rtn.IsImplemented) return;
 
+            languageISO = rtn.LanguageISO;
             if (rtn.SelectEquipment != null)
             {
                 stage = RecipeStage.EquipmentSelection;

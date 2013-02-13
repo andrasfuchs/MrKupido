@@ -48,7 +48,7 @@ namespace MrKupido.Web.Controllers
 
         public ActionResult Recipe(string id)
         {
-            ImportedRecipe importedRecipe = db.ImportedRecipes.FirstOrDefault(r => (r.UniqueName == id) && (r.Language == System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName));
+            ImportedRecipe importedRecipe = db.ImportedRecipes.FirstOrDefault(r => (r.UniqueName == id) && (r.Language == (string)Session["Language"]));
             if (importedRecipe == null) return RedirectToAction("Index", "HomeController");
 
             DataContractJsonSerializer dcjs = new DataContractJsonSerializer(typeof(string[]));

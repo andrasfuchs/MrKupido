@@ -52,14 +52,8 @@ namespace MrKupido.Library.Recipe
             fakanal.ElkeverniEdenyben(bogre);
             
 
-            //IIngredient pizzateszta = fakanal.Osszekeverni(edeny1.Contents, bogre.Contents);
-            //IIngredient pizzateszta = fakanal.OsszekeverniEdenyeket(edeny1, bogre);
-            
-            //Edeny edeny2 = eg.Use<Edeny>();
-            //edeny2.Berakni(pizzateszta);
             Edeny edeny2 = (Edeny)fakanal.OsszekeverniEdenyeket(edeny1, bogre);
             edeny2.Varni(45);
-            //IIngredient pizzateszta = edeny2.Kivenni();
 
             NyujtoDeszka nyd = eg.Use<NyujtoDeszka>();
             IIngredient pizzateszta = nyd.Nyujtani(edeny2, 1);

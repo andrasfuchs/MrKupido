@@ -16,7 +16,7 @@
     </details>
 </div>
 <div class="formbuttons">
-    <input type="button" value="@MrKupido.Web.Resources.Home.RecipeNotAvailableYet.HomeButton" onclick="window.location='../../@System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName'" />
+    <input type="button" value="@MrKupido.Web.Resources.Home.RecipeNotAvailableYet.HomeButton" onclick="window.location='../../@Session["Language"]'" />
     @using (Html.BeginForm("IgnoreOldBrowser", "Home", new { }))
     {
         <input type="submit" value="@MrKupido.Web.Resources.Home.RecipeNotAvailableYet.UploadRecipeButton" />

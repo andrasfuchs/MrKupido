@@ -50,13 +50,7 @@ namespace MrKupido.Processor
             {
                 string language = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName;
 
-                if (!recipeCache.ContainsKey(language))
-                {
-                    recipeCache.Add(language, new RecipeCache());
-                    recipeCache[language].Initialize(language);
-                }
-
-                return recipeCache[language];
+                return GetRecipeCache(language);
             }
         }
 
@@ -103,6 +97,12 @@ namespace MrKupido.Processor
 
         public static RecipeCache GetRecipeCache(string language)
         {
+            if (!recipeCache.ContainsKey(language))
+            {
+                recipeCache.Add(language, new RecipeCache());
+                recipeCache[language].Initialize(language);
+            }
+
             return recipeCache[language];
         }
     }

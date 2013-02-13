@@ -231,7 +231,7 @@ namespace MrKupido.Web.Controllers
                 string returnUrl = (string)Session["ReturnUrl"];
                 if (String.IsNullOrEmpty(returnUrl))
                 {
-                    return RedirectToRoute("Default", new { language = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName, controller = "Home", action = "Index" });
+                    return RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Home", action = "Index" });
                 }
                 else
                 {
@@ -252,7 +252,7 @@ namespace MrKupido.Web.Controllers
             Session.SetCurrentUser(null);
             Session.Abandon();
 
-            return RedirectToRoute("Default", new { language = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName, controller = "Account", action = "LogIn" });
+            return RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Account", action = "LogIn" });
         }
 
 
@@ -363,7 +363,7 @@ namespace MrKupido.Web.Controllers
 
             System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(user.CultureName);
 
-            return RedirectToRoute("Default", new { language = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName, controller = "Home", action = "Index" });
+            return RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Home", action = "Index" });
         }
     }
 }

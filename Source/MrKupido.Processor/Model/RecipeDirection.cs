@@ -34,7 +34,7 @@ namespace MrKupido.Processor.Model
 
         private string[] correctionReplacements = { "tált", "tálat", "olajt", "olajat" };
 
-        public RecipeDirection(ref int idCounter, string assemblyName, string command, object[] operands = null, object result = null, RecipeStage stage = RecipeStage.Unknown, int actorIndex = 1, List<string> seenIngredients = null)
+        public RecipeDirection(string languageISO, ref int idCounter, string assemblyName, string command, object[] operands = null, object result = null, RecipeStage stage = RecipeStage.Unknown, int actorIndex = 1, List<string> seenIngredients = null)
         {
             ActorIndex = actorIndex;
             Stage = stage;
@@ -73,17 +73,17 @@ namespace MrKupido.Processor.Model
             if (ids.Length == 2)
             {
                 DirectionType = Assembly.Load(AssemblyName).GetType(ids[0]);
-                Direction = NameAliasAttribute.GetName(DirectionType, ids[1], targetPriority: 100);
+                Direction = NameAliasAttribute.GetName(languageISO, DirectionType, ids[1], 100);
                 MemberInfo mi = DirectionType.GetMember(ids[1])[0];
 
                 IconUrls = IconUriFragmentAttribute.GetUrls(mi, "~/Content/svg/action_{0}.svg");
                 IsPassive = PassiveActionAttribute.IsMethodPassiveAction(mi);
             }
 
-            this.DirectionSegments = GenerateSegments(seenIngredients);
+            this.DirectionSegments = GenerateSegments(languageISO, seenIngredients);
         }
 
-        private RecipeDirectionSegment[] GenerateSegments(List<string> seenIngredients)
+        private RecipeDirectionSegment[] GenerateSegments(string languageISO, List<string> seenIngredients)
         {
             List<RecipeDirectionSegment> result = new List<RecipeDirectionSegment>();
 
@@ -98,7 +98,7 @@ namespace MrKupido.Processor.Model
 
                     for (int i = 0; i < Operands.Length; i++)
                     {
-                        result.Add(new RecipeDirectionSegmentReference(Operands[i], seenIngredients));
+                        result.Add(new RecipeDirectionSegmentReference(languageISO, Operands[i], seenIngredients));
                         if (i < Operands.Length - 1) result.Add(new RecipeDirectionSegment(", "));
                     }
                 }
@@ -138,7 +138,7 @@ namespace MrKupido.Processor.Model
                     if (clauseEndIndex - clauseStartIndex == 1)
                     {
                         // {}
-                        result.Add(new RecipeDirectionSegmentReference(Operands[0], seenIngredients));
+                        result.Add(new RecipeDirectionSegmentReference(languageISO, Operands[0], seenIngredients));
                     }
                     else 
                     {
@@ -160,7 +160,7 @@ namespace MrKupido.Processor.Model
                                 foreach (object item in items)
                                 {
                                     if (!String.IsNullOrEmpty(beforeString)) result.Add(new RecipeDirectionSegment(beforeString));
-                                    result.Add(new RecipeDirectionSegmentReference(item, seenIngredients));
+                                    result.Add(new RecipeDirectionSegmentReference(languageISO, item, seenIngredients));
                                     if (!String.IsNullOrEmpty(afterString)) result.Add(new RecipeDirectionSegment(afterString));
                                 }
                                 if (!String.IsNullOrEmpty(afterString)) result.RemoveAt(result.Count - 1);
@@ -168,7 +168,7 @@ namespace MrKupido.Processor.Model
                         }
                         else
                         {
-                            RecipeDirectionSegmentReference rdsr = new RecipeDirectionSegmentReference(operand, seenIngredients);
+                            RecipeDirectionSegmentReference rdsr = new RecipeDirectionSegmentReference(languageISO, operand, seenIngredients);
 
                             // TODO: special (culture dependent) formatting for {0T} {0N} etc. etc.
                             if (affixId != Char.MinValue)
@@ -203,7 +203,7 @@ namespace MrKupido.Processor.Model
 
                 result.Add(new RecipeDirectionSegment(" => "));
 
-                RecipeDirectionSegmentReference rdsr = new RecipeDirectionSegmentReference(ig, seenIngredients);
+                RecipeDirectionSegmentReference rdsr = new RecipeDirectionSegmentReference(languageISO, ig, seenIngredients);
                 if (!String.IsNullOrEmpty(rdsr.IconAlt) && (rdsr.Text.StartsWith(rdsr.IconAlt)))
                 {
                     rdsr.Text = rdsr.Text.Replace(rdsr.IconAlt, "-");

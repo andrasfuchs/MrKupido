@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MrKupido.Processor.Model;
-using MrKupido.Processor.Models;
 using MrKupido.Library.Attributes;
 
 namespace MrKupido.Processor

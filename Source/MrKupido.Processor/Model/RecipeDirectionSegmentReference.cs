@@ -16,7 +16,7 @@ namespace MrKupido.Processor.Model
         public object Reference { get; private set; }
         public TreeNode TreeNode { get; set; }
 
-        public RecipeDirectionSegmentReference(object reference, List<string> seenIngredients)
+        public RecipeDirectionSegmentReference(string languageISO, object reference, List<string> seenIngredients)
             : base("")
         {
             this.Reference = reference;
@@ -27,7 +27,7 @@ namespace MrKupido.Processor.Model
             }
             else
             {
-                this.Text = reference.ToString();
+                this.Text = reference is NamedObject ? ((NamedObject)reference).GetName(languageISO) : reference.ToString();
 
                 if (reference is IngredientBase)
                 {
@@ -47,13 +47,14 @@ namespace MrKupido.Processor.Model
                         }
                     }
 
-                    if (seenIngredients.Contains(ib.ToString(false, false)))
+                    if (seenIngredients.Contains(ib.ToString(languageISO, false, false)))
                     {
-                        this.Text = ib.ToString(false, true);
+                        this.Text = ib.ToString(languageISO, false, true);
                     }
                     else
                     {
-                        seenIngredients.Add(ib.ToString(false, false));
+                        this.Text = ib.ToString(languageISO, true, true);
+                        seenIngredients.Add(ib.ToString(languageISO, false, false));
                     }
                 }
 
