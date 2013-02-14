@@ -14,11 +14,11 @@ namespace MrKupido.Library.Equipment
         [NameAlias("eng", "squash", Priority = 200)]
         [NameAlias("hun", "összeprésel", Priority = 200)]
         [NameAlias("hun", "préseld össze a(z) {0T}")]
-        public void Preselni(IIngredient i)
+        public void Preselni(ISingleIngredient i)
         {
-            if ((!(i is IngredientBase)) || (i.Unit != MeasurementUnit.gramm)) throw new InvalidActionForIngredientException("Preselni", i.Name, i.Unit);
+            if (i.Unit != MeasurementUnit.gramm) throw new InvalidActionForIngredientException("Preselni", i.Name, i.Unit);
 
-            ((IngredientBase)i).State = IngredientState.Preselt;
+            i.State = IngredientState.Preselt;
         }
     }
 }

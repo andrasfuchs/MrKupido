@@ -19,7 +19,7 @@ namespace MrKupido.Library.Recipe
 
         public static new EquipmentGroup SelectEquipment(float amount)
         {
-            EquipmentGroup result = new EquipmentGroup();
+            EquipmentGroup result = ParadicsomosAlapuPizza.SelectEquipment(amount);
 
             result.Containers.Add(new LaposTanyer());
 
@@ -31,20 +31,22 @@ namespace MrKupido.Library.Recipe
 
         public static new PreparedIngredients Prepare(float amount, EquipmentGroup eg)
         {
-            PreparedIngredients result = new PreparedIngredients();
+            PreparedIngredients result = ParadicsomosAlapuPizza.Prepare(amount, eg);
 
-            IIngredient pizzateszta = new ParadicsomosAlapuPizza(amount * 1.0f);
+            IIngredientContainer pizzateszta = result["pizzateszta"];
             result.Remove("pizzateszta");
 
             Kes kes = eg.Use<Kes>();
-            IIngredient ananaszdarabok = kes.Feldarabolni(new Ananasz(100.0f), 5.0f);
-            IIngredient sonka = kes.Feldarabolni(new Sonka(50.0f), 1.0f);
+            ISingleIngredient ananaszdarabok = new Ananasz(100.0f);
+            kes.Feldarabolni(ananaszdarabok, 5.0f);
+            
+            ISingleIngredient sonka = new Sonka(50.0f);
+            kes.Feldarabolni(sonka, 1.0f);
+            
             IIngredient kukorica = new MorzsoltFottKukorica(50.0f);
 
             Kez kez = eg.Use<Kez>();
-            pizzateszta = kez.Rarakni(pizzateszta, sonka);
-            pizzateszta = kez.Rarakni(pizzateszta, kukorica);
-            pizzateszta = kez.Rarakni(pizzateszta, ananaszdarabok);
+            kez.Rarakni(pizzateszta, sonka, kukorica, ananaszdarabok);
             
             result.Add("pizzateszta", pizzateszta);
 
@@ -54,8 +56,7 @@ namespace MrKupido.Library.Recipe
 
         public static new CookedFoodParts Cook(float amount, PreparedIngredients preps, EquipmentGroup eg)
         {
-            CookedFoodParts cfp = new CookedFoodParts();
-            cfp.Add("pizzateszta", preps["pizzateszta"]);
+            CookedFoodParts cfp = ParadicsomosAlapuPizza.Cook(amount, preps, eg);
             return cfp;
         }
 

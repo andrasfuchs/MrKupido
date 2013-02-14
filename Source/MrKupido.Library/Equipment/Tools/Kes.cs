@@ -14,54 +14,31 @@ namespace MrKupido.Library.Equipment
         [NameAlias("eng", "dismember", Priority = 200)]
         [NameAlias("hun", "feldarabol", Priority = 200)]
         [NameAlias("hun", "darabold fel a(z) {0T} {1} grammos darabokra")]
-        public IngredientBase Feldarabolni(IIngredient i, float weight)
+        public void Feldarabolni(ISingleIngredient i, float weight)
         {
-            if ((!(i is IngredientBase))  || (i.Unit != MeasurementUnit.gramm)) throw new InvalidActionForIngredientException("Feldarabolni", i.Name, i.Unit);
-
-            //List<IIngredient> result = new List<IIngredient>();
+            if (i.Unit != MeasurementUnit.gramm) throw new InvalidActionForIngredientException("Feldarabolni", i.Name, i.Unit);
 
             float totalWeight = i.GetAmount(MeasurementUnit.gramm);
             int count = ((int)Math.Floor(totalWeight / weight)) + 1;
 
             i.State = IngredientState.Darabolt;
             i.PieceCount = count;
-
-            return i as IngredientBase;
-
-            //for (int j = 0; j < count; j++)
-            //{
-            //    if (i is IngredientGroup)
-            //    {
-            //        result.Add(((IngredientGroup)i).Clone(totalWeight / count, MeasurementUnit.gramm));
-            //    }
-            //    else
-            //    {
-            //        result.Add(i.GetType().DefaultConstructor(totalWeight / count, MeasurementUnit.gramm) as IngredientBase);
-            //    }
-            //}
-
-            //return new IngredientGroup(result.ToArray());
         }
 
         [NameAlias("eng", "circle", Priority = 200)]
         [NameAlias("hun", "felkarikáz", Priority = 200)]
         [NameAlias("hun", "karikázd fel a(z) {0T} {1} grammos darabokra")]
-        public IngredientBase Felkarikazni(IIngredient i, float weight)
+        public void Felkarikazni(ISingleIngredient i, float weight)
         {
-            if ((!(i is IngredientBase)) || ((i.Unit != MeasurementUnit.piece) && (i.Unit != MeasurementUnit.gramm))) throw new InvalidActionForIngredientException("Felkarikazni", i.Name, i.Unit);
+            if ((i.Unit != MeasurementUnit.piece) && (i.Unit != MeasurementUnit.gramm)) throw new InvalidActionForIngredientException("Felkarikazni", i.Name, i.Unit);
 
             i.ChangeUnitTo(MeasurementUnit.gramm);
 
-            return Feldarabolni(i, weight);
-            
-            //IngredientGroup ig = Feldarabolni(i, weight);
+            float totalWeight = i.GetAmount(MeasurementUnit.gramm);
+            int count = ((int)Math.Floor(totalWeight / weight)) + 1;
 
-            //foreach (IIngredient ingredient in ig)
-            //{
-            //    ingredient.ChangeUnitTo(MeasurementUnit.piece);
-            //}
-
-            //return new IngredientGroup(ig.ToArray());
+            i.State = IngredientState.Karikazott;
+            i.PieceCount = count;
         }
     }
 }

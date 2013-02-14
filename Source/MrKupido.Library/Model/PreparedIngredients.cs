@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MrKupido.Library
 {
-    public class PreparedIngredients : Dictionary<string, IIngredient>
+    public class PreparedIngredients : Dictionary<string, IIngredientContainer>
     {
     }
 }

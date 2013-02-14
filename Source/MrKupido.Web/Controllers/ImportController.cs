@@ -181,20 +181,7 @@ namespace MrKupido.Web.Controllers
         [HttpPost]
         public ActionResult CreateIngredient(string nameHun, string uniqueNameHun, string nameEng, string uniqueNameEng)
         {
-            Ingredient ingredient = new Ingredient();
-            ingredient.NameHun = nameHun;
-            ingredient.UniqueNameHun = uniqueNameHun;
-            ingredient.NameEng = nameEng;
-            ingredient.UniqueNameEng = uniqueNameEng;
-
-            ingredient.Index = 1;
-            ingredient.Type = (int)FilterItemType.Ingredient;
-
-            db.Ingredients.Add(ingredient);
-
-            db.SaveChanges();
-
-            return null;
+            throw new MrKupidoException("This function is not supported any more.");
         }
 
         [HttpPost]

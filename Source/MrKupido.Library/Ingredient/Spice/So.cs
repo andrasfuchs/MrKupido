@@ -14,7 +14,7 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "étkezési só")]
 
     [KindOf(typeof(Minerale))]
-    public class So : IngredientBase
+    public class So : SingleIngredient
     {
         public So(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
             : base(amount, unit)

@@ -676,6 +676,7 @@
     <Content Include="Content\fonts\Tangerine\tangerinea_bold-webfont.eot" />
     <Content Include="Content\fonts\Tangerine\tangerinea_bold-webfont.ttf" />
     <Content Include="Content\Web.config" />
+    <Content Include="ClassDiagram.cd" />
     <None Include="Properties\PublishProfiles\HFL_beta.pubxml" />
     <Content Include="Resources\Web.config" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -858,7 +859,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.None" BuildVersion_UpdateFileVersion="False" BuildVersion_StartDate="1975/10/21" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="1975/10/21" BuildVersion_UpdateFileVersion="False" BuildVersion_BuildVersioningStyle="None.None.None.None" />
     </VisualStudio>
   </ProjectExtensions>
   <ItemGroup>

@@ -29,9 +29,9 @@ namespace MrKupido.Processor.Model
             {
                 this.Text = reference is NamedObject ? ((NamedObject)reference).GetName(languageISO) : reference.ToString();
 
-                if (reference is IngredientBase)
+                if (reference is SingleIngredient)
                 {
-                    IngredientBase ib = (IngredientBase)reference;
+                    SingleIngredient ib = (SingleIngredient)reference;
 
                     IngredientTreeNode itn = Cache.Ingredient[ib.GetType().FullName];
                     if (itn != null)

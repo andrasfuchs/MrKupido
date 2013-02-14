@@ -13,14 +13,14 @@ namespace MrKupido.Library.Equipment
     {
         [NameAlias("eng", "rasp", Priority = 200)]
         [NameAlias("hun", "lereszel", Priority = 200)]
-        [NameAlias("hun", "reszeld le a(z) {0T}")]
-        public IngredientBase Lereszelni(IIngredient i)
+        [NameAlias("hun", "reszeld le a(z) {0B} a(z) {1T}")]
+        public void Lereszelni(IIngredientContainer ic, ISingleIngredient i)
         {
-            if ((!(i is IngredientBase)) || (i.Unit != MeasurementUnit.gramm)) throw new InvalidActionForIngredientException("Lereszelni", i.Name, i.Unit);
-            
+            if (i.Unit != MeasurementUnit.gramm) throw new InvalidActionForIngredientException("Lereszelni", i.Name, i.Unit);
+
             i.State = IngredientState.Reszelt;
 
-            return i as IngredientBase;
+            ic.Add(i);
         }
     }
 }

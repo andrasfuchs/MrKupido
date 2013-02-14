@@ -24,6 +24,9 @@ namespace MrKupido.Library
         [NameAlias("eng", "cut")]
         [NameAlias("hun", "darabolt")]
         Darabolt,
+        [NameAlias("eng", "circled")]
+        [NameAlias("hun", "karikázott")]
+        Karikazott,
         [NameAlias("eng", "minced")]
         [NameAlias("hun", "darált")]
         Daralt,
@@ -33,6 +36,9 @@ namespace MrKupido.Library
         [NameAlias("eng", "squezed")]
         [NameAlias("hun", "préselt")]
         Preselt,
+        [NameAlias("eng", "peeled")]
+        [NameAlias("hun", "hámozott")]
+        Hamozott,
         [NameAlias("eng", "teared")]
         [NameAlias("hun", "kiszaggatott")]
         Kiszaggatott

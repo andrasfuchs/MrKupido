@@ -9,7 +9,7 @@ namespace MrKupido.Library.Equipment
     [NameAlias("eng", "fridge")]
     [NameAlias("hun", "hűtő", Priority = 1)]
     [NameAlias("hun", "hűtőgép")]
-    public class Hutogep : Device, IIngredientContainer
+    public class Hutogep : Device
     {
         public Dimensions Dimensions { get; set; }
 

@@ -12,7 +12,7 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "búzaliszt")]
 
     [GristOf(typeof(TriticumAestivum))]
-    public class Liszt : IngredientBase
+    public class Liszt : SingleIngredient
     {
         public Liszt(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
             : base(amount, unit)

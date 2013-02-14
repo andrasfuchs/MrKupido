@@ -18,9 +18,10 @@ namespace MrKupido.Library.Equipment
         [NameAlias("eng", "roll out", Priority = 200)]
         [NameAlias("hun", "kinyújt", Priority = 200)]
         [NameAlias("hun", "nyújtsd ki nyújtódeszkán a(z) {0} tartalmát {1} mm-esre")]
-        public IIngredient Nyujtani(Container c, float thickness)
+        public void Nyujtani(IIngredientContainer c, float thickness)
         {
-            return c.Contents;
+            this.Add(c.Contents);
+            c.Empty();
         }
     }
 }

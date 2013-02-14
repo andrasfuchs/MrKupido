@@ -10,7 +10,7 @@ else
         { 
             <li class="ingredientlistitem">
                 <input type="checkbox" id="ing_@ing.TreeNode.UniqueName" name="@ing.TreeNode.UniqueName" value="@ing.TreeNode.UniqueName" checked="checked">
-                <label for="ing_@ing.TreeNode.UniqueName">@ing.Ingredient.ToString((string)Session["Language"], true, true)</label>
+                <label for="ing_@ing.TreeNode.UniqueName">@ing.Ingredient.ToString((string)Session["Language"])</label>
                 <a href="#" style="display: none;"><img runat="server" id="ing-menu-trigger" src="~/Content/svg/icon_menutrigger.svg" alt="Menu" width="11" height="9" /></a>
             </li>
         }

@@ -14,7 +14,7 @@ namespace MrKupido.Library.Ingredient
     [IngredientConsts(Category = ShoppingListCategory.Spice, GrammsPerPiece = 3)]
 
     [YieldOf(typeof(PiperNigrum))]
-    public class FeketeBors : IngredientBase
+    public class FeketeBors : SingleIngredient
     {
         public FeketeBors(float amount, MeasurementUnit unit = MeasurementUnit.piece, IngredientState state = IngredientState.Normal)
             : base(amount, unit, state)

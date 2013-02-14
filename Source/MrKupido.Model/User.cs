@@ -63,10 +63,6 @@ namespace MrKupido.Model
 
         public Address[] Addresses { get; set; }
         
-        public Ingredient[] Likes { get; set; }
-        public Ingredient[] Dislikes { get; set; }
-        public Condition[] Conditions { get; set; }
-
         [MaxLength(110)]
         [MinLength(0)]
         [StringLength(110, MinimumLength = 0)]        

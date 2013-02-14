@@ -14,7 +14,7 @@ namespace MrKupido.Library.Ingredient
     [IngredientConsts(GrammsPerLiter = 1000)]
 
     [MilkOf(typeof(BosPrimigenius))]
-    public class Tej : IngredientBase
+    public class Tej : SingleIngredient
     {
         public Tej(float amount, MeasurementUnit unit = MeasurementUnit.liter)
             : base(amount, unit)

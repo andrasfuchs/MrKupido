@@ -11,7 +11,7 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "kukorica")]
 
     //[RootOf(typeof(SolanumTuberosum))]
-    public class Kukorica : IngredientBase
+    public class Kukorica : SingleIngredient
     {
         public Kukorica(float amount, MeasurementUnit unit = MeasurementUnit.piece)
             : base(amount, unit)

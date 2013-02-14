@@ -26,6 +26,7 @@ namespace MrKupido.Library.Recipe
             result.Containers.Add(new Edeny(1.5f));
             result.Containers.Add(new JenaiTal(13.4f, 11.3f));
             result.Containers.Add(new LaposTanyer());
+            result.Containers.Add(new LaposKisTanyer());
 
             result.Devices.Add(new Suto());
 
@@ -47,16 +48,16 @@ namespace MrKupido.Library.Recipe
         {
             CookedFoodParts cfp = new CookedFoodParts();
 
+            LaposKisTanyer laposKisTanyer = eg.Use<LaposKisTanyer>();
+
             Reszelo reszelo = eg.Use<Reszelo>();
-            IIngredient reszeltSajt = reszelo.Lereszelni(new KaravanFustoltSajt(100.0f));
+            reszelo.Lereszelni(laposKisTanyer, new FustoltSajt(100.0f));
 
             Edeny edeny = eg.Use<Edeny>();
-            edeny.BerakniMind(new Liszt(250.0f), new So(20.0f), new Tojas(2.0f), reszeltSajt);
-
-            IIngredient csirkemell = new Csirkemell(250 * 10);
+            edeny.Berakni(new Liszt(250.0f), new So(20.0f), new Tojas(2.0f), laposKisTanyer.Contents);
 
             Kez kez = eg.Use<Kez>();
-            kez.Megforgatni(csirkemell, edeny.Contents);
+            IngredientGroup csirkemell = kez.Megforgatni(edeny, new Csirkemell(250 * 10));
 
             JenaiTal jenai = eg.Use<JenaiTal>();
             jenai.Berakni(csirkemell);

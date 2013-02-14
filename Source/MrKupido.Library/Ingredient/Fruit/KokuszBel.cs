@@ -13,7 +13,7 @@ namespace MrKupido.Library.Ingredient
     [IngredientConsts(Category = ShoppingListCategory.Fruit)]
 
     [PartOf(typeof(CocosNucifera))]
-    public class KokuszBel : IngredientBase
+    public class KokuszBel : SingleIngredient
     {
         public KokuszBel(float amount, MeasurementUnit unit = MeasurementUnit.gramm, IngredientState state = IngredientState.Normal)
             : base(amount, unit, state)

@@ -10,7 +10,8 @@ namespace MrKupido.Library.Equipment
     [NameAlias("hun", "kör alapú tároló")]
     public class RoundContainer : Container
     {
-        public RoundContainer(float radius, float depth) : base(radius*2, radius*2, depth)
+        public RoundContainer(float diameter, float depth)
+            : base(diameter, diameter, depth)
         {
         }
     }

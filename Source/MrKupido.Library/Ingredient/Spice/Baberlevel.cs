@@ -14,7 +14,7 @@ namespace MrKupido.Library.Ingredient
     [IngredientConsts(Category = ShoppingListCategory.Spice, GrammsPerPiece = 3)]
 
     [LeafOf(typeof(LaurusNobilis))]
-    public class Baberlevel : IngredientBase
+    public class Baberlevel : SingleIngredient
     {
         public Baberlevel(float amount, MeasurementUnit unit = MeasurementUnit.piece, IngredientState state = IngredientState.Normal)
             : base(amount, unit, state)

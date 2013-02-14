@@ -14,17 +14,20 @@ namespace MrKupido.Library.Equipment
         [NameAlias("eng", "chop", Priority = 200)]
         [NameAlias("hun", "kiszaggat", Priority = 200)]
         [NameAlias("hun", "szaggass ki {1} grammos, {2} mm sugarú alakzatokat a(z) {0L}")]
-        public IngredientBase Kiszaggatni(IIngredient i, float weight, float diameter)
+        public void Kiszaggatni(IIngredientContainer ic, float weight, float diameter)
         {
-            if (!(i is IngredientBase)) throw new InvalidActionForIngredientException("Kiszaggatni", i.Name, i.Unit);
-
-            float totalWeight = i.GetAmount(MeasurementUnit.gramm);
+            float totalWeight = ic.Contents.GetAmount(MeasurementUnit.gramm);
             int count = ((int)Math.Floor(totalWeight / weight)) + 1;
 
-            i.State = IngredientState.Kiszaggatott;
-            i.PieceCount = count;
+            IIngredient content = ic.Contents;
+            ic.Empty();
 
-            return (IngredientBase)i;
+            for (int i = 0; i < count; i++)
+            {
+                IIngredient c = (IIngredient)content.Clone();
+                //TODO: c.SetAmount(totalWeight / count);
+                ic.Add(c);
+            }
         }
     }
 }

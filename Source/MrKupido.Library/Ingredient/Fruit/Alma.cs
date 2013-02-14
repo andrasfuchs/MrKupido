@@ -13,7 +13,7 @@ namespace MrKupido.Library.Ingredient
     [IngredientConsts(Category = ShoppingListCategory.Fruit, GrammsPerPiece=35.0f)]
 
     [YieldOf(typeof(Malus))]
-    public class Alma : IngredientBase
+    public class Alma : SingleIngredient
     {
         public Alma(float amount, MeasurementUnit unit = MeasurementUnit.piece)
             : base(amount, unit)

@@ -17,7 +17,7 @@ namespace MrKupido.Library.Ingredient
     [IngredientConsts(Category = ShoppingListCategory.Mushroom)]
 
     [PartOf(typeof(AgaricusCampestris))]
-    public class KertiCsiperke : IngredientBase
+    public class KertiCsiperke : SingleIngredient
     {
         public KertiCsiperke(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
             : base(amount, unit)

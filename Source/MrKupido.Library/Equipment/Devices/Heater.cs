@@ -8,7 +8,7 @@ namespace MrKupido.Library.Equipment
 {
     [NameAlias("eng", "heater device")]
     [NameAlias("hun", "melegítő berendezés")]   
-    public class Heater : Device, IIngredientContainer
+    public class Heater : Device
     {
         public float MinHeat;
 

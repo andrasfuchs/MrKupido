@@ -11,7 +11,7 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "oregánólevél")]
 
     [LeafOf(typeof(OriganumVulgareL))]
-    public class Oregano : IngredientBase
+    public class Oregano : SingleIngredient
     {
         public Oregano(float amount, MeasurementUnit unit = MeasurementUnit.gramm, IngredientState state = IngredientState.Normal)
             : base(amount, unit, state)

@@ -13,7 +13,8 @@ namespace MrKupido.Library.Equipment
     {
         public Fedo Fedo = new Fedo();
 
-        public JenaiTal(float radius, float depth) : base(radius, depth)
+        public JenaiTal(float diameter, float depth)
+            : base(diameter, depth)
         {
             // standard sizes [volume(l),r(cm),d(cm)]
             // 1,5 205 93

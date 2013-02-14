@@ -13,9 +13,9 @@ namespace MrKupido.Library.Equipment
         [NameAlias("eng", "peel", Priority = 200)]
         [NameAlias("hun", "meghámoz", Priority = 200)]
         [NameAlias("hun", "hámozd meg a(z) {0T}")]
-        public IIngredient Meghamozni(IIngredient i)
+        public void Meghamozni(ISingleIngredient i)
         {
-            return i;
+            i.State = IngredientState.Hamozott;
         }
     }
 }

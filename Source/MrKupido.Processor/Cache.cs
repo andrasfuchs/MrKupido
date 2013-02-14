@@ -75,10 +75,13 @@ namespace MrKupido.Processor
             {
                 string language = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName;
 
-                if (!equipmentCache.ContainsKey(language))
+                lock (equipmentCache)
                 {
-                    equipmentCache.Add(language, new EquipmentCache());
-                    equipmentCache[language].Initialize(language);
+                    if (!equipmentCache.ContainsKey(language))
+                    {
+                        equipmentCache.Add(language, new EquipmentCache());
+                        equipmentCache[language].Initialize(language);
+                    }
                 }
 
                 return equipmentCache[language];

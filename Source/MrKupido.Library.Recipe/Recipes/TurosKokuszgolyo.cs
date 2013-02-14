@@ -23,7 +23,9 @@ namespace MrKupido.Library.Recipe
             EquipmentGroup result = new EquipmentGroup();
 
             result.Containers.Add(new Edeny());
+            result.Containers.Add(new LaposKisTanyer());
             result.Containers.Add(new LaposTanyer());
+            result.Containers.Add(new MelyTanyer());
 
             result.Tools.Add(new Kez());
             result.Tools.Add(new Reszelo());
@@ -36,10 +38,12 @@ namespace MrKupido.Library.Recipe
             PreparedIngredients result = new PreparedIngredients();
 
             Reszelo reszelo = eg.Use<Reszelo>();
+            LaposKisTanyer tanyer = eg.Use<LaposKisTanyer>();
 
-            IIngredient citromHej = reszelo.Lereszelni(new CitromHej(5.0f * amount));
+            //IIngredient citromHej = reszelo.Lereszelni(new CitromHej(5.0f * amount));
+            reszelo.Lereszelni(tanyer, new CitromHej(5.0f * amount));
 
-            result.Add("citromhej", citromHej);
+            result.Add("citromhej", tanyer);
 
             eg.WashUp();
             return result;
@@ -49,16 +53,23 @@ namespace MrKupido.Library.Recipe
         {
             CookedFoodParts cfp = new CookedFoodParts();
 
+            IIngredientContainer kisTanyer = preps["citromhej"];
+
+            Edeny edeny = eg.Use<Edeny>();
+            edeny.Berakni(new Turo(250.0f * amount), new PorCukor(200.0f * amount), new KokuszReszelek(150.0f * amount), new VaniliasCukor(10.0f * amount), kisTanyer.Contents);
+
             Kez kez = eg.Use<Kez>();
 
-            IIngredient massza = kez.Osszegyurni(new Turo(250.0f * amount), new PorCukor(200.0f * amount), new KokuszReszelek(150.0f * amount), new VaniliasCukor(10.0f * amount), preps["citromhej"]);
+            kez.OsszegyurniEdenyben(edeny);
 
-            IIngredient golyok = kez.Kiszaggatni(massza, 10.0f);
+            IngredientGroup golyok = kez.Kiszaggatni(edeny.Contents, 10.0f);
 
             // foreach
             kez.GolyovaGyurni(golyok);
 
-            IIngredient megforgatottGolyo = kez.Megforgatni(golyok, new KokuszReszelek(10.0f * amount));
+            MelyTanyer melyTanyer = eg.Use<MelyTanyer>();
+            melyTanyer.Add(new KokuszReszelek(10.0f * amount));
+            IngredientGroup megforgatottGolyo = kez.Megforgatni(melyTanyer, golyok);
             //
 
             cfp.Add("golyok", megforgatottGolyo);

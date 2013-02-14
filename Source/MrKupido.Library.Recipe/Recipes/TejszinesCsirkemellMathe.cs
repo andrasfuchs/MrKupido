@@ -26,6 +26,8 @@ namespace MrKupido.Library.Recipe
             result.Containers.Add(new Edeny(1.5f));
             result.Containers.Add(new JenaiTal(13.4f, 11.3f));
             result.Containers.Add(new LaposTanyer());
+            result.Containers.Add(new LaposKisTanyer());
+            result.Containers.Add(new LaposKisTanyer());
 
             result.Devices.Add(new Suto());
 
@@ -45,23 +47,19 @@ namespace MrKupido.Library.Recipe
 
             Edeny edeny = eg.Use<Edeny>();
 
-            IIngredient fokhagyma = new Fokhagyma(6.0f);
+            ISingleIngredient fokhagyma = new Fokhagyma(6.0f);
             FokhagymaPres fp = eg.Use<FokhagymaPres>();
             fp.Preselni(fokhagyma);
-            edeny.BerakniMind(fokhagyma, new Tej(1.0f));
+            edeny.Berakni(fokhagyma, new Tej(1.0f));
 
             Fakanal fakanal = eg.Use<Fakanal>();
-            //IIngredient tej = fakanal.Osszekeverni(new Tej(1.0f), fokhagyma);
-            //fakanal.OsszekeverniEdenyeket(edeny);
             fakanal.ElkeverniEdenyben(edeny);
 
             edeny.Berakni(new Csirkemell(250 * 10));
-            //edeny.Beonteni(tej);
             edeny.Varni(8 * 60);
             edeny.FolyadekotLeonteni();            
-            IIngredient tejesCsirkemell = edeny.Kivenni();
 
-            result.Add("tejescsirkemell", tejesCsirkemell);
+            result.Add("tejescsirkemell", edeny);
 
             eg.WashUp();
             return result;
@@ -73,21 +71,24 @@ namespace MrKupido.Library.Recipe
 
             Kez kez = eg.Use<Kez>();
 
-            IIngredient tejesCsirkemell = preps["tejescsirkemell"];
-            tejesCsirkemell = kez.Raszorni(tejesCsirkemell, new So(10.0f));
+            IIngredientContainer tejesCsirkemell = preps["tejescsirkemell"];
+            kez.Raszorni(tejesCsirkemell, new So(10.0f));
 
-            IIngredient alma = new Alma(4.0f);
+            ISingleIngredient alma = new Alma(4.0f);
             alma.ChangeUnitTo(MeasurementUnit.gramm);
 
+            LaposKisTanyer laposKisTanyer1 = eg.Use<LaposKisTanyer>();
             Reszelo reszelo = eg.Use<Reszelo>();
-            IIngredient reszeltAlma = reszelo.Lereszelni(alma);
+            reszelo.Lereszelni(laposKisTanyer1, alma);
 
-            IIngredient reszeltSajt = reszelo.Lereszelni(new KaravanFustoltSajt(200.0f));
+            LaposKisTanyer laposKisTanyer2 = eg.Use<LaposKisTanyer>();
+            ISingleIngredient sajt = new FustoltSajt(200.0f);
+            reszelo.Lereszelni(laposKisTanyer2, sajt);
 
             JenaiTal jenai = eg.Use<JenaiTal>();
-            jenai.BerakniMind(new FustoltSzalonna(5, MeasurementUnit.piece), tejesCsirkemell, reszeltAlma);
+            jenai.Berakni(new FustoltSzalonna(5, MeasurementUnit.piece), tejesCsirkemell.Contents, alma);
             jenai.Beonteni(new Tejszin(0.3f));
-            kez.Raszorni(tejesCsirkemell, reszeltSajt);
+            kez.Raszorni(tejesCsirkemell, sajt);
             jenai.Berakni(new FustoltSzalonna(5, MeasurementUnit.piece));
 
             Alufolia alufolia = new Alufolia(29.0f, 1000.0f);

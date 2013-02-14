@@ -32,15 +32,14 @@ namespace MrKupido.Library.Recipe
         {
             PreparedIngredients result = Pizza.Prepare(amount, eg);
 
-            IIngredient pizzateszta = result["pizzateszta"];
+            IIngredientContainer tepsi = result["pizzateszta"];
             result.Remove("pizzateszta");
 
             IIngredient paradicsomosPizzaszosz = new PizzaParadicsomszosz(0.2f);
             Kez kez = eg.Use<Kez>();
-            pizzateszta = kez.Raonteni(pizzateszta, paradicsomosPizzaszosz);
+            kez.Raonteni(tepsi, paradicsomosPizzaszosz);
 
-            result.Add("pizzateszta", pizzateszta);
-            result.Add("paradicsomos alapu teszt", null);
+            result.Add("pizzateszta", tepsi);
 
             eg.WashUp();
             return result;
@@ -49,7 +48,7 @@ namespace MrKupido.Library.Recipe
         public static new CookedFoodParts Cook(float amount, PreparedIngredients preps, EquipmentGroup eg)
         {
             CookedFoodParts cfp = Pizza.Cook(amount, preps, eg);
-            cfp.Add("pizzateszta", preps["pizzateszta"]);
+            cfp.Add("pizzateszta", preps["pizzateszta"].Contents);
             return cfp;
         }
 

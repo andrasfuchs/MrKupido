@@ -13,7 +13,7 @@ namespace MrKupido.Library.Ingredient
     [IngredientConsts(Category = ShoppingListCategory.Fruit)]
 
     [YieldOf(typeof(CitrusMedicaL))]
-    public class Citrom : IngredientBase
+    public class Citrom : SingleIngredient
     {
         public Citrom(float amount, MeasurementUnit unit = MeasurementUnit.piece)
             : base(amount, unit)

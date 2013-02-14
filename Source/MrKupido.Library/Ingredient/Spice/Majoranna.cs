@@ -11,7 +11,7 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "majoránna")]
 
     [LeafOf(typeof(OriganumMajorana))]
-    public class Majoranna : IngredientBase
+    public class Majoranna : SingleIngredient
     {
         public Majoranna(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
             : base(amount, unit)

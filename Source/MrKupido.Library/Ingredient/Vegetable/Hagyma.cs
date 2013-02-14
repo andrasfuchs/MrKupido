@@ -18,7 +18,7 @@ namespace MrKupido.Library.Ingredient
     [IngredientConsts(GrammsPerPiece = 35)]
 
     [RootOf(typeof(AlliumCepaL))]
-    public class Hagyma : IngredientBase
+    public class Hagyma : SingleIngredient
     {
         public Hagyma(float amount, MeasurementUnit unit = MeasurementUnit.piece)
             : base(amount, unit)

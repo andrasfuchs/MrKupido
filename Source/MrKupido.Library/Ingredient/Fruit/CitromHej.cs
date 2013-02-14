@@ -13,7 +13,7 @@ namespace MrKupido.Library.Ingredient
     [IngredientConsts(Category = ShoppingListCategory.Fruit)]
 
     [PartOf(typeof(CitrusMedicaL))]
-    public class CitromHej : IngredientBase
+    public class CitromHej : SingleIngredient
     {
         public CitromHej(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
             : base(amount, unit)

@@ -11,7 +11,7 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "paprika")]
 
     [YieldOf(typeof(CapsicumAnnuumL))]
-    public class Paprika : IngredientBase
+    public class Paprika : SingleIngredient
     {
         public Paprika(float amount, MeasurementUnit unit = MeasurementUnit.piece)
             : base(amount, unit)

@@ -8,16 +8,10 @@ namespace MrKupido.Library
     public interface IIngredient : ICloneable
     {
         [Obsolete]
-        string Name { get; }
-
-        ShoppingListCategory? Category { get; }
+        string Name { get; }        
 
         MeasurementUnit Unit { get; }
-
-        IngredientState State { get; set;  }
-        
-        int PieceCount { get; set; }
-
+               
         float GetAmount();
 
         float GetAmount(MeasurementUnit unit);

@@ -11,7 +11,7 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "sárgarépa")]
 
     [RootOf(typeof(DaucusCarotaSubspSativus))]
-    public class Sargarepa : IngredientBase
+    public class Sargarepa : SingleIngredient
     {
         public Sargarepa(float amount, MeasurementUnit unit = MeasurementUnit.piece)
             : base(amount, unit)

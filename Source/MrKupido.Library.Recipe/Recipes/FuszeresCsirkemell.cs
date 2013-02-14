@@ -23,8 +23,13 @@ namespace MrKupido.Library.Recipe
         {
             EquipmentGroup result = new EquipmentGroup();
 
+            result.Containers.Add(new Edeny());
             result.Containers.Add(new Tepsi());
+            result.Containers.Add(new Bogre());
             result.Containers.Add(new LaposTanyer());
+            result.Containers.Add(new LaposTanyer());
+            result.Containers.Add(new LaposKisTanyer());
+            result.Containers.Add(new LaposKisTanyer());
 
             result.Devices.Add(new Suto(38, 40, 4));
 
@@ -42,25 +47,43 @@ namespace MrKupido.Library.Recipe
 
             Kes knife = eg.Use<Kes>();
 
-            IIngredient csirkemell = knife.Feldarabolni(new Csirkemell(500.0f * amount), 50.0f);
-           
+            ISingleIngredient csirkemell = new Csirkemell(500.0f * amount);
+            knife.Feldarabolni(csirkemell, 50.0f);
+
+            LaposTanyer laposTanyer = eg.Use<LaposTanyer>();
+            laposTanyer.Berakni(csirkemell);
+
             Kez kez = eg.Use<Kez>();
-            csirkemell = kez.Raszorni(csirkemell, new So(5.0f * amount));
+            kez.Raszorni(laposTanyer, new So(5.0f * amount));
 
+            Edeny edeny = eg.Use<Edeny>();
+            edeny.Berakni(new Liszt(70.0f * amount), new So(5.0f * amount), new Fuszerpaprika(5.0f * amount), new FeketeBors(3.0f * amount), new Majoranna(3.0f * amount));
+
+            LaposTanyer laposTanyer2 = eg.Use<LaposTanyer>();
             Fakanal fakanal = eg.Use<Fakanal>();
-            IngredientGroup fuszeresliszt = fakanal.Osszekeverni(new Liszt(70.0f * amount), new So(5.0f * amount), new Fuszerpaprika(5.0f * amount), new FeketeBors(3.0f * amount), new Majoranna(3.0f * amount));
-            csirkemell = kez.Megforgatni(csirkemell, fuszeresliszt);
+            fakanal.ElkeverniEdenyben(edeny);
+            IngredientGroup prezlisCsirkemell = kez.Megforgatni(edeny, csirkemell);
+            laposTanyer2.Berakni(prezlisCsirkemell);            
+            
+            LaposKisTanyer laposKisTanyer1 = eg.Use<LaposKisTanyer>();
+            ISingleIngredient hagyma = new Hagyma(1.0f * amount, MeasurementUnit.piece);
+            knife.Felkarikazni(hagyma, 5.0f);
+            laposKisTanyer1.Berakni(hagyma);
 
-            IIngredient hagyma = knife.Felkarikazni(new Hagyma(1.0f * amount, MeasurementUnit.piece), 5.0f);
-            IngredientGroup tejfol = fakanal.Osszekeverni(new Tejfol(0.2f * amount), new NapraforgoOlaj(0.1f * amount));
+            Bogre bogre = eg.Use<Bogre>();
+            bogre.Beonteni(new Tejfol(0.2f * amount), new NapraforgoOlaj(0.1f * amount));
+            fakanal.ElkeverniEdenyben(bogre);
 
             Reszelo reszelo = eg.Use<Reszelo>();
-            IIngredient sajt = reszelo.Lereszelni(new Sajt(100.0f * amount));
+            ISingleIngredient sajt = new Sajt(100.0f * amount);
 
-            result.Add("csirkemell", csirkemell);
-            result.Add("hagyma", hagyma);
-            result.Add("tejfol", tejfol);
-            result.Add("sajt", sajt);
+            LaposKisTanyer laposKisTanyer2 = eg.Use<LaposKisTanyer>();
+            reszelo.Lereszelni(laposKisTanyer2, sajt);
+
+            result.Add("csirkemell", laposTanyer2);
+            result.Add("hagyma", laposKisTanyer1);
+            result.Add("tejfol", bogre);
+            result.Add("sajt", laposKisTanyer2);
 
             eg.WashUp();
             return result;
@@ -71,13 +94,13 @@ namespace MrKupido.Library.Recipe
             CookedFoodParts cfp = new CookedFoodParts();
 
             Tepsi tepsi = eg.Use<Tepsi>();
-            tepsi.Berakni((IngredientBase)preps["csirkemell"]);
+            tepsi.Berakni(preps["csirkemell"].Contents);
 
             Kez kez = eg.Use<Kez>();
-            tepsi.Contents = kez.Raszorni(tepsi.Contents, new Liszt(10.0f * amount));
-            tepsi.Contents = kez.Rarakni(tepsi.Contents, preps["hagyma"]);
-            tepsi.Contents = kez.Ralocsolni(tepsi.Contents, preps["tejfol"]);
-            tepsi.Contents = kez.Raszorni(tepsi.Contents, preps["sajt"]);
+            kez.Raszorni(tepsi, new Liszt(10.0f * amount));
+            kez.Rarakni(tepsi, preps["hagyma"].Contents);
+            kez.Ralocsolni(tepsi, preps["tejfol"].Contents);
+            kez.Raszorni(tepsi, preps["sajt"].Contents);
             Alufolia alufolia = new Alufolia(29.0f, 1000.0f);
             tepsi.Lefedni(alufolia);
 

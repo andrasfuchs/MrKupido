@@ -13,7 +13,7 @@ namespace MrKupido.Library.Ingredient
     [IngredientConsts(GrammsPerLiter = 1000)]
 
     [KindOf(typeof(Nonliving))]
-    public class Viz  : IngredientBase
+    public class Viz  : SingleIngredient
     {
         public Viz(float amount, MeasurementUnit unit = MeasurementUnit.liter)
             : base(amount, unit)

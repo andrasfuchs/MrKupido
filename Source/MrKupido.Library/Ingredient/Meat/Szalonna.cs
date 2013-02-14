@@ -14,7 +14,7 @@ namespace MrKupido.Library.Ingredient
     [IngredientConsts(Category = ShoppingListCategory.Meat)]
 
     [PartOf(typeof(SusScrofaDomestica))]
-    public class Szalonna : IngredientBase
+    public class Szalonna : SingleIngredient
     {
         public Szalonna(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
             : base(amount, unit)

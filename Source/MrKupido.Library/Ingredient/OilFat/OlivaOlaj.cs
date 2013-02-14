@@ -14,7 +14,7 @@ namespace MrKupido.Library.Ingredient
     [IngredientConsts(GrammsPerLiter = 1000)]
 
     [OilOf(typeof(OleaEuropaea))]
-    public class OlivaOlaj : IngredientBase
+    public class OlivaOlaj : SingleIngredient
     {
         public OlivaOlaj(float amount, MeasurementUnit unit = MeasurementUnit.liter)
             : base(amount, unit)

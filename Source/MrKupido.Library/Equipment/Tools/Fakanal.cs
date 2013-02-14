@@ -16,6 +16,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("eng", "mix together", Priority = 200)]
         [NameAlias("hun", "összekever", Priority = 200)]
         [NameAlias("hun", "keverd össze a következőket: ({0*}, )")]
+        [Obsolete("Use the Fakanal.Elkeverni instead")]
         public IngredientGroup Osszekeverni(params IIngredient[] ingredients)
         {
             return new IngredientGroup(ingredients);
@@ -26,12 +27,10 @@ namespace MrKupido.Library.Equipment
         [NameAlias("eng", "mix together", Priority = 200)]
         [NameAlias("hun", "összekever", Priority = 200)]
         [NameAlias("hun", "keverd össze a(z) {0} és {1} tartalmát")]
-        public Container OsszekeverniEdenyeket(Container container1, Container container2)
+        public void OsszekeverniEdenyeket(IIngredientContainer container1, IIngredientContainer container2)
         {
-            container1.Contents = new IngredientGroup(container1.Contents, container2.Contents);
-            container2.Contents = null;
-
-            return container1;
+            container1.Add(container2.Contents);
+            container2.Empty();
         }
 
         [IconUriFragment("mix")]
@@ -39,7 +38,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("eng", "mix together", Priority = 200)]
         [NameAlias("hun", "összekever", Priority = 200)]
         [NameAlias("hun", "alaposan keverd össze a(z) {0T}")]
-        public IngredientGroup Elkeverni(IngredientGroup ingredients)
+        public IIngredientGroup Elkeverni(IIngredientGroup ingredients)
         {
             return ingredients;
         }
@@ -49,7 +48,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("eng", "mix together", Priority = 200)]
         [NameAlias("hun", "összekever", Priority = 200)]
         [NameAlias("hun", "alaposan keverd össze a(z) {0} tartalmát")]
-        public void ElkeverniEdenyben(Container container)
+        public void ElkeverniEdenyben(IIngredientContainer container)
         {
         }
 

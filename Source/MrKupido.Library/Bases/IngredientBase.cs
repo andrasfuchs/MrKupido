@@ -12,67 +12,18 @@ namespace MrKupido.Library.Ingredient
 
     public class IngredientBase : NamedObject, IIngredient
     {
-        private static Dictionary<string,object> staticInfoObjects = new Dictionary<string,object>();
-
-        private Dictionary<int, float> amounts = new Dictionary<int, float>();
+        protected Dictionary<int, float> amounts = new Dictionary<int, float>();
         
         public MeasurementUnit Unit { get; protected set; }
-
-        public IngredientState State { get; set; }
-
-        public int PieceCount { get; set; }
-
-        public ShoppingListCategory? Category { get; protected set; }
-
-        public int? ExpirationTime { get; protected set; }
-        public float? StorageTemperature { get; protected set; }
-        public int? GlichemicalIndex { get; protected set; }
-        public float? PotencialAlkalinity { get; protected set; }
 
         public float? GrammsPerLiter { get; protected set; }
         public float? GrammsPerPiece { get; protected set; }
         public float? KCaloriesPerGramm { get; protected set; }
 
-        public IngredientBase(float amount, MeasurementUnit unit, IngredientState state = IngredientState.Normal)
+        public IngredientBase(float amount, MeasurementUnit unit)
         {
             this.Unit = unit;
             this.SetAmount(amount, unit);
-            this.State = state;
-            this.PieceCount = 1;
-
-            foreach (object icaObj in this.GetType().GetCustomAttributes(typeof(IngredientConstsAttribute), true))
-            {
-                IngredientConstsAttribute ica = (IngredientConstsAttribute)icaObj;
-
-                this.Category = ica.Category;
-                
-                this.ExpirationTime = ica.ExpirationTime;
-                this.GlichemicalIndex = ica.GlichemicalIndex;
-                this.PotencialAlkalinity = ica.PotencialAlkalinity;
-
-                this.GrammsPerLiter = ica.GrammsPerLiter;
-                this.GrammsPerPiece = ica.GrammsPerPiece;
-                this.KCaloriesPerGramm = ica.KCaloriesPerGramm;
-            }
-
-            if (staticInfoObjects.ContainsKey(this.GetType().FullName)) LoadStaticInfoObject(staticInfoObjects[this.GetType().FullName]);
-        }
-
-        public void LoadStaticInfoObject(object obj)
-        {
-            if (obj == null) return;
-
-            if (!staticInfoObjects.ContainsKey(this.GetType().FullName)) staticInfoObjects.Add(this.GetType().FullName, null);
-            staticInfoObjects[this.GetType().FullName] = obj;
-
-            try
-            {
-                // TODO: load only the properties which are NULL at the moment
-            }
-            catch (Exception ex)
-            {
-                throw new MrKupidoException(ex, "This object '{0}' can not be used as the static info object of type '{1}'. It doesn't have the necessary properties implemented or they are not accessible.", obj.GetType().FullName, this.GetType().FullName);
-            }
         }
 
         public float GetAmount()
@@ -171,77 +122,14 @@ namespace MrKupido.Library.Ingredient
             this.SetAmount(amount1 + amount2, this.Unit);
         }
 
-        public virtual string ToString(string languageISO)
-        {
-            return ToString(languageISO, true, true);
-        }
-
-        public virtual string ToString(string languageISO, bool includeAmount, bool includeState)
-        {
-            string amountStr = "";
-
-            if (includeAmount)
-            {
-                try
-                {
-                    float amount = GetAmount();
-
-                    if (amount > 0)
-                    {
-
-                        switch (Unit)
-                        {
-                            case MeasurementUnit.piece:
-                                amountStr = (amount).ToString("0") + " db";
-                                break;
-
-                            case MeasurementUnit.portion:
-                                amountStr = (amount).ToString("0") + " adag";
-                                break;
-
-                            case MeasurementUnit.gramm:
-                                if (amount >= 1000) amountStr = (amount / 1000).ToString("0.0") + " kg";
-                                else if (amount >= 100) amountStr = (amount / 10).ToString("0") + " dkg";
-                                else if (amount >= 10) amountStr = (amount / 10).ToString("0.0") + " dkg";
-                                else amountStr = (amount).ToString("0.00") + " g";
-                                break;
-
-                            case MeasurementUnit.liter:
-                                if (amount >= 1) amountStr = (amount).ToString("0.0") + " l";
-                                else if (amount >= 0.1) amountStr = (amount * 10).ToString("0") + " dl";
-                                else if (amount >= 0.01) amountStr = (amount * 10).ToString("0.0") + " dl";
-                                else amountStr = (amount * 100).ToString("0.00") + " cl";
-                                break;
-
-                            default:
-                                break;
-                        }
-
-                        amountStr += " ";
-                    }
-                }
-                catch (AmountUnknownException)
-                {
-                    // NOTE: that's fine for now, we do not calculate the amount for ingredient groups for the moment
-                }
-            }
-
-            string stateStr = "";
-
-            if (includeState)
-            {
-                if (State != IngredientState.Normal)
-                {
-                    stateStr = new EnumToMultilingualString().ConvertToString(State) + " ";
-                }
-            }
-
-            return amountStr + stateStr + this.GetName(languageISO);
-        }
-
         public object Clone()
         {
             return this.MemberwiseClone();
+        }
+
+        public virtual string ToString(string languageISO)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -10,6 +10,7 @@ using MrKupido.Library.Attributes;
 using MrKupido.Utils;
 using System.Threading;
 using System.Diagnostics;
+using MrKupido.Library.Ingredient;
 
 namespace MrKupido.Web.Models
 {
@@ -67,9 +68,9 @@ namespace MrKupido.Web.Models
             StringBuilder sb = new StringBuilder();
             foreach (RuntimeIngredient i in rtn.GetIngredients(1.0f, 1))
             {
-                if ((this.MainCategory == ShoppingListCategory.Unknown) && (i.Ingredient.Category.HasValue))
+                if ((this.MainCategory == ShoppingListCategory.Unknown) && (i.Ingredient is SingleIngredient) && (((SingleIngredient)i.Ingredient).Category.HasValue))
                 {
-                    this.MainCategory = i.Ingredient.Category.Value;
+                    this.MainCategory = ((SingleIngredient)i.Ingredient).Category.Value;
                 }
 
                 sb.Append(i.Ingredient.GetName(rtn.LanguageISO));

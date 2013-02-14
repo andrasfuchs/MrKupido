@@ -97,6 +97,10 @@
     <Compile Include="Migrations\201301041552473_MrKupido-20130104a.Designer.cs">
       <DependentUpon>201301041552473_MrKupido-20130104a.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201302141454474_MrKupido-20130214a.cs" />
+    <Compile Include="Migrations\201302141454474_MrKupido-20130214a.Designer.cs">
+      <DependentUpon>201302141454474_MrKupido-20130214a.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MrKupidoContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -120,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201301041552473_MrKupido-20130104a.resx">
       <DependentUpon>201301041552473_MrKupido-20130104a.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201302141454474_MrKupido-20130214a.resx">
+      <DependentUpon>201302141454474_MrKupido-20130214a.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

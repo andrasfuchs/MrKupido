@@ -26,6 +26,7 @@ namespace MrKupido.Library.Recipe
             result.Containers.Add(new Edeny(1.5f));
             result.Containers.Add(new Serpenyo());
             result.Containers.Add(new LaposTanyer());
+            result.Containers.Add(new MelyTanyer());
 
             result.Devices.Add(new Suto());
             result.Devices.Add(new Tuzhely());
@@ -41,24 +42,22 @@ namespace MrKupido.Library.Recipe
             PreparedIngredients result = new PreparedIngredients();
 
             IIngredient felfuttatottEleszto = new FelfuttatottEleszto(30f * amount);
+           
+            Edeny edeny = eg.Use<Edeny>();
+            edeny.Berakni(new Liszt(1000f * amount), felfuttatottEleszto, new Tejfol(0.2f * amount), new So(15f * amount), new Viz(0.5f * amount));
 
             Kez kez = eg.Use<Kez>();
-            //IIngredient teszta = kez.Osszegyurni(new Liszt(1000f * amount), felfuttatottEleszto, new Tejfol(0.2f * amount), new So(15f * amount), new Viz(0.5f * amount));
-            
-            Edeny edeny = eg.Use<Edeny>();
-            //edeny.Berakni(teszta);
-            edeny.BerakniMind(new Liszt(1000f * amount), felfuttatottEleszto, new Tejfol(0.2f * amount), new So(15f * amount), new Viz(0.5f * amount));
             kez.OsszegyurniEdenyben(edeny);
             edeny.Lefedni(edeny.Fedo);
             edeny.Varni(30);
 
             NyujtoDeszka nyd = eg.Use<NyujtoDeszka>();
-            IIngredient teszta = nyd.Nyujtani(edeny, 5);
+            nyd.Nyujtani(edeny, 5);
 
             Szaggato szaggato = eg.Use<Szaggato>();
-            IIngredient tesztadarabok = szaggato.Kiszaggatni(teszta, 250, 200);
+            szaggato.Kiszaggatni(nyd, 250, 200);
 
-            result.Add("tesztadarabok", tesztadarabok);
+            result.Add("tesztadarabok", nyd);
 
             eg.WashUp();
             return result;
@@ -72,13 +71,16 @@ namespace MrKupido.Library.Recipe
             serpenyo.Berakni(new NapraforgoOlaj(0.5f));
 
             Tuzhely tuzhely = eg.Use<Tuzhely>();
-            tuzhely.Rahelyezni(serpenyo);
             tuzhely.Homerseklet(350);
+            tuzhely.Rahelyezni(serpenyo);
 
-            IIngredient langosok = preps["tesztadarabok"];
-            serpenyo.KisutniOsszeset(langosok, 3.5f);
+            IIngredientContainer langosok = preps["tesztadarabok"];
 
-            cfp.Add("osszeslangos", langosok);
+            MelyTanyer melyTanyer = eg.Use<MelyTanyer>();
+            IIngredient kisutottLangos = serpenyo.KisutniOsszeset(langosok, 3.5f);
+            melyTanyer.Berakni(kisutottLangos);
+
+            cfp.Add("osszeslangos", melyTanyer.Contents);
 
             eg.WashUp();
             return cfp;

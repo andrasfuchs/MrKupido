@@ -10,8 +10,8 @@ namespace MrKupido.Library.Equipment
     [NameAlias("hun", "tányér")]
     public class Tanyer : RoundContainer
     {
-        public Tanyer(float radius, float depth)
-            : base(radius, depth)
+        public Tanyer(float diameter, float depth)
+            : base(diameter, depth)
         {
         }
     }

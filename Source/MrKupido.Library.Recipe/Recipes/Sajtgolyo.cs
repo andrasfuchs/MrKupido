@@ -25,6 +25,11 @@ namespace MrKupido.Library.Recipe
             result.Containers.Add(new Serpenyo());
             result.Containers.Add(new Edeny());
             result.Containers.Add(new LaposTanyer());
+            result.Containers.Add(new LaposTanyer());
+            result.Containers.Add(new MelyTanyer());
+            result.Containers.Add(new MelyTanyer());
+            result.Containers.Add(new MelyTanyer());
+            result.Containers.Add(new LaposKisTanyer());
 
             result.Devices.Add(new Tuzhely());
 
@@ -44,7 +49,7 @@ namespace MrKupido.Library.Recipe
             PreparedIngredients result = new PreparedIngredients();
 
             Labas labas = eg.Use<Labas>();
-            labas.BerakniMind(new Burgonya(2.0f), new Viz(0.5f));
+            labas.Berakni(new Burgonya(2.0f), new Viz(0.5f));
 
             Tuzhely tuzhely = eg.Use<Tuzhely>();
             tuzhely.Behelyezni(labas);
@@ -53,20 +58,23 @@ namespace MrKupido.Library.Recipe
             labas = (Labas)tuzhely.Kiemelni(typeof(Labas));
             labas.FolyadekotLeonteni();
 
-            IIngredient burgonya = labas.Kivenni();
+            ISingleIngredient burgonya = (ISingleIngredient)labas.Kivenni();
             KrumpliPucolo kp = eg.Use<KrumpliPucolo>();
-            burgonya = kp.Meghamozni(burgonya);
+            kp.Meghamozni(burgonya);
             burgonya.ChangeUnitTo(MeasurementUnit.gramm);
 
             BurgonyaPres bp = eg.Use<BurgonyaPres>();
             bp.Preselni(burgonya);
 
-            IIngredient fokhagyma = new Fokhagyma(1.0f);
+            ISingleIngredient fokhagyma = new Fokhagyma(1.0f);
             FokhagymaPres fp = eg.Use<FokhagymaPres>();
             fp.Preselni(fokhagyma);
 
             Reszelo reszelo = eg.Use<Reszelo>();
-            IIngredient sajt = reszelo.Lereszelni(new Sajt(70.0f));
+            LaposKisTanyer laposKisTanyer = eg.Use<LaposKisTanyer>();
+
+            ISingleIngredient sajt = new Sajt(70.0f);
+            reszelo.Lereszelni(laposKisTanyer, sajt);
 
             IIngredient tojas = new Tojas(1.0f);
             Kez kez = eg.Use<Kez>();
@@ -86,10 +94,13 @@ namespace MrKupido.Library.Recipe
             Fakanal fakanal = eg.Use<Fakanal>();
             IIngredient massza = fakanal.Osszekeverni(new Liszt(50.0f), new FeketeBorsOrolt(3.0f), new So(6.0f), vaj, burgonya, tojas, fokhagyma, sajt);
 
-            IIngredient golyok = kez.Kiszaggatni(massza, 30.0f);
-            golyok = kez.GolyovaGyurni(golyok);
+            LaposTanyer laposTanyer = eg.Use<LaposTanyer>();
 
-            result.Add("golyok", golyok);
+            IngredientGroup golyok = kez.Kiszaggatni(massza, 30.0f);
+            golyok = kez.GolyovaGyurni(golyok);
+            laposTanyer.Add(golyok);
+
+            result.Add("golyok", laposTanyer);
 
             eg.WashUp();
             return result;
@@ -106,23 +117,23 @@ namespace MrKupido.Library.Recipe
             tuzhely.Behelyezni(serpenyo);
             tuzhely.Homerseklet(350);
 
-            Edeny edeny = eg.Use<Edeny>();
+            MelyTanyer melyTanyer = eg.Use<MelyTanyer>();
+            melyTanyer.Berakni(new Zsemlemorzsa(100.0f));
 
             Kez kez = eg.Use<Kez>();
-            IIngredient golyok = kez.Megforgatni(preps["golyok"], new Zsemlemorzsa(100.0f));
+            IngredientGroup golyok = preps["golyok"].Contents as IngredientGroup;
+            golyok = kez.Megforgatni(melyTanyer, golyok);
 
-            bool mindbefert = false;
-            do
-            {
-                mindbefert = serpenyo.Berakni(golyok);
-                serpenyo.Varni(5);
+            MelyTanyer melyTanyer3 = eg.Use<MelyTanyer>();
+            melyTanyer3.Berakni(golyok);
 
-                IIngredient keszgolyok = serpenyo.Kivenni();
-                keszgolyok = kez.Lecsepegtetni(keszgolyok);
+            MelyTanyer melyTanyer2 = eg.Use<MelyTanyer>();
+            melyTanyer2.Berakni(serpenyo.KisutniOsszeset(melyTanyer3, 5));
 
-                edeny.Berakni(keszgolyok);
-            } while (!mindbefert);
-            
+            IIngredient keszgolyok = kez.Lecsepegtetni(golyok);
+
+            Edeny edeny = eg.Use<Edeny>();
+            edeny.Berakni(keszgolyok);
 
             cfp.Add("osszesgolyo", edeny.Contents);
 

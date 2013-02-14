@@ -11,7 +11,7 @@ namespace MrKupido.Library.Equipment
     public class Bogre : RoundContainer
     {
         public Bogre(float scale = 1.0f)
-            : base(4.0f * scale, 9.0f * scale)
+            : base(8.0f * scale, 9.0f * scale)
         {
         }
     }

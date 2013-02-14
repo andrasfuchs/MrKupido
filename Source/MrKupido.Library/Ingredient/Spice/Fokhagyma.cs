@@ -15,7 +15,7 @@ namespace MrKupido.Library.Ingredient
     [IngredientConsts(GrammsPerPiece = 5)]
 
     [RootOf(typeof(AlliumSativum))]
-    public class Fokhagyma : IngredientBase
+    public class Fokhagyma : SingleIngredient
     {
         public Fokhagyma(float amount, MeasurementUnit unit = MeasurementUnit.piece)
             : base(amount, unit)

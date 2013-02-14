@@ -109,6 +109,8 @@
     <Compile Include="Equipment\Containers\NyujtoDeszka.cs" />
     <Compile Include="Equipment\Containers\RoundContainer.cs" />
     <Compile Include="Equipment\Containers\RoundContainer\Bogre.cs" />
+    <Compile Include="Equipment\Containers\RoundContainer\MelyTanyer.cs" />
+    <Compile Include="Equipment\Containers\RoundContainer\LaposKisTanyer.cs" />
     <Compile Include="Equipment\Containers\RoundContainer\JenaiTal.cs" />
     <Compile Include="Equipment\Containers\RoundContainer\Labas.cs" />
     <Compile Include="Equipment\Devices\Hutogep.cs" />
@@ -191,12 +193,14 @@
     <Compile Include="Interfaces\IIngredient.cs" />
     <Compile Include="Bases\IngredientBase.cs" />
     <Compile Include="Enums\IngredientCategory.cs" />
+    <Compile Include="Interfaces\IIngredientGroup.cs" />
     <Compile Include="Interfaces\INutritionInfo.cs" />
-    <Compile Include="Interfaces\RecipeDirectionSegment.cs" />
+    <Compile Include="Interfaces\ISingleIngredient.cs" />
     <Compile Include="Model\CookedFoodParts.cs" />
     <Compile Include="Model\Dimensions.cs" />
     <Compile Include="Model\EnumToMultilingualString.cs" />
     <Compile Include="Model\EquipmentGroup.cs" />
+    <Compile Include="Model\SingleIngredient.cs" />
     <Compile Include="Model\IngredientGroup.cs" />
     <Compile Include="Ingredient\Spice\FeketeBors.cs" />
     <Compile Include="Ingredient\Meat\Csirkemell.cs" />

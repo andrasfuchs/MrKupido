@@ -13,7 +13,7 @@ namespace MrKupido.Library.Ingredient
     [IngredientConsts(Category = ShoppingListCategory.Nut)]
 
     [YieldOf(typeof(TheobromaCacao))]
-    public class Kakaobab : IngredientBase
+    public class Kakaobab : SingleIngredient
     {
         public Kakaobab(float amount, MeasurementUnit unit = MeasurementUnit.piece, IngredientState state = IngredientState.Normal)
             : base(amount, unit, state)

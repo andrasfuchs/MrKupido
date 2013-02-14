@@ -11,13 +11,17 @@ namespace MrKupido.Library
 
         IIngredient Contents { get; }
 
-        bool Berakni(IIngredient ig);
+        void Berakni(params IIngredient[] ingredients);
 
         IIngredient Kivenni();
 
         void Varni(int minutes);
 
         string GetName(string languageISO);
+
+        void Add(IIngredient i);
+        void AddRange(IIngredient[] i);
+        void Empty();
     }
 }
 

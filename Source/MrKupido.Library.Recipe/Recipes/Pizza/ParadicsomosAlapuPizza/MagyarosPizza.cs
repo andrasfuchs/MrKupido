@@ -22,6 +22,7 @@ namespace MrKupido.Library.Recipe
         {
             EquipmentGroup result = ParadicsomosAlapuPizza.SelectEquipment(amount);
 
+            result.Containers.Add(new LaposKisTanyer());
             result.Containers.Add(new LaposTanyer());
 
             result.Tools.Add(new Kez());
@@ -35,21 +36,31 @@ namespace MrKupido.Library.Recipe
         {
             PreparedIngredients result = ParadicsomosAlapuPizza.Prepare(amount, eg);
 
-            IIngredient pizzateszta = result["pizzateszta"];
+            IIngredientContainer pizzateszta = result["pizzateszta"];
             result.Remove("pizzateszta");
 
             Kes kes = eg.Use<Kes>();
-            IIngredient szalonna = kes.Feldarabolni(new FustoltSzalonna(150.0f * amount), 75.0f);
-            IIngredient kolbasz = kes.Felkarikazni(new Kolbasz(250.0f * amount), 25.0f);
-            IIngredient hagyma = kes.Felkarikazni(new Hagyma(5.0f * amount), 15.0f);
-            IIngredient paprika = kes.Felkarikazni(new Fuszerpaprika(100.0f * amount), 15.0f);
+            ISingleIngredient szalonna = new FustoltSzalonna(150.0f * amount);
+            kes.Feldarabolni(szalonna, 75.0f);
+
+            ISingleIngredient kolbasz = new Kolbasz(250.0f * amount);
+            kes.Felkarikazni(kolbasz, 25.0f);
+
+            ISingleIngredient hagyma = new Hagyma(5.0f * amount);
+            kes.Felkarikazni(hagyma, 15.0f);
+
+            ISingleIngredient paprika = new Fuszerpaprika(100.0f * amount);
+            kes.Felkarikazni(paprika, 15.0f);
 
             Reszelo reszelo = eg.Use<Reszelo>();
-            IIngredient sajt = reszelo.Lereszelni(new Sajt(100.0f * amount));
+            LaposKisTanyer laposKisTanyer = eg.Use<LaposKisTanyer>();
+
+            ISingleIngredient sajt = new Sajt(100.0f * amount);
+            reszelo.Lereszelni(laposKisTanyer, sajt);
 
             Kez kez = eg.Use<Kez>();
-            pizzateszta = kez.RarakniMind(pizzateszta, szalonna, kolbasz, hagyma, paprika);
-            pizzateszta = kez.Raszorni(pizzateszta, sajt);
+            kez.Rarakni(pizzateszta, szalonna, kolbasz, hagyma, paprika);
+            kez.Raszorni(pizzateszta, sajt);
             
             result.Add("pizzateszta", pizzateszta);
 

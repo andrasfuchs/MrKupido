@@ -32,7 +32,7 @@ namespace MrKupido.Library.Attributes
 
             if (
                 (miName == "System.Object") || (miName == "System.MarshalByRefObject") || (miName == "System.ValueType") || (miName == "System.Enum")
-                //|| (miName == "MrKupido.Library.Equipment.EquipmentBase") 
+                //|| (miName == "MrKupido.Library.NamedObject") 
                 //|| (miName == "MrKupido.Library.Ingredient.IngredientBase")
                 //|| (miName == "MrKupido.Library.Recipe.RecipeBase")
                 )

@@ -13,7 +13,7 @@ namespace MrKupido.Library.Ingredient
     [IngredientConsts(Category = ShoppingListCategory.Other)]
 
     [MilkOf(typeof(ApisMellifera))]
-    public class Honey : IngredientBase
+    public class Honey : SingleIngredient
     {
         public Honey(float amount, MeasurementUnit unit = MeasurementUnit.liter)
             : base(amount, unit)

@@ -13,7 +13,7 @@ namespace MrKupido.Library.Ingredient
     [IngredientConsts(Category = ShoppingListCategory.Nut)]
 
     [YieldOf(typeof(JuglansRegia))]
-    public class Diobel : IngredientBase
+    public class Diobel : SingleIngredient
     {
         public Diobel(float amount, MeasurementUnit unit = MeasurementUnit.piece, IngredientState state = IngredientState.Normal)
             : base(amount, unit, state)

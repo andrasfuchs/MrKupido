@@ -13,7 +13,7 @@ namespace MrKupido.Library.Ingredient
     [IngredientConsts(GrammsPerLiter = 1000)]
 
     //[KernelOf(typeof())]
-    public class FeherRizs : IngredientBase
+    public class FeherRizs : SingleIngredient
     {
         public FeherRizs(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
             : base(amount, unit)

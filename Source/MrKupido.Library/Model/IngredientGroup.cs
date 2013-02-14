@@ -9,30 +9,15 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("eng", "ingredient group")]
     [NameAlias("hun", "hozzávalók csoportja")]
 
-    public class IngredientGroup : IngredientBase, IIngredient, IEnumerable<IIngredient>
+    public class IngredientGroup : IngredientBase, IIngredientGroup, IEnumerable<SingleIngredient>
     {
-        private int id;
-        public int Id
-        {
-            set
-            {
-                if (!IconUrl.Contains("{0}")) throw new MrKupidoException("The ID of an ingredientgroup should be set only once.");
-
-                id = value;
-                IconUrl = IconUrl.Replace("{0}", id.ToString("00"));
-            }
-
-            get
-            {
-                return id;
-            }
-        }
+        public int Id { set; get; }
 
         public string IconUrl { get; set; }
 
-        private List<IIngredient> ingredients = new List<IIngredient>();
+        private List<SingleIngredient> ingredients = new List<SingleIngredient>();
 
-        public IIngredient[] Ingredients
+        public ISingleIngredient[] Ingredients
         {
             get
             {
@@ -52,21 +37,7 @@ namespace MrKupido.Library.Ingredient
 
         public IngredientGroup(params IIngredient[] ingredients) : base(0.0f, MeasurementUnit.none)
         {
-            this.Category = 0;
-
             AddIngredients(ingredients);
-
-            if (this.Unit != MeasurementUnit.none)
-            {
-                float amount = 0.0f;
-                foreach (IIngredient i in Ingredients)
-                {
-                    amount += i.GetAmount(this.Unit);
-                }
-                SetAmount(amount, this.Unit);
-            }
-
-            IconUrl = "~/Content/svg/inggroup_{0}.svg";
         }
 
         public IngredientGroup Clone(float amount, MeasurementUnit unit)
@@ -87,26 +58,49 @@ namespace MrKupido.Library.Ingredient
             return ig;
         }
 
-        private void AddIngredients(IIngredient[] ingredients)
+        public void AddIngredients(params IIngredient[] ingredients)
         {
+            bool changed = false;
+
             foreach (IIngredient ingredient in ingredients)
             {
+                if (ingredient == null) continue;
+
+                changed = true;
+
                 if (ingredient is IngredientGroup)
                 {
                     AddIngredients(((IngredientGroup)ingredient).Ingredients);
                     continue;
                 }
 
-                this.ingredients.Add(ingredient);
-                if (this.Unit == MeasurementUnit.none)
+                if (ingredient is SingleIngredient)
                 {
-                    this.Unit = ingredient.Unit;
-                } else if (this.Unit != ingredient.Unit) 
-                {
-                    this.Unit = MeasurementUnit.gramm;
+                    this.ingredients.Add((SingleIngredient)ingredient);
+                    if (this.Unit == MeasurementUnit.none)
+                    {
+                        this.Unit = ingredient.Unit;
+                    }
+                    else if (this.Unit != ingredient.Unit)
+                    {
+                        this.Unit = MeasurementUnit.gramm;
+                    }
                 }
+            }
 
-                this.Category |= ingredient.Category;
+            if (changed)
+            {
+                amounts.Clear();
+
+                if (this.Unit != MeasurementUnit.none)
+                {
+                    float amount = 0.0f;
+                    foreach (IIngredient i in Ingredients)
+                    {
+                        amount += i.GetAmount(this.Unit);
+                    }
+                    SetAmount(amount, this.Unit);
+                }
             }
         }
 
@@ -115,8 +109,7 @@ namespace MrKupido.Library.Ingredient
             nameOverride = value;
         }
 
-
-        public override string GetName(string languageISO)
+        public string GetName(string languageISO)
         {
             if (Ingredients.Length == 0) return base.GetName(languageISO);
             else return (nameOverride == null ? Ingredients[0].GetName(languageISO) : nameOverride);
@@ -134,7 +127,7 @@ namespace MrKupido.Library.Ingredient
 
                 for (int i = 0; i < ingredients.Count(); i++)
                 {
-                    sb.Append(ingredients[i].ToString());
+                    sb.Append(ingredients[i].ToString(languageISO));
 
                     if (i < ingredients.Count()-1) sb.Append(", ");
                 }
@@ -147,7 +140,7 @@ namespace MrKupido.Library.Ingredient
 
         #region IEnumerable<IIngredient> Members
 
-        public IEnumerator<IIngredient> GetEnumerator()
+        public IEnumerator<SingleIngredient> GetEnumerator()
         {
             return ingredients.GetEnumerator();
         }

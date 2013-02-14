@@ -43,7 +43,7 @@ namespace MrKupido.Processor
             if (node.LanguageISO != this.LanguageISO) return;
 
             all.Add(node);
-
+            
             if (classNameIndex.ContainsKey(node.ClassName)) throw new MrKupidoException("Class-name index already has an item with the key '{0}'", node.ClassName);
             classNameIndex.Add(node.ClassFullName, node);
 

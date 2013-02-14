@@ -17,7 +17,7 @@ namespace MrKupido.Library.Ingredient
     [IngredientConsts(GrammsPerPiece = 150)]
 
     [RootOf(typeof(SolanumTuberosum))]
-    public class Burgonya : IngredientBase
+    public class Burgonya : SingleIngredient
     {
         public Burgonya(float amount, MeasurementUnit unit = MeasurementUnit.piece)
             : base(amount, unit)

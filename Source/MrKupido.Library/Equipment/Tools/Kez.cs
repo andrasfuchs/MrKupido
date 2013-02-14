@@ -22,21 +22,20 @@ namespace MrKupido.Library.Equipment
         [NameAlias("eng", "crumple", Priority = 200)]
         [NameAlias("hun", "összegyúr", Priority = 200)]
         [NameAlias("hun", "gyúrd össze a(z) {0} tartalmát")]
-        public void OsszegyurniEdenyben(Container container)
+        public void OsszegyurniEdenyben(IIngredientContainer container)
         {            
         }
-
 
         [NameAlias("eng", "knead to balls", Priority = 200)]
         [NameAlias("hun", "golyóvá gyúr", Priority = 200)]
         [NameAlias("hun", "gyúrd golyóvá a(z) {0T}")]
-        public IIngredient GolyovaGyurni(IIngredient i)
+        public IngredientGroup GolyovaGyurni(IngredientGroup ig)
         {
-            if ((!(i is IngredientBase)) || (i.Unit != MeasurementUnit.gramm)) throw new InvalidActionForIngredientException("GolyovaGyurni", i.Name, i.Unit);
+            if (ig.Unit != MeasurementUnit.gramm) throw new InvalidActionForIngredientException("GolyovaGyurni", ig.Name, ig.Unit);
             
             // TODO: change dimensions and shape
 
-            return i;
+            return ig;
         }
 
         [NameAlias("eng", "tear", Priority = 200)]
@@ -70,83 +69,66 @@ namespace MrKupido.Library.Equipment
         [NameAlias("eng", "drip", Priority = 200)]
         [NameAlias("hun", "lecsepegtet", Priority = 200)]
         [NameAlias("hun", "csepegtesd le a(z) {0T}")]
-        public IIngredient Lecsepegtetni(IIngredient i) { return i; }
+        public IIngredient Lecsepegtetni(IIngredient i) 
+        { 
+            return i; 
+        }
 
         [NameAlias("eng", "sprinkle", Priority = 200)]
         [NameAlias("hun", "rászór", Priority = 200)]
-        [NameAlias("hun", "szórd rá a(z) {1T} a(z) {0R}")]
-        public IIngredient Raszorni(IIngredient iOn, IIngredient i)
+        [NameAlias("hun", "szórd rá a(z) {1T} a(z) {0} tartalmára")]
+        public void Raszorni(IIngredientContainer iOn, IIngredient i)
         {
             if (i.Unit != MeasurementUnit.gramm) throw new InvalidActionForIngredientException("Raszorni", i.Name, i.Unit);
 
-            return new IngredientGroup(new IIngredient[] { iOn, i });
-        }
-
-        [NameAlias("eng", "superimpose", Priority = 200)]
-        [NameAlias("hun", "rárak", Priority = 200)]
-        [NameAlias("hun", "rakd rá a(z) {1T} a(z) {0R}")]
-        public IIngredient Rarakni(IIngredient iOnTo, IIngredient i)
-        {
-            if ((i.Unit != MeasurementUnit.piece) && (i.Unit != MeasurementUnit.gramm)) throw new InvalidActionForIngredientException("Rarakni", i.Name, i.Unit);
-
-            return new IngredientGroup(new IIngredient[] { iOnTo, i });
+            //iOn.Contents.AddRange(ingredients);
         }
 
         [NameAlias("eng", "superimpose", Priority = 200)]
         [NameAlias("hun", "rárak", Priority = 200)]
         [NameAlias("hun", "rakd rá a(z) {0R} a következőket: ({1*}, )")]
-        public IIngredient RarakniMind(IIngredient iOnTo, params IIngredient[] ingredients)
+        public void Rarakni(IIngredientContainer iOnTo, params IIngredient[] ingredients)
         {
-            if (ingredients.Length == 0) return iOnTo;
+            if (ingredients.Length == 0) return;
 
             foreach (IIngredient i in ingredients)
             {
                 if ((i.Unit != MeasurementUnit.piece) && (i.Unit != MeasurementUnit.gramm)) throw new InvalidActionForIngredientException("Rarakni", i.Name, i.Unit);
             }
 
-
-            List<IIngredient> ings = new List<IIngredient>();
-
-            ings.Add(iOnTo);
-            foreach (IIngredient i in ingredients)
-            {
-                //ings.Add(i);
-            }
-
-            return new IngredientGroup(ings.ToArray());
+            iOnTo.AddRange(ingredients);
         }
-
 
         [NameAlias("eng", "pour on", Priority = 200)]
         [NameAlias("hun", "ráönt", Priority = 200)]
-        [NameAlias("hun", "öntsd rá a(z) {1T} a(z) {0R}")]
-        public IIngredient Raonteni(IIngredient iOnTo, IIngredient i)
+        [NameAlias("hun", "öntsd rá a(z) {1T} a(z) {0} tartalmára")]
+        public void Raonteni(IIngredientContainer iOnTo, IIngredient i)
         {
             if (i.Unit != MeasurementUnit.liter) throw new InvalidActionForIngredientException("Raonteni", i.Name, i.Unit);
 
-            return new IngredientGroup(new IIngredient[] { iOnTo, i });
+            iOnTo.Add(i);
         }
 
         [NameAlias("eng", "water", Priority = 200)]
         [NameAlias("hun", "rálocsol", Priority = 200)]
-        [NameAlias("hun", "locsold rá a(z) {1T} a(z) {0R}")]
-        public IIngredient Ralocsolni(IIngredient iOn, IIngredient i)
+        [NameAlias("hun", "locsold rá a(z) {1T} a(z) {0} tartalmára")]
+        public void Ralocsolni(IIngredientContainer iOn, IIngredient i)
         {
             if (i.Unit != MeasurementUnit.liter) throw new InvalidActionForIngredientException("Lelocsolni", i.Name, i.Unit);
 
-            return new IngredientGroup(new IIngredient[] { iOn, i });
+            iOn.Add(i);
         }
 
         [NameAlias("eng", "plow", Priority = 200)]
         [NameAlias("hun", "megforgat", Priority = 200)]
-        [NameAlias("hun", "forgasd meg a(z) {0T} a(z) {1N}")]
-        public IIngredient Megforgatni(IIngredient i, IIngredient iIn)
+        [NameAlias("hun", "forgasd meg a(z) {1T} a(z) {0N}")]
+        public IngredientGroup Megforgatni(IIngredientContainer iIn, IIngredient i)
         {
             if (i.Unit != MeasurementUnit.gramm) throw new InvalidActionForIngredientException("Megforgatni", i.Name, i.Unit);
 
-            // TODO: a small amount of i must be separated
+            // TODO: a small amount of iIn.Contents must be separated
 
-            return new IngredientGroup(new IIngredient[] { i, iIn });
+            return new IngredientGroup(new IIngredient[] { i, iIn.Contents });
         }
 
         [NameAlias("eng", "serve", Priority = 200)]

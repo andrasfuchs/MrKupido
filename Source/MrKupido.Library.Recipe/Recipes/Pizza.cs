@@ -44,21 +44,24 @@ namespace MrKupido.Library.Recipe
             Fakanal fakanal = eg.Use<Fakanal>();
 
             Edeny edeny1 = eg.Use<Edeny>();
-            edeny1.BerakniMind(new Liszt(1000f * amount), new So(6.0f * amount), new Oregano(3.0f * amount), new FeketeBorsOrolt(5.0f * amount));
+            edeny1.Berakni(new Liszt(1000f * amount), new So(6.0f * amount), new Oregano(3.0f * amount), new FeketeBorsOrolt(5.0f * amount));
             fakanal.ElkeverniEdenyben(edeny1);
 
             Bogre bogre = eg.Use<Bogre>();
-            bogre.BerakniMind(new Eleszto(14.0f * amount), new Cukor(1.5f * amount), new Viz(0.6f * amount), new OlivaOlaj(0.05f * amount));
+            bogre.Berakni(new Eleszto(14.0f * amount), new Cukor(1.5f * amount), new Viz(0.6f * amount), new OlivaOlaj(0.05f * amount));
             fakanal.ElkeverniEdenyben(bogre);
             
 
-            Edeny edeny2 = (Edeny)fakanal.OsszekeverniEdenyeket(edeny1, bogre);
-            edeny2.Varni(45);
+            fakanal.OsszekeverniEdenyeket(edeny1, bogre);
+            edeny1.Varni(45);
 
             NyujtoDeszka nyd = eg.Use<NyujtoDeszka>();
-            IIngredient pizzateszta = nyd.Nyujtani(edeny2, 1);
+            nyd.Nyujtani(edeny1, 1);
 
-            result.Add("pizzateszta", pizzateszta);
+            Tepsi tepsi = eg.Use<Tepsi>();
+            tepsi.BerakniEdenybol(nyd);
+
+            result.Add("pizzateszta", tepsi);
 
             eg.WashUp();
             return result;
@@ -68,14 +71,13 @@ namespace MrKupido.Library.Recipe
         {
             CookedFoodParts cfp = new CookedFoodParts();
 
-            Tepsi tepsi = eg.Use<Tepsi>();
-            tepsi.Berakni(preps["pizzateszta"]);
+            IIngredientContainer tepsi = preps["pizzateszta"];
 
             Suto suto = eg.Use<Suto>();
             suto.Homerseklet(200);
             suto.Behelyezni(tepsi);
             suto.Varni(30);
-            tepsi = (Tepsi)suto.Kiemelni(typeof(Tepsi));
+            tepsi = suto.Kiemelni(typeof(Tepsi));
 
             cfp.Add("pizzaalap", tepsi.Contents);
 

@@ -14,7 +14,7 @@ namespace MrKupido.Library.Ingredient
     [IngredientConsts(Category = ShoppingListCategory.Spice, GrammsPerPiece = 3)]
 
     [LeafOf(typeof(OcimumBasilicum))]
-    public class Bazsalikom : IngredientBase
+    public class Bazsalikom : SingleIngredient
     {
         public Bazsalikom(float amount, MeasurementUnit unit = MeasurementUnit.piece, IngredientState state = IngredientState.Normal)
             : base(amount, unit, state)

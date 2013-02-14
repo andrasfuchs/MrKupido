@@ -31,7 +31,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("eng", "mix together", Priority = 200)]
         [NameAlias("hun", "összekever", Priority = 200)]
         [NameAlias("hun", "alaposan keverd össze a {0T}")]
-        public IngredientGroup Elkeverni(IngredientGroup ingredients)
+        public IIngredientGroup Elkeverni(IIngredientGroup ingredients)
         {
             return ingredients;
         }

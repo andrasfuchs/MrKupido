@@ -13,7 +13,7 @@ namespace MrKupido.Library.Ingredient
     [IngredientConsts(Category = ShoppingListCategory.Fruit)]
 
     [YieldOf(typeof(AnanasComosus))]
-    public class Ananasz : IngredientBase
+    public class Ananasz : SingleIngredient
     {
         public Ananasz(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
             : base(amount, unit)

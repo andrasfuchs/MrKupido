@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using MrKupido.Library.Attributes;
+using MrKupido.Library.Ingredient;
 
 namespace MrKupido.Library.Equipment
 {
@@ -18,9 +19,22 @@ namespace MrKupido.Library.Equipment
         [NameAlias("eng", "bake", Priority = 200)]
         [NameAlias("hun", "kisüt", Priority = 200)]
         [NameAlias("hun", "süsd ki a(z) {N} az összes {0T} egyenként {1} percig")]
-        public void KisutniOsszeset(IIngredient i, float timeForOne)
+        public IIngredient KisutniOsszeset(IIngredientContainer i, float timeForOne)
         {
-            LastActionDuration = (uint)Math.Ceiling(i.PieceCount * timeForOne * 60);
+            IIngredient c = i.Contents;
+
+            if (c is SingleIngredient)
+            {
+                LastActionDuration = (uint)Math.Ceiling(((SingleIngredient)c).PieceCount * timeForOne * 60);
+            }
+            else if (c is IngredientGroup)
+            {
+                LastActionDuration = (uint)Math.Ceiling(((IngredientGroup)c).Count * timeForOne * 60);
+            }
+
+            i.Empty();
+
+            return c;
         }
     }
 }

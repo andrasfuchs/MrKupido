@@ -13,7 +13,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("eng", "skim", Priority = 200)]
         [NameAlias("hun", "lefölöz", Priority = 200)]
         [NameAlias("hun", "fölözd le a(z) {} tartalmát")]
-        public IIngredient Lefoloz(Container container, float percent)
+        public IIngredient Lefoloz(IIngredientContainer container, float percent)
         {
             IIngredient i = container.Contents;
             

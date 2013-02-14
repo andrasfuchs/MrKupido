@@ -14,7 +14,7 @@ namespace MrKupido.Library.Equipment
         public Fedo Fedo = new Fedo();
 
         public Edeny(float scale = 1.0f)
-            : base(7.0f * scale, 6.0f * scale)
+            : base(14.0f * scale, 6.0f * scale)
         {
         }
     }

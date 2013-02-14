@@ -13,7 +13,7 @@ namespace MrKupido.Library.Ingredient
     [IngredientConsts(Category = ShoppingListCategory.Nut)]
 
     [YieldOf(typeof(MyristicaFragrans))]
-    public class Szerecsendiobel : IngredientBase
+    public class Szerecsendiobel : SingleIngredient
     {
         public Szerecsendiobel(float amount, MeasurementUnit unit = MeasurementUnit.piece, IngredientState state = IngredientState.Normal)
             : base(amount, unit, state)

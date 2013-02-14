@@ -14,7 +14,7 @@ namespace MrKupido.Library.Ingredient
     [IngredientConsts(Category = ShoppingListCategory.Other, GrammsPerPiece = 30)]
 
     [EggOf(typeof(GallusGallusDomesticus))]
-    public class Tojas : IngredientBase
+    public class Tojas : SingleIngredient
     {
         public Tojas(float amount, MeasurementUnit unit = MeasurementUnit.piece)
             : base(amount, unit)
