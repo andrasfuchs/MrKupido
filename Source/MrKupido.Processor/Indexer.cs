@@ -74,8 +74,6 @@ namespace MrKupido.Processor
             TreeNode tn = null;
             classNameIndex.TryGetValue(className, out tn);
 
-            if (tn == null) Trace.TraceError("The class '{0}' was not found in the tree.", className);
-
             return tn;
         }
 
@@ -84,8 +82,6 @@ namespace MrKupido.Processor
             TreeNode tn = null;
             uniqueNameIndex[languageISO].TryGetValue(uniqueName, out tn);
 
-            if (tn == null) Trace.TraceError("The class with unique-name '{0}' was not found in the tree.", uniqueName);
-
             return tn;
         }
 
@@ -93,8 +89,6 @@ namespace MrKupido.Processor
         {
             TreeNode tn = null;
             nameIndex[languageISO].TryGetValue(name, out tn);
-
-            if (tn == null) Trace.TraceError("The class with name '{0}' was not found in the tree.", name);
 
             return tn;
         }

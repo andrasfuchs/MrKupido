@@ -18,20 +18,12 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "bake", Priority = 200)]
         [NameAlias("hun", "kisüt", Priority = 200)]
-        [NameAlias("hun", "süsd ki a(z) {N} az összes {0T} egyenként {1} percig")]
+        [NameAlias("hun", "süsd ki a(z) {N} a(z) {0.Contents.T}, egyenként {1} percig (kb. {0.Contents.PieceCount.} db)")]
         public IIngredient KisutniOsszeset(IIngredientContainer i, float timeForOne)
         {
             IIngredient c = i.Contents;
 
-            if (c is SingleIngredient)
-            {
-                LastActionDuration = (uint)Math.Ceiling(((SingleIngredient)c).PieceCount * timeForOne * 60);
-            }
-            else if (c is IngredientGroup)
-            {
-                LastActionDuration = (uint)Math.Ceiling(((IngredientGroup)c).Count * timeForOne * 60);
-            }
-
+            LastActionDuration = (uint)Math.Ceiling(c.PieceCount * timeForOne * 60);
             i.Empty();
 
             return c;

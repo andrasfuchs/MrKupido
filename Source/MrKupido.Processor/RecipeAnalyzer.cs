@@ -105,9 +105,9 @@ namespace MrKupido.Processor
 
             foreach (object p in parameters)
             {
-                if (p is IngredientBase)
+                if (p is ICloneable)
                 {
-                    tempParameters.Add(((IngredientBase)p).Clone());
+                    tempParameters.Add(((ICloneable)p).Clone());
                 }
                 else
                 {

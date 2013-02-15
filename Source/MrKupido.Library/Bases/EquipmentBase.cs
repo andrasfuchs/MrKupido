@@ -11,7 +11,31 @@ namespace MrKupido.Library.Equipment
 
     public class EquipmentBase : NamedObject, IEquipment
     {
-        public bool IsInUse { get; private set; }
+        private int index = 0;
+        public int Index 
+        {
+            get
+            {
+                return index;
+            }
+            
+            set
+            {
+                if (index > 0)
+                {
+                    throw new MrKupidoException("The index of an EquipmentBase must be set only once.");
+                }
+
+                if (value <= 0)
+                {
+                    throw new MrKupidoException("The new index value must be pozitive.");
+                }
+
+                index = value;
+            }
+        }
+
+        public bool IsDirty { get; private set; }
 
         public virtual uint LastActionDuration { get; protected set; }
 
@@ -25,7 +49,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "használd a(z) {T}")]
         public void Use()
         {
-            IsInUse = true;
+            IsDirty = true;
         }
 
         [NameAlias("eng", "wash up", Priority = 200)]
@@ -33,7 +57,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "mosogasd el a(z) {T}")]
         public void WashUp()
         {
-            IsInUse = false;
+            IsDirty = false;
         }
     }
 }

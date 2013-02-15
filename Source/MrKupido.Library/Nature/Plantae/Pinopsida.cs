@@ -6,6 +6,7 @@ using System.Text;
 
 namespace MrKupido.Library.Nature
 {
+    [NameAlias("eng", "pinopsida")]
     [NameAlias("hun", "tűlevelűek")]
 
     [NatureClass]

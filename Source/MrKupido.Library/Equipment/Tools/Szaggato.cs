@@ -19,15 +19,9 @@ namespace MrKupido.Library.Equipment
             float totalWeight = ic.Contents.GetAmount(MeasurementUnit.gramm);
             int count = ((int)Math.Floor(totalWeight / weight)) + 1;
 
-            IIngredient content = ic.Contents;
-            ic.Empty();
+            ic.Contents.PieceCount = count;
 
-            for (int i = 0; i < count; i++)
-            {
-                IIngredient c = (IIngredient)content.Clone();
-                //TODO: c.SetAmount(totalWeight / count);
-                ic.Add(c);
-            }
+            LastActionDuration = 30 * (uint)count;
         }
     }
 }

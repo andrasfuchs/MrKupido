@@ -10,6 +10,15 @@ namespace MrKupido.Library.Equipment
     [NameAlias("hun", "nyújtódeszka")]
     public class NyujtoDeszka : Container
     {
+        [NameAlias("hun", "{L} a tésztadarabok")]
+        public IIngredient Contents
+        {
+            get
+            {
+                return getContents();
+            }
+        }
+
         public NyujtoDeszka(float scale = 1.0f)
             : base(40.0f * scale, 80.0f * scale, 1.0f)
         {

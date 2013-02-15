@@ -6,10 +6,6 @@ using System.Text;
 
 namespace MrKupido.Library.Nature
 {
-    [NameAlias("hun", "újhagyma", Priority = 1)]
-    [NameAlias("hun", "zöldhagyma")]
-    [NameAlias("hun", "téli sarjadékhagyma", Priority = 200)]
-
     [NameAlias("eng", "spring onion", Priority = 1)]
     [NameAlias("eng", "green onion")]
     [NameAlias("eng", "scallion", Priority = 200)]
@@ -22,6 +18,9 @@ namespace MrKupido.Library.Nature
     [NameAlias("eng", "yard onion", Priority = 207)]
     [NameAlias("eng", "gibbons", Priority = 208)]
     [NameAlias("eng", "syboes", Priority = 209)]
+    [NameAlias("hun", "újhagyma", Priority = 1)]
+    [NameAlias("hun", "zöldhagyma")]
+    [NameAlias("hun", "téli sarjadékhagyma", Priority = 200)]
 
     [NatureSpecies]
     public class AlliumCepa : Amaryllidaceae

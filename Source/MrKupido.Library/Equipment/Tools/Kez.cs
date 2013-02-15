@@ -63,6 +63,8 @@ namespace MrKupido.Library.Equipment
 
             }
 
+            LastActionDuration = 30 * (uint)count;
+
             return new IngredientGroup(result.ToArray());
         }
 

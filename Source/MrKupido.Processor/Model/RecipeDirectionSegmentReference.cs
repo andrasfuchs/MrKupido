@@ -1,6 +1,7 @@
 ﻿using MrKupido.Library;
 using MrKupido.Library.Equipment;
 using MrKupido.Library.Ingredient;
+using MrKupido.Library.Recipe;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,17 +34,20 @@ namespace MrKupido.Processor.Model
                 {
                     SingleIngredient ib = (SingleIngredient)reference;
 
-                    IngredientTreeNode itn = Cache.Ingredient[ib.GetType().FullName];
-                    if (itn != null)
-                    {
-                        this.TreeNode = itn;
-                    }
-                    else
+                    if (ib is RecipeBase)
                     {
                         RecipeTreeNode rtn = Cache.Recipe[ib.GetType().FullName];
                         if (rtn != null)
                         {
                             this.TreeNode = rtn;
+                        }
+                    }
+                    else
+                    {
+                        IngredientTreeNode itn = Cache.Ingredient[ib.GetType().FullName];
+                        if (itn != null)
+                        {
+                            this.TreeNode = itn;
                         }
                     }
 
@@ -75,9 +79,11 @@ namespace MrKupido.Processor.Model
                 {
                     IngredientGroup ig = (IngredientGroup)reference;
 
+                    this.TreeNode = Cache.Ingredient[ig.GetType().FullName];
+                    
                     this.Id = ig.Id;
-                    this.IconAlt = IntegerToStringHun(this.Id);
-                    this.Text = String.IsNullOrEmpty(ig.IconUrl) ? this.Text = ig.Name : IntegerToStringHun(this.Id);
+                    this.IconAlt = IntegerToStringHun(ig.Id);
+                    this.Text = ig.GetName(languageISO);
                 }
             }
 

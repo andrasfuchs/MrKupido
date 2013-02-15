@@ -9,11 +9,9 @@ namespace MrKupido.Library
     {
         int Id { set; get; }
 
-        string IconUrl { get; set; }
-
         ISingleIngredient[] Ingredients { get; }
 
-        int Count { get; }
+        int IngredientCount { get; }
 
         void AddIngredients(params IIngredient[] ingredients);
     }

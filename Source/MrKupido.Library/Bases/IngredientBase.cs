@@ -20,8 +20,13 @@ namespace MrKupido.Library.Ingredient
         public float? GrammsPerPiece { get; protected set; }
         public float? KCaloriesPerGramm { get; protected set; }
 
+        public IngredientState State { get; set; }
+
+        public int PieceCount { get; set; }
+
         public IngredientBase(float amount, MeasurementUnit unit)
         {
+            this.PieceCount = 1;
             this.Unit = unit;
             this.SetAmount(amount, unit);
         }
@@ -120,11 +125,6 @@ namespace MrKupido.Library.Ingredient
 
             amounts.Clear();
             this.SetAmount(amount1 + amount2, this.Unit);
-        }
-
-        public object Clone()
-        {
-            return this.MemberwiseClone();
         }
 
         public virtual string ToString(string languageISO)

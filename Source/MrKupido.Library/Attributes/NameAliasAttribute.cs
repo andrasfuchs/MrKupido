@@ -115,13 +115,21 @@ namespace MrKupido.Library.Attributes
 
             if (names.Length == 0)
             {
+                bool isCommercialProduct = (mi.GetCustomAttributes(typeof(CommercialProductAttribute), false).Length > 0);
+
                 if (memberName == null)
                 {
-                    Trace.TraceWarning("The class '{0}' has no name defined in culture '{1}'.", objType.FullName, languageISOCode);
+                    if (!isCommercialProduct)
+                    {
+                        Trace.TraceWarning("The class '{0}' has no name defined in the '{1}' language.", objType.FullName, languageISOCode);
+                    }
                 }
                 else
                 {
-                    Trace.TraceWarning("The member '{1}' of the class '{0}' has no name defined in culture '{2}'.", objType.FullName, mi.Name, languageISOCode);
+                    if ((memberName != "GetName") && (memberName != "Clone") && (memberName != "GetLifetimeService") && (memberName != "InitializeLifetimeService") && (memberName != "CreateObjRef"))
+                    {
+                        Trace.TraceWarning("The member '{1}' of the class '{0}' has no name defined in the '{2}' language.", objType.FullName, mi.Name, languageISOCode);
+                    }
                 }
             }
             else

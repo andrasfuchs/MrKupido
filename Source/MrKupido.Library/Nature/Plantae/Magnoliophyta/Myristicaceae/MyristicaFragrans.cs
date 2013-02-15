@@ -6,6 +6,7 @@ using System.Text;
 
 namespace MrKupido.Library.Nature
 {
+    [NameAlias("eng", "nutmeg")]
     [NameAlias("hun", "szerecsendiófa")]
     [NameAlias("hun", "muskátdió", Priority = 200)]
 

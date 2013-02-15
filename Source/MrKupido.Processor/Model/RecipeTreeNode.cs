@@ -124,18 +124,23 @@ namespace MrKupido.Processor.Model
             {
                 string classFullName = i.GetType().FullName;
 
-                RecipeTreeNode rtn = Cache.Recipe[classFullName];
-                if (rtn != null)
+                if (i is RecipeBase)
                 {
-                    result.Add(new RuntimeIngredient(i, rtn));
-                    continue;
+                    RecipeTreeNode rtn = Cache.Recipe[classFullName];
+                    if (rtn != null)
+                    {
+                        result.Add(new RuntimeIngredient(i, rtn));
+                        continue;
+                    }
                 }
-
-                IngredientTreeNode itn = Cache.Ingredient[classFullName];
-                if (itn != null)
+                else
                 {
-                    result.Add(new RuntimeIngredient(i, itn));
-                    continue;
+                    IngredientTreeNode itn = Cache.Ingredient[classFullName];
+                    if (itn != null)
+                    {
+                        result.Add(new RuntimeIngredient(i, itn));
+                        continue;
+                    }
                 }
 
                 throw new MrKupidoException("Ingredient '{0}' was not found eighter in the ingredients or recipes trees.");

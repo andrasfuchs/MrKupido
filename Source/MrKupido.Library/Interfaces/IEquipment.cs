@@ -10,7 +10,7 @@ namespace MrKupido.Library
         [Obsolete]
         string Name { get; }
 
-        bool IsInUse { get; }
+        bool IsDirty { get; }
         
         uint LastActionDuration { get; }
 

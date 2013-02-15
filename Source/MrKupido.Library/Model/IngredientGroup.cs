@@ -13,8 +13,6 @@ namespace MrKupido.Library.Ingredient
     {
         public int Id { set; get; }
 
-        public string IconUrl { get; set; }
-
         private List<SingleIngredient> ingredients = new List<SingleIngredient>();
 
         public ISingleIngredient[] Ingredients
@@ -25,7 +23,7 @@ namespace MrKupido.Library.Ingredient
             }
         }
 
-        public int Count
+        public int IngredientCount
         {
             get
             {

@@ -26,15 +26,15 @@ namespace MrKupido.Library.Recipe
             result.Containers.Add(new Edeny());
             result.Containers.Add(new Tepsi());
             result.Containers.Add(new Bogre());
-            result.Containers.Add(new LaposTanyer());
-            result.Containers.Add(new LaposTanyer());
+            //result.Containers.Add(new LaposTanyer());
+            //result.Containers.Add(new LaposTanyer());
             result.Containers.Add(new LaposKisTanyer());
             result.Containers.Add(new LaposKisTanyer());
 
             result.Devices.Add(new Suto(38, 40, 4));
 
             result.Tools.Add(new Kez());
-            result.Tools.Add(new Kes());
+            //result.Tools.Add(new Kes());
             result.Tools.Add(new Fakanal());
             result.Tools.Add(new Reszelo());
 
@@ -45,21 +45,21 @@ namespace MrKupido.Library.Recipe
         {
             PreparedIngredients result = new PreparedIngredients();
 
-            Kes knife = eg.Use<Kes>();
+            Kes knife = eg.Use<Kes>(1);
 
             ISingleIngredient csirkemell = new Csirkemell(500.0f * amount);
             knife.Feldarabolni(csirkemell, 50.0f);
 
-            LaposTanyer laposTanyer = eg.Use<LaposTanyer>();
-            laposTanyer.Berakni(csirkemell);
+            MelyTanyer melyTanyer = eg.Use<MelyTanyer>(1);
+            melyTanyer.Berakni(csirkemell);
 
             Kez kez = eg.Use<Kez>();
-            kez.Raszorni(laposTanyer, new So(5.0f * amount));
+            kez.Raszorni(melyTanyer, new So(5.0f * amount));
 
             Edeny edeny = eg.Use<Edeny>();
             edeny.Berakni(new Liszt(70.0f * amount), new So(5.0f * amount), new Fuszerpaprika(5.0f * amount), new FeketeBors(3.0f * amount), new Majoranna(3.0f * amount));
 
-            LaposTanyer laposTanyer2 = eg.Use<LaposTanyer>();
+            LaposTanyer laposTanyer2 = eg.Use<LaposTanyer>(2);
             Fakanal fakanal = eg.Use<Fakanal>();
             fakanal.ElkeverniEdenyben(edeny);
             IngredientGroup prezlisCsirkemell = kez.Megforgatni(edeny, csirkemell);
@@ -125,7 +125,7 @@ namespace MrKupido.Library.Recipe
         public static void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
             Kez kez = eg.Use<Kez>();
-            kez.Talalni(food["csirke"], eg.Use<LaposTanyer>());
+            kez.Talalni(food["csirke"], eg.Use<LaposTanyer>(3));
             eg.WashUp();
         }
     }

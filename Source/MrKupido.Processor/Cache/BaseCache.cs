@@ -5,6 +5,7 @@ using System.Text;
 using MrKupido.Processor.Model;
 using System.Threading;
 using MrKupido.Library;
+using System.Diagnostics;
 
 namespace MrKupido.Processor
 {
@@ -37,6 +38,11 @@ namespace MrKupido.Processor
                 if (result == null)
                 {
                     result = Indexer.GetByName(name, language);
+                }
+
+                if (result == null)
+                {
+                    Trace.TraceError("The class with unique-name/class name/name '{0}' was not found in the tree.", name);
                 }
 
                 return result;

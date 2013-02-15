@@ -11,10 +11,6 @@ namespace MrKupido.Library.Ingredient
 
     public class SingleIngredient : IngredientBase, ISingleIngredient
     {
-        public IngredientState State { get; set; }
-
-        public int PieceCount { get; set; }
-
         public ShoppingListCategory? Category { get; protected set; }
 
         public int? ExpirationTime { get; protected set; }

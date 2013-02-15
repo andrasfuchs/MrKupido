@@ -15,16 +15,28 @@ namespace MrKupido.Library.Equipment
 
         public int Id { get; set; }
 
-        private IngredientGroup contents = new IngredientGroup();
+        protected IngredientGroup contents = new IngredientGroup();
+        [NameAlias("hun", "{} tartalma")]
         public IIngredient Contents 
         {
             get
             {
-                if (contents.Count == 0)
+                return getContents();
+            }
+        }
+
+        public Container(float width, float height, float depth)
+        {
+            this.Dimensions = new Dimensions(width, height, depth);
+        }
+
+        protected IIngredient getContents()
+        {
+                if (contents.IngredientCount == 0)
                 {
                     return null;
                 }
-                else if (contents.Count == 1)
+                else if (contents.IngredientCount == 1)
                 {
                     return contents.Ingredients[0];
                 }
@@ -32,12 +44,6 @@ namespace MrKupido.Library.Equipment
                 {
                     return contents;
                 }
-            }
-        }
-
-        public Container(float width, float height, float depth)
-        {
-            this.Dimensions = new Dimensions(width, height, depth);
         }
 
         [NameAlias("eng", "put in", Priority = 200)]
@@ -149,16 +155,22 @@ namespace MrKupido.Library.Equipment
             c.AddRange(liquids.ToArray());
         }
 
+        [NameAlias("eng", "add", Priority = 200)]
+        [NameAlias("hun", "hozzáad", Priority = 200)]
         public void Add(IIngredient i)
         {
             this.contents.AddIngredients(i);
         }
 
+        [NameAlias("eng", "add more", Priority = 200)]
+        [NameAlias("hun", "többeket hozzáad", Priority = 200)]
         public void AddRange(IIngredient[] i)
         {
             this.contents.AddIngredients(i);
         }
 
+        [NameAlias("eng", "empty", Priority = 200)]
+        [NameAlias("hun", "kiürít", Priority = 200)]
         public void Empty()
         {
             this.contents = new IngredientGroup();

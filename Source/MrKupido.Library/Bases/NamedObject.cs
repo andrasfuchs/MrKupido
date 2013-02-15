@@ -6,7 +6,10 @@ using System.Text;
 
 namespace MrKupido.Library
 {
-    public class NamedObject : MarshalByRefObject
+    [NameAlias("eng", "named object")]
+    [NameAlias("hun", "elnevezett objektum")]
+
+    public class NamedObject : MarshalByRefObject, ICloneable
     {
         private Dictionary<string ,string> names = new Dictionary<string,string>();
 
@@ -35,5 +38,9 @@ namespace MrKupido.Library
             return GetName(System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName);
         }
 
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }

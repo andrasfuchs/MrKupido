@@ -8,6 +8,7 @@ namespace MrKupido.Library.Nature
 {
     [IconUriFragment("cow")]
 
+    [NameAlias("eng", "bovidae")]
     [NameAlias("hun", "tülkösszarvú")]
 
     [NatureFamily]

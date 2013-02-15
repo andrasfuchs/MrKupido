@@ -8,6 +8,7 @@ namespace MrKupido.Library.Nature
 {
     [IconUriFragment("pig")]
 
+    [NameAlias("eng", "suidae")]
     [NameAlias("hun", "disznóféle")]
 
     [NatureFamily]

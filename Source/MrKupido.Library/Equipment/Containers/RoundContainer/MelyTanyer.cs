@@ -7,7 +7,7 @@ using MrKupido.Library.Attributes;
 namespace MrKupido.Library.Equipment
 {
     [NameAlias("eng", "soup plate")]
-    [NameAlias("hun", "mélytányér")]
+    [NameAlias("hun", "mély tányér")]
     public class MelyTanyer : Tanyer
     {
         public MelyTanyer()

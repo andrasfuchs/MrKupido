@@ -21,7 +21,7 @@ namespace MrKupido.Library
             Tools = new List<Tool>();
         }
 
-        public T Use<T>() where T : EquipmentBase
+        public T Use<T>(int index = 0) where T : EquipmentBase
         {
             T result = null;
             string typeFullName = typeof(T).FullName;
@@ -29,19 +29,19 @@ namespace MrKupido.Library
 
             if (typeof(T).CheckParents(typeof(Container), false))
             {
-                sametypeEquipment = Containers.Where(c => c.GetType().FullName == typeFullName);
+                sametypeEquipment = Containers.Where(c => (c.GetType().FullName == typeFullName) && (c.Index == index));
             }
             else if (typeof(T).CheckParents(typeof(Device), false))
             {
-                sametypeEquipment = Devices.Where(c => c.GetType().FullName == typeFullName);
+                sametypeEquipment = Devices.Where(c => (c.GetType().FullName == typeFullName) && (c.Index == index));
             }
             else if (typeof(T).CheckParents(typeof(Material), false))
             {
-                sametypeEquipment = Materials.Where(c => c.GetType().FullName == typeFullName);
+                sametypeEquipment = Materials.Where(c => (c.GetType().FullName == typeFullName) && (c.Index == index));
             }
             else if (typeof(T).CheckParents(typeof(Tool), false))
             {
-                sametypeEquipment = Tools.Where(c => c.GetType().FullName == typeFullName);
+                sametypeEquipment = Tools.Where(c => (c.GetType().FullName == typeFullName) && (c.Index == index));
             }
             else
             {
@@ -50,10 +50,21 @@ namespace MrKupido.Library
 
             if (sametypeEquipment.Count() == 0)
             {
-                throw new MrKupidoException("There are no classes of type '{0}' in the equipment group. Please add it to the 'SelectEquipment' method of the recipe.", typeFullName);
+                if (index == 0)
+                {
+                    throw new MrKupidoException("There are no classes of type '{0}' in the equipment group. Please add it to the 'SelectEquipment' method of the recipe.", typeFullName);
+                }
+                else
+                {
+                    List<T> createdEquipment = new List<T>();
+                    createdEquipment.Add(Activator.CreateInstance<T>());
+                    createdEquipment[0].Index = index;
+
+                    sametypeEquipment = createdEquipment;
+                }
             }
 
-            result = sametypeEquipment.FirstOrDefault(c => !c.IsInUse) as T;
+            result = sametypeEquipment.FirstOrDefault(c => !c.IsDirty) as T;
 
             if (result == null)
             {
@@ -69,19 +80,19 @@ namespace MrKupido.Library
         {
             foreach (Container container in Containers)
             {
-                if (container.IsInUse) container.WashUp();
+                if (container.IsDirty) container.WashUp();
             }
             foreach (Device device in Devices)
             {
-                if (device.IsInUse) device.WashUp();
+                if (device.IsDirty) device.WashUp();
             }
             foreach (Material material in Materials)
             {
-                if (material.IsInUse) material.WashUp();
+                if (material.IsDirty) material.WashUp();
             }
             foreach (Tool tool in Tools)
             {
-                if (tool.IsInUse) tool.WashUp();
+                if (tool.IsDirty) tool.WashUp();
             }
         }
 
