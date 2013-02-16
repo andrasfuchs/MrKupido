@@ -21,6 +21,8 @@ namespace MrKupido.Library.Equipment
             i.State = IngredientState.Reszelt;
 
             ic.Add(i);
+
+            this.LastActionDuration = 180;
         }
     }
 }

@@ -17,9 +17,9 @@ namespace MrKupido.Processor
     {
         private static List<IngredientBase> ingredients = new List<IngredientBase>();
         private static List<string> seenIngredients = new List<string>();
+        private static Dictionary<int, int> containerIds = new Dictionary<int, int>();
         private static List<RecipeDirection> directions = new List<RecipeDirection>();
         private static RecipeStage stage = RecipeStage.Unknown;        
-        private static int IdCounter;
         private static List<object> tempParameters = new List<object>();
         private static bool ignoreDirections = false;
         private static string languageISO = "";
@@ -28,6 +28,7 @@ namespace MrKupido.Processor
         {
             ingredients.Clear();
             seenIngredients.Clear();
+            containerIds.Clear();
 
             ignoreDirections = true;
             
@@ -94,7 +95,18 @@ namespace MrKupido.Processor
         {
             if (ignoreDirections) return;
 
-            directions.Add(new RecipeDirection(languageISO, ref IdCounter, assemblyFullName, methodFullName, tempParameters.ToArray(), result, stage, 1, seenIngredients));
+            SetIds(new object[] { result });
+
+            if ((parameters[0] is IEquipment) && (tempParameters[0] is IEquipment))
+            {
+                uint duration = ((IEquipment)parameters[0]).LastActionDuration;
+                ((IEquipment)tempParameters[0]).LastActionDuration = duration;
+                ((IEquipment)parameters[0]).LastActionDuration = 0;
+
+                if (duration == 0) Trace.TraceWarning("The duration of the action '{0}' is not set.", methodFullName);
+            }
+
+            directions.Add(new RecipeDirection(languageISO, assemblyFullName, methodFullName, tempParameters.ToArray(), result, stage, 1, seenIngredients));
         }
 
         public static void DirectionGeneratorBefore(string assemblyFullName, string methodFullName, object[] parameters)
@@ -102,6 +114,8 @@ namespace MrKupido.Processor
             if (ignoreDirections) return;
 
             tempParameters.Clear();
+
+            SetIds(parameters);
 
             foreach (object p in parameters)
             {
@@ -116,12 +130,37 @@ namespace MrKupido.Processor
             }
         }
 
+        private static void SetIds(object[] parameters)
+        {
+            foreach (object p in parameters)
+            {
+                if (p is IIngredientContainer)
+                {
+                    if (!containerIds.ContainsKey(p.GetHashCode()))
+                    {
+                        containerIds.Add(p.GetHashCode(), containerIds.Count + 1);
+                    }
+
+                    ((IIngredientContainer)p).Id = containerIds[p.GetHashCode()];
+                }
+
+                if (p is IIngredientGroup)
+                {
+                    if (!containerIds.ContainsKey(p.GetHashCode()))
+                    {
+                        containerIds.Add(p.GetHashCode(), containerIds.Count + 1);
+                    }
+
+                    ((IIngredientGroup)p).Id = containerIds[p.GetHashCode()];
+                }
+            }
+        }
+
         public static RecipeDirection[] GenerateDirections(RecipeTreeNode rtn, float amount)
         {
-            IdCounter = 0;
-
             directions.Clear();
             seenIngredients.Clear();
+            containerIds.Clear();
 
             ignoreDirections = false;
             RunRecipe(rtn, amount);

@@ -23,6 +23,8 @@ namespace MrKupido.Library.Equipment
 
             i.State = IngredientState.Darabolt;
             i.PieceCount = count;
+
+            this.LastActionDuration = 10 * (uint)count;
         }
 
         [NameAlias("eng", "circle", Priority = 200)]
@@ -39,6 +41,8 @@ namespace MrKupido.Library.Equipment
 
             i.State = IngredientState.Karikazott;
             i.PieceCount = count;
+
+            this.LastActionDuration = 10 * (uint)count;
         }
     }
 }

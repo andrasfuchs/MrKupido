@@ -23,7 +23,7 @@ namespace MrKupido.Library.Recipe
             EquipmentGroup result = new EquipmentGroup();
 
             result.Containers.Add(new NyujtoDeszka());
-            result.Containers.Add(new Edeny(1.5f));
+            result.Containers.Add(new NagyEdeny());
             result.Containers.Add(new Serpenyo());
             result.Containers.Add(new LaposTanyer());
             result.Containers.Add(new MelyTanyer());
@@ -42,8 +42,8 @@ namespace MrKupido.Library.Recipe
             PreparedIngredients result = new PreparedIngredients();
 
             IIngredient felfuttatottEleszto = new FelfuttatottEleszto(30f * amount);
-           
-            Edeny edeny = eg.Use<Edeny>();
+
+            NagyEdeny edeny = eg.Use<NagyEdeny>();
             edeny.Berakni(new Liszt(1000f * amount), felfuttatottEleszto, new Tejfol(0.2f * amount), new So(15f * amount), new Viz(0.5f * amount));
 
             Kez kez = eg.Use<Kez>();
@@ -55,7 +55,7 @@ namespace MrKupido.Library.Recipe
             nyd.Nyujtani(edeny, 5);
 
             Szaggato szaggato = eg.Use<Szaggato>();
-            szaggato.Kiszaggatni(nyd, 250, 200);
+            szaggato.Kiszaggatni(nyd, 25, 20);
 
             result.Add("tesztadarabok", nyd);
 
@@ -80,7 +80,7 @@ namespace MrKupido.Library.Recipe
             IIngredient kisutottLangos = serpenyo.KisutniOsszeset(langosok, 3.5f);
             melyTanyer.Berakni(kisutottLangos);
 
-            cfp.Add("osszeslangos", melyTanyer.Contents);
+            cfp.Add("osszeslangos", melyTanyer);
 
             eg.WashUp();
             return cfp;

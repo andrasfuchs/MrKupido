@@ -15,7 +15,8 @@ namespace MrKupido.Library.Equipment
 
         public IIngredient Contents { get; set; }
 
-        public Hutogep() : this(50,60,40)
+        public Hutogep() 
+            : this(50,60,40)
         {
         }
 

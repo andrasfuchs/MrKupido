@@ -10,7 +10,12 @@ namespace MrKupido.Library.Equipment
     [NameAlias("hun", "tepsi")]
     public class Tepsi : Container
     {
-        public Tepsi(float scale = 1.0f)
+        public Tepsi()
+            : this(1.0f)
+        {
+        }
+
+        public Tepsi(float scale)
             : base(30.0f * scale, 34.0f * scale, 2.0f)
         {
         }

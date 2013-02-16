@@ -9,6 +9,8 @@ namespace MrKupido.Library
     {
         Dimensions Dimensions { get; }
 
+        int Id { get; set; }
+
         IIngredient Contents { get; }
 
         void Berakni(params IIngredient[] ingredients);

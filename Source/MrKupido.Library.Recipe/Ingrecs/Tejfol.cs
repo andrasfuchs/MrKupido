@@ -25,7 +25,7 @@ namespace MrKupido.Library.Recipe
             EquipmentGroup result = new EquipmentGroup();
 
             result.Containers.Add(new Edeny(1.0f));
-            result.Containers.Add(new Bogre(1.0f));
+            result.Containers.Add(new Bogre());
 
             result.Devices.Add(new Futotest());
             
@@ -58,7 +58,9 @@ namespace MrKupido.Library.Recipe
             Spoon kanal = eg.Use<Spoon>();
             IIngredient tejfol = kanal.Lefoloz(edeny, 0.10f);
 
-            cfp.Add("tejfol", tejfol);
+            eg.Use<Bogre>(1).Berakni(tejfol);
+
+            cfp.Add("tejfol", eg.Use<Bogre>(1));
 
             eg.WashUp();
             return cfp;

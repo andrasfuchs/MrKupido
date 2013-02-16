@@ -92,13 +92,14 @@ namespace MrKupido.Library.Recipe
             IIngredient vaj = serpenyo.Kivenni();
 
             Fakanal fakanal = eg.Use<Fakanal>();
-            IIngredient massza = fakanal.Osszekeverni(new Liszt(50.0f), new FeketeBorsOrolt(3.0f), new So(6.0f), vaj, burgonya, tojas, fokhagyma, sajt);
+            eg.Use<NagyEdeny>(1).Berakni(new Liszt(50.0f), new FeketeBorsOrolt(3.0f), new So(6.0f), vaj, burgonya, tojas, fokhagyma, sajt);
+            fakanal.ElkeverniEdenyben(eg.Use<NagyEdeny>(1));
 
             LaposTanyer laposTanyer = eg.Use<LaposTanyer>();
 
-            IngredientGroup golyok = kez.Kiszaggatni(massza, 30.0f);
+            IngredientGroup golyok = kez.Kiszaggatni(eg.Use<NagyEdeny>(1).Contents, 30.0f);
             golyok = kez.GolyovaGyurni(golyok);
-            laposTanyer.Add(golyok);
+            laposTanyer.Berakni(golyok);
 
             result.Add("golyok", laposTanyer);
 
@@ -135,7 +136,7 @@ namespace MrKupido.Library.Recipe
             Edeny edeny = eg.Use<Edeny>();
             edeny.Berakni(keszgolyok);
 
-            cfp.Add("osszesgolyo", edeny.Contents);
+            cfp.Add("osszesgolyo", edeny);
 
             eg.WashUp();
             return cfp;

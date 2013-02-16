@@ -61,10 +61,27 @@ namespace MrKupido.Library
                     createdEquipment[0].Index = index;
 
                     sametypeEquipment = createdEquipment;
+
+                    if (typeof(T).CheckParents(typeof(Container), false))
+                    {
+                        Containers.Add(createdEquipment[0] as Container);
+                    }
+                    else if (typeof(T).CheckParents(typeof(Device), false))
+                    {
+                        Devices.Add(createdEquipment[0] as Device);
+                    }
+                    else if (typeof(T).CheckParents(typeof(Material), false))
+                    {
+                        Materials.Add(createdEquipment[0] as Material);
+                    }
+                    else if (typeof(T).CheckParents(typeof(Tool), false))
+                    {
+                        Tools.Add(createdEquipment[0] as Tool);
+                    }
                 }
             }
 
-            result = sametypeEquipment.FirstOrDefault(c => !c.IsDirty) as T;
+            result = sametypeEquipment.FirstOrDefault(c => (!c.IsDirty) || (index > 0)) as T;
 
             if (result == null)
             {

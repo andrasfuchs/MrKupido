@@ -109,6 +109,7 @@
     <Compile Include="Equipment\Containers\NyujtoDeszka.cs" />
     <Compile Include="Equipment\Containers\RoundContainer.cs" />
     <Compile Include="Equipment\Containers\RoundContainer\Bogre.cs" />
+    <Compile Include="Equipment\Containers\RoundContainer\NagyEdeny.cs" />
     <Compile Include="Equipment\Containers\RoundContainer\MelyTanyer.cs" />
     <Compile Include="Equipment\Containers\RoundContainer\LaposKisTanyer.cs" />
     <Compile Include="Equipment\Containers\RoundContainer\JenaiTal.cs" />

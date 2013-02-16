@@ -19,6 +19,8 @@ namespace MrKupido.Library.Equipment
             if (i.Unit != MeasurementUnit.piece) throw new InvalidActionForIngredientException("Preselni", i.Name, i.Unit);
 
             i.State = IngredientState.Preselt;
+
+            this.LastActionDuration = 90;
         }
     }
 }

@@ -12,7 +12,11 @@ namespace MrKupido.Library.Equipment
     [NameAlias("hun", "sütő")]
     public class Suto : Heater
     {
-        public Suto(float scale = 1.0f, int levels = 4, int heatLevels = 10)
+        public Suto() : this(1.0f, 4, 10)
+        {
+        }
+
+        public Suto(float scale, int levels, int heatLevels)
             : base(38.0f * scale, 40.0f * scale, 28.0f * scale, levels, 150.0f, 300.0f, heatLevels)
         {
         }

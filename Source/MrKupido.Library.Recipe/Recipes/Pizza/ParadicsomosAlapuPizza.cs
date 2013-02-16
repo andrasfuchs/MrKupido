@@ -48,7 +48,7 @@ namespace MrKupido.Library.Recipe
         public static new CookedFoodParts Cook(float amount, PreparedIngredients preps, EquipmentGroup eg)
         {
             CookedFoodParts cfp = Pizza.Cook(amount, preps, eg);
-            cfp.Add("pizzateszta", preps["pizzateszta"].Contents);
+            cfp.Add("pizzateszta", preps["pizzateszta"]);
             return cfp;
         }
 

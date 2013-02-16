@@ -16,14 +16,17 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "gyúrd össze a következőket: ({0*}, )")]
         public IngredientGroup Osszegyurni(params IIngredient[] ingredients)
         {
+            this.LastActionDuration = 180;
+
             return new IngredientGroup(ingredients);
         }
 
         [NameAlias("eng", "crumple", Priority = 200)]
         [NameAlias("hun", "összegyúr", Priority = 200)]
-        [NameAlias("hun", "gyúrd össze a(z) {0} tartalmát")]
+        [NameAlias("hun", "gyúrd össze a(z) {0.Contents.T}")]
         public void OsszegyurniEdenyben(IIngredientContainer container)
-        {            
+        {
+            this.LastActionDuration = 60;
         }
 
         [NameAlias("eng", "knead to balls", Priority = 200)]
@@ -35,6 +38,8 @@ namespace MrKupido.Library.Equipment
             
             // TODO: change dimensions and shape
 
+            this.LastActionDuration = 60;
+
             return ig;
         }
 
@@ -43,47 +48,40 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "szaggass {1} grammos darabokat a(z) {0K}")]
         public IngredientGroup Kiszaggatni(IIngredient i, float weight)
         {
-            if ((!(i is IngredientBase)) || (i.Unit != MeasurementUnit.gramm)) throw new InvalidActionForIngredientException("Kiszaggatni", i.Name, i.Unit);
+            if (i.Unit != MeasurementUnit.gramm) throw new InvalidActionForIngredientException("Kiszaggatni", i.Name, i.Unit);
 
             List<IIngredient> result = new List<IIngredient>();
 
             float totalWeight = i.GetAmount(MeasurementUnit.gramm);
             int count = ((int)Math.Floor(totalWeight / weight)) + 1;
 
-            for (int j = 0; j < count; j++)
-            {
-                if (i is IngredientGroup)
-                {
-                    result.Add(((IngredientGroup)i).Clone(totalWeight / count, MeasurementUnit.gramm));
-                }
-                else
-                {
-                    result.Add(i.GetType().DefaultConstructor(totalWeight / count, MeasurementUnit.gramm) as IngredientBase);
-                }
-
-            }
+            i.PieceCount = count;
 
             LastActionDuration = 30 * (uint)count;
 
-            return new IngredientGroup(result.ToArray());
+            return new IngredientGroup(i);
         }
 
         [NameAlias("eng", "drip", Priority = 200)]
         [NameAlias("hun", "lecsepegtet", Priority = 200)]
         [NameAlias("hun", "csepegtesd le a(z) {0T}")]
         public IIngredient Lecsepegtetni(IIngredient i) 
-        { 
+        {
+            this.LastActionDuration = 60;
+
             return i; 
         }
 
         [NameAlias("eng", "sprinkle", Priority = 200)]
         [NameAlias("hun", "rászór", Priority = 200)]
-        [NameAlias("hun", "szórd rá a(z) {1T} a(z) {0} tartalmára")]
+        [NameAlias("hun", "szórd rá a(z) {1T} a(z) {0.Contents.R}")]
         public void Raszorni(IIngredientContainer iOn, IIngredient i)
         {
             if (i.Unit != MeasurementUnit.gramm) throw new InvalidActionForIngredientException("Raszorni", i.Name, i.Unit);
 
-            //iOn.Contents.AddRange(ingredients);
+            iOn.Add(i);
+
+            this.LastActionDuration = 60;
         }
 
         [NameAlias("eng", "superimpose", Priority = 200)]
@@ -99,26 +97,32 @@ namespace MrKupido.Library.Equipment
             }
 
             iOnTo.AddRange(ingredients);
+
+            this.LastActionDuration = 60;
         }
 
         [NameAlias("eng", "pour on", Priority = 200)]
         [NameAlias("hun", "ráönt", Priority = 200)]
-        [NameAlias("hun", "öntsd rá a(z) {1T} a(z) {0} tartalmára")]
+        [NameAlias("hun", "öntsd rá a(z) {1T} a(z) {0.Contents.R}")]
         public void Raonteni(IIngredientContainer iOnTo, IIngredient i)
         {
             if (i.Unit != MeasurementUnit.liter) throw new InvalidActionForIngredientException("Raonteni", i.Name, i.Unit);
 
             iOnTo.Add(i);
+
+            this.LastActionDuration = 60;
         }
 
         [NameAlias("eng", "water", Priority = 200)]
         [NameAlias("hun", "rálocsol", Priority = 200)]
-        [NameAlias("hun", "locsold rá a(z) {1T} a(z) {0} tartalmára")]
+        [NameAlias("hun", "locsold rá a(z) {1T} a(z) {0.Contents.R}")]
         public void Ralocsolni(IIngredientContainer iOn, IIngredient i)
         {
             if (i.Unit != MeasurementUnit.liter) throw new InvalidActionForIngredientException("Lelocsolni", i.Name, i.Unit);
 
             iOn.Add(i);
+
+            this.LastActionDuration = 60;
         }
 
         [NameAlias("eng", "plow", Priority = 200)]
@@ -130,13 +134,18 @@ namespace MrKupido.Library.Equipment
 
             // TODO: a small amount of iIn.Contents must be separated
 
+            this.LastActionDuration = 180;
+
             return new IngredientGroup(new IIngredient[] { i, iIn.Contents });
         }
 
         [NameAlias("eng", "serve", Priority = 200)]
         [NameAlias("hun", "tálal", Priority = 200)]
-        [NameAlias("hun", "tálald a(z) {0T} a(z) {1N}")]
-        public void Talalni(IIngredient i, IEquipment container) { }
+        [NameAlias("hun", "tálald a(z) {0.Contents.T} {1N}")]
+        public void Talalni(IIngredientContainer i, IEquipment container) 
+        {
+            this.LastActionDuration = 300;
+        }
 
         [NameAlias("eng", "separate", Priority = 200)]
         [NameAlias("hun", "szétválaszt", Priority = 200)]
@@ -153,6 +162,8 @@ namespace MrKupido.Library.Equipment
                 result.Add(new TojasFeherje(i.GetAmount()));
                 result[1].ChangeUnitTo(MeasurementUnit.liter);
             }
+
+            this.LastActionDuration = 30 * (uint)i.PieceCount;
 
             return result.ToArray();
         }

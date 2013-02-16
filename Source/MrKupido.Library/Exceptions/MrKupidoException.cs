@@ -6,6 +6,7 @@ using System.Diagnostics;
 
 namespace MrKupido.Library
 {
+    [Serializable]
     public class MrKupidoException : Exception
     {
         public MrKupidoException(string message, params object[] args) : base(String.Format(message, args))

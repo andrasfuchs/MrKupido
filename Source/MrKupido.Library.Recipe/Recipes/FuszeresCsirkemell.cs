@@ -31,7 +31,7 @@ namespace MrKupido.Library.Recipe
             result.Containers.Add(new LaposKisTanyer());
             result.Containers.Add(new LaposKisTanyer());
 
-            result.Devices.Add(new Suto(38, 40, 4));
+            result.Devices.Add(new Suto());
 
             result.Tools.Add(new Kez());
             //result.Tools.Add(new Kes());
@@ -116,7 +116,7 @@ namespace MrKupido.Library.Recipe
             suto.Varni(10);
             tepsi = (Tepsi)suto.Kiemelni(typeof(Tepsi));
 
-            cfp.Add("csirke", tepsi.Contents);
+            cfp.Add("csirke", tepsi);
 
             eg.WashUp();
             return cfp;

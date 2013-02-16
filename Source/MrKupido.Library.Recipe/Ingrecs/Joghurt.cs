@@ -66,7 +66,7 @@ namespace MrKupido.Library.Recipe
             edeny.Varni((int)(1.5 * 24 * 60));
             edeny = (Edeny)futotest.Kiemelni(typeof(Edeny));
 
-            cfp.Add("joghurt", edeny.Contents);
+            cfp.Add("joghurt", edeny);
 
             eg.WashUp();
             return cfp;

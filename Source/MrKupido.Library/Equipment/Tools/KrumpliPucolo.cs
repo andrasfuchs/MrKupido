@@ -16,6 +16,8 @@ namespace MrKupido.Library.Equipment
         public void Meghamozni(ISingleIngredient i)
         {
             i.State = IngredientState.Hamozott;
+
+            this.LastActionDuration = 120;
         }
     }
 }

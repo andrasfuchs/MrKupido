@@ -23,8 +23,8 @@ namespace MrKupido.Library.Recipe
         {
             EquipmentGroup result = new EquipmentGroup();
 
-            result.Containers.Add(new Edeny(1.5f));
-            result.Containers.Add(new JenaiTal(13.4f, 11.3f));
+            result.Containers.Add(new NagyEdeny());
+            result.Containers.Add(new JenaiTal());
             result.Containers.Add(new LaposTanyer());
             result.Containers.Add(new LaposKisTanyer());
 
@@ -53,7 +53,7 @@ namespace MrKupido.Library.Recipe
             Reszelo reszelo = eg.Use<Reszelo>();
             reszelo.Lereszelni(laposKisTanyer, new FustoltSajt(100.0f));
 
-            Edeny edeny = eg.Use<Edeny>();
+            NagyEdeny edeny = eg.Use<NagyEdeny>();
             edeny.Berakni(new Liszt(250.0f), new So(20.0f), new Tojas(2.0f), laposKisTanyer.Contents);
 
             Kez kez = eg.Use<Kez>();
@@ -75,7 +75,7 @@ namespace MrKupido.Library.Recipe
             suto.Varni(10);
             jenai = (JenaiTal)suto.Kiemelni(typeof(JenaiTal));
 
-            cfp.Add("csirkemellek", jenai.Contents);
+            cfp.Add("csirkemellek", jenai);
 
             eg.WashUp();
             return cfp;

@@ -11,7 +11,12 @@ namespace MrKupido.Library.Equipment
     [NameAlias("hun", "serpenyő")]
     public class Serpenyo : RoundContainer
     {
-        public Serpenyo(float scale = 1.0f)
+        public Serpenyo()
+            : this(1.0f)
+        { 
+        }
+
+        public Serpenyo(float scale)
             : base(26.0f * scale, 4.0f)
         {
         }

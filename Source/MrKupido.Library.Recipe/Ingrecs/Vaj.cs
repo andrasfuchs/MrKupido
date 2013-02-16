@@ -47,7 +47,7 @@ namespace MrKupido.Library.Recipe
             Habvero habvero = eg.Use<Habvero>();
             habvero.Felverni(edeny.Contents);
 
-            cfp.Add("vaj", edeny.Contents);
+            cfp.Add("vaj", edeny);
 
             eg.WashUp();
             return cfp;

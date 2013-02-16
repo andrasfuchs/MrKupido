@@ -10,7 +10,7 @@ namespace MrKupido.Library.Equipment
     [NameAlias("hun", "nyújtódeszka")]
     public class NyujtoDeszka : Container
     {
-        [NameAlias("hun", "{L} a tésztadarabok")]
+        [NameAlias("hun", "{L} a tészta")]
         public IIngredient Contents
         {
             get
@@ -19,18 +19,24 @@ namespace MrKupido.Library.Equipment
             }
         }
 
-        public NyujtoDeszka(float scale = 1.0f)
+        public NyujtoDeszka()
+            : this(1.0f)
+        { }
+
+        public NyujtoDeszka(float scale)
             : base(40.0f * scale, 80.0f * scale, 1.0f)
         {
         }
 
         [NameAlias("eng", "roll out", Priority = 200)]
         [NameAlias("hun", "kinyújt", Priority = 200)]
-        [NameAlias("hun", "nyújtsd ki nyújtódeszkán a(z) {0} tartalmát {1} mm-esre")]
+        [NameAlias("hun", "nyújtsd ki nyújtódeszkán a(z) {0.Contents.T} {1} mm-esre")]
         public void Nyujtani(IIngredientContainer c, float thickness)
         {
             this.Add(c.Contents);
             c.Empty();
+
+            this.LastActionDuration = 180;
         }
     }
 }

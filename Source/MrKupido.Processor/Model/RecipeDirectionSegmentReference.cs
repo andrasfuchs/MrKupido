@@ -83,7 +83,7 @@ namespace MrKupido.Processor.Model
                     
                     this.Id = ig.Id;
                     this.IconAlt = IntegerToStringHun(ig.Id);
-                    this.Text = ig.GetName(languageISO);
+                    this.Text = "-"; //ig.GetName(languageISO);
                 }
             }
 

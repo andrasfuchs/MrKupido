@@ -5,9 +5,10 @@ using System.Text;
 
 namespace MrKupido.Library
 {
-    public class CookedFoodParts : Dictionary<string, IIngredient>
+    [Serializable]
+    public class CookedFoodParts : Dictionary<string, IIngredientContainer>
     {
-        public IIngredient this[int index]
+        public IIngredientContainer this[int index]
         {
             get
             {

@@ -219,7 +219,7 @@ namespace MrKupido.Processor
             CookedFoodParts cps = Cache.Recipe["Sajt"].Cook(amount, preps, eq);
             
             // replace the original constructor of the ingredient class with the following
-            MrKupido.Library.IIngredient sajt = cps[0];
+            MrKupido.Library.IIngredientContainer sajt = cps[0];
 
             return result;
         }

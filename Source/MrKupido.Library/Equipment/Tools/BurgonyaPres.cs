@@ -19,6 +19,8 @@ namespace MrKupido.Library.Equipment
             if (i.Unit != MeasurementUnit.gramm) throw new InvalidActionForIngredientException("Preselni", i.Name, i.Unit);
 
             i.State = IngredientState.Preselt;
+
+            this.LastActionDuration = 120;
         }
     }
 }

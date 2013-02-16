@@ -25,14 +25,18 @@ namespace MrKupido.Library.Equipment
 
             result.Add(i);
 
+            this.LastActionDuration = 120;
+
             return new IngredientGroup(result.ToArray());
         }
 
         [NameAlias("eng", "mix together", Priority = 200)]
         [NameAlias("hun", "összekever", Priority = 200)]
-        [NameAlias("hun", "alaposan keverd össze a {0T}")]
+        [NameAlias("hun", "alaposan keverd össze a(z) {0T}")]
         public IIngredientGroup Elkeverni(IIngredientGroup ingredients)
         {
+            this.LastActionDuration = 60;
+
             return ingredients;
         }
 

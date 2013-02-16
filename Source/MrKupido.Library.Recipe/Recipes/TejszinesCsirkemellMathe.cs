@@ -23,8 +23,8 @@ namespace MrKupido.Library.Recipe
         {
             EquipmentGroup result = new EquipmentGroup();
 
-            result.Containers.Add(new Edeny(1.5f));
-            result.Containers.Add(new JenaiTal(13.4f, 11.3f));
+            result.Containers.Add(new NagyEdeny());
+            result.Containers.Add(new JenaiTal());
             result.Containers.Add(new LaposTanyer());
             result.Containers.Add(new LaposKisTanyer());
             result.Containers.Add(new LaposKisTanyer());
@@ -45,7 +45,7 @@ namespace MrKupido.Library.Recipe
         {
             PreparedIngredients result = new PreparedIngredients();
 
-            Edeny edeny = eg.Use<Edeny>();
+            NagyEdeny edeny = eg.Use<NagyEdeny>();
 
             ISingleIngredient fokhagyma = new Fokhagyma(6.0f);
             FokhagymaPres fp = eg.Use<FokhagymaPres>();
@@ -104,7 +104,7 @@ namespace MrKupido.Library.Recipe
             suto.Varni(15);
             jenai = (JenaiTal)suto.Kiemelni(typeof(JenaiTal));
 
-            cfp.Add("csirkemellek", jenai.Contents);
+            cfp.Add("csirkemellek", jenai);
 
             eg.WashUp();
             return cfp;

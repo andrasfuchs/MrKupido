@@ -38,6 +38,7 @@ namespace MrKupido.Library.Ingredient
             AddIngredients(ingredients);
         }
 
+        [Obsolete]
         public IngredientGroup Clone(float amount, MeasurementUnit unit)
         {
             List<IngredientBase> ibs = new List<IngredientBase>();

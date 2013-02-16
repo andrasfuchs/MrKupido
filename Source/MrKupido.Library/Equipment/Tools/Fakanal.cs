@@ -15,41 +15,23 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "mix together", Priority = 200)]
         [NameAlias("hun", "összekever", Priority = 200)]
-        [NameAlias("hun", "keverd össze a következőket: ({0*}, )")]
-        [Obsolete("Use the Fakanal.Elkeverni instead")]
-        public IngredientGroup Osszekeverni(params IIngredient[] ingredients)
-        {
-            return new IngredientGroup(ingredients);
-        }
-
-        [IconUriFragment("mix")]
-
-        [NameAlias("eng", "mix together", Priority = 200)]
-        [NameAlias("hun", "összekever", Priority = 200)]
-        [NameAlias("hun", "keverd össze a(z) {0} és {1} tartalmát")]
+        [NameAlias("hun", "keverd össze a(z) {0} és {1.Contents.T}")]
         public void OsszekeverniEdenyeket(IIngredientContainer container1, IIngredientContainer container2)
         {
             container1.Add(container2.Contents);
             container2.Empty();
+
+            this.LastActionDuration = 180;
         }
 
         [IconUriFragment("mix")]
 
         [NameAlias("eng", "mix together", Priority = 200)]
         [NameAlias("hun", "összekever", Priority = 200)]
-        [NameAlias("hun", "alaposan keverd össze a(z) {0T}")]
-        public IIngredientGroup Elkeverni(IIngredientGroup ingredients)
-        {
-            return ingredients;
-        }
-
-        [IconUriFragment("mix")]
-
-        [NameAlias("eng", "mix together", Priority = 200)]
-        [NameAlias("hun", "összekever", Priority = 200)]
-        [NameAlias("hun", "alaposan keverd össze a(z) {0} tartalmát")]
+        [NameAlias("hun", "alaposan keverd össze a(z) {0.Contents.T}")]
         public void ElkeverniEdenyben(IIngredientContainer container)
         {
+            this.LastActionDuration = 180;
         }
 
         [NameAlias("eng", "mix up", Priority = 200)]
@@ -57,6 +39,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "kevergesd meg a {0T}")]
         public void Kevergetni(IIngredient ingredient)
         {
+            this.LastActionDuration = 60;
         }    
     }
 }

@@ -10,7 +10,12 @@ namespace MrKupido.Library.Equipment
     [NameAlias("hun", "tűzhely")]
     public class Tuzhely : Heater
     {
-        public Tuzhely(float scale = 1.0f, int positions = 4, int heatLevels = 10)
+        public Tuzhely()
+            : this(1.0f, 4, 10)
+        {
+        }
+
+        public Tuzhely(float scale, int positions, int heatLevels)
             : base(38.0f * scale, 40.0f * scale, 5.0f * scale, positions, 150.0f, 300.0f, heatLevels)
         {
         }

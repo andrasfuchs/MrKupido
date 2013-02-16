@@ -10,7 +10,12 @@ namespace MrKupido.Library.Equipment
     [NameAlias("hun", "bögre")]
     public class Bogre : RoundContainer
     {
-        public Bogre(float scale = 1.0f)
+        public Bogre()
+            : this(1.0f)
+        {
+        }
+
+        public Bogre(float scale)
             : base(8.0f * scale, 9.0f * scale)
         {
         }

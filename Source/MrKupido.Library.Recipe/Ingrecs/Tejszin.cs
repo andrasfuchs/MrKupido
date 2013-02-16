@@ -71,7 +71,7 @@ namespace MrKupido.Library.Recipe
             huto.Behelyezni(edeny2);
             edeny2.Varni(60);
 
-            cfp.Add("tejszin", edeny2.Contents);
+            cfp.Add("tejszin", edeny2);
 
             eg.WashUp();
             return cfp;

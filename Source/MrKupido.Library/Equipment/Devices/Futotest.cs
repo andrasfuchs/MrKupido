@@ -10,7 +10,12 @@ namespace MrKupido.Library.Equipment
     [NameAlias("hun", "fűtőtest")]
     public class Futotest : Heater
     {
-        public Futotest(float scale = 1.0f, int positions = 4, int heatLevels = 3)
+        public Futotest()
+            : this(1.0f, 4, 3)
+        {
+        }
+
+        public Futotest(float scale, int positions, int heatLevels)
             : base(38.0f * scale, 40.0f * scale, 5.0f * scale, positions, 40.0f, 80.0f, heatLevels)
         {
         }

@@ -37,11 +37,10 @@ namespace MrKupido.Library.Equipment
 
         public bool IsDirty { get; private set; }
 
-        public virtual uint LastActionDuration { get; protected set; }
+        public virtual uint LastActionDuration { get; set; }
 
         public EquipmentBase()
         {
-            this.LastActionDuration = 60;
         }
 
         [NameAlias("eng", "use", Priority = 200)]

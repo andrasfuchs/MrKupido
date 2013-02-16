@@ -57,7 +57,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "put in", Priority = 200)]
         [NameAlias("hun", "berak", Priority = 200)]
-        [NameAlias("hun", "rakd be a(z) {B} a {0} tartalmát")]
+        [NameAlias("hun", "rakd be a(z) {B} a {0.Contents.T}")]
         public void BerakniEdenybol(IIngredientContainer ic)
         {
             this.contents.AddIngredients(ic.Contents);
@@ -81,6 +81,8 @@ namespace MrKupido.Library.Equipment
             IIngredient i = this.Contents;
             this.Empty();
 
+            this.LastActionDuration = 30;
+
             return i;
         }
 
@@ -98,7 +100,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "fedd le a(z) {T} {0V}")]
         public void Lefedni(Material material) 
         {
-            this.LastActionDuration = 5;
+            this.LastActionDuration = 30;
         }
 
         [NameAlias("eng", "take off", Priority = 200)]

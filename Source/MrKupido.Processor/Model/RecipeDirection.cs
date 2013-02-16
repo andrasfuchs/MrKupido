@@ -34,7 +34,7 @@ namespace MrKupido.Processor.Model
 
         private string[] correctionReplacements = { "tált", "tálat", "olajt", "olajat", "mély tányér", "mélytányér", "tésztadarabokot", "tésztadarabokat" };
 
-        public RecipeDirection(string languageISO, ref int idCounter, string assemblyName, string command, object[] operands = null, object result = null, RecipeStage stage = RecipeStage.Unknown, int actorIndex = 1, List<string> seenIngredients = null)
+        public RecipeDirection(string languageISO, string assemblyName, string command, object[] operands = null, object result = null, RecipeStage stage = RecipeStage.Unknown, int actorIndex = 1, List<string> seenIngredients = null)
         {
             ActorIndex = actorIndex;
             Stage = stage;
@@ -49,23 +49,11 @@ namespace MrKupido.Processor.Model
                 IEquipment eq = ((IEquipment)operands[0]);
                 ActionDuration = eq.LastActionDuration;
                 TimeToComplete = new TimeSpan(0, 0, (int)eq.LastActionDuration);
-
-                if (eq is Container)
-                {
-                    if (((Container)eq).Id == 0)
-                    {
-                        ((Container)eq).Id = ++idCounter;
-                    }
-                }
             }
 
             if (Result is IIngredientGroup)
             {
-                Alias = ((IIngredientGroup)Result).Name;
-                if (((IIngredientGroup)Result).Id == 0)
-                {
-                    ((IIngredientGroup)Result).Id = ++idCounter;
-                }
+                Alias = ((IIngredientGroup)Result).GetName(languageISO);
             }
 
 
@@ -272,11 +260,6 @@ namespace MrKupido.Processor.Model
                 result.Add(new RecipeDirectionSegment(" => "));
 
                 RecipeDirectionSegmentReference rdsr = new RecipeDirectionSegmentReference(languageISO, ig, seenIngredients);
-                if (!String.IsNullOrEmpty(rdsr.IconAlt) && (rdsr.Text.StartsWith(rdsr.IconAlt)))
-                {
-                    rdsr.Text = rdsr.Text.Replace(rdsr.IconAlt, "-");
-                    if (rdsr.Text == "-") rdsr.Text = "";
-                }
 
                 result.Add(rdsr);
             }
@@ -322,6 +305,8 @@ namespace MrKupido.Processor.Model
             // replace the word which are irregular
             foreach (RecipeDirectionSegment segment in result)
             {
+                if (segment.Text == "-") segment.Text = "";
+
                 segment.Text = " " + segment.Text + " ";
 
                 for (int i = 0; i < correctionReplacements.Length / 2; i++)
@@ -355,7 +340,7 @@ namespace MrKupido.Processor.Model
             int highest = Math.Max(vowels[0], Math.Max(vowels[1], vowels[2]));
             int highestCount = vowels.Count(i => i == highest);
 
-            if (highestCount > 1) return VowelHarmony.Mixed;
+            if (highestCount > 1) return VowelHarmony.Mixed; // in this case we should check out the type of the last one of them
             if (vowels[0] == highest) return VowelHarmony.Low;
             if (vowels[1] == highest) return VowelHarmony.HighType1;
             if (vowels[2] == highest) return VowelHarmony.HighType2;
@@ -428,6 +413,18 @@ namespace MrKupido.Processor.Model
                 case 'K':
                     if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) result += "ból";
                     if (vh == VowelHarmony.HighType1) result += "ből";
+                    break;
+                case 'H':
+                    if (StringUtils.IsVowel(result[result.Length - 1]))
+                    {
+                        result += "n";
+                    }
+                    else
+                    {
+                        if (vh == VowelHarmony.Low) result += "on";
+                        if (vh == VowelHarmony.HighType1) result += "en";
+                        if (vh == VowelHarmony.HighType2) result += "ön";
+                    }
                     break;
                 default:
                     throw new MrKupidoException("The affix id '{0}' is unknown, so the word '{1}' can't be processed.", affixId, word);

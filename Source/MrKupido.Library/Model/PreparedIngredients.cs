@@ -5,6 +5,7 @@ using System.Text;
 
 namespace MrKupido.Library
 {
+    [Serializable]
     public class PreparedIngredients : Dictionary<string, IIngredientContainer>
     {
     }

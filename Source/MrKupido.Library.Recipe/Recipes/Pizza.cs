@@ -22,14 +22,14 @@ namespace MrKupido.Library.Recipe
         {
             EquipmentGroup result = new EquipmentGroup();
 
-            result.Containers.Add(new Edeny(1.5f));
-            result.Containers.Add(new Edeny(1.5f));
+            result.Containers.Add(new NagyEdeny());
+            result.Containers.Add(new NagyEdeny());
             result.Containers.Add(new Bogre());
             result.Containers.Add(new Tepsi());
             result.Containers.Add(new LaposTanyer());
             result.Containers.Add(new NyujtoDeszka());
 
-            result.Devices.Add(new Suto(38, 40, 4));
+            result.Devices.Add(new Suto());
 
             result.Tools.Add(new Fakanal());
             result.Tools.Add(new Kez());
@@ -43,7 +43,7 @@ namespace MrKupido.Library.Recipe
 
             Fakanal fakanal = eg.Use<Fakanal>();
 
-            Edeny edeny1 = eg.Use<Edeny>();
+            NagyEdeny edeny1 = eg.Use<NagyEdeny>();
             edeny1.Berakni(new Liszt(1000f * amount), new So(6.0f * amount), new Oregano(3.0f * amount), new FeketeBorsOrolt(5.0f * amount));
             fakanal.ElkeverniEdenyben(edeny1);
 
@@ -79,7 +79,7 @@ namespace MrKupido.Library.Recipe
             suto.Varni(30);
             tepsi = suto.Kiemelni(typeof(Tepsi));
 
-            cfp.Add("pizzaalap", tepsi.Contents);
+            cfp.Add("pizzaalap", tepsi);
 
             eg.WashUp();
             return cfp;

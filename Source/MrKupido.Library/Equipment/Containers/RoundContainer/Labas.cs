@@ -10,7 +10,12 @@ namespace MrKupido.Library.Equipment
     [NameAlias("hun", "lábas")]
     public class Labas : RoundContainer
     {
-        public Labas(float scale = 1.0f)
+        public Labas()
+            : this(1.0f)
+        {
+        }
+
+        public Labas(float scale)
             : base(20.0f * scale, 10.0f)
         {
         }

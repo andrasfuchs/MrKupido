@@ -71,7 +71,7 @@ namespace MrKupido.Library.Recipe
             edeny.Varni(10);
             edeny.FolyadekotLeonteni();
 
-            cfp.Add("turo", edeny.Contents);
+            cfp.Add("turo", edeny);
 
             eg.WashUp();
             return cfp;
