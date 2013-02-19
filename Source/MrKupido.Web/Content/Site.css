@@ -464,11 +464,15 @@ details#login li {
     text-align: center;
 }
 
-details#login img {
+details#login li img {
     vertical-align: middle;
     max-width: 230px;
     max-height: 90px;
     padding: 10px;
+}
+
+details#login li.disabled {
+    opacity: 0.5;
 }
 
 details div.openidoption {

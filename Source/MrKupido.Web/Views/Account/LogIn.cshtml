@@ -9,7 +9,7 @@
 </header>
 @using (Html.BeginForm("LogIn", "Account", FormMethod.Post, new { @id = "openIdForm" }))
 {
-    @Html.Hidden("loginIdentifier", "")
+    @Html.Hidden("loginType", "")
     <details id="login" open class="alwaysopen">
         <summary>
             <h1>
@@ -18,21 +18,15 @@
                 
             </h2>
         </summary>
-        <br/>
+        <hr />
         <ul>
-            <li><a href="javascript:$('#loginIdentifier').val('https://www.google.com/accounts/o8/id'); $('#openIdForm').submit();">@MrKupido.Web.Resources.Account.LogIn.LogInWith
-                <img runat="server" src="~/Content/svg/logo_google.svg" alt="Google" width="270px" /></a> </li>
-            <li><a href="javascript:$('#loginIdentifier').val('Facebook'); $('#openIdForm').submit();">@MrKupido.Web.Resources.Account.LogIn.ConnectWith
-                <img runat="server" src="~/Content/svg/logo_facebook.svg" alt="Facebook" width="270px" /></a> </li>
-            <li class="disabled"><a href="@Url.Action("LogIn", "Account", new { loginIdentifier = "https://me.yahoo.com" })">@MrKupido.Web.Resources.Account.LogIn.LogInWith
-                <img runat="server" src="~/Content/svg/logo_yahoo.svg" alt="Yahoo!" width="270px" /></a> </li>
-            <li class="disabled"><a href="@Url.Action("LogIn", "Account", new { loginIdentifier = "http://matt.wordpress.com/" })">@MrKupido.Web.Resources.Account.LogIn.LogInWith
-                <img runat="server" src="~/Content/svg/logo_wordpress.svg" alt="Wordpress" width="270px" /></a> </li>
-            <li class="disabled"><a href="@Url.Action("LogIn", "Account", new { loginIdentifier = "http://www.flickr.com/username" })">@MrKupido.Web.Resources.Account.LogIn.LogInWith
-                <img runat="server" src="~/Content/svg/logo_flickr.svg" alt="Flickr" width="270px" /></a> </li>
-            <li class="disabled"><a href="@Url.Action("LogIn", "Account", new { loginIdentifier = "http://www.flickr.com/username" })">@MrKupido.Web.Resources.Account.LogIn.LogInWith
-                <img runat="server" src="~/Content/svg/logo_twitter.svg" alt="Twitter" width="270px" /></a> </li>
+            <li><a href="javascript:$('#loginType').val('Google'); $('#openIdForm').submit();">@MrKupido.Web.Resources.Account.LogIn.LogInWith
+                <img runat="server" src="~/Content/svg/authlogo_google.svg" alt="Google" width="270px" /></a> </li>
+            <li><a href="javascript:$('#loginType').val('Facebook'); $('#openIdForm').submit();">@MrKupido.Web.Resources.Account.LogIn.ConnectWith
+                <img runat="server" src="~/Content/svg/authlogo_facebook.svg" alt="Facebook" width="270px" /></a> </li>
+            <li><a href="javascript:$('#loginType').val('WindowsLive'); $('#openIdForm').submit();">@MrKupido.Web.Resources.Account.LogIn.LogInWith
+                <img runat="server" src="~/Content/svg/authlogo_windowslive.svg" alt="Windows Live" width="270px" /></a> </li>
         </ul>
     </details>
-
 }
+<hr />

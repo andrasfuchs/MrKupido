@@ -4,7 +4,8 @@
 	using System.Diagnostics;
 	using System.IO;
 	using System.Net;
-	using DotNetOpenAuth.Messaging;
+    using DotNetOpenAuth;
+    using DotNetOpenAuth.Messaging;
 
 	public static class Util {
 		/// <summary>

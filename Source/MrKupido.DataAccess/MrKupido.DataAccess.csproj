@@ -77,6 +77,12 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
+    </Reference>
     <Reference Include="System.ServiceModel.DomainServices.EntityFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -100,6 +106,18 @@
     <Compile Include="Migrations\201302141454474_MrKupido-20130214a.cs" />
     <Compile Include="Migrations\201302141454474_MrKupido-20130214a.Designer.cs">
       <DependentUpon>201302141454474_MrKupido-20130214a.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201302171050276_MrKupido-20130217a.cs" />
+    <Compile Include="Migrations\201302171050276_MrKupido-20130217a.Designer.cs">
+      <DependentUpon>201302171050276_MrKupido-20130217a.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201302190026539_MrKupido-20130218a.cs" />
+    <Compile Include="Migrations\201302190026539_MrKupido-20130218a.Designer.cs">
+      <DependentUpon>201302190026539_MrKupido-20130218a.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201302190127320_MrKupido-20130218b.cs" />
+    <Compile Include="Migrations\201302190127320_MrKupido-20130218b.Designer.cs">
+      <DependentUpon>201302190127320_MrKupido-20130218b.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MrKupidoContext.cs" />
@@ -127,6 +145,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201302141454474_MrKupido-20130214a.resx">
       <DependentUpon>201302141454474_MrKupido-20130214a.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201302171050276_MrKupido-20130217a.resx">
+      <DependentUpon>201302171050276_MrKupido-20130217a.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201302190026539_MrKupido-20130218a.resx">
+      <DependentUpon>201302190026539_MrKupido-20130218a.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201302190127320_MrKupido-20130218b.resx">
+      <DependentUpon>201302190127320_MrKupido-20130218b.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

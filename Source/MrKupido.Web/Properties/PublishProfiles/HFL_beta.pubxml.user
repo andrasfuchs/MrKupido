@@ -15,13 +15,49 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/22/2012 09:51:32</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.ApplicationBlock.dll">
-      <publishTime>02/10/2013 19:17:02</publishTime>
+      <publishTime>02/18/2013 17:01:46</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.ApplicationBlock.pdb">
-      <publishTime>02/10/2013 19:17:02</publishTime>
+      <publishTime>02/18/2013 17:01:46</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.Core.dll">
+      <publishTime>02/17/2013 13:34:16</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.dll">
       <publishTime>10/01/2012 00:38:08</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth.Common.dll">
+      <publishTime>02/18/2013 16:46:11</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth.Consumer.dll">
+      <publishTime>02/18/2013 16:46:11</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth.dll">
+      <publishTime>02/18/2013 16:42:49</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth.ServiceProvider.dll">
+      <publishTime>02/18/2013 16:46:11</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth2.Client.dll">
+      <publishTime>02/17/2013 13:34:18</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth2.ClientAuthorization.dll">
+      <publishTime>02/17/2013 13:34:18</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OAuth2.dll">
+      <publishTime>02/17/2013 13:34:18</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OpenId.dll">
+      <publishTime>02/18/2013 16:40:56</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OpenId.Provider.dll">
+      <publishTime>02/18/2013 16:51:41</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OpenId.RelyingParty.dll">
+      <publishTime>02/18/2013 16:51:04</publishTime>
+    </File>
+    <File Include="bin/DotNetOpenAuth.OpenIdOAuth.dll">
+      <publishTime>02/18/2013 16:46:11</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.pdb">
       <publishTime>10/01/2012 00:38:08</publishTime>
@@ -30,7 +66,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/11/2012 16:27:27</publishTime>
     </File>
     <File Include="bin/hu/MrKupido.Web.resources.dll">
-      <publishTime>02/13/2013 21:23:38</publishTime>
+      <publishTime>02/18/2013 17:01:54</publishTime>
     </File>
     <File Include="bin/Hunspellx64.dll">
       <publishTime>10/31/2011 17:30:18</publishTime>
@@ -50,59 +86,65 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Mono.Cecil.pdb">
       <publishTime>12/08/2012 16:48:36</publishTime>
     </File>
+    <File Include="bin/Mono.Math.dll">
+      <publishTime>02/18/2013 16:40:56</publishTime>
+    </File>
     <File Include="bin/MrKupido.DataAccess.dll">
-      <publishTime>02/13/2013 21:22:21</publishTime>
+      <publishTime>02/18/2013 17:01:48</publishTime>
     </File>
     <File Include="bin/MrKupido.DataAccess.pdb">
-      <publishTime>02/13/2013 21:22:21</publishTime>
+      <publishTime>02/18/2013 17:01:48</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.dll">
-      <publishTime>02/13/2013 21:22:20</publishTime>
+      <publishTime>02/18/2013 17:01:46</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.pdb">
-      <publishTime>02/13/2013 21:22:20</publishTime>
+      <publishTime>02/18/2013 17:01:46</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.Provider.dll">
-      <publishTime>02/13/2013 21:22:20</publishTime>
+      <publishTime>02/18/2013 17:01:47</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.Provider.pdb">
-      <publishTime>02/13/2013 21:22:20</publishTime>
+      <publishTime>02/18/2013 17:01:47</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.Recipe.dll">
-      <publishTime>02/13/2013 21:23:37</publishTime>
+      <publishTime>02/18/2013 17:01:51</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.Recipe.pdb">
-      <publishTime>02/13/2013 21:22:22</publishTime>
+      <publishTime>02/18/2013 17:01:50</publishTime>
     </File>
     <File Include="bin/MrKupido.Model.dll">
-      <publishTime>02/13/2013 21:22:20</publishTime>
+      <publishTime>02/18/2013 17:01:47</publishTime>
     </File>
     <File Include="bin/MrKupido.Model.pdb">
-      <publishTime>02/13/2013 21:22:20</publishTime>
+      <publishTime>02/18/2013 17:01:47</publishTime>
     </File>
     <File Include="bin/MrKupido.Processor.dll">
-      <publishTime>02/13/2013 21:22:22</publishTime>
+      <publishTime>02/18/2013 17:01:49</publishTime>
     </File>
     <File Include="bin/MrKupido.Processor.pdb">
-      <publishTime>02/13/2013 21:22:22</publishTime>
+      <publishTime>02/18/2013 17:01:49</publishTime>
     </File>
     <File Include="bin/MrKupido.Utils.dll">
-      <publishTime>02/13/2013 21:22:19</publishTime>
+      <publishTime>02/18/2013 17:01:45</publishTime>
     </File>
     <File Include="bin/MrKupido.Utils.pdb">
-      <publishTime>02/13/2013 21:22:19</publishTime>
+      <publishTime>02/18/2013 17:01:45</publishTime>
     </File>
     <File Include="bin/MrKupido.Web.dll">
-      <publishTime>02/13/2013 21:23:38</publishTime>
+      <publishTime>02/18/2013 17:01:54</publishTime>
     </File>
     <File Include="bin/MrKupido.Web.pdb">
-      <publishTime>02/13/2013 21:23:38</publishTime>
+      <publishTime>02/18/2013 17:01:54</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>07/22/2012 09:51:29</publishTime>
     </File>
     <File Include="bin/NHunspell.dll">
       <publishTime>10/31/2011 17:30:18</publishTime>
+    </File>
+    <File Include="bin/Org.Mentalis.Security.Cryptography.dll">
+      <publishTime>02/18/2013 16:40:56</publishTime>
     </File>
     <File Include="bin/System.Net.Http.dll">
       <publishTime>07/10/2012 22:52:12</publishTime>
@@ -145,6 +187,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>07/22/2012 09:51:32</publishTime>
+    </File>
+    <File Include="ClassDiagram.cd">
+      <publishTime>02/15/2013 11:12:09</publishTime>
     </File>
     <File Include="Content/fonts/Cardo/cardo-regular-webfont.eot">
       <publishTime>01/09/2013 05:00:12</publishTime>
@@ -300,10 +345,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/25/2012 09:53:04</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>02/12/2013 12:40:21</publishTime>
+      <publishTime>02/17/2013 10:02:57</publishTime>
     </File>
     <File Include="Content/Site.min.css">
-      <publishTime>02/12/2013 12:40:21</publishTime>
+      <publishTime>02/17/2013 10:02:57</publishTime>
     </File>
     <File Include="Content/svg/action_betesz.svg">
       <publishTime>11/18/2012 18:28:54</publishTime>
@@ -391,6 +436,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/svg/arrow_right_light.svg">
       <publishTime>07/24/2012 19:53:20</publishTime>
+    </File>
+    <File Include="Content/svg/authlogo_facebook.svg">
+      <publishTime>02/17/2013 09:55:14</publishTime>
+    </File>
+    <File Include="Content/svg/authlogo_google.svg">
+      <publishTime>02/17/2013 09:55:14</publishTime>
+    </File>
+    <File Include="Content/svg/authlogo_windowslive.svg">
+      <publishTime>02/17/2013 12:09:01</publishTime>
     </File>
     <File Include="Content/svg/avatar.svg">
       <publishTime>08/05/2012 23:52:46</publishTime>
@@ -1161,85 +1215,85 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/22/2012 09:51:25</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.accordion.min.css">
-      <publishTime>01/31/2013 11:33:32</publishTime>
+      <publishTime>02/16/2013 16:12:30</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.all.css">
       <publishTime>07/22/2012 09:51:25</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.all.min.css">
-      <publishTime>01/31/2013 11:33:32</publishTime>
+      <publishTime>02/16/2013 16:12:30</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.autocomplete.css">
       <publishTime>07/22/2012 09:51:25</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.autocomplete.min.css">
-      <publishTime>01/31/2013 11:33:32</publishTime>
+      <publishTime>02/16/2013 16:12:30</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.base.css">
       <publishTime>07/22/2012 14:16:56</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.base.min.css">
-      <publishTime>01/31/2013 11:33:32</publishTime>
+      <publishTime>02/16/2013 16:12:30</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.button.css">
       <publishTime>07/22/2012 09:51:25</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.button.min.css">
-      <publishTime>01/31/2013 11:33:32</publishTime>
+      <publishTime>02/16/2013 16:12:30</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.core.css">
       <publishTime>07/22/2012 09:51:25</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.core.min.css">
-      <publishTime>01/31/2013 11:33:32</publishTime>
+      <publishTime>02/16/2013 16:12:30</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.datepicker.css">
       <publishTime>07/22/2012 09:51:25</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.datepicker.min.css">
-      <publishTime>01/31/2013 11:33:32</publishTime>
+      <publishTime>02/16/2013 16:12:30</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.dialog.css">
       <publishTime>07/22/2012 09:51:25</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.dialog.min.css">
-      <publishTime>01/31/2013 11:33:32</publishTime>
+      <publishTime>02/16/2013 16:12:30</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.progressbar.css">
       <publishTime>07/22/2012 09:51:25</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.progressbar.min.css">
-      <publishTime>01/31/2013 11:33:32</publishTime>
+      <publishTime>02/16/2013 16:12:30</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.resizable.css">
       <publishTime>07/22/2012 09:51:25</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.resizable.min.css">
-      <publishTime>01/31/2013 11:33:32</publishTime>
+      <publishTime>02/16/2013 16:12:30</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.selectable.css">
       <publishTime>07/22/2012 09:51:25</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.selectable.min.css">
-      <publishTime>01/31/2013 11:33:32</publishTime>
+      <publishTime>02/16/2013 16:12:30</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.slider.css">
       <publishTime>07/22/2012 09:51:25</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.slider.min.css">
-      <publishTime>01/31/2013 11:33:32</publishTime>
+      <publishTime>02/16/2013 16:12:30</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.tabs.css">
       <publishTime>07/22/2012 09:51:25</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.tabs.min.css">
-      <publishTime>01/31/2013 11:33:32</publishTime>
+      <publishTime>02/16/2013 16:12:30</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.theme.css">
       <publishTime>07/22/2012 09:51:25</publishTime>
     </File>
     <File Include="Content/themes/base/jquery.ui.theme.min.css">
-      <publishTime>01/31/2013 11:33:32</publishTime>
+      <publishTime>02/16/2013 16:12:30</publishTime>
     </File>
     <File Include="Content/Web.config">
       <publishTime>02/09/2013 00:08:53</publishTime>
@@ -1257,7 +1311,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/31/2011 17:30:18</publishTime>
     </File>
     <File Include="packages.config">
-      <publishTime>02/09/2013 12:57:36</publishTime>
+      <publishTime>02/18/2013 16:55:47</publishTime>
     </File>
     <File Include="Resources/Web.config">
       <publishTime>02/09/2013 00:09:20</publishTime>
@@ -1308,37 +1362,37 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/22/2012 09:51:26</publishTime>
     </File>
     <File Include="Scripts/jquery.unobtrusive-ajax.min.js">
-      <publishTime>01/31/2013 11:33:33</publishTime>
+      <publishTime>02/16/2013 16:12:31</publishTime>
     </File>
     <File Include="Scripts/jquery.unobtrusive-ajax.min.js.map">
-      <publishTime>01/31/2013 11:33:33</publishTime>
+      <publishTime>02/16/2013 16:12:31</publishTime>
     </File>
     <File Include="Scripts/jquery.validate-vsdoc.js">
       <publishTime>07/22/2012 09:51:24</publishTime>
     </File>
     <File Include="Scripts/jquery.validate-vsdoc.min.js">
-      <publishTime>01/31/2013 11:33:33</publishTime>
+      <publishTime>02/16/2013 16:12:31</publishTime>
     </File>
     <File Include="Scripts/jquery.validate-vsdoc.min.js.map">
-      <publishTime>01/31/2013 11:33:33</publishTime>
+      <publishTime>02/16/2013 16:12:31</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.js">
       <publishTime>07/22/2012 09:51:24</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.min.js">
-      <publishTime>01/31/2013 11:33:33</publishTime>
+      <publishTime>02/16/2013 16:12:32</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.min.js.map">
-      <publishTime>01/31/2013 11:33:33</publishTime>
+      <publishTime>02/16/2013 16:12:32</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.js">
       <publishTime>07/22/2012 09:51:26</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.min.js">
-      <publishTime>01/31/2013 11:33:33</publishTime>
+      <publishTime>02/16/2013 16:12:32</publishTime>
     </File>
     <File Include="Scripts/jquery.validate.unobtrusive.min.js.map">
-      <publishTime>01/31/2013 11:33:33</publishTime>
+      <publishTime>02/16/2013 16:12:32</publishTime>
     </File>
     <File Include="Scripts/knockout-2.0.0.debug.js">
       <publishTime>07/22/2012 09:51:32</publishTime>
@@ -1374,34 +1428,34 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/01/2012 14:06:38</publishTime>
     </File>
     <File Include="Scripts/whatwg_reviewer.min.js">
-      <publishTime>01/31/2013 11:33:35</publishTime>
+      <publishTime>02/16/2013 16:12:32</publishTime>
     </File>
     <File Include="Scripts/whatwg_reviewer.min.js.map">
-      <publishTime>01/31/2013 11:33:35</publishTime>
+      <publishTime>02/16/2013 16:12:32</publishTime>
     </File>
     <File Include="Scripts/wTimer.js">
       <publishTime>02/10/2013 13:58:38</publishTime>
     </File>
     <File Include="Scripts/wTimer.min.js">
-      <publishTime>02/10/2013 13:58:38</publishTime>
+      <publishTime>02/16/2013 16:12:32</publishTime>
     </File>
     <File Include="Scripts/wTimer.min.js.map">
-      <publishTime>02/10/2013 13:58:38</publishTime>
+      <publishTime>02/16/2013 16:12:32</publishTime>
     </File>
     <File Include="Scripts/_references.js">
       <publishTime>02/09/2013 12:58:09</publishTime>
     </File>
     <File Include="Scripts/_references.min.js">
-      <publishTime>02/09/2013 12:58:09</publishTime>
+      <publishTime>02/16/2013 16:12:32</publishTime>
     </File>
     <File Include="Scripts/_references.min.js.map">
-      <publishTime>02/09/2013 12:58:09</publishTime>
+      <publishTime>02/16/2013 16:12:32</publishTime>
     </File>
     <File Include="Scripts/__jquery-ui-1.9.1.customautocomplete.github.js">
       <publishTime>02/09/2013 02:38:20</publishTime>
     </File>
     <File Include="Views/Account/LogIn.cshtml">
-      <publishTime>01/31/2013 13:40:39</publishTime>
+      <publishTime>02/17/2013 13:21:34</publishTime>
     </File>
     <File Include="Views/Account/Profile.cshtml">
       <publishTime>02/13/2013 19:07:11</publishTime>
@@ -1473,7 +1527,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/09/2013 01:38:09</publishTime>
     </File>
     <File Include="Views/Recipe/_RecipeIngredients.cshtml">
-      <publishTime>02/13/2013 16:28:07</publishTime>
+      <publishTime>02/14/2013 19:51:33</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>01/28/2013 11:53:10</publishTime>
@@ -1491,7 +1545,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/22/2012 09:51:18</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>02/13/2013 21:23:46</publishTime>
+      <publishTime>02/18/2013 17:02:01</publishTime>
     </File>
   </ItemGroup>
 </Project>

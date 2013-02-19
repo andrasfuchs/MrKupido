@@ -43,7 +43,7 @@ namespace MrKupido.Web.Models
         {
             User user = GetCurrentUser(session);
             isAvatarCached |= displayAvatar;
-            return ((user != null) && !String.IsNullOrEmpty(user.AvatarUrl) ? user.AvatarUrl : "Content/svg/icon_avatar.svg");
+            return ((user != null) && (user.AvatarUrl != null) ? user.AvatarUrl.ToString() : "Content/svg/icon_avatar.svg");
         }        
 
         private static bool isAvatarCached = false;

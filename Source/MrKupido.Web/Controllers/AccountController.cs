@@ -7,18 +7,17 @@ using System.Web.Mvc;
 using System.Web.Security;
 using System.Configuration;
 using System.IO;
+using DotNetOpenAuth;
 using DotNetOpenAuth.Messaging;
-using DotNetOpenAuth.OpenId.Extensions.SimpleRegistration;
 using DotNetOpenAuth.ApplicationBlock;
-using DotNetOpenAuth.ApplicationBlock.Facebook;
-using DotNetOpenAuth.OAuth2;
-using DotNetOpenAuth.OpenId.RelyingParty;
-using DotNetOpenAuth.OpenId.Extensions.AttributeExchange;
-using DotNetOpenAuth.OpenId;
 using MrKupido.Model;
 using MrKupido.Web.Models;
 using System.Globalization;
 using MrKupido.Library.Attributes;
+using DotNetOpenAuth.OAuth2;
+using DotNetOpenAuth.OpenId.Extensions.AttributeExchange;
+using DotNetOpenAuth.OpenId;
+using DotNetOpenAuth.OpenId.RelyingParty;
 
 namespace MrKupido.Web.Controllers
 {
@@ -26,181 +25,136 @@ namespace MrKupido.Web.Controllers
     {
         private static MrKupido.DataAccess.MrKupidoContext context = new MrKupido.DataAccess.MrKupidoContext("Name=MrKupidoContext");
 
-        private static readonly FacebookClient client = new FacebookClient
+        private static readonly FacebookClient facebookClient = new FacebookClient
         {
-            ClientIdentifier = ConfigurationManager.AppSettings["FacebookAppID"],
-            ClientCredentialApplicator = ClientCredentialApplicator.PostParameter(ConfigurationManager.AppSettings["FacebookAppSecret"])
+            ClientIdentifier = ConfigurationManager.AppSettings["facebookAppID"],
+            ClientCredentialApplicator = ClientCredentialApplicator.PostParameter(ConfigurationManager.AppSettings["facebookAppSecret"])
+        };
+
+        private static readonly WindowsLiveClient windowsLiveClient = new WindowsLiveClient
+        {
+            ClientIdentifier = ConfigurationManager.AppSettings["windowsLiveAppID"],
+            ClientCredentialApplicator = ClientCredentialApplicator.PostParameter(ConfigurationManager.AppSettings["windowsLiveAppSecret"])            
+        };
+
+        private static readonly GoogleClient googleClient = new GoogleClient
+        {
+            ClientIdentifier = ConfigurationManager.AppSettings["googleClientID"],
+            ClientCredentialApplicator = ClientCredentialApplicator.PostParameter(ConfigurationManager.AppSettings["googleClientSecret"])
         };
 
         [HttpGet]
         public ActionResult LogIn()
         {
-            string email = "";
-            string id = "";
-            FetchResponse openIdFetch = null;
-            Identifier openIdIdentifier = null;
-            FacebookGraph facebookGraph = null;
+            IAuthorizationState authState = null;
+            IOAuth2Graph oauth2Graph = null;
+            User user = null;
 
-            if ((string)Session["LoginType"] == "OpenId")
+            #region get the user
+            switch ((string)Session["LoginType"])
             {
-                var openid = new OpenIdRelyingParty();
-                IAuthenticationResponse response = openid.GetResponse();
+                case "Google":
+                    authState = googleClient.ProcessUserAuthorization();
+                    oauth2Graph = googleClient.GetGraph(authState);
 
-                if (response != null)
-                {
-                    switch (response.Status)
+                    if (oauth2Graph != null)
                     {
-                        case AuthenticationStatus.Authenticated:
-                            openIdIdentifier = response.ClaimedIdentifier;
-                            id = openIdIdentifier.ToString();
-                            openIdFetch = response.GetExtension<FetchResponse>();
-                            email = openIdFetch == null ? null : openIdFetch.GetAttributeValue(WellKnownAttributes.Contact.Email);
-                            break;
-                        case AuthenticationStatus.Canceled:
-                            ModelState.AddModelError("loginIdentifier", "Login was cancelled at the provider");
-                            break;
-                        case AuthenticationStatus.Failed:
-                            ModelState.AddModelError("loginIdentifier", "Login failed using the provided OpenID identifier");
-                            break;
+                        // check if the user already exists
+                        user = context.Users.FirstOrDefault(u => u.GoogleId == oauth2Graph.Id);
                     }
-                }
-            }
+                    break;
 
-            if ((string)Session["LoginType"] == "Facebook")
-            {
-                IAuthorizationState authorization = client.ProcessUserAuthorization();
+                case "Facebook":            
+                    authState = facebookClient.ProcessUserAuthorization();
+                    oauth2Graph = facebookClient.GetGraph(authState, new[] { FacebookGraph.Fields.Defaults, FacebookGraph.Fields.Email, FacebookGraph.Fields.Picture, FacebookGraph.Fields.Birthday });
 
-                if (authorization != null)
-                {
-                    WebRequest request = WebRequest.Create("https://graph.Facebook.com/me?fields=first_name,last_name,name,picture,email,birthday,gender,locale&access_token=" + Uri.EscapeDataString(authorization.AccessToken));
-                    WebResponse response = request.GetResponse();
-                    
-                    if (response != null)
+                    if (oauth2Graph != null)
                     {
-                        Stream responseStream = response.GetResponseStream();
-
-                        if (responseStream != null)
-                        {
-                            //// convert stream to string
-                            //StreamReader reader = new StreamReader(responseStream);
-                            //string responseText = reader.ReadToEnd();
-
-                            facebookGraph = FacebookGraph.Deserialize(responseStream);
-
-                            email = facebookGraph == null ? null : facebookGraph.Email;
-                            id = facebookGraph == null ? null : facebookGraph.Id.ToString();
-                        }
+                        // check if the user already exists
+                        user = context.Users.FirstOrDefault(u => u.FacebookId == oauth2Graph.Id);
                     }
-                }
+                    break;
+
+                case "WindowsLive":            
+                    authState = windowsLiveClient.ProcessUserAuthorization();
+                    oauth2Graph = windowsLiveClient.GetGraph(authState);
+
+                    if (oauth2Graph != null)
+                    {
+                        // check if the user already exists
+                        user = context.Users.FirstOrDefault(u => u.WindowsLiveId == oauth2Graph.Id);
+                    }
+                    break;
             }
-
-            // we have a valid login
-            if (email != "")
+            #endregion
+           
+            // if we have a valid login
+            if ((authState != null) && (authState.AccessToken != null) && (oauth2Graph != null))
             {
-                // check if the user already exists
-                User user = context.Users.FirstOrDefault(u => u.Email == email);
 
+                // check if we have an existing user
                 if (user == null)
                 {
-                    // if it does, create it
+                    // if we don't, just create a new one
                     user = new User();
-                    user.Email = email;
+                    user.Email = oauth2Graph.Email;
+
+                    switch ((string)Session["LoginType"])
+                    {
+                        case "Google":
+                            user.GoogleId = oauth2Graph.Id;
+                            break;
+                        case "Facebook":
+                            user.FacebookId = oauth2Graph.Id;
+                            break;
+                        case "WindowsLive":
+                            user.WindowsLiveId = oauth2Graph.Id;
+                            break;
+                    }
                 }
 
-                if (((string)Session["LoginType"] == "OpenId") && (openIdFetch != null))
+                // let's set all the user's properties
+                user.AvatarUrl = oauth2Graph.AvatarUrl;
+
+                if (String.IsNullOrEmpty(user.CultureName))
                 {
+                    user.CultureName = oauth2Graph.Locale.Replace('_', '-');
 
-                    if (String.IsNullOrEmpty(user.CultureName))
-                    {
-                        user.CultureName = openIdFetch.GetAttributeValue(WellKnownAttributes.Preferences.Language);
-                    }
+                    user.CultureName = user.CultureName.Replace("_", "-");
+                    if (user.CultureName == "hu") user.CultureName = "hu-HU";
+                    if (user.CultureName == "en") user.CultureName = "en-GB";
+                    if (user.CultureName == "en-US") user.CultureName = "en-GB";
 
-                    if (String.IsNullOrEmpty(user.FirstName))
-                    {
-                        user.FirstName = openIdFetch.GetAttributeValue(WellKnownAttributes.Name.First);
-                    }
-
-                    if (String.IsNullOrEmpty(user.LastName))
-                    {
-                        user.LastName = openIdFetch.GetAttributeValue(WellKnownAttributes.Name.Last);
-                    }
-
-                    if (String.IsNullOrEmpty(user.FullName))
-                    {
-                        user.FullName = openIdFetch.GetAttributeValue(WellKnownAttributes.Name.FullName);
-                    }
-
-                    if (user.Gender == (int)MrKupido.Model.Gender.Unknown)
-                    {
-                        string gender = openIdFetch.GetAttributeValue(WellKnownAttributes.Person.Gender);
-
-                        if (gender == "M") user.Gender = (int)MrKupido.Model.Gender.Male;
-                        if (gender == "F") user.Gender = (int)MrKupido.Model.Gender.Female;
-                    }
-
-                    if (user.DateOfBirth == null)
-                    {
-                        string birthdate = openIdFetch.GetAttributeValue(WellKnownAttributes.BirthDate.WholeBirthDate);
-                    }
-
-                    // this one doesn't work for Google
-                    user.AvatarUrl = openIdFetch.GetAttributeValue(WellKnownAttributes.Media.Images.Aspect11);
-
-                    if (String.IsNullOrEmpty(user.AvatarUrl))
-                    {
-                        user.AvatarUrl = "http://profiles.google.com/s2/photos/profile/" + user.Email.Substring(0, user.Email.IndexOf('@')) + "?sz=50";
-                    }
                 }
 
-                if (((string)Session["LoginType"] == "Facebook") && (facebookGraph != null))
+                if (String.IsNullOrEmpty(user.FirstName))
                 {
-                    if (String.IsNullOrEmpty(user.CultureName))
-                    {
-                        user.CultureName = facebookGraph.Locale.Replace('_', '-');
-                    }
-
-                    if (String.IsNullOrEmpty(user.FirstName))
-                    {
-                        user.FirstName = HttpUtility.HtmlDecode(facebookGraph.FirstName);
-                    }
-
-                    if (String.IsNullOrEmpty(user.LastName))
-                    {
-                        user.LastName = HttpUtility.HtmlDecode(facebookGraph.LastName);
-                    }
-
-                    if (String.IsNullOrEmpty(user.FullName))
-                    {
-                        user.FullName = HttpUtility.HtmlDecode(facebookGraph.Name);
-                    }
-
-                    if (user.Gender == (int)MrKupido.Model.Gender.Unknown)
-                    {
-                        string gender = facebookGraph.Gender;
-
-                        if (gender == "male") user.Gender = (int)MrKupido.Model.Gender.Male;
-                        if (gender == "female") user.Gender = (int)MrKupido.Model.Gender.Female;
-                    }
-
-                    if (user.DateOfBirth == null)
-                    {
-                        string birthday = facebookGraph.Birthday;
-
-                        if (!String.IsNullOrEmpty(birthday))
-                        {
-                            CultureInfo ci = new CultureInfo(facebookGraph.Locale.Replace('_','-'));
-                            user.DateOfBirth = DateTime.Parse(facebookGraph.Birthday, ci);
-                        }
-                    }
-
-                    user.AvatarUrl = "http://graph.facebook.com/" + facebookGraph.Id + "/picture?type=square";
+                    user.FirstName = HttpUtility.HtmlDecode(oauth2Graph.FirstName);
                 }
 
-                user.CultureName = user.CultureName.Replace("_", "-");
-                if (user.CultureName == "hu") user.CultureName = "hu-HU";
-                if (user.CultureName == "en") user.CultureName = "en-GB";
-                if (user.CultureName == "en-US") user.CultureName = "en-GB";
+                if (String.IsNullOrEmpty(user.LastName))
+                {
+                    user.LastName = HttpUtility.HtmlDecode(oauth2Graph.LastName);
+                }
 
+                if (String.IsNullOrEmpty(user.FullName))
+                {
+                    user.FullName = HttpUtility.HtmlDecode(oauth2Graph.Name);
+                }
+
+                if (user.Gender == (int)MrKupido.Model.Gender.Unknown)
+                {
+                    if (oauth2Graph.GenderEnum == HumanGender.Male) user.Gender = (int)MrKupido.Model.Gender.Male;
+                    if (oauth2Graph.GenderEnum == HumanGender.Female) user.Gender = (int)MrKupido.Model.Gender.Female;
+                    if (oauth2Graph.GenderEnum == HumanGender.Other) user.Gender = (int)MrKupido.Model.Gender.Other;
+                    if (oauth2Graph.GenderEnum == HumanGender.Unknown) user.Gender = (int)MrKupido.Model.Gender.Unknown;
+                }
+
+                if (user.DateOfBirth == null)
+                {
+                    user.DateOfBirth = oauth2Graph.BirthdayDT;
+                }
+               
                 if (String.IsNullOrEmpty(user.FullName))
                 {
                     if (user.CultureName == "hu-HU")
@@ -212,6 +166,7 @@ namespace MrKupido.Web.Controllers
                         user.FullName = user.FirstName + " " + user.LastName;
                     }
                 }
+
                 System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(user.CultureName);
 
                 if (user.UserId == 0)
@@ -245,6 +200,49 @@ namespace MrKupido.Web.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult LogIn(string loginType)
+        {
+            if (loginType == "Facebook")
+            {
+                Session["LoginType"] = "Facebook";
+
+                IAuthorizationState authorization = facebookClient.ProcessUserAuthorization();
+                if (authorization == null)
+                {
+                    // Kick off authorization request
+                    facebookClient.RequestUserAuthorization(scope: new[] { FacebookClient.Scopes.Email, FacebookClient.Scopes.UserBirthday });
+                }
+                return View();
+            }
+            else if (loginType == "WindowsLive")
+            {
+                Session["LoginType"] = "WindowsLive";
+
+                IAuthorizationState authorization = windowsLiveClient.ProcessUserAuthorization();
+                if (authorization == null)
+                {
+                    // Kick off authorization request
+                    windowsLiveClient.RequestUserAuthorization(scope: new[] { WindowsLiveClient.Scopes.SignIn, WindowsLiveClient.Scopes.Emails, WindowsLiveClient.Scopes.Birthday });
+                }
+                return View();
+            }
+            else if (loginType == "Google")
+            {
+                Session["LoginType"] = "Google";
+
+                IAuthorizationState authorization = googleClient.ProcessUserAuthorization();
+                if (authorization == null)
+                {
+                    // Kick off authorization request
+                    googleClient.RequestUserAuthorization(scope: new[] { GoogleClient.Scopes.UserInfo.Profile, GoogleClient.Scopes.UserInfo.Email });
+                }
+                return View();
+            }
+
+            return View();
+        }
+
         [HttpGet]
         public ActionResult LogOut()
         {
@@ -272,61 +270,6 @@ namespace MrKupido.Web.Controllers
             if (rememberMe) cookie.Expires = DateTime.Now.AddDays(10);
 
             HttpContext.Response.Cookies.Add(cookie);
-        }
-
-        [HttpPost]
-        public ActionResult LogIn(string loginIdentifier)
-        {
-            if (loginIdentifier == "Facebook")
-            {
-                return LogInWithFacebook();
-            }
-            else
-            {
-                // OpenId
-                if (!Identifier.IsValid(loginIdentifier))
-                {
-                    ModelState.AddModelError("loginIdentifier", "The specified login identifier is invalid");
-                    return View();
-                }
-                else
-                {
-                    Session["LoginType"] = "OpenId";
-
-                    var openid = new OpenIdRelyingParty();
-                    IAuthenticationRequest request = openid.CreateRequest(Identifier.Parse(loginIdentifier));
-
-                    FetchRequest fetchRequest = new FetchRequest();
-                    // Google is OK with these
-                    fetchRequest.Attributes.Add(new AttributeRequest(WellKnownAttributes.Contact.Email, true));
-                    fetchRequest.Attributes.Add(new AttributeRequest(WellKnownAttributes.Name.First, true));
-                    fetchRequest.Attributes.Add(new AttributeRequest(WellKnownAttributes.Name.Last, true));
-                    fetchRequest.Attributes.Add(new AttributeRequest(WellKnownAttributes.Preferences.Language, true));
-                    // but not with these
-                    fetchRequest.Attributes.Add(new AttributeRequest(WellKnownAttributes.Media.Images.Default, true));
-                    fetchRequest.Attributes.Add(new AttributeRequest(WellKnownAttributes.Media.Images.Aspect11, true));
-                    fetchRequest.Attributes.Add(new AttributeRequest(WellKnownAttributes.Name.FullName, true));
-                    fetchRequest.Attributes.Add(new AttributeRequest(WellKnownAttributes.Person.Gender, true));
-                    fetchRequest.Attributes.Add(new AttributeRequest(WellKnownAttributes.BirthDate.WholeBirthDate, true));
-
-                    request.AddExtension(fetchRequest);
-
-                    return request.RedirectingResponse.AsActionResult();
-                }
-            }
-        }
-
-        public ActionResult LogInWithFacebook()
-        {
-            Session["LoginType"] = "Facebook";
-
-            IAuthorizationState authorization = client.ProcessUserAuthorization();
-            if (authorization == null)
-            {
-                // Kick off authorization request
-                client.RequestUserAuthorization(new string[] { "email", "user_birthday" });
-            }
-            return View();
         }
 
         [HttpGet]

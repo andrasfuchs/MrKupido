@@ -62,17 +62,30 @@ namespace MrKupido.Model
         //public Address PrimaryAddress { get; set; }
 
         public Address[] Addresses { get; set; }
-        
-        [MaxLength(110)]
-        [MinLength(0)]
-        [StringLength(110, MinimumLength = 0)]        
-        public string AvatarUrl { get; set; }
+
+        [NotMapped]
+        public Uri AvatarUrl { get; set; }
 
         [Required]
         public DateTime FirstLoginUtc { get; set; }        
         [Required]
         public DateTime LastLoginUtc { get; set; }
+
+        [MaxLength(50)]
+        [MinLength(0)]
+        [StringLength(50, MinimumLength = 0)]
+        public string GoogleId { get; set; }
+
+        [MaxLength(50)]
+        [MinLength(0)]
+        [StringLength(50, MinimumLength = 0)]
+        public string FacebookId { get; set; }
+
+        [MaxLength(50)]
+        [MinLength(0)]
+        [StringLength(50, MinimumLength = 0)]
+        public string WindowsLiveId { get; set; }
     }
 
-    public enum Gender { Unknown, Male, Female }
+    public enum Gender { Unknown, Male, Female, Other }
 }
