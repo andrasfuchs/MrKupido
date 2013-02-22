@@ -55,7 +55,7 @@ namespace MrKupido.Library.Recipe
         public static new void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
             Kez kez = eg.Use<Kez>();
-            kez.Talalni(food["pizzateszta"], eg.Use<LaposTanyer>());
+            kez.TalalniC(food["pizzateszta"], eg.Use<LaposTanyer>());
             eg.WashUp();
         }
 

@@ -46,46 +46,6 @@ namespace MrKupido.Library.Equipment
                 }
         }
 
-        [NameAlias("eng", "put in", Priority = 200)]
-        [NameAlias("hun", "berak", Priority = 200)]
-        [NameAlias("hun", "rakd be a(z) {B} a következőket: ({0*}, )")]
-        public void Berakni(params IIngredient[] ingredients)
-        {
-            this.contents.AddIngredients(ingredients);
-            this.LastActionDuration = 30 * (uint)ingredients.Length;
-        }
-
-        [NameAlias("eng", "put in", Priority = 200)]
-        [NameAlias("hun", "berak", Priority = 200)]
-        [NameAlias("hun", "rakd be a(z) {B} a {0.Contents.T}")]
-        public void BerakniEdenybol(IIngredientContainer ic)
-        {
-            this.contents.AddIngredients(ic.Contents);
-            this.LastActionDuration = 30;
-        }
-
-        [NameAlias("eng", "pour out", Priority = 200)]
-        [NameAlias("hun", "beönt", Priority = 200)]
-        [NameAlias("hun", "öntsd be a(z) {B} a következőket: ({0*}, )")]
-        public void Beonteni(params IIngredient[] ingredients)
-        {
-            this.contents.AddIngredients(ingredients);
-            this.LastActionDuration = 15 * (uint)ingredients.Length;
-        }
-
-        [NameAlias("eng", "pull out", Priority = 200)]
-        [NameAlias("hun", "kivesz", Priority = 200)]
-        [NameAlias("hun", "vedd ki a(z) {} tartalmát")]
-        public IIngredient Kivenni()
-        {
-            IIngredient i = this.Contents;
-            this.Empty();
-
-            this.LastActionDuration = 30;
-
-            return i;
-        }
-
         [NameAlias("eng", "wait", Priority = 200)]
         [NameAlias("hun", "vár", Priority = 200)]
         [NameAlias("hun", "várj {0} percet")]
@@ -93,22 +53,6 @@ namespace MrKupido.Library.Equipment
         public void Varni(int minutes) 
         {
             this.LastActionDuration = (uint)(minutes * 60);
-        }
-
-        [NameAlias("eng", "cover", Priority = 200)]
-        [NameAlias("hun", "lefed", Priority = 200)]
-        [NameAlias("hun", "fedd le a(z) {T} {0V}")]
-        public void Lefedni(Material material) 
-        {
-            this.LastActionDuration = 30;
-        }
-
-        [NameAlias("eng", "take off", Priority = 200)]
-        [NameAlias("hun", "levesz", Priority = 200)]
-        [NameAlias("hun", "vedd le a fedőt")]
-        public void FedotLevenni() 
-        {
-            this.LastActionDuration = 5;
         }
 
         [NameAlias("eng", "pour off", Priority = 200)]
@@ -156,6 +100,11 @@ namespace MrKupido.Library.Equipment
 
             c.AddRange(liquids.ToArray());
         }
+
+
+
+
+
 
         [NameAlias("eng", "add", Priority = 200)]
         [NameAlias("hun", "hozzáad", Priority = 200)]

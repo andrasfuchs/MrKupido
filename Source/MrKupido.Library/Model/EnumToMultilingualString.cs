@@ -18,7 +18,7 @@ namespace MrKupido.Library
             if (destinationType == typeof(string))
             {
                 Type valueType = value.GetType();
-                string valueStr = value.ToString();
+                string valueStr = value.ToString().Replace(" ","");
                 string cacheKey = culture.ThreeLetterISOLanguageName + "-" + valueType.FullName + "-" + valueStr;
 
                 if (cache.ContainsKey(cacheKey))
@@ -28,24 +28,30 @@ namespace MrKupido.Library
                 else
                 {
 
-                    string result = null;
-                    int priority = Int32.MaxValue;
+                    List<string> result = new List<string>();
 
-                    foreach (Attribute attribute in NameAliasAttribute.GetNames(valueType, valueStr, culture.ThreeLetterISOLanguageName))
+                    foreach (string oneValueStr in valueStr.Split(','))
                     {
-                        NameAliasAttribute naa = (NameAliasAttribute)attribute;
-                        if ((naa.CultureName == culture.ThreeLetterISOLanguageName) && (naa.Priority < priority))
+                        int priority = Int32.MaxValue;
+
+                        foreach (Attribute attribute in NameAliasAttribute.GetNames(valueType, oneValueStr, culture.ThreeLetterISOLanguageName))
                         {
-                            result = naa.Name;
-                            priority = naa.Priority;
+                            NameAliasAttribute naa = (NameAliasAttribute)attribute;
+                            if ((naa.CultureName == culture.ThreeLetterISOLanguageName) && (naa.Priority < priority))
+                            {
+                                result.Add(naa.Name);
+                                priority = naa.Priority;
+                            }
                         }
                     }
 
-                    if (result != null)
+                    if (result.Count != 0)
                     {
-                        cache.Add(cacheKey, result);
+                        string cacheValue = String.Join(" ", result);
 
-                        return result;
+                        cache.Add(cacheKey, cacheValue);
+
+                        return cacheValue;
                     }
                 }
 

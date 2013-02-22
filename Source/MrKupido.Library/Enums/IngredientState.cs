@@ -14,33 +14,39 @@ namespace MrKupido.Library
     {
         [NameAlias("eng", "")]
         [NameAlias("hun", "")]
-        Normal,
+        Normal = 0,
         [NameAlias("eng", "ground")]
         [NameAlias("hun", "őrölt")]
-        Orolt,
+        Orolt = 1,
         [NameAlias("eng", "filed")]
         [NameAlias("hun", "reszelt")]
-        Reszelt,
+        Reszelt = 2,
         [NameAlias("eng", "cut")]
         [NameAlias("hun", "darabolt")]
-        Darabolt,
+        Darabolt = 4,
         [NameAlias("eng", "circled")]
         [NameAlias("hun", "karikázott")]
-        Karikazott,
+        Karikazott = 8,
         [NameAlias("eng", "minced")]
         [NameAlias("hun", "darált")]
-        Daralt,
+        Daralt = 16,
         [NameAlias("eng", "pitted")]
         [NameAlias("hun", "magozott")]
-        Magozott,
+        Magozott = 32,
         [NameAlias("eng", "squezed")]
         [NameAlias("hun", "préselt")]
-        Preselt,
+        Preselt = 64,
         [NameAlias("eng", "peeled")]
         [NameAlias("hun", "hámozott")]
-        Hamozott,
+        Hamozott = 128,
         [NameAlias("eng", "teared")]
         [NameAlias("hun", "kiszaggatott")]
-        Kiszaggatott
+        Kiszaggatott = 256,
+        [NameAlias("eng", "disassembled")]
+        [NameAlias("hun", "szétszedett")]
+        Szetszedett = 512,
+        [NameAlias("eng", "beaten")]
+        [NameAlias("hun", "felvert")]
+        Felvert = 1024
     }
 }

@@ -30,7 +30,7 @@ namespace MrKupido.Library.Recipe
             result.Devices.Add(new Futotest());
             
             result.Tools.Add(new Kez());
-            result.Tools.Add(new Spoon());
+            result.Tools.Add(new Kanal());
 
             return result;
         }
@@ -50,13 +50,13 @@ namespace MrKupido.Library.Recipe
             Edeny edeny = eg.Use<Edeny>();
             edeny.Beonteni(new Tej(10.0f * amount));
 
-            futotest.Behelyezni(edeny);
-            futotest.Homerseklet(40);
+            futotest.RahelyezniC(edeny);
+            //futotest.Homerseklet(40);
             edeny.Varni((int)(1.5 * 24 * 60));
-            edeny = (Edeny)futotest.Kiemelni(typeof(Edeny));
+            futotest.LeemelniC(edeny);
 
-            Spoon kanal = eg.Use<Spoon>();
-            IIngredient tejfol = kanal.Lefoloz(edeny, 0.10f);
+            Kanal kanal = eg.Use<Kanal>();
+            IIngredient tejfol = kanal.LefolozniC(edeny, 0.10f);
 
             eg.Use<Bogre>(1).Berakni(tejfol);
 
@@ -69,7 +69,7 @@ namespace MrKupido.Library.Recipe
         public static void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
             Kez kez = eg.Use<Kez>();
-            kez.Talalni(food["tejfol"], eg.Use<Bogre>());
+            kez.TalalniC(food["tejfol"], eg.Use<Bogre>());
 
             eg.WashUp();
         }

@@ -31,7 +31,7 @@ namespace MrKupido.Library.Recipe
 
             result.Tools.Add(new Kez());
             result.Tools.Add(new Fakanal());
-            result.Tools.Add(new Spoon());
+            result.Tools.Add(new Kanal());
 
             return result;
         }
@@ -51,23 +51,23 @@ namespace MrKupido.Library.Recipe
             Edeny edeny = eg.Use<Edeny>();
             edeny.Beonteni(new Tej(10.0f * amount));
 
-            futotest.Behelyezni(edeny);
-            futotest.Homerseklet(40);
+            futotest.RahelyezniC(edeny);
+            //futotest.Homerseklet(40);
             edeny.Varni((int)(1.5 * 24 * 60));
-            edeny = (Edeny)futotest.Kiemelni(typeof(Edeny));
+            futotest.LeemelniC(edeny);
 
-            Spoon kanal = eg.Use<Spoon>();
-            IIngredient tejfol = kanal.Lefoloz(edeny, 0.10f);
+            Kanal kanal = eg.Use<Kanal>();
+            IIngredient tejfol = kanal.LefolozniC(edeny, 0.10f);
 
 
             Tuzhely tuzhely = eg.Use<Tuzhely>();
             tuzhely.Homerseklet(90);
-            tuzhely.Behelyezni(edeny);
+            tuzhely.RahelyezniC(edeny);
             Fakanal fakanal = eg.Use<Fakanal>();
-            fakanal.Kevergetni(edeny.Contents);
+            fakanal.KevergetniC(edeny, 1);
             edeny.Varni(30); // itt keletkezik a turo a tejből
 
-            edeny = (Edeny)tuzhely.Kiemelni(typeof(Edeny));
+            tuzhely.LeemelniC(edeny);
             edeny.Varni(10);
             edeny.FolyadekotLeonteni();
 
@@ -80,7 +80,7 @@ namespace MrKupido.Library.Recipe
         public static void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
             Kez kez = eg.Use<Kez>();
-            kez.Talalni(food["turo"], eg.Use<LaposTanyer>());
+            kez.TalalniC(food["turo"], eg.Use<LaposTanyer>());
 
             eg.WashUp();
         }

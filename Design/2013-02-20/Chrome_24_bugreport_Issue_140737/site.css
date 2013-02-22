@@ -1,0 +1,30 @@
+﻿body {
+    color: /*mcd*/#553e31;
+    background-color: #6f5d41;
+}
+
+.wrapper
+{
+    padding: 0px;
+    margin: 20px auto 20px auto;
+    width: 880px;
+    background-color: /*bgc*/#fffcf5;
+    box-shadow: 0 0 30px #000000;
+
+    /* PNG */
+    -moz-border-image: url('frame160x160.png') 25% 25% 25% 25% round;
+    -webkit-border-image: url('frame160x160.png') 25% 25% 25% 25% round;
+    border-image: url('frame160x160.png') 25% 25% 25% 25% round;
+    /**/
+
+
+    /* SVG 
+    -moz-border-image: url('frame160x160.svg') 25% 25% 25% 25% round;
+    -webkit-border-image: url('frame160x160.svg') 25% 25% 25% 25% round;
+    border-image: url('frame160x160.svg') 25% 25% 25% 25% round;
+    /* */
+
+    border-width: 40px;
+    text-align: center;
+}
+

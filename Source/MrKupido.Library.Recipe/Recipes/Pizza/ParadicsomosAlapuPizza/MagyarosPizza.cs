@@ -41,22 +41,22 @@ namespace MrKupido.Library.Recipe
 
             Kes kes = eg.Use<Kes>();
             ISingleIngredient szalonna = new FustoltSzalonna(150.0f * amount);
-            kes.Feldarabolni(szalonna, 75.0f);
+            kes.FeldarabolniI(szalonna, 75.0f);
 
             ISingleIngredient kolbasz = new Kolbasz(250.0f * amount);
-            kes.Felkarikazni(kolbasz, 25.0f);
+            kes.FelkarikazniI(kolbasz, 25.0f);
 
             ISingleIngredient hagyma = new Hagyma(5.0f * amount);
-            kes.Felkarikazni(hagyma, 15.0f);
+            kes.FelkarikazniI(hagyma, 15.0f);
 
             ISingleIngredient paprika = new Fuszerpaprika(100.0f * amount);
-            kes.Felkarikazni(paprika, 15.0f);
+            kes.FelkarikazniI(paprika, 15.0f);
 
             Reszelo reszelo = eg.Use<Reszelo>();
             LaposKisTanyer laposKisTanyer = eg.Use<LaposKisTanyer>();
 
             ISingleIngredient sajt = new Sajt(100.0f * amount);
-            reszelo.Lereszelni(laposKisTanyer, sajt);
+            reszelo.LereszelniI(laposKisTanyer, sajt);
 
             Kez kez = eg.Use<Kez>();
             kez.Rarakni(pizzateszta, szalonna, kolbasz, hagyma, paprika);
@@ -77,7 +77,7 @@ namespace MrKupido.Library.Recipe
         public static new void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
             Kez kez = eg.Use<Kez>();
-            kez.Talalni(food["pizzateszta"], eg.Use<LaposTanyer>());
+            kez.TalalniC(food["pizzateszta"], eg.Use<LaposTanyer>());
             eg.WashUp();
         }
     }

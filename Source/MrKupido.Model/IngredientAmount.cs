@@ -158,7 +158,7 @@ namespace MrKupido.Model
 
         private static void TransformMeasurementUnit(string amount, string mu, ref IngredientAmount ia)
         {
-            float am = Single.Parse(amount);
+            float am = Single.Parse(amount.Replace(".",","));
 
             switch (mu)
             {

@@ -67,22 +67,9 @@ namespace MrKupido.Web.Controllers
                     {
                         CurrentSessions[requestContext.HttpContext.Session.SessionID].Changed += new UserStateChangedEventHandler(BaseController_UserStateChanged);
                         CurrentSessions[requestContext.HttpContext.Session.SessionID].SessionID = requestContext.HttpContext.Session.SessionID;
-                        CurrentSessions[requestContext.HttpContext.Session.SessionID].IPAddress = "unknown";
                     }
-
-                    // get the public IP in and async way
-                    BackgroundWorker bgWorker = new BackgroundWorker();
-                    bgWorker.DoWork += (sender, e) =>
-                    {
-                        string sessionId = (string)e.Argument;
-
-                        lock (CurrentSessions[sessionId])
-                        {
-                            CurrentSessions[sessionId].IPAddress = GetPublicIP("http://repeater.smartftp.com");
-                        }
-                    };
-                    bgWorker.RunWorkerAsync(requestContext.HttpContext.Session.SessionID);                    
                 }
+                CurrentSessions[requestContext.HttpContext.Session.SessionID].IPAddress = GetIPAddress(Request);
             }
 
 
@@ -220,47 +207,21 @@ namespace MrKupido.Web.Controllers
         //}
 
 
-        private string GetPublicIP(string publicIpUrl)
+        public static string GetIPAddress(HttpRequestBase request)
         {
-            string result = "";
+            string szRemoteAddr = request.UserHostAddress;
+            string szXForwardedFor = request.Headers["Via"] ?? request.ServerVariables["X_FORWARDED_FOR"];
+            string szIP = "";
 
-            HttpWebRequest req = null;
-            HttpWebResponse resp = null;
-
-            try
+            if (szXForwardedFor == null)
             {
-                //string ipCountryISO = "XX";
-
-                // get our public IP
-                req = (HttpWebRequest)HttpWebRequest.Create(publicIpUrl);
-                resp = (HttpWebResponse)req.GetResponse();
-                StreamReader strmReader = new StreamReader(resp.GetResponseStream());
-                result = strmReader.ReadToEnd().Trim();
-                resp.Close();
-
-                //string requestUrl = "http://api.hostip.info/country.php?ip=" + publicIp;
-                //// get the IP's country
-                //req = (HttpWebRequest)HttpWebRequest.Create(requestUrl);
-                //resp = (HttpWebResponse)req.GetResponse();
-                //strmReader = new StreamReader(resp.GetResponseStream());
-                //ipCountryISO = strmReader.ReadToEnd().Trim();
+                szIP = szRemoteAddr;
             }
-            catch { }
-            finally
+            else
             {
-                if (req != null)
-                {
-                    req = null;
-                }
-
-                if (resp != null)
-                {
-                    resp.Close();
-                    resp = null;
-                }
+                szIP = szXForwardedFor;
             }
-
-            return result;
+            return szIP;
         }
     }
 }

@@ -14,31 +14,36 @@ namespace MrKupido.Library.Equipment
         [NameAlias("eng", "hunt out", Priority = 200)]
         [NameAlias("hun", "felver", Priority = 200)]
         [NameAlias("hun", "verd fel a(z) {0T}")]
-        public IngredientGroup Felverni(IIngredient i)
+        public IIngredient FelverniI(IIngredient i)
         {
-            if ((!(i is IngredientBase)) || (i.Unit != MeasurementUnit.liter)) throw new InvalidActionForIngredientException("Felverni", i.Name, i.Unit);
+            if (i.Unit != MeasurementUnit.liter) throw new InvalidActionForIngredientException("Felverni", i.Name, i.Unit);
 
-            List<IIngredient> result = new List<IIngredient>();
+            i.ChangeUnitTo(MeasurementUnit.gramm);
 
-
-            ((IngredientBase)i).ChangeUnitTo(MeasurementUnit.gramm);
-
-            result.Add(i);
+            i.State |= IngredientState.Felvert;
 
             this.LastActionDuration = 120;
 
-            return new IngredientGroup(result.ToArray());
+            return i;
         }
 
         [NameAlias("eng", "mix together", Priority = 200)]
         [NameAlias("hun", "összekever", Priority = 200)]
         [NameAlias("hun", "alaposan keverd össze a(z) {0T}")]
-        public IIngredientGroup Elkeverni(IIngredientGroup ingredients)
+        public IIngredientGroup ElkeverniIG(IIngredientGroup ingredients)
         {
             this.LastActionDuration = 60;
 
             return ingredients;
         }
 
-    }
+        [NameAlias("eng", "mix up", Priority = 200)]
+        [NameAlias("hun", "kikever", Priority = 200)]
+        [NameAlias("hun", "keverd ki a(z) {0.Contents.T}")]
+        public void KikeverniC(IIngredientContainer c)
+        {
+            this.LastActionDuration = 60;
+        }
+
+   }
 }

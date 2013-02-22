@@ -19,6 +19,7 @@ namespace DotNetOpenAuth.ApplicationBlock {
 		private static readonly AuthorizationServerDescription FacebookDescription = new AuthorizationServerDescription {
 			TokenEndpoint = new Uri("https://graph.facebook.com/oauth/access_token"),
 			AuthorizationEndpoint = new Uri("https://graph.facebook.com/oauth/authorize"),
+            ProtocolVersion = ProtocolVersion.V20
 		};
 
 		/// <summary>

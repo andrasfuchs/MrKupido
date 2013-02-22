@@ -17,5 +17,10 @@ namespace MrKupido.Library
             this.Height = height;
             this.Depth = depth;
         }
+
+        public static Dimensions operator *(Dimensions d, float m)
+        {
+            return new Dimensions(d.Width * m, d.Height * m, d.Depth * m);
+        }
     }
 }

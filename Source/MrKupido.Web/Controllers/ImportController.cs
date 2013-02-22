@@ -21,6 +21,7 @@ namespace MrKupido.Web.Controllers
         private static MrKupidoContext db = new MrKupidoContext("Name=MrKupidoContext");
         private static char[] whiteSpaces = new char[] { ' ', ',', '.', '!', '?', ')', '(', '"', '&', ';', '\'', '[', ']', ':', '\\', '_', '`', '„', '<', '>', '\r', '\n', '”' };
 
+        [Authorize]
         public ActionResult RecipeList()
         {
             return View();
@@ -44,11 +45,11 @@ namespace MrKupido.Web.Controllers
             return PartialView("_ImportedRecipeList", recipes);
         }
 
-
-
+        [Authorize]
         public ActionResult Recipe(string id)
         {
-            ImportedRecipe importedRecipe = db.ImportedRecipes.FirstOrDefault(r => (r.UniqueName == id) && (r.Language == (string)Session["Language"]));
+            string language = (string)Session["Language"];
+            ImportedRecipe importedRecipe = db.ImportedRecipes.FirstOrDefault(r => (r.UniqueName == id) && (r.Language == language));
             if (importedRecipe == null) return RedirectToAction("Index", "HomeController");
 
             DataContractJsonSerializer dcjs = new DataContractJsonSerializer(typeof(string[]));
@@ -98,10 +99,14 @@ namespace MrKupido.Web.Controllers
                 {
                     ingredient.Language = langISO;
 
-                    IngredientTreeNode itn = Cache.Ingredient[ingredient.IngredientUniqueName];
+                    TreeNode tn = Cache.Ingredient[ingredient.IngredientName];
+                    if (tn == null)
+                    {
+                        tn = Cache.Recipe[ingredient.IngredientName];
+                    }
                     //Ingredient dbIngredient = db.Ingredients.Where(ing => ((ingredient.Language == "hun") && (ing.UniqueNameHun == ingredient.IngredientUniqueName)) || ((ingredient.Language == "eng") && (ing.UniqueNameEng == ingredient.IngredientUniqueName))).FirstOrDefault();
                     //ingredient.Index = (dbIngredient != null ? dbIngredient.Index.Value : -1);
-                    ingredient.Index = (itn == null ? -1 : 1);
+                    ingredient.Index = (tn == null ? -1 : 1);
 
                     result.Add(ingredient);
                 }
@@ -189,7 +194,7 @@ namespace MrKupido.Web.Controllers
         {
             //string[] verbs = new string[0];
             string[] conjunctions = new string[0];
-            string[] ingredients = new string[0];
+            List<string> ingredients = new List<string>();
             string[] devices = new string[0];
             HashSet<string> aliases = new HashSet<string>();
             string[] units = new string[0];
@@ -210,7 +215,8 @@ namespace MrKupido.Web.Controllers
                 // TODO
             }
 
-            ingredients = Cache.Ingredient.Indexer.All.Select(tn => tn.ShortName).ToArray();
+            ingredients.AddRange(Cache.Ingredient.Indexer.All.Select(tn => tn.ShortName).ToArray());
+            ingredients.AddRange(Cache.Recipe.Indexer.All.Select(tn => tn.ShortName).ToArray());
             devices = Cache.Equipment.Indexer.All.Select(tn => tn.ShortName).ToArray();
 
             List<string> verbs = new List<string>();

@@ -8,6 +8,8 @@ using MrKupido.Library.Nature;
 namespace MrKupido.Library.Ingredient
 {
     [NameAlias("eng", "parsley leaf")]
+    [NameAlias("hun", "petrezselyem", Priority = 1)]
+    [NameAlias("hun", "petrezselyemzöld", Priority = 2)]
     [NameAlias("hun", "petrezselyemlevél")]
 
     [LeafOf(typeof(Petroselinum))]

@@ -10,50 +10,35 @@ namespace MrKupido.Library.Equipment
     [NameAlias("hun", "berendezés")]
     public class Device : EquipmentBase
     {
-        public int AveragePowerConsumption;
+        public Dimensions Dimensions { get; protected set; }
 
-        private IIngredientContainer contents;
+        public int Id { get; set; }
 
-        [NameAlias("eng", "put in", Priority = 200)]
-        [NameAlias("hun", "behelyez", Priority = 200)]
-        [NameAlias("hun", "helyezd be a(z) {B} a(z) {0T}")]
-        public void Behelyezni(IIngredientContainer contents)
+        protected List<IIngredientContainer> contents = new List<IIngredientContainer>();
+        protected IIngredientContainer Contents
         {
-            if (this.contents != null) throw new MrKupidoException("The device '{0}' already has a '{1}' in it. Remove it before putting something other in it.", this.Name, this.contents);
-
-            this.contents = contents;
-
-            this.LastActionDuration = 10;
+            get 
+            {
+                if (contents.Count == 0) return null;
+                
+                return contents.Last(); 
+            }
         }
 
-        [NameAlias("eng", "put on", Priority = 200)]
-        [NameAlias("hun", "ráhelyez", Priority = 200)]
-        [NameAlias("hun", "helyezd rá a(z) {R} a(z) {0T}")]
-        public void Rahelyezni(IIngredientContainer contents)
+        public int AveragePowerConsumption { get; protected set; } 
+
+        public Device(float width, float height, float depth)
         {
-            if (this.contents != null) throw new MrKupidoException("The device '{0}' already has a '{1}' on it. Remove it before putting something other on it.", this.Name, this.contents);
-
-            this.contents = contents;
-
-            this.LastActionDuration = 10;
+            this.Dimensions = new Dimensions(width, height, depth);
         }
 
-        [NameAlias("eng", "pull out", Priority = 200)]
-        [NameAlias("hun", "kiemel", Priority = 200)]
-        [NameAlias("hun", "emeld ki a(z) {K} a tartalmát")]
-        public IIngredientContainer Kiemelni(Type equipmentType)
+        [NameAlias("eng", "wait", Priority = 200)]
+        [NameAlias("hun", "vár", Priority = 200)]
+        [NameAlias("hun", "várj {0} percet")]
+        [PassiveAction]
+        public void Varni(int minutes)
         {
-            if (this.contents == null) throw new MrKupidoException("The device '{0}' is empty at the moment, it doesn't have a '{1}' in it.", this.Name, equipmentType.Name);
-
-            if (!(this.contents.GetType() == equipmentType)) throw new MrKupidoException("The device '{0}' doesn't have a '{1}' in it. It has a '{2}' instead.", this.Name, equipmentType.Name, this.contents);
-
-            IIngredientContainer result = this.contents;
-
-            this.contents = null;
-
-            this.LastActionDuration = 10;
-
-            return result;
+            this.LastActionDuration = (uint)(minutes * 60);
         }
     }
 }

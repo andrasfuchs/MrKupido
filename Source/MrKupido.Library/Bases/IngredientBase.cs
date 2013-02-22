@@ -28,6 +28,12 @@ namespace MrKupido.Library.Ingredient
         {
             this.PieceCount = 1;
             this.Unit = unit;
+
+            if (this.Unit == MeasurementUnit.piece)
+            {
+                amount = (float)Math.Ceiling((double)amount);
+            }
+
             this.SetAmount(amount, unit);
         }
 

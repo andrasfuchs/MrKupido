@@ -34,7 +34,7 @@ namespace MrKupido.Library.Recipe
             result.Devices.Add(new Hutogep());
 
             result.Tools.Add(new Kez());
-            result.Tools.Add(new Spoon());
+            result.Tools.Add(new Kanal());
 
             return result;
         }
@@ -53,22 +53,22 @@ namespace MrKupido.Library.Recipe
             edeny1.Beonteni(new Tej(12.0f * amount, MeasurementUnit.liter));
             edeny1.Varni(180);
 
-            Spoon kanal = eg.Use<Spoon>();
-            IIngredient nyersTejszin = kanal.Lefoloz(edeny1, 0.15f);
+            Kanal kanal = eg.Use<Kanal>();
+            IIngredient nyersTejszin = kanal.LefolozniC(edeny1, 0.15f);
 
             Edeny edeny2 = eg.Use<Edeny>();
             edeny2.Beonteni(nyersTejszin);
 
             Tuzhely tuzhely = eg.Use<Tuzhely>();
-            tuzhely.Behelyezni(edeny2);
+            tuzhely.RahelyezniC(edeny2);
             tuzhely.Homerseklet(110);
             edeny2.Varni(10);
 
-            edeny2 = (Edeny)tuzhely.Kiemelni(typeof(Edeny));
+            tuzhely.LeemelniC(edeny2);
             edeny2.Varni(30);
 
             Hutogep huto = eg.Use<Hutogep>();
-            huto.Behelyezni(edeny2);
+            huto.BehelyezniC(edeny2);
             edeny2.Varni(60);
 
             cfp.Add("tejszin", edeny2);
@@ -80,7 +80,7 @@ namespace MrKupido.Library.Recipe
         public static void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
             Kez kez = eg.Use<Kez>();
-            kez.Talalni(food["tejszin"], eg.Use<Bogre>());
+            kez.TalalniC(food["tejszin"], eg.Use<Bogre>());
 
             eg.WashUp();
         }

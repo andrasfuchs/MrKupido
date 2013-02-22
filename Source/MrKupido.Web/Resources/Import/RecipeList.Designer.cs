@@ -61,7 +61,7 @@ namespace MrKupido.Web.Resources.Import {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unsupported browser.
+        ///   Looks up a localized string similar to Import recipe.
         /// </summary>
         public static string PageTitle {
             get {

@@ -9,6 +9,7 @@ namespace MrKupido.Library.Ingredient
 {
     [NameAlias("eng", "pepper")]
     [NameAlias("hun", "pirospaprika", Priority = 1)]
+    [NameAlias("hun", "piros fűszerpaprika", Priority = 2)]
     [NameAlias("hun", "fűszerpaprika")]
 
     [GristOf(typeof(CapsicumAnnuumL))]

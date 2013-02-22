@@ -41,7 +41,7 @@ namespace MrKupido.Library.Recipe
             LaposKisTanyer tanyer = eg.Use<LaposKisTanyer>();
 
             //IIngredient citromHej = reszelo.Lereszelni(new CitromHej(5.0f * amount));
-            reszelo.Lereszelni(tanyer, new CitromHej(5.0f * amount));
+            reszelo.LereszelniI(tanyer, new CitromHej(5.0f * amount));
 
             result.Add("citromhej", tanyer);
 
@@ -60,18 +60,17 @@ namespace MrKupido.Library.Recipe
 
             Kez kez = eg.Use<Kez>();
 
-            kez.OsszegyurniEdenyben(edeny);
-
-            IngredientGroup golyok = kez.Kiszaggatni(edeny.Contents, 50.0f);
+            kez.OsszegyurniC(edeny);
 
             // foreach
-            kez.GolyovaGyurni(golyok);
+            IIngredient golyok = kez.GolyovaGyurniC(edeny, 50.0f);
+            eg.Use<LaposTanyer>(1).Rarakni(golyok);
 
             MelyTanyer melyTanyer = eg.Use<MelyTanyer>();
-            melyTanyer.Berakni(new KokuszReszelek(10.0f * amount));
-            IngredientGroup megforgatottGolyo = kez.Megforgatni(melyTanyer, golyok);
+            melyTanyer.BerakniI(new KokuszReszelek(100.0f * amount));
+            IngredientGroup megforgatottGolyo = kez.MegforgatniI(melyTanyer, golyok);
             //
-            eg.Use<LaposTanyer>(1).Berakni(megforgatottGolyo);
+            eg.Use<LaposTanyer>(1).Rarakni(megforgatottGolyo);
 
             cfp.Add("golyok", eg.Use<LaposTanyer>(1));
              
@@ -82,7 +81,7 @@ namespace MrKupido.Library.Recipe
         public static void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
             Kez kez = eg.Use<Kez>();
-            kez.Talalni(food["golyok"], eg.Use<LaposTanyer>());
+            kez.TalalniC(food["golyok"], eg.Use<LaposTanyer>());
             eg.WashUp();
         }
     }

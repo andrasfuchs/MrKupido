@@ -49,11 +49,11 @@ namespace MrKupido.Library.Recipe
 
             ISingleIngredient fokhagyma = new Fokhagyma(6.0f);
             FokhagymaPres fp = eg.Use<FokhagymaPres>();
-            fp.Preselni(fokhagyma);
+            fp.PreselniI(fokhagyma);
             edeny.Berakni(fokhagyma, new Tej(1.0f));
 
             Fakanal fakanal = eg.Use<Fakanal>();
-            fakanal.ElkeverniEdenyben(edeny);
+            fakanal.ElkeverniC(edeny);
 
             edeny.Berakni(new Csirkemell(250 * 10));
             edeny.Varni(8 * 60);
@@ -79,30 +79,30 @@ namespace MrKupido.Library.Recipe
 
             LaposKisTanyer laposKisTanyer1 = eg.Use<LaposKisTanyer>();
             Reszelo reszelo = eg.Use<Reszelo>();
-            reszelo.Lereszelni(laposKisTanyer1, alma);
+            reszelo.LereszelniI(laposKisTanyer1, alma);
 
             LaposKisTanyer laposKisTanyer2 = eg.Use<LaposKisTanyer>();
             ISingleIngredient sajt = new FustoltSajt(200.0f);
-            reszelo.Lereszelni(laposKisTanyer2, sajt);
+            reszelo.LereszelniI(laposKisTanyer2, sajt);
 
             JenaiTal jenai = eg.Use<JenaiTal>();
-            jenai.Berakni(new FustoltSzalonna(5, MeasurementUnit.piece), tejesCsirkemell.Contents, alma);
-            jenai.Beonteni(new Tejszin(0.3f));
-            kez.Raszorni(tejesCsirkemell, sajt);
-            jenai.Berakni(new FustoltSzalonna(5, MeasurementUnit.piece));
+            jenai.BerakniC(tejesCsirkemell);
+            jenai.Berakni(new FustoltSzalonna(5, MeasurementUnit.piece), alma);
+            jenai.BeonteniI(new Tejszin(0.3f));
+            kez.Raszorni(jenai, sajt);
+            jenai.BerakniI(new FustoltSzalonna(5, MeasurementUnit.piece));
 
-            Alufolia alufolia = new Alufolia(29.0f, 1000.0f);
-            jenai.Lefedni(alufolia);
+            jenai.Lefedni(new Alufolia());
 
             Suto suto = eg.Use<Suto>();
             suto.Homerseklet(200);
-            suto.Behelyezni(jenai);
+            suto.BehelyezniC(jenai);
             suto.Varni(60);
-            jenai = (JenaiTal)suto.Kiemelni(typeof(JenaiTal));
+            suto.KiemelniC(jenai);
             jenai.FedotLevenni();
-            suto.Behelyezni(jenai);
+            suto.BehelyezniC(jenai);
             suto.Varni(15);
-            jenai = (JenaiTal)suto.Kiemelni(typeof(JenaiTal));
+            suto.KiemelniC(jenai);
 
             cfp.Add("csirkemellek", jenai);
 
@@ -113,7 +113,7 @@ namespace MrKupido.Library.Recipe
         public static void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
             Kez kez = eg.Use<Kez>();
-            kez.Talalni(food["csirkemellek"], eg.Use<LaposTanyer>());
+            kez.TalalniC(food["csirkemellek"], eg.Use<LaposTanyer>());
 
             eg.WashUp();
         }

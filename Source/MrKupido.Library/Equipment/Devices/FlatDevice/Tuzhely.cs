@@ -1,0 +1,31 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using MrKupido.Library.Attributes;
+
+namespace MrKupido.Library.Equipment
+{
+    [NameAlias("eng", "cooker")]
+    [NameAlias("hun", "tűzhely")]
+    public class Tuzhely : FlatDevice
+    {
+        public Tuzhely()
+            : this(1.0f)
+        {
+        }
+
+        public Tuzhely(float scale)
+            : base(38.0f * scale, 40.0f * scale, 5.0f * scale)
+        {
+        }
+
+        [NameAlias("eng", "set the heat", Priority = 200)]
+        [NameAlias("hun", "felmelegít", Priority = 201)]
+        [NameAlias("hun", "állítsd a(z) {} hőmérsékletét {0} fokra")]
+        public void Homerseklet(int temperature)
+        {
+            this.LastActionDuration = 60;
+        }
+    }
+}

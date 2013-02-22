@@ -45,7 +45,7 @@ namespace MrKupido.Library.Recipe
             edeny.Beonteni(new Tejszin(10.0f * amount));
 
             Habvero habvero = eg.Use<Habvero>();
-            habvero.Felverni(edeny.Contents);
+            habvero.FelverniI(edeny.Contents);
 
             cfp.Add("vaj", edeny);
 
@@ -56,7 +56,7 @@ namespace MrKupido.Library.Recipe
         public static void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
             Kez kez = eg.Use<Kez>();
-            kez.Talalni(food["vaj"], eg.Use<LaposTanyer>());
+            kez.TalalniC(food["vaj"], eg.Use<LaposTanyer>());
 
             eg.WashUp();
         }

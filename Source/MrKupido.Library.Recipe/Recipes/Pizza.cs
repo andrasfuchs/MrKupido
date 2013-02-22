@@ -45,21 +45,21 @@ namespace MrKupido.Library.Recipe
 
             NagyEdeny edeny1 = eg.Use<NagyEdeny>();
             edeny1.Berakni(new Liszt(1000f * amount), new So(6.0f * amount), new Oregano(3.0f * amount), new FeketeBorsOrolt(5.0f * amount));
-            fakanal.ElkeverniEdenyben(edeny1);
+            fakanal.ElkeverniC(edeny1);
 
             Bogre bogre = eg.Use<Bogre>();
             bogre.Berakni(new Eleszto(14.0f * amount), new Cukor(1.5f * amount), new Viz(0.6f * amount), new OlivaOlaj(0.05f * amount));
-            fakanal.ElkeverniEdenyben(bogre);
+            fakanal.ElkeverniC(bogre);
             
 
-            fakanal.OsszekeverniEdenyeket(edeny1, bogre);
+            fakanal.OsszekeverniCC(edeny1, bogre);
             edeny1.Varni(45);
 
             NyujtoDeszka nyd = eg.Use<NyujtoDeszka>();
-            nyd.Nyujtani(edeny1, 1);
+            nyd.NyujtaniC(edeny1, 1);
 
             Tepsi tepsi = eg.Use<Tepsi>();
-            tepsi.BerakniEdenybol(nyd);
+            tepsi.BerakniC(nyd);
 
             result.Add("pizzateszta", tepsi);
 
@@ -75,9 +75,9 @@ namespace MrKupido.Library.Recipe
 
             Suto suto = eg.Use<Suto>();
             suto.Homerseklet(200);
-            suto.Behelyezni(tepsi);
+            suto.BehelyezniC(tepsi);
             suto.Varni(30);
-            tepsi = suto.Kiemelni(typeof(Tepsi));
+            suto.KiemelniC(tepsi);
 
             cfp.Add("pizzaalap", tepsi);
 
@@ -88,7 +88,7 @@ namespace MrKupido.Library.Recipe
         public static void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
             Kez kez = eg.Use<Kez>();
-            kez.Talalni(food["pizzaalap"], eg.Use<LaposTanyer>());
+            kez.TalalniC(food["pizzaalap"], eg.Use<LaposTanyer>());
             eg.WashUp();
         }
     }

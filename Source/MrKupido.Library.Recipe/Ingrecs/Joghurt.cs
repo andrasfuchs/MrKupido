@@ -50,21 +50,21 @@ namespace MrKupido.Library.Recipe
 
             Tuzhely tuzhely = eg.Use<Tuzhely>();
             tuzhely.Homerseklet(110);
-            tuzhely.Behelyezni(edeny);
+            tuzhely.RahelyezniC(edeny);
             edeny.Varni(10);
             
-            edeny = (Edeny)tuzhely.Kiemelni(typeof(Edeny));
+            tuzhely.LeemelniC(edeny);
             edeny.Varni(5);
 
             Habvero habvero = eg.Use<Habvero>();
             edeny.Berakni(new Joghurt(0.1f));
-            habvero.Elkeverni((IngredientGroup)edeny.Contents);
+            habvero.ElkeverniIG((IngredientGroup)edeny.Contents);
 
             Futotest futotest = eg.Use<Futotest>();
-            futotest.Behelyezni(edeny);
-            futotest.Homerseklet(40);
+            futotest.RahelyezniC(edeny);
+            //futotest.Homerseklet(40);
             edeny.Varni((int)(1.5 * 24 * 60));
-            edeny = (Edeny)futotest.Kiemelni(typeof(Edeny));
+            futotest.LeemelniC(edeny);
 
             cfp.Add("joghurt", edeny);
 
@@ -75,7 +75,7 @@ namespace MrKupido.Library.Recipe
         public static void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
             Kez kez = eg.Use<Kez>();
-            kez.Talalni(food["joghurt"], eg.Use<LaposTanyer>());
+            kez.TalalniC(food["joghurt"], eg.Use<LaposTanyer>());
 
             eg.WashUp();
         }

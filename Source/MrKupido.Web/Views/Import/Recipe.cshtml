@@ -6,51 +6,50 @@
 @this.ScriptBlock(
 @<script type="text/javascript">
 
-    var uniqueName = '@(((MrKupido.Model.ImportedRecipe)Model[0]).UniqueName)';
-    var $textChanged = false;
+     var uniqueName = '@(((MrKupido.Model.ImportedRecipe)Model[0]).UniqueName)';
+     var $textChanged = false;
 
-    $.ajaxSetup({
-        type: 'POST',
-        contentType: "application/json; charset=utf-8",
-        dataType: 'html',
-        cache: false
-    });
+     $.ajaxSetup({
+         type: 'POST',
+         contentType: "application/json; charset=utf-8",
+         dataType: 'html',
+         cache: false
+     });
 
-    $(document).ready(function () {
+     $(document).ready(function () {
 
-        attachEventHandlerToIngredientList();
-        $('textarea#ingredients').trigger('change');
-        $('section#recipeeditor').trigger('keyup');
-        $textChanged = false;
-       
-        $("div#confirmRecipeSave").bind('dialogclose', function (event) {
-            $('select#recipes').trigger('change');
-        });
+         attachEventHandlerToIngredientList();
+         $('textarea#ingredients').trigger('change');
+         $('section#recipeeditor').trigger('keyup');
+         $textChanged = false;
 
-    });
+         $("div#confirmRecipeSave").bind('dialogclose', function (event) {
+             $('select#recipes').trigger('change');
+         });
 
-    function attachEventHandlerToIngredientList() {
-        $('textarea#ingredients').on('change.kupido', function () {
-            $textChanged = true;
-            $('textarea#ingredients').attr('disabled', 'disabled');
+     });
 
-            $.ajax({
-                url: '../LoadIngredientTable',
-                data: JSON.stringify({ langISO: 'hun', ingredients: $('textarea#ingredients').val() }),
-                success: function (result) {
-                    $('div#_IngredientTable').html(result);
-                    $('textarea#ingredients').removeAttr('disabled');
-                }
-            });
-        });
-    };
+     function attachEventHandlerToIngredientList() {
+         $('textarea#ingredients').on('change.kupido', function () {
+             $textChanged = true;
+             $('textarea#ingredients').attr('disabled', 'disabled');
 
-    function saveRecipe() 
-    {
-        $('input#savebutton').attr('disabled', 'disabled');
+             $.ajax({
+                 url: '../LoadIngredientTable',
+                 data: JSON.stringify({ langISO: 'hun', ingredients: $('textarea#ingredients').val() }),
+                 success: function (result) {
+                     $('div#_IngredientTable').html(result);
+                     $('textarea#ingredients').removeAttr('disabled');
+                 }
+             });
+         });
+     };
 
-        $.ajax({
-            url: '../SaveRecipe',
+     function saveRecipe() {
+         $('input#savebutton').attr('disabled', 'disabled');
+
+         $.ajax({
+             url: '@Url.Action("SaveRecipe", "Import")',
             data: JSON.stringify({ recipeUniqueName: uniqueName, ingredients: $('textarea#ingredients').val(), directions: $('section#recipeeditor').html() }),
             success: function (result) {
                 $('input#savebutton').removeAttr('disabled');
@@ -76,26 +75,39 @@
             @name</h3>
         <hr class="single" />
     </summary>
-    <div id="ingredientlist" class="boxed">
-        <h2>1. Módosítsd a hozzávalók listáját</h2>
-        <div id="_IngredientList">
-            @{ Html.RenderPartial("_IngredientList", Model[1]); }
-        </div>
+</details>
+<hr />
+<details id="ingredientlist" class="boxed" open>
+    <summary>
+        <h1>1. Módosítsd a hozzávalók listáját</h1>
+    </summary>
+    <div id="_IngredientList">
+        @{ Html.RenderPartial("_IngredientList", Model[1]); }
     </div>
-    <div id="ingredienttable" class="boxed">
-        <h2>2. Ellenőrízd, hogy minden összetevő helyesen szerepel-e a táblában</h2>
-        <div id="_IngredientTable">
-            @{ Html.RenderPartial("_IngredientTable", null, new ViewDataDictionary()); }
-        </div>
+</details>
+<hr />
+<details id="ingredienttable" class="boxed" open>
+    <summary>
+        <h1>2. Ellenőrízd, hogy minden összetevő helyesen szerepel-e a táblában</h1>
+    </summary>
+    <div id="_IngredientTable">
+        @{ Html.RenderPartial("_IngredientTable", null, new ViewDataDictionary()); }
     </div>
-    <div id="originalrecipe" class="boxed">
-        <h2>3. A recept eredeti szövege</h2>
-
-        <div id="_OriginalRecipe">
-            @{ Html.RenderPartial("_OriginalRecipe", Model[2]); }
-        </div>
+</details>
+<hr />
+<details id="originalrecipe" class="boxed" open>
+    <summary>
+        <h1>3. A recept eredeti szövege</h1>
+    </summary>
+    <div id="_OriginalRecipe">
+        @{ Html.RenderPartial("_OriginalRecipe", Model[2]); }
     </div>
-    <h2>4. Ird át úgy a receptet, hogy ne legyen benne értelmezhetetlen kifejezés</h2>
+</details>
+<hr />
+<details open>
+    <summary>
+        <h1>4. Ird át úgy a receptet, hogy ne legyen benne értelmezhetetlen kifejezés</h1>
+    </summary>
     <div id="recipeeditor" class="boxed">
         <div id="_RecipeEditor">
             @{ Html.RenderPartial("_RecipeEditor", Model[3]); }
@@ -106,14 +118,18 @@
             @{ Html.RenderPartial("_BasicRecipe", null, new ViewDataDictionary()); }
         </div>
     </div>
-    <div id="recipecode" class="boxed">
-        <h2>5. A generált programkód, amit be lehet illeszteni</h2>
-        <div id="_RecipeCode">
-            @{ Html.RenderPartial("_RecipeCode", null, new ViewDataDictionary()); }
-        </div>
-    </div>
-    <hr class="single" />
-    <div class="formbuttons">
-        <input id="savebutton" type="button" title="Save" value="Save changes" onclick="javascript: saveRecipe();" />
+</details>
+<hr />
+<details id="recipecode" class="boxed" open>
+    <summary>
+        <h1>5. A generált programkód, amit be lehet illeszteni</h1>
+    </summary>
+    <div id="_RecipeCode">
+        @{ Html.RenderPartial("_RecipeCode", null, new ViewDataDictionary()); }
     </div>
 </details>
+<hr />
+
+<div class="formbuttons">
+    <input id="savebutton" type="button" title="Save" value="Save changes" onclick="javascript: saveRecipe();" />
+</div>

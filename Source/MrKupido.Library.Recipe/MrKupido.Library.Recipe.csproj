@@ -86,10 +86,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ingrecs\Sargabarackiz.cs" />
     <Compile Include="Ingrecs\Sajt\FustoltSajtC1.cs" />
     <Compile Include="Ingrecs\Sajt\TrappistaC2.cs" />
     <Compile Include="Ingrecs\Sajt\TrappistaC1.cs" />
     <Compile Include="Ingrecs\Sajt\Trappista\FustrolTrappistaC1.cs" />
+    <Compile Include="Ingrecs\Szodabikarbona.cs" />
+    <Compile Include="Ingrecs\Zsemle.cs" />
+    <Compile Include="Recipes\AlmasFahejasKevert.cs" />
+    <Compile Include="Recipes\TepsisKarfiol.cs" />
     <Compile Include="Recipes\Pizza\ParadicsomosAlapuPizza\MagyarosPizzaC2.cs" />
     <Compile Include="Recipes\Pizza\ParadicsomosAlapuPizza\MagyarosPizzaC1.cs" />
     <Compile Include="Recipes\TejszinesCsirkemellFuchs.cs" />

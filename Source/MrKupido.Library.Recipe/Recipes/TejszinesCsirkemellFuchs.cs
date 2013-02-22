@@ -51,29 +51,28 @@ namespace MrKupido.Library.Recipe
             LaposKisTanyer laposKisTanyer = eg.Use<LaposKisTanyer>();
 
             Reszelo reszelo = eg.Use<Reszelo>();
-            reszelo.Lereszelni(laposKisTanyer, new FustoltSajt(100.0f));
+            reszelo.LereszelniI(laposKisTanyer, new FustoltSajt(100.0f));
 
             NagyEdeny edeny = eg.Use<NagyEdeny>();
             edeny.Berakni(new Liszt(250.0f), new So(20.0f), new Tojas(2.0f), laposKisTanyer.Contents);
 
             Kez kez = eg.Use<Kez>();
-            IngredientGroup csirkemell = kez.Megforgatni(edeny, new Csirkemell(250 * 10));
+            IngredientGroup csirkemell = kez.MegforgatniI(edeny, new Csirkemell(250 * 10));
 
             JenaiTal jenai = eg.Use<JenaiTal>();
-            jenai.Berakni(csirkemell);
-            jenai.Berakni(new FustoltSzalonna(5, MeasurementUnit.piece));
-            jenai.Beonteni(new Tejszin(0.3f));
+            jenai.Berakni(csirkemell, new FustoltSzalonna(5, MeasurementUnit.piece));
+            jenai.BeonteniI(new Tejszin(0.3f));
             jenai.Lefedni(jenai.Fedo);
 
             Suto suto = eg.Use<Suto>();
             suto.Homerseklet(200);
-            suto.Behelyezni(jenai);
+            suto.BehelyezniC(jenai);
             suto.Varni(30);
-            jenai = (JenaiTal)suto.Kiemelni(typeof(JenaiTal));
+            suto.KiemelniC(jenai);
             jenai.FedotLevenni();
-            suto.Behelyezni(jenai);
+            suto.BehelyezniC(jenai);
             suto.Varni(10);
-            jenai = (JenaiTal)suto.Kiemelni(typeof(JenaiTal));
+            suto.KiemelniC(jenai);
 
             cfp.Add("csirkemellek", jenai);
 
@@ -84,7 +83,7 @@ namespace MrKupido.Library.Recipe
         public static void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
             Kez kez = eg.Use<Kez>();
-            kez.Talalni(food["csirkemellek"], eg.Use<LaposTanyer>());
+            kez.TalalniC(food["csirkemellek"], eg.Use<LaposTanyer>());
 
             eg.WashUp();
         }

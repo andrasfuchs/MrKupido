@@ -14,14 +14,16 @@ namespace MrKupido.Library.Equipment
         [NameAlias("eng", "dismember", Priority = 200)]
         [NameAlias("hun", "feldarabol", Priority = 200)]
         [NameAlias("hun", "darabold fel a(z) {0T} {1} grammos darabokra")]
-        public void Feldarabolni(ISingleIngredient i, float weight)
+        public void FeldarabolniI(ISingleIngredient i, float weight)
         {
-            if (i.Unit != MeasurementUnit.gramm) throw new InvalidActionForIngredientException("Feldarabolni", i.Name, i.Unit);
+            if ((i.Unit != MeasurementUnit.gramm) && (i.Unit != MeasurementUnit.piece)) throw new InvalidActionForIngredientException("Feldarabolni", i.Name, i.Unit);
+
+            if (i.Unit != MeasurementUnit.gramm) i.ChangeUnitTo(MeasurementUnit.gramm);
 
             float totalWeight = i.GetAmount(MeasurementUnit.gramm);
             int count = ((int)Math.Floor(totalWeight / weight)) + 1;
 
-            i.State = IngredientState.Darabolt;
+            i.State |= IngredientState.Darabolt;
             i.PieceCount = count;
 
             this.LastActionDuration = 10 * (uint)count;
@@ -30,7 +32,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("eng", "circle", Priority = 200)]
         [NameAlias("hun", "felkarikáz", Priority = 200)]
         [NameAlias("hun", "karikázd fel a(z) {0T} {1} grammos darabokra")]
-        public void Felkarikazni(ISingleIngredient i, float weight)
+        public void FelkarikazniI(ISingleIngredient i, float weight)
         {
             if ((i.Unit != MeasurementUnit.piece) && (i.Unit != MeasurementUnit.gramm)) throw new InvalidActionForIngredientException("Felkarikazni", i.Name, i.Unit);
 
@@ -39,7 +41,7 @@ namespace MrKupido.Library.Equipment
             float totalWeight = i.GetAmount(MeasurementUnit.gramm);
             int count = ((int)Math.Floor(totalWeight / weight)) + 1;
 
-            i.State = IngredientState.Karikazott;
+            i.State |= IngredientState.Karikazott;
             i.PieceCount = count;
 
             this.LastActionDuration = 10 * (uint)count;

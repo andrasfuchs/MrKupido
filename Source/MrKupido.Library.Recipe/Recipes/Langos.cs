@@ -47,15 +47,15 @@ namespace MrKupido.Library.Recipe
             edeny.Berakni(new Liszt(1000f * amount), felfuttatottEleszto, new Tejfol(0.2f * amount), new So(15f * amount), new Viz(0.5f * amount));
 
             Kez kez = eg.Use<Kez>();
-            kez.OsszegyurniEdenyben(edeny);
+            kez.OsszegyurniC(edeny);
             edeny.Lefedni(edeny.Fedo);
             edeny.Varni(30);
 
             NyujtoDeszka nyd = eg.Use<NyujtoDeszka>();
-            nyd.Nyujtani(edeny, 5);
+            nyd.NyujtaniC(edeny, 5);
 
             Szaggato szaggato = eg.Use<Szaggato>();
-            szaggato.Kiszaggatni(nyd, 25, 20);
+            szaggato.KiszaggatniC(nyd, 25, 20);
 
             result.Add("tesztadarabok", nyd);
 
@@ -72,12 +72,12 @@ namespace MrKupido.Library.Recipe
 
             Tuzhely tuzhely = eg.Use<Tuzhely>();
             tuzhely.Homerseklet(350);
-            tuzhely.Rahelyezni(serpenyo);
+            tuzhely.RahelyezniC(serpenyo);
 
             IIngredientContainer langosok = preps["tesztadarabok"];
 
             MelyTanyer melyTanyer = eg.Use<MelyTanyer>();
-            IIngredient kisutottLangos = serpenyo.KisutniOsszeset(langosok, 3.5f);
+            IIngredient kisutottLangos = serpenyo.KisutniOsszesetC(langosok, 3.5f);
             melyTanyer.Berakni(kisutottLangos);
 
             cfp.Add("osszeslangos", melyTanyer);
@@ -89,7 +89,7 @@ namespace MrKupido.Library.Recipe
         public static void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
             Kez kez = eg.Use<Kez>();
-            kez.Talalni(food["osszeslangos"], eg.Use<LaposTanyer>());
+            kez.TalalniC(food["osszeslangos"], eg.Use<LaposTanyer>());
 
             eg.WashUp();
         }

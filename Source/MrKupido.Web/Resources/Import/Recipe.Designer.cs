@@ -61,7 +61,7 @@ namespace MrKupido.Web.Resources.Import {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Recipe list.
+        ///   Looks up a localized string similar to Original recipe details.
         /// </summary>
         public static string PageTitle {
             get {

@@ -16,7 +16,7 @@ namespace MrKupido.Library.Ingredient
     [YieldOf(typeof(CinnamomumVerum))]
     public class Fahej : SingleIngredient
     {
-        public Fahej(float amount, MeasurementUnit unit = MeasurementUnit.piece, IngredientState state = IngredientState.Normal)
+        public Fahej(float amount, MeasurementUnit unit = MeasurementUnit.gramm, IngredientState state = IngredientState.Normal)
             : base(amount, unit, state)
         {
         }

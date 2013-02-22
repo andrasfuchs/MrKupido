@@ -3,11 +3,11 @@
 @this.ScriptBlock(
 @<script type="text/javascript">
 
-     $('section#recipeeditor[contenteditable]').live('focus', function () {
+     $('section#recipeeditor[contenteditable]').load('focus', function () {
          var $this = $(this);
          $this.data('before', $this.html());
          return $this;
-     }).live('blur keyup paste', function () {
+     }).load('blur keyup paste', function () {
          var $this = $(this);
          if ($this.data('before') !== $this.html()) {
              $this.data('before', $this.html());
@@ -19,7 +19,7 @@
      var $stringLists = null;
 
      $.ajax({
-         url: '../LoadRecipeKeywords',
+         url: '@Url.Action("LoadRecipeKeywords", "Import")',
          data: JSON.stringify({ langISO: $('select#language').val(), directions: $('section#recipeeditor').html() }),
          success: function (result) {
              $stringLists = JSON.parse(result);
@@ -47,7 +47,7 @@
          $contentChanged = true;
 
          $.ajax({
-             url: '../MakeDirectionsBasic',
+             url: '@Url.Action("MakeDirectionsBasic", "Import")',
              data: JSON.stringify({ langISO: $('select#language').val(), directions: $('section#recipeeditor').html() }),
              success: function (result) {
                  $('div#_BasicRecipe').html(result);

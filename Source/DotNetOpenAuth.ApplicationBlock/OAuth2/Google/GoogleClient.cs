@@ -1,5 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="FacebookClient.cs" company="Outercurve Foundation">
+// <copyright file="GoogleClient.cs" company="Outercurve Foundation">
 //     Copyright (c) Outercurve Foundation. All rights reserved.
 // </copyright>
 //-----------------------------------------------------------------------
@@ -21,7 +21,8 @@ namespace DotNetOpenAuth.ApplicationBlock {
 		private static readonly AuthorizationServerDescription GoogleDescription = new AuthorizationServerDescription {
             TokenEndpoint = new Uri("https://accounts.google.com/o/oauth2/token"),
             AuthorizationEndpoint = new Uri("https://accounts.google.com/o/oauth2/auth"),
-            //RevokeEndpoint = new Uri("https://accounts.google.com/o/oauth2/revoke")
+            //RevokeEndpoint = new Uri("https://accounts.google.com/o/oauth2/revoke"),
+            ProtocolVersion = ProtocolVersion.V20
 		};
 
 		/// <summary>
@@ -88,6 +89,26 @@ namespace DotNetOpenAuth.ApplicationBlock {
                 /// Per-file access to files created or opened by the app
                 /// </summary>
                 public const string File = "https://www.googleapis.com/auth/drive.file";
+
+                /// <summary>
+                /// Allows apps read-only access to the list of Drive apps a user has installed
+                /// </summary>
+                public const string AppsReadonly = "https://www.googleapis.com/auth/drive.apps.readonly";
+
+                /// <summary>
+                /// Allows read-only access to file metadata and file content
+                /// </summary>
+                public const string Readonly = "https://www.googleapis.com/auth/drive.readonly";
+
+                /// <summary>
+                /// Allows read-only access to file metadata, but does not allow any access to read or download file content
+                /// </summary>
+                public const string Metadata = "https://www.googleapis.com/auth/drive.readonly.metadata";
+
+                /// <summary>
+                /// Special scope used to let users approve installation of an app
+                /// </summary>
+                public const string Install = "https://www.googleapis.com/auth/drive.install";
             }
         }
 

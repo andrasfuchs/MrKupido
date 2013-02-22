@@ -32,7 +32,7 @@ namespace MrKupido.Processor.Model
         public bool IsPassive { get; private set; }
         public IDirectionSegment[] DirectionSegments { get; private set; }
 
-        private string[] correctionReplacements = { "tált", "tálat", "olajt", "olajat", "mély tányér", "mélytányér", "tésztadarabokot", "tésztadarabokat" };
+        private string[] correctionReplacements = { "tált", "tálat", "olajt", "olajat", "mély tányér", "mélytányér", "tésztadarabokot", "tésztadarabokat", "citromhéjt", "citromhéjat", "tejt", "tejet" };
 
         public RecipeDirection(string languageISO, string assemblyName, string command, object[] operands = null, object result = null, RecipeStage stage = RecipeStage.Unknown, int actorIndex = 1, List<string> seenIngredients = null)
         {
@@ -140,107 +140,99 @@ namespace MrKupido.Processor.Model
                     result.Add(new RecipeDirectionSegment(beginStr));
                 }
 
-                if (clauseEndIndex - clauseStartIndex == 1)
+                // { ... }   there is a clause between the brackets
+                string clause = expression.Substring(clauseStartIndex + 1, clauseEndIndex - clauseStartIndex - 1);
+
+                string propertyAccessorStr = null;
+
+                if (clause.IndexOf(".") >= 0)
                 {
-                    // {}
-                    result.Add(new RecipeDirectionSegmentReference(languageISO, operands[0], seenIngredients));
+                    propertyAccessorStr = clause.Substring(clause.IndexOf("."), clause.LastIndexOf(".") - clause.IndexOf(".") + 1);
+                    clause = clause.Replace(propertyAccessorStr, "");
                 }
-                else
+
+                // affix is always the last character
+                char affixId = clause.Length == 0 ? '_' : clause[clause.Length - 1];
+                if (!Char.IsLetter(affixId)) affixId = Char.MinValue;
+
+                // operand can be a number OR a number followed by an asterix (in case of an iteration)
+                string operandIndexStr = clause.Substring(0, clause.Length - (isIteration || affixId != Char.MinValue ? 1 : 0));
+                int operandIndex = String.IsNullOrEmpty(operandIndexStr) ? 0 : Int32.Parse(operandIndexStr) + 1;
+
+                object operand = operands[operandIndex];
+
+                if (propertyAccessorStr != null)
                 {
-                    // { ... }   there is a clause between the brackets
-                    string clause = expression.Substring(clauseStartIndex + 1, clauseEndIndex - clauseStartIndex - 1);
+                    string[] propertyNames = propertyAccessorStr.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
 
-                    string propertyAccessorStr = null;
-
-                    if (clause.IndexOf(".") >= 0)
+                    for (int i = 0; i < propertyNames.Length; i++)
                     {
-                        propertyAccessorStr = clause.Substring(clause.IndexOf("."), clause.LastIndexOf(".") - clause.IndexOf(".") + 1);
-                        clause = clause.Replace(propertyAccessorStr, "");
-                    }
+                        PropertyInfo property = operand.GetType().GetProperty(propertyNames[i]);
 
-                    // affix is always the last character
-                    char affixId = clause[clause.Length - 1];
-                    if (!Char.IsLetter(affixId)) affixId = Char.MinValue;
-
-                    // operand can be a number OR a number followed by an asterix (in case of an iteration)
-                    string operandIndexStr = clause.Substring(0, clause.Length - (isIteration || affixId != Char.MinValue ? 1 : 0));
-                    int operandIndex = String.IsNullOrEmpty(operandIndexStr) ? 0 : Int32.Parse(operandIndexStr) + 1;
-
-                    object operand = operands[operandIndex];
-
-                    if (propertyAccessorStr != null)
-                    {
-                        string[] propertyNames = propertyAccessorStr.Split(new char[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
-
-                        for (int i = 0; i < propertyNames.Length; i++)
+                        // if this property is the last to evaluate
+                        if (i == propertyNames.Length - 1)
                         {
-                            PropertyInfo property = operand.GetType().GetProperty(propertyNames[i]);
-
-                            // if this property is the last to evaluate
-                            if (i == propertyNames.Length - 1)
-                            {
-                                // let's try to get its NameAlias instead of its value
-                                string propertyNameAlias = NameAliasAttribute.GetName(languageISO, operand.GetType(), propertyNames[i]);
-                                if (String.IsNullOrEmpty(propertyNameAlias))
-                                {
-                                    operand = property.GetValue(operand, null);
-                                }
-                                else
-                                {
-                                    result.AddRange(EvaluateNameAliasExpression(languageISO, propertyNameAlias, new object[] { operand }, null, seenIngredients));
-                                    operand = result.Last().ToString();
-                                    result.RemoveAt(result.Count - 1);
-                                }
-                            }
-                            else
+                            // let's try to get its NameAlias instead of its value
+                            string propertyNameAlias = NameAliasAttribute.GetName(languageISO, operand.GetType(), propertyNames[i]);
+                            if (String.IsNullOrEmpty(propertyNameAlias))
                             {
                                 operand = property.GetValue(operand, null);
                             }
-
-                            if (operand == null) break;
-                        }
-                    }
-
-                    if (isIteration)
-                    {
-                        if (!(operand is Array)) throw new MrKupidoException("If you use the {0*} clause in the action, you must pass an array as a parameter. The parameter number " + (operandIndex - 1) + " is not an array.");
-
-                        Array items = (Array)operand;
-
-                        if (items.Length > 0)
-                        {
-                            foreach (object item in items)
+                            else
                             {
-                                if (!String.IsNullOrEmpty(beforeString)) result.Add(new RecipeDirectionSegment(beforeString));
-                                result.Add(new RecipeDirectionSegmentReference(languageISO, item, seenIngredients));
-                                if (!String.IsNullOrEmpty(afterString)) result.Add(new RecipeDirectionSegment(afterString));
+                                result.AddRange(EvaluateNameAliasExpression(languageISO, propertyNameAlias, new object[] { operand }, null, seenIngredients));
+                                operand = result.Last().ToString();
+                                result.RemoveAt(result.Count - 1);
                             }
-                            if (!String.IsNullOrEmpty(afterString)) result.RemoveAt(result.Count - 1);
                         }
-                    }
-                    else
-                    {
-                        RecipeDirectionSegmentReference rdsr = new RecipeDirectionSegmentReference(languageISO, operand, seenIngredients);
-
-                        // TODO: special (culture dependent) formatting for {0T} {0N} etc. etc.
-                        if (affixId != Char.MinValue)
+                        else
                         {
-                            // only the last word needs affixation
-                            string[] words = rdsr.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                            string lastWord = PrepareForAffix(words[words.Length - 1]);
-                            lastWord = Affixate(lastWord, affixId);
-
-                            if (!String.IsNullOrEmpty(rdsr.IconAlt) && (lastWord.StartsWith(rdsr.IconAlt)))
-                            {
-                                lastWord = lastWord.Replace(rdsr.IconAlt, "-");
-                            }
-
-                            // replace the last word
-                            rdsr.Text = rdsr.Text.Remove(rdsr.Text.Length - words[words.Length - 1].Length) + lastWord;
+                            operand = property.GetValue(operand, null);
                         }
 
-                        result.Add(rdsr);
+                        if (operand == null) break;
                     }
+                }
+
+                if (isIteration)
+                {
+                    if (!(operand is Array)) throw new MrKupidoException("If you use the {0*} clause in the action, you must pass an array as a parameter. The parameter number " + (operandIndex - 1) + " is not an array.");
+
+                    Array items = (Array)operand;
+
+                    if (items.Length > 0)
+                    {
+                        foreach (object item in items)
+                        {
+                            if (!String.IsNullOrEmpty(beforeString)) result.Add(new RecipeDirectionSegment(beforeString));
+                            result.Add(new RecipeDirectionSegmentReference(languageISO, item, seenIngredients));
+                            if (!String.IsNullOrEmpty(afterString)) result.Add(new RecipeDirectionSegment(afterString));
+                        }
+                        if (!String.IsNullOrEmpty(afterString)) result.RemoveAt(result.Count - 1);
+                    }
+                }
+                else
+                {
+                    RecipeDirectionSegmentReference rdsr = new RecipeDirectionSegmentReference(languageISO, operand, seenIngredients);
+
+                    // TODO: special (culture dependent) formatting for {0T} {0N} etc. etc.
+                    if (affixId != Char.MinValue)
+                    {
+                        // only the last word needs affixation
+                        string[] words = rdsr.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                        string lastWord = PrepareForAffix(words[words.Length - 1]);
+                        lastWord = Affixate(lastWord, affixId);
+
+                        if (!String.IsNullOrEmpty(rdsr.IconAlt) && (lastWord.StartsWith(rdsr.IconAlt)))
+                        {
+                            lastWord = lastWord.Replace(rdsr.IconAlt, "-");
+                        }
+
+                        // replace the last word
+                        rdsr.Text = rdsr.Text.Remove(rdsr.Text.Length - words[words.Length - 1].Length) + lastWord;
+                    }
+
+                    result.Add(rdsr);
                 }
 
                 clauseEndIndex = iterationClauseEnd >= 0 ? iterationClauseEnd + 1 : clauseEndIndex + 1;

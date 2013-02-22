@@ -1,6 +1,5 @@
 ﻿//-----------------------------------------------------------------------
-// <copyright file="WindowsLiveGraph.cs" company="Andrew Arnott">
-//     Copyright (c) Andrew Arnott. All rights reserved.
+// <copyright file="GoogleGraph.cs" company="Andras Fuchs">
 // </copyright>
 //-----------------------------------------------------------------------
 

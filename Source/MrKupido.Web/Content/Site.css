@@ -71,17 +71,19 @@ img {
     -moz-box-shadow: 0 0 30px #000000;
     -webkit-box-shadow: 0 0 30px #000000;
     box-shadow: 0 0 30px #000000;
-    /*
+    border: double; /* this one is need for Firefox to display the border */
+    border-width: 40px;
+
+    
+    /*-moz-border-image: url('../Content/svg/frame160x160.svg') 25% 25% 25% 25% round;
+    -webkit-border-image: url('../Content/svg/frame160x160.svg') 25% 25% 25% 25% round;
+    -o-border-image: url('../Content/svg/frame160x160.svg') 25% 25% 25% 25% round;
+    border-image: url('../Content/svg/frame160x160.svg') 25% 25% 25% 25% round;*/
+    
     -moz-border-image: url('../Content/svg/frame160x160.svg') 25% 25% 25% 25% round;
     -webkit-border-image: url('../Content/svg/frame160x160.svg') 25% 25% 25% 25% round;
     -o-border-image: url('../Content/svg/frame160x160.svg') 25% 25% 25% 25% round;
-    border-image: url('../Content/svg/frame160x160.svg') 25% 25% 25% 25% round;
-    */
-    -moz-border-image: url('../Content/images/frame160x160.png') 25% 25% 25% 25% round;
-    -webkit-border-image: url('../Content/images/frame160x160.png') 25% 25% 25% 25% round;
-    -o-border-image: url('../Content/images/frame160x160.png') 25% 25% 25% 25% round;
-    border-image: url('../Content/images/frame160x160.png') 25% 25% 25% 25% round;
-    border-width: 40px;
+    border-image: url('../Content/images/frame160x160.png') 25% 25% 25% 25% round;    
 }
 
 header, footer, nav, section {
@@ -464,16 +466,16 @@ details#login li {
     text-align: center;
 }
 
-details#login li img {
-    vertical-align: middle;
-    max-width: 230px;
-    max-height: 90px;
-    padding: 10px;
-}
+    details#login li img {
+        vertical-align: middle;
+        max-width: 230px;
+        max-height: 90px;
+        padding: 10px;
+    }
 
-details#login li.disabled {
-    opacity: 0.5;
-}
+    details#login li.disabled {
+        opacity: 0.5;
+    }
 
 details div.openidoption {
     font-size: 22px;
@@ -1443,7 +1445,7 @@ ul#ingredientlist li.ingredientlistitem {
         left: 0;
         opacity: 0;
     }
-    
+
     div#profile div#language label,
     ul#ingredientlist li.ingredientlistitem label {
         float: left;

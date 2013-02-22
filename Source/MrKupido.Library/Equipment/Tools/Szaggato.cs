@@ -14,7 +14,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("eng", "chop", Priority = 200)]
         [NameAlias("hun", "kiszaggat", Priority = 200)]
         [NameAlias("hun", "szaggass ki kb. {1} dekás, {2} cm átmérőjű alakzatokat a(z) {0H}")]
-        public void Kiszaggatni(IIngredientContainer ic, float weight, float diameter)
+        public void KiszaggatniC(IIngredientContainer ic, float weight, float diameter)
         {
             weight *= 10; // dkg -> g
             diameter *= 10; // cm -> mm

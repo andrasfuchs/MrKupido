@@ -14,11 +14,11 @@ namespace MrKupido.Library.Equipment
         [NameAlias("eng", "squash", Priority = 200)]
         [NameAlias("hun", "összeprésel", Priority = 200)]
         [NameAlias("hun", "préseld össze a(z) {0T}")]
-        public void Preselni(ISingleIngredient i)
+        public void PreselniI(ISingleIngredient i)
         {
             if (i.Unit != MeasurementUnit.piece) throw new InvalidActionForIngredientException("Preselni", i.Name, i.Unit);
 
-            i.State = IngredientState.Preselt;
+            i.State |= IngredientState.Preselt;
 
             this.LastActionDuration = 90;
         }

@@ -38,10 +38,10 @@ namespace MrKupido.Library.Recipe
 
             Kes kes = eg.Use<Kes>();
             ISingleIngredient ananaszdarabok = new Ananasz(100.0f);
-            kes.Feldarabolni(ananaszdarabok, 5.0f);
+            kes.FeldarabolniI(ananaszdarabok, 5.0f);
             
             ISingleIngredient sonka = new Sonka(50.0f);
-            kes.Feldarabolni(sonka, 1.0f);
+            kes.FeldarabolniI(sonka, 1.0f);
             
             IIngredient kukorica = new MorzsoltFottKukorica(50.0f);
 
@@ -63,7 +63,7 @@ namespace MrKupido.Library.Recipe
         public static new void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
             Kez kez = eg.Use<Kez>();
-            kez.Talalni(food["pizzateszta"], eg.Use<LaposTanyer>());
+            kez.TalalniC(food["pizzateszta"], eg.Use<LaposTanyer>());
             eg.WashUp();
         }
     }
