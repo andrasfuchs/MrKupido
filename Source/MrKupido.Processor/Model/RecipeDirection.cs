@@ -32,7 +32,7 @@ namespace MrKupido.Processor.Model
         public bool IsPassive { get; private set; }
         public IDirectionSegment[] DirectionSegments { get; private set; }
 
-        private string[] correctionReplacements = { "tált", "tálat", "olajt", "olajat", "mély tányér", "mélytányér", "tésztadarabokot", "tésztadarabokat", "citromhéjt", "citromhéjat", "tejt", "tejet" };
+        private string[] correctionReplacements = { "tált", "tálat", "olajt", "olajat", "mély tányér", "mélytányér", "tésztadarabokot", "tésztadarabokat", "citromhéjt", "citromhéjat", "tejt", "tejet", "sütőpapírrel", "sütőpapírral", "vízt", "vizet", "dióbélt", "dióbelet", "cukort", "cukrot" };
 
         public RecipeDirection(string languageISO, string assemblyName, string command, object[] operands = null, object result = null, RecipeStage stage = RecipeStage.Unknown, int actorIndex = 1, List<string> seenIngredients = null)
         {
@@ -395,8 +395,8 @@ namespace MrKupido.Processor.Model
                     if (vh == VowelHarmony.HighType1) result += "be";
                     break;
                 case 'V':
-                    if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) result += (StringUtils.IsVowel(result[result.Length - 1]) ? "v" : "result[result.Length - 1]") + "al";
-                    if (vh == VowelHarmony.HighType1) result += (StringUtils.IsVowel(result[result.Length - 1]) ? "v" : "result[result.Length - 1]") + "el";
+                    if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) result += (StringUtils.IsVowel(result[result.Length - 1]) ? 'v' : result[result.Length - 1]) + "al";
+                    if (vh == VowelHarmony.HighType1) result += (StringUtils.IsVowel(result[result.Length - 1]) ? 'v' : result[result.Length - 1]) + "el";
                     break;
                 case 'L':
                     if ((vh == VowelHarmony.Low) || (vh == VowelHarmony.Mixed)) result += "ról";

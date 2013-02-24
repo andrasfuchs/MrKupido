@@ -48,7 +48,7 @@ namespace MrKupido.Library.Recipe
             Kes knife = eg.Use<Kes>(1);
 
             ISingleIngredient csirkemell = new Csirkemell(500.0f * amount);
-            knife.FeldarabolniI(csirkemell, 50.0f);
+            knife.FeldarabolniI(csirkemell, 5.0f);
 
             MelyTanyer melyTanyer = eg.Use<MelyTanyer>(1);
             melyTanyer.BerakniI(csirkemell);
@@ -67,7 +67,7 @@ namespace MrKupido.Library.Recipe
             
             LaposKisTanyer laposKisTanyer1 = eg.Use<LaposKisTanyer>();
             ISingleIngredient hagyma = new Hagyma(1.0f * amount, MeasurementUnit.piece);
-            knife.FelkarikazniI(hagyma, 5.0f);
+            knife.FelkarikazniI(hagyma, 0.5f);
             laposKisTanyer1.RarakniI(hagyma);
 
             Bogre bogre = eg.Use<Bogre>();

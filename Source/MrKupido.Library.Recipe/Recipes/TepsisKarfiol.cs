@@ -52,7 +52,7 @@ namespace MrKupido.Library.Recipe
             eg.Use<Fakanal>(1).KevergetniC(eg.Use<NagyEdeny>(1), 10);
 
             ISingleIngredient hagyma = new Ujhagyma(1.0f * amount, MeasurementUnit.piece);
-            eg.Use<Kes>(1).FelkarikazniI(hagyma, 10.0f);
+            eg.Use<Kes>(1).FelkarikazniI(hagyma, 1.0f);
 
             eg.Use<Reszelo>(1).LereszelniI(eg.Use<LaposTanyer>(1), new FustoltSajt(100.0f));
 

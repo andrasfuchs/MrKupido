@@ -154,5 +154,22 @@ namespace MrKupido.Library.Ingredient
         }
 
         #endregion
+
+        public override void ChangeUnitTo(MeasurementUnit unit)
+        {
+            foreach (SingleIngredient si in ingredients)
+            {
+                si.ChangeUnitTo(unit);
+            }
+
+            this.Unit = unit;
+
+            float amount = 0.0f;
+            foreach (IIngredient i in Ingredients)
+            {
+                amount += i.GetAmount(this.Unit);
+            }
+            SetAmount(amount, this.Unit);
+        }
     }
 }

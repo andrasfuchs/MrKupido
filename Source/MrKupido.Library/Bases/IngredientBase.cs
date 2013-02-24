@@ -65,7 +65,7 @@ namespace MrKupido.Library.Ingredient
             amounts.Add((int)unit, amount);
         }
 
-        public void ChangeUnitTo(MeasurementUnit unit)
+        public virtual void ChangeUnitTo(MeasurementUnit unit)
         {
             if (this.Unit == unit) return;
 

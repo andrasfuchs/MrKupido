@@ -11,8 +11,6 @@ namespace MrKupido.Library.Equipment
     [NameAlias("hun", "fakanál")]
     public class Fakanal : Kanal
     {
-        [IconUriFragment("mix")]
-
         [NameAlias("eng", "mix together", Priority = 200)]
         [NameAlias("hun", "összekever", Priority = 200)]
         [NameAlias("hun", "keverd össze a(z) {0} és {1.Contents.T}")]
@@ -23,8 +21,6 @@ namespace MrKupido.Library.Equipment
 
             this.LastActionDuration = 180;
         }
-
-        [IconUriFragment("mix")]
 
         [NameAlias("eng", "mix together", Priority = 200)]
         [NameAlias("hun", "összekever", Priority = 200)]

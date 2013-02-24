@@ -38,7 +38,7 @@ namespace MrKupido.Library.Recipe
 
             Kes kes = eg.Use<Kes>();
             ISingleIngredient ananaszdarabok = new Ananasz(100.0f);
-            kes.FeldarabolniI(ananaszdarabok, 5.0f);
+            kes.FeldarabolniI(ananaszdarabok, 0.5f);
             
             ISingleIngredient sonka = new Sonka(50.0f);
             kes.FeldarabolniI(sonka, 1.0f);

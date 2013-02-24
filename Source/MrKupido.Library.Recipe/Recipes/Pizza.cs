@@ -56,7 +56,7 @@ namespace MrKupido.Library.Recipe
             edeny1.Varni(45);
 
             NyujtoDeszka nyd = eg.Use<NyujtoDeszka>();
-            nyd.NyujtaniC(edeny1, 1);
+            nyd.NyujtaniC(edeny1, 1.0f);
 
             Tepsi tepsi = eg.Use<Tepsi>();
             tepsi.BerakniC(nyd);

@@ -52,7 +52,7 @@ namespace MrKupido.Library.Recipe
             edeny.Varni(30);
 
             NyujtoDeszka nyd = eg.Use<NyujtoDeszka>();
-            nyd.NyujtaniC(edeny, 5);
+            nyd.NyujtaniC(edeny, 5.0f);
 
             Szaggato szaggato = eg.Use<Szaggato>();
             szaggato.KiszaggatniC(nyd, 25, 20);

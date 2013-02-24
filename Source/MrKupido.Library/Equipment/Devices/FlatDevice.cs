@@ -27,7 +27,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "get off", Priority = 200)]
         [NameAlias("hun", "leemel", Priority = 200)]
-        [NameAlias("hun", "emeld le a(z) {R} a(z) {0T}")]
+        [NameAlias("hun", "emeld le a(z) {L} a(z) {0T}")]
         public void LeemelniC(IIngredientContainer c)
         {
             if (this.contents.Count == 0) throw new MrKupidoException("The device '{0}' is empty at the moment.", this.Name);

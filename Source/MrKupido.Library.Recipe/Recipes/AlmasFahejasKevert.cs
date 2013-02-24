@@ -31,7 +31,7 @@ namespace MrKupido.Library.Recipe
 
             ISingleIngredient alma = new Alma(5.0f * amount);
             eg.Use<KrumpliPucolo>(1).MeghamozniI(alma);
-            eg.Use<Kes>(1).FeldarabolniI(alma, 20.0f);
+            eg.Use<Kes>(1).FeldarabolniI(alma, 2.0f);
             eg.Use<Edeny>(2).Berakni(alma);
 
             eg.Use<Kez>(1).MeglocsolniI(eg.Use<Edeny>(2), new CitromLe(10.0f * amount));

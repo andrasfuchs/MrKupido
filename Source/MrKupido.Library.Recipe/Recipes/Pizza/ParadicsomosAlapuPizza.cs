@@ -37,7 +37,7 @@ namespace MrKupido.Library.Recipe
 
             IIngredient paradicsomosPizzaszosz = new PizzaParadicsomszosz(0.2f);
             Kez kez = eg.Use<Kez>();
-            kez.Raonteni(tepsi, paradicsomosPizzaszosz);
+            kez.RaonteniI(tepsi, paradicsomosPizzaszosz);
 
             result.Add("pizzateszta", tepsi);
 

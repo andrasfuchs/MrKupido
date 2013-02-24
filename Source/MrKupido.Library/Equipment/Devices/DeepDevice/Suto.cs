@@ -19,10 +19,10 @@ namespace MrKupido.Library.Equipment
         {
         }
 
-        [NameAlias("eng", "preheat", Priority = 200)]
+        [NameAlias("eng", "heat up", Priority = 200)]
         [NameAlias("hun", "előmelegít", Priority = 200)]
         [NameAlias("hun", "felmelegít", Priority = 201)]
-        [NameAlias("hun", "melegítsd elő a(z) {} hőmérsékletét {0} fokra")]
+        [NameAlias("hun", "melegítsd elő a(z) {T} {0} fokra")]
         public void Homerseklet(int temperature)
         {
             this.LastActionDuration = 60;

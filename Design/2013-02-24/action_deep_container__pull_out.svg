@@ -5,11 +5,11 @@
 	 width="60px" height="60px" viewBox="0 0 60 60" enable-background="new 0 0 60 60" xml:space="preserve">
 <g>
 	<defs>
-		<path id="SVGID_37_" d="M29.999,53.5C17.041,53.5,6.5,42.958,6.5,30c0-12.96,10.541-23.5,23.499-23.5
+		<path id="SVGID_41_" d="M29.999,53.5C17.041,53.5,6.5,42.958,6.5,30c0-12.96,10.541-23.5,23.499-23.5
 			C42.958,6.5,53.5,17.04,53.5,30C53.5,42.958,42.958,53.5,29.999,53.5z"/>
 	</defs>
 	<clipPath id="SVGID_2_">
-		<use xlink:href="#SVGID_37_"  overflow="visible"/>
+		<use xlink:href="#SVGID_41_"  overflow="visible"/>
 	</clipPath>
 	<rect x="0.625" y="0.625" clip-path="url(#SVGID_2_)" fill="#FFFCF5" width="58.75" height="58.75"/>
 	<g clip-path="url(#SVGID_2_)">

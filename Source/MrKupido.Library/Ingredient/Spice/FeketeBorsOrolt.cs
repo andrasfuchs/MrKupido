@@ -10,6 +10,7 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "bors", Priority = 1)]
     [NameAlias("hun", "őrölt fekete bors")]
 
+    [IngredientConsts(GrammsPerLiter = 1000)]
     public class FeketeBorsOrolt : FeketeBors
     {
         public FeketeBorsOrolt(float amount, MeasurementUnit unit = MeasurementUnit.gramm, IngredientState state = IngredientState.Orolt)

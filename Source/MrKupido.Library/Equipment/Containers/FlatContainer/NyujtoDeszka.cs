@@ -10,7 +10,7 @@ namespace MrKupido.Library.Equipment
     [NameAlias("hun", "nyújtódeszka")]
     public class NyujtoDeszka : FlatContainer
     {
-        [NameAlias("hun", "{L} a tészta")]
+        [NameAlias("hun", "{H} lévő tészta")]
         public new IIngredient Contents
         {
             get
@@ -30,8 +30,8 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "roll out", Priority = 200)]
         [NameAlias("hun", "kinyújt", Priority = 200)]
-        [NameAlias("hun", "nyújtsd ki nyújtódeszkán a(z) {0.Contents.T} {1} mm-esre")]
-        public void NyujtaniC(IIngredientContainer c, float thickness)
+        [NameAlias("hun", "nyújtsd ki nyújtódeszkán a(z) {0.Contents.T} {1} cm-esre")]
+        public void NyujtaniC(IIngredientContainer c, float thicknessInCm)
         {
             this.Add(c.Contents);
             c.Empty();

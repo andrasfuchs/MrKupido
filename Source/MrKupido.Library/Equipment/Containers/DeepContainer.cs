@@ -42,27 +42,27 @@ namespace MrKupido.Library.Equipment
             this.LastActionDuration = 30;
         }
 
-        [NameAlias("eng", "pour out", Priority = 200)]
-        [NameAlias("hun", "beönt", Priority = 200)]
-        [NameAlias("hun", "öntsd be a(z) {B} a következőket: ({0*}, )")]
+        [NameAlias("eng", "pour into", Priority = 200)]
+        [NameAlias("hun", "beleönt", Priority = 200)]
+        [NameAlias("hun", "öntsd bele a(z) {B} a következőket: ({0*}, )")]
         public void Beonteni(params IIngredient[] ingredients)
         {
             this.contents.AddIngredients(ingredients);
             this.LastActionDuration = 15 * (uint)ingredients.Length;
         }
 
-        [NameAlias("eng", "pour out", Priority = 200)]
-        [NameAlias("hun", "beönt", Priority = 200)]
-        [NameAlias("hun", "öntsd be a(z) {B} a(z) {0T}")]
+        [NameAlias("eng", "pour into", Priority = 200)]
+        [NameAlias("hun", "beleönt", Priority = 200)]
+        [NameAlias("hun", "öntsd bele a(z) {B} a(z) {0T}")]
         public void BeonteniI(ISingleIngredient i)
         {
             this.contents.AddIngredients(i);
             this.LastActionDuration = 15;
         }
 
-        [NameAlias("eng", "pour out", Priority = 200)]
-        [NameAlias("hun", "beönt", Priority = 200)]
-        [NameAlias("hun", "öntsd be a(z) {B} a(z) {0.Contents.T}")]
+        [NameAlias("eng", "pour into", Priority = 200)]
+        [NameAlias("hun", "beleönt", Priority = 200)]
+        [NameAlias("hun", "öntsd bele a(z) {B} a(z) {0.Contents.T}")]
         public void BeonteniC(IIngredientContainer c)
         {
             this.contents.AddIngredients(c.Contents);

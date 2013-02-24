@@ -42,10 +42,10 @@ namespace MrKupido.Library.Equipment
             this.LastActionDuration = 30;
         }
 
-        [NameAlias("eng", "pour on", Priority = 200)]
-        [NameAlias("hun", "ráönt", Priority = 200)]
-        [NameAlias("hun", "öntsd rá a(z) {B} a(z) {0.Contents.T}")]
-        public void RaonteniC(IIngredientContainer c)
+        [NameAlias("eng", "pour into", Priority = 200)]
+        [NameAlias("hun", "beleönt", Priority = 200)]
+        [NameAlias("hun", "öntsd bele a(z) {B} a(z) {0.Contents.T}")]
+        public void BeleonteniC(IIngredientContainer c)
         {
             this.contents.AddIngredients(c.Contents);
             this.LastActionDuration = 15;

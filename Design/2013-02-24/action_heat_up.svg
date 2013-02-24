@@ -5,10 +5,10 @@
 	 width="60px" height="60px" viewBox="0 0 60 60" enable-background="new 0 0 60 60" xml:space="preserve">
 <g>
 	<defs>
-		<path id="SVGID_31_" d="M30,53.5C17.042,53.5,6.5,42.959,6.5,30S17.042,6.5,30,6.5S53.5,17.041,53.5,30S42.958,53.5,30,53.5z"/>
+		<path id="SVGID_35_" d="M30,53.5C17.042,53.5,6.5,42.959,6.5,30S17.042,6.5,30,6.5S53.5,17.041,53.5,30S42.958,53.5,30,53.5z"/>
 	</defs>
 	<clipPath id="SVGID_2_">
-		<use xlink:href="#SVGID_31_"  overflow="visible"/>
+		<use xlink:href="#SVGID_35_"  overflow="visible"/>
 	</clipPath>
 	<rect x="0.625" y="0.625" clip-path="url(#SVGID_2_)" fill="#FFFCF5" width="58.75" height="58.75"/>
 	<polygon clip-path="url(#SVGID_2_)" fill="#CDB8AB" stroke="#553E31" stroke-miterlimit="10" points="-9.126,52.096 60.823,62.368 

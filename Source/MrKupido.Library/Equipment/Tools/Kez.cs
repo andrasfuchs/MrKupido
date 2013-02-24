@@ -40,6 +40,14 @@ namespace MrKupido.Library.Equipment
             this.LastActionDuration = 60;
         }
 
+        [NameAlias("eng", "flip over", Priority = 200)]
+        [NameAlias("hun", "megfordít", Priority = 200)]
+        [NameAlias("hun", "fordítsd meg a(z) {0.Contents.T}")]
+        public void MegforditaniC(IIngredientContainer container)
+        {
+            this.LastActionDuration = 120;
+        }
+
         [NameAlias("eng", "knead to balls", Priority = 200)]
         [NameAlias("hun", "golyóvá gyúr", Priority = 200)]
         [NameAlias("hun", "gyúrj {1} grammos golyókat a(z) {0.Contents.K}")]
@@ -148,11 +156,26 @@ namespace MrKupido.Library.Equipment
         [NameAlias("eng", "pour on", Priority = 200)]
         [NameAlias("hun", "ráönt", Priority = 200)]
         [NameAlias("hun", "öntsd rá a(z) {1T} a(z) {0.Contents.R}")]
-        public void Raonteni(IIngredientContainer iOnTo, IIngredient i)
+        public void RaonteniI(IIngredientContainer iOnTo, IIngredient i)
         {
             if (i.Unit != MeasurementUnit.liter) throw new InvalidActionForIngredientException("Raonteni", i.Name, i.Unit);
 
             iOnTo.Add(i);
+
+            this.LastActionDuration = 60;
+        }
+
+        [NameAlias("eng", "pour on", Priority = 200)]
+        [NameAlias("hun", "ráönt", Priority = 200)]
+        [NameAlias("hun", "öntsd rá a(z) {1.Contents.T} a(z) {0.Contents.R}")]
+        public void RaonteniC(IIngredientContainer iOnTo, IIngredientContainer c)
+        {
+            IIngredient ci = c.Contents;
+
+            if (ci.Unit != MeasurementUnit.liter) throw new InvalidActionForIngredientException("Raonteni", ci.Name, ci.Unit);
+
+            iOnTo.Add(ci);
+            c.Empty();
 
             this.LastActionDuration = 60;
         }
@@ -200,7 +223,7 @@ namespace MrKupido.Library.Equipment
             return new IngredientGroup(new IIngredient[] { i, iIn.Contents });
         }
 
-        [NameAlias("eng", "spray", Priority = 200)]
+        [NameAlias("eng", "water", Priority = 200)]
         [NameAlias("hun", "meglocsol", Priority = 200)]
         [NameAlias("hun", "locsold meg a(z) {0.Contents.T} a(z) {1V}")]
         public void MeglocsolniI(IIngredientContainer i, IIngredient iWith)
@@ -213,7 +236,7 @@ namespace MrKupido.Library.Equipment
             i.AddRange(new IIngredient[] { iWith, i.Contents });
         }
 
-        [NameAlias("eng", "spray", Priority = 200)]
+        [NameAlias("eng", "water", Priority = 200)]
         [NameAlias("hun", "meglocsol", Priority = 200)]
         [NameAlias("hun", "locsold meg a(z) {0.Contents.T} a(z) {1V}")]
         public void MeglocsolniC(IIngredientContainer i, IIngredientContainer cWith)
@@ -256,5 +279,28 @@ namespace MrKupido.Library.Equipment
 
             return result.ToArray();
         }
+
+        [NameAlias("eng", "roll", Priority = 200)]
+        [NameAlias("hun", "felgöngyöl", Priority = 200)]
+        [NameAlias("hun", "göngyöld fel a(z) {0.Contents.T}")]
+        public void FelgongyolniC(IIngredientContainer c)
+        {
+            this.LastActionDuration = 30;
+        }
+
+        [NameAlias("eng", "dip into", Priority = 200)]
+        [NameAlias("hun", "belemárt", Priority = 200)]
+        [NameAlias("hun", "mártsd bele a(z) {0.Contents.T} a(z) {1.Contents.B}")]
+        public void BelemartaniC(IIngredientContainer c1, IIngredientContainer c2)
+        {
+            IIngredient ci = c2.Contents;
+
+            if (ci.Unit != MeasurementUnit.liter) throw new InvalidActionForIngredientException("Belemartani", ci.Name, ci.Unit);
+
+            // TODO: a small amount of iIn.Contents must be separated
+
+            this.LastActionDuration = 30;
+        }
+
     }
 }
