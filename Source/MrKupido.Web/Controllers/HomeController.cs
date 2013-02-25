@@ -18,7 +18,7 @@ namespace MrKupido.Web.Controllers
     {
         private static Dictionary<string, string[]> tipsTricks = new Dictionary<string, string[]>();
 
-        [Authorize]
+        //[Authorize]
         public ActionResult Index()
         {
             if (Request.Params["q"] != null)

@@ -243,6 +243,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\HelpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImportController.cs" />
     <Compile Include="Controllers\IngredientController.cs" />
@@ -282,6 +283,11 @@
     </Compile>
     <Compile Include="Resources\Account\LogIn.Designer.cs">
       <DependentUpon>LogIn.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Help\VersionChangeLog020.Designer.cs">
+      <DependentUpon>VersionChangeLog020.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -781,6 +787,8 @@
       <DependentUpon>wTimer.js</DependentUpon>
     </Content>
     <Content Include="Views\Home\RecipeNotAvailableYet.cshtml" />
+    <Content Include="Views\Help\VersionChangeLog020.cshtml" />
+    <Content Include="Views\Shared\_HelpHeader.cshtml" />
     <None Include="Web.Debug_at_localhost.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -905,7 +913,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.None" BuildVersion_UpdateFileVersion="False" BuildVersion_StartDate="1975/10/21" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="1975/10/21" BuildVersion_UpdateFileVersion="False" BuildVersion_BuildVersioningStyle="None.None.None.None" />
     </VisualStudio>
   </ProjectExtensions>
   <ItemGroup>
@@ -927,6 +935,10 @@
     <EmbeddedResource Include="Resources\Account\LogIn.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>LogIn.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Help\VersionChangeLog020.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>VersionChangeLog020.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Home\NotSupportedBrowser.hu.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

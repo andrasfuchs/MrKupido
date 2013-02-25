@@ -272,7 +272,7 @@ namespace MrKupido.Web.Controllers
             HttpContext.Response.Cookies.Add(cookie);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet]
         public new ActionResult Profile()
         {
@@ -284,7 +284,7 @@ namespace MrKupido.Web.Controllers
             return View();
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost]
         public new ActionResult Profile(string userId)
         {

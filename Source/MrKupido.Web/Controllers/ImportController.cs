@@ -21,7 +21,7 @@ namespace MrKupido.Web.Controllers
         private static MrKupidoContext db = new MrKupidoContext("Name=MrKupidoContext");
         private static char[] whiteSpaces = new char[] { ' ', ',', '.', '!', '?', ')', '(', '"', '&', ';', '\'', '[', ']', ':', '\\', '_', '`', '„', '<', '>', '\r', '\n', '”' };
 
-        [Authorize]
+        //[Authorize]
         public ActionResult RecipeList()
         {
             return View();
@@ -45,7 +45,7 @@ namespace MrKupido.Web.Controllers
             return PartialView("_ImportedRecipeList", recipes);
         }
 
-        [Authorize]
+        //[Authorize]
         public ActionResult Recipe(string id)
         {
             string language = (string)Session["Language"];
