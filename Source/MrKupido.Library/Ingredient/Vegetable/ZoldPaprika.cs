@@ -11,6 +11,7 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "zöldpaprika", Priority = 1)]
     [NameAlias("hun", "zöld paprika")]
 
+	[IngredientConsts(GrammsPerPiece=70)]
     //[YieldOf(typeof(Capsicum annuum var. grossum))]
     public class ZoldPaprika : SingleIngredient
     {

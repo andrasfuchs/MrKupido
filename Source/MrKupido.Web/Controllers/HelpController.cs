@@ -36,12 +36,17 @@ namespace MrKupido.Web.Controllers
             return View();
         }
 
-        public ActionResult Disclaimer()
+        public ActionResult PrivacyPolicy()
         {
             return View();
         }
 
-        public ActionResult VersionChangeLog020()
+		public ActionResult TermsOfUse()
+		{
+			return View();
+		}
+		
+		public ActionResult VersionChangeLog020()
         {
             return View();
         }

@@ -102,7 +102,24 @@ namespace MrKupido.Library.Equipment
         }
 
 
+		[NameAlias("eng", "separate", Priority = 200)]
+		[NameAlias("hun", "szétválaszt", Priority = 200)]
+		[NameAlias("hun", "válaszd szét a(z) {.Contents.T} a(z) {0B} és a(z) {1B}, úgy hogy az elsőbe kb. {2}% kerüljön")]
+		public void Szetvalasztani(Container c1, Container c2, float p)
+		{
+			if ((p < 0.0f) || (p > 1.0f)) throw new MrKupidoException("Invalid percentage value was passed. It must be between 0.0 and 1.0.");
 
+			Container oc = (Container)this.Clone();
+			this.Empty();
+
+			//c1.Add(oc.Contents * p);
+			//c2.Add(oc.Contents * (1.0f - p));
+
+			c1.Add(oc.Contents);
+			c2.Add(oc.Contents);
+
+			this.LastActionDuration = 30;
+		}
 
 
 

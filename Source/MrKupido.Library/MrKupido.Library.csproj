@@ -114,6 +114,8 @@
     <Compile Include="Enums\VowelHarmony.cs" />
     <Compile Include="Equipment\Containers\DeepContainer.cs" />
     <Compile Include="Equipment\Containers\CoverableContainer.cs" />
+    <Compile Include="Equipment\Containers\DeepContainer\Pohar.cs" />
+    <Compile Include="Equipment\Containers\DeepContainer\PalacsintaSuto.cs" />
     <Compile Include="Equipment\Containers\DeepContainer\MuffinForma.cs" />
     <Compile Include="Equipment\Containers\FlatContainer\NyujtoDeszka.cs" />
     <Compile Include="Equipment\Containers\FlatContainer.cs" />
@@ -141,6 +143,7 @@
     <Compile Include="Equipment\Materials\Sutopapir.cs" />
     <Compile Include="Equipment\Materials\Fedo.cs" />
     <Compile Include="Equipment\Tool.cs" />
+    <Compile Include="Equipment\Tools\HusDaralo.cs" />
     <Compile Include="Equipment\Tools\Ecset.cs" />
     <Compile Include="Equipment\Tools\Daralo.cs" />
     <Compile Include="Equipment\Tools\Fakanal.cs" />

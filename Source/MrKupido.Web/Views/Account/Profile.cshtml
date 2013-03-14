@@ -1,8 +1,45 @@
 ﻿@using MrKupido.Web.Models
 @{
-    ViewBag.Title = MrKupido.Web.Resources.Account.Profile.PageTitle + " - " + MrKupido.Web.Resources.Shared.Layout.PageTitle; 
+    ViewBag.Title = MrKupido.Web.Resources.Account.Profile.PageTitle + " - " + MrKupido.Web.Resources.Shared.Layout.PageTitle;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+
+@this.ScriptBlock(
+@<script type="text/javascript">
+     $(document).ready(function () {
+         $('input').change(function (e) {
+             if (!e.target.validity.valid) {
+                 var errorMessage = "";
+
+                 if (e.target.validity.valueMissing) {
+                     errorMessage = "@MrKupido.Web.Resources.Shared.Validation.Missing";
+                 } else if (e.target.validity.patternMismatch) {
+                     errorMessage = "@MrKupido.Web.Resources.Shared.Validation.Format";
+                 } else if (e.target.validity.rangeUnderflow) {
+                     errorMessage = "@MrKupido.Web.Resources.Shared.Validation.Underflow";
+                 } else if (e.target.validity.rangeOverflow) {
+                     errorMessage = "@MrKupido.Web.Resources.Shared.Validation.Overflow";
+                 } else {
+                     errorMessage = "@MrKupido.Web.Resources.Shared.Validation.General";
+                 }
+
+                 if (e.target.title != "") {
+                     errorMessage = errorMessage.replace("{}", e.target.title);
+                 } else {
+                     errorMessage = errorMessage.replace("{}", "@MrKupido.Web.Resources.Shared.Validation.ThisValue");
+                 }
+
+                 errorMessage = $("<div/>").html(errorMessage).text();
+
+                 e.target.setCustomValidity(errorMessage);
+             }
+         });
+     });
+
+</script>
+)
+
 <header class="nosearch">
     <a runat="server" href="~/">
         <img runat="server" src="~/Content/svg/logo_mrkupido_wide.svg" alt="Mr. Kupido" width="600" height="157" />
@@ -29,12 +66,6 @@
                         <input id="languageEng" name="language" type="radio" value="en-GB" @(user.CultureName == "en-GB" ? "checked" : "")/><label for="languageEng">@MrKupido.Web.Resources.Account.Profile.LanguageEng</label>
                         <input id="languageDeu" name="language" type="radio" value="de-DE" @(user.CultureName == "de-DE" ? "checked" : "")/><label for="languageDeu">@MrKupido.Web.Resources.Account.Profile.LanguageDeu</label>
                         <input id="languageSpa" name="language" type="radio" value="es-ES" @(user.CultureName == "es-ES" ? "checked" : "")/><label for="languageSpa">@MrKupido.Web.Resources.Account.Profile.LanguageSpa</label>
-@*
-                        <input id="languageHun" name="language" type="checkbox" value="hu-HU" @(user.CultureName == "hu-HU" ? "checked" : "")/><label for="languageHun">@MrKupido.Web.Resources.Account.Profile.LanguageHun</label>
-                        <input id="languageEng" name="language" type="checkbox" value="en-GB" @(user.CultureName == "en-GB" ? "checked" : "")/><label for="languageEng">@MrKupido.Web.Resources.Account.Profile.LanguageEng</label>
-                        <input id="languageDeu" name="language" type="checkbox" value="de-DE" @(user.CultureName == "de-DE" ? "checked" : "")/><label for="languageDeu">@MrKupido.Web.Resources.Account.Profile.LanguageDeu</label>
-                        <input id="languageSpa" name="language" type="checkbox" value="es-ES" @(user.CultureName == "es-ES" ? "checked" : "")/><label for="languageSpa">@MrKupido.Web.Resources.Account.Profile.LanguageSpa</label>
-*@
                     </div>
                 </li>
                 <li>
@@ -61,7 +92,7 @@
                             @MrKupido.Web.Resources.Account.Profile.FirstName:</label>
                     </div>
                     <div class="input">
-                        <input type="text" id="firstname" name="firstname" autocomplete="off" required pattern="[a-zA-Z\u00E0-\u00FC]+" value='@(user.FirstName)'/>
+                        <input type="text" id="firstname" name="firstname" autocomplete="off" required pattern="[a-zA-Z\u00E0-\u00FC ]+" value='@(user.FirstName)'/>
                     </div>
                 </li>
                 <li>
@@ -86,11 +117,25 @@
             <ul>
                 <li>
                     <div class="label">
+                        <label for="language">
+                            @MrKupido.Web.Resources.Account.Profile.Gender:</label>
+                    </div>
+                    <div id="gender" class="input">
+                        <input id="genderMale" name="gender" type="radio" value="male" @(user.Gender ==  1 ? "checked" : "")/><label for="genderMale">@MrKupido.Web.Resources.Account.Profile.GenderMale</label>
+                        <input id="genderFemale" name="gender" type="radio" value="female" @(user.Gender == 2 ? "checked" : "")/><label for="genderFemale">@MrKupido.Web.Resources.Account.Profile.GenderFemale</label>
+                    </div>
+                </li>
+                <li>
+                    <div class="label">
                         <label for="height">
                             @MrKupido.Web.Resources.Account.Profile.Height:</label>
                     </div>
                     <div class="input">
-                        <input type="text" id="height" name="height" autocomplete="off" placeholder="165 cm" pattern="[0-9]+ cm" value='@(user.Height != 0 ? (user.Height * 100).ToString("0 cm") : "")'/>
+                        <input type="text" id="height" name="height" autocomplete="off" placeholder="165" pattern="[0-9]+" value='@(user.Height.HasValue ? (user.Height.Value * 100).ToString("0") : "")' min="130" maxlength="210"/>
+                        <div class="units">
+                            <input id="heightUnitCm" name="heightUnit" type="radio" value="cm" checked /><label for="heightUnitCm">cm</label>
+                            <input id="heightUnitInch" name="heightUnit" type="radio" value="in" /><label for="heightUnitInch">in</label>
+                        </div>
                     </div>
                 </li>
                 <li>
@@ -99,7 +144,11 @@
                             @MrKupido.Web.Resources.Account.Profile.Weight:</label>
                     </div>
                     <div class="input">
-                        <input type="text" id="weight" name="weight" autocomplete="off" placeholder="@((61.50f).ToString("0.00")) kg" pattern="[0-9.,]+ kg" value='@(user.Weight != 0 ? user.Weight.ToString("0.00 kg") : "")'/>
+                        <input type="text" id="weight" name="weight" autocomplete="off" placeholder="@((61.50f).ToString("0.00"))" pattern="[0-9.,]+" value='@(user.Weight.HasValue ? user.Weight.Value.ToString("0.00") : "")'/>
+                        <div class="units">
+                            <input id="weightUnitKg" name="weightUnit" type="radio" value="kg" checked /><label for="weightUnitKg">kg</label>
+                            <input id="weightUnitLbs" name="weightUnit" type="radio" value="lbs" /><label for="weightUnitLbs">lbs</label>
+                        </div>
                     </div>
                 </li>
                 <li>

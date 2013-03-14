@@ -79,6 +79,15 @@ namespace MrKupido.Web.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BAz F11 billentyű megnyomásával teljes képernyős módba válthatsz, amivel még tovább növelheted szemeid esztétikai kényeztetését!.
+        /// </summary>
+        public static string TipsAndTricks10 {
+            get {
+                return ResourceManager.GetString("TipsAndTricks10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to BA PAGE-UP, PAGE-DOWN, HOME, END és kurzor billenyűkkel is tudsz lapozni..
         /// </summary>
         public static string TipsAndTricks2 {

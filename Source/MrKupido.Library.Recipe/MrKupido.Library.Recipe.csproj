@@ -94,6 +94,7 @@
     <Compile Include="Ingrecs\Szodabikarbona.cs" />
     <Compile Include="Ingrecs\Zsemle.cs" />
     <Compile Include="Recipes\AlmasFahejasKevert.cs" />
+    <Compile Include="Recipes\HortobagyiHusosPalacsinta.cs" />
     <Compile Include="Recipes\MustarosFokhagymasSultCsirkecomb.cs" />
     <Compile Include="Recipes\KakaosCsiga.cs" />
     <Compile Include="Recipes\PitaGyroshoz.cs" />
@@ -139,7 +140,7 @@
     <Compile Include="Ingrecs\Sajt\Trappista\FustrolTrappista.cs" />
     <Compile Include="Ingrecs\NaturJoghurt.cs" />
     <Compile Include="Ingrecs\Tejfol.cs" />
-    <Compile Include="Ingrecs\Tejfol\MilliTejfol.cs" />
+    <Compile Include="Ingrecs\Tejfol\TejfolC1.cs" />
     <Compile Include="Ingrecs\Tejszin.cs" />
     <Compile Include="Recipes\TejszinesCsirkemell.cs" />
     <Compile Include="Ingrecs\Teszta.cs" />

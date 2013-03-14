@@ -22,5 +22,5 @@ namespace MrKupido.Library.Equipment
             : base(14.0f * scale, 14.0f * scale, 6.0f * scale)
         {
         }
-    }
+	}
 }

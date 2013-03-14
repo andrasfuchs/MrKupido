@@ -48,11 +48,16 @@ namespace MrKupido.Model
 
         [Required]
         //public Gender Gender { get; set; }
+		[Range(0, 3)]
         public int Gender { get; set; }
 
         public DateTime? DateOfBirth { get; set; }
-        public float Height { get; set; }
-        public float Weight { get; set; }
+
+		[Range(120, 220)]
+		public float? Height { get; set; }
+
+		[Range(35, 300)]
+		public float? Weight { get; set; }
 
         [Required]
         public int NewsletterFlags { get; set; }

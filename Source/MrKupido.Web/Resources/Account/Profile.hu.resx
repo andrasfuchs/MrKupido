@@ -126,6 +126,15 @@
   <data name="FirstName" xml:space="preserve">
     <value>Keresztnevem</value>
   </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Nemem</value>
+  </data>
+  <data name="GenderFemale" xml:space="preserve">
+    <value>Nő</value>
+  </data>
+  <data name="GenderMale" xml:space="preserve">
+    <value>Férfi</value>
+  </data>
   <data name="General" xml:space="preserve">
     <value>Általános információk</value>
   </data>

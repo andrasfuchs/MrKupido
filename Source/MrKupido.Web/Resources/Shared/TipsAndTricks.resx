@@ -123,6 +123,9 @@
   <data name="TipsAndTricks1" xml:space="preserve">
     <value>BSzűrőket használva leegyszerűsíthetjük a keresést. Próbálkozz hozzávalóval, diétával vagy az étel nevével.</value>
   </data>
+  <data name="TipsAndTricks10" xml:space="preserve">
+    <value>BAz F11 billentyű megnyomásával teljes képernyős módba válthatsz, amivel még tovább növelheted szemeid esztétikai kényeztetését!</value>
+  </data>
   <data name="TipsAndTricks2" xml:space="preserve">
     <value>BA PAGE-UP, PAGE-DOWN, HOME, END és kurzor billenyűkkel is tudsz lapozni.</value>
   </data>

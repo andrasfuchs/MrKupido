@@ -10,9 +10,9 @@ namespace MrKupido.Library.Recipe
     [NameAlias("hun", "Milli tejföl")]
 
     [CommercialProduct()]
-    public class MilliTejfol : Tejfol
+    public class TejfolC1 : Tejfol
     {
-        public MilliTejfol(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+        public TejfolC1(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
             : base(amount, unit)
         {
             RecipeUnknown();

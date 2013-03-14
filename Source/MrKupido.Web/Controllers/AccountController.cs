@@ -298,8 +298,9 @@ namespace MrKupido.Web.Controllers
 
             user.CultureName = Request.Form["language"];
 
-            user.Height = String.IsNullOrEmpty(Request.Form["height"]) ? 0 : Single.Parse(Request.Form["height"].Substring(0, Request.Form["height"].Length - 3)) / 100;
-            user.Weight = String.IsNullOrEmpty(Request.Form["weight"]) ? 0 : Single.Parse(Request.Form["weight"].Substring(0, Request.Form["weight"].Length - 3));
+			user.Gender = String.IsNullOrEmpty(Request.Form["gender"]) ? 0 : Request.Form["gender"] == "male" ? 1 : Request.Form["gender"] == "female" ? 2 : 0;
+            user.Height = String.IsNullOrEmpty(Request.Form["height"]) ? (float?)null : Single.Parse(Request.Form["height"]) / 100;
+            user.Weight = String.IsNullOrEmpty(Request.Form["weight"]) ? (float?)null : Single.Parse(Request.Form["weight"]);
             user.DateOfBirth = String.IsNullOrEmpty(Request.Form["dateofbirth"]) ? (DateTime?)null : DateTime.ParseExact(Request.Form["dateofbirth"], "yyyy-MM-dd", System.Threading.Thread.CurrentThread.CurrentUICulture);
             
             context.SaveChanges();

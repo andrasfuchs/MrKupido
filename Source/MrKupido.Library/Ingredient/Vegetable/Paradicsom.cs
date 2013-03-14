@@ -10,6 +10,8 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("eng", "tomato")]
     [NameAlias("hun", "paradicsom")]
 
+	[IngredientConsts(GrammsPerPiece = 120)]
+
     [YieldOf(typeof(SolanumLycopersicum))]
     public class Paradicsom : SingleIngredient
     {

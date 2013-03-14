@@ -72,5 +72,23 @@ namespace MrKupido.Library.Equipment
 
             this.LastActionDuration = 10 * (uint)count;
         }
-    }
+
+		[NameAlias("eng", "peel", Priority = 200)]
+		[NameAlias("hun", "meghámoz", Priority = 200)]
+		[NameAlias("hun", "hámozd meg a(z) {0T}")]
+		public void MeghamozniI(ISingleIngredient i)
+		{
+			i.State |= IngredientState.Hamozott;
+
+			this.LastActionDuration = 120;
+		}
+
+		[NameAlias("eng", "spread", Priority = 200)]
+		[NameAlias("hun", "megken", Priority = 200)]
+		[NameAlias("hun", "kend meg a(z) {0.Contents.T} a(z) {1.Contents.V}")]
+		public void Megkenni(IIngredientContainer c1, IIngredientContainer c2)
+		{
+			this.LastActionDuration = 20;
+		}
+	}
 }

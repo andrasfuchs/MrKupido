@@ -286,6 +286,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Resources\Help\Index.Designer.cs">
+      <DependentUpon>Index.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\Help\VersionChangeLog020.Designer.cs">
       <DependentUpon>VersionChangeLog020.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -361,6 +366,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Resources\Shared\Validation.hu.Designer.cs">
+      <DependentUpon>Validation.hu.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Shared\Validation.Designer.cs">
+      <DependentUpon>Validation.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\Shared\TipsAndTricks.Designer.cs">
       <DependentUpon>TipsAndTricks.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -404,6 +419,26 @@
     <Content Include="Content\images\browser_ie.png" />
     <Content Include="Content\images\browser_opera.png" />
     <Content Include="Content\images\browser_safari.png" />
+    <Content Include="Content\images\changelog020_brands.png" />
+    <Content Include="Content\images\changelog020_container.png" />
+    <Content Include="Content\images\changelog020_descendants.png" />
+    <Content Include="Content\images\changelog020_filteritems.png" />
+    <Content Include="Content\images\changelog020_help.png" />
+    <Content Include="Content\images\changelog020_import.png" />
+    <Content Include="Content\images\changelog020_ingredients.png" />
+    <Content Include="Content\images\changelog020_language.png" />
+    <Content Include="Content\images\changelog020_loading.png" />
+    <Content Include="Content\images\changelog020_location.png" />
+    <Content Include="Content\images\changelog020_login.png" />
+    <Content Include="Content\images\changelog020_minus.png" />
+    <Content Include="Content\images\changelog020_nettime.png" />
+    <Content Include="Content\images\changelog020_order.png" />
+    <Content Include="Content\images\changelog020_portion.png" />
+    <Content Include="Content\images\changelog020_profile.png" />
+    <Content Include="Content\images\changelog020_taxonomy.png" />
+    <Content Include="Content\images\changelog020_timer.png" />
+    <Content Include="Content\images\changelog020_tips.png" />
+    <Content Include="Content\images\changelog020_urlfilter.png" />
     <Content Include="Content\images\frame160x160.png" />
     <Content Include="Content\images\logo_mrkupido_wide.png" />
     <Content Include="Content\images\mrkupido.ico" />
@@ -789,6 +824,13 @@
     <Content Include="Views\Home\RecipeNotAvailableYet.cshtml" />
     <Content Include="Views\Help\VersionChangeLog020.cshtml" />
     <Content Include="Views\Shared\_HelpHeader.cshtml" />
+    <Content Include="Views\Help\TermsOfUse.cshtml" />
+    <Content Include="Views\Help\PrivacyPolicy.cshtml" />
+    <Content Include="Views\Help\BetaTesterGuide.cshtml" />
+    <Content Include="Views\Help\Index.cshtml" />
+    <Content Include="Views\Help\FeatureGuideLevel1.cshtml" />
+    <Content Include="Views\Help\FeatureGuideLevel2.cshtml" />
+    <Content Include="Views\Help\WhoIsMrKupido.cshtml" />
     <None Include="Web.Debug_at_localhost.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -913,7 +955,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="1975/10/21" BuildVersion_UpdateFileVersion="False" BuildVersion_BuildVersioningStyle="None.None.None.None" />
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.None" BuildVersion_UpdateFileVersion="False" BuildVersion_StartDate="1975/10/21" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
   <ItemGroup>
@@ -935,6 +977,10 @@
     <EmbeddedResource Include="Resources\Account\LogIn.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>LogIn.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Help\Index.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Index.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Help\VersionChangeLog020.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -997,6 +1043,14 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Details.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Shared\Validation.hu.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Validation.hu.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Shared\Validation.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Validation.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Shared\TipsAndTricks.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

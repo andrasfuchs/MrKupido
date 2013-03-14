@@ -119,7 +119,7 @@ namespace MrKupido.Web.Controllers
             Log log = new Log() { UtcTime = utc, IPAddress = ip, SessionId = sessionId, Action = action, Parameters = parameters, FormattedMessage = fm };
             LogAsync(log, forceDBWrite);            
         }
-
+		
         private static void LogAsync(Log log, bool forceDBWrite)
         {
             BackgroundWorker bgWorker = new BackgroundWorker();

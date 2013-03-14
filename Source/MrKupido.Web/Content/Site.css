@@ -73,17 +73,15 @@ img {
     box-shadow: 0 0 30px #000000;
     border: double; /* this one is need for Firefox to display the border */
     border-width: 40px;
-
-    
+    border-color: #ebe0d5;
     /*-moz-border-image: url('../Content/svg/frame160x160.svg') 25% 25% 25% 25% round;
     -webkit-border-image: url('../Content/svg/frame160x160.svg') 25% 25% 25% 25% round;
     -o-border-image: url('../Content/svg/frame160x160.svg') 25% 25% 25% 25% round;
     border-image: url('../Content/svg/frame160x160.svg') 25% 25% 25% 25% round;*/
-    
     -moz-border-image: url('../Content/svg/frame160x160.svg') 25% 25% 25% 25% round;
     -webkit-border-image: url('../Content/svg/frame160x160.svg') 25% 25% 25% 25% round;
     -o-border-image: url('../Content/svg/frame160x160.svg') 25% 25% 25% 25% round;
-    border-image: url('../Content/images/frame160x160.png') 25% 25% 25% 25% round;    
+    border-image: url('../Content/images/frame160x160.png') 25% 25% 25% 25% round;
 }
 
 header, footer, nav, section {
@@ -826,12 +824,12 @@ div#pagingright {
 div#profile details li {
     margin: 5px;
     margin-left: 80px;
-    width: 800px;
-    border: 1px dotted /*mcl*/ #ebe0d5;
+    width: 800px;    
+    border: none;
 }
 
     div#profile details li:hover {
-        border: 1px dotted /*mcm*/ #cdb8ab;
+        border: none;
     }
 
     div#profile details li div.label {
@@ -870,6 +868,10 @@ div#profile details li {
             div#profile details li div.input input:disabled {
                 color: /*mcd*/ #553e31;
                 background-color: /*mcm*/ #cdb8ab;
+            }
+
+            div#profile details li div.input input:invalid {
+                border-bottom-color: /*mcd*/ #f00;
             }
 
 
@@ -1434,6 +1436,7 @@ ul#ingredientlist li.ingredientlistitem {
     max-width: 240px;
 }
 
+    div#profile div#gender input,
     div#profile div#language input,
     ul#ingredientlist li.ingredientlistitem input {
         padding: 0;
@@ -1446,6 +1449,7 @@ ul#ingredientlist li.ingredientlistitem {
         opacity: 0;
     }
 
+    div#profile div#gender label,
     div#profile div#language label,
     ul#ingredientlist li.ingredientlistitem label {
         float: left;
@@ -1514,6 +1518,29 @@ ul#ingredientlist li.ingredientlistitem input[type=radio]:hover:disabled:checked
 ul#ingredientlist li.ingredientlistitem input[type=radio]:focus:disabled:checked + label,
 ul#ingredientlist li.ingredientlistitem input[type=radio]:disabled:checked + label:hover,
 ul#ingredientlist li.ingredientlistitem input[type=radio]:disabled:checked + label:hover:active		{ background-position: 0 -301px; }*/
+
+/* --------------- unit selection ---------------------- */
+
+div.units {
+    color: #cdb8ab;
+    vertical-align: super;
+    display: inline;
+    margin-left: -90px;
+}
+
+    div.units input {
+        display: inline;
+    }
+
+    div.units label {
+        background-image: none;
+    }
+
+    div.units input[type=radio]:checked + label {
+        color: #553e31;
+        background-image: none; 
+    }
+    
 
 
 /* --------------- reviewer ---------------------- */
@@ -1698,3 +1725,69 @@ div#portionselector {
         border-right: 6px solid transparent;
         border-bottom: 6px solid #553e31;
     }
+
+
+/* ----------- help ------------ */
+article.help {
+    font-size: 14px;
+    font-family: Cardo, Sans-Serif;
+    color: /*mcd*/ #553e31;
+}
+
+    article.help a {
+        text-decoration: underline;
+        -moz-text-decoration-style: dashed;
+        text-decoration-style: dashed;
+    }
+
+    article.help li {
+        clear: right;
+        margin: 5px;
+        text-align: justify;
+    }
+
+    article.help img {
+        border: 3px solid #553e31;
+        float: right;
+        margin: 10px;
+    }
+
+    article.help h1 {
+        font-size: 44px;
+        font-family: tangerinearegular, Sans-Serif;
+        color: /*mcd*/ #553e31;
+        text-align: center;
+        text-decoration: underline;
+        margin-top: 15px;
+        margin-bottom: 0px;
+    }
+
+    article.help h2 {
+        font-size: 22px;
+        font-family: Cardo, Sans-Serif;
+        color: /*mcd*/ #553e31;
+        text-decoration: underline;
+        padding: 10px;
+        margin-top: 15px;
+        margin-bottom: -5px;
+    }
+
+    article.help h3 {
+        font-size: 20px;
+        font-family: Cardo, Sans-Serif;
+        color: /*mcd*/ #553e31;
+        text-decoration: underline;
+        margin-top: 15px;
+        margin-bottom: -10px;
+    }
+
+/* ----------- validation ------------ */
+::-webkit-validation-bubble {}
+::-webkit-validation-bubble-message {}
+::-webkit-validation-bubble-arrow {}
+::-webkit-validation-bubble-arrow-clipper {}
+
+::-webkit-validation-bubble-icon {}
+::-webkit-validation-bubble-body {}
+::-webkit-validation-bubble-text-block {}
+::-webkit-validation-bubble-arrow-heading {}

@@ -16,7 +16,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "daráld le a(z) {1T} a(z) {0B}")]
         public void DaralniI(IIngredientContainer ic, ISingleIngredient i)
         {
-            if ((i.Unit != MeasurementUnit.gramm) && (i.Unit != MeasurementUnit.piece)) throw new InvalidActionForIngredientException("Lereszelni", i.Name, i.Unit);
+			if ((i.Unit != MeasurementUnit.gramm) && (i.Unit != MeasurementUnit.piece)) throw new InvalidActionForIngredientException("DaralniI", i.Name, i.Unit);
 
             if (i.Unit != MeasurementUnit.gramm) i.ChangeUnitTo(MeasurementUnit.gramm);
 

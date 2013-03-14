@@ -123,6 +123,9 @@
   <data name="Disclaimer" xml:space="preserve">
     <value>disclaimer</value>
   </data>
+  <data name="HelpPageTitle" xml:space="preserve">
+    <value>Mr. Kupido help</value>
+  </data>
   <data name="Homepage" xml:space="preserve">
     <value>home</value>
   </data>
