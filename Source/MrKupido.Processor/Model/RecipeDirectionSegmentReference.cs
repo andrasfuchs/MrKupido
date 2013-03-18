@@ -9,16 +9,16 @@ using System.Text;
 
 namespace MrKupido.Processor.Model
 {
-    public class RecipeDirectionSegmentReference : RecipeDirectionSegment
-    {
-        public int Id { get; private set; }
-        public string IconUrl { get; set; }
-        public string IconAlt { get; set; }
-        public object Reference { get; private set; }
-        public TreeNode TreeNode { get; set; }
+	public class RecipeDirectionSegmentReference : RecipeDirectionSegment
+	{
+		public int Id { get; private set; }
+		public string IconUrl { get; set; }
+		public string IconAlt { get; set; }
+		public object Reference { get; private set; }
+		public TreeNode TreeNode { get; set; }
 
-        public RecipeDirectionSegmentReference(string languageISO, object reference, List<string> seenIngredients)
-            : base("")
+		public RecipeDirectionSegmentReference(string languageISO, object reference, List<string> seenIngredients)
+			: base("")
         {
             this.Reference = reference;
 
@@ -51,15 +51,48 @@ namespace MrKupido.Processor.Model
                         }
                     }
 
-                    if (seenIngredients.Contains(ib.ToString(languageISO, false, false)))
-                    {
-                        this.Text = ib.ToString(languageISO, false, true);
-                    }
-                    else
-                    {
-                        this.Text = ib.ToString(languageISO, true, true);
-                        seenIngredients.Add(ib.ToString(languageISO, false, false));
-                    }
+					string ibShortname = ib.ToString(languageISO, false, false);
+					string ibLongName = ib.ToString(languageISO, true, false);
+					string ibFullName = ib.ToString(languageISO, true, true);
+					int matchedSeenIngredientIndex = -1;
+
+					// look for the ingredient in the seenIngredient array
+					for (int i=0; i<seenIngredients.Count; i++)
+					{
+						if (seenIngredients[i].StartsWith(ibShortname + "|"))
+						{
+							matchedSeenIngredientIndex = i;
+						}
+					}
+
+					if (matchedSeenIngredientIndex >= 0)
+					{
+						// if this was in the seenIngredients, let's check if it was there with the amount
+						if (!seenIngredients[matchedSeenIngredientIndex].Contains(ibLongName))
+						{
+							seenIngredients[matchedSeenIngredientIndex] += ibLongName + "|";
+						}
+
+						int wordCount = seenIngredients[matchedSeenIngredientIndex].Count(c => c == '|');
+
+						// check if it was mentioned with more then 1 amounts
+						if (wordCount <= 2)
+						{
+							// we don't need to display the amount
+							this.Text = ib.ToString(languageISO, false, true);
+						}
+						else
+						{
+							// to avoid confusion let's display the amount
+							this.Text = ibFullName;
+						}
+					}
+					else
+					{
+						// this is the first time we show this ingredient, so let's display the amount
+						this.Text = ibFullName;
+						seenIngredients.Add(ibShortname + "|" + ibLongName + "|");
+					}
                 }
 
                 if (reference is Container)
@@ -97,54 +130,54 @@ namespace MrKupido.Processor.Model
             }
         }
 
-        private string IntegerToStringHun(int i)
-        {
-            if ((i < 0) || (i >= 100)) throw new MrKupidoException("IntegerToStringHun supports only pozitive 1- and 2-digit integers.");
+		private string IntegerToStringHun(int i)
+		{
+			if ((i < 0) || (i >= 100)) throw new MrKupidoException("IntegerToStringHun supports only pozitive 1- and 2-digit integers.");
 
-            string[] oneDigit = { "nullás", "egyes", "kettes", "hármas", "négyes", "ötös", "hatos", "hetes", "nyolcas", "kilences" };
-            string[] twoDigitZero = { "", "tízes", "húszas", "hármincas", "négyvenes", "ötvenes", "hatvanas", "hetvenes", "nyolcvanas", "kilencvenes" };
-            string[] twoDigitNonZero = { "", "tízen", "húszon", "hárminc", "négyven", "ötven", "hatvan", "hetven", "nyolcvan", "kilencven" };
+			string[] oneDigit = { "nullás", "egyes", "kettes", "hármas", "négyes", "ötös", "hatos", "hetes", "nyolcas", "kilences" };
+			string[] twoDigitZero = { "", "tízes", "húszas", "hármincas", "négyvenes", "ötvenes", "hatvanas", "hetvenes", "nyolcvanas", "kilencvenes" };
+			string[] twoDigitNonZero = { "", "tízen", "húszon", "hárminc", "négyven", "ötven", "hatvan", "hetven", "nyolcvan", "kilencven" };
 
-            int lastDigit = i % 10;
-            int secondLastDigit = (i / 10) % 10;
+			int lastDigit = i % 10;
+			int secondLastDigit = (i / 10) % 10;
 
-            if ((lastDigit == 0) && (secondLastDigit > 0))
-            {
-                return twoDigitZero[secondLastDigit];
-            }
-            else
-            {
-                return twoDigitNonZero[secondLastDigit] + oneDigit[lastDigit];
-            }
-        }
+			if ((lastDigit == 0) && (secondLastDigit > 0))
+			{
+				return twoDigitZero[secondLastDigit];
+			}
+			else
+			{
+				return twoDigitNonZero[secondLastDigit] + oneDigit[lastDigit];
+			}
+		}
 
-        public override string TextOnly()
-        {
-            StringBuilder sb = new StringBuilder();
+		public override string TextOnly()
+		{
+			StringBuilder sb = new StringBuilder();
 
-            for (int i = 0; i < this.Text.Length; i++)
-            {
-                if (Char.IsNumber(this.Text[i]))
-                {
-                    if ((i + 1 < this.Text.Length) && Char.IsNumber(this.Text[i + 1]))
-                    {
-                        // two- or more-digit number
-                        sb.Append(IntegerToStringHun(Int32.Parse(this.Text[i].ToString() + this.Text[i + 1].ToString())) + " ");
-                        i++;
-                    }
-                    else
-                    {
-                        // one-digit number
-                        sb.Append(IntegerToStringHun(Int32.Parse(this.Text[i].ToString())) + " ");
-                    }
-                }
-                else
-                {
-                    sb.Append(this.Text[i]);
-                }
-            }
+			for (int i = 0; i < this.Text.Length; i++)
+			{
+				if (Char.IsNumber(this.Text[i]))
+				{
+					if ((i + 1 < this.Text.Length) && Char.IsNumber(this.Text[i + 1]))
+					{
+						// two- or more-digit number
+						sb.Append(IntegerToStringHun(Int32.Parse(this.Text[i].ToString() + this.Text[i + 1].ToString())) + " ");
+						i++;
+					}
+					else
+					{
+						// one-digit number
+						sb.Append(IntegerToStringHun(Int32.Parse(this.Text[i].ToString())) + " ");
+					}
+				}
+				else
+				{
+					sb.Append(this.Text[i]);
+				}
+			}
 
-            return (String.IsNullOrEmpty(this.IconAlt) ? sb.ToString() : this.IconAlt + " " + sb.ToString());
-        }
-    }
+			return (String.IsNullOrEmpty(this.IconAlt) ? sb.ToString() : this.IconAlt + " " + sb.ToString());
+		}
+	}
 }

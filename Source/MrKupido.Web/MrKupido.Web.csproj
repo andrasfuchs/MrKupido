@@ -440,11 +440,13 @@
     <Content Include="Content\images\changelog020_tips.png" />
     <Content Include="Content\images\changelog020_urlfilter.png" />
     <Content Include="Content\images\frame160x160.png" />
+    <Content Include="Content\images\logo_google120x60.png" />
     <Content Include="Content\images\logo_mrkupido_wide.png" />
     <Content Include="Content\images\mrkupido.ico" />
     <Content Include="Content\Site.min.css">
       <DependentUpon>Site.css</DependentUpon>
     </Content>
+    <Content Include="Content\svg\action_bake.svg" />
     <Content Include="Content\svg\action_chop.svg" />
     <Content Include="Content\svg\action_circle.svg" />
     <Content Include="Content\svg\action_cotton.svg" />
@@ -457,9 +459,12 @@
     <Content Include="Content\svg\action_deep_device__pull_out.svg" />
     <Content Include="Content\svg\action_deep_device__put_in.svg" />
     <Content Include="Content\svg\action_default.svg" />
+    <Content Include="Content\svg\action_dip_into.svg" />
     <Content Include="Content\svg\action_egg-beater.svg" />
     <Content Include="Content\svg\action_get_off.svg" />
+    <Content Include="Content\svg\action_grease.svg" />
     <Content Include="Content\svg\action_heat_up.svg" />
+    <Content Include="Content\svg\action_knead_to_balls.svg" />
     <Content Include="Content\svg\action_mix_together.svg" />
     <Content Include="Content\svg\action_peel.svg" />
     <Content Include="Content\svg\action_plow.svg" />
@@ -468,6 +473,7 @@
     <Content Include="Content\svg\action_pour_on.svg" />
     <Content Include="Content\svg\action_put_on.svg" />
     <Content Include="Content\svg\action_rasp.svg" />
+    <Content Include="Content\svg\action_roll.svg" />
     <Content Include="Content\svg\action_roll_out.svg" />
     <Content Include="Content\svg\action_separate.svg" />
     <Content Include="Content\svg\action_serve.svg" />
@@ -831,6 +837,7 @@
     <Content Include="Views\Help\FeatureGuideLevel1.cshtml" />
     <Content Include="Views\Help\FeatureGuideLevel2.cshtml" />
     <Content Include="Views\Help\WhoIsMrKupido.cshtml" />
+    <Content Include="Views\Shared\_ValidationErrors.cshtml" />
     <None Include="Web.Debug_at_localhost.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

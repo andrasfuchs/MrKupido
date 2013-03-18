@@ -16,6 +16,7 @@ namespace MrKupido.Model
         [MaxLength(50)]
         [MinLength(5)]
         [StringLength(50, MinimumLength = 5)]
+		[RegularExpression(@"^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$")]
         public string Email { get; set; }
 
         [Required]
@@ -28,22 +29,26 @@ namespace MrKupido.Model
         [MaxLength(50)]
         [MinLength(1)]
         [StringLength(50, MinimumLength = 1)]
+		[RegularExpression(@"^[a-zA-Z''-'\sáéíóúöőüűÁÉÍÓÚÖŐÜŰ]{1,50}$")]
         public string FirstName { get; set; }
 
         [Required]
         [MaxLength(50)]
         [MinLength(1)]
         [StringLength(50, MinimumLength = 1)]
+		[RegularExpression(@"^[a-zA-Z''-'\sáéíóúöőüűÁÉÍÓÚÖŐÜŰ]{1,50}$")]
         public string LastName { get; set; }
 
         [Required]
         [MaxLength(110)]
         [MinLength(3)]
         [StringLength(110, MinimumLength = 3)]
+		[RegularExpression(@"^[a-zA-Z''-'\sáéíóúöőüűÁÉÍÓÚÖŐÜŰ]{1,50}$")]
         public string FullName { get; set; }
 
         [MaxLength(50)]
         [StringLength(50)]
+		[RegularExpression(@"^[a-zA-Z''-'\sáéíóúöőüűÁÉÍÓÚÖŐÜŰ]{1,50}$")]
         public string NickName { get; set; }
 
         [Required]
@@ -53,7 +58,7 @@ namespace MrKupido.Model
 
         public DateTime? DateOfBirth { get; set; }
 
-		[Range(120, 220)]
+		[Range(1.20, 2.20)]
 		public float? Height { get; set; }
 
 		[Range(35, 300)]

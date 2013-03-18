@@ -1,0 +1,25 @@
+﻿@model string[]
+<div class="validationErrors">
+    @{ string[] invalidProperties = Session["InvalidProperties"] != null ? (string[])Session["InvalidProperties"] : new string[0]; }
+    
+    @for (int i = 0; i < invalidProperties.Length; i++)
+    {
+        if ((i % 2 == 1) || !Model.Contains(invalidProperties[i]))
+        {
+            continue;
+        }            
+                   
+        if (String.IsNullOrEmpty(invalidProperties[i + 1]))
+        {
+            <span>[</span>            
+            <span>@(invalidProperties[i])</span>
+            <span>]</span>
+        }
+        else
+        {
+            <span>@(invalidProperties[i + 1])</span>
+        }
+        <img runat="server" src="~/Content/svg/tnt_exclamation.svg" height="20px" />
+        <br />
+    }
+</div>

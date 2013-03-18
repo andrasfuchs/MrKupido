@@ -133,6 +133,24 @@ namespace MrKupido.Web.Resources.Account {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your current body height.
+        /// </summary>
+        public static string HeightDescription {
+            get {
+                return ResourceManager.GetString("HeightDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Height must be between 120 and 230 cm!.
+        /// </summary>
+        public static string HeightValidation {
+            get {
+                return ResourceManager.GetString("HeightValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
         public static string Language {

@@ -33,6 +33,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MrKupido.IngredientRanking"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{61B76AEA-E109-4490-A677-EEE2A10388AD}"
 	ProjectSection(SolutionItems) = preProject
+		WE-browsers.xml = WE-browsers.xml
 		WE-settings.xml = WE-settings.xml
 	EndProjectSection
 EndProject

@@ -288,21 +288,98 @@ namespace MrKupido.Web.Controllers
         [HttpPost]
         public new ActionResult Profile(string userId)
         {
-            User sessionUser = Session.GetCurrentUser();
+			List<String> invalidProperties = new List<String>();
 
+            User sessionUser = Session.GetCurrentUser();
             User user = context.Users.First(u => u.UserId == sessionUser.UserId);
 
             user.LastName = Request.Form["lastname"];
             user.FirstName = Request.Form["firstname"];
-            user.NickName = Request.Form["nickname"];
+			user.NickName = Request.Form["nickname"];
 
             user.CultureName = Request.Form["language"];
 
+
 			user.Gender = String.IsNullOrEmpty(Request.Form["gender"]) ? 0 : Request.Form["gender"] == "male" ? 1 : Request.Form["gender"] == "female" ? 2 : 0;
-            user.Height = String.IsNullOrEmpty(Request.Form["height"]) ? (float?)null : Single.Parse(Request.Form["height"]) / 100;
-            user.Weight = String.IsNullOrEmpty(Request.Form["weight"]) ? (float?)null : Single.Parse(Request.Form["weight"]);
-            user.DateOfBirth = String.IsNullOrEmpty(Request.Form["dateofbirth"]) ? (DateTime?)null : DateTime.ParseExact(Request.Form["dateofbirth"], "yyyy-MM-dd", System.Threading.Thread.CurrentThread.CurrentUICulture);
             
+			if ((!String.IsNullOrEmpty(Request.Form["height"])))
+			{
+				float f;
+				if (Single.TryParse(Request.Form["height"], out f))
+				{
+					user.Height = f / 100;
+				}
+				else
+				{
+					invalidProperties.Add("Height");
+					invalidProperties.Add(MrKupido.Web.Resources.Account.Profile.ResourceManager.GetString("HeightValidation"));
+					user.Height = null;
+				}
+			} else
+			{
+				user.Height = null;
+			}
+
+			if ((!String.IsNullOrEmpty(Request.Form["weight"])))
+			{
+				float f;
+				if (Single.TryParse(Request.Form["weight"], out f))
+				{
+					user.Weight = f;
+				}
+				else
+				{
+					invalidProperties.Add("Weight");
+					invalidProperties.Add(MrKupido.Web.Resources.Account.Profile.ResourceManager.GetString("WeightValidation"));
+					user.Weight = null;
+				}
+			}
+			else
+			{
+				user.Weight = null;
+			}
+
+			if ((!String.IsNullOrEmpty(Request.Form["dateofbirth"])))
+			{
+				DateTime dt;
+				if (DateTime.TryParseExact(Request.Form["dateofbirth"], "yyyy-MM-dd", System.Threading.Thread.CurrentThread.CurrentUICulture, DateTimeStyles.None, out dt))
+				{
+					user.DateOfBirth = dt;
+				}
+				else
+				{
+					invalidProperties.Add("DateOfBirth");
+					invalidProperties.Add(MrKupido.Web.Resources.Account.Profile.ResourceManager.GetString("DateOfBirthValidation"));
+					user.DateOfBirth = null;
+				}
+			}
+			else
+			{
+				user.DateOfBirth = null;
+			}
+
+			foreach (System.Data.Entity.Validation.DbEntityValidationResult error in context.GetValidationErrors())
+			{
+				foreach (System.Data.Entity.Validation.DbValidationError ve in error.ValidationErrors)
+				{
+					if (invalidProperties.Contains(ve.PropertyName)) continue;
+
+					invalidProperties.Add(ve.PropertyName);
+
+					string errorMsg = MrKupido.Web.Resources.Account.Profile.ResourceManager.GetString(ve.PropertyName + "Validation");
+					if (errorMsg == null) errorMsg = ve.ErrorMessage;
+					invalidProperties.Add(errorMsg);
+				}
+			}
+
+			if (invalidProperties.Count > 0)
+			{
+				Session["InvalidProperties"] = invalidProperties.ToArray();
+								
+				return RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Account", action = "Profile" });
+			}
+
+			Session["InvalidProperties"] = null;
             context.SaveChanges();
 
             Session.SetCurrentUser(user);

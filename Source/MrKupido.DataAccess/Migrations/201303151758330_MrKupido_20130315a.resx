@@ -117,73 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DateOfBirth" xml:space="preserve">
-    <value>Date of birth</value>
-  </data>
-  <data name="Email" xml:space="preserve">
-    <value>E-mail address</value>
-  </data>
-  <data name="FirstName" xml:space="preserve">
-    <value>First name</value>
-  </data>
-  <data name="Gender" xml:space="preserve">
-    <value>Gender</value>
-  </data>
-  <data name="GenderFemale" xml:space="preserve">
-    <value>Female</value>
-  </data>
-  <data name="GenderMale" xml:space="preserve">
-    <value>Male</value>
-  </data>
-  <data name="General" xml:space="preserve">
-    <value>General</value>
-  </data>
-  <data name="Height" xml:space="preserve">
-    <value>Height</value>
-  </data>
-  <data name="HeightDescription" xml:space="preserve">
-    <value>Your current body height</value>
-  </data>
-  <data name="HeightValidation" xml:space="preserve">
-    <value>Height must be between 120 and 230 cm!</value>
-  </data>
-  <data name="Language" xml:space="preserve">
-    <value>Language</value>
-  </data>
-  <data name="LanguageDeu" xml:space="preserve">
-    <value>German</value>
-  </data>
-  <data name="LanguageEng" xml:space="preserve">
-    <value>English</value>
-  </data>
-  <data name="LanguageHun" xml:space="preserve">
-    <value>Hungarian</value>
-  </data>
-  <data name="LanguageSpa" xml:space="preserve">
-    <value>Spanish</value>
-  </data>
-  <data name="LastName" xml:space="preserve">
-    <value>Surname</value>
-  </data>
-  <data name="NickName" xml:space="preserve">
-    <value>Nick</value>
-  </data>
-  <data name="PageTitle" xml:space="preserve">
-    <value>Profile</value>
-  </data>
-  <data name="Physical" xml:space="preserve">
-    <value>Physical</value>
-  </data>
-  <data name="PhysicalWhy" xml:space="preserve">
-    <value>Why do we need this?</value>
-  </data>
-  <data name="Save" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="Unknown" xml:space="preserve">
-    <value>(unknown)</value>
-  </data>
-  <data name="Weight" xml:space="preserve">
-    <value>Weight</value>
+  <data name="Target" xml:space="preserve">
+    <value>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</value>
   </data>
 </root>

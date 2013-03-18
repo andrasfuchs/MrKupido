@@ -821,10 +821,12 @@ div#pagingright {
         padding: 5px;
     }
 
+/* ---------------- profile -------------------------- */
+
 div#profile details li {
     margin: 5px;
     margin-left: 80px;
-    width: 800px;    
+    width: 750px;    
     border: none;
 }
 
@@ -834,7 +836,7 @@ div#profile details li {
 
     div#profile details li div.label {
         float: left;
-        width: 300px;
+        width: 260px;
         text-align: right;
     }
 
@@ -847,33 +849,59 @@ div#profile details li {
         div#profile details li div.input input {
             -moz-appearance: none;
             -webkit-appearance: none;
-            width: 380px;
+
+            color: /*mcd*/ #553e31;
+
+            /* 50% mcl #f3ece6 */
+            /* 25% mcl #f9f6f2 */
+
+            /* generated on http://www.colorzilla.com/gradient-editor/#fffcf5+0,ebe0d5+100;Custom */            
+            /*background: #fffcf5;*/
+            background: #ebe0d5;
+            
+            margin-top: 0;
+            width: 375px;
+            vertical-align: super;
+            
             font-size: 20px;
             font-family: Cardo, Sans-Serif;
-            vertical-align: super;
-            color: /*mcd*/ #553e31;
-            background-color: /*bgc*/ #fffcf5;
-            background-color: /*mcl*/ #ebe0d5;
-            margin-top: 0;
-            text-align: center;
-            border-color: /*mcl*/ #ebe0d5;
-            border-bottom-color: /*mcd*/ #553e31;
-            border-top-width: 0;
-            border-right-width: 0;
-            border-bottom-width: 2px;
-            border-left-width: 0;
+            text-align: center;            
             outline: none;
+            
+            border: 1px solid #cdb8ab;
+            
+            border-bottom-width: 2px;
         }
 
-            div#profile details li div.input input:disabled {
-                color: /*mcd*/ #553e31;
-                background-color: /*mcm*/ #cdb8ab;
+            div#profile details li div.input input[type=text].unit {
+                border-top-right-radius: 5px;
+                border-bottom-right-radius: 5px;
             }
+        
+
+            div#profile details li div.input input:disabled {                
+                background: /*bgc*/ #fffcf5;
+                opacity: 0.5;
+            }
+
+            div#profile details li div.input input:focus {
+                border-color: /*mcm*/ #cdb8ab;
+            }          
 
             div#profile details li div.input input:invalid {
                 border-bottom-color: /*mcd*/ #f00;
             }
 
+        div#profile details li div.input input[type='button'].unit {
+            margin-left: -50px;
+            width: 40px;
+            border-width: 0px;
+            border-left-width: 1px;
+            border-radius: 0px;
+            padding-left: 10px;
+        }
+
+/* ---------------- search result items -------------------------- */
 
 details li div.title {
     display: inline-block;
@@ -951,6 +979,7 @@ input[type='button'] {
     font-size: 14px;
 }
 
+input[type='button'].submit,
 input[type='submit'] {
     font-size: 20px;
 }
@@ -958,26 +987,26 @@ input[type='submit'] {
 input[type='button'], input[type='submit'] {
     font-family: Cardo, Sans-Serif;
     color: /*mcd*/ #553e31;
-    background: /*mcl*/ #ebe0d5;
-    border: 1px solid /*mcm*/ #cdb8ab;
+    border: 1px solid #cdb8ab;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
+
+    background: #fffcf5; /* Old browsers */
+    background: -moz-linear-gradient(top,  #fffcf5 0%, #ebe0d5 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fffcf5), color-stop(100%,#ebe0d5)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #fffcf5 0%,#ebe0d5 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #fffcf5 0%,#ebe0d5 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #fffcf5 0%,#ebe0d5 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #fffcf5 0%,#ebe0d5 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffcf5', endColorstr='#ebe0d5',GradientType=0 ); /* IE6-9 */
+
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-bottom: 10px;
 }
 
-    input[type='button']:hover, input[type='submit']:hover {
-        background: #e8ddd2;
-        border: 1px solid /*mcd*/ #553e31;
-    }
-
-    input[type='button']:focus, input[type='submit']:focus {
-        background: #e8ddd2;
-        border: 1px solid /*mcd*/ #553e31;
-        outline: none;
-    }
-
-div.formbuttons {
-    width: 960px;
+div.formbuttons {    
     text-align: center;
 }
 
@@ -1460,6 +1489,8 @@ ul#ingredientlist li.ingredientlistitem {
 /* Checked styles */
 input[type=radio]:checked + label,
 input[type=checkbox]:checked + label {
+    margin-top: -5px;
+    padding-top: 5px;
     background-image: url('../Content/svg/tick_on.svg');
 }
 
@@ -1471,10 +1502,14 @@ input[type=checkbox]:checked + label {
     input[type=checkbox]:focus:checked + label,
     input[type=checkbox]:checked + label:hover,
     input[type=checkbox]:focus:checked + label {
+        margin-top: -5px;
+        padding-top: 5px;
         background-image: url('../Content/svg/tick_on.svg');
     }
 
 input + label {
+    margin-top: -5px;
+    padding-top: 5px;
     background: url('../Content/svg/tick_off.svg') 0 0 no-repeat;
     height: 32px;
 }
@@ -1791,3 +1826,13 @@ article.help {
 ::-webkit-validation-bubble-body {}
 ::-webkit-validation-bubble-text-block {}
 ::-webkit-validation-bubble-arrow-heading {}
+
+.validationErrors {
+    margin: 0px 125px 0px 100px;
+    float: right;
+    text-align: right;
+}
+
+.validationErrors img {
+    vertical-align: sub;
+}

@@ -124,7 +124,12 @@
              $("details#searchresults li").css({ opacity: 0.0 }).animate({ opacity: '1' }, 750, "easeInOutCubic");
          }
 
+         var searchInProgress = false;
+
          function doSearch(maxResult) {
+             if (searchInProgress) return;
+             searchInProgress = true;
+
              hideAllResults();
              $.ajax({
                  url: '@Url.Action("Search", "Home")',
@@ -137,9 +142,11 @@
                     $("details#searchresults li").promise().done(function () {
                         $('div#_RecipeSearchResults').html(data);
                         showAllResults();
+                        searchInProgress = false;
                     });
                 }, // success
                 error: function (xhr, textStatus, errorThrown) {
+                    searchInProgress = false;
                 } // error
             });   // ajax
             $("#query").focus();
