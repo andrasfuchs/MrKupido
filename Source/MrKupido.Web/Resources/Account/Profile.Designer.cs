@@ -70,6 +70,15 @@ namespace MrKupido.Web.Resources.Account {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your date of birth must be in a format of yyyy-MM-dd, e.g. 1961-10-21.
+        /// </summary>
+        public static string DateOfBirthValidation {
+            get {
+                return ResourceManager.GetString("DateOfBirthValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to E-mail address.
         /// </summary>
         public static string Email {
@@ -84,6 +93,15 @@ namespace MrKupido.Web.Resources.Account {
         public static string FirstName {
             get {
                 return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First name is required and it must be a string of letters or spaces.
+        /// </summary>
+        public static string FirstNameValidation {
+            get {
+                return ResourceManager.GetString("FirstNameValidation", resourceCulture);
             }
         }
         
@@ -142,7 +160,7 @@ namespace MrKupido.Web.Resources.Account {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Height must be between 120 and 230 cm!.
+        ///   Looks up a localized string similar to Height must be between 120 and 230 cms.
         /// </summary>
         public static string HeightValidation {
             get {
@@ -205,11 +223,29 @@ namespace MrKupido.Web.Resources.Account {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Surname is required and it must be a string of letters.
+        /// </summary>
+        public static string LastNameValidation {
+            get {
+                return ResourceManager.GetString("LastNameValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Nick.
         /// </summary>
         public static string NickName {
             get {
                 return ResourceManager.GetString("NickName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nick is required and it must be a string of letters or spaces.
+        /// </summary>
+        public static string NickNameValidation {
+            get {
+                return ResourceManager.GetString("NickNameValidation", resourceCulture);
             }
         }
         
@@ -264,6 +300,15 @@ namespace MrKupido.Web.Resources.Account {
         public static string Weight {
             get {
                 return ResourceManager.GetString("Weight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your weight must be between 35 and 300 kgs.
+        /// </summary>
+        public static string WeightValidation {
+            get {
+                return ResourceManager.GetString("WeightValidation", resourceCulture);
             }
         }
     }

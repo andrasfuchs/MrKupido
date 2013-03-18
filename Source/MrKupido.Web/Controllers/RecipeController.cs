@@ -18,7 +18,7 @@ namespace MrKupido.Web.Controllers
     {
         private MrKupidoContext db = new MrKupidoContext("Name=MrKupidoContext");
 
-        //[Authorize]
+        [Authorize]
         public ActionResult Details(string id)
         {
             object[] result = new object[7];

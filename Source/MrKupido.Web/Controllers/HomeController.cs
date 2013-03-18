@@ -18,9 +18,11 @@ namespace MrKupido.Web.Controllers
     {
         private static Dictionary<string, string[]> tipsTricks = new Dictionary<string, string[]>();
 
-        //[Authorize]
+        [Authorize]
         public ActionResult Index()
         {
+			Session["InvalidProperties"] = null;
+
             if (Request.Params["q"] != null)
             {
                 List<FilterCondition> filters = new List<FilterCondition>();
@@ -302,7 +304,13 @@ namespace MrKupido.Web.Controllers
             return Json(temp[rnd.Next(temp.Length)]);
         }
 
-        public ActionResult RecipeNotAvailableYet(string lan, string un)
+		[HttpPost]
+		public void QueryWordUnknown(string word)
+		{
+			Log("UNKNOWNQUERY", "The query word '{2}' was not recognized by the search indexer.", word);
+		}
+		
+		public ActionResult RecipeNotAvailableYet(string lan, string un)
         {
             Log("NORECIPE", "Recipe '{2}' is not available yet.", lan + "|" + un);
 

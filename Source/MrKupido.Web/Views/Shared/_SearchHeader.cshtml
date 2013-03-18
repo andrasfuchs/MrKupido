@@ -1,7 +1,8 @@
 ﻿@using MrKupido.Web.Models
 @this.ScriptBlock(
     @<script type="text/javascript">
-        var lastItemDisplayString = "";
+         var lastItemDisplayString = "";
+         var lastAutoCompleteLength = 0;
 
         $(function () {
             $("#query").keydown(function (e) {
@@ -60,6 +61,18 @@
                 } else {
                     // enter
                     if (code == 13) {
+                        if (lastAutoCompleteLength == 0) {
+                            $("input#query.ui-autocomplete-input").css('color', 'red').animate({ color: '#553e31' }, { duration: 1000, easing: "easeOutCubic", queue: false });
+
+                            $.ajax({
+                                url: '@Url.Action("QueryWordUnknown", "Home")',
+                                type: "POST",
+                                dataType: "json",
+                                data: {
+                                    word: $("input#query.ui-autocomplete-input")[0].value,
+                                }
+                            }); // ajax
+                        }
                         e.preventDefault();
                     }
                 }
@@ -78,6 +91,7 @@
                         name_startsWith: request.term
                     },
                     success: function (data) {
+                        lastAutoCompleteLength = data.length;
                         response($.map(data, function (item) {
                             return {
                                 displayString: item.DisplayString,

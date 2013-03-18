@@ -120,11 +120,17 @@
   <data name="DateOfBirth" xml:space="preserve">
     <value>Születési dátumom</value>
   </data>
+  <data name="DateOfBirthValidation" xml:space="preserve">
+    <value>A születési dátumod formátuma yyyy-MM-dd kell, hogy legyen, azaz például 1961-10-21</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>Az e-mail címem</value>
   </data>
   <data name="FirstName" xml:space="preserve">
     <value>Keresztnevem</value>
+  </data>
+  <data name="FirstNameValidation" xml:space="preserve">
+    <value>A keresztneved megadása kötelező és betűkből és szóközökből kell állnia</value>
   </data>
   <data name="Gender" xml:space="preserve">
     <value>Nemem</value>
@@ -140,6 +146,9 @@
   </data>
   <data name="Height" xml:space="preserve">
     <value>Magasságom</value>
+  </data>
+  <data name="HeightValidation" xml:space="preserve">
+    <value>A magasságodnak 120 és 230 cm között kell lennie</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Nyelv</value>
@@ -159,8 +168,14 @@
   <data name="LastName" xml:space="preserve">
     <value>Vezetéknevem</value>
   </data>
+  <data name="LastNameValidation" xml:space="preserve">
+    <value>A vezetékneved megadása kötelező és betűkből kell állnia</value>
+  </data>
   <data name="NickName" xml:space="preserve">
     <value>Becenevem</value>
+  </data>
+  <data name="NickNameValidation" xml:space="preserve">
+    <value>A beceneved megadása kötelező és betűkből és szóközökből kell állnia</value>
   </data>
   <data name="PageTitle" xml:space="preserve">
     <value>Profil</value>
@@ -179,5 +194,8 @@
   </data>
   <data name="Weight" xml:space="preserve">
     <value>Súlyom</value>
+  </data>
+  <data name="WeightValidation" xml:space="preserve">
+    <value>A súlyodnak 35 és 300 kg között kell lennie</value>
   </data>
 </root>

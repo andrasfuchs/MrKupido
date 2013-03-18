@@ -120,11 +120,17 @@
   <data name="DateOfBirth" xml:space="preserve">
     <value>Date of birth</value>
   </data>
+  <data name="DateOfBirthValidation" xml:space="preserve">
+    <value>Your date of birth must be in a format of yyyy-MM-dd, e.g. 1961-10-21</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>E-mail address</value>
   </data>
   <data name="FirstName" xml:space="preserve">
     <value>First name</value>
+  </data>
+  <data name="FirstNameValidation" xml:space="preserve">
+    <value>First name is required and it must be a string of letters or spaces</value>
   </data>
   <data name="Gender" xml:space="preserve">
     <value>Gender</value>
@@ -145,7 +151,7 @@
     <value>Your current body height</value>
   </data>
   <data name="HeightValidation" xml:space="preserve">
-    <value>Height must be between 120 and 230 cm!</value>
+    <value>Height must be between 120 and 230 cms</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Language</value>
@@ -165,8 +171,14 @@
   <data name="LastName" xml:space="preserve">
     <value>Surname</value>
   </data>
+  <data name="LastNameValidation" xml:space="preserve">
+    <value>Surname is required and it must be a string of letters</value>
+  </data>
   <data name="NickName" xml:space="preserve">
     <value>Nick</value>
+  </data>
+  <data name="NickNameValidation" xml:space="preserve">
+    <value>Nick is required and it must be a string of letters or spaces</value>
   </data>
   <data name="PageTitle" xml:space="preserve">
     <value>Profile</value>
@@ -185,5 +197,8 @@
   </data>
   <data name="Weight" xml:space="preserve">
     <value>Weight</value>
+  </data>
+  <data name="WeightValidation" xml:space="preserve">
+    <value>Your weight must be between 35 and 300 kgs</value>
   </data>
 </root>
