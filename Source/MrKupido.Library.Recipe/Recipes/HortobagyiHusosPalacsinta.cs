@@ -35,7 +35,7 @@ namespace MrKupido.Library.Recipe
 			eg.Use<MelyTanyer>(1).BerakniI(sertesComb);
 
 			ISingleIngredient hagyma = new Hagyma(1.0f * amount);
-			eg.Use<Kes>(1).FeldarabolniI(hagyma, 5.0f);
+			eg.Use<Kes>(1).FeldarabolniI(hagyma, 0.5f);
 
 			eg.Use<LaposKisTanyer>(1).RarakniI(hagyma);
 

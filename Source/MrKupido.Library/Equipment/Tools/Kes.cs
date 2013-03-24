@@ -13,7 +13,8 @@ namespace MrKupido.Library.Equipment
     {
         [NameAlias("eng", "cut", Priority = 200)]
         [NameAlias("hun", "feldarabol", Priority = 200)]
-        [NameAlias("hun", "darabold fel a(z) {0T} kb. {1} dekás darabokra")]
+        [NameAlias("hun", "darabold fel a(z) {0T}")]
+		[NameAlias("hun", "darabold fel a(z) {0T} kb. {1} dekás darabokra", Priority = 101)]
         public void FeldarabolniI(ISingleIngredient i, float weight)
         {
             weight *= 10; //dkg -> gramm

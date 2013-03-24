@@ -13,7 +13,7 @@
              return constructor;
          }
 
-         var DirectionItem = makeStruct("id image timeInSecs");
+         var DirectionItem = makeStruct("id image timeInSecs li");
 
          var timerCounter = 0;
          var directionItems;
@@ -28,7 +28,7 @@
                      directionItems = new Array(100);
                      $("img[id^='clock_']").each(function (i, item) {
 
-                         directionItems[i] = new DirectionItem(item["id"], item, parseInt(item["id"].substring(6) - currentTimeInSeconds, 10));
+                         directionItems[i] = new DirectionItem(item["id"], item, parseInt(item["id"].substring(6) - currentTimeInSeconds, 10), $(this).parents("li"));
                          currentTimeInSeconds += directionItems[i].timeInSecs;
                      });
                  }
@@ -38,6 +38,13 @@
 
                  while ((directionItems[currentIndex] != null) && (directionItems[currentIndex].timeInSecs + currentTimeInSeconds <= timerCounter)) {
                      directionItems[currentIndex].image["src"] = "./../../Content/svg/d_clock8.svg";
+                     directionItems[currentIndex].li.addClass('pastDirection');
+
+                     if (directionItems[currentIndex].li.is('.currentDirection')) {
+                         directionItems[currentIndex].li.removeClass('currentDirection');
+
+                         compactDirection(directionItems[currentIndex].li);
+                     }
 
                      currentTimeInSeconds += directionItems[currentIndex].timeInSecs;
                      currentIndex++;
@@ -47,12 +54,27 @@
                      var imgIndex = Math.floor(((timerCounter - currentTimeInSeconds) / directionItems[currentIndex].timeInSecs) * 8 + 1);
 
                      directionItems[currentIndex].image["src"] = "./../../Content/svg/d_clock" + imgIndex + ".svg";
+                     directionItems[currentIndex].li.removeClass('pastDirection');
+
+                     if (!directionItems[currentIndex].li.is('.currentDirection')) {
+                         directionItems[currentIndex].li.addClass('currentDirection');
+
+                         expandDirection(directionItems[currentIndex].li);
+                     }
+
                      currentTimeInSeconds += directionItems[currentIndex].timeInSecs;
                      currentIndex++;
                  }
 
                  while (directionItems[currentIndex] != null) {
                      directionItems[currentIndex].image["src"] = "./../../Content/svg/d_clock0.svg";
+                     directionItems[currentIndex].li.removeClass('pastDirection');
+
+                     if (directionItems[currentIndex].li.is('.currentDirection')) {
+                         directionItems[currentIndex].li.removeClass('currentDirection');
+
+                         compactDirection(directionItems[currentIndex].li);
+                     }
 
                      currentTimeInSeconds += directionItems[currentIndex].timeInSecs;
                      currentIndex++;
@@ -60,6 +82,28 @@
 
              }
          });
+
+         function expandDirection(li) {
+             li.animate({ height: 140 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             li.find("span[class^=stage]").animate({ height: 140, marginTop: 2 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             li.find("span.timer").animate({ height: 140 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             li.find("span.timer>img").animate({ height: 120, width: 120 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             li.find("span.timer>span.action>img").animate({ height: 120, width: 120, marginTop: -104, marginLeft: -130 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             li.find("div.directionRightPart").animate({ width: 630, height: 140 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             li.find("div.directionRightPart>span.directionBigIcons").animate({ opacity: 1.0 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             li.find("div.directionRightPart>span.directionText").animate({ width: 630 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+         }
+
+         function compactDirection(li) {
+             li.animate({ height: 70 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             li.find("span[class^=stage]").animate({ height: 70, marginTop: 2 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             li.find("span.timer").animate({ height: 70 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             li.find("span.timer>img").animate({ height: 60, width: 60 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             li.find("span.timer>span.action>img").animate({ height: 60, width: 60, marginTop: -44, marginLeft: -70 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             li.find("div.directionRightPart").animate({ width: 700, height: 70 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             li.find("div.directionRightPart>span.directionBigIcons").animate({ opacity: 0.0 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             li.find("div.directionRightPart>span.directionText").animate({ width: 700 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+         }
     </script>
 )
 
@@ -75,56 +119,47 @@ else
     TimeSpan time = new TimeSpan();
     foreach (MrKupido.Library.IDirection dir in Model)
     {
-            <li><span class="stage">
-                @if (dir.Stage == MrKupido.Library.RecipeStage.Preparation)
-                {
-                    <img runat="server" src="~/Content/svg/stage_preparation.svg"  alt="@dir.Stage" width="25px" height="70px" />
-                }
-                else if (dir.Stage == MrKupido.Library.RecipeStage.Cooking)
-                {
-                    <img runat="server" src="~/Content/svg/stage_cooking.svg"  alt="@dir.Stage" width="25px" height="70px" />
-                }
-                else if (dir.Stage == MrKupido.Library.RecipeStage.Serving)
-                {
-                    <img runat="server" src="~/Content/svg/stage_serving.svg"  alt="@dir.Stage" width="25px" height="70px" />
-                }
-            </span>
+            <li><span class="stage@(dir.Stage)"></span>
                 <span class="time">@Math.Floor(time.TotalHours).ToString("00"):@time.Minutes.ToString("00")</span>
                 <span class="timer">
                     <img runat="server" id="clock_@((time + dir.TimeToComplete).TotalSeconds)" src="~/Content/svg/d_clock0.svg" alt="1 perc" width="60px" height="60px" />
                     <span class="action">
-                        <img runat="server" src="@dir.IconUrl" alt="1 perc" width="60px" height="60px" onclick="javascript: timerCounter = @((time).TotalSeconds); timer.start();" />
+                        <img runat="server" src="@dir.IconUrl" width="60px" height="60px" onclick="javascript: timerCounter = @((time).TotalSeconds); timer.start();" />
                     </span>
                 </span>
-                <div class="direction">
-                    <span class="directioncontent">
-                        @foreach (MrKupido.Library.IDirectionSegment segment in dir.DirectionSegments)
-                        {
-                            if (segment is MrKupido.Processor.Model.RecipeDirectionSegmentReference)
+                <div class="directionRightPart">
+                    <span class="directionBigIcons"></span>
+                    <span class="directionText">
+                        <span class="directionTextContent">
+                            @foreach (MrKupido.Library.IDirectionSegment segment in dir.DirectionSegments)
                             {
-                                MrKupido.Processor.Model.RecipeDirectionSegmentReference refSegment = (MrKupido.Processor.Model.RecipeDirectionSegmentReference)segment;
-
-                                if (!String.IsNullOrEmpty(refSegment.IconUrl))
+                                if (segment is MrKupido.Processor.Model.RecipeDirectionSegmentReference)
                                 {
-                            <img runat="server" src="@refSegment.IconUrl" alt="@refSegment.IconAlt" title="@refSegment.IconAlt" width="32px" height="32px" />
-                                }
+                                    MrKupido.Processor.Model.RecipeDirectionSegmentReference refSegment = (MrKupido.Processor.Model.RecipeDirectionSegmentReference)segment;
 
-                                if (refSegment.Id > 0)
+                                    if (!String.IsNullOrEmpty(refSegment.IconUrl))
+                                    {
+                                        @*<img runat="server" src="@refSegment.IconUrl" alt="@refSegment.IconAlt" title="@refSegment.IconAlt" width="32px" height="32px" />*@
+                                    }
+
+                                    if (refSegment.Id > 0)
+                                    {
+                                        @*<span>@refSegment.Id</span>*@
+                                        <span>@refSegment.IconAlt</span>
+                                    }
+                            
+                                @refSegment.Text
+                                }
+                                else
                                 {
-                            <span>@refSegment.Id</span>
+                                @segment
                                 }
-
-                            @refSegment.Text
                             }
-                            else
-                            {
-                            @segment
-                            }
-                        }
+                        </span>
                     </span>
                 </div>
             </li>
-                        time = time + dir.TimeToComplete;
+                            time = time + dir.TimeToComplete;
     }
         }
     </ul>

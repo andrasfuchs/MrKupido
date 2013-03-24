@@ -5,14 +5,40 @@
 @using MrKupido.Web.Models
 @this.ScriptBlock(
     @<script type="text/javascript">
+         var popupToClose = null;
+
          $(document).ready(function () {
              deleteFilter("", false);
 
-             $(".portionselector-trigger").on("click", function (e) {
-                 $("#portionselector").toggle();
-                 refreshAll();
-                 e.preventDefault();
+             $(document).click(function (e)
+             {
+                 if (popupToClose != null) {
+                     popupToClose.animate({ opacity: '0.00' }, 500, "easeInOutCubic", function () { popupToClose.toggle(); popupToClose = null; });
+
+                     e.preventDefault();
+                     e.stopPropagation();
+                 }
              });
+
+             $(".portionselector-trigger").click(function (e) {
+                 if (popupToClose == null) {
+                     $("#portionselector").toggle().animate({ opacity: '1.00' }, 500, "easeInOutCubic");
+                     popupToClose = $("#portionselector");
+
+                     e.preventDefault();
+                     e.stopPropagation();
+                 }
+             });
+
+             //$("#portionselector").mouseenter(function(e) {
+             //    portionselectorEntered = true;
+             //});
+
+             //$("#portionselector").mouseleave(function (e) {
+             //    portionselectorEntered = false;
+             //    $("#portionselector").animate({ opacity: '0.00' }, 500, "easeInOutCubic");
+             //    refreshAll();
+             //});
          });
 
          $(function () {
@@ -23,6 +49,7 @@
                  step: 250,
                  slide: function (event, ui) {
                      $("#portionamount").val(ui.value + " kcal");
+                     refreshAll();
                  }
              });
              $("#portionamount").val($("#portionslider").slider("value") + " kcal");
@@ -68,6 +95,8 @@
              } else {
                  $("#portionimage_5").removeClass("hidden");
              }
+
+             refreshAll();
          }
 
          function refreshAll() {

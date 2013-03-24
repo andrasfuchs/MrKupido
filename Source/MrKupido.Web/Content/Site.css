@@ -1,7 +1,7 @@
 ﻿/********************* Colour reference chart****************
 *************************** comment ********* colour ******** 
 
-main color light        mcl         #ebe0d5
+main color light        mcl         #eadfd4
 main color medium       mcm         #cdb8ab
 main color dark         mcd         #553e31
 background              bgc         #fffcf5
@@ -73,7 +73,7 @@ img {
     box-shadow: 0 0 30px #000000;
     border: double; /* this one is need for Firefox to display the border */
     border-width: 40px;
-    border-color: #ebe0d5;
+    border-color: #eadfd4;
     /*-moz-border-image: url('../Content/svg/frame160x160.svg') 25% 25% 25% 25% round;
     -webkit-border-image: url('../Content/svg/frame160x160.svg') 25% 25% 25% 25% round;
     -o-border-image: url('../Content/svg/frame160x160.svg') 25% 25% 25% 25% round;
@@ -191,11 +191,11 @@ header, footer, nav, section {
             text-align: center;
             border-left: 1px solid #cdb8ab;
             border-right: 1px solid #cdb8ab;
-            background: #ebe0d5;
+            background: #eadfd4;
         }
 
             header ul#usermenu a:hover {
-                color: #ebe0d5;
+                color: #eadfd4;
                 background-color: #553e31;
             }
 
@@ -297,7 +297,7 @@ header, footer, nav, section {
         display: inline;
         margin-left: 5px;
         padding: 0 5px 0 5px;
-        background-color: /*mcl*/ #ebe0d5;
+        background-color: /*mcl*/ #eadfd4;
     }
 
         .searchbox #filters li a.disabled {
@@ -505,7 +505,7 @@ details li.empty {
 details li.disabled {
     /*-moz-opacity: 0.3;
     opacity: 0.3;*/
-    border-color: #ebe0d5;
+    border-color: #eadfd4;
 }
 
     details li.disabled a {
@@ -514,7 +514,7 @@ details li.disabled {
     }
 
 details li.loading {
-    background-color: #ebe0d5;
+    background-color: #eadfd4;
     border-width: 0px;
 }
 
@@ -575,9 +575,9 @@ details#recipe li {
     width: auto;
     margin: 0 5px 15px 5px;
     border: 1px solid /*mcm*/ #cdb8ab;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
 }
 
 details#recipe div#directionlist li {
@@ -595,32 +595,70 @@ details#recipe div#directionlist li {
         vertical-align: middle;
     }
 
+        details#recipe div#directionlist li span.stagePreparation {
+            width: 25px;
+            height: 70px;
+            background: #d5e6cc;
+        }
+
+        details#recipe div#directionlist li span.stageCooking {
+            width: 25px;
+            height: 70px;
+            background: #e8d6cd;
+        }
+
+        details#recipe div#directionlist li span.stageServing {
+            width: 25px;
+            height: 70px;
+            background: #d6e4ea;
+        }
+
         details#recipe div#directionlist li span.time {
             margin: -10px 5px 0 10px;
         }
-
-    details#recipe div#directionlist li div.direction {
-        display: table;
-        float: right;
-        height: 70px;
-        width: 700px;
-    }
 
     details#recipe div#directionlist li span.timer {
         margin-top: 4px;
     }
 
-    details#recipe div#directionlist li span.directioncontent {
-        display: table-cell;
+    details#recipe div#directionlist li div.directionRightPart {
+        position: relative;
+        display: block;
+        float: right;
+        height: 70px;
+        width: 700px;
+        line-height: 70px;
+        /*border: solid 1px green;*/
+    }
+
+    details#recipe div#directionlist li div.directionRightPart span.directionBigIcons {        
+        display: inline-block;
+        opacity: 0.0;
+        height: 70px;
+        width: 630px;
+        /*border: solid 1px red;*/
+    }
+
+    details#recipe div#directionlist li div.directionRightPart span.directionText {
+        position: absolute;
+        bottom: 0px;
+        left: 0px;
+        display: inline-block;
+        width: 700px;
+        height: 70px;
+        /*border: solid 1px blue;*/
+    }
+
+    details#recipe div#directionlist li div.directionRightPart span.directionText span.directionTextContent {
+        display: inline-block;
         vertical-align: middle;
         line-height: 25px;
         -ms-word-wrap: break-word;
         word-wrap: break-word;
-        /*margin-top: -10px;
-        height: 70px;*/
+        /*border: solid 1px black;*/
     }
 
-        details#recipe div#directionlist li span.directioncontent img {
+        details#recipe div#directionlist li span.directionTextContent img2 {
             position: relative;
             top: 4px;
             display: inline-block;
@@ -629,11 +667,12 @@ details#recipe div#directionlist li {
             vertical-align: bottom;
         }
 
-        details#recipe div#directionlist li span.directioncontent span {
+        details#recipe div#directionlist li span.directionTextContent span2 {
             position: relative;
-            margin-top: -2px;
-            margin-left: -38px;
-            font-size: 18px;
+            margin-top: -32px;
+            margin-left: -28px;
+            margin-right: -10px;
+            font-size: 12px;
             font-family: Arial;
             color: /*mcd*/ #553e31;
             font-weight: bold;
@@ -667,7 +706,7 @@ details li:not(.disabled):hover, details li:not(.disabled):focus {
 
 details li div.resulthead {
     height: 55px;
-    background: /*mcl*/ #ebe0d5;
+    background: /*mcl*/ #eadfd4;
     -moz-border-radius: 4px;
     -webkit-border-radius: 4px;
     border-radius: 4px;
@@ -855,9 +894,9 @@ div#profile details li {
             /* 50% mcl #f3ece6 */
             /* 25% mcl #f9f6f2 */
 
-            /* generated on http://www.colorzilla.com/gradient-editor/#fffcf5+0,ebe0d5+100;Custom */            
+            /* generated on http://www.colorzilla.com/gradient-editor/#fffcf5+0,eadfd4+100;Custom */            
             /*background: #fffcf5;*/
-            background: #ebe0d5;
+            background: #eadfd4;
             
             margin-top: 0;
             width: 375px;
@@ -993,13 +1032,13 @@ input[type='button'], input[type='submit'] {
     border-radius: 3px;
 
     background: #fffcf5; /* Old browsers */
-    background: -moz-linear-gradient(top,  #fffcf5 0%, #ebe0d5 100%); /* FF3.6+ */
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fffcf5), color-stop(100%,#ebe0d5)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #fffcf5 0%,#ebe0d5 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #fffcf5 0%,#ebe0d5 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #fffcf5 0%,#ebe0d5 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #fffcf5 0%,#ebe0d5 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffcf5', endColorstr='#ebe0d5',GradientType=0 ); /* IE6-9 */
+    background: -moz-linear-gradient(top,  #fffcf5 0%, #eadfd4 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fffcf5), color-stop(100%,#eadfd4)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #fffcf5 0%,#eadfd4 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #fffcf5 0%,#eadfd4 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #fffcf5 0%,#eadfd4 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #fffcf5 0%,#eadfd4 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffcf5', endColorstr='#eadfd4',GradientType=0 ); /* IE6-9 */
 
     padding-left: 15px;
     padding-right: 15px;
@@ -1102,13 +1141,13 @@ td, th {
 }
 
 tbody tr:nth-child(even) {
-    background: /*mcl*/ #ebe0d5;
+    background: /*mcl*/ #eadfd4;
 }
 
 th {
     text-align: center;
     text-decoration: underline;
-    background-color: /*mcl*/ #ebe0d5;
+    background-color: /*mcl*/ #eadfd4;
     border-bottom-width: 2px;
 }
 
@@ -1116,7 +1155,7 @@ tfoot td {
     text-align: center;
     border-bottom: 0;
     border-top: 1px solid /*mcd*/ #553e31;
-    background-color: /*mcl*/ #ebe0d5;
+    background-color: /*mcl*/ #eadfd4;
 }
 
     tfoot td:first-child {
@@ -1411,7 +1450,7 @@ div.css-treeview img {
         font-weight: normal;
         margin: -1px;
         border: 1px solid /*mcd*/ #553e31;
-        background: /*mcl*/ #ebe0d5;
+        background: /*mcl*/ #eadfd4;
     }
 
     .ui-menu .ui-menu-item-with-icon a {
@@ -1590,7 +1629,7 @@ div.units {
     z-index: 30;
     background: /*mcd*/ #553e31;
     color: white;
-    border: 1px solid /*mcl*/ #ebe0d5;
+    border: 1px solid /*mcl*/ #eadfd4;
     border-bottom-width: 0;
     border-right-width: 0;
     -moz-border-radius: 1em 0 0 0;
@@ -1642,7 +1681,7 @@ div#portionsliderblock div#portionsliderandtext {
 div#portionsliderblock input#portionamount {
     width: 200px;
     border: 0;
-    background: #ebe0d5;
+    background: #eadfd4;
     color: #553e31;
     font-size: 14px;
     font-family: Cardo, Sans-Serif;
@@ -1737,6 +1776,7 @@ div#portionselectorwrapper {
 
 div#portionselector {
     display: none;
+    opacity: 0;
     width: 430px;
     height: 65px;
     margin: 0px;
@@ -1746,7 +1786,7 @@ div#portionselector {
     top: 0px;
     left: 430px;
     z-index: 2;
-    background: #ebe0d5;
+    background: #eadfd4;
     border: 1px solid #553e31;
     border-radius: 3px;
 }
@@ -1835,4 +1875,12 @@ article.help {
 
 .validationErrors img {
     vertical-align: sub;
+}
+
+.currentDirection {
+    background: #eadfd4;
+}
+
+.pastDirection {
+    opacity: 0.7;
 }

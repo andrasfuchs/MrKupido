@@ -20,7 +20,7 @@ namespace MrKupido.Library.Equipment
             this.LastActionDuration = 180;
         }
 
-        [NameAlias("eng", "grease", Priority = 200)]
+		[NameAlias("eng", "besmear", Priority = 200)]
         [NameAlias("hun", "megken", Priority = 200)]
         [NameAlias("hun", "kend meg a(z) {1.Contents.T} a(z) {0.Contents.V}")]
         public void MegkenniC(IIngredientContainer withC, IIngredientContainer c)
@@ -30,7 +30,7 @@ namespace MrKupido.Library.Equipment
             this.LastActionDuration = 180;
         }
 
-        [NameAlias("eng", "grease", Priority = 200)]
+		[NameAlias("eng", "besmear", Priority = 200)]
         [NameAlias("hun", "megken", Priority = 200)]
         [NameAlias("hun", "kend meg a(z) {1.Contents.T} a(z) {0V}")]
         public void MegkenniI(IIngredient withI, IIngredientContainer c)
@@ -40,7 +40,7 @@ namespace MrKupido.Library.Equipment
             this.LastActionDuration = 180;
         }
 
-        [NameAlias("eng", "grease", Priority = 200)]
+        [NameAlias("eng", "daub", Priority = 200)]
         [NameAlias("hun", "beken", Priority = 200)]
         [NameAlias("hun", "kend be a(z) {1.Contents.T} a(z) {0V}")]
         public void BekenniI(IIngredient withI, IIngredientContainer c)
