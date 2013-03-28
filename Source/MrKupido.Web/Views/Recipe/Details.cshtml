@@ -7,12 +7,23 @@
     @<script type="text/javascript">
          var popupToClose = null;
 
+         function isDescendant(parent, child) {
+             var node = child.parentNode;
+             while (node != null) {
+                 if (node == parent) {
+                     return true;
+                 }
+                 node = node.parentNode;
+             }
+             return false;
+         }
+
          $(document).ready(function () {
              deleteFilter("", false);
 
              $(document).click(function (e)
              {
-                 if (popupToClose != null) {
+                 if ((popupToClose != null) && (!isDescendant(popupToClose[0], e.toElement))) {
                      popupToClose.animate({ opacity: '0.00' }, 500, "easeInOutCubic", function () { popupToClose.toggle(); popupToClose = null; });
 
                      e.preventDefault();
@@ -28,17 +39,7 @@
                      e.preventDefault();
                      e.stopPropagation();
                  }
-             });
-
-             //$("#portionselector").mouseenter(function(e) {
-             //    portionselectorEntered = true;
-             //});
-
-             //$("#portionselector").mouseleave(function (e) {
-             //    portionselectorEntered = false;
-             //    $("#portionselector").animate({ opacity: '0.00' }, 500, "easeInOutCubic");
-             //    refreshAll();
-             //});
+             });             
          });
 
          $(function () {

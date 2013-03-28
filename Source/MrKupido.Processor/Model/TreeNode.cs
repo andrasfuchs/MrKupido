@@ -13,7 +13,7 @@ using MrKupido.Utils;
 
 namespace MrKupido.Processor.Model
 {
-    public class TreeNode
+    public class TreeNode : ITreeNode
     {
         //[ScriptIgnore]
         //protected static MrKupidoContext db = new MrKupidoContext();

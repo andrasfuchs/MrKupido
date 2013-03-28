@@ -122,6 +122,35 @@
          function showAllResults() {
              loadingStop();
              $("details#searchresults li").css({ opacity: 0.0 }).animate({ opacity: '1' }, 750, "easeInOutCubic");
+             $('.nivoSlider').nivoSlider({ effect: 'fade', animSpeed: 1000, pauseTime: 5000, directionNav: false, controlNav: false, controlNavThumbs: false, pauseOnHover: false, beforeChange: beforeSliderChange });
+         }
+
+         function beforeSliderChange(sender, currentSlide, totalSlides) {
+             var pagerImages = sender.parents(".resultbox").next(".resultpager").children("img");
+
+             for (var index = pagerImages.length; index >= totalSlides; index--) {
+                 pagerImages.eq(index).remove();
+             }
+
+             pagerImages = sender.parents(".resultbox").next(".resultpager").children("img");
+
+             for (var index = 0; index < pagerImages.length; index++)
+             {
+                 var img = pagerImages.eq(index);
+
+                 if (index == currentSlide) {
+                     img.animate({ opacity: 1.0 }, 2000, "easeInOutCubic");
+                 } else {
+                     img.animate({ opacity: 0.5 }, 2000, "easeInOutCubic");
+                 }
+             }
+         }
+
+         function changeSliderIndex(sender, newIndex) {
+             var nivoSlider = sender.parent().prev(".resultbox").find(".nivoSlider");
+             nivoSlider.changeIndex(newIndex);
+
+             //console.log(sender + " " + newIndex);
          }
 
          var searchInProgress = false;

@@ -1,0 +1,62 @@
+﻿@model MrKupido.Web.Models.RecipeSearchResultItem
+@using MrKupido.Web.Models
+
+<link rel="stylesheet" href="./Content/themes/default/default.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="./Content/themes/light/light.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="./Content/themes/dark/dark.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="./Content/themes/bar/bar.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="./Content/nivo-slider.css" type="text/css" media="screen" />
+
+<div class="resultbox">
+    <div class="resulthead @Model.CSSClass">
+        <div class="category"></div>
+        <div class="title">
+            <span class="titlecontent">
+
+                <a runat="server" href="~/@Session["Language"]/@((string)Session["Language"] == "hun" ? "recept" : "recipe")/@Model.UniqueName" class='@(Model.IsImplemented ? "enabled" : "disabled")'>
+
+                    @Model.DisplayName
+
+                </a>
+
+                @if (Model.IsHidden)
+                { 
+                    <span>*</span>
+                }
+            </span>
+        </div>
+        <div class="flag">
+            <a href="#">
+                <img class="flag" runat="server" src="~/Content/svg/icon_flag.svg" width="40" height="23" />
+            </a>
+        </div>
+    </div>
+    <div class="resultdetails">
+        <div class="resultphotoframe">
+
+            <div class="nivoSlider">
+                @{ 
+                    Session["i"] = Session["i"] == null ? 1 : ((int)Session["i"] + 1) % 7 + 1; 
+                }
+                <img runat="server" src="~/Content/photos/240x120/sample0@(Session["i"].ToString()).jpg"/>
+                @{ 
+                    Session["i"] = Session["i"] == null ? 1 : ((int)Session["i"] + 1) % 7 + 1; 
+                }
+                <img runat="server" src="~/Content/photos/240x120/sample0@(Session["i"].ToString()).jpg"/>
+                @{ 
+                    Session["i"] = Session["i"] == null ? 1 : ((int)Session["i"] + 1) % 7 + 1; 
+                }
+                <img runat="server" src="~/Content/photos/240x120/sample0@(Session["i"].ToString()).jpg"/>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="resultpager">
+    <img runat="server" src="~/Content/svg/pager_active.svg" width="10" height="10" onclick="changeSliderIndex($(this), 0)" />
+    <img runat="server" src="~/Content/svg/pager_active.svg" width="10" height="10" onclick="changeSliderIndex($(this), 1)" />
+    <img runat="server" src="~/Content/svg/pager_active.svg" width="10" height="10" />
+    <img runat="server" src="~/Content/svg/pager_active.svg" width="10" height="10" />
+    <img runat="server" src="~/Content/svg/pager_active.svg" width="10" height="10" />
+</div>
+

@@ -101,7 +101,7 @@ namespace MrKupido.Processor
             {
                 uint duration = ((IEquipment)parameters[0]).LastActionDuration;
                 ((IEquipment)tempParameters[0]).LastActionDuration = duration;
-                ((IEquipment)parameters[0]).LastActionDuration = 0;
+                ((IEquipment)parameters[0]).LastActionDuration = 0; // I have no idea why is this here...
 
                 if (duration == 0) Trace.TraceWarning("The duration of the action '{0}' is not set.", methodFullName);
             }

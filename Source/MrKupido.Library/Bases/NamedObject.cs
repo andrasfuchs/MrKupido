@@ -38,7 +38,7 @@ namespace MrKupido.Library
             return GetName(System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName);
         }
 
-        public object Clone()
+        public virtual object Clone()
         {
             return this.MemberwiseClone();
         }

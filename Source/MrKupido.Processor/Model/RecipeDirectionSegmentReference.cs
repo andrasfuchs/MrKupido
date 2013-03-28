@@ -12,6 +12,7 @@ namespace MrKupido.Processor.Model
 	public class RecipeDirectionSegmentReference : RecipeDirectionSegment
 	{
 		public int Id { get; private set; }
+		public string Name { get; set; }
 		public string IconUrl { get; set; }
 		public string IconAlt { get; set; }
 		public object Reference { get; private set; }
@@ -107,6 +108,11 @@ namespace MrKupido.Processor.Model
 
                     this.Id = c.Id;
                     this.IconAlt = IntegerToStringHun(c.Id);
+
+					if (c.Contents != null)
+					{
+						this.Name = c.Contents.GetName(languageISO);
+					}
                 }
                 else if (reference is IngredientGroup)
                 {
@@ -177,7 +183,7 @@ namespace MrKupido.Processor.Model
 				}
 			}
 
-			return (String.IsNullOrEmpty(this.IconAlt) ? sb.ToString() : this.IconAlt + " " + sb.ToString());
+			return (String.IsNullOrEmpty(this.Name) ? (String.IsNullOrEmpty(this.IconAlt) ? sb.ToString() : this.IconAlt + " " + sb.ToString()) : this.Name + " " + sb.ToString());
 		}
 	}
 }

@@ -17,9 +17,14 @@ namespace MrKupido.Library
         object[] Operands { get; }
         object Result { get; }
         string Alias { get; }
-        uint ActionDuration { get; }
+
+		ITreeNode Equipment { get; }
+
+		uint ActionDuration { get; }
         bool IsPassive { get; }
-        string IconUrl { get; }
+        string ActionIconUrl { get; }
+
+		ITreeNode[] Parameters { get; }
 
         IDirectionSegment[] DirectionSegments { get; }
     }

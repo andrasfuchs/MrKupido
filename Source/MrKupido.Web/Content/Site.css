@@ -617,9 +617,9 @@ details#recipe div#directionlist li {
             margin: -10px 5px 0 10px;
         }
 
-    details#recipe div#directionlist li span.timer {
-        margin-top: 4px;
-    }
+        details#recipe div#directionlist li span.timer {
+            margin-top: 4px;
+        }
 
     details#recipe div#directionlist li div.directionRightPart {
         position: relative;
@@ -631,57 +631,62 @@ details#recipe div#directionlist li {
         /*border: solid 1px green;*/
     }
 
-    details#recipe div#directionlist li div.directionRightPart span.directionBigIcons {        
-        display: inline-block;
-        opacity: 0.0;
-        height: 70px;
-        width: 630px;
-        /*border: solid 1px red;*/
-    }
-
-    details#recipe div#directionlist li div.directionRightPart span.directionText {
-        position: absolute;
-        bottom: 0px;
-        left: 0px;
-        display: inline-block;
-        width: 700px;
-        height: 70px;
-        /*border: solid 1px blue;*/
-    }
-
-    details#recipe div#directionlist li div.directionRightPart span.directionText span.directionTextContent {
-        display: inline-block;
-        vertical-align: middle;
-        line-height: 25px;
-        -ms-word-wrap: break-word;
-        word-wrap: break-word;
-        /*border: solid 1px black;*/
-    }
-
-        details#recipe div#directionlist li span.directionTextContent img2 {
-            position: relative;
-            top: 4px;
+        details#recipe div#directionlist li div.directionRightPart span.directionBigIcons {
             display: inline-block;
-            padding-top: 0px;
-            margin-top: -10px;
-            vertical-align: bottom;
+            opacity: 0.0;
+            padding: 5px;
+            height: 70px;
+            width: 630px;
+            /*border: solid 1px red;*/
         }
 
-        details#recipe div#directionlist li span.directionTextContent span2 {
-            position: relative;
-            margin-top: -32px;
-            margin-left: -28px;
-            margin-right: -10px;
-            font-size: 12px;
-            font-family: Arial;
-            color: /*mcd*/ #553e31;
-            font-weight: bold;
-            width: 32px;
-            text-align: center;
-            z-index: 3;
-            -webkit-text-shadow: 0px 0px 0 #fffcf5, -1px -1px 0 #fffcf5, 1px -1px 0 #fffcf5, -1px 1px 0 #fffcf5, 1px 1px 0 #fffcf5;
-            text-shadow: 0px 0px 0 #fffcf5, -1px -1px 0 #fffcf5, 1px -1px 0 #fffcf5, -1px 1px 0 #fffcf5, 1px 1px 0 #fffcf5;
+        details#recipe div#directionlist li div.directionRightPart span.directionText {
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            display: inline-block;
+            width: 700px;
+            height: 70px;
+            /*border: solid 1px blue;*/
         }
+
+            details#recipe div#directionlist li div.directionRightPart span.directionText span.directionTextContent {
+                display: inline-block;
+                vertical-align: middle;
+                line-height: 25px;
+                -ms-word-wrap: break-word;
+                word-wrap: break-word;
+                /*border: solid 1px black;*/
+            }
+
+    details#recipe div#directionlist li span.directionTextContent img2 {
+        position: relative;
+        top: 4px;
+        display: inline-block;
+        padding-top: 0px;
+        margin-top: -10px;
+        vertical-align: bottom;
+    }
+
+    details#recipe div#directionlist li span.directionTextContent span2 {
+        position: relative;
+        margin-top: -32px;
+        margin-left: -28px;
+        margin-right: -10px;
+        font-size: 12px;
+        font-family: Arial;
+        color: /*mcd*/ #553e31;
+        font-weight: bold;
+        width: 32px;
+        text-align: center;
+        z-index: 3;
+        -webkit-text-shadow: 0px 0px 0 #fffcf5, -1px -1px 0 #fffcf5, 1px -1px 0 #fffcf5, -1px 1px 0 #fffcf5, 1px 1px 0 #fffcf5;
+        text-shadow: 0px 0px 0 #fffcf5, -1px -1px 0 #fffcf5, 1px -1px 0 #fffcf5, -1px 1px 0 #fffcf5, 1px 1px 0 #fffcf5;
+    }
+
+    details#recipe div#directionlist li span.directionTextContent span {
+        vertical-align: baseline;
+    }
 
 details#searchresults div.resultbox div.resulthead div.title {
     display: table;
@@ -865,7 +870,7 @@ div#pagingright {
 div#profile details li {
     margin: 5px;
     margin-left: 80px;
-    width: 750px;    
+    width: 750px;
     border: none;
 }
 
@@ -888,27 +893,20 @@ div#profile details li {
         div#profile details li div.input input {
             -moz-appearance: none;
             -webkit-appearance: none;
-
             color: /*mcd*/ #553e31;
-
             /* 50% mcl #f3ece6 */
             /* 25% mcl #f9f6f2 */
-
-            /* generated on http://www.colorzilla.com/gradient-editor/#fffcf5+0,eadfd4+100;Custom */            
+            /* generated on http://www.colorzilla.com/gradient-editor/#fffcf5+0,eadfd4+100;Custom */
             /*background: #fffcf5;*/
             background: #eadfd4;
-            
             margin-top: 0;
             width: 375px;
             vertical-align: super;
-            
             font-size: 20px;
             font-family: Cardo, Sans-Serif;
-            text-align: center;            
+            text-align: center;
             outline: none;
-            
             border: 1px solid #cdb8ab;
-            
             border-bottom-width: 2px;
         }
 
@@ -916,29 +914,29 @@ div#profile details li {
                 border-top-right-radius: 5px;
                 border-bottom-right-radius: 5px;
             }
-        
 
-            div#profile details li div.input input:disabled {                
+
+            div#profile details li div.input input:disabled {
                 background: /*bgc*/ #fffcf5;
                 opacity: 0.5;
             }
 
             div#profile details li div.input input:focus {
                 border-color: /*mcm*/ #cdb8ab;
-            }          
+            }
 
             div#profile details li div.input input:invalid {
                 border-bottom-color: /*mcd*/ #f00;
             }
 
-        div#profile details li div.input input[type='button'].unit {
-            margin-left: -50px;
-            width: 40px;
-            border-width: 0px;
-            border-left-width: 1px;
-            border-radius: 0px;
-            padding-left: 10px;
-        }
+            div#profile details li div.input input[type='button'].unit {
+                margin-left: -50px;
+                width: 40px;
+                border-width: 0px;
+                border-left-width: 1px;
+                border-radius: 0px;
+                padding-left: 10px;
+            }
 
 /* ---------------- search result items -------------------------- */
 
@@ -1018,10 +1016,10 @@ input[type='button'] {
     font-size: 14px;
 }
 
-input[type='button'].submit,
-input[type='submit'] {
-    font-size: 20px;
-}
+    input[type='button'].submit,
+    input[type='submit'] {
+        font-size: 20px;
+    }
 
 input[type='button'], input[type='submit'] {
     font-family: Cardo, Sans-Serif;
@@ -1030,22 +1028,20 @@ input[type='button'], input[type='submit'] {
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
-
     background: #fffcf5; /* Old browsers */
-    background: -moz-linear-gradient(top,  #fffcf5 0%, #eadfd4 100%); /* FF3.6+ */
+    background: -moz-linear-gradient(top, #fffcf5 0%, #eadfd4 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fffcf5), color-stop(100%,#eadfd4)); /* Chrome,Safari4+ */
-    background: -webkit-linear-gradient(top,  #fffcf5 0%,#eadfd4 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-linear-gradient(top,  #fffcf5 0%,#eadfd4 100%); /* Opera 11.10+ */
-    background: -ms-linear-gradient(top,  #fffcf5 0%,#eadfd4 100%); /* IE10+ */
-    background: linear-gradient(to bottom,  #fffcf5 0%,#eadfd4 100%); /* W3C */
+    background: -webkit-linear-gradient(top, #fffcf5 0%,#eadfd4 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #fffcf5 0%,#eadfd4 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #fffcf5 0%,#eadfd4 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #fffcf5 0%,#eadfd4 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fffcf5', endColorstr='#eadfd4',GradientType=0 ); /* IE6-9 */
-
     padding-left: 15px;
     padding-right: 15px;
     margin-bottom: 10px;
 }
 
-div.formbuttons {    
+div.formbuttons {
     text-align: center;
 }
 
@@ -1317,37 +1313,43 @@ section#basicrecipe {
         color: #000000;
     }
 
-/* TreeView */
-div.css-treeview img {
-    min-height: 24px;
-    min-width: 24px;
-    max-height: 48px;
-    max-width: 48px;
-}
-
-.css-treeview ul,
-.css-treeview li {
-    padding-left: 20px;
-    margin: 0;
-    margin-top: 10px;
-    list-style: none;
-    vertical-align: central;
-    color: #553e31;
-}
-
-.css-treeview input {
-    position: absolute;
-    -moz-opacity: 0;
-    opacity: 0;
-}
-
+/* ---------------- treeview -------------------------- */
 .css-treeview {
-    font: normal 11px "Segoe UI", Arial, Sans-serif;
+    font: normal 14px "Cardo", Arial, Sans-serif;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
+
+    .css-treeview img {
+        min-height: 24px;
+        min-width: 24px;
+        max-height: 48px;
+        max-width: 48px;
+    }
+
+    .css-treeview ul,
+    .css-treeview li {
+        padding-left: 20px;
+        margin: 0;
+        margin-top: 10px;
+        list-style: none;
+        vertical-align: central;
+        color: #553e31;
+    }
+
+    .css-treeview input {
+        position: absolute;
+        -moz-opacity: 0;
+        opacity: 0;
+        background: none;
+    }
+
+    .css-treeview label {
+        margin-top: -25px;
+        margin-left: 15px;
+    }
 
     .css-treeview a {
         margin-top: -25px;
@@ -1369,9 +1371,12 @@ div.css-treeview img {
         display: none;
     }
 
-    .css-treeview label,
-    .css-treeview label::before {
+    .css-treeview input[type=checkbox] + label,
+    .css-treeview input[type=checkbox]:hover + label,
+    .css-treeview input[type=checkbox]:checked + label,
+    .css-treeview input[type=checkbox]:hover:checked + label {
         cursor: pointer;
+        background: none;
         margin-top: -25px;
         margin-left: 15px;
     }
@@ -1387,52 +1392,12 @@ div.css-treeview img {
     }
 
     .css-treeview label,
-    .css-treeview a,
-    .css-treeview label::before {
+    .css-treeview a {
         display: inline-block;
         height: 16px;
         line-height: 16px;
         vertical-align: middle;
-        /*background: url('../Content/images/tree-icons.png') no-repeat;*/
     }
-
-    .css-treeview label {
-        background-position: 18px 0;
-    }
-
-    /*.css-treeview label::before {
-            content: "";
-            width: 16px;
-            margin: 0 22px 0 0;
-            vertical-align: middle;
-            background-position: 0 -32px;
-        }*/
-
-    .css-treeview input:checked + label::before {
-        background-position: 0 -16px;
-    }
-
-/* webkit adjacent element selector bugfix */
-/*@media screen and (-webkit-min-device-pixel-ratio:0)
-{
-    .css-treeview 
-    {
-        -webkit-animation: webkit-adjacent-element-selector-bugfix infinite 1s;
-    }
-            
-    @-webkit-keyframes webkit-adjacent-element-selector-bugfix 
-    {
-        from 
-        { 
-            padding: 0;
-        } 
-        to 
-        { 
-            padding: 0;
-        }
-    }
-}*/
-
 
 /* ---------------- autocomplete -------------------------- */
 
@@ -1612,9 +1577,9 @@ div.units {
 
     div.units input[type=radio]:checked + label {
         color: #553e31;
-        background-image: none; 
+        background-image: none;
     }
-    
+
 
 
 /* --------------- reviewer ---------------------- */
@@ -1857,15 +1822,29 @@ article.help {
     }
 
 /* ----------- validation ------------ */
-::-webkit-validation-bubble {}
-::-webkit-validation-bubble-message {}
-::-webkit-validation-bubble-arrow {}
-::-webkit-validation-bubble-arrow-clipper {}
+::-webkit-validation-bubble {
+}
 
-::-webkit-validation-bubble-icon {}
-::-webkit-validation-bubble-body {}
-::-webkit-validation-bubble-text-block {}
-::-webkit-validation-bubble-arrow-heading {}
+::-webkit-validation-bubble-message {
+}
+
+::-webkit-validation-bubble-arrow {
+}
+
+::-webkit-validation-bubble-arrow-clipper {
+}
+
+::-webkit-validation-bubble-icon {
+}
+
+::-webkit-validation-bubble-body {
+}
+
+::-webkit-validation-bubble-text-block {
+}
+
+::-webkit-validation-bubble-arrow-heading {
+}
 
 .validationErrors {
     margin: 0px 125px 0px 100px;
@@ -1873,9 +1852,9 @@ article.help {
     text-align: right;
 }
 
-.validationErrors img {
-    vertical-align: sub;
-}
+    .validationErrors img {
+        vertical-align: sub;
+    }
 
 .currentDirection {
     background: #eadfd4;
@@ -1883,4 +1862,35 @@ article.help {
 
 .pastDirection {
     opacity: 0.7;
+}
+
+/* ----------- side B ------------ */
+.resultdetails {
+    background-image: url('../Content/svg/dashed_bg.svg');
+    height: 135px;
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-left: 13px;
+}
+
+.resultphotoframe {
+    width: 240px;
+    height: 120px;
+    border: 2px solid #cdb8ab;
+    border-radius: 20px;
+    -webkit-box-shadow: 1px 1px 0px #553e31;
+    box-shadow: 1px 1px 0px #553e31;
+}
+
+    .resultphotoframe img {
+        width: 240px;
+        height: 120px;
+
+        border-radius: 18px;
+    }
+
+
+.resultpager {
+    margin-top: -5px;
+    margin-left: 105px;
 }

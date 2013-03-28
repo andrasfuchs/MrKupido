@@ -198,7 +198,7 @@ namespace MrKupido.Web.Controllers
             //}
 
             rsr.ItemsPerPage = 6;
-            rsr.PageIndex = 1;
+			rsr.PageIndex = Session["RecipeSearchResult"] == null ? 1 : ((RecipeSearchResult)Session["RecipeSearchResult"]).PageIndex;
 
             Session["RecipeSearchResult"] = rsr;
             return PartialView("_RecipeSearchResultHead", rsr);

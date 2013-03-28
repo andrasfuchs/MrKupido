@@ -225,6 +225,7 @@
     <Compile Include="Interfaces\IIngredientGroup.cs" />
     <Compile Include="Interfaces\INutritionInfo.cs" />
     <Compile Include="Interfaces\ISingleIngredient.cs" />
+    <Compile Include="Interfaces\ITreeNode.cs" />
     <Compile Include="Model\CookedFoodParts.cs" />
     <Compile Include="Model\Dimensions.cs" />
     <Compile Include="Model\EnumToMultilingualString.cs" />

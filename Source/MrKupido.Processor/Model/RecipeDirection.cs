@@ -26,13 +26,19 @@ namespace MrKupido.Processor.Model
         public object[] Operands { get; private set; }
         public object Result { get; private set; }
         public string Alias { get; private set; }
-        public uint ActionDuration { get; private set; }
-        public string[] IconUrls { get; private set; }
-        public string IconUrl { get; set; }
-        public bool IsPassive { get; private set; }
-        public IDirectionSegment[] DirectionSegments { get; private set; }
 
-        private string[] correctionReplacements = { "tált", "tálat", "olajt", "olajat", "mély tányér", "mélytányér", "tésztadarabokot", "tésztadarabokat", "citromhéjt", "citromhéjat", "tejt", "tejet", "sütőpapírrel", "sütőpapírral", "vízt", "vizet", "dióbélt", "dióbelet", "cukort", "cukrot", "fahéjt", "fahéjat", "sertéscombet", "sertéscombot" };
+		public ITreeNode Equipment { get; private set; }
+
+		public uint ActionDuration { get; private set; }
+        public string[] ActionIconUrls { get; private set; }
+        public string ActionIconUrl { get; set; }
+		public bool IsPassive { get; private set; }
+
+		public ITreeNode[] Parameters { get; private set; }
+
+		public IDirectionSegment[] DirectionSegments { get; private set; }
+
+		private string[] correctionReplacements = { "tált", "tálat", "olajt", "olajat", "mély tányér", "mélytányér", "tésztadarabokot", "tésztadarabokat", "citromhéjt", "citromhéjat", "tejt", "tejet", "sütőpapírrel", "sütőpapírral", "vízt", "vizet", "dióbélt", "dióbelet", "cukort", "cukrot", "fahéjt", "fahéjat", "sertéscombet", "sertéscombot", "sertéscombes", "sertéscombos" };
 
         public RecipeDirection(string languageISO, string assemblyName, string command, object[] operands = null, object result = null, RecipeStage stage = RecipeStage.Unknown, int actorIndex = 1, List<string> seenIngredients = null)
         {
@@ -44,12 +50,19 @@ namespace MrKupido.Processor.Model
             Operands = (operands == null ? new string[0] : operands);
             Result = result;
 
-            if (operands[0] is IEquipment)
-            {
-                IEquipment eq = ((IEquipment)operands[0]);
-                ActionDuration = eq.LastActionDuration;
-                TimeToComplete = new TimeSpan(0, 0, (int)eq.LastActionDuration);
-            }
+			Parameters = new IngredientTreeNode[operands.Length - 1];
+
+			if (operands[0] is IEquipment)
+			{
+				IEquipment eq = ((IEquipment)operands[0]);
+				this.Equipment = Cache.Equipment[eq.GetName(languageISO)];
+				ActionDuration = eq.LastActionDuration;
+				TimeToComplete = new TimeSpan(0, 0, (int)eq.LastActionDuration);
+			}
+			else
+			{
+				Console.Write("");
+			}
 
             if (Result is IIngredientGroup)
             {
@@ -61,12 +74,21 @@ namespace MrKupido.Processor.Model
             if (ids.Length == 2)
             {
                 DirectionType = Assembly.Load(AssemblyName).GetType(ids[0]);
+
                 Direction = NameAliasAttribute.GetName(languageISO, DirectionType, ids[1], 100);
                 MemberInfo mi = DirectionType.GetMember(ids[1])[0];
 
-                IconUrls = IconUriFragmentAttribute.GetUrls(mi, "~/Content/svg/action_{0}.svg");
+                ActionIconUrls = IconUriFragmentAttribute.GetUrls(mi, "~/Content/svg/action_{0}.svg");
                 IsPassive = PassiveActionAttribute.IsMethodPassiveAction(mi);
             }
+
+			for (int i = 1; i < operands.Length; i++)
+			{
+				if (operands[i] is IIngredient)
+				{
+					Parameters[i-1] = Cache.Ingredient[((IIngredient)operands[i]).GetName(languageISO)];
+				} 
+			}
 
             this.DirectionSegments = GenerateSegments(languageISO, seenIngredients);
         }
@@ -214,6 +236,10 @@ namespace MrKupido.Processor.Model
                 else
                 {
                     RecipeDirectionSegmentReference rdsr = new RecipeDirectionSegmentReference(languageISO, operand, seenIngredients);
+					if (!String.IsNullOrEmpty(rdsr.Name))
+					{
+						rdsr.Name = Affixate(PrepareForAffix(rdsr.Name), 'S');
+					}
 
                     // TODO: special (culture dependent) formatting for {0T} {0N} etc. etc.
                     if (affixId != Char.MinValue)
@@ -297,20 +323,34 @@ namespace MrKupido.Processor.Model
             // replace the word which are irregular
             foreach (RecipeDirectionSegment segment in result)
             {
-                if (segment.Text == "-") segment.Text = "";
+				segment.Text = ReplaceIrregularWord(segment.Text);
 
-                segment.Text = " " + segment.Text + " ";
-
-                for (int i = 0; i < correctionReplacements.Length / 2; i++)
-                {
-                    segment.Text = segment.Text.Replace(" " + correctionReplacements[i * 2] + " ", " " + correctionReplacements[i * 2 + 1] + " ");
-                }
-
-                segment.Text = segment.Text.Substring(1, segment.Text.Length - 2);
+				if (segment is RecipeDirectionSegmentReference)
+				{
+					((RecipeDirectionSegmentReference)segment).Name = ReplaceIrregularWord(((RecipeDirectionSegmentReference)segment).Name);
+				}
             }
 
             return result.ToArray();
         }
+
+		private string ReplaceIrregularWord(string word)
+		{
+			string result = word;
+
+			if (result == "-") result = "";
+
+			result = " " + result + " ";
+
+			for (int i = 0; i < correctionReplacements.Length / 2; i++)
+			{
+				result = result.Replace(" " + correctionReplacements[i * 2] + " ", " " + correctionReplacements[i * 2 + 1] + " ");
+			}
+
+			result = result.Substring(1, result.Length - 2);
+
+			return result;
+		}
 
         private static VowelHarmony VowelHarmonyOf(string word, bool separateHighTypes = false)
         {
@@ -418,6 +458,19 @@ namespace MrKupido.Processor.Model
                         if (vh == VowelHarmony.HighType2) result += "ön";
                     }
                     break;
+				case 'S':
+					if (StringUtils.IsVowel(result[result.Length - 1]))
+					{
+						result += "s";
+					}
+					else
+					{
+						if (vh == VowelHarmony.Low) result += "os";
+						if (vh == VowelHarmony.HighType1) result += "es";
+						if (vh == VowelHarmony.HighType2) result += "ös";
+						if (vh == VowelHarmony.Mixed) result += "s";
+					}
+					break;
                 default:
                     throw new MrKupidoException("The affix id '{0}' is unknown, so the word '{1}' can't be processed.", affixId, word);
             }

@@ -84,7 +84,7 @@ namespace MrKupido.Web
 
             CultureInitializer.InitializeCulture(Request, new HttpSessionStateWrapper(Session), language);
 
-            if (!(Request.Url.AbsoluteUri.Contains("notsupportedbrowser") || Request.Url.AbsoluteUri.Contains("IgnoreOldBrowser")))
+            if (!(Request.Url.AbsoluteUri.Contains("NotSupportedBrowser") || Request.Url.AbsoluteUri.Contains("IgnoreOldBrowser")))
             {
                 // =================================
                 // Check browser version

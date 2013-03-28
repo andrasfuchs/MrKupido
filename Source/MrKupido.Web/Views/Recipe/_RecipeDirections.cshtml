@@ -124,11 +124,20 @@ else
                 <span class="timer">
                     <img runat="server" id="clock_@((time + dir.TimeToComplete).TotalSeconds)" src="~/Content/svg/d_clock0.svg" alt="1 perc" width="60px" height="60px" />
                     <span class="action">
-                        <img runat="server" src="@dir.IconUrl" width="60px" height="60px" onclick="javascript: timerCounter = @((time).TotalSeconds); timer.start();" />
+                        <img runat="server" src="@dir.ActionIconUrl" width="60px" height="60px" onclick="javascript: timerCounter = @((time).TotalSeconds); timer.start();" />
                     </span>
                 </span>
                 <div class="directionRightPart">
-                    <span class="directionBigIcons"></span>
+                    <span class="directionBigIcons">
+                        <img runat="server" src="@dir.Equipment.IconUrl" width="60px" height="60px" />
+                        @foreach (MrKupido.Library.ITreeNode tn in dir.Parameters)
+                        {
+                            if (tn != null)
+                            {
+                                <img runat="server" src="@tn.IconUrl" width="60px" height="60px" />
+                            }
+                        }
+                    </span>
                     <span class="directionText">
                         <span class="directionTextContent">
                             @foreach (MrKupido.Library.IDirectionSegment segment in dir.DirectionSegments)
@@ -145,7 +154,12 @@ else
                                     if (refSegment.Id > 0)
                                     {
                                         @*<span>@refSegment.Id</span>*@
-                                        <span>@refSegment.IconAlt</span>
+                                        @*<span>@refSegment.IconAlt</span>*@
+                                    }
+                                    
+                                    if (!String.IsNullOrEmpty(refSegment.Name))
+                                    {
+                                        <span>@refSegment.Name</span>
                                     }
                             
                                 @refSegment.Text

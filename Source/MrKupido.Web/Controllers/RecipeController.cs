@@ -49,7 +49,7 @@ namespace MrKupido.Web.Controllers
         {
             foreach (RecipeDirection direction in directions)
             {
-                if (direction.IconUrl == null) direction.IconUrl = PathUtils.GetActualUrl(direction.IconUrls);
+                if (direction.ActionIconUrl == null) direction.ActionIconUrl = PathUtils.GetActualUrl(direction.ActionIconUrls);
 
                 foreach (RecipeDirectionSegment segment in direction.DirectionSegments)
                 {

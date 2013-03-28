@@ -770,6 +770,7 @@
     <Content Include="ClassDiagram.cd" />
     <None Include="Properties\PublishProfiles\HFL_beta.pubxml" />
     <Content Include="Resources\Web.config" />
+    <Content Include="Scripts\jquery.nivo.slider.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js">
       <DependentUpon>jquery.unobtrusive-ajax.js</DependentUpon>
@@ -838,6 +839,8 @@
     <Content Include="Views\Help\FeatureGuideLevel2.cshtml" />
     <Content Include="Views\Help\WhoIsMrKupido.cshtml" />
     <Content Include="Views\Shared\_ValidationErrors.cshtml" />
+    <Content Include="Views\Home\_RecipeSearchResultSideA.cshtml" />
+    <Content Include="Views\Home\_RecipeSearchResultSideB.cshtml" />
     <None Include="Web.Debug_at_localhost.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -962,7 +965,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.None" BuildVersion_UpdateFileVersion="False" BuildVersion_StartDate="1975/10/21" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="1975/10/21" BuildVersion_UpdateFileVersion="False" BuildVersion_BuildVersioningStyle="None.None.None.None" />
     </VisualStudio>
   </ProjectExtensions>
   <ItemGroup>

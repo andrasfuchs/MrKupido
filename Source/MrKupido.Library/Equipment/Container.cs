@@ -16,6 +16,7 @@ namespace MrKupido.Library.Equipment
         public int Id { get; set; }
 
         protected IngredientGroup contents = new IngredientGroup();
+
         [NameAlias("hun", "{} tartalma")]
         public IIngredient Contents 
         {
@@ -143,5 +144,13 @@ namespace MrKupido.Library.Equipment
         {
             this.contents = new IngredientGroup();
         }
+
+		public override object Clone()
+		{
+			object result = this.MemberwiseClone();
+			((Container)result).contents = new IngredientGroup(this.contents);
+
+			return result;
+		}
     }
 }
