@@ -759,6 +759,10 @@ details#searchresults li {
             vertical-align: middle;
         }
 
+        details#searchresults li div.resulticons a {
+            text-decoration: none;
+        }
+
         details#searchresults li div.resulticons div.preptime {
             display: inline;
             position: relative;
@@ -1357,6 +1361,9 @@ section#basicrecipe {
         color: #553e31;
         text-decoration: none;
         /*padding-left: 20px;*/
+
+        pointer-events: none;
+        cursor: default;
     }
 
         .css-treeview a:hover {
@@ -1891,6 +1898,13 @@ article.help {
 
 
 .resultpager {
+    width: 268px;
     margin-top: -5px;
-    margin-left: 105px;
+}
+
+.resultpager-images {
+    display: block;
+    margin: auto;
+    height: 30px;
+    text-align: center;
 }

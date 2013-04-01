@@ -20,7 +20,9 @@
             running: false,
             paused: false,
             stop: false,
-            controlNavEl: false
+            controlNavEl: false,
+            timer: 0,
+            nextChangeSyncTime: null
         };
 
         // Get this slider
@@ -114,9 +116,8 @@
         processCaption(settings);
         
         // In the words of Super Mario "let's a go!"
-        var timer = 0;
         if(!settings.manualAdvance && kids.length > 1){
-            timer = setInterval(function(){ nivoRun(slider, kids, settings, false); }, settings.pauseTime);
+            vars.timer = setInterval(function(){ nivoRun(slider, kids, settings, false); }, settings.pauseTime);
         }
         
         // Add Direction nav
@@ -125,16 +126,16 @@
             
             $(slider).on('click', 'a.nivo-prevNav', function(){
                 if(vars.running) { return false; }
-                clearInterval(timer);
-                timer = '';
+                clearInterval(vars.timer);
+                vars.timer = '';
                 vars.currentSlide -= 2;
                 nivoRun(slider, kids, settings, 'prev');
             });
             
             $(slider).on('click', 'a.nivo-nextNav', function(){
                 if(vars.running) { return false; }
-                clearInterval(timer);
-                timer = '';
+                clearInterval(vars.timer);
+                vars.timer = '';
                 nivoRun(slider, kids, settings, 'next');
             });
         }
@@ -160,30 +161,19 @@
             $('a:eq('+ vars.currentSlide +')', vars.controlNavEl).addClass('active');
             
             $('a', vars.controlNavEl).bind('click', changeIndex($(this).attr('rel')));
-        }
-
-        function changeIndex(newIndex) {
-            if (vars.running) return false;
-            if ($(this).hasClass('active')) return false;
-            clearInterval(timer);
-            timer = '';
-            sliderImg.attr('src', vars.currentImage.attr('src'));
-            vars.currentSlide = newIndex - 1;
-            nivoRun(slider, kids, settings, 'control');
-        }
-        
+        }        
         
         //For pauseOnHover setting
         if(settings.pauseOnHover){
             slider.hover(function(){
                 vars.paused = true;
-                clearInterval(timer);
-                timer = '';
+                clearInterval(vars.timer);
+                vars.timer = '';
             }, function(){
                 vars.paused = false;
-                // Restart the timer
-                if(timer === '' && !settings.manualAdvance){
-                    timer = setInterval(function(){ nivoRun(slider, kids, settings, false); }, settings.pauseTime);
+                // Restart the vars.timer
+                if(vars.timer === '' && !settings.manualAdvance){
+                    vars.timer = setInterval(function(){ nivoRun(slider, kids, settings, false); }, settings.pauseTime);
                 }
             });
         }
@@ -202,9 +192,9 @@
             if($(kids[vars.currentSlide]).is('a')){
                 $(kids[vars.currentSlide]).css('display','block');
             }
-            // Restart the timer
-            if(timer === '' && !vars.paused && !settings.manualAdvance){
-                timer = setInterval(function(){ nivoRun(slider, kids, settings, false); }, settings.pauseTime);
+            // Restart the vars.timer
+            if(vars.timer === '' && !vars.paused && !settings.manualAdvance){
+                vars.timer = setInterval(function(){ nivoRun(slider, kids, settings, false); }, settings.pauseTime);
             }
             // Trigger the afterChange callback
             settings.afterChange.call(this);
@@ -301,6 +291,24 @@
             // Stop
             if((!vars || vars.stop) && !nudge) { return false; }
             
+            // let's sync
+            if (vars.nextChangeSyncTime)
+            {
+                var timeToWait = vars.nextChangeSyncTime - new Date().getTime();
+                if (timeToWait > 0) {
+                    setInterval(nivoAnimate(slider, kids, settings, nudge, vars), timeToWait);
+                } else {
+                    nivoAnimate(slider, kids, settings, nudge, vars);
+                }
+                vars.nextChangeSyncTime = null;
+            } else
+            {
+                nivoAnimate(slider, kids, settings, nudge, vars);
+            }
+        }
+
+        var nivoAnimate = function (slider, kids, settings, nudge, vars) {
+
             // Trigger the beforeChange callback
             settings.beforeChange.call(this, slider, vars.currentSlide, vars.totalSlides);
 
@@ -617,6 +625,16 @@
                 trace('Start Slider');
             }
         };
+
+        this.changeIndex = function(newIndex) {
+            if (vars.running) return false;
+            if ($(this).hasClass('active')) return false;
+            clearInterval(vars.timer);
+            vars.timer = '';
+            sliderImg.attr('src', vars.currentImage.attr('src'));
+            vars.currentSlide = newIndex - 1;
+            nivoRun(slider, kids, settings, 'control');
+        }
         
         // Trigger the afterLoad callback
         settings.afterLoad.call(this);

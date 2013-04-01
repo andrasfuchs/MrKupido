@@ -1,6 +1,18 @@
 ﻿@model MrKupido.Web.Models.RecipeSearchResultItem
 @using MrKupido.Web.Models
 
+<script type="text/javascript">
+    function flipToSideB@(Model.Index)(uniqueName) {
+             $("li#" + uniqueName).animate({ opacity: 0.0 }, 500, "easeInOutCubic", function() {
+                 $.get('@Url.Action("RenderSideB","Home", new { uniqueName = Model.UniqueName } )', function (data) {
+                     $("li#" + uniqueName).html(data);
+                     $("div#nivoSlider" + @(Model.Index) + "").nivoSlider({ effect: 'fade', animSpeed: 1000, pauseTime: 5000, directionNav: false, controlNav: false, controlNavThumbs: false, pauseOnHover: false, beforeChange: beforeSliderChange, afterChange: afterSliderChange });
+                     $("li#" + uniqueName).animate({ opacity: 1.0 }, 500, "easeInOutCubic");
+                 });
+             });
+         }
+</script>
+
 <div class="resultbox">
     <div class="resulthead @Model.CSSClass">
         <div class="category">
@@ -22,7 +34,7 @@
             </span>
         </div>
         <div class="flag">
-            <a href="#">
+            <a href="javascript:flipToSideB@(Model.Index)('@Model.UniqueName')">
                 <img class="flag" runat="server" src="~/Content/svg/icon_flag.svg" width="40px" height="23px" />
             </a>
         </div>
@@ -92,7 +104,9 @@
 
             if ((Model.Photos != null) && (Model.Photos.Length > 0))
             { 
-            <img runat="server" src="~/Content/svg/icon_photos.svg" alt="@Model.Photos.Length kép" width="40px" height="45px" />
+                <a href="javascript:flipToSideB@(Model.Index)('@Model.UniqueName')">
+                    <img runat="server" src="~/Content/svg/icon_photos.svg" alt="@Model.Photos.Length kép" width="40px" height="45px" />
+                </a>
             }
             else
             { 

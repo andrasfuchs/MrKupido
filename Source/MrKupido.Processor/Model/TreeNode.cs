@@ -25,7 +25,8 @@ namespace MrKupido.Processor.Model
 
         public char NodeType { get; private set; }
         public string LanguageISO { get; private set; }
-        public string UniqueName { get; protected set; }
+		public string UniqueName { get; private set; }
+		public string UniqueNameEng { get; private set; }
         public string ShortName { get; protected set; }
         public string LongName { get; protected set; }
         public string ClassName { get; private set; }
@@ -80,6 +81,7 @@ namespace MrKupido.Processor.Model
             ShortName = ShortName.TrimEnd();
             LongName = name;
             UniqueName = LongName.ToUniqueString();
+			UniqueNameEng = NameAliasAttribute.GetName("eng", nodeClass).ToUniqueString();
 
             if (nodeClass.IsSubclassOf(typeof(MrKupido.Library.Equipment.EquipmentBase)) || (nodeClass == typeof(MrKupido.Library.Equipment.EquipmentBase))) NodeType = 'E';
             else if (nodeClass.IsSubclassOf(typeof(MrKupido.Library.Recipe.RecipeBase)) || (nodeClass == typeof(MrKupido.Library.Recipe.RecipeBase))) NodeType = 'R';

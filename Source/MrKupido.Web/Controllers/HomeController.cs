@@ -204,7 +204,17 @@ namespace MrKupido.Web.Controllers
             return PartialView("_RecipeSearchResultHead", rsr);
         }
 
-        [HttpPost]
+		public ActionResult RenderSideA(string uniqueName)
+		{
+			return PartialView("_RecipeSearchResultSideA", ((RecipeSearchResult)Session["RecipeSearchResult"]).Items.First(rsri => rsri.UniqueName == uniqueName));
+		}
+
+		public ActionResult RenderSideB(string uniqueName)
+		{
+			return PartialView("_RecipeSearchResultSideB", ((RecipeSearchResult)Session["RecipeSearchResult"]).Items.First(rsri => rsri.UniqueName == uniqueName));
+		}
+		
+		[HttpPost]
         public ActionResult RefreshRecipeResults(string actionName)
         {
             if (Session["RecipeSearchResult"] == null) return null;

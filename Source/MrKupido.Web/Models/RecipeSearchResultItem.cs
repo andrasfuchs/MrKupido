@@ -18,6 +18,8 @@ namespace MrKupido.Web.Models
     {
         private static Random rnd = new Random();
 
+		public int Index;
+
         public ShoppingListCategory MainCategory;
         public string IconUrl;
         public string DisplayName;
@@ -30,7 +32,7 @@ namespace MrKupido.Web.Models
         public bool IsVegetarian;
         public bool IsGlutenFree;
         public bool IsLactoseFree;
-        public Uri[] Photos;
+        public string[] Photos;
         public int SubVersions;
         
         public string MainIngredients;
@@ -151,6 +153,22 @@ namespace MrKupido.Web.Models
 
                 CSSClass = "commercial";
             }
+
+
+			// get the images
+			List<string> photos = new List<string>();
+			for (int i = 1; i <= 99; i++)
+			{
+				string url = String.Format("~/Content/photos/960x480/{0}_{1}.jpg", rtn.UniqueNameEng, i.ToString("00"));
+
+				url = PathUtils.GetActualUrl(new string[] { url });
+
+				if (url != null)
+				{
+					photos.Add(url);
+				}
+			}
+			this.Photos = photos.ToArray();
         }
 
         public override string ToString()

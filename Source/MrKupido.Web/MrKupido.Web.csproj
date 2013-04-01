@@ -443,12 +443,43 @@
     <Content Include="Content\images\logo_google120x60.png" />
     <Content Include="Content\images\logo_mrkupido_wide.png" />
     <Content Include="Content\images\mrkupido.ico" />
+    <Content Include="Content\nivo-slider.css" />
+    <Content Include="Content\photos\240x120\sample01.jpg" />
+    <Content Include="Content\photos\240x120\sample02.jpg" />
+    <Content Include="Content\photos\240x120\sample03.jpg" />
+    <Content Include="Content\photos\240x120\sample04.jpg" />
+    <Content Include="Content\photos\240x120\sample05.jpg" />
+    <Content Include="Content\photos\240x120\sample06.jpg" />
+    <Content Include="Content\photos\240x120\sample07.jpg" />
+    <Content Include="Content\photos\480x240\sample01.jpg" />
+    <Content Include="Content\photos\480x240\sample02.jpg" />
+    <Content Include="Content\photos\480x240\sample03.jpg" />
+    <Content Include="Content\photos\480x240\sample04.jpg" />
+    <Content Include="Content\photos\480x240\sample05.jpg" />
+    <Content Include="Content\photos\480x240\sample06.jpg" />
+    <Content Include="Content\photos\480x240\sample07.jpg" />
+    <Content Include="Content\photos\960x480\apple-cinemon-mixup_01.jpg" />
+    <Content Include="Content\photos\960x480\apple-cinemon-mixup_02.jpg" />
+    <Content Include="Content\photos\960x480\apple-cinemon-mixup_03.jpg" />
+    <Content Include="Content\photos\960x480\cocoa-spiral_01.jpg" />
+    <Content Include="Content\photos\960x480\cocoa-spiral_02.jpg" />
+    <Content Include="Content\photos\960x480\cocoa-spiral_03.jpg" />
+    <Content Include="Content\photos\960x480\cocoa-spiral_04.jpg" />
+    <Content Include="Content\photos\960x480\hortobagy-meat-pancake_01.jpg" />
+    <Content Include="Content\photos\960x480\hortobagy-meat-pancake_02.jpg" />
+    <Content Include="Content\photos\960x480\hortobagy-meat-pancake_03.jpg" />
+    <Content Include="Content\photos\960x480\muffin-with-cinemon_01.jpg" />
+    <Content Include="Content\photos\960x480\mustard-garlic-chicken_01.jpg" />
+    <Content Include="Content\photos\960x480\mustard-garlic-chicken_02.jpg" />
+    <Content Include="Content\photos\960x480\mustard-garlic-chicken_03.jpg" />
     <Content Include="Content\Site.min.css">
       <DependentUpon>Site.css</DependentUpon>
     </Content>
     <Content Include="Content\svg\action_bake.svg" />
     <Content Include="Content\svg\action_chop.svg" />
     <Content Include="Content\svg\action_circle.svg" />
+    <Content Include="Content\svg\action_container__pull_out.svg" />
+    <Content Include="Content\svg\action_container__put_in.svg" />
     <Content Include="Content\svg\action_cotton.svg" />
     <Content Include="Content\svg\action_cover.svg" />
     <Content Include="Content\svg\action_crumple.svg" />
@@ -460,23 +491,31 @@
     <Content Include="Content\svg\action_deep_device__put_in.svg" />
     <Content Include="Content\svg\action_default.svg" />
     <Content Include="Content\svg\action_dip_into.svg" />
+    <Content Include="Content\svg\action_disassemble.svg" />
+    <Content Include="Content\svg\action_dismember.svg" />
+    <Content Include="Content\svg\action_drip.svg" />
     <Content Include="Content\svg\action_egg-beater.svg" />
     <Content Include="Content\svg\action_get_off.svg" />
     <Content Include="Content\svg\action_grease.svg" />
+    <Content Include="Content\svg\action_hand__pull_out.svg" />
+    <Content Include="Content\svg\action_hand__put_in.svg" />
     <Content Include="Content\svg\action_heat_up.svg" />
     <Content Include="Content\svg\action_knead_to_balls.svg" />
     <Content Include="Content\svg\action_mix_together.svg" />
+    <Content Include="Content\svg\action_mix_up.svg" />
     <Content Include="Content\svg\action_peel.svg" />
     <Content Include="Content\svg\action_plow.svg" />
     <Content Include="Content\svg\action_pour_into.svg" />
     <Content Include="Content\svg\action_pour_off.svg" />
     <Content Include="Content\svg\action_pour_on.svg" />
+    <Content Include="Content\svg\action_preheat.svg" />
     <Content Include="Content\svg\action_put_on.svg" />
     <Content Include="Content\svg\action_rasp.svg" />
     <Content Include="Content\svg\action_roll.svg" />
     <Content Include="Content\svg\action_roll_out.svg" />
     <Content Include="Content\svg\action_separate.svg" />
     <Content Include="Content\svg\action_serve.svg" />
+    <Content Include="Content\svg\action_spread.svg" />
     <Content Include="Content\svg\action_sprinkle.svg" />
     <Content Include="Content\svg\action_squash.svg" />
     <Content Include="Content\svg\action_strech.svg" />
@@ -523,6 +562,7 @@
     <Content Include="Content\svg\crowd_3.svg" />
     <Content Include="Content\svg\crowd_4.svg" />
     <Content Include="Content\svg\crowd_5.svg" />
+    <Content Include="Content\svg\dashed_bg.svg" />
     <Content Include="Content\svg\d_clock0.svg" />
     <Content Include="Content\svg\d_clock1.svg" />
     <Content Include="Content\svg\d_clock2.svg" />
@@ -626,6 +666,8 @@
     <Content Include="Content\svg\n_nature.svg" />
     <Content Include="Content\svg\n_pig.svg" />
     <Content Include="Content\svg\n_plant.svg" />
+    <Content Include="Content\svg\pager.svg" />
+    <Content Include="Content\svg\pager_active.svg" />
     <Content Include="Content\svg\paging_first.svg" />
     <Content Include="Content\svg\paging_last.svg" />
     <Content Include="Content\svg\paging_next.svg" />
@@ -850,6 +892,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\photos\originals\" />
     <Folder Include="Scripts\TypeScript\" />
   </ItemGroup>
   <ItemGroup>
@@ -965,7 +1008,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="1975/10/21" BuildVersion_UpdateFileVersion="False" BuildVersion_BuildVersioningStyle="None.None.None.None" />
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.None" BuildVersion_UpdateFileVersion="False" BuildVersion_StartDate="1975/10/21" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
   <ItemGroup>

@@ -79,6 +79,7 @@ namespace MrKupido.Web.Models
             foreach (RecipeTreeNode rtn in results)
             {
                 Items.Add(new RecipeSearchResultItem(rtn));
+				Items[Items.Count - 1].Index = Items.Count - 1;
             }
 
             // TODO: build category groups

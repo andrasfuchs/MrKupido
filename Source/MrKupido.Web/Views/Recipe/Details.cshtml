@@ -50,7 +50,7 @@
                  step: 250,
                  slide: function (event, ui) {
                      $("#portionamount").val(ui.value + " kcal");
-                     refreshAll();
+                     refreshAll(ui.value);
                  }
              });
              $("#portionamount").val($("#portionslider").slider("value") + " kcal");
@@ -100,8 +100,8 @@
              refreshAll();
          }
 
-         function refreshAll() {
-             var portion = $("#portionslider").slider("value");
+         function refreshAll(portionValue) {
+             var portion = (portionValue != null ? portionValue : $("#portionslider").slider("value"));
              var multiplier = parseInt($("#portioncountervalue").html(), 10);
 
              $.ajax({
