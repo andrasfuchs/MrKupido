@@ -12,7 +12,18 @@ namespace MrKupido.Library.Recipe
     [NameAlias("eng", "sour cream")]
     [NameAlias("hun", "tejföl")]
 
-    [IngredientConsts(GrammsPerLiter = 1750, IsIngrec = true)]
+	[IngredientConsts(
+		IsIngrec = true,
+		Category = ShoppingListCategory.Other,
+		GrammsPerLiter = 946,
+		KCaloriesPer100Gramms = 193.0f,
+		CarbohydratesPer100Gramms = 10.8f,
+		FatPer100Gramms = 173.0f,
+		ProteinPer100Gramms = 8.8f,
+		GlichemicalIndex = 2,
+		InflammationFactor = -111
+	)]
+
     public class Tejfol : RecipeBase
     {
         public Tejfol(float amount, MeasurementUnit unit = MeasurementUnit.liter)

@@ -60,7 +60,7 @@ namespace MrKupido.Web.Models
                 StringBuilder sb = new StringBuilder();
                 foreach (string key in value.HttpContext.Request.Params.AllKeys)
                 {
-                    if ((key == "ASP.NET_SessionId") || (key.ToUpper() == key) || key.StartsWith("__")) continue;
+					if ((key == "ASP.NET_SessionId") || (key.ToUpper() == key) || key.StartsWith("__") || (key.StartsWith("DotNetOpenAuth.WebServerClient.XSRF-Session"))) continue;
                     sb.Append(key);
                     sb.Append(':');
                     sb.Append(value.HttpContext.Request.Params[key]);

@@ -10,7 +10,17 @@ namespace MrKupido.Library.Recipe
     [NameAlias("hun", "vaj")]
     [NameAlias("eng", "butter")]
 
-    [IngredientConsts(IsIngrec = true)]
+	[IngredientConsts(
+		IsIngrec = true,
+		Category = ShoppingListCategory.Other,
+		KCaloriesPer100Gramms = 717.0f,
+		CarbohydratesPer100Gramms = 0.4f,
+		FatPer100Gramms = 713.0f,
+		ProteinPer100Gramms = 3.6f,
+		GlichemicalIndex = 0,
+		InflammationFactor = -317
+	)]
+
     public class Vaj : RecipeBase
     {
         public Vaj(float amount, MeasurementUnit unit = MeasurementUnit.gramm)

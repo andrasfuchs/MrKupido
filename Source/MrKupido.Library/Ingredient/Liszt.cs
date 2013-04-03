@@ -11,6 +11,17 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "liszt", Priority = 1)]
     [NameAlias("hun", "búzaliszt")]
 
+	[IngredientConsts(
+		Category = ShoppingListCategory.Other,
+		KCaloriesPer100Gramms = 366.0f,
+		CarbohydratesPer100Gramms = 314.0f,
+		FatPer100Gramms = 12.4f,
+		ProteinPer100Gramms = 39.3f,
+		GlichemicalIndex = 53,
+		InflammationFactor = -387
+	)]
+
+
     [GristOf(typeof(TriticumAestivum))]
     public class Liszt : SingleIngredient
     {

@@ -10,8 +10,16 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("eng", "cinemon")]
     [NameAlias("hun", "fahéj")]
 
-    // TODO: GrammsPerPiece
-    //[IngredientConsts(GrammsPerPiece = 3)]
+	[IngredientConsts(
+		Category = ShoppingListCategory.Spice,
+		KCaloriesPer100Gramms = 247.0f,
+		CarbohydratesPer100Gramms = 229.0f,
+		FatPer100Gramms = 10.4f,
+		ProteinPer100Gramms = 7.3f,
+		GlichemicalIndex = 10,
+		InflammationFactor = -55
+	)]
+
 
     [YieldOf(typeof(CinnamomumVerum))]
     public class Fahej : SingleIngredient

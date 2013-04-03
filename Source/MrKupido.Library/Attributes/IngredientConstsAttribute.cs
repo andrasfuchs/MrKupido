@@ -34,6 +34,8 @@ namespace MrKupido.Library.Attributes
         /// Glichemical index between 1 and 100
         /// </summary>
         public int GlichemicalIndex;
+
+		public int InflammationFactor;
         
         /// <summary>
         /// Relative potencial of alkalinity (+) or acidity (-) between +50 and -50
@@ -43,7 +45,10 @@ namespace MrKupido.Library.Attributes
 
         public float GrammsPerLiter;
         public float GrammsPerPiece;
-        public float KCaloriesPerGramm;
+        public float KCaloriesPer100Gramms;
+		public float CarbohydratesPer100Gramms;
+		public float FatPer100Gramms;
+		public float ProteinPer100Gramms;
 
         /// <summary>
         /// True if it is more like a category not a physical ingredient. Abstract ingredients must have the DefaultChild defined 

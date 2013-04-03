@@ -9,7 +9,18 @@ namespace MrKupido.Library.Recipe
     [NameAlias("eng", "baking soda")]
     [NameAlias("hun", "szódabikarbóna")]
 
-    [IngredientConsts(IsIngrec = true)]
+	[IngredientConsts(
+		IsIngrec = true,
+		Category = ShoppingListCategory.Other,
+		KCaloriesPer100Gramms = 0.0f,
+		CarbohydratesPer100Gramms = 0.0f,
+		FatPer100Gramms = 0.0f,
+		ProteinPer100Gramms = 0.0f,
+		GlichemicalIndex = 0,
+		InflammationFactor = 0
+	)]
+
+
     public class Szodabikarbona : RecipeBase
     {
         public Szodabikarbona(float amount, MeasurementUnit unit = MeasurementUnit.gramm)

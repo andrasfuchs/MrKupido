@@ -12,8 +12,16 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "olaj", Priority = 1)]
     [NameAlias("hun", "napraforgó olaj")]
 
-    // TODO: GrammsPerLiter
-    [IngredientConsts(GrammsPerLiter = 1000)]
+    [IngredientConsts(
+		Category = ShoppingListCategory.Other,
+		GrammsPerLiter = 921.1f,
+		KCaloriesPer100Gramms = 844.0f,
+		CarbohydratesPer100Gramms = 0.0f,
+		FatPer100Gramms = 844.0f,
+		ProteinPer100Gramms = 0.0f,
+		GlichemicalIndex = 0,
+		InflammationFactor = 13
+	)]
 
     [OilOf(typeof(HelianthusAnnuus))]
     public class NapraforgoOlaj : SingleIngredient

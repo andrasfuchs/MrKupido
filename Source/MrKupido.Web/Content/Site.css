@@ -1045,6 +1045,12 @@ input[type='button'], input[type='submit'] {
     margin-bottom: 10px;
 }
 
+input[type='button']:hover, input[type='submit'] {
+    cursor: pointer;
+    border: 1px solid #553e31;
+}
+
+
 div.formbuttons {
     text-align: center;
 }
@@ -1907,4 +1913,17 @@ article.help {
     margin: auto;
     height: 30px;
     text-align: center;
+}
+
+/* ----------- login page description ------------ */
+div.description h2{
+    font-size: 22px;
+    text-align: center;
+    margin: 25px;
+}
+
+div.description h3{
+    font-size: 14px;
+    text-align: center;
+    margin: 20px;
 }

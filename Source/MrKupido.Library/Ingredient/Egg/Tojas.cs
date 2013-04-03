@@ -11,7 +11,16 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "tojás", Priority = 1)]
     [NameAlias("hun", "tyúktojás")]
 
-    [IngredientConsts(Category = ShoppingListCategory.Other, GrammsPerPiece = 30)]
+    [IngredientConsts(
+		Category = ShoppingListCategory.Other, 
+		GrammsPerPiece = 44.0f,
+		KCaloriesPer100Gramms = 143.0f,
+		CarbohydratesPer100Gramms = 3.2f,
+		FatPer100Gramms = 89.5f,
+		ProteinPer100Gramms = 50.3f,
+		GlichemicalIndex = 1,
+		InflammationFactor = -92
+		)]
 
     [EggOf(typeof(GallusGallusDomesticus))]
     public class Tojas : SingleIngredient

@@ -10,8 +10,16 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("eng", "whole black pepper")]
     [NameAlias("hun", "fekete bors")]
 
-    // TODO: GrammsPerPiece
-    [IngredientConsts(Category = ShoppingListCategory.Spice, GrammsPerPiece = 3)]
+	[IngredientConsts(
+		Category = ShoppingListCategory.Spice,
+		GrammsPerPiece = 0.5f,
+		KCaloriesPer100Gramms = 15.9f,
+		CarbohydratesPer100Gramms = 13.0f,
+		FatPer100Gramms = 1.7f,
+		ProteinPer100Gramms = 1.3f,
+		GlichemicalIndex = 1,
+		InflammationFactor = -5
+	)]
 
     [YieldOf(typeof(PiperNigrum))]
     public class FeketeBors : SingleIngredient

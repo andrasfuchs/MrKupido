@@ -7,6 +7,14 @@
         <img runat="server" src="~/Content/svg/logo_mrkupido_wide.svg" alt="Mr. Kupido" width="600" height="157" />
     </a>
 </header>
+<div class="description">
+    <h2>Szeretnéd receptjeidet tökéletesen rendszerezve látni?<br />
+        Keresni közöttük hozzávalók alapján?<br />
+        Szeretnéd, ha minden recepted úgy lenne megfogalmazva, hogy akár kezdőként,<br />
+        akár mesterszakácsként is egyértelműek legyenek a lépések?</h2>
+    <h2>Ha igen, próbáld ki Mr. Kupidót, nem fogsz csalódni!</h2>
+    <h3>Jelenleg az oldal tesztelési fázisban van, ezért be kell jelentkezned az alábbi fóikjaid egyikével.</h3>
+</div>
 @using (Html.BeginForm("LogIn", "Account", FormMethod.Post, new { @id = "openIdForm" }))
 {
     @Html.Hidden("loginType", "")

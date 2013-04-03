@@ -10,7 +10,17 @@ namespace MrKupido.Library.Recipe
     [NameAlias("eng", "castor sugar")]
     [NameAlias("hun", "porcukor")]
 
-    [IngredientConsts(IsIngrec = true)]
+	[IngredientConsts(
+		IsIngrec = true,
+		Category = ShoppingListCategory.Other,
+		KCaloriesPer100Gramms = 389.0f,
+		CarbohydratesPer100Gramms = 388.0f,
+		FatPer100Gramms = 0.8f,
+		ProteinPer100Gramms = 0.0f,
+		GlichemicalIndex = 70,
+		InflammationFactor = -525
+	)]
+
     public class PorCukor : Cukor
     {
         public PorCukor(float amount, MeasurementUnit unit = MeasurementUnit.gramm)

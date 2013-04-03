@@ -21,7 +21,12 @@ namespace MrKupido.Web.Controllers
             return View();
         }
 
-        public ActionResult FeatureGuideLevel1()
+		public ActionResult FirstTimeTutorial()
+		{
+			return View();
+		}
+		
+		public ActionResult FeatureGuideLevel1()
         {
             return View();
         }

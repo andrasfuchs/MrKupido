@@ -15,7 +15,16 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "zsidószalonna", Priority = 202)]
     [NameAlias("hun", "mózespecsenye", Priority = 203)]
 
-    [IngredientConsts(GrammsPerPiece = 35)]
+    [IngredientConsts(
+		Category = ShoppingListCategory.Vegetable,
+		GrammsPerPiece = 35,
+		KCaloriesPer100Gramms = 245.0f,
+		CarbohydratesPer100Gramms = 0.3f,
+		FatPer100Gramms = 170.0f,
+		ProteinPer100Gramms = 74.4f,
+		GlichemicalIndex = 0,
+		InflammationFactor = -52
+		)]
 
     [RootOf(typeof(AlliumCepaL))]
     public class Hagyma : SingleIngredient

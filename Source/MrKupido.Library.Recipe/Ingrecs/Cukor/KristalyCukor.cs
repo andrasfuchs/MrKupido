@@ -15,7 +15,17 @@ namespace MrKupido.Library.Recipe
     [NameAlias("hun", "finomított cukor", Priority = 202)]
 
     //[CommercialProductOf(Brand = typeof(Koronas))]
-    [IngredientConsts(IsIngrec = true)]
+    [IngredientConsts(
+		IsIngrec = true,
+		Category = ShoppingListCategory.Other, 
+		KCaloriesPer100Gramms = 319.0f,
+		CarbohydratesPer100Gramms = 319.0f,
+		FatPer100Gramms = 0.0f,
+		ProteinPer100Gramms = 0.0f,
+		GlichemicalIndex = 53,
+		InflammationFactor = -394
+		)]
+
     public class KristalyCukor : Cukor
     {
         public KristalyCukor(float amount, MeasurementUnit unit = MeasurementUnit.gramm)

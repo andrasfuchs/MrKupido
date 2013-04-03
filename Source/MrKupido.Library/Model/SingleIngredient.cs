@@ -35,7 +35,7 @@ namespace MrKupido.Library.Ingredient
 
                 this.GrammsPerLiter = ica.GrammsPerLiter;
                 this.GrammsPerPiece = ica.GrammsPerPiece;
-                this.KCaloriesPerGramm = ica.KCaloriesPerGramm;
+                this.KCaloriesPerGramm = ica.KCaloriesPer100Gramms;
             }
         }
 

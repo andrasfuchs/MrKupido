@@ -13,6 +13,16 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "konyhasó", Priority = 2)]
     [NameAlias("hun", "étkezési só")]
 
+	[IngredientConsts(
+		Category = ShoppingListCategory.Spice,
+		KCaloriesPer100Gramms = 0.0f,
+		CarbohydratesPer100Gramms = 0.0f,
+		FatPer100Gramms = 0.0f,
+		ProteinPer100Gramms = 0.0f,
+		GlichemicalIndex = 0,
+		InflammationFactor = 0
+	)]
+
     [KindOf(typeof(Minerale))]
     public class So : SingleIngredient
     {

@@ -26,6 +26,7 @@ namespace MrKupido.Processor
 
         public static IIngredient[] GenerateIngredients(RecipeTreeNode rtn, float amount)
         {
+			//directions.Clear();
             ingredients.Clear();
             seenIngredients.Clear();
             containerIds.Clear();
@@ -159,10 +160,12 @@ namespace MrKupido.Processor
         public static RecipeDirection[] GenerateDirections(RecipeTreeNode rtn, float amount)
         {
             directions.Clear();
-            seenIngredients.Clear();
+			ingredients.Clear();
+			seenIngredients.Clear();
             containerIds.Clear();
 
             ignoreDirections = false;
+
             RunRecipe(rtn, amount);
 
             return directions.ToArray();

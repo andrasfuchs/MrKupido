@@ -10,7 +10,9 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "dió", Priority = 1)]
     [NameAlias("hun", "őrölt dióbél")]
 
-    [IngredientConsts(Category = ShoppingListCategory.Nut)]
+    [IngredientConsts(
+		Category = ShoppingListCategory.Nut
+		)]
 
     public class DioOrolt : Diobel
     {

@@ -7,17 +7,26 @@ using MrKupido.Library.Nature;
 
 namespace MrKupido.Library.Ingredient
 {
-    [NameAlias("eng", "apple")]
-    [NameAlias("hun", "alma")]
+	[NameAlias("eng", "apple")]
+	[NameAlias("hun", "alma")]
 
-    [IngredientConsts(Category = ShoppingListCategory.Fruit, GrammsPerPiece=35.0f)]
+	[IngredientConsts(
+		Category = ShoppingListCategory.Fruit,
+		GrammsPerPiece = 182.0f,
+		KCaloriesPer100Gramms = 52.0f,
+		CarbohydratesPer100Gramms = 49.7f,
+		FatPer100Gramms = 1.4f,
+		ProteinPer100Gramms = 0.9f,
+		GlichemicalIndex = 3,
+		InflammationFactor = -17
+		)]
 
-    [YieldOf(typeof(Malus))]
-    public class Alma : SingleIngredient
-    {
-        public Alma(float amount, MeasurementUnit unit = MeasurementUnit.piece)
-            : base(amount, unit)
-        {
-        }
-    }
+	[YieldOf(typeof(Malus))]
+	public class Alma : SingleIngredient
+	{
+		public Alma(float amount, MeasurementUnit unit = MeasurementUnit.piece)
+			: base(amount, unit)
+		{
+		}
+	}
 }

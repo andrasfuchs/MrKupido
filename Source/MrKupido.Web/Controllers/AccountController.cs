@@ -186,7 +186,16 @@ namespace MrKupido.Web.Controllers
                 string returnUrl = (string)Session["ReturnUrl"];
                 if (String.IsNullOrEmpty(returnUrl))
                 {
-                    return RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Home", action = "Index" });
+
+					if (user.FirstLoginUtc == user.LastLoginUtc)
+					{
+						// this is the first time he's here
+						return RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Help", action = "FirstTimeTutorial" });
+					}
+					else
+					{
+						return RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Home", action = "Index" });
+					}
                 }
                 else
                 {
