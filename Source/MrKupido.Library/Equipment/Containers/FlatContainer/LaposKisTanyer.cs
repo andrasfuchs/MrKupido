@@ -8,6 +8,9 @@ namespace MrKupido.Library.Equipment
 {
     [NameAlias("eng", "flat small plate")]
     [NameAlias("hun", "lapos kis tányér")]
+
+	[IconUriFragment("flat plate")]
+
     public class LaposKisTanyer : FlatContainer
     {
         public LaposKisTanyer()

@@ -9,7 +9,7 @@ namespace MrKupido.Library.Recipe
     [NameAlias("hun", "sajt")]
     [NameAlias("eng", "cheese")]
 
-    [IngredientConsts(IsIngrec = true)]
+	[IngredientConsts(DefaultChild = typeof(EdamiSajt), IsIngrec = true)]
     public class Sajt : RecipeBase
     {
         public Sajt(float amount, MeasurementUnit unit = MeasurementUnit.gramm)

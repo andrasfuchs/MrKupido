@@ -22,33 +22,33 @@ namespace MrKupido.Library.Attributes
         /// Expiration in days
         /// source: http://www.engineeringtoolbox.com/fruits-vegetables-storage-conditions-d_710.html
         /// </summary>
-        public int ExpirationTime;
+        public int ExpirationTime = Int32.MinValue;
 
         /// <summary>
         /// Storage temperature in degree Celsius
         /// source: http://www.engineeringtoolbox.com/fruits-vegetables-storage-conditions-d_710.html
         /// </summary>
-        public float StorageTemperature;
+        public float StorageTemperature = Single.MinValue;
 
         /// <summary>
         /// Glichemical index between 1 and 100
         /// </summary>
-        public int GlichemicalIndex;
+        public int GlichemicalIndex = Int32.MinValue;
 
-		public int InflammationFactor;
+		public int InflammationFactor = Int32.MinValue;
         
         /// <summary>
         /// Relative potencial of alkalinity (+) or acidity (-) between +50 and -50
         /// source: http://www.balance-ph-diet.com/acid_alkaline_food_chart.html
         /// </summary>
-        public float PotencialAlkalinity;
+		public float PotencialAlkalinity = Single.MinValue;
 
-        public float GrammsPerLiter;
-        public float GrammsPerPiece;
-        public float KCaloriesPer100Gramms;
-		public float CarbohydratesPer100Gramms;
-		public float FatPer100Gramms;
-		public float ProteinPer100Gramms;
+		public float GrammsPerLiter = Single.MinValue;
+		public float GrammsPerPiece = Single.MinValue;
+		public float CaloriesPer100Gramms = Single.MinValue;
+		public float CarbohydratesPer100Gramms = Single.MinValue;
+		public float FatPer100Gramms = Single.MinValue;
+		public float ProteinPer100Gramms = Single.MinValue;
 
         /// <summary>
         /// True if it is more like a category not a physical ingredient. Abstract ingredients must have the DefaultChild defined 

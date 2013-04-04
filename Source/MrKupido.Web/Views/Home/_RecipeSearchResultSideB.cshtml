@@ -3,14 +3,19 @@
 
 <script type="text/javascript">
     function flipToSideA@(Model.Index)(uniqueName) {
-             $("li#" + uniqueName).animate({ opacity: 0.0 }, 500, "easeInOutCubic", function() {
-                 $.get('@Url.Action("RenderSideA","Home", new { uniqueName = Model.UniqueName } )', function (data) {
-                     $("div#nivoSlider" + @(Model.Index) + "").nivoSlider().stop();
-                     $("li#" + uniqueName).html(data);
-                     $("li#" + uniqueName).animate({ opacity: 1.0 }, 500, "easeInOutCubic");
-                 });
-             });
-         }
+        $("li#" + uniqueName).animate({ opacity: 0.0 }, 500, "easeInOutCubic", function () {
+            $.ajax({
+                url: '@Url.Action("RenderSideA","Home", new { uniqueName = Model.UniqueName } )',
+                success: function (data) {
+                    $("div#nivoSlider" + @(Model.Index) + "").nivoSlider().stop();
+                    $("li#" + uniqueName).html(data);
+                },
+                complete: function () {
+                    $("li#" + uniqueName).animate({ opacity: 1.0 }, 500, "easeInOutCubic");
+                }
+            });
+        });
+    }
 </script>
 
 <div class="resultbox">

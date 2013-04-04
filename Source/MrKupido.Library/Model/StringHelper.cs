@@ -8,7 +8,7 @@ namespace MrKupido.Library
 {
     public static class StringHelper
     {
-        private static string allowedCharacters = "abcdefghijklmnopqrstouvwxyz-$+()[]{}'";
+        private static string allowedCharacters = "abcdefghijklmnopqrstouvwxyz-$+()[]{}',.%0123456789";
 
         /// <summary>
         /// Unique string is used for URL identification
@@ -49,7 +49,12 @@ namespace MrKupido.Library
                 Trace.TraceWarning("The string '{0}' should start with a letter if you want to use it as a unique-name string.", str);
             }
 
-            return new String(result);
+			if (allowedCharacters.IndexOf(result[result.Length - 1]) > 26)
+			{
+				Trace.TraceWarning("The string '{0}' should end with a letter if you want to use it as a unique-name string.", str);
+			}
+			
+			return new String(result);
         }
 
         public static string FromUniqueStringToClassName(this String str)

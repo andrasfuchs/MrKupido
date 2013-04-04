@@ -16,8 +16,6 @@ namespace MrKupido.Web.Models
 {
     public class RecipeSearchResultItem
     {
-        private static Random rnd = new Random();
-
 		public int Index;
 
         public ShoppingListCategory MainCategory;
@@ -42,10 +40,20 @@ namespace MrKupido.Web.Models
         public float? Rating;
         public int RatingCount;
 
-        public float? Cals;
-        public float? Sugar;
-        public float? Fat;
-        public float? Salt;
+		public float TotalWeight;
+		public float? TotalCalories = null;
+		public float TotalCaloriesCompletion;
+		public float? TotalCarbohydrates = null;
+		public float TotalCarbohydratesCompletion;
+		public float? TotalProtein = null;
+		public float TotalProteinCompletion;
+		public float? TotalFat = null;
+		public float TotalFatCompletion;
+
+		public float? CaloriesLevel;
+		public float? CarbohydratesLevel;
+		public float? ProteinLevel;
+		public float? FatLevel;
 
         public bool IsImplemented;
         public bool IsHidden;
@@ -68,7 +76,11 @@ namespace MrKupido.Web.Models
             this.IconUrl = rtn.IconUrl;
 
             StringBuilder sb = new StringBuilder();
-            foreach (RuntimeIngredient i in rtn.GetIngredients(1.0f, 1))
+			
+			RuntimeIngredient[] ingredients = rtn.GetIngredients(1.0f, 1);
+			float completionStep = ingredients.Length > 0 ? 1.0f / ingredients.Length : 0.0f;
+
+            foreach (RuntimeIngredient i in ingredients)
             {
                 if ((this.MainCategory == ShoppingListCategory.Unknown) && (i.Ingredient is SingleIngredient) && (((SingleIngredient)i.Ingredient).Category.HasValue))
                 {
@@ -77,6 +89,19 @@ namespace MrKupido.Web.Models
 
                 sb.Append(i.Ingredient.GetName(rtn.LanguageISO));
                 sb.Append(", ");
+
+				float ingredientGramms = i.Ingredient.GetAmount(MeasurementUnit.gramm);
+				this.TotalWeight += ingredientGramms;
+
+				if (!i.Ingredient.CaloriesPer100Gramms.HasValue)
+				{
+					Trace.TraceWarning("Ingredient '{0}' doesn't have calories defined.", i.Ingredient.Name);
+				}
+
+				AddOrSet(ref this.TotalCalories, i.Ingredient.CaloriesPer100Gramms * ingredientGramms / 100, ref this.TotalCaloriesCompletion, completionStep);
+				AddOrSet(ref this.TotalCarbohydrates, i.Ingredient.CarbohydratesPer100Gramms * ingredientGramms / 100, ref this.TotalCarbohydratesCompletion, completionStep);
+				AddOrSet(ref this.TotalProtein, i.Ingredient.ProteinPer100Gramms * ingredientGramms / 100, ref this.TotalProteinCompletion, completionStep);
+				AddOrSet(ref this.TotalFat, i.Ingredient.FatPer100Gramms * ingredientGramms / 100, ref this.TotalFatCompletion, completionStep);
             }
             if (sb.Length >= 2) sb.Remove(sb.Length - 2, 2);
             this.MainIngredients = sb.ToString();
@@ -91,9 +116,25 @@ namespace MrKupido.Web.Models
             this.TotalTime = (int)directions.Select(d => d.TimeToComplete).Select(t => t.TotalMinutes).Sum();
             this.NetTime = (int)directions.Where(d => !d.IsPassive).Select(d => d.TimeToComplete).Select(t => t.TotalMinutes).Sum();
 
-            this.Sugar = rnd.Next(5);
-            this.Fat = rnd.Next(5);
-            this.Salt = rnd.Next(5);
+			if (this.TotalCaloriesCompletion > 0.75)
+			{
+				CaloriesLevel = this.TotalCalories.Value / this.TotalWeight;
+
+				if (this.TotalCarbohydratesCompletion > 0.75)
+				{
+					CarbohydratesLevel = this.TotalCarbohydrates.Value / this.TotalCalories.Value;
+				}
+
+				if (this.TotalProteinCompletion > 0.75)
+				{
+					ProteinLevel = this.TotalProtein.Value / this.TotalCalories.Value;
+				}
+
+				if (this.TotalFatCompletion > 0.75 )
+				{
+					FatLevel = this.TotalFat.Value / this.TotalCalories.Value;
+				}
+			}
 
             this.IsHidden = rtn.IsIngrec || rtn.IsInline || (rtn.CommercialAttribute != null);
             this.IsImplemented = rtn.IsImplemented;
@@ -170,6 +211,22 @@ namespace MrKupido.Web.Models
 			}
 			this.Photos = photos.ToArray();
         }
+
+		private void AddOrSet(ref float? f1, float? f2, ref float completion, float completionStep)
+		{
+			if (f2.HasValue)
+			{
+				if (f1.HasValue)
+				{
+					f1 = f1 + f2;
+				}
+				else
+				{
+					f1 = f2;
+				}
+				completion += completionStep;
+			}
+		}
 
         public override string ToString()
         {

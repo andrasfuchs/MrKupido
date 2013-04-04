@@ -23,21 +23,69 @@ namespace MrKupido.Library.Ingredient
             this.State = state;
             this.PieceCount = 1;
 
-            foreach (object icaObj in this.GetType().GetCustomAttributes(typeof(IngredientConstsAttribute), true))
+            foreach (object icaObj in this.GetType().GetCustomAttributes(typeof(IngredientConstsAttribute), false))
             {
                 IngredientConstsAttribute ica = (IngredientConstsAttribute)icaObj;
 
-                this.Category = ica.Category;
-                
-                this.ExpirationTime = ica.ExpirationTime;
-                this.GlichemicalIndex = ica.GlichemicalIndex;
-                this.PotencialAlkalinity = ica.PotencialAlkalinity;
+				while (ica != null)
+				{
+					CopyFieldsToPropertiesIfNeeded(this, ica, new string[] { "Category", "ExpirationTime", "GlichemicalIndex", "PotencialAlkalinity", "GrammsPerLiter", "GrammsPerPiece", "CaloriesPer100Gramms", "CarbohydratesPer100Gramms", "ProteinPer100Gramms", "FatPer100Gramms" });
 
-                this.GrammsPerLiter = ica.GrammsPerLiter;
-                this.GrammsPerPiece = ica.GrammsPerPiece;
-                this.KCaloriesPerGramm = ica.KCaloriesPer100Gramms;
+					if (ica.DefaultChild != null)
+					{
+						ica = (IngredientConstsAttribute)ica.DefaultChild.GetCustomAttributes(typeof(IngredientConstsAttribute), false).FirstOrDefault();
+					}
+					else
+					{
+						break;
+					}
+				}
+
+				//this.Category = ica.Category;
+                
+				//this.ExpirationTime = ica.ExpirationTime;
+				//this.GlichemicalIndex = ica.GlichemicalIndex;
+				//this.PotencialAlkalinity = ica.PotencialAlkalinity;
+
+				//this.GrammsPerLiter = this.GrammsPerLiter == null && ica.GrammsPerLiter != Single.MinValue ? ica.GrammsPerLiter : (float?)null;
+				//this.GrammsPerPiece = ica.GrammsPerPiece == Single.MinValue ? (float?)null : ica.GrammsPerPiece;
+				//this.CaloriesPer100Gramm = ica.CaloriesPer100Gramms == Single.MinValue ? (float?)null : ica.CaloriesPer100Gramms;
+				//this.CarbohydratesPer100Gramms = ica.CarbohydratesPer100Gramms == Single.MinValue ? (float?)null : ica.CarbohydratesPer100Gramms;
+				//this.ProteinPer100Gramms = ica.ProteinPer100Gramms == Single.MinValue ? (float?)null : ica.ProteinPer100Gramms;
+				//this.FatPer100Gramms = ica.FatPer100Gramms == Single.MinValue ? (float?)null : ica.FatPer100Gramms;
             }
         }
+
+		private void CopyFieldsToPropertiesIfNeeded(object o1, object o2, string[] propNames)
+		{
+			foreach (string propName in propNames)
+			{
+				System.Reflection.PropertyInfo o1pi = o1.GetType().GetProperty(propName);
+
+				object o1Value = o1pi.GetValue(o1, null);
+				object o2Value = o2.GetType().GetField(propName).GetValue(o2);
+
+				if ((o1Value == null) && (o2Value != null))
+				{
+					// check if it's minValue
+					object minValue = null;
+					bool isO2ValueEqualsToMinValue = false;
+
+					System.Reflection.FieldInfo fi = o2Value.GetType().GetField("MinValue");
+					if (fi != null)
+					{
+						minValue = fi.GetValue(o2Value);
+						isO2ValueEqualsToMinValue = (bool)o2Value.GetType().GetMethod("Equals", new Type[] { o2Value.GetType() }).Invoke(o2Value, new object[] { minValue });
+					}
+
+					if (!isO2ValueEqualsToMinValue)
+					{
+						// if it's not null and not minValue (this one is needed because Attributes can't have nullable optional parameters)
+						o1pi.SetValue(o1, o2Value, null);
+					}
+				}
+			}
+		}
 
         public override string ToString(string languageISO)
         {

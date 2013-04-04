@@ -7,14 +7,14 @@ using MrKupido.Library.Nature;
 
 namespace MrKupido.Library.Ingredient
 {
-    [NameAlias("eng", "drumstick (+skin)", Priority = 1)]
+    [NameAlias("eng", "drumstick", Priority = 1)]
     [NameAlias("eng", "chicken leg")]
-    [NameAlias("hun", "csirkecomb (bőrrel)")]
+    [NameAlias("hun", "bőrös csirkecomb")]
 
 	[IngredientConsts(
 		Category = ShoppingListCategory.Meat,
 		GrammsPerPiece = 167,
-		KCaloriesPer100Gramms = 187.0f,
+		CaloriesPer100Gramms = 187.0f,
 		CarbohydratesPer100Gramms = 0.1f,
 		FatPer100Gramms = 109.0f,
 		ProteinPer100Gramms = 77.5f,

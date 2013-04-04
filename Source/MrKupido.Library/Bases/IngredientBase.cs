@@ -18,7 +18,10 @@ namespace MrKupido.Library.Ingredient
 
         public float? GrammsPerLiter { get; protected set; }
         public float? GrammsPerPiece { get; protected set; }
-        public float? KCaloriesPerGramm { get; protected set; }
+        public float? CaloriesPer100Gramms { get; protected set; }
+		public float? CarbohydratesPer100Gramms { get; protected set; }
+		public float? ProteinPer100Gramms { get; protected set; }
+		public float? FatPer100Gramms { get; protected set; }
 
         public IngredientState State { get; set; }
 
@@ -101,16 +104,16 @@ namespace MrKupido.Library.Ingredient
 
             if ((this.Unit == MeasurementUnit.gramm) && (unit == MeasurementUnit.calories))
             {
-                if (!this.KCaloriesPerGramm.HasValue) throw new InvalidUnitConversionException(this, this.Unit, unit);
+                if (!this.CaloriesPer100Gramms.HasValue) throw new InvalidUnitConversionException(this, this.Unit, unit);
 
-                amount *= this.KCaloriesPerGramm.Value;
+                amount *= this.CaloriesPer100Gramms.Value;
             }
 
             if ((this.Unit == MeasurementUnit.calories) && (unit == MeasurementUnit.gramm))
             {
-                if (!this.KCaloriesPerGramm.HasValue) throw new InvalidUnitConversionException(this, this.Unit, unit);
+                if (!this.CaloriesPer100Gramms.HasValue) throw new InvalidUnitConversionException(this, this.Unit, unit);
 
-                amount /= this.KCaloriesPerGramm.Value;
+                amount /= this.CaloriesPer100Gramms.Value;
             }
 
             if (!this.amounts.ContainsKey((int)unit))

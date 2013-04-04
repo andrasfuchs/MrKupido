@@ -86,6 +86,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ingrecs\Sajt\Edami.cs" />
     <Compile Include="Ingrecs\Sargabarackiz.cs" />
     <Compile Include="Ingrecs\Sajt\FustoltSajtC1.cs" />
     <Compile Include="Ingrecs\Sajt\TrappistaC2.cs" />

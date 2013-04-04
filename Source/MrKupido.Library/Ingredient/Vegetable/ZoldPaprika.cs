@@ -11,10 +11,12 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "zöldpaprika", Priority = 1)]
     [NameAlias("hun", "zöld paprika")]
 
+	[IconUriFragment("paprika")]
+
 	[IngredientConsts(
 		Category = ShoppingListCategory.Vegetable,
 		GrammsPerPiece = 119,
-		KCaloriesPer100Gramms = 20.0f,
+		CaloriesPer100Gramms = 20.0f,
 		CarbohydratesPer100Gramms = 16.5f,
 		FatPer100Gramms = 1.4f,
 		ProteinPer100Gramms = 2.1f,

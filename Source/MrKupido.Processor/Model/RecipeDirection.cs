@@ -50,8 +50,6 @@ namespace MrKupido.Processor.Model
             Operands = (operands == null ? new string[0] : operands);
             Result = result;
 
-			Parameters = new IngredientTreeNode[operands.Length - 1];
-
 			if (operands[0] is IEquipment)
 			{
 				IEquipment eq = ((IEquipment)operands[0]);
@@ -82,13 +80,26 @@ namespace MrKupido.Processor.Model
                 IsPassive = PassiveActionAttribute.IsMethodPassiveAction(mi);
             }
 
+			List<TreeNode> parameters = new List<TreeNode>();
 			for (int i = 1; i < operands.Length; i++)
 			{
 				if (operands[i] is IIngredient)
 				{
-					Parameters[i-1] = Cache.Ingredient[((IIngredient)operands[i]).GetName(languageISO)];
-				} 
+					parameters.Add(Cache.Ingredient[((IIngredient)operands[i]).GetName(languageISO)]);
+				}
+				else if (operands[i] is IIngredient[])
+				{
+					foreach (IIngredient ing in ((IIngredient[])operands[i]))
+					{
+						parameters.Add(Cache.Ingredient[ing.GetName(languageISO)]);
+					}
+				}
+				else if (operands[i] is IEquipment)
+				{
+					parameters.Add(Cache.Equipment[((IEquipment)operands[i]).GetName(languageISO)]);
+				}
 			}
+			Parameters = parameters.ToArray();
 
             this.DirectionSegments = GenerateSegments(languageISO, seenIngredients);
         }

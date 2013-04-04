@@ -16,7 +16,7 @@ namespace MrKupido.Library.Recipe
 		IsIngrec = true,
 		Category = ShoppingListCategory.Other,
 		GrammsPerLiter = 946,
-		KCaloriesPer100Gramms = 193.0f,
+		CaloriesPer100Gramms = 193.0f,
 		CarbohydratesPer100Gramms = 10.8f,
 		FatPer100Gramms = 173.0f,
 		ProteinPer100Gramms = 8.8f,

@@ -14,7 +14,18 @@ namespace MrKupido.Library.Recipe
 
     [NameAlias("eng", "cream")]
 
-    [IngredientConsts(GrammsPerLiter = 1900, IsIngrec = true)]
+	[IngredientConsts(
+		IsIngrec = true,
+		Category = ShoppingListCategory.Other,
+		GrammsPerLiter = 1900,
+		CaloriesPer100Gramms = 130.0f,
+		CarbohydratesPer100Gramms = 16.3f,
+		FatPer100Gramms = 101.0f,
+		ProteinPer100Gramms = 12.6f,
+		GlichemicalIndex = 3,
+		InflammationFactor = -56
+	)]
+
     public class Tejszin : RecipeBase
     {
         public Tejszin(float amount, MeasurementUnit unit = MeasurementUnit.liter)
