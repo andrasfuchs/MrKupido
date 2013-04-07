@@ -29,10 +29,10 @@ namespace MrKupido.Library.Recipe
         {
             PreparedIngredients result = new PreparedIngredients();
 
-            eg.Use<Edeny>(1).Berakni(new Viz(0.2f), new Eleszto(25.0f * amount), new Cukor(2.50f * amount), new So(7.50f * amount));
+            eg.Use<Edeny>(1).Berakni(new Eleszto(25.0f * amount), new Viz(0.2f), new Cukor(1.0f * amount, MeasurementUnit.teaskanal), new So(7.50f * amount));
             eg.Use<Fakanal>(1).ElkeverniC(eg.Use<Edeny>(1));
 
-            eg.Use<NagyEdeny>(1).Berakni(new Liszt(800.0f * amount));
+            eg.Use<NagyEdeny>(1).Berakni(new Liszt(8.0f * amount, MeasurementUnit.kilogramm));
             eg.Use<NagyEdeny>(1).BeonteniC(eg.Use<Edeny>(1));
             eg.Use<NagyEdeny>(1).BeonteniI(new Viz(0.5f * amount));
 
@@ -40,11 +40,13 @@ namespace MrKupido.Library.Recipe
             eg.Use<NagyEdeny>(1).Varni(60);
             eg.Use<NagyEdeny>(1).FedotLevenni();
 
-            eg.Use<Kez>(1).GolyovaGyurniC(eg.Use<NagyEdeny>(1), 20.0f);
-            eg.Use<NagyEdeny>(1).Varni(15);
-            eg.Use<Kez>(1).MegforgatniI(eg.Use<NagyEdeny>(1), new Liszt(200.0f * amount));
+			eg.Use<Kez>(1).GolyovaGyurniC(eg.Use<NagyEdeny>(1), 20.0f, eg.Use<LaposTanyer>(1));
+			eg.Use<LaposTanyer>(1).Varni(15);
 
-            result.Add("pitagolyo", eg.Use<NagyEdeny>(1));
+			eg.Use<MelyTanyer>(1).BerakniI(new Liszt(20.0f * amount));
+			eg.Use<Kez>(1).MegforgatniC(eg.Use<MelyTanyer>(1), eg.Use<LaposTanyer>(1), eg.Use<LaposTanyer>(2));
+
+			result.Add("pitagolyo", eg.Use<LaposTanyer>(2));
 
             eg.WashUp();
             return result;
@@ -78,7 +80,7 @@ namespace MrKupido.Library.Recipe
 
         public static void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
-            eg.Use<Kez>(1).TalalniC(food["pita"], eg.Use<LaposTanyer>(1));
+            eg.Use<Kez>(1).TalalniC(food["pita"], eg.Use<LaposTanyer>(3));
             eg.WashUp();
         }
     }

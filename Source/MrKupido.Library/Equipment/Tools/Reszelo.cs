@@ -16,7 +16,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "reszeld le a(z) {1T} a(z) {0B}")]
         public void LereszelniI(IIngredientContainer ic, ISingleIngredient i)
         {
-            if (i.Unit != MeasurementUnit.gramm) throw new InvalidActionForIngredientException("Lereszelni", i.Name, i.Unit);
+			if (!i.IsSolid) throw new InvalidActionForIngredientException("Lereszelni", i);
 
             i.State |= IngredientState.Reszelt;
 

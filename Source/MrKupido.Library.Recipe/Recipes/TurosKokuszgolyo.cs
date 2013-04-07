@@ -63,16 +63,13 @@ namespace MrKupido.Library.Recipe
             kez.OsszegyurniC(edeny);
 
             // foreach
-            IIngredient golyok = kez.GolyovaGyurniC(edeny, 50.0f);
-            eg.Use<LaposTanyer>(1).Rarakni(golyok);
+			kez.GolyovaGyurniC(edeny, 50.0f, eg.Use<LaposTanyer>(1));
 
-            MelyTanyer melyTanyer = eg.Use<MelyTanyer>();
-            melyTanyer.BerakniI(new KokuszReszelek(100.0f * amount));
-            IngredientGroup megforgatottGolyo = kez.MegforgatniI(melyTanyer, golyok);
+			eg.Use<MelyTanyer>(1).BerakniI(new KokuszReszelek(100.0f * amount));
+			kez.MegforgatniC(eg.Use<MelyTanyer>(1), eg.Use<LaposTanyer>(1), eg.Use<MelyTanyer>(2));
             //
-            eg.Use<LaposTanyer>(1).Rarakni(megforgatottGolyo);
 
-            cfp.Add("golyok", eg.Use<LaposTanyer>(1));
+			cfp.Add("golyok", eg.Use<MelyTanyer>(2));
              
             eg.WashUp();
             return cfp;

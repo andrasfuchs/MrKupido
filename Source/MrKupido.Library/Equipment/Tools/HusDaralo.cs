@@ -18,7 +18,7 @@ namespace MrKupido.Library.Equipment
         {
 			IIngredient i = ic.Contents;
 
-			if ((i.Unit != MeasurementUnit.gramm) && (i.Unit != MeasurementUnit.piece)) throw new InvalidActionForIngredientException("DaralniC", i.Name, i.Unit);
+			if (!i.IsSolid) throw new InvalidActionForIngredientException("DaralniC", i);
 
             if (i.Unit != MeasurementUnit.gramm) i.ChangeUnitTo(MeasurementUnit.gramm);
 

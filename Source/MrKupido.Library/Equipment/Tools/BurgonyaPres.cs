@@ -16,7 +16,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "préseld össze a(z) {0T}")]
         public void PreselniI(ISingleIngredient i)
         {
-            if (i.Unit != MeasurementUnit.gramm) throw new InvalidActionForIngredientException("Preselni", i.Name, i.Unit);
+            if (!i.IsSolid) throw new InvalidActionForIngredientException("Preselni", i);
 
             i.State |= IngredientState.Preselt;
 

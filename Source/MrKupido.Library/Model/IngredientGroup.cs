@@ -78,11 +78,18 @@ namespace MrKupido.Library.Ingredient
                     this.ingredients.Add((SingleIngredient)ingredient);
                     if (this.Unit == MeasurementUnit.none)
                     {
-                        this.Unit = ingredient.Unit;
-                    }
-                    else if (this.Unit != ingredient.Unit)
-                    {
-                        this.Unit = MeasurementUnit.gramm;
+						if (ingredient.IsSolid)
+						{
+							this.Unit = MeasurementUnit.gramm;
+						}
+						else if (ingredient.IsFluid)
+						{
+							this.Unit = MeasurementUnit.liter;
+						}
+						else
+						{
+							this.Unit = ingredient.Unit;
+						}
                     }
                 }
             }
@@ -155,8 +162,10 @@ namespace MrKupido.Library.Ingredient
 
         #endregion
 
-        public override void ChangeUnitTo(MeasurementUnit unit)
+        public override bool ChangeUnitTo(MeasurementUnit unit)
         {
+			if (this.Unit == unit) return true;
+
             foreach (SingleIngredient si in ingredients)
             {
                 si.ChangeUnitTo(unit);
@@ -169,7 +178,9 @@ namespace MrKupido.Library.Ingredient
             {
                 amount += i.GetAmount(this.Unit);
             }
-            SetAmount(amount, this.Unit);
+            
+			SetAmount(amount, this.Unit);
+			return true;
         }
     }
 }

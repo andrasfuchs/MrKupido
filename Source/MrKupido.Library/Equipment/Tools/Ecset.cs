@@ -27,7 +27,7 @@ namespace MrKupido.Library.Equipment
         {
             c.Add(withC.Contents);
 
-            this.LastActionDuration = 180;
+            this.LastActionDuration = 300;
         }
 
 		[NameAlias("eng", "besmear", Priority = 200)]
@@ -37,7 +37,7 @@ namespace MrKupido.Library.Equipment
         {
             c.Add(withI);
 
-            this.LastActionDuration = 180;
+			this.LastActionDuration = 300;
         }
 
         [NameAlias("eng", "daub", Priority = 200)]
@@ -47,7 +47,7 @@ namespace MrKupido.Library.Equipment
         {
             c.Add(withI);
 
-            this.LastActionDuration = 180;
+			this.LastActionDuration = 300;
         }    
     
     }

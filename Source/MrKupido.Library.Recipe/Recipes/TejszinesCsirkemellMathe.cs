@@ -50,7 +50,7 @@ namespace MrKupido.Library.Recipe
             ISingleIngredient fokhagyma = new Fokhagyma(6.0f);
             FokhagymaPres fp = eg.Use<FokhagymaPres>();
             fp.PreselniI(fokhagyma);
-            edeny.Berakni(fokhagyma, new Tej(1.0f));
+            edeny.Berakni(fokhagyma, new Tej(10.0f));
 
             Fakanal fakanal = eg.Use<Fakanal>();
             fakanal.ElkeverniC(edeny);
@@ -88,7 +88,7 @@ namespace MrKupido.Library.Recipe
             JenaiTal jenai = eg.Use<JenaiTal>();
             jenai.BerakniC(tejesCsirkemell);
             jenai.Berakni(new FustoltSzalonna(5, MeasurementUnit.piece), alma);
-            jenai.BeonteniI(new Tejszin(0.3f));
+            jenai.BeonteniI(new Tejszin(3.0f));
             kez.Raszorni(jenai, sajt);
             jenai.BerakniI(new FustoltSzalonna(5, MeasurementUnit.piece));
 

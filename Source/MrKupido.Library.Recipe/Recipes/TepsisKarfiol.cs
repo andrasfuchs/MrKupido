@@ -39,12 +39,12 @@ namespace MrKupido.Library.Recipe
             ISingleIngredient karfiol = new Karfiol(6.0f * amount);
             eg.Use<Kez>(1).SzetszedniI(karfiol);
 
-            eg.Use<Edeny>(1).Berakni(new Vaj(50.0f * amount), new Liszt(30.0f * amount));
+            eg.Use<Edeny>(1).Berakni(new Vaj(5.0f * amount), new Liszt(3.0f * amount));
 
             eg.Use<Tuzhely>(1).RahelyezniC(eg.Use<Edeny>(1));
             eg.Use<Tuzhely>(1).Homerseklet(80);
 
-            eg.Use<NagyEdeny>(1).BeonteniI(new Tej(0.2f * amount));
+            eg.Use<NagyEdeny>(1).BeonteniI(new Tej(2.0f * amount));
             eg.Use<Tuzhely>(1).RahelyezniC(eg.Use<NagyEdeny>(1));
             eg.Use<Tuzhely>(1).Homerseklet(60);
 
@@ -56,7 +56,7 @@ namespace MrKupido.Library.Recipe
 
             eg.Use<Reszelo>(1).LereszelniI(eg.Use<LaposTanyer>(1), new FustoltSajt(100.0f));
 
-            eg.Use<NagyEdeny>(1).Berakni(new Fuszerpaprika(5.0f * amount), new So(5.0f * amount), new FeherBors(3.0f * amount), new Borokabogyo(2.0f * amount), hagyma);
+            eg.Use<NagyEdeny>(1).Berakni(new Fuszerpaprika(3.0f * amount), new So(5.0f * amount), new FeherBors(3.0f * amount), new Borokabogyo(2.0f * amount), hagyma);
             eg.Use<NagyEdeny>(1).BerakniC(eg.Use<LaposTanyer>(1));
 
             eg.Use<Tuzhely>(1).Homerseklet(30);

@@ -25,7 +25,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "béleld ki a(z) {T} {0V}")]
         public void Kibelelni(Material material)
         {
-            this.LastActionDuration = 30;
+            this.LastActionDuration = 120;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace MrKupido.Library.Equipment
         {
             weight *= 10; //dkg -> gramm
 
-            if ((i.Unit != MeasurementUnit.gramm) && (i.Unit != MeasurementUnit.piece)) throw new InvalidActionForIngredientException("Feldarabolni", i.Name, i.Unit);
+			if (!i.IsSolid) throw new InvalidActionForIngredientException("Feldarabolni", i);
 
             if (i.Unit != MeasurementUnit.gramm) i.ChangeUnitTo(MeasurementUnit.gramm);
 
@@ -41,7 +41,7 @@ namespace MrKupido.Library.Equipment
 
             IIngredient ci = c.Contents;
 
-            if ((ci.Unit != MeasurementUnit.gramm) && (ci.Unit != MeasurementUnit.piece)) throw new InvalidActionForIngredientException("Feldarabolni", ci.Name, ci.Unit);
+			if (!ci.IsSolid) throw new InvalidActionForIngredientException("Feldarabolni", ci);
 
             if (ci.Unit != MeasurementUnit.gramm) ci.ChangeUnitTo(MeasurementUnit.gramm);
 
@@ -61,7 +61,7 @@ namespace MrKupido.Library.Equipment
         {
             weight *= 10; //dkg -> gramm
 
-            if ((i.Unit != MeasurementUnit.piece) && (i.Unit != MeasurementUnit.gramm)) throw new InvalidActionForIngredientException("Felkarikazni", i.Name, i.Unit);
+			if (!i.IsSolid) throw new InvalidActionForIngredientException("Felkarikazni", i);
 
             i.ChangeUnitTo(MeasurementUnit.gramm);
 

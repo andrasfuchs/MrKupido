@@ -32,11 +32,11 @@ namespace MrKupido.Library.Recipe
             ISingleIngredient fokhagyma = new Fokhagyma(3.00f * amount);
             eg.Use<FokhagymaPres>(1).PreselniI(fokhagyma);
 
-            eg.Use<Edeny>(1).Berakni(new Tejfol(0.4f * amount), new Mustar(15.0f * amount), new Etelizesito(15.0f * amount), new FeketeBorsOrolt(5.0f * amount), fokhagyma, new NapraforgoOlaj(0.1f * amount));
+            eg.Use<Edeny>(1).Berakni(new Tejfol(4.0f * amount), new Mustar(1.0f * amount), new Etelizesito(1.0f * amount), new FeketeBorsOrolt(5.0f * amount), fokhagyma, new NapraforgoOlaj(0.1f * amount));
             eg.Use<Edeny>(1).Contents.ChangeUnitTo(MeasurementUnit.liter);
 
             eg.Use<MelyTanyer>(1).BerakniI(new Csirkecomb(8.0f * amount, MeasurementUnit.piece));
-            eg.Use<Ecset>(1).BekenniI(new Vaj(50.0f * amount), eg.Use<MelyTanyer>(1));
+            eg.Use<Ecset>(1).BekenniI(new Vaj(5.0f * amount), eg.Use<MelyTanyer>(1));
 
             eg.Use<Kez>(1).BelemartaniC(eg.Use<MelyTanyer>(1), eg.Use<Edeny>(1));
 
@@ -58,7 +58,7 @@ namespace MrKupido.Library.Recipe
             eg.Use<Suto>(1).Varni(40);
             eg.Use<Suto>(1).KiemelniC(eg.Use<Tepsi>(1));
 
-            eg.Use<Reszelo>(1).LereszelniI(eg.Use<LaposKisTanyer>(1), new Sajt(200.0f * amount));
+            eg.Use<Reszelo>(1).LereszelniI(eg.Use<LaposKisTanyer>(1), new Sajt(20.0f * amount));
 
             eg.Use<Tepsi>(1).FedotLevenni();
             eg.Use<Kez>(1).RaszorniC(eg.Use<Tepsi>(1), eg.Use<LaposKisTanyer>(1));

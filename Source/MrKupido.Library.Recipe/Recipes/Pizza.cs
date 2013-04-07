@@ -44,11 +44,11 @@ namespace MrKupido.Library.Recipe
             Fakanal fakanal = eg.Use<Fakanal>();
 
             NagyEdeny edeny1 = eg.Use<NagyEdeny>();
-            edeny1.Berakni(new Liszt(1000f * amount), new So(6.0f * amount), new Oregano(3.0f * amount), new FeketeBorsOrolt(5.0f * amount));
+            edeny1.Berakni(new Liszt(100.0f * amount), new So(6.0f * amount), new Oregano(3.0f * amount), new FeketeBorsOrolt(5.0f * amount));
             fakanal.ElkeverniC(edeny1);
 
             Bogre bogre = eg.Use<Bogre>();
-            bogre.Berakni(new Eleszto(14.0f * amount), new Cukor(1.5f * amount), new Viz(0.6f * amount), new OlivaOlaj(0.05f * amount));
+            bogre.Berakni(new Eleszto(5.0f * amount), new Cukor(1.0f * amount, MeasurementUnit.teaskanal), new Viz(0.6f * amount), new OlivaOlaj(0.05f * amount));
             fakanal.ElkeverniC(bogre);
             
 

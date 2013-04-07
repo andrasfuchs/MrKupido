@@ -21,7 +21,7 @@ namespace MrKupido.Library.Equipment
         public void Berakni(params IIngredient[] ingredients)
         {
             this.contents.AddIngredients(ingredients);
-            this.LastActionDuration = 30 * (uint)ingredients.Length;
+            this.LastActionDuration = 90 * (uint)ingredients.Length;
         }
 
         [NameAlias("eng", "put in", Priority = 200)]
@@ -30,7 +30,7 @@ namespace MrKupido.Library.Equipment
         public void BerakniI(ISingleIngredient i)
         {
             this.contents.AddIngredients(i);
-            this.LastActionDuration = 30;
+			this.LastActionDuration = 60 * (uint)i.PieceCount;
         }
 
         [NameAlias("eng", "put in", Priority = 200)]
@@ -39,7 +39,7 @@ namespace MrKupido.Library.Equipment
         public void BerakniC(IIngredientContainer c)
         {
             this.contents.AddIngredients(c.Contents);
-            this.LastActionDuration = 30;
+            this.LastActionDuration = 60 * (uint)c.Contents.PieceCount;
         }
 
         [NameAlias("eng", "pour into", Priority = 200)]

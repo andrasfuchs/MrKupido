@@ -84,7 +84,7 @@ namespace MrKupido.Library.Equipment
 
             foreach (IIngredient i in contents.Ingredients)
             {
-                if (i.Unit != MeasurementUnit.liter)
+                if (!i.IsFluid)
                 {
                     newContent.Add(i);
                 }
@@ -108,13 +108,13 @@ namespace MrKupido.Library.Equipment
 		[NameAlias("hun", "válaszd szét a(z) {.Contents.T} a(z) {0B} és a(z) {1B}, úgy hogy az elsőbe kb. {2}% kerüljön")]
 		public void Szetvalasztani(Container c1, Container c2, float p)
 		{
-			if ((p < 0.0f) || (p > 1.0f)) throw new MrKupidoException("Invalid percentage value was passed. It must be between 0.0 and 1.0.");
+			if ((p < 0.0f) || (p > 100.0f)) throw new MrKupidoException("Invalid percentage value was passed. It must be between 0.0 and 1.0.");
 
 			Container oc = (Container)this.Clone();
 			this.Empty();
 
-			//c1.Add(oc.Contents * p);
-			//c2.Add(oc.Contents * (1.0f - p));
+			//c1.Add(oc.Contents * p / 100.0f);
+			//c2.Add(oc.Contents * (100.0f - p) / 100.0f);
 
 			c1.Add(oc.Contents);
 			c2.Add(oc.Contents);

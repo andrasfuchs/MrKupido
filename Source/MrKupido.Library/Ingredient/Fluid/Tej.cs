@@ -7,8 +7,8 @@ using MrKupido.Library.Nature;
 
 namespace MrKupido.Library.Ingredient
 {
-    [NameAlias("eng", "milk (3.25%)")]
-    [NameAlias("hun", "tej (3.25%)", Priority = 1)]
+	[NameAlias("eng", "whole milk")]
+    [NameAlias("hun", "zsíros tej", Priority = 1)]
     [NameAlias("hun", "tehéntej")]
 
 	[IngredientConsts(
@@ -25,7 +25,7 @@ namespace MrKupido.Library.Ingredient
     [MilkOf(typeof(BosPrimigenius))]
     public class Tej : SingleIngredient
     {
-        public Tej(float amount, MeasurementUnit unit = MeasurementUnit.liter)
+        public Tej(float amount, MeasurementUnit unit = MeasurementUnit.deciliter)
             : base(amount, unit)
         {
         }

@@ -18,10 +18,12 @@ namespace MrKupido.Library.Ingredient
         public int? GlichemicalIndex { get; protected set; }
         public float? PotencialAlkalinity { get; protected set; }
 
+		public float? PieceCountEstimation { get; private set; }
+		public float? StandardPortionCalories { get; protected set; }
+
         public SingleIngredient(float amount, MeasurementUnit unit, IngredientState state = IngredientState.Normal) : base(amount, unit)
         {
             this.State = state;
-            this.PieceCount = 1;
 
             foreach (object icaObj in this.GetType().GetCustomAttributes(typeof(IngredientConstsAttribute), false))
             {
@@ -29,7 +31,7 @@ namespace MrKupido.Library.Ingredient
 
 				while (ica != null)
 				{
-					CopyFieldsToPropertiesIfNeeded(this, ica, new string[] { "Category", "ExpirationTime", "GlichemicalIndex", "PotencialAlkalinity", "GrammsPerLiter", "GrammsPerPiece", "CaloriesPer100Gramms", "CarbohydratesPer100Gramms", "ProteinPer100Gramms", "FatPer100Gramms" });
+					CopyFieldsToPropertiesIfNeeded(this, ica, new string[] { "Category", "ExpirationTime", "GlichemicalIndex", "PotencialAlkalinity", "GrammsPerLiter", "GrammsPerPiece", "CaloriesPer100Gramms", "CarbohydratesPer100Gramms", "ProteinPer100Gramms", "FatPer100Gramms", "PieceCountEstimation", "StandardPortionCalories" });
 
 					if (ica.DefaultChild != null)
 					{
@@ -40,20 +42,14 @@ namespace MrKupido.Library.Ingredient
 						break;
 					}
 				}
-
-				//this.Category = ica.Category;
-                
-				//this.ExpirationTime = ica.ExpirationTime;
-				//this.GlichemicalIndex = ica.GlichemicalIndex;
-				//this.PotencialAlkalinity = ica.PotencialAlkalinity;
-
-				//this.GrammsPerLiter = this.GrammsPerLiter == null && ica.GrammsPerLiter != Single.MinValue ? ica.GrammsPerLiter : (float?)null;
-				//this.GrammsPerPiece = ica.GrammsPerPiece == Single.MinValue ? (float?)null : ica.GrammsPerPiece;
-				//this.CaloriesPer100Gramm = ica.CaloriesPer100Gramms == Single.MinValue ? (float?)null : ica.CaloriesPer100Gramms;
-				//this.CarbohydratesPer100Gramms = ica.CarbohydratesPer100Gramms == Single.MinValue ? (float?)null : ica.CarbohydratesPer100Gramms;
-				//this.ProteinPer100Gramms = ica.ProteinPer100Gramms == Single.MinValue ? (float?)null : ica.ProteinPer100Gramms;
-				//this.FatPer100Gramms = ica.FatPer100Gramms == Single.MinValue ? (float?)null : ica.FatPer100Gramms;
             }
+
+			if (!this.GrammsPerLiter.HasValue)
+			{
+				this.GrammsPerLiter = 1000.0f;
+			}
+
+			this.PieceCount = this.PieceCountEstimation.HasValue ? (int)(this.PieceCountEstimation * amount) : 1;
         }
 
 		private void CopyFieldsToPropertiesIfNeeded(object o1, object o2, string[] propNames)
@@ -100,40 +96,12 @@ namespace MrKupido.Library.Ingredient
             {
                 try
                 {
-                    float amount = GetAmount();
+                    float amount = GetAmount(this.PreferredUnit);
 
                     if (amount > 0)
                     {
-
-                        switch (Unit)
-                        {
-                            case MeasurementUnit.piece:
-                                amountStr = (amount).ToString("0") + " db";
-                                break;
-
-                            case MeasurementUnit.portion:
-                                amountStr = (amount).ToString("0") + " adag";
-                                break;
-
-                            case MeasurementUnit.gramm:
-                                if (amount >= 1000) amountStr = (amount / 1000).ToString("0.0") + " kg";
-                                else if (amount >= 100) amountStr = (amount / 10).ToString("0") + " dkg";
-                                else if (amount >= 10) amountStr = (amount / 10).ToString("0.0") + " dkg";
-                                else amountStr = (amount).ToString("0.00") + " g";
-                                break;
-
-                            case MeasurementUnit.liter:
-                                if (amount >= 1) amountStr = (amount).ToString("0.0") + " l";
-                                else if (amount >= 0.1) amountStr = (amount * 10).ToString("0") + " dl";
-                                else if (amount >= 0.01) amountStr = (amount * 10).ToString("0.0") + " dl";
-                                else amountStr = (amount * 100).ToString("0.00") + " cl";
-                                break;
-
-                            default:
-                                break;
-                        }
-
-                        amountStr += " ";
+						amountStr = SignificantDigits.ToString(amount, 1);
+						amountStr += " " + NameAliasAttribute.GetName(languageISO, typeof(MeasurementUnit), this.PreferredUnit.ToString()) + " ";
                     }
                 }
                 catch (AmountUnknownException)

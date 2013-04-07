@@ -124,7 +124,7 @@
     <Compile Include="Equipment\Containers\DeepContainer\MelyTanyer.cs" />
     <Compile Include="Equipment\Containers\FlatContainer\LaposKisTanyer.cs" />
     <Compile Include="Equipment\Containers\DeepContainer\CoverableContainer\JenaiTal.cs" />
-    <Compile Include="Equipment\Containers\DeepContainer\Labas.cs" />
+    <Compile Include="Equipment\Containers\DeepContainer\CoverableContainer\Labas.cs" />
     <Compile Include="Equipment\Devices\DeepDevice.cs" />
     <Compile Include="Equipment\Devices\FlatDevice.cs" />
     <Compile Include="Equipment\Devices\DeepDevice\Hutogep.cs" />
@@ -230,6 +230,7 @@
     <Compile Include="Model\Dimensions.cs" />
     <Compile Include="Model\EnumToMultilingualString.cs" />
     <Compile Include="Model\EquipmentGroup.cs" />
+    <Compile Include="Model\SignificantDigits.cs" />
     <Compile Include="Model\SingleIngredient.cs" />
     <Compile Include="Model\IngredientGroup.cs" />
     <Compile Include="Ingredient\Spice\FeketeBors.cs" />
@@ -239,6 +240,7 @@
     <Compile Include="Model\PreparedIngredients.cs" />
     <Compile Include="Model\StringHelper.cs" />
     <Compile Include="Model\TypeHelper.cs" />
+    <Compile Include="Model\UnitConversionRule.cs" />
     <Compile Include="Nature\Animalia\Actinopterygii.cs" />
     <Compile Include="Nature\Animalia\Chondrichthyes.cs" />
     <Compile Include="Nature\Animalia\Insecta.cs" />

@@ -57,31 +57,28 @@ namespace MrKupido.Library.Recipe
             kez.Raszorni(melyTanyer, new So(5.0f * amount));
 
             Edeny edeny = eg.Use<Edeny>();
-            edeny.Berakni(new Liszt(70.0f * amount), new So(5.0f * amount), new Fuszerpaprika(5.0f * amount), new FeketeBors(3.0f * amount), new Majoranna(3.0f * amount));
+            edeny.Berakni(new Liszt(7.0f * amount), new So(5.0f * amount), new Fuszerpaprika(3.0f * amount), new FeketeBors(3.0f * amount), new Majoranna(3.0f * amount));
 
-            LaposTanyer laposTanyer2 = eg.Use<LaposTanyer>(2);
             Fakanal fakanal = eg.Use<Fakanal>();
             fakanal.ElkeverniC(edeny);
-            IngredientGroup prezlisCsirkemell = kez.MegforgatniI(edeny, csirkemell);
-            laposTanyer2.Rarakni(prezlisCsirkemell);            
+			kez.MegforgatniI(edeny, csirkemell, eg.Use<LaposTanyer>(2));
             
-            LaposKisTanyer laposKisTanyer1 = eg.Use<LaposKisTanyer>();
             ISingleIngredient hagyma = new Hagyma(1.0f * amount, MeasurementUnit.piece);
             knife.FelkarikazniI(hagyma, 0.5f);
-            laposKisTanyer1.RarakniI(hagyma);
+			eg.Use<LaposKisTanyer>(1).RarakniI(hagyma);
 
             Bogre bogre = eg.Use<Bogre>();
-            bogre.Beonteni(new Tejfol(0.2f * amount), new NapraforgoOlaj(0.1f * amount));
+            bogre.Beonteni(new Tejfol(2.0f * amount), new NapraforgoOlaj(0.1f * amount));
             fakanal.ElkeverniC(bogre);
 
             Reszelo reszelo = eg.Use<Reszelo>();
-            ISingleIngredient sajt = new Sajt(100.0f * amount);
+            ISingleIngredient sajt = new Sajt(10.0f * amount);
 
             LaposKisTanyer laposKisTanyer2 = eg.Use<LaposKisTanyer>();
             reszelo.LereszelniI(laposKisTanyer2, sajt);
 
-            result.Add("csirkemell", laposTanyer2);
-            result.Add("hagyma", laposKisTanyer1);
+			result.Add("csirkemell", eg.Use<LaposTanyer>(2));
+			result.Add("hagyma", eg.Use<LaposKisTanyer>(1));
             result.Add("tejfol", bogre);
             result.Add("sajt", laposKisTanyer2);
 
@@ -97,7 +94,7 @@ namespace MrKupido.Library.Recipe
             tepsi.BerakniC(preps["csirkemell"]);
 
             Kez kez = eg.Use<Kez>();
-            kez.Raszorni(tepsi, new Liszt(10.0f * amount));
+            kez.Raszorni(tepsi, new Liszt(5.0f * amount));
             kez.Rarakni(tepsi, preps["hagyma"].Contents);
             kez.Ralocsolni(tepsi, preps["tejfol"]);
             kez.Raszorni(tepsi, preps["sajt"].Contents);

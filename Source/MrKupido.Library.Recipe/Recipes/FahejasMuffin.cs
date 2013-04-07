@@ -29,7 +29,7 @@ namespace MrKupido.Library.Recipe
         {
             PreparedIngredients result = new PreparedIngredients();
 
-            eg.Use<Edeny>(1).Berakni(new Vaj(100.0f * amount));
+            eg.Use<Edeny>(1).BerakniI(new Vaj(10.0f * amount));
             eg.Use<Tuzhely>(1).RahelyezniC(eg.Use<Edeny>(1));
             eg.Use<Tuzhely>(1).Homerseklet(50);
             eg.Use<Tuzhely>(1).LeemelniC(eg.Use<Edeny>(1));
@@ -41,12 +41,12 @@ namespace MrKupido.Library.Recipe
             eg.Use<KrumpliPucolo>(1).MeghamozniI(alma);
             eg.Use<Kes>(1).FeldarabolniI(alma, 2.0f);
 
-            eg.Use<NagyEdeny>(1).Berakni(new Cukor(125.0f * amount), new Liszt(250.0f * amount), new Sutopor(5.0f * amount), new Fahej(8.0f * amount), new So(5.0f * amount), alma);
+            eg.Use<NagyEdeny>(1).Berakni(new Liszt(25.0f * amount), new Cukor(8.0f * amount), new Sutopor(5.0f * amount), new Fahej(8.0f * amount), new So(5.0f * amount), alma);
             eg.Use<Fakanal>(1).ElkeverniC(eg.Use<NagyEdeny>(1));
 
             IIngredient tojasfeherje = eg.Use<Kez>(1).SzetvalasztaniI(new Tojas(2.0f * amount))[1];
             eg.Use<Habvero>(1).FelverniI(tojasfeherje);
-            eg.Use<Edeny>(2).Berakni(tojasfeherje, new Vaj(25.0f * amount), new Tej(0.05f * amount));
+            eg.Use<Edeny>(2).Berakni(tojasfeherje, new Vaj(2.5f * amount), new Tej(0.5f * amount));
 
             // Kanalanként a lisztes-almás keverékbe dolgozzuk úgy hogy ne túl folyékony masszát kapjunk
             eg.Use<NagyEdeny>(2).BeonteniC(eg.Use<Edeny>(2));

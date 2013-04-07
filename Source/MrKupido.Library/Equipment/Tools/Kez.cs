@@ -27,7 +27,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "gyúrd össze a következőket: ({0*}, )")]
         public IngredientGroup Osszegyurni(params IIngredient[] ingredients)
         {
-            this.LastActionDuration = 180;
+			this.LastActionDuration = 300;
 
             return new IngredientGroup(ingredients);
         }
@@ -37,7 +37,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "gyúrd össze a(z) {0.Contents.T}")]
         public void OsszegyurniC(IIngredientContainer container)
         {
-            this.LastActionDuration = 60;
+            this.LastActionDuration = 300;
         }
 
         [NameAlias("eng", "flip over", Priority = 200)]
@@ -50,12 +50,12 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "knead to balls", Priority = 200)]
         [NameAlias("hun", "golyóvá gyúr", Priority = 200)]
-        [NameAlias("hun", "gyúrj {1} grammos golyókat a(z) {0.Contents.K}")]
-        public IIngredient GolyovaGyurniC(IIngredientContainer c, float weight)
+        [NameAlias("hun", "gyúrj {1} grammos golyókat a(z) {0.Contents.K}, majd tedd őket a {2B}")]
+		public void GolyovaGyurniC(IIngredientContainer c1, float weight, IIngredientContainer c2)
         {
-            IIngredient i = c.Contents;
+            IIngredient i = c1.Contents;
 
-            if (i.Unit != MeasurementUnit.gramm) throw new InvalidActionForIngredientException("GolyovaGyurni", i.Name, i.Unit);
+			if (!i.IsSolid) throw new InvalidActionForIngredientException("GolyovaGyurni", i);
 
             float totalWeight = i.GetAmount(MeasurementUnit.gramm);
             int count = ((int)Math.Floor(totalWeight / weight)) + 1;
@@ -64,8 +64,9 @@ namespace MrKupido.Library.Equipment
 
             LastActionDuration = 8 * (uint)count;
 
-            c.Empty();
-            return i;
+            c1.Empty();
+
+			c2.Add(i);
         }
 
         [NameAlias("eng", "tear", Priority = 200)]
@@ -75,7 +76,7 @@ namespace MrKupido.Library.Equipment
         {
             IIngredient i = c.Contents;
 
-            if (i.Unit != MeasurementUnit.gramm) throw new InvalidActionForIngredientException("Kiszaggatni", i.Name, i.Unit);
+			if (!i.IsSolid) throw new InvalidActionForIngredientException("Kiszaggatni", i);
 
             List<IIngredient> result = new List<IIngredient>();
 
@@ -103,7 +104,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "szórd rá a(z) {1T} a(z) {0.Contents.R}")]
         public void Raszorni(IIngredientContainer iOn, IIngredient i)
         {
-            if (i.Unit != MeasurementUnit.gramm) throw new InvalidActionForIngredientException("Raszorni", i.Name, i.Unit);
+			if (!i.IsSolid) throw new InvalidActionForIngredientException("Raszorni", i);
 
             iOn.Add(i);
 
@@ -117,7 +118,7 @@ namespace MrKupido.Library.Equipment
         {
             IIngredient ci = c.Contents;
 
-            if (ci.Unit != MeasurementUnit.gramm) throw new InvalidActionForIngredientException("Raszorni", ci.Name, ci.Unit);
+			if (!ci.IsSolid) throw new InvalidActionForIngredientException("Raszorni", ci);
 
             iOn.Add(ci);
 
@@ -129,7 +130,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "szórd rá a(z) {1T} a(z) {0.Contents.R}")]
         public void RaszorniI(IIngredientContainer iOn, ISingleIngredient i)
         {
-            if (i.Unit != MeasurementUnit.gramm) throw new InvalidActionForIngredientException("Raszorni", i.Name, i.Unit);
+			if (!i.IsSolid) throw new InvalidActionForIngredientException("Raszorni", i);
 
             iOn.Add(i);
 
@@ -145,7 +146,7 @@ namespace MrKupido.Library.Equipment
 
             foreach (IIngredient i in ingredients)
             {
-                if ((i.Unit != MeasurementUnit.piece) && (i.Unit != MeasurementUnit.gramm)) throw new InvalidActionForIngredientException("Rarakni", i.Name, i.Unit);
+				if (!i.IsSolid) throw new InvalidActionForIngredientException("Rarakni", i);
             }
 
             iOnTo.AddRange(ingredients);
@@ -158,11 +159,11 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "öntsd rá a(z) {1T} a(z) {0.Contents.R}")]
         public void RaonteniI(IIngredientContainer iOnTo, IIngredient i)
         {
-            if (i.Unit != MeasurementUnit.liter) throw new InvalidActionForIngredientException("Raonteni", i.Name, i.Unit);
+			if (!i.IsFluid) throw new InvalidActionForIngredientException("Raonteni", i);
 
             iOnTo.Add(i);
 
-            this.LastActionDuration = 60;
+            this.LastActionDuration = 180;
         }
 
         [NameAlias("eng", "pour on", Priority = 200)]
@@ -172,12 +173,12 @@ namespace MrKupido.Library.Equipment
         {
             IIngredient ci = c.Contents;
 
-            if (ci.Unit != MeasurementUnit.liter) throw new InvalidActionForIngredientException("Raonteni", ci.Name, ci.Unit);
+			if (!ci.IsFluid) throw new InvalidActionForIngredientException("Raonteni", ci);
 
             iOnTo.Add(ci);
             c.Empty();
 
-            this.LastActionDuration = 60;
+            this.LastActionDuration = 180;
         }
 
         [NameAlias("eng", "water", Priority = 200)]
@@ -185,7 +186,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "locsold rá a(z) {1.Contents.T} a(z) {0.Contents.R}")]
         public void Ralocsolni(IIngredientContainer iOn, IIngredientContainer c)
         {
-            if (c.Contents.Unit != MeasurementUnit.liter) throw new InvalidActionForIngredientException("Lelocsolni", c.Contents.Name, c.Contents.Unit);
+			if (!c.Contents.IsFluid) throw new InvalidActionForIngredientException("Lelocsolni", c.Contents);
 
             iOn.Add(c.Contents);
             c.Empty();
@@ -196,31 +197,31 @@ namespace MrKupido.Library.Equipment
         [NameAlias("eng", "plow", Priority = 200)]
         [NameAlias("hun", "megforgat", Priority = 200)]
         [NameAlias("hun", "forgasd meg a(z) {1T} a(z) {0N}")]
-        public IngredientGroup MegforgatniI(IIngredientContainer iIn, IIngredient i)
+		public void MegforgatniI(IIngredientContainer iIn, IIngredient i, IIngredientContainer c2)
         {
-            if (i.Unit != MeasurementUnit.gramm) throw new InvalidActionForIngredientException("Megforgatni", i.Name, i.Unit);
+			if (!i.IsSolid) throw new InvalidActionForIngredientException("Megforgatni", i);
 
             // TODO: a small amount of iIn.Contents must be separated
 
             this.LastActionDuration = 180;
 
-            return new IngredientGroup(new IIngredient[] { i, iIn.Contents });
+			c2.AddRange(new IIngredient[] { i, iIn.Contents });
         }
 
         [NameAlias("eng", "plow", Priority = 200)]
         [NameAlias("hun", "megforgat", Priority = 200)]
-        [NameAlias("hun", "forgasd meg a(z) {1.Contents.T} a(z) {0N}")]
-        public IngredientGroup MegforgatniC(IIngredientContainer iIn, IIngredientContainer c)
+        [NameAlias("hun", "forgasd meg a(z) {1.Contents.T} a(z) {0N}, majd helyezd a {2B}")]
+        public void MegforgatniC(IIngredientContainer iIn, IIngredientContainer c, IIngredientContainer c2)
         {
             IIngredient i = c.Contents;
 
-            if (i.Unit != MeasurementUnit.gramm) throw new InvalidActionForIngredientException("Megforgatni", i.Name, i.Unit);
+			if (!i.IsSolid) throw new InvalidActionForIngredientException("Megforgatni", i);
 
             // TODO: a small amount of iIn.Contents must be separated
 
             this.LastActionDuration = 180;
 
-            return new IngredientGroup(new IIngredient[] { i, iIn.Contents });
+			c2.AddRange(new IIngredient[] { i, iIn.Contents });
         }
 
         [NameAlias("eng", "water", Priority = 200)]
@@ -228,12 +229,13 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "locsold meg a(z) {0.Contents.T} a(z) {1V}")]
         public void MeglocsolniI(IIngredientContainer i, IIngredient iWith)
         {
-            if (iWith.Unit != MeasurementUnit.liter) throw new InvalidActionForIngredientException("Meglocsolni", iWith.Name, iWith.Unit);
+			if (!iWith.IsFluid) throw new InvalidActionForIngredientException("Meglocsolni", iWith);
 
             this.LastActionDuration = 30;
 
+			IIngredient iContents = i.Contents;
             i.Empty();
-            i.AddRange(new IIngredient[] { iWith, i.Contents });
+			i.AddRange(new IIngredient[] { iContents, iWith });
         }
 
         [NameAlias("eng", "water", Priority = 200)]
@@ -243,7 +245,7 @@ namespace MrKupido.Library.Equipment
         {
             IIngredient ci = cWith.Contents;
 
-            if (ci.Unit != MeasurementUnit.liter) throw new InvalidActionForIngredientException("Meglocsolni", ci.Name, ci.Unit);
+			if (!ci.IsFluid) throw new InvalidActionForIngredientException("Meglocsolni", ci);
 
             this.LastActionDuration = 30;
 
@@ -253,7 +255,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "serve", Priority = 200)]
         [NameAlias("hun", "tálal", Priority = 200)]
-        [NameAlias("hun", "tálald a(z) {0.Contents.T} {1N}")]
+		[NameAlias("hun", "tálald a(z) {0.Contents.T} {1N}")]
         public void TalalniC(IIngredientContainer i, IEquipment container) 
         {
             this.LastActionDuration = 300;
@@ -264,7 +266,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "válaszd szét a(z) {0T}")]
         public IIngredient[] SzetvalasztaniI(IIngredient i) 
         {
-            if (!(i is Tojas)) throw new InvalidActionForIngredientException("Szetvalasztani", i.Name, i.Unit);
+            if (!(i is Tojas)) throw new InvalidActionForIngredientException("Szetvalasztani", i);
 
             List<IIngredient> result = new List<IIngredient>();
 
@@ -285,7 +287,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "göngyöld fel a(z) {0.Contents.T}")]
         public void FelgongyolniC(IIngredientContainer c)
         {
-            this.LastActionDuration = 30;
+            this.LastActionDuration = 240;
         }
 
         [NameAlias("eng", "dip into", Priority = 200)]
@@ -295,7 +297,7 @@ namespace MrKupido.Library.Equipment
         {
             IIngredient ci = c2.Contents;
 
-            if (ci.Unit != MeasurementUnit.liter) throw new InvalidActionForIngredientException("Belemartani", ci.Name, ci.Unit);
+			if (!ci.IsFluid) throw new InvalidActionForIngredientException("Belemartani", ci);
 
             // TODO: a small amount of iIn.Contents must be separated
 

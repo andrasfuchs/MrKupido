@@ -23,7 +23,7 @@ namespace MrKupido.Library.Recipe
 
     public class Mustar : RecipeBase
     {
-        public Mustar(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+        public Mustar(float amount, MeasurementUnit unit = MeasurementUnit.evokanal)
             : base(amount, unit)
         {
             RecipeUnknown();

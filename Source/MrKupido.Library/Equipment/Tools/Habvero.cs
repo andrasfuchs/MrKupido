@@ -16,7 +16,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "verd fel a(z) {0T}")]
         public IIngredient FelverniI(IIngredient i)
         {
-            if (i.Unit != MeasurementUnit.liter) throw new InvalidActionForIngredientException("Felverni", i.Name, i.Unit);
+			if (!i.IsFluid) throw new InvalidActionForIngredientException("Felverni", i);
 
             i.ChangeUnitTo(MeasurementUnit.gramm);
 

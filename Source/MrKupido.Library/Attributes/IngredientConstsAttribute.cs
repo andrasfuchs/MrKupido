@@ -50,6 +50,16 @@ namespace MrKupido.Library.Attributes
 		public float FatPer100Gramms = Single.MinValue;
 		public float ProteinPer100Gramms = Single.MinValue;
 
+		/// <summary>
+		/// Indicates the calories value which should be handled as one portion. The portion multiplier is altered in runtime to standardize it to this number of calories when giving the 1.0 multiplier as parameter to the recipe.
+		/// </summary>
+		public float StandardPortionCalories = 1000.0f;
+
+		/// <summary>
+		/// If the recipe will consist of more than one unit, this property should indicate the estimated number of units cooked by the recipe with the 1.0 multiplier
+		/// </summary>
+		public float PieceCountEstimation = Single.MinValue;
+
         /// <summary>
         /// True if it is more like a category not a physical ingredient. Abstract ingredients must have the DefaultChild defined 
         /// and they should be replaced by any of its descendants in the recipe.

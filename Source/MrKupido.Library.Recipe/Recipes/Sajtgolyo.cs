@@ -73,7 +73,7 @@ namespace MrKupido.Library.Recipe
             Reszelo reszelo = eg.Use<Reszelo>();
             LaposKisTanyer laposKisTanyer = eg.Use<LaposKisTanyer>();
 
-            ISingleIngredient sajt = new Sajt(70.0f * amount);
+            ISingleIngredient sajt = new Sajt(7.0f * amount);
             reszelo.LereszelniI(laposKisTanyer, sajt);
 
             IIngredient tojas = new Tojas(1.0f * amount);
@@ -84,7 +84,7 @@ namespace MrKupido.Library.Recipe
             tojas = hv.FelverniI(tojasfeherje);
 
             Serpenyo serpenyo = eg.Use<Serpenyo>();
-            serpenyo.Berakni(new Vaj(40.0f * amount));
+            serpenyo.Berakni(new Vaj(4.0f * amount));
             tuzhely.RahelyezniC(serpenyo);
             tuzhely.Homerseklet(200);
             serpenyo.Varni(5);
@@ -92,16 +92,13 @@ namespace MrKupido.Library.Recipe
             IIngredient vaj = serpenyo.Kivenni();
 
             Fakanal fakanal = eg.Use<Fakanal>();
-            eg.Use<NagyEdeny>(1).Berakni(new Liszt(500.0f * amount), new FeketeBorsOrolt(3.0f * amount), new So(6.0f * amount), vaj, burgonya, tojas, fokhagyma, sajt);
+            eg.Use<NagyEdeny>(1).Berakni(new Liszt(50.0f * amount), new FeketeBorsOrolt(3.0f * amount), new So(6.0f * amount), vaj, burgonya, tojas, fokhagyma, sajt);
             fakanal.ElkeverniC(eg.Use<NagyEdeny>(1));
 
-            LaposTanyer laposTanyer = eg.Use<LaposTanyer>();
-
             //IngredientGroup golyok = kez.Kiszaggatni(eg.Use<NagyEdeny>(1).Contents, 30.0f);
-            IIngredient golyok = kez.GolyovaGyurniC(eg.Use<NagyEdeny>(1), 30.0f);
-            laposTanyer.Rarakni(golyok);
+			kez.GolyovaGyurniC(eg.Use<NagyEdeny>(1), 30.0f, eg.Use<LaposTanyer>(1));
 
-            result.Add("golyok", laposTanyer);
+			result.Add("golyok", eg.Use<LaposTanyer>(1));
 
             eg.WashUp();
             return result;
@@ -123,13 +120,10 @@ namespace MrKupido.Library.Recipe
 
             Kez kez = eg.Use<Kez>();
             //IIngredient golyok = preps["golyok"].Contents;
-            IIngredient golyok = kez.MegforgatniC(melyTanyer, preps["golyok"]);
-
-            MelyTanyer melyTanyer3 = eg.Use<MelyTanyer>();
-            melyTanyer3.Berakni(golyok);
+			kez.MegforgatniC(melyTanyer, preps["golyok"], eg.Use<MelyTanyer>(3));
 
             MelyTanyer melyTanyer2 = eg.Use<MelyTanyer>();
-            melyTanyer2.Berakni(serpenyo.KisutniOsszesetC(melyTanyer3, 5));
+			melyTanyer2.Berakni(serpenyo.KisutniOsszesetC(eg.Use<MelyTanyer>(3), 5));
 
             kez.LecsepegtetniC(melyTanyer2);
 

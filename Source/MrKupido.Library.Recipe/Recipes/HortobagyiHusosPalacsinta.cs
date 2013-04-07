@@ -29,7 +29,7 @@ namespace MrKupido.Library.Recipe
         {
             PreparedIngredients result = new PreparedIngredients();
 
-			ISingleIngredient sertesComb = new SertesComb(400.0f * amount);
+			ISingleIngredient sertesComb = new SertesComb(40.0f * amount);
 			eg.Use<Kes>(1).FeldarabolniI(sertesComb, 15.0f);
 
 			eg.Use<MelyTanyer>(1).BerakniI(sertesComb);
@@ -75,7 +75,7 @@ namespace MrKupido.Library.Recipe
 
 			eg.Use<Tuzhely>(1).LeemelniC(eg.Use<Edeny>(1));
 
-			eg.Use<Kez>(1).RaszorniI(eg.Use<Edeny>(1), new Fuszerpaprika(3.0f * amount));
+			eg.Use<Kez>(1).RaszorniI(eg.Use<Edeny>(1), new Fuszerpaprika(2.0f * amount));
 			eg.Use<Edeny>(1).BerakniC(preps["paprikaparadicsom"]);
 			eg.Use<Kez>(1).RaszorniI(eg.Use<Edeny>(1), new So(2.0f * amount));
 			eg.Use<Fakanal>(1).ElkeverniC(eg.Use<Edeny>(1));
@@ -86,7 +86,7 @@ namespace MrKupido.Library.Recipe
 			eg.Use<Tuzhely>(1).Varni(25);
 
 
-			eg.Use<NagyEdeny>(1).Berakni(new Liszt(150.0f * amount), new Tojas(3.0f * amount), new So(2.0f * amount), new Tej(0.4f * amount), new NapraforgoOlaj(0.05f));
+			eg.Use<NagyEdeny>(1).Berakni(new Liszt(15.0f * amount), new Tojas(3.0f * amount), new So(2.0f * amount), new Tej(4.0f * amount), new NapraforgoOlaj(0.05f));
 			eg.Use<Fakanal>(1).ElkeverniC(eg.Use<NagyEdeny>(1));
 			eg.Use<NagyEdeny>(1).Lefedni(new Konyharuha());
 			eg.Use<NagyEdeny>(1).Varni(30);
@@ -98,13 +98,13 @@ namespace MrKupido.Library.Recipe
 			eg.Use<Edeny>(1).FolyadekotAtonteni(eg.Use<Edeny>(2));
 			eg.Use<HusDaralo>(1).DaralniC(eg.Use<Edeny>(3), eg.Use<Edeny>(1));
 
-			eg.Use<Edeny>(2).BeonteniI(new Tejfol(0.3f * amount));
+			eg.Use<Edeny>(2).BeonteniI(new Tejfol(3.0f * amount));
 			
 			eg.Use<Tuzhely>(1).RahelyezniC(eg.Use<Edeny>(2));
 			eg.Use<Tuzhely>(1).Homerseklet(150);
 			eg.Use<Tuzhely>(1).Varni(5);
 
-			eg.Use<Edeny>(2).Szetvalasztani(eg.Use<Edeny>(2), eg.Use<Edeny>(4), 0.20f);
+			eg.Use<Edeny>(2).Szetvalasztani(eg.Use<Edeny>(2), eg.Use<Edeny>(4), 20.0f);
 			eg.Use<Edeny>(2).FolyadekotAtonteni(eg.Use<Edeny>(3));
 
 			eg.Use<Suto>(1).Homerseklet(200);
@@ -121,7 +121,7 @@ namespace MrKupido.Library.Recipe
 			eg.Use<Suto>(1).Varni(10);
 			eg.Use<Suto>(1).KiemelniC(eg.Use<Tepsi>(1));
 
-			eg.Use<Pohar>(1).Beonteni(new Tejfol(0.1f * amount));
+			eg.Use<Pohar>(1).Beonteni(new Tejfol(1.0f * amount));
 			eg.Use<Kez>(1).Ralocsolni(eg.Use<Tepsi>(1), eg.Use<Pohar>(1));
 
 			cfp.Add("palacsinta", eg.Use<Tepsi>(1));

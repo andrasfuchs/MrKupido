@@ -26,7 +26,7 @@ namespace MrKupido.Library.Ingredient
     [KindOf(typeof(Minerale))]
     public class So : SingleIngredient
     {
-        public So(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+        public So(float amount, MeasurementUnit unit = MeasurementUnit.csipet)
             : base(amount, unit)
         {
         }

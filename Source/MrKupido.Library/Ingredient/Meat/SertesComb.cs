@@ -23,7 +23,7 @@ namespace MrKupido.Library.Ingredient
     [PartOf(typeof(SusScrofaDomestica))]
     public class SertesComb : SingleIngredient
     {
-        public SertesComb(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+        public SertesComb(float amount, MeasurementUnit unit = MeasurementUnit.dekagramm)
             : base(amount, unit)
         {
         }

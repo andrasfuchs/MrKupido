@@ -58,5 +58,5 @@ namespace MrKupido.Library.Equipment
         {
             IsDirty = false;
         }
-    }
+	}
 }

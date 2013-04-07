@@ -5,10 +5,10 @@ using System.Text;
 
 namespace MrKupido.Library
 {
-    public class InvalidActionForIngredientException : MrKupidoException
-    {
-        public InvalidActionForIngredientException(string actionName, string ingredientName, MeasurementUnit unit)
-            : base("The action '"+actionName+"' on ingredient '" + ingredientName + "' (" + unit.ToString() + ") is invalid.")
-        { }
-    }
+	public class InvalidActionForIngredientException : MrKupidoException
+	{
+		public InvalidActionForIngredientException(string actionName, IIngredient i)
+			: base("The action '" + actionName + "' on ingredient '" + i.Name + "' (" + i.Unit.ToString() + ") is invalid.")
+		{ }
+	}
 }

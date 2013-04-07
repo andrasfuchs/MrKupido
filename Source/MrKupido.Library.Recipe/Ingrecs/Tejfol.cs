@@ -26,7 +26,7 @@ namespace MrKupido.Library.Recipe
 
     public class Tejfol : RecipeBase
     {
-        public Tejfol(float amount, MeasurementUnit unit = MeasurementUnit.liter)
+        public Tejfol(float amount, MeasurementUnit unit = MeasurementUnit.deciliter)
             : base(amount, unit)
         {
         }

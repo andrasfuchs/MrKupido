@@ -12,7 +12,7 @@ namespace MrKupido.Library.Recipe
     [IngredientConsts(DefaultChild = typeof(KristalyCukor), GrammsPerLiter = 1000, IsAbstract = true, IsIngrec = true)]
     public class Cukor : RecipeBase
     {
-        public Cukor(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+        public Cukor(float amount, MeasurementUnit unit = MeasurementUnit.evokanal)
             : base(amount, unit)
         {
             RecipeUnknown();

@@ -16,12 +16,15 @@ namespace MrKupido.Library
 
         int PieceCount { get; set; }
 
+		bool IsSolid { get; }
+		bool IsFluid { get; }
+
                
         float GetAmount();
 
         float GetAmount(MeasurementUnit unit);
 
-        void ChangeUnitTo(MeasurementUnit unit);
+        bool ChangeUnitTo(MeasurementUnit unit);
 
         string GetName(string languageISO);
     }

@@ -12,7 +12,7 @@ namespace MrKupido.Library.Recipe
     [IngredientConsts(IsIngrec = true, GrammsPerLiter=1000)]
     public class Etelizesito : RecipeBase
     {
-        public Etelizesito(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+        public Etelizesito(float amount, MeasurementUnit unit = MeasurementUnit.evokanal)
             : base(amount, unit)
         {
             RecipeUnknown();

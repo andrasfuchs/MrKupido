@@ -54,27 +54,26 @@ namespace MrKupido.Library.Recipe
             reszelo.LereszelniI(laposKisTanyer, new FustoltSajt(100.0f));
 
             NagyEdeny edeny = eg.Use<NagyEdeny>();
-            edeny.Berakni(new Liszt(250.0f), new So(20.0f), new Tojas(2.0f), laposKisTanyer.Contents);
+            edeny.Berakni(new Liszt(25.0f), new So(20.0f), new Tojas(2.0f), laposKisTanyer.Contents);
 
             Kez kez = eg.Use<Kez>();
-            IngredientGroup csirkemell = kez.MegforgatniI(edeny, new Csirkemell(250 * 10));
+			kez.MegforgatniI(edeny, new Csirkemell(250 * 10), eg.Use<JenaiTal>(1));
 
-            JenaiTal jenai = eg.Use<JenaiTal>();
-            jenai.Berakni(csirkemell, new FustoltSzalonna(5, MeasurementUnit.piece));
-            jenai.BeonteniI(new Tejszin(0.3f));
-            jenai.Lefedni(jenai.Fedo);
+			eg.Use<JenaiTal>(1).Berakni(new FustoltSzalonna(5, MeasurementUnit.piece));
+			eg.Use<JenaiTal>(1).BeonteniI(new Tejszin(3.0f));
+			eg.Use<JenaiTal>(1).Lefedni(eg.Use<JenaiTal>(1).Fedo);
 
             Suto suto = eg.Use<Suto>();
             suto.Homerseklet(200);
-            suto.BehelyezniC(jenai);
+			suto.BehelyezniC(eg.Use<JenaiTal>(1));
             suto.Varni(30);
-            suto.KiemelniC(jenai);
-            jenai.FedotLevenni();
-            suto.BehelyezniC(jenai);
+			suto.KiemelniC(eg.Use<JenaiTal>(1));
+			eg.Use<JenaiTal>(1).FedotLevenni();
+			suto.BehelyezniC(eg.Use<JenaiTal>(1));
             suto.Varni(10);
-            suto.KiemelniC(jenai);
+			suto.KiemelniC(eg.Use<JenaiTal>(1));
 
-            cfp.Add("csirkemellek", jenai);
+			cfp.Add("csirkemellek", eg.Use<JenaiTal>(1));
 
             eg.WashUp();
             return cfp;

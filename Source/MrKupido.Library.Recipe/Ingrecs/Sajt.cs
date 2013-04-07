@@ -12,7 +12,7 @@ namespace MrKupido.Library.Recipe
 	[IngredientConsts(DefaultChild = typeof(EdamiSajt), IsIngrec = true)]
     public class Sajt : RecipeBase
     {
-        public Sajt(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+        public Sajt(float amount, MeasurementUnit unit = MeasurementUnit.dekagramm)
             : base(amount, unit)
         {
             RecipeUnknown();

@@ -23,7 +23,7 @@ namespace MrKupido.Library.Recipe
 
     public class Vaj : RecipeBase
     {
-        public Vaj(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+        public Vaj(float amount, MeasurementUnit unit = MeasurementUnit.dekagramm)
             : base(amount, unit)
         {
         }
@@ -52,7 +52,7 @@ namespace MrKupido.Library.Recipe
             CookedFoodParts cfp = new CookedFoodParts();
 
             Edeny edeny = eg.Use<Edeny>();
-            edeny.Beonteni(new Tejszin(10.0f * amount));
+            edeny.Beonteni(new Tejszin(100.0f * amount));
 
             Habvero habvero = eg.Use<Habvero>();
             habvero.FelverniI(edeny.Contents);

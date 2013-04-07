@@ -41,10 +41,10 @@ namespace MrKupido.Library.Recipe
         {
             PreparedIngredients result = new PreparedIngredients();
 
-            IIngredient felfuttatottEleszto = new FelfuttatottEleszto(30f * amount);
+            IIngredient felfuttatottEleszto = new FelfuttatottEleszto(5.0f * amount);
 
             NagyEdeny edeny = eg.Use<NagyEdeny>();
-            edeny.Berakni(new Liszt(1000f * amount), felfuttatottEleszto, new Tejfol(0.2f * amount), new So(15f * amount), new Viz(0.5f * amount));
+            edeny.Berakni(new Liszt(100.0f * amount), felfuttatottEleszto, new Tejfol(2.0f * amount), new So(15f * amount), new Viz(0.5f * amount));
 
             Kez kez = eg.Use<Kez>();
             kez.OsszegyurniC(edeny);

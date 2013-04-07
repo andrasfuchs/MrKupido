@@ -12,7 +12,7 @@ namespace MrKupido.Library.Recipe
     [IngredientConsts(IsIngrec = true)]
     public class FelfuttatottEleszto : RecipeBase
     {
-        public FelfuttatottEleszto(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+        public FelfuttatottEleszto(float amount, MeasurementUnit unit = MeasurementUnit.dekagramm)
             : base(amount, unit)
         {
             RecipeUnknown();

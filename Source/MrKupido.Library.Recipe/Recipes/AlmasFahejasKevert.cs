@@ -9,8 +9,8 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Recipe
 {
-    [NameAlias("eng", "apple-cinemon mixup")]
-    [NameAlias("hun", "almás-fahéjas kevert")]
+    [NameAlias("eng", "apple-cinemon cookie")]
+    [NameAlias("hun", "almás-fahéjas süti")]
 
     public class AlmasFahejasKevert : RecipeBase
     {
@@ -36,14 +36,17 @@ namespace MrKupido.Library.Recipe
 
             eg.Use<Kez>(1).MeglocsolniI(eg.Use<Edeny>(2), new CitromLe(0.1f * amount));
 
-            eg.Use<Edeny>(1).Berakni(new Tojas(3.0f * amount), new Cukor(10.0f * amount));
+			ISingleIngredient tojas = new Tojas(3.0f * amount);
+			tojas.ChangeUnitTo(MeasurementUnit.gramm);
+
+            eg.Use<Edeny>(1).Berakni(tojas, new Cukor(1.0f * amount));
             eg.Use<Habvero>(1).KikeverniC(eg.Use<Edeny>(1));
 
             ISingleIngredient citromhej = new CitromHej(1.0f * amount);
             eg.Use<Reszelo>(1).LereszelniI(eg.Use<LaposKisTanyer>(1), citromhej);
             eg.Use<Edeny>(1).Berakni(new NapraforgoOlaj(0.2f * amount), citromhej);
 
-            eg.Use<Edeny>(2).Berakni(new Liszt(400.0f * amount), new Fahej(15.0f * amount), new Szodabikarbona(3.0f * amount));
+            eg.Use<Edeny>(2).Berakni(new Liszt(40.0f * amount), new Fahej(15.0f * amount), new Szodabikarbona(3.0f * amount));
             eg.Use<Fakanal>(1).ElkeverniC(eg.Use<Edeny>(2));
 
             ISingleIngredient dio = new Diobel(150.0f * amount, MeasurementUnit.gramm);

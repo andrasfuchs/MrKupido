@@ -9,9 +9,10 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Recipe
 {
+	[IngredientConsts(PieceCountEstimation=28, GrammsPerPiece=34)]
+
     [NameAlias("eng", "cocoa spiral")]
     [NameAlias("hun", "kakaós csiga")]
-
     public class KakaosCsiga : RecipeBase
     {
         public KakaosCsiga(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
@@ -29,7 +30,7 @@ namespace MrKupido.Library.Recipe
         {
             PreparedIngredients result = new PreparedIngredients();
 
-            eg.Use<NagyEdeny>(1).Berakni(new Liszt(400.0f * amount), new TojasSargaja(2.0f * amount), new FelfuttatottEleszto(5.0f * amount), new Vaj(40.00f * amount), new Cukor(40.0f * amount), new So(2.0f * amount));
+            eg.Use<NagyEdeny>(1).Berakni(new Liszt(40.0f * amount), new TojasSargaja(2.0f * amount), new FelfuttatottEleszto(2.5f * amount), new Vaj(4.0f * amount), new Cukor(3.0f * amount), new So(2.0f * amount));
             eg.Use<Kez>(1).OsszegyurniC(eg.Use<NagyEdeny>(1));
 
             eg.Use<Futotest>(1).RahelyezniC(eg.Use<NagyEdeny>(1));
@@ -48,7 +49,10 @@ namespace MrKupido.Library.Recipe
 
             eg.Use<NyujtoDeszka>(1).NyujtaniC(preps["csigateszta"], 1.50f);
 
-            eg.Use<Edeny>(1).Berakni(new PorCukor(140.0f * amount), new VaniliasCukor(20.0f * amount), new Vaj(100.0f * amount), new Kakaopor(20.0f * amount));
+			ISingleIngredient kakao = new Kakaopor(5.0f * amount, MeasurementUnit.teaskanal);
+			kakao.ChangeUnitTo(MeasurementUnit.gramm);
+
+            eg.Use<Edeny>(1).Berakni(kakao, new PorCukor(140.0f * amount), new VaniliasCukor(20.0f * amount), new Vaj(10.0f * amount));
             eg.Use<Fakanal>(1).ElkeverniC(eg.Use<Edeny>(1));
 
             eg.Use<Ecset>(1).MegkenniC(eg.Use<Edeny>(1), eg.Use<NyujtoDeszka>(1));
@@ -63,14 +67,14 @@ namespace MrKupido.Library.Recipe
             eg.Use<Tepsi>(1).Lefedni(new Konyharuha());
             eg.Use<Tepsi>(1).Varni(30);
 
-            eg.Use<Suto>(1).Homerseklet(200);
+            eg.Use<Suto>(1).Homerseklet(180);
             eg.Use<Suto>(1).BehelyezniC(eg.Use<Tepsi>(1));
-            eg.Use<Suto>(1).Varni(40);
+            eg.Use<Suto>(1).Varni(20);
             eg.Use<Suto>(1).KiemelniC(eg.Use<Tepsi>(1));
 
 
-            eg.Use<Edeny>(2).BeonteniI(new Tejszin(0.2f * amount));
-            ISingleIngredient cukor = new Cukor(50.0f * amount);
+            eg.Use<Edeny>(2).BeonteniI(new Tejszin(2.0f * amount));
+            ISingleIngredient cukor = new Cukor(3.0f * amount);
             cukor.ChangeUnitTo(MeasurementUnit.liter);
             eg.Use<Edeny>(2).BerakniI(cukor);
 

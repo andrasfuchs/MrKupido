@@ -28,7 +28,7 @@ namespace MrKupido.Library.Recipe
 
     public class Tejszin : RecipeBase
     {
-        public Tejszin(float amount, MeasurementUnit unit = MeasurementUnit.liter)
+        public Tejszin(float amount, MeasurementUnit unit = MeasurementUnit.deciliter)
             : base(amount, unit)
         {
         }
