@@ -48,7 +48,7 @@ namespace MrKupido.Library.Equipment
         public void Beonteni(params IIngredient[] ingredients)
         {
             this.contents.AddIngredients(ingredients);
-            this.LastActionDuration = 15 * (uint)ingredients.Length;
+            this.LastActionDuration = 60 * (uint)ingredients.Length;
         }
 
         [NameAlias("eng", "pour into", Priority = 200)]
@@ -57,7 +57,7 @@ namespace MrKupido.Library.Equipment
         public void BeonteniI(ISingleIngredient i)
         {
             this.contents.AddIngredients(i);
-            this.LastActionDuration = 15;
+            this.LastActionDuration = 60;
         }
 
         [NameAlias("eng", "pour into", Priority = 200)]
@@ -66,7 +66,7 @@ namespace MrKupido.Library.Equipment
         public void BeonteniC(IIngredientContainer c)
         {
             this.contents.AddIngredients(c.Contents);
-            this.LastActionDuration = 15;
+            this.LastActionDuration = 60;
         }
 
         [NameAlias("eng", "pull out", Priority = 200)]

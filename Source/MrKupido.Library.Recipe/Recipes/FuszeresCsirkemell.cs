@@ -9,7 +9,7 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Recipe
 {
-    [NameAlias("eng", "spicey chicken breast")]
+    [NameAlias("eng", "spicy chicken breast")]
     [NameAlias("hun", "fűszeres csirkemell")]
 
     public class FuszeresCsirkemell : RecipeBase

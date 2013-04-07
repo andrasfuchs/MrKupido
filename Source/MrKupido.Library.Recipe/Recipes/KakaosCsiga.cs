@@ -52,7 +52,7 @@ namespace MrKupido.Library.Recipe
 			ISingleIngredient kakao = new Kakaopor(5.0f * amount, MeasurementUnit.teaskanal);
 			kakao.ChangeUnitTo(MeasurementUnit.gramm);
 
-            eg.Use<Edeny>(1).Berakni(kakao, new PorCukor(140.0f * amount), new VaniliasCukor(20.0f * amount), new Vaj(10.0f * amount));
+            eg.Use<Edeny>(1).Berakni(kakao, new PorCukor(14.0f * amount), new VaniliasCukor(20.0f * amount), new Vaj(10.0f * amount));
             eg.Use<Fakanal>(1).ElkeverniC(eg.Use<Edeny>(1));
 
             eg.Use<Ecset>(1).MegkenniC(eg.Use<Edeny>(1), eg.Use<NyujtoDeszka>(1));

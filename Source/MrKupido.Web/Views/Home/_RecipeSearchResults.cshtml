@@ -4,7 +4,7 @@
     @{MrKupido.Web.Models.RecipeSearchResultItem[] rsri = (Model == null ? new MrKupido.Web.Models.RecipeSearchResultItem[0] : Model);}
     @for (int i = 0; i < rsri.Length; i++)
     { 
-        <li id="@rsri[i].UniqueName">
+        <li id="@rsri[i].UniqueName.Replace("[","_").Replace("]","_")">
             @{ Html.RenderPartial("_RecipeSearchResultSideB", rsri[i]); }
         </li>
     }

@@ -138,6 +138,8 @@
     });
 
          function searchKeywordSelected(event, ui) {
+             _gaq.push(['_trackEvent', 'UserAction', 'Search', ui.item ? ui.item.value : this.value]);
+
              $.ajax({
                  url: '@Url.Action("SearchSelected", "Home")',
                  type: "POST",
@@ -287,14 +289,14 @@
         <img runat="server" id="menu-trigger" src="~/Content/svg/icon_menutrigger.svg" alt="Menu" width="11" height="9" />
         <nav id="menu-wrap">
             <ul id="usermenu">
-                <li><a href="#">@MrKupido.Web.Resources.Shared.SearchHeader.Language</a>
+@*                <li><a href="#">@MrKupido.Web.Resources.Shared.SearchHeader.Language</a>
                     <ul>
                         <li><a href="~/hun">@MrKupido.Web.Resources.Shared.SearchHeader.LanguageHun</a></li>
                         <li><a href="~/eng">@MrKupido.Web.Resources.Shared.SearchHeader.LanguageEng</a></li>
                         <li><a href="~/deu" style="text-decoration: line-through;">@MrKupido.Web.Resources.Shared.SearchHeader.LanguageDeu</a></li>
                         <li><a href="~/spa" style="text-decoration: line-through;">@MrKupido.Web.Resources.Shared.SearchHeader.LanguageSpa</a></li>
                     </ul>
-                </li>
+                </li>*@
                 <li><a href="~/@Session["Language"]/account/profile">@MrKupido.Web.Resources.Shared.SearchHeader.Profile</a></li>
                 <li><a href="~/@Session["Language"]/ingredient/trees">@MrKupido.Web.Resources.Shared.SearchHeader.Taxonomy</a></li>
                 <li><a href="~/@Session["Language"]/import/recipelist">@MrKupido.Web.Resources.Shared.SearchHeader.Import</a></li>

@@ -29,7 +29,7 @@ namespace MrKupido.Library.Recipe
         {
             PreparedIngredients result = new PreparedIngredients();
 
-            eg.Use<Edeny>(1).Berakni(new Eleszto(25.0f * amount), new Viz(0.2f), new Cukor(1.0f * amount, MeasurementUnit.teaskanal), new So(7.50f * amount));
+            eg.Use<Edeny>(1).Berakni(new Eleszto(2.5f * amount), new Viz(0.2f), new Cukor(1.0f * amount, MeasurementUnit.teaskanal), new So(7.50f * amount));
             eg.Use<Fakanal>(1).ElkeverniC(eg.Use<Edeny>(1));
 
             eg.Use<NagyEdeny>(1).Berakni(new Liszt(8.0f * amount, MeasurementUnit.kilogramm));

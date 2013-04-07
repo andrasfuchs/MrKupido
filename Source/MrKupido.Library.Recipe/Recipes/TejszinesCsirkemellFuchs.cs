@@ -51,13 +51,13 @@ namespace MrKupido.Library.Recipe
             LaposKisTanyer laposKisTanyer = eg.Use<LaposKisTanyer>();
 
             Reszelo reszelo = eg.Use<Reszelo>();
-            reszelo.LereszelniI(laposKisTanyer, new FustoltSajt(100.0f));
+            reszelo.LereszelniI(laposKisTanyer, new FustoltSajt(10.0f * amount));
 
             NagyEdeny edeny = eg.Use<NagyEdeny>();
-            edeny.Berakni(new Liszt(25.0f), new So(20.0f), new Tojas(2.0f), laposKisTanyer.Contents);
+			edeny.Berakni(new Liszt(25.0f * amount), new So(20.0f * amount), new Tojas(2.0f * amount), laposKisTanyer.Contents);
 
             Kez kez = eg.Use<Kez>();
-			kez.MegforgatniI(edeny, new Csirkemell(250 * 10), eg.Use<JenaiTal>(1));
+			kez.MegforgatniI(edeny, new Csirkemell(250 * 10 * amount), eg.Use<JenaiTal>(1));
 
 			eg.Use<JenaiTal>(1).Berakni(new FustoltSzalonna(5, MeasurementUnit.piece));
 			eg.Use<JenaiTal>(1).BeonteniI(new Tejszin(3.0f));

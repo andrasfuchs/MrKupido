@@ -23,7 +23,7 @@ namespace MrKupido.Library.Recipe
 
     public class PorCukor : Cukor
     {
-        public PorCukor(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+        public PorCukor(float amount, MeasurementUnit unit = MeasurementUnit.dekagramm)
             : base(amount, unit)
         {
             RecipeUnknown();

@@ -23,7 +23,16 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "zöldhagyma")]
     [NameAlias("hun", "téli sarjadékhagyma", Priority = 200)]
 
-    [IngredientConsts(GrammsPerPiece = 20)]
+	[IngredientConsts(
+		Category = ShoppingListCategory.Vegetable,
+		GrammsPerPiece = 15,
+		CaloriesPer100Gramms = 32.0f,
+		CarbohydratesPer100Gramms = 25.9f,
+		FatPer100Gramms = 1.6f,
+		ProteinPer100Gramms = 4.5f,
+		GlichemicalIndex = 3,
+		InflammationFactor = 304
+	)]
 
     [RootOf(typeof(AlliumCepa))]
     public class Ujhagyma : SingleIngredient

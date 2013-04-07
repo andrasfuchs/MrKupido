@@ -47,15 +47,15 @@ namespace MrKupido.Library.Recipe
 
             NagyEdeny edeny = eg.Use<NagyEdeny>();
 
-            ISingleIngredient fokhagyma = new Fokhagyma(6.0f);
+			ISingleIngredient fokhagyma = new Fokhagyma(6.0f * amount);
             FokhagymaPres fp = eg.Use<FokhagymaPres>();
             fp.PreselniI(fokhagyma);
-            edeny.Berakni(fokhagyma, new Tej(10.0f));
+			edeny.Berakni(fokhagyma, new Tej(10.0f * amount));
 
             Fakanal fakanal = eg.Use<Fakanal>();
             fakanal.ElkeverniC(edeny);
 
-            edeny.Berakni(new Csirkemell(250 * 10));
+			edeny.Berakni(new Csirkemell(250 * 10 * amount));
             edeny.Varni(8 * 60);
             edeny.FolyadekotLeonteni();            
 
@@ -72,9 +72,9 @@ namespace MrKupido.Library.Recipe
             Kez kez = eg.Use<Kez>();
 
             IIngredientContainer tejesCsirkemell = preps["tejescsirkemell"];
-            kez.Raszorni(tejesCsirkemell, new So(10.0f));
+			kez.Raszorni(tejesCsirkemell, new So(10.0f * amount));
 
-            ISingleIngredient alma = new Alma(4.0f);
+			ISingleIngredient alma = new Alma(4.0f * amount);
             alma.ChangeUnitTo(MeasurementUnit.gramm);
 
             LaposKisTanyer laposKisTanyer1 = eg.Use<LaposKisTanyer>();
@@ -82,15 +82,15 @@ namespace MrKupido.Library.Recipe
             reszelo.LereszelniI(laposKisTanyer1, alma);
 
             LaposKisTanyer laposKisTanyer2 = eg.Use<LaposKisTanyer>();
-            ISingleIngredient sajt = new FustoltSajt(200.0f);
+			ISingleIngredient sajt = new FustoltSajt(20.0f * amount);
             reszelo.LereszelniI(laposKisTanyer2, sajt);
 
             JenaiTal jenai = eg.Use<JenaiTal>();
             jenai.BerakniC(tejesCsirkemell);
-            jenai.Berakni(new FustoltSzalonna(5, MeasurementUnit.piece), alma);
-            jenai.BeonteniI(new Tejszin(3.0f));
+			jenai.Berakni(new FustoltSzalonna(5 * amount, MeasurementUnit.piece), alma);
+			jenai.BeonteniI(new Tejszin(3.0f * amount));
             kez.Raszorni(jenai, sajt);
-            jenai.BerakniI(new FustoltSzalonna(5, MeasurementUnit.piece));
+			jenai.BerakniI(new FustoltSzalonna(5 * amount, MeasurementUnit.piece));
 
             jenai.Lefedni(new Alufolia());
 

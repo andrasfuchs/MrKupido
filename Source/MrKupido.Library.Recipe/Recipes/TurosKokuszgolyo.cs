@@ -56,7 +56,7 @@ namespace MrKupido.Library.Recipe
             IIngredientContainer kisTanyer = preps["citromhej"];
 
             Edeny edeny = eg.Use<Edeny>();
-            edeny.Berakni(new Turo(250.0f * amount), new PorCukor(200.0f * amount), new KokuszReszelek(150.0f * amount), new VaniliasCukor(10.0f * amount), kisTanyer.Contents);
+            edeny.Berakni(new Turo(250.0f * amount), new PorCukor(20.0f * amount), new KokuszReszelek(150.0f * amount), new VaniliasCukor(10.0f * amount), kisTanyer.Contents);
 
             Kez kez = eg.Use<Kez>();
 

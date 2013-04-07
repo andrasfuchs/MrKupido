@@ -23,6 +23,7 @@ namespace MrKupido.Web.Models
         public string DisplayName;
         public string UniqueName;
         public string ParentUniqueName;
+		public string Version;
 
         public bool IsSelected;
         public int NetTime;
@@ -71,6 +72,7 @@ namespace MrKupido.Web.Models
 
             this.UniqueName = rtn.UniqueName;
             this.ParentUniqueName = rtn.Parent == null ? null : rtn.Parent.UniqueName;
+			this.Version = rtn.Version;
 
             this.SubVersions = TreeNode.GetDescendantCount(rtn);
             this.IconUrl = rtn.IconUrl;

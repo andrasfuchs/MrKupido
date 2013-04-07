@@ -705,6 +705,10 @@ details#searchresults div.resultbox div.resulthead span.titlecontent {
     word-wrap: break-word;
 }
 
+details#searchresults div.resultbox div.resulthead span.titlecontent span.version {
+    font-size: 14px;
+}
+
 details li:not(.disabled):hover, details li:not(.disabled):focus {
     border: 1px solid /*mcd*/ #553e31;
 }
@@ -1927,3 +1931,13 @@ div.description h3{
     text-align: center;
     margin: 20px;
 }
+
+.login-slider-wrapper {
+    width: 500px;
+    height: 250px;
+    border: 3px solid #553e31;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 40px;
+}
+

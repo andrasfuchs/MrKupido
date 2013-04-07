@@ -7,6 +7,11 @@ using System.Text;
 
 namespace MrKupido.Library.Recipe
 {
+	[IngredientConsts(
+		Category = ShoppingListCategory.Other,
+		CaloriesPer100Gramms = 353.0f
+	)]
+
     [CommercialProduct(Brand = typeof(Karavan))]
     public class KaravanFustoltSajt : FustoltSajt
     {

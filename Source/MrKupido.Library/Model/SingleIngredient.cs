@@ -100,7 +100,15 @@ namespace MrKupido.Library.Ingredient
 
                     if (amount > 0)
                     {
-						amountStr = SignificantDigits.ToString(amount, 1);
+						if (amount == Math.Round(amount))
+						{
+							amountStr = SignificantDigits.ToString(amount, 1);
+						}
+						else
+						{
+							amountStr = SignificantDigits.ToString(amount, 2);
+						}
+
 						amountStr += " " + NameAliasAttribute.GetName(languageISO, typeof(MeasurementUnit), this.PreferredUnit.ToString()) + " ";
                     }
                 }

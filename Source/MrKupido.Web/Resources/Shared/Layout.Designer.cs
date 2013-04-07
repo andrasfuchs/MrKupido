@@ -70,6 +70,15 @@ namespace MrKupido.Web.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to contact.
+        /// </summary>
+        public static string Contact {
+            get {
+                return ResourceManager.GetString("Contact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to disclaimer.
         /// </summary>
         public static string Disclaimer {

@@ -1,20 +1,46 @@
-﻿@{
+﻿@using MrKupido.Web.Models
+
+@{
     ViewBag.Title = MrKupido.Web.Resources.Account.LogIn.PageTitle + " - " + MrKupido.Web.Resources.Shared.Layout.PageTitle;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@this.ScriptBlock(
+    @<script type="text/javascript">
+    $(window).load(function() {
+        $('#slider').nivoSlider({ effect: 'fade', animSpeed: 1000, pauseTime: 5000, directionNav: false, controlNav: false, controlNavThumbs: false });
+    });
+</script>
+)
+
 <header class="nosearch">
     <a runat="server" href="~/">
         <img runat="server" src="~/Content/svg/logo_mrkupido_wide.svg" alt="Mr. Kupido" width="600" height="157" />
     </a>
 </header>
+
 <div class="description">
-    <h2>Szeretnéd receptjeidet tökéletesen rendszerezve látni?<br />
-        Keresni közöttük hozzávalók alapján?<br />
-        Szeretnéd, ha minden recepted úgy lenne megfogalmazva, hogy akár kezdőként,<br />
-        akár mesterszakácsként is egyértelműek legyenek a lépések?</h2>
+    <h2>
+        Szeretnéd, ha nem mesterszakácsoknak szólnának a receptek?<br />
+        Van hogy csak összeütnél valamit, mert szorít az idő?<br />
+        Bonyolult a keresés, nem találod, amit kívánsz?<br />
+        Sok a reklám, félreérthetőek a receptek?<br />
+        Szeretnél egészségesen főzni?<br />
+    </h2>
+        
     <h2>Ha igen, próbáld ki Mr. Kupidót, nem fogsz csalódni!</h2>
-    <h3>Jelenleg az oldal tesztelési fázisban van, ezért be kell jelentkezned az alábbi fóikjaid egyikével.</h3>
 </div>
+
+<div class="login-slider-wrapper">
+    <div id="slider" class="nivoSlider">
+        <img runat="server" src="~/content/images/loginslide_01.png" width="500" height="250" title="Kupidó segít kiválogatni, mi kell a boltból. Ha tudna be is vásárolna helyetted!" />
+        <img runat="server" src="~/content/images/loginslide_02.png" width="500" height="250" title="Szűrés egy új dimenzióban: keress hozzávalóra, receptre vagy diétára!"/>
+        <img runat="server" src="~/content/images/loginslide_03.png" width="500" height="250" title="Egyszerű és nagyszerű lépések minden recepthez, kezdőknek is!" />
+        <img runat="server" src="~/content/images/loginslide_04.png" width="500" height="250" title="Bajban voltál a mennyiségekkel? Mától nem! Kupidó mindent számol helyetted!"/>
+        <img runat="server" src="~/content/images/loginslide_05.png" width="500" height="250" title="Mit? Miből? Mennyi idő? Meglátszik majd még egy süti? A válasz: Mr. Kupidó!"/>
+    </div>
+</div>
+
 @using (Html.BeginForm("LogIn", "Account", FormMethod.Post, new { @id = "openIdForm" }))
 {
     @Html.Hidden("loginType", "")
@@ -28,11 +54,11 @@
         </summary>
         <hr />
         <ul>
-            <li><a href="javascript:$('#loginType').val('Google'); $('#openIdForm').submit();">@MrKupido.Web.Resources.Account.LogIn.LogInWith
+            <li><a href="javascript:_gaq.push(['_trackEvent', 'UserAction', 'Login', 'Google']); $('#loginType').val('Google'); $('#openIdForm').submit();">@MrKupido.Web.Resources.Account.LogIn.LogInWith
                 <img runat="server" src="~/Content/svg/authlogo_google.svg" alt="Google" width="270px" /></a> </li>
-            <li><a href="javascript:$('#loginType').val('Facebook'); $('#openIdForm').submit();">@MrKupido.Web.Resources.Account.LogIn.ConnectWith
+            <li><a href="javascript:_gaq.push(['_trackEvent', 'UserAction', 'Login', 'Facebook']); $('#loginType').val('Facebook'); $('#openIdForm').submit();">@MrKupido.Web.Resources.Account.LogIn.ConnectWith
                 <img runat="server" src="~/Content/svg/authlogo_facebook.svg" alt="Facebook" width="270px" /></a> </li>
-            <li><a href="javascript:$('#loginType').val('WindowsLive'); $('#openIdForm').submit();">@MrKupido.Web.Resources.Account.LogIn.LogInWith
+            <li><a href="javascript:_gaq.push(['_trackEvent', 'UserAction', 'Login', 'Windows Live']); $('#loginType').val('WindowsLive'); $('#openIdForm').submit();">@MrKupido.Web.Resources.Account.LogIn.LogInWith
                 <img runat="server" src="~/Content/svg/authlogo_windowslive.svg" alt="Windows Live" width="270px" /></a> </li>
         </ul>
     </details>

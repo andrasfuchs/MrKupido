@@ -16,7 +16,7 @@ namespace MrKupido.Library.Equipment
         }
 
         public Labas(float scale)
-            : base(20.0f * scale, 20.0f * scale, 10.0f)
+            : base(25.0f * scale, 25.0f * scale, 20.0f)
         {
         }
     }

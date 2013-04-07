@@ -114,6 +114,7 @@
     <Compile Include="Enums\VowelHarmony.cs" />
     <Compile Include="Equipment\Containers\DeepContainer.cs" />
     <Compile Include="Equipment\Containers\CoverableContainer.cs" />
+    <Compile Include="Equipment\Containers\DeepContainer\CoverableContainer\KisLabas.cs" />
     <Compile Include="Equipment\Containers\DeepContainer\Pohar.cs" />
     <Compile Include="Equipment\Containers\DeepContainer\PalacsintaSuto.cs" />
     <Compile Include="Equipment\Containers\DeepContainer\MuffinForma.cs" />

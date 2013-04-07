@@ -24,10 +24,10 @@
         <div class="title">
             <span class="titlecontent">
 
-                <a runat="server" href="~/@Session["Language"]/@((string)Session["Language"] == "hun" ? "recept" : "recipe")/@Model.UniqueName" class='@(Model.IsImplemented ? "enabled" : "disabled")'>
+                <a runat="server" href="~/@Session["Language"]/@((string)Session["Language"] == "hun" ? "recept" : "recipe")/@Model.UniqueName" onclick="_gaq.push(['_trackEvent', 'UserAction', 'RecipeDetails', '@Model.UniqueName']);" class='@(Model.IsImplemented ? "enabled" : "disabled")'>
 
-                    @Model.DisplayName
-
+                    <span>@Model.DisplayName</span>
+                    <span class="version">@Model.Version</span>
                 </a>
 
                 @if (Model.IsHidden)
@@ -37,7 +37,7 @@
             </span>
         </div>
         <div class="flag">
-            <a href="javascript:flipToSideA@(Model.Index)('@Model.UniqueName')">
+            <a href="javascript:flipToSideA@(Model.Index)('@Model.UniqueName.Replace("[","_").Replace("]","_")')">
                 <img class="flag" runat="server" src="~/Content/svg/icon_flag.svg" width="40" height="23" />
             </a>
         </div>

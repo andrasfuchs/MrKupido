@@ -8,17 +8,17 @@ using MrKupido.Library.Nature;
 namespace MrKupido.Library.Ingredient
 {
     [NameAlias("eng", "whole black pepper")]
-    [NameAlias("hun", "fekete bors")]
+    [NameAlias("hun", "egész fekete bors")]
 
 	[IngredientConsts(
 		Category = ShoppingListCategory.Spice,
 		GrammsPerPiece = 0.5f,
-		CaloriesPer100Gramms = 15.9f,
-		CarbohydratesPer100Gramms = 13.0f,
-		FatPer100Gramms = 1.7f,
-		ProteinPer100Gramms = 1.3f,
-		GlichemicalIndex = 1,
-		InflammationFactor = -5
+		CaloriesPer100Gramms = 255.0f,
+		CarbohydratesPer100Gramms = 208.0f,
+		FatPer100Gramms = 27.3f,
+		ProteinPer100Gramms = 20.0f,
+		GlichemicalIndex = 17,
+		InflammationFactor = -76
 	)]
 
     [YieldOf(typeof(PiperNigrum))]

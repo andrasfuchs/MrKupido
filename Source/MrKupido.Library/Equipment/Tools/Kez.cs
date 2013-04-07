@@ -304,5 +304,15 @@ namespace MrKupido.Library.Equipment
             this.LastActionDuration = 30;
         }
 
+		[NameAlias("eng", "wipe", Priority = 200)]
+		[NameAlias("hun", "összemorzsol", Priority = 200)]
+		[NameAlias("hun", "morzsold össze a(z) {0T} a(z) {1B}")]
+		public void Morzsol(ISingleIngredient i, IIngredientContainer c)
+		{
+			c.Add(i);
+
+			this.LastActionDuration = 60;
+		}
+
     }
 }

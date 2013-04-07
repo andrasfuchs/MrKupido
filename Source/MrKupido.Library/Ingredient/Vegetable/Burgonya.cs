@@ -14,7 +14,16 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "krompé", Priority = 201)]
     [NameAlias("hun", "pityóka", Priority = 202)]
 
-    [IngredientConsts(GrammsPerPiece = 150)]
+	[IngredientConsts(
+		Category = ShoppingListCategory.Vegetable,
+		GrammsPerPiece = 213.0f,
+		CaloriesPer100Gramms = 77.0f,
+		CarbohydratesPer100Gramms = 70.6f,
+		FatPer100Gramms = 0.8f,
+		ProteinPer100Gramms = 5.6f,
+		GlichemicalIndex = 8,
+		InflammationFactor = -46
+	)]
 
     [RootOf(typeof(SolanumTuberosum))]
     public class Burgonya : SingleIngredient

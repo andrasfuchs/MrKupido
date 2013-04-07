@@ -120,6 +120,9 @@
   <data name="AllRightsReserved" xml:space="preserve">
     <value>Minden jog fenntartva</value>
   </data>
+  <data name="Contact" xml:space="preserve">
+    <value>kapcsolat</value>
+  </data>
   <data name="Disclaimer" xml:space="preserve">
     <value>jogi nyilatkozat</value>
   </data>

@@ -55,6 +55,9 @@ namespace MrKupido.Web
                 language = "eng";
             }
 
+			// TODO: force hungarian language for now
+			language = "hun";
+
 
             if (language != routeData.Values["language"].ToString())
             {

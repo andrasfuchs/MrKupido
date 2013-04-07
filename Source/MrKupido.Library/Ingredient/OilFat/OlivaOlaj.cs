@@ -10,8 +10,16 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("eng", "olive oil")]
     [NameAlias("hun", "olívaolaj")]
 
-    // TODO: GrammsPerLiter
-    [IngredientConsts(GrammsPerLiter = 1000)]
+	[IngredientConsts(
+		Category = ShoppingListCategory.Other,
+		CaloriesPer100Gramms = 884.0f,
+		CarbohydratesPer100Gramms = 0.0f,
+		FatPer100Gramms = 884.0f,
+		ProteinPer100Gramms = 0.0f,
+		GlichemicalIndex = 0,
+		InflammationFactor = 526
+	)]
+
 
     [OilOf(typeof(OleaEuropaea))]
     public class OlivaOlaj : SingleIngredient
