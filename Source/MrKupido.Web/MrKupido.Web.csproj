@@ -439,6 +439,16 @@
     <Content Include="Content\images\changelog020_timer.png" />
     <Content Include="Content\images\changelog020_tips.png" />
     <Content Include="Content\images\changelog020_urlfilter.png" />
+    <Content Include="Content\images\firsttime_negsearch.png" />
+    <Content Include="Content\images\firsttime_paging.png" />
+    <Content Include="Content\images\firsttime_recipedetails.png" />
+    <Content Include="Content\images\firsttime_recipeingredients.png" />
+    <Content Include="Content\images\firsttime_recipestep.png" />
+    <Content Include="Content\images\firsttime_searchdropdown.png" />
+    <Content Include="Content\images\firsttime_searchfield.png" />
+    <Content Include="Content\images\firsttime_sidea.png" />
+    <Content Include="Content\images\firsttime_sideadetails.png" />
+    <Content Include="Content\images\firsttime_usermenu.png" />
     <Content Include="Content\images\frame160x160.png" />
     <Content Include="Content\images\loginslide_01.png" />
     <Content Include="Content\images\loginslide_02.png" />
@@ -449,20 +459,6 @@
     <Content Include="Content\images\logo_mrkupido_wide.png" />
     <Content Include="Content\images\mrkupido.ico" />
     <Content Include="Content\nivo-slider.css" />
-    <Content Include="Content\photos\240x120\sample01.jpg" />
-    <Content Include="Content\photos\240x120\sample02.jpg" />
-    <Content Include="Content\photos\240x120\sample03.jpg" />
-    <Content Include="Content\photos\240x120\sample04.jpg" />
-    <Content Include="Content\photos\240x120\sample05.jpg" />
-    <Content Include="Content\photos\240x120\sample06.jpg" />
-    <Content Include="Content\photos\240x120\sample07.jpg" />
-    <Content Include="Content\photos\480x240\sample01.jpg" />
-    <Content Include="Content\photos\480x240\sample02.jpg" />
-    <Content Include="Content\photos\480x240\sample03.jpg" />
-    <Content Include="Content\photos\480x240\sample04.jpg" />
-    <Content Include="Content\photos\480x240\sample05.jpg" />
-    <Content Include="Content\photos\480x240\sample06.jpg" />
-    <Content Include="Content\photos\480x240\sample07.jpg" />
     <Content Include="Content\photos\960x480\apple-cinemon-cookie_01.jpg" />
     <Content Include="Content\photos\960x480\baked-cauliflower_01.jpg" />
     <Content Include="Content\photos\960x480\cheese-ball_01.jpg" />
@@ -477,7 +473,7 @@
     <Content Include="Content\photos\960x480\mustard-garlic-chicken_01.jpg" />
     <Content Include="Content\photos\960x480\pita-for-gyros_01.jpg" />
     <Content Include="Content\photos\960x480\scone_01.jpg" />
-    <Content Include="Content\photos\960x480\spicey-chicken-breast_01.jpg" />
+    <Content Include="Content\photos\960x480\spicy-chicken-breast_01.jpg" />
     <Content Include="Content\Site.min.css">
       <DependentUpon>Site.css</DependentUpon>
     </Content>
@@ -819,6 +815,7 @@
     <Content Include="Content\fonts\Tangerine\tangerinea_bold-webfont.ttf" />
     <Content Include="Content\Web.config" />
     <Content Include="ClassDiagram.cd" />
+    <None Include="Properties\PublishProfiles\HFL_live.pubxml" />
     <None Include="Properties\PublishProfiles\HFL_beta.pubxml" />
     <Content Include="Resources\Web.config" />
     <Content Include="Scripts\jquery.nivo.slider.js" />
@@ -1018,7 +1015,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.None" BuildVersion_UpdateFileVersion="False" BuildVersion_StartDate="1975/10/21" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="1975/10/21" BuildVersion_UpdateFileVersion="False" BuildVersion_BuildVersioningStyle="None.None.None.None" />
     </VisualStudio>
   </ProjectExtensions>
   <ItemGroup>

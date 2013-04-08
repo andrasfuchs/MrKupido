@@ -1809,6 +1809,12 @@ article.help {
         margin: 10px;
     }
 
+    article.help img.middleframed {
+        float: none;
+        margin-left: 150px;
+        margin-right: 150px;
+    }
+
     article.help h1 {
         font-size: 44px;
         font-family: tangerinearegular, Sans-Serif;
