@@ -44,7 +44,7 @@ namespace MrKupido.Library.Recipe
             IIngredient felfuttatottEleszto = new FelfuttatottEleszto(5.0f * amount);
 
             NagyEdeny edeny = eg.Use<NagyEdeny>();
-            edeny.Berakni(new Liszt(100.0f * amount), felfuttatottEleszto, new Tejfol(2.0f * amount), new So(15f * amount), new Viz(0.5f * amount));
+            edeny.Berakni(new Liszt(100.0f * amount), felfuttatottEleszto, new Tejfol(2.0f * amount), new So(15f * amount), new Viz(5.0f * amount));
 
             Kez kez = eg.Use<Kez>();
             kez.OsszegyurniC(edeny);
@@ -68,7 +68,7 @@ namespace MrKupido.Library.Recipe
             CookedFoodParts cfp = new CookedFoodParts();
 
             Serpenyo serpenyo = eg.Use<Serpenyo>();
-            serpenyo.Berakni(new NapraforgoOlaj(0.5f));
+            serpenyo.Berakni(new NapraforgoOlaj(5.0f));
 
             Tuzhely tuzhely = eg.Use<Tuzhely>();
             tuzhely.Homerseklet(350);

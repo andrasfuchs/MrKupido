@@ -63,7 +63,7 @@ namespace MrKupido.Library.Recipe
             CookedFoodParts cfp = new CookedFoodParts();
 
 			eg.Use<Edeny>(1).BerakniC(preps["hagyma"]);
-			eg.Use<Edeny>(1).BerakniI(new NapraforgoOlaj(0.05f));
+			eg.Use<Edeny>(1).BerakniI(new NapraforgoOlaj(0.5f));
 
 			eg.Use<Tuzhely>(1).Homerseklet(150);
 			eg.Use<Tuzhely>(1).RahelyezniC(eg.Use<Edeny>(1));
@@ -86,7 +86,7 @@ namespace MrKupido.Library.Recipe
 			eg.Use<Tuzhely>(1).Varni(25);
 
 
-			eg.Use<NagyEdeny>(1).Berakni(new Liszt(15.0f * amount), new Tojas(3.0f * amount), new So(2.0f * amount), new Tej(4.0f * amount), new NapraforgoOlaj(0.05f));
+			eg.Use<NagyEdeny>(1).Berakni(new Liszt(15.0f * amount), new Tojas(3.0f * amount), new So(2.0f * amount), new Tej(4.0f * amount), new NapraforgoOlaj(0.5f));
 			eg.Use<Fakanal>(1).ElkeverniC(eg.Use<NagyEdeny>(1));
 			eg.Use<NagyEdeny>(1).Lefedni(new Konyharuha());
 			eg.Use<NagyEdeny>(1).Varni(30);

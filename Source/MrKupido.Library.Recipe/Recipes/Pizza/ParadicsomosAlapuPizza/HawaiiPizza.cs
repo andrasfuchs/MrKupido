@@ -37,13 +37,13 @@ namespace MrKupido.Library.Recipe
             result.Remove("pizzateszta");
 
             Kes kes = eg.Use<Kes>();
-            ISingleIngredient ananaszdarabok = new Ananasz(100.0f);
+            ISingleIngredient ananaszdarabok = new Ananasz(100.0f * amount);
             kes.FeldarabolniI(ananaszdarabok, 0.5f);
-            
-            ISingleIngredient sonka = new Sonka(50.0f);
+
+			ISingleIngredient sonka = new Sonka(50.0f * amount);
             kes.FeldarabolniI(sonka, 1.0f);
-            
-            IIngredient kukorica = new MorzsoltFottKukorica(50.0f);
+
+			IIngredient kukorica = new MorzsoltFottKukorica(50.0f * amount);
 
             Kez kez = eg.Use<Kez>();
             kez.Rarakni(pizzateszta, sonka, kukorica, ananaszdarabok);

@@ -63,9 +63,9 @@ namespace MrKupido.Library.Equipment
         {
             List<IIngredient> newContent = new List<IIngredient>();
 
-            foreach (IIngredient i in contents.Ingredients)
+            foreach (ISingleIngredient i in contents.Ingredients)
             {
-                if (i.Unit != MeasurementUnit.liter) newContent.Add(i);
+                if (!i.IsFluid) newContent.Add(i);
             }
 
             this.LastActionDuration = 120;

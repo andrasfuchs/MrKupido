@@ -169,6 +169,22 @@ namespace MrKupido.Processor.Model
             return result;
         }
 
+		protected void AddOrSet(ref float? f1, float? f2, ref float completion, float completionStep)
+		{
+			if (f2.HasValue)
+			{
+				if (f1.HasValue)
+				{
+					f1 = f1 + f2;
+				}
+				else
+				{
+					f1 = f2;
+				}
+				completion += completionStep;
+			}
+		}
+
         public override string ToString()
         {
             return LongName + " (" + ClassName + ")";

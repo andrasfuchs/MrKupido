@@ -20,6 +20,8 @@ namespace MrKupido.Library.Equipment
             this.LastActionDuration = 180;
         }
 
+		[IconUriFragment("spread")]
+
 		[NameAlias("eng", "besmear", Priority = 200)]
         [NameAlias("hun", "megken", Priority = 200)]
         [NameAlias("hun", "kend meg a(z) {1.Contents.T} a(z) {0.Contents.V}")]
@@ -30,6 +32,8 @@ namespace MrKupido.Library.Equipment
             this.LastActionDuration = 300;
         }
 
+		[IconUriFragment("spread")]
+
 		[NameAlias("eng", "besmear", Priority = 200)]
         [NameAlias("hun", "megken", Priority = 200)]
         [NameAlias("hun", "kend meg a(z) {1.Contents.T} a(z) {0V}")]
@@ -39,6 +43,8 @@ namespace MrKupido.Library.Equipment
 
 			this.LastActionDuration = 300;
         }
+
+		[IconUriFragment("spread")]
 
         [NameAlias("eng", "daub", Priority = 200)]
         [NameAlias("hun", "beken", Priority = 200)]

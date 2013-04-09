@@ -26,7 +26,7 @@ namespace MrKupido.Library.Ingredient
     [OilOf(typeof(HelianthusAnnuus))]
     public class NapraforgoOlaj : SingleIngredient
     {
-        public NapraforgoOlaj(float amount, MeasurementUnit unit = MeasurementUnit.liter)
+        public NapraforgoOlaj(float amount, MeasurementUnit unit = MeasurementUnit.deciliter)
             : base(amount, unit)
         {
         }

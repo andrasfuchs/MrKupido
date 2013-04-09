@@ -33,10 +33,10 @@ namespace MrKupido.Web.Controllers
             
             result[0] = rtn;
             result[1] = rtn.GetTags();
-            result[2] = rtn.GetEquipments(1.0f, 1);
-            result[3] = rtn.GetIngredients(1.0f, 1);
-            result[4] = rtn.GetDirections(1.0f, 1);
-            result[5] = rtn.GetNutritions(1.0f, 1);
+            result[2] = rtn.GetEquipments(1.0f, 4);
+            result[3] = rtn.GetIngredients(1.0f, 4);
+            result[4] = rtn.GetDirections(1.0f, 4);
+            result[5] = rtn.GetNutritions(1.0f, 4);
 
             ValidateDirectionUrls((IDirection[])result[4]);
 

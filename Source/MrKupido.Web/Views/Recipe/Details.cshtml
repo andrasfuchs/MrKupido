@@ -39,7 +39,7 @@
                      e.preventDefault();
                      e.stopPropagation();
                  }
-             });             
+             });
          });
 
          $(function () {
@@ -49,6 +49,10 @@
                  max: 1500,
                  step: 250,
                  slide: function (event, ui) {
+                     if (blockRefresh > 0) {                         
+                         return false;
+                     }
+
                      $("#portionamount").val(ui.value + " kcal");
                      refreshAll(ui.value);
                  }
@@ -57,6 +61,8 @@
          });
 
          function portionAdd() {
+             if (blockRefresh > 0) return;
+
              var counterValue = parseInt($("#portioncountervalue").html(), 10);
 
              if (counterValue < 99) {
@@ -67,6 +73,8 @@
          }
 
          function portionSubtract() {
+             if (blockRefresh > 0) return;
+
              var counterValue = parseInt($("#portioncountervalue").html(), 10);
 
              if (counterValue > 1) {
@@ -77,6 +85,8 @@
          }
 
          function refreshPortionValue(counterValue) {
+             if (blockRefresh > 0) return;
+
              $("#portioncountervalue").html(counterValue);
 
              $("#portionimage_1").addClass("hidden");
@@ -100,7 +110,13 @@
              refreshAll();
          }
 
+         var blockRefresh = 0;
+
          function refreshAll(portionValue) {
+
+             if (blockRefresh > 0) return;
+             blockRefresh = 3;
+
              var portion = (portionValue != null ? portionValue : $("#portionslider").slider("value"));
              var multiplier = parseInt($("#portioncountervalue").html(), 10);
 
@@ -119,6 +135,9 @@
                     $('div#directionlist h3').html(data[2]);
                 }, // success
                 error: function (xhr, textStatus, errorThrown) {
+                },
+                complete: function () {
+                    blockRefresh--;
                 }
             });   // ajax
 
@@ -138,6 +157,9 @@
                     console.log(xhr);
                     console.log(textStatus);
                     console.log(errorThrown);
+                },
+                complete: function () {
+                    blockRefresh--;
                 }
             });   // ajax
 
@@ -157,6 +179,9 @@
                     console.log(xhr);
                     console.log(textStatus);
                     console.log(errorThrown);
+                },
+                complete: function () {
+                    blockRefresh--;
                 }
             });   // ajax
         }
@@ -197,7 +222,7 @@
         <hr />
         <div id="ingredientlist">
             <h2>@MrKupido.Web.Resources.Recipe.Details.Ingredients</h2>
-            <h3 class="portionselector-trigger">@String.Format(MrKupido.Web.Resources.Recipe.Details.PortionHint, 1)</h3>
+            <h3 class="portionselector-trigger">@String.Format(MrKupido.Web.Resources.Recipe.Details.PortionHint, 4)</h3>
             <div id="portionselectorwrapper">
                 <div id="portionselector">
                     <div id="portionsliderblock">
@@ -212,11 +237,11 @@
                         <img id="portionbig" runat="server" src="~/Content/svg/icon_figurebig.svg" width="18px" height="35px" />
                     </div>
                     <div id="portioncounterblock">
-                        <div id="portioncountertext">x <span id="portioncountervalue">1</span></div>
-                        <img id="portionimage_1" runat="server" src="~/Content/svg/crowd_1.svg" width="45px" height="35px" />
+                        <div id="portioncountertext">x <span id="portioncountervalue">4</span></div>
+                        <img id="portionimage_1" runat="server" src="~/Content/svg/crowd_1.svg" width="45px" height="35px" class="hidden" />
                         <img id="portionimage_2" runat="server" src="~/Content/svg/crowd_2.svg" width="45px" height="35px" class="hidden" />
                         <img id="portionimage_3" runat="server" src="~/Content/svg/crowd_3.svg" width="45px" height="35px" class="hidden" />
-                        <img id="portionimage_4" runat="server" src="~/Content/svg/crowd_4.svg" width="45px" height="35px" class="hidden" />
+                        <img id="portionimage_4" runat="server" src="~/Content/svg/crowd_4.svg" width="45px" height="35px" />
                         <img id="portionimage_5" runat="server" src="~/Content/svg/crowd_5.svg" width="45px" height="35px" class="hidden" />
                         <div id="portionbuttonblock">
                             <input type="button" id="plusbutton" value="+" onclick="portionAdd();" /><br />

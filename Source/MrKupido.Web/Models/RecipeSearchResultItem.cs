@@ -80,33 +80,24 @@ namespace MrKupido.Web.Models
             StringBuilder sb = new StringBuilder();
 			
 			RuntimeIngredient[] ingredients = rtn.GetIngredients(1.0f, 1);
-			float completionStep = ingredients.Length > 0 ? 1.0f / ingredients.Length : 0.0f;
+			foreach (RuntimeIngredient i in ingredients)
+			{
+				sb.Append(i.Ingredient.GetName(rtn.LanguageISO));
+				sb.Append(", ");
+			}
 
-            foreach (RuntimeIngredient i in ingredients)
-            {
-                if ((this.MainCategory == ShoppingListCategory.Unknown) && (i.Ingredient is SingleIngredient) && (((SingleIngredient)i.Ingredient).Category.HasValue))
-                {
-                    this.MainCategory = ((SingleIngredient)i.Ingredient).Category.Value;
-                }
-
-                sb.Append(i.Ingredient.GetName(rtn.LanguageISO));
-                sb.Append(", ");
-
-				float ingredientGramms = i.Ingredient.GetAmount(MeasurementUnit.gramm);
-				this.TotalWeight += ingredientGramms;
-
-				if (!i.Ingredient.CaloriesPer100Gramms.HasValue)
-				{
-					Trace.TraceWarning("Ingredient '{0}' doesn't have calories defined.", i.Ingredient.Name);
-				}
-
-				AddOrSet(ref this.TotalCalories, i.Ingredient.CaloriesPer100Gramms * ingredientGramms / 100, ref this.TotalCaloriesCompletion, completionStep);
-				AddOrSet(ref this.TotalCarbohydrates, i.Ingredient.CarbohydratesPer100Gramms * ingredientGramms / 100, ref this.TotalCarbohydratesCompletion, completionStep);
-				AddOrSet(ref this.TotalProtein, i.Ingredient.ProteinPer100Gramms * ingredientGramms / 100, ref this.TotalProteinCompletion, completionStep);
-				AddOrSet(ref this.TotalFat, i.Ingredient.FatPer100Gramms * ingredientGramms / 100, ref this.TotalFatCompletion, completionStep);
-            }
             if (sb.Length >= 2) sb.Remove(sb.Length - 2, 2);
-            this.MainIngredients = sb.ToString();
+            
+			this.MainIngredients = sb.ToString();
+			this.TotalWeight = rtn.TotalWeight;
+			this.TotalCalories = rtn.TotalCalories;
+			this.TotalCaloriesCompletion = rtn.TotalCaloriesCompletion;
+			this.TotalCarbohydrates = rtn.TotalCarbohydrates;
+			this.TotalCarbohydratesCompletion = rtn.TotalCarbohydratesCompletion;
+			this.TotalProtein = rtn.TotalProtein;
+			this.TotalProteinCompletion = rtn.TotalProteinCompletion;
+			this.TotalFat = rtn.TotalFat;
+			this.TotalFatCompletion = rtn.TotalFatCompletion;
 
             if (this.IconUrl == null)
             {
@@ -213,22 +204,6 @@ namespace MrKupido.Web.Models
 			}
 			this.Photos = photos.ToArray();
         }
-
-		private void AddOrSet(ref float? f1, float? f2, ref float completion, float completionStep)
-		{
-			if (f2.HasValue)
-			{
-				if (f1.HasValue)
-				{
-					f1 = f1 + f2;
-				}
-				else
-				{
-					f1 = f2;
-				}
-				completion += completionStep;
-			}
-		}
 
         public override string ToString()
         {

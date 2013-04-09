@@ -24,7 +24,7 @@ namespace MrKupido.Library.Ingredient
     [PartOf(typeof(CitrusMedicaL))]
     public class CitromLe : SingleIngredient
     {
-        public CitromLe(float amount, MeasurementUnit unit = MeasurementUnit.liter)
+        public CitromLe(float amount, MeasurementUnit unit = MeasurementUnit.deciliter)
             : base(amount, unit)
         {
         }

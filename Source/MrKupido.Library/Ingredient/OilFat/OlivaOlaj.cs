@@ -24,7 +24,7 @@ namespace MrKupido.Library.Ingredient
     [OilOf(typeof(OleaEuropaea))]
     public class OlivaOlaj : SingleIngredient
     {
-        public OlivaOlaj(float amount, MeasurementUnit unit = MeasurementUnit.liter)
+        public OlivaOlaj(float amount, MeasurementUnit unit = MeasurementUnit.deciliter)
             : base(amount, unit)
         {
         }

@@ -34,7 +34,7 @@ namespace MrKupido.Library.Recipe
             eg.Use<Kes>(1).FeldarabolniI(alma, 2.0f);
             eg.Use<Edeny>(2).Berakni(alma);
 
-            eg.Use<Kez>(1).MeglocsolniI(eg.Use<Edeny>(2), new CitromLe(0.1f * amount));
+            eg.Use<Kez>(1).MeglocsolniI(eg.Use<Edeny>(2), new CitromLe(1.0f * amount));
 
 			ISingleIngredient tojas = new Tojas(3.0f * amount);
 			tojas.ChangeUnitTo(MeasurementUnit.gramm);
@@ -44,7 +44,7 @@ namespace MrKupido.Library.Recipe
 
             ISingleIngredient citromhej = new CitromHej(1.0f * amount);
             eg.Use<Reszelo>(1).LereszelniI(eg.Use<LaposKisTanyer>(1), citromhej);
-            eg.Use<Edeny>(1).Berakni(new NapraforgoOlaj(0.2f * amount), citromhej);
+            eg.Use<Edeny>(1).Berakni(new NapraforgoOlaj(2.0f * amount), citromhej);
 
             eg.Use<Edeny>(2).Berakni(new Liszt(40.0f * amount), new Fahej(15.0f * amount), new Szodabikarbona(3.0f * amount));
             eg.Use<Fakanal>(1).ElkeverniC(eg.Use<Edeny>(2));

@@ -141,6 +141,9 @@
   <data name="ReviewButton" xml:space="preserve">
     <value>Vélemény elküldése</value>
   </data>
+  <data name="ReviewButtonThankYou" xml:space="preserve">
+    <value>Köszönjük!</value>
+  </data>
   <data name="ReviewPlaceholder" xml:space="preserve">
     <value>(minimum 15 karakter) -</value>
   </data>

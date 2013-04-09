@@ -32,7 +32,7 @@ namespace MrKupido.Library.Recipe
             ISingleIngredient fokhagyma = new Fokhagyma(3.00f * amount);
             eg.Use<FokhagymaPres>(1).PreselniI(fokhagyma);
 
-            eg.Use<Edeny>(1).Berakni(new Tejfol(4.0f * amount), new Mustar(1.0f * amount), new Etelizesito(1.0f * amount), new FeketeBorsOrolt(5.0f * amount), fokhagyma, new NapraforgoOlaj(0.1f * amount));
+            eg.Use<Edeny>(1).Berakni(new Tejfol(4.0f * amount), new Mustar(1.0f * amount), new Etelizesito(1.0f * amount), new FeketeBorsOrolt(5.0f * amount), fokhagyma, new NapraforgoOlaj(1.0f * amount));
             eg.Use<Edeny>(1).Contents.ChangeUnitTo(MeasurementUnit.liter);
 
             eg.Use<MelyTanyer>(1).BerakniI(new Csirkecomb(8.0f * amount, MeasurementUnit.piece));

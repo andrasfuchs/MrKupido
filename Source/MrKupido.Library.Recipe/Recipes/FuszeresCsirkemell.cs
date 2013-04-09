@@ -68,7 +68,7 @@ namespace MrKupido.Library.Recipe
 			eg.Use<LaposKisTanyer>(1).RarakniI(hagyma);
 
             Bogre bogre = eg.Use<Bogre>();
-            bogre.Beonteni(new Tejfol(2.0f * amount), new NapraforgoOlaj(0.1f * amount));
+            bogre.Beonteni(new Tejfol(2.0f * amount), new NapraforgoOlaj(1.0f * amount));
             fakanal.ElkeverniC(bogre);
 
             Reszelo reszelo = eg.Use<Reszelo>();

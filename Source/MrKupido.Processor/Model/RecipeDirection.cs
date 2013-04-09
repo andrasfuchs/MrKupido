@@ -58,10 +58,6 @@ namespace MrKupido.Processor.Model
 				ActionDuration = eq.LastActionDuration;
 				TimeToComplete = new TimeSpan(0, 0, (int)eq.LastActionDuration);
 			}
-			else
-			{
-				Console.Write("");
-			}
 
             if (Result is IIngredientGroup)
             {
@@ -86,13 +82,19 @@ namespace MrKupido.Processor.Model
 			{
 				if (operands[i] is IIngredient)
 				{
-					parameters.Add(Cache.Ingredient[((IIngredient)operands[i]).GetName(languageISO)]);
+					TreeNode tn = Cache.Ingredient[((IIngredient)operands[i]).GetName(languageISO)];
+					if (tn == null) tn = Cache.Recipe[((IIngredient)operands[i]).GetName(languageISO)];
+
+					parameters.Add(tn);
 				}
 				else if (operands[i] is IIngredient[])
 				{
 					foreach (IIngredient ing in ((IIngredient[])operands[i]))
 					{
-						parameters.Add(Cache.Ingredient[ing.GetName(languageISO)]);
+						TreeNode tn = Cache.Ingredient[ing.GetName(languageISO)];
+						if (tn == null) tn = Cache.Recipe[ing.GetName(languageISO)];
+
+						parameters.Add(tn);
 					}
 				}
 				else if (operands[i] is IEquipment)

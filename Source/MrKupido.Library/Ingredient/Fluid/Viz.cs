@@ -25,7 +25,7 @@ namespace MrKupido.Library.Ingredient
     [KindOf(typeof(Nonliving))]
     public class Viz  : SingleIngredient
     {
-        public Viz(float amount, MeasurementUnit unit = MeasurementUnit.liter)
+        public Viz(float amount, MeasurementUnit unit = MeasurementUnit.deciliter)
             : base(amount, unit)
         {
         }

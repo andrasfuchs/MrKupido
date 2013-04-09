@@ -403,6 +403,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ClickTaleIntegrationModule.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ClickTaleScripts.xml" />
     <Content Include="Content\fonts\Cardo\cardo-regular-webfont.svg" />
     <Content Include="Content\fonts\Cardo\OFL.txt" />
     <Content Include="Content\fonts\Tangerine\OFL.txt" />
@@ -585,7 +589,7 @@
     <Content Include="Content\svg\e_hand.svg" />
     <Content Include="Content\svg\e_knife.svg" />
     <Content Include="Content\svg\e_mug.svg" />
-    <Content Include="Content\svg\e_owen.svg" />
+    <Content Include="Content\svg\e_oven.svg" />
     <Content Include="Content\svg\e_pan.svg" />
     <Content Include="Content\svg\e_providing_board.svg" />
     <Content Include="Content\svg\e_rasper.svg" />
@@ -733,6 +737,7 @@
       <DependentUpon>jquery.ui.theme.css</DependentUpon>
     </Content>
     <Content Include="Error.html" />
+    <Content Include="FilterRules.xml" />
     <Content Include="Hunspellx64.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -1015,7 +1020,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="1975/10/21" BuildVersion_UpdateFileVersion="False" BuildVersion_BuildVersioningStyle="None.None.None.None" />
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.None" BuildVersion_UpdateFileVersion="False" BuildVersion_StartDate="1975/10/21" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
   <ItemGroup>
@@ -1115,6 +1120,7 @@
     <EmbeddedResource Include="Resources\Shared\TipsAndTricks.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>TipsAndTricks.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Shared\SearchHeader.hu.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -1128,6 +1134,7 @@
     <EmbeddedResource Include="Resources\Shared\Layout.hu.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Layout.hu.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Shared\Layout.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -133,6 +133,15 @@ namespace MrKupido.Web.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Thank you!.
+        /// </summary>
+        public static string ReviewButtonThankYou {
+            get {
+                return ResourceManager.GetString("ReviewButtonThankYou", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (at least 15 characters) -.
         /// </summary>
         public static string ReviewPlaceholder {

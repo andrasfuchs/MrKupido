@@ -45,10 +45,26 @@ namespace MrKupido.Processor.Model
         [ScriptIgnore]
         public string[] SearchStrings { get; private set; }
 
+		public ShoppingListCategory MainCategory;
+
         public bool IsImplemented = false;
         public bool IsAbtract = false;
         public bool IsInline = false;
         public bool IsIngrec = false;
+
+		public float TotalWeight;
+		public float? TotalCalories = null;
+		public float TotalCaloriesCompletion;
+		public float? TotalCarbohydrates = null;
+		public float TotalCarbohydratesCompletion;
+		public float? TotalProtein = null;
+		public float TotalProteinCompletion;
+		public float? TotalFat = null;
+		public float TotalFatCompletion;
+
+		public float StandardPortionCalories = 1000.0f;
+		public float PortionMultiplier = 1.00f;
+
         public CommercialProductAttribute CommercialAttribute = null;
 
         public RecipeTreeNode(Type recipeType, string languageISO)
@@ -98,6 +114,11 @@ namespace MrKupido.Processor.Model
                 IsAbtract = ica[0].IsAbstract;
                 IsInline = ica[0].IsInline;
                 IsIngrec = ica[0].IsIngrec;
+
+				if (ica[0].StandardPortionCalories != Single.MinValue)
+				{
+					StandardPortionCalories = ica[0].StandardPortionCalories;
+				}
             }
 
             CommercialProductAttribute[] commercialAttributes = (CommercialProductAttribute[])recipeType.GetCustomAttributes(typeof(CommercialProductAttribute), false);
@@ -146,12 +167,46 @@ namespace MrKupido.Processor.Model
                 throw new MrKupidoException("Ingredient '{0}' was not found eighter in the ingredients or recipes trees.");
             }
 
+
+			float completionStep = ingredients.Length > 0 ? 1.0f / ingredients.Length : 0.0f;
+
+			foreach (RuntimeIngredient i in result)
+			{
+				if ((this.MainCategory == ShoppingListCategory.Unknown) && (i.Ingredient is SingleIngredient) && (((SingleIngredient)i.Ingredient).Category.HasValue))
+				{
+					this.MainCategory = ((SingleIngredient)i.Ingredient).Category.Value;
+				}
+
+				float ingredientGramms = i.Ingredient.GetAmount(MeasurementUnit.gramm);
+				this.TotalWeight += ingredientGramms;
+
+				if (!i.Ingredient.CaloriesPer100Gramms.HasValue)
+				{
+					Trace.TraceWarning("Ingredient '{0}' doesn't have calories defined.", i.Ingredient.Name);
+				}
+
+				AddOrSet(ref this.TotalCalories, i.Ingredient.CaloriesPer100Gramms * ingredientGramms / 100, ref this.TotalCaloriesCompletion, completionStep);
+				AddOrSet(ref this.TotalCarbohydrates, i.Ingredient.CarbohydratesPer100Gramms * ingredientGramms / 100, ref this.TotalCarbohydratesCompletion, completionStep);
+				AddOrSet(ref this.TotalProtein, i.Ingredient.ProteinPer100Gramms * ingredientGramms / 100, ref this.TotalProteinCompletion, completionStep);
+				AddOrSet(ref this.TotalFat, i.Ingredient.FatPer100Gramms * ingredientGramms / 100, ref this.TotalFatCompletion, completionStep);
+			}
+			if (this.TotalCaloriesCompletion > 1.00) this.TotalCaloriesCompletion = 1.00f;
+			if (this.TotalCarbohydratesCompletion > 1.00) this.TotalCarbohydratesCompletion = 1.00f;
+			if (this.TotalProteinCompletion > 1.00) this.TotalProteinCompletion = 1.00f;
+			if (this.TotalFatCompletion > 1.00) this.TotalFatCompletion = 1.00f;
+
+			if ((this.PortionMultiplier == 1.0) && (this.TotalCaloriesCompletion == 1.0) && (amount == 1.0f))
+			{
+				this.PortionMultiplier = this.StandardPortionCalories / this.TotalCalories.Value / amount;
+			}
+
+
             return result.ToArray();
         }
 
         private IIngredient[] GetRecipeIngredients(float amount, int multiplier)
         {
-            float am = amount * multiplier;     
+			float am = amount * this.PortionMultiplier * multiplier;     
                    
             lock (ingredientCache)
             {
@@ -213,7 +268,7 @@ namespace MrKupido.Processor.Model
 
         public IDirection[] GetDirections(float amount, int multiplier)
         {
-            float am = amount * multiplier;
+			float am = amount * this.PortionMultiplier * multiplier;
 
             if (!directionCache.ContainsKey(am))
             {

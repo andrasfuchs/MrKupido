@@ -48,7 +48,7 @@ namespace MrKupido.Library.Recipe
             fakanal.ElkeverniC(edeny1);
 
             Bogre bogre = eg.Use<Bogre>();
-            bogre.Berakni(new Eleszto(5.0f * amount), new Cukor(1.0f * amount, MeasurementUnit.teaskanal), new Viz(0.6f * amount), new OlivaOlaj(0.05f * amount));
+            bogre.Berakni(new Eleszto(5.0f * amount), new Cukor(1.0f * amount, MeasurementUnit.teaskanal), new Viz(6.0f * amount), new OlivaOlaj(0.5f * amount));
             fakanal.ElkeverniC(bogre);
             
 

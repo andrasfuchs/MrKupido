@@ -88,6 +88,15 @@ namespace MrKupido.Web.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Q&lt;a href=\&quot;http://mrkupido.uservoice.com\&quot;&gt;Van jó ötleted, hogy mivel tehetnénk jobbá az oldalt? Látogass el az ötletadó oldalunkra &gt;&gt;&lt;/a&gt;.
+        /// </summary>
+        public static string TipsAndTricks11 {
+            get {
+                return ResourceManager.GetString("TipsAndTricks11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to BA PAGE-UP, PAGE-DOWN, HOME, END és kurzor billenyűkkel is tudsz lapozni..
         /// </summary>
         public static string TipsAndTricks2 {
