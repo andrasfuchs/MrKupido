@@ -200,6 +200,10 @@ namespace MrKupido.Processor.Model
 				this.PortionMultiplier = this.StandardPortionCalories / this.TotalCalories.Value / amount;
 			}
 
+			if ((this.PortionMultiplier == 1.0) && (this.TotalCaloriesCompletion > 0.0) && (this.TotalCaloriesCompletion < 1.0))
+			{
+				Trace.TraceWarning("Recipe '{0}' does not have all the ingredients' calories information, so the portion multiplier can not be calculated.", this.UniqueName);
+			}
 
             return result.ToArray();
         }

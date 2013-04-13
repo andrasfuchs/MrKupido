@@ -1,0 +1,304 @@
+﻿/********************* Colour reference chart****************
+*************************** comment ********* colour ******** 
+
+main color light        mcl         #eadfd4
+main color medium       mcm         #cdb8ab
+main color dark         mcd         #553e31
+background              bgc         #fffcf5
+
+*/
+
+@media print {
+
+    @font-face {
+        font-family: 'Cardo';
+        src: url('../Content/fonts/Cardo/cardo-regular-webfont.eot');
+        src: url('../Content/fonts/Cardo/cardo-regular-webfont.eot?#iefix') format('embedded-opentype'),
+        /*url('../Content/fonts/Cardo/cardo-regular-webfont.woff') format('woff'),*/
+        url('../Content/fonts/Cardo/cardo-regular-webfont.ttf') format('truetype'), url('../Content/fonts/Cardo/cardo-regular-webfont.svg#cardoregular') format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'tangerinearegular';
+        src: url('../Content/fonts/Tangerine/tangerinea-webfont.eot');
+        src: url('../Content/fonts/Tangerine/tangerinea-webfont.eot?#iefix') format('embedded-opentype'),
+        /*url('../Content/fonts/Tangerine/tangerinea-webfont.woff') format('woff'),*/
+        url('../Content/fonts/Tangerine/tangerinea-webfont.ttf') format('truetype'), url('../Content/fonts/Tangerine/tangerinea-webfont.svg#tangerinearegular') format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    @font-face {
+        font-family: 'tangerineabold';
+        src: url('../Content/fonts/Tangerine/tangerinea_bold-webfont.eot');
+        src: url('../Content/fonts/Tangerine/tangerinea_bold-webfont.eot?#iefix') format('embedded-opentype'),
+        /*url('../Content/fonts/Tangerine/tangerinea_bold-webfont.woff') format('woff'),*/
+        url('../Content/fonts/Tangerine/tangerinea_bold-webfont.ttf') format('truetype'), url('../Content/fonts/Tangerine/tangerinea_bold-webfont.svg#tangerineabold') format('svg');
+        font-weight: normal;
+        font-style: normal;
+    }
+
+    body {
+        font-size: 14px;
+        font-family: Cardo, Sans-Serif;
+        color: #000000;
+        background-color: #000000;
+    }
+
+    .wrapper {
+        background-color: /*bgc*/ #fff;
+        border-width: 0px;
+    }
+
+    header, footer, nav, section {
+        display: none;
+    }
+
+
+    hr.single {
+        border: 0;
+        height: 3px;
+        background: url('../Content/svg/hr_single.svg') 0 0 no-repeat;
+        background-position: center;
+        margin: 3px;
+    }
+
+    hr.double {
+        border: 0;
+        height: 11px;
+        background: url('../Content/svg/hr_double.svg') 0 0 no-repeat;
+        background-position: center;
+        margin: 2px;
+    }
+
+    hr.space {
+        border: 0;
+        height: 1px;
+        margin: 6px;
+    }
+
+    details summary::-webkit-details-marker {
+        display: none;
+    }
+
+    details summary h1 {
+        font-size: 44px;
+        font-family: tangerineabold, Sans-Serif;
+        color: /*mcd*/ #553e31;
+        text-align: center;
+        margin: 0;
+        background: url('../Content/svg/h1_bg.svg') 0 0 repeat-y;
+        background-position: center;
+    }
+
+        details summary h1:hover, details summary h1:focus {
+            outline: /*mcm*/ #cdb8ab dashed 1px;
+        }
+
+    details summary h2 {
+        font-size: 26px;
+        font-family: tangerinearegular, Sans-Serif;
+        color: /*mcd*/ #553e31;
+        float: right;
+        width: auto;
+        text-align: right;
+        margin: -35px 10px 10px 0;
+        background: transparent;
+    }
+
+    details summary h3 {
+        font-size: 26px;
+        font-family: tangerinearegular, Sans-Serif;
+        color: /*mcd*/ #553e31;
+        margin: 0;
+        width: auto;
+        text-align: center;
+    }
+
+    details h2 {
+        font-size: 44px;
+        font-family: tangerineabold, Sans-Serif;
+        color: /*mcd*/ #553e31;
+        text-align: center;
+        margin-top: -8px;
+        margin-bottom: 35px;
+        background: url('../Content/svg/h1_bg.svg') 0 0 repeat-y;
+        background-position: center;
+    }
+
+
+    details h3 {
+        font-size: 26px;
+        font-family: tangerinearegular, Sans-Serif;
+        color: /*mcd*/ #553e31;
+        width: auto;
+        text-align: right;
+        margin: -70px 10px 10px 0;
+    }
+
+
+    details ul {
+        float: left;
+        font-size: 20px;
+        font-family: Cardo, Sans-Serif;
+        color: /*mcd*/ #553e31;
+        margin: 0 auto 0 auto;
+        padding: 0;
+        list-style-type: none;
+        list-style-image: none;
+    }
+
+    details li {
+        display: list-item;
+        float: left;
+        width: 270px;
+        margin: 0 5px 15px 5px;
+        border: 1px solid /*mcm*/ #cdb8ab;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+    }
+
+    hr {
+        clear: both;
+        border: 0;
+        height: 20px;
+        margin: 1em 0;
+    }
+
+    div#ingredientlist li {
+        border: 0;
+        margin-right: 20px;
+        white-space: nowrap;
+    }
+
+        div#ingredientlist li a {
+            margin-left: 5px;
+        }
+
+
+    ul#ingredientlist li.ingredientlistitem {
+        margin: 0px 40px 0px 5px;
+        min-width: 240px;
+        max-width: 240px;
+    }
+
+        ul#ingredientlist li.ingredientlistitem input {
+            padding: 0;
+            margin: 0;
+            height: 32px;
+            width: 32px;
+            float: left;
+            position: absolute;
+            left: 0;
+            opacity: 0;
+        }
+
+        ul#ingredientlist li.ingredientlistitem label {
+            float: left;
+            padding-left: 24px;
+            padding-right: 10px;
+        }
+
+    details#recipe div#directionlist li {
+        display: list-item;
+        float: left;
+        width: 880px;
+        height: 70px;
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+        details#recipe div#directionlist li span {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+            details#recipe div#directionlist li span.stagePreparation {
+                width: 25px;
+                height: 70px;
+                background: #d5e6cc;
+            }
+
+            details#recipe div#directionlist li span.stageCooking {
+                width: 25px;
+                height: 70px;
+                background: #e8d6cd;
+            }
+
+            details#recipe div#directionlist li span.stageServing {
+                width: 25px;
+                height: 70px;
+                background: #d6e4ea;
+            }
+
+            details#recipe div#directionlist li span.time {
+                margin: -10px 5px 0 10px;
+            }
+
+            details#recipe div#directionlist li span.timer {
+                margin-top: 4px;
+            }
+
+        details#recipe div#directionlist li div.directionRightPart {
+            position: relative;
+            display: block;
+            float: right;
+            height: 70px;
+            width: 700px;
+            line-height: 70px;
+            /*border: solid 1px green;*/
+        }
+
+            details#recipe div#directionlist li div.directionRightPart span.directionText {
+                position: absolute;
+                bottom: 0px;
+                left: 0px;
+                display: inline-block;
+                width: 700px;
+                height: 70px;
+                /*border: solid 1px blue;*/
+            }
+
+            details#recipe div#directionlist li div.directionRightPart span.directionBigIcons {
+                display: inline-block;
+                opacity: 0.0;
+                padding: 5px;
+                height: 70px;
+                width: 630px;
+                /*border: solid 1px red;*/
+            }
+
+
+            details#recipe div#directionlist li div.directionRightPart span.directionText span.directionTextContent {
+                display: inline-block;
+                vertical-align: middle;
+                line-height: 25px;
+                -ms-word-wrap: break-word;
+                word-wrap: break-word;
+                /*border: solid 1px black;*/
+            }
+
+        details#recipe div#directionlist li span.directionTextContent span {
+            vertical-align: baseline;
+        }
+
+    ul#directions span.action img {
+        padding: 5px;
+        margin-top: -44px;
+        margin-left: -70px;
+        cursor: pointer;
+    }
+
+
+    #reviewer {
+        display: none;
+    }
+
+    #portionselectorwrapper {
+        display: none;
+    }
+}

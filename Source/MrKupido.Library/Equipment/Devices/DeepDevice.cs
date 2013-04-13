@@ -22,7 +22,7 @@ namespace MrKupido.Library.Equipment
         {
             this.contents.Add(c);
 
-            this.LastActionDuration = 10;
+            this.LastActionDuration = 60;
         }
 
         [NameAlias("eng", "pull out", Priority = 200)]
@@ -35,7 +35,7 @@ namespace MrKupido.Library.Equipment
 
             this.contents.Remove(c);
 
-            this.LastActionDuration = 10;
+            this.LastActionDuration = 60;
         }
     }
 }

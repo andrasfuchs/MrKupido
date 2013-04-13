@@ -55,5 +55,10 @@ namespace MrKupido.Web.Controllers
         {
             return View();
         }
-    }
+
+		public ActionResult Poll001()
+		{
+			return View();
+		}
+	}
 }

@@ -39,7 +39,7 @@ namespace MrKupido.Library.Equipment
         public void BerakniC(IIngredientContainer c)
         {
             this.contents.AddIngredients(c.Contents);
-            this.LastActionDuration = 60 * (uint)c.Contents.PieceCount;
+            this.LastActionDuration = 120 * (uint)c.Contents.PieceCount;
         }
 
         [NameAlias("eng", "pour into", Priority = 200)]

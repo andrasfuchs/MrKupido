@@ -55,7 +55,7 @@ namespace MrKupido.Library.Recipe
             Fakanal fakanal = eg.Use<Fakanal>();
             fakanal.ElkeverniC(edeny);
 
-			edeny.Berakni(new Csirkemell(250 * 10 * amount));
+			edeny.Berakni(new Csirkemell(25 * 10 * amount));
             edeny.Varni(8 * 60);
             edeny.FolyadekotLeonteni();            
 

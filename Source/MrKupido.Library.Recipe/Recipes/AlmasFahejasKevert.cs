@@ -31,10 +31,10 @@ namespace MrKupido.Library.Recipe
 
             ISingleIngredient alma = new Alma(5.0f * amount);
             eg.Use<KrumpliPucolo>(1).MeghamozniI(alma);
-            eg.Use<Kes>(1).FeldarabolniI(alma, 2.0f);
-            eg.Use<Edeny>(2).Berakni(alma);
+            eg.Use<Kes>(1).FeldarabolniI(alma, 4.0f);
+            eg.Use<NagyEdeny>(1).BerakniI(alma);
 
-            eg.Use<Kez>(1).MeglocsolniI(eg.Use<Edeny>(2), new CitromLe(1.0f * amount));
+            eg.Use<Kez>(1).MeglocsolniI(eg.Use<NagyEdeny>(1), new CitromLe(1.0f * amount));
 
 			ISingleIngredient tojas = new Tojas(3.0f * amount);
 			tojas.ChangeUnitTo(MeasurementUnit.gramm);
@@ -42,18 +42,19 @@ namespace MrKupido.Library.Recipe
             eg.Use<Edeny>(1).Berakni(tojas, new Cukor(1.0f * amount));
             eg.Use<Habvero>(1).KikeverniC(eg.Use<Edeny>(1));
 
-            ISingleIngredient citromhej = new CitromHej(1.0f * amount);
+            ISingleIngredient citromhej = new CitromHej(2.0f * amount, MeasurementUnit.piece);
             eg.Use<Reszelo>(1).LereszelniI(eg.Use<LaposKisTanyer>(1), citromhej);
             eg.Use<Edeny>(1).Berakni(new NapraforgoOlaj(2.0f * amount), citromhej);
 
-            eg.Use<Edeny>(2).Berakni(new Liszt(40.0f * amount), new Fahej(15.0f * amount), new Szodabikarbona(3.0f * amount));
-            eg.Use<Fakanal>(1).ElkeverniC(eg.Use<Edeny>(2));
+            eg.Use<Edeny>(1).Berakni(new Liszt(40.0f * amount), new Fahej(15.0f * amount), new Szodabikarbona(3.0f * amount));
+			eg.Use<NagyEdeny>(1).BeonteniC(eg.Use<Edeny>(1));
+			eg.Use<Fakanal>(1).ElkeverniC(eg.Use<NagyEdeny>(1));
 
-            ISingleIngredient dio = new Diobel(150.0f * amount, MeasurementUnit.gramm);
-            eg.Use<Daralo>(1).DaralniI(eg.Use<LaposKisTanyer>(1), dio);
+            ISingleIngredient dio = new Diobel(15.0f * amount, MeasurementUnit.dekagramm);
+            eg.Use<Daralo>(1).DaralniI(eg.Use<LaposKisTanyer>(2), dio);
 
-            result.Add("alma", eg.Use<Edeny>(2));
-            result.Add("dio", eg.Use<LaposKisTanyer>(1));
+            result.Add("alma", eg.Use<NagyEdeny>(1));
+            result.Add("dio", eg.Use<LaposKisTanyer>(2));
 
             eg.WashUp();
             return result;

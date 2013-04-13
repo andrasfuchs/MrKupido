@@ -17,7 +17,7 @@ namespace MrKupido.Library.Equipment
         {
             i.State |= IngredientState.Hamozott;
 
-            this.LastActionDuration = 120;
+            this.LastActionDuration = 60 * (uint)i.PieceCount;
         }
     }
 }

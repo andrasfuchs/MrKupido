@@ -22,7 +22,7 @@ namespace MrKupido.Library.Equipment
 
             ic.Add(i);
 
-            this.LastActionDuration = 180;
+            this.LastActionDuration = 240;
         }
     }
 }

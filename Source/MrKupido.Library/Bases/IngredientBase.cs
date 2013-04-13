@@ -55,6 +55,7 @@ namespace MrKupido.Library.Ingredient
 			new UnitConversionRule(MeasurementUnit.kilogramm, MeasurementUnit.gramm, "*", "1000", true),
 			new UnitConversionRule(MeasurementUnit.dekagramm, MeasurementUnit.gramm, "*", "10", true),
 			new UnitConversionRule(MeasurementUnit.csipet, MeasurementUnit.gramm, "*", "1.5", true),
+			new UnitConversionRule(MeasurementUnit.gramm, MeasurementUnit.milligramm, "*", "1000", true),
 
 			new UnitConversionRule(MeasurementUnit.liter, MeasurementUnit.deciliter, "*", "10", true),
 			new UnitConversionRule(MeasurementUnit.liter, MeasurementUnit.centiliter, "*", "100", true),
@@ -86,7 +87,7 @@ namespace MrKupido.Library.Ingredient
             this.Unit = unit;
 			this.PreferredUnit = unit;
 
-            if (this.Unit == MeasurementUnit.piece)
+            if ((this.Unit == MeasurementUnit.piece) || (this.Unit == MeasurementUnit.csipet))
             {
                 amount = (float)Math.Ceiling((double)amount);
             }

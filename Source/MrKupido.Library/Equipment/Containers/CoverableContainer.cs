@@ -28,7 +28,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("hun", "vedd le a fedőt")]
         public void FedotLevenni()
         {
-            this.LastActionDuration = 5;
+            this.LastActionDuration = 60;
         }
     }
 }

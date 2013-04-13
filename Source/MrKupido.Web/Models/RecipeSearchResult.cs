@@ -82,10 +82,23 @@ namespace MrKupido.Web.Models
 				Items[Items.Count - 1].Index = Items.Count - 1;
             }
 
+			// randomize items
+			//Random rnd = new Random();
+			//List<RecipeSearchResultItem> rndList = new List<RecipeSearchResultItem>();
+			//while (Items.Count > 0)
+			//{
+			//	RecipeSearchResultItem rsri = Items[rnd.Next(Items.Count - 1)];
+			//	rndList.Add(rsri);
+			//	Items.Remove(rsri);
+			//}
+			//Items = rndList;
+
+			Items = Items.OrderBy(rsri => rsri.DisplayName).ToList();
+
             // TODO: build category groups
         }
 
-        private void ReorderItemList(string orderBy, bool isOrderDescending)
+		private void ReorderItemList(string orderBy, bool isOrderDescending)
         {
             Items.Sort(delegate(RecipeSearchResultItem x, RecipeSearchResultItem y)
             {

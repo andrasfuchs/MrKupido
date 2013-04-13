@@ -478,6 +478,7 @@
     <Content Include="Content\photos\960x480\pita-for-gyros_01.jpg" />
     <Content Include="Content\photos\960x480\scone_01.jpg" />
     <Content Include="Content\photos\960x480\spicy-chicken-breast_01.jpg" />
+    <Content Include="Content\Print.css" />
     <Content Include="Content\Site.min.css">
       <DependentUpon>Site.css</DependentUpon>
     </Content>
@@ -895,6 +896,7 @@
     <Content Include="Views\Home\_RecipeSearchResultSideA.cshtml" />
     <Content Include="Views\Home\_RecipeSearchResultSideB.cshtml" />
     <Content Include="Views\Help\FirstTimeTutorial.cshtml" />
+    <Content Include="Views\Help\Poll001.cshtml" />
     <None Include="Web.Debug_at_localhost.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

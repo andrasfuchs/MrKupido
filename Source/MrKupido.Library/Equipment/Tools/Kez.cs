@@ -108,7 +108,7 @@ namespace MrKupido.Library.Equipment
 
             iOn.Add(i);
 
-            this.LastActionDuration = 60;
+            this.LastActionDuration = 120;
         }
 
         [NameAlias("eng", "sprinkle", Priority = 200)]
@@ -122,7 +122,7 @@ namespace MrKupido.Library.Equipment
 
             iOn.Add(ci);
 
-            this.LastActionDuration = 60;
+            this.LastActionDuration = 120;
         }
 
         [NameAlias("eng", "sprinkle", Priority = 200)]
@@ -134,7 +134,7 @@ namespace MrKupido.Library.Equipment
 
             iOn.Add(i);
 
-            this.LastActionDuration = 60;
+            this.LastActionDuration = 120;
         }
         
         [NameAlias("eng", "superimpose", Priority = 200)]
@@ -191,7 +191,7 @@ namespace MrKupido.Library.Equipment
             iOn.Add(c.Contents);
             c.Empty();
 
-            this.LastActionDuration = 60;
+            this.LastActionDuration = 120;
         }
 
         [NameAlias("eng", "plow", Priority = 200)]
@@ -231,7 +231,7 @@ namespace MrKupido.Library.Equipment
         {
 			if (!iWith.IsFluid) throw new InvalidActionForIngredientException("Meglocsolni", iWith);
 
-            this.LastActionDuration = 30;
+            this.LastActionDuration = 120;
 
 			IIngredient iContents = i.Contents;
             i.Empty();
@@ -247,7 +247,7 @@ namespace MrKupido.Library.Equipment
 
 			if (!ci.IsFluid) throw new InvalidActionForIngredientException("Meglocsolni", ci);
 
-            this.LastActionDuration = 30;
+            this.LastActionDuration = 120;
 
             i.Empty();
             i.AddRange(new IIngredient[] { ci, i.Contents });

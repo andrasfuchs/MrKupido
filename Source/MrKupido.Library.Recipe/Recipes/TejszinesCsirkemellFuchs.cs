@@ -57,7 +57,7 @@ namespace MrKupido.Library.Recipe
 			edeny.Berakni(new Liszt(25.0f * amount), new So(20.0f * amount), new Tojas(2.0f * amount), laposKisTanyer.Contents);
 
             Kez kez = eg.Use<Kez>();
-			kez.MegforgatniI(edeny, new Csirkemell(250 * 10 * amount), eg.Use<JenaiTal>(1));
+			kez.MegforgatniI(edeny, new Csirkemell(25 * 10 * amount), eg.Use<JenaiTal>(1));
 
 			eg.Use<JenaiTal>(1).Berakni(new FustoltSzalonna(5, MeasurementUnit.piece));
 			eg.Use<JenaiTal>(1).BeonteniI(new Tejszin(3.0f));

@@ -23,7 +23,7 @@ namespace MrKupido.Library.Ingredient
     [PartOf(typeof(GallusGallusDomesticus))]
     public class Csirkemell : SingleIngredient
     {
-        public Csirkemell(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+        public Csirkemell(float amount, MeasurementUnit unit = MeasurementUnit.dekagramm)
             : base(amount, unit)
         {
         }

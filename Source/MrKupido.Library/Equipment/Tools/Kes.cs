@@ -29,7 +29,7 @@ namespace MrKupido.Library.Equipment
             i.State |= IngredientState.Darabolt;
             i.PieceCount = count;
 
-            this.LastActionDuration = 10 * (uint)count;
+            this.LastActionDuration = 15 * (uint)count;
         }
 
         [NameAlias("eng", "cut", Priority = 200)]
