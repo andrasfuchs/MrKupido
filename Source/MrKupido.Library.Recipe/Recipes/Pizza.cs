@@ -8,7 +8,7 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Recipe
 {
-    [NameAlias("hun", "pizza")]
+    [NameAlias("hun", "pizza tészta")]
     [NameAlias("eng", "pizza")]
 
     [IngredientConsts(Category = ShoppingListCategory.Pizza, IsInline = true)]
@@ -21,19 +21,6 @@ namespace MrKupido.Library.Recipe
         public static EquipmentGroup SelectEquipment(float amount)
         {
             EquipmentGroup result = new EquipmentGroup();
-
-            result.Containers.Add(new NagyEdeny());
-            result.Containers.Add(new NagyEdeny());
-            result.Containers.Add(new Bogre());
-            result.Containers.Add(new Tepsi());
-            result.Containers.Add(new LaposTanyer());
-            result.Containers.Add(new NyujtoDeszka());
-
-            result.Devices.Add(new Suto());
-
-            result.Tools.Add(new Fakanal());
-            result.Tools.Add(new Kez());
-
             return result;
         }
 
@@ -41,27 +28,20 @@ namespace MrKupido.Library.Recipe
         {
             PreparedIngredients result = new PreparedIngredients();
 
-            Fakanal fakanal = eg.Use<Fakanal>();
+			eg.Use<NagyEdeny>(1).Berakni(new Liszt(100.0f * amount), new So(2.0f * amount, MeasurementUnit.evokanal), new Oregano(1.0f * amount, MeasurementUnit.evokanal), new FeketeBorsOrolt(2.0f * amount, MeasurementUnit.evokanal));
+			eg.Use<Fakanal>(1).ElkeverniC(eg.Use<NagyEdeny>(1));
 
-            NagyEdeny edeny1 = eg.Use<NagyEdeny>();
-            edeny1.Berakni(new Liszt(100.0f * amount), new So(6.0f * amount), new Oregano(3.0f * amount), new FeketeBorsOrolt(5.0f * amount));
-            fakanal.ElkeverniC(edeny1);
+			eg.Use<Bogre>(1).Berakni(new Eleszto(5.0f * amount), new Cukor(1.0f * amount, MeasurementUnit.teaskanal), new Viz(6.0f * amount), new OlivaOlaj(6.0f * amount, MeasurementUnit.evokanal));
+			eg.Use<Fakanal>(1).ElkeverniC(eg.Use<Bogre>(1));
 
-            Bogre bogre = eg.Use<Bogre>();
-            bogre.Berakni(new Eleszto(5.0f * amount), new Cukor(1.0f * amount, MeasurementUnit.teaskanal), new Viz(6.0f * amount), new OlivaOlaj(0.5f * amount));
-            fakanal.ElkeverniC(bogre);
-            
+			eg.Use<Fakanal>(1).OsszekeverniCC(eg.Use<NagyEdeny>(1), eg.Use<Bogre>(1));
+			eg.Use<NagyEdeny>(1).Varni(45);
 
-            fakanal.OsszekeverniCC(edeny1, bogre);
-            edeny1.Varni(45);
+			eg.Use<NyujtoDeszka>(1).NyujtaniC(eg.Use<NagyEdeny>(1), 1.0f);
 
-            NyujtoDeszka nyd = eg.Use<NyujtoDeszka>();
-            nyd.NyujtaniC(edeny1, 1.0f);
+			eg.Use<Tepsi>(1).BerakniC(eg.Use<NyujtoDeszka>(1));
 
-            Tepsi tepsi = eg.Use<Tepsi>();
-            tepsi.BerakniC(nyd);
-
-            result.Add("pizzateszta", tepsi);
+			result.Add("pizzateszta", eg.Use<Tepsi>(1));
 
             eg.WashUp();
             return result;
@@ -73,11 +53,10 @@ namespace MrKupido.Library.Recipe
 
             IIngredientContainer tepsi = preps["pizzateszta"];
 
-            Suto suto = eg.Use<Suto>();
-            suto.Homerseklet(200);
-            suto.BehelyezniC(tepsi);
-            suto.Varni(30);
-            suto.KiemelniC(tepsi);
+            eg.Use<Suto>(1).Homerseklet(200);
+            eg.Use<Suto>(1).BehelyezniC(tepsi);
+            eg.Use<Suto>(1).Varni(30);
+            eg.Use<Suto>(1).KiemelniC(tepsi);
 
             cfp.Add("pizzaalap", tepsi);
 
@@ -87,8 +66,7 @@ namespace MrKupido.Library.Recipe
 
         public static void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
-            Kez kez = eg.Use<Kez>();
-            kez.TalalniC(food["pizzaalap"], eg.Use<LaposTanyer>());
+			eg.Use<Kez>(1).TalalniC(food["pizzaalap"], eg.Use<LaposTanyer>(1));
             eg.WashUp();
         }
     }

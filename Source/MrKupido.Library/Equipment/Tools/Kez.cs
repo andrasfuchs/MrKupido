@@ -24,16 +24,6 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "crumple", Priority = 200)]
         [NameAlias("hun", "összegyúr", Priority = 200)]
-        [NameAlias("hun", "gyúrd össze a következőket: ({0*}, )")]
-        public IngredientGroup Osszegyurni(params IIngredient[] ingredients)
-        {
-			this.LastActionDuration = 300;
-
-            return new IngredientGroup(ingredients);
-        }
-
-        [NameAlias("eng", "crumple", Priority = 200)]
-        [NameAlias("hun", "összegyúr", Priority = 200)]
         [NameAlias("hun", "gyúrd össze a(z) {0.Contents.T}")]
         public void OsszegyurniC(IIngredientContainer container)
         {

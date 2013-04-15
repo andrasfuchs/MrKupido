@@ -25,7 +25,7 @@ namespace MrKupido.Library.Ingredient
     [PartOf(typeof(SusScrofaDomestica))]
     public class Sonka : SingleIngredient
     {
-        public Sonka(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
+        public Sonka(float amount, MeasurementUnit unit = MeasurementUnit.dekagramm)
             : base(amount, unit)
         {
         }

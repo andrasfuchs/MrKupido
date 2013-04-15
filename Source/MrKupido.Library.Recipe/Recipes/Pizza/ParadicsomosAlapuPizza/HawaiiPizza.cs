@@ -20,13 +20,7 @@ namespace MrKupido.Library.Recipe
         public static new EquipmentGroup SelectEquipment(float amount)
         {
             EquipmentGroup result = ParadicsomosAlapuPizza.SelectEquipment(amount);
-
-            result.Containers.Add(new LaposTanyer());
-
-            result.Tools.Add(new Kez());
-            result.Tools.Add(new Kes());
-
-            return result;
+			return result;
         }
 
         public static new PreparedIngredients Prepare(float amount, EquipmentGroup eg)
@@ -35,18 +29,16 @@ namespace MrKupido.Library.Recipe
 
             IIngredientContainer pizzateszta = result["pizzateszta"];
             result.Remove("pizzateszta");
-
-            Kes kes = eg.Use<Kes>();
+            
             ISingleIngredient ananaszdarabok = new Ananasz(100.0f * amount);
-            kes.FeldarabolniI(ananaszdarabok, 0.5f);
+			eg.Use<Kes>(1).FeldarabolniI(ananaszdarabok, 0.5f);
 
-			ISingleIngredient sonka = new Sonka(50.0f * amount);
-            kes.FeldarabolniI(sonka, 1.0f);
+			ISingleIngredient sonka = new Sonka(5.0f * amount);
+			eg.Use<Kes>(1).FeldarabolniI(sonka, 1.0f);
 
-			IIngredient kukorica = new MorzsoltFottKukorica(50.0f * amount);
+			IIngredient kukorica = new MorzsoltFottKukorica(5.0f * amount);
 
-            Kez kez = eg.Use<Kez>();
-            kez.Rarakni(pizzateszta, sonka, kukorica, ananaszdarabok);
+			eg.Use<Kez>(1).Rarakni(pizzateszta, sonka, kukorica, ananaszdarabok);
             
             result.Add("pizzateszta", pizzateszta);
 
@@ -62,8 +54,7 @@ namespace MrKupido.Library.Recipe
 
         public static new void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
-            Kez kez = eg.Use<Kez>();
-            kez.TalalniC(food["pizzateszta"], eg.Use<LaposTanyer>());
+			eg.Use<Kez>(1).TalalniC(food["pizzateszta"], eg.Use<LaposTanyer>(1));
             eg.WashUp();
         }
     }

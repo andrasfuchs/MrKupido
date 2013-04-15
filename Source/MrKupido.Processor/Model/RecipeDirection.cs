@@ -193,9 +193,9 @@ namespace MrKupido.Processor.Model
 
                 // operand can be a number OR a number followed by an asterix (in case of an iteration)
                 string operandIndexStr = clause.Substring(0, clause.Length - (isIteration || affixId != Char.MinValue ? 1 : 0));
-                int operandIndex = String.IsNullOrEmpty(operandIndexStr) ? 0 : Int32.Parse(operandIndexStr) + 1;
+                int operandIndex = String.IsNullOrEmpty(operandIndexStr) || (operandIndexStr == "-") ? 0 : Int32.Parse(operandIndexStr) + 1;
 
-                object operand = operands[operandIndex];
+                object operand = operandIndexStr == "-" ? returnedValue : operands[operandIndex];
 
                 if (propertyAccessorStr != null)
                 {
@@ -284,18 +284,6 @@ namespace MrKupido.Processor.Model
             {
                 result.Add(new RecipeDirectionSegment(endStr));
             }
-
-            if ((returnedValue != null) && (returnedValue is IngredientGroup))// && (returnedValue != operands[operands.Length - 1]))
-            {
-                IngredientGroup ig = ((IngredientGroup)returnedValue);
-
-                result.Add(new RecipeDirectionSegment(" => "));
-
-                RecipeDirectionSegmentReference rdsr = new RecipeDirectionSegmentReference(languageISO, ig, seenIngredients);
-
-                result.Add(rdsr);
-            }
-
 
             // a(z) -> a, az
             int azIndex = 0;
