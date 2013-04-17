@@ -30,7 +30,7 @@ namespace MrKupido.Library.Recipe
             IIngredientContainer tepsi = result["pizzateszta"];
             result.Remove("pizzateszta");
 
-            IIngredient paradicsomosPizzaszosz = new PizzaParadicsomszosz(0.2f);
+            IIngredient paradicsomosPizzaszosz = new PizzaParadicsomszosz(2.0f * amount);
 			eg.Use<Kez>(1).RaonteniI(tepsi, paradicsomosPizzaszosz);
 
             result.Add("pizzateszta", tepsi);

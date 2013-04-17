@@ -12,6 +12,7 @@ namespace MrKupido.Library.Recipe
     [NameAlias("eng", "apple-cinemon cookie")]
     [NameAlias("hun", "almás-fahéjas süti")]
 
+	[IngredientConsts(ManTags = "Cake")]
     public class AlmasFahejasKevert : RecipeBase
     {
         public AlmasFahejasKevert(float amount, MeasurementUnit unit = MeasurementUnit.gramm)

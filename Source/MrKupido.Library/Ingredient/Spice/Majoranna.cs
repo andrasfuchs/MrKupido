@@ -24,7 +24,7 @@ namespace MrKupido.Library.Ingredient
     public class Majoranna : SingleIngredient
     {
         public Majoranna(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
-            : base(amount, unit)
+            : base(amount, unit, IngredientState.Orolt)
         {
         }
     }

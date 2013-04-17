@@ -9,10 +9,10 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Recipe
 {
-	[IngredientConsts(PieceCountEstimation=28, GrammsPerPiece=34)]
-
     [NameAlias("eng", "cocoa spiral")]
     [NameAlias("hun", "kakaós csiga")]
+
+	[IngredientConsts(ManTags = "Cake", PieceCountEstimation = 28, GrammsPerPiece = 34)]
     public class KakaosCsiga : RecipeBase
     {
         public KakaosCsiga(float amount, MeasurementUnit unit = MeasurementUnit.gramm)

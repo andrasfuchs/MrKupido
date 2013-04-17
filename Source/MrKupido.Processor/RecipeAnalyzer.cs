@@ -47,7 +47,7 @@ namespace MrKupido.Processor
             {
                 rb = ((RecipeBase)returnedObject);
                 string rbTypeName = rb.GetType().Name;
-                rtn = Cache.Recipe.All.FirstOrDefault(tn => tn.RecipeType.Name == rbTypeName);
+                rtn = Cache.Recipe.All.FirstOrDefault(tn => tn.ClassName == rbTypeName);
             }
 
             if (returnedObject is IngredientBase)

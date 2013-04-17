@@ -11,6 +11,7 @@ namespace MrKupido.Library.Recipe
     [NameAlias("eng", "cottage cheese coconut ball")]
     [NameAlias("hun", "túrós kókuszgolyó")]
 
+	[IngredientConsts(ManTags = "Easy")]
     public class TurosKokuszgolyo : RecipeBase
     {
         public TurosKokuszgolyo(float amount, MeasurementUnit unit = MeasurementUnit.gramm)

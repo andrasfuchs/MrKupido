@@ -6,9 +6,9 @@ using System.Text;
 
 namespace MrKupido.Library.Ingredient
 {
-    [NameAlias("eng", "cocoa powder (unsweetened)")]
+	[NameAlias("eng", "unsweetened cocoa powder")]
     [NameAlias("hun", "kakaó", Priority = 1)]
-	[NameAlias("hun", "kakaópor (keserű)")]
+	[NameAlias("hun", "keserű kakaópor")]
 
 	[IngredientConsts(
 		Category = ShoppingListCategory.Other,

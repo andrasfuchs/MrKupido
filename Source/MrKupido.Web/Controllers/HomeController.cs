@@ -114,7 +114,11 @@ namespace MrKupido.Web.Controllers
                     case 'R':
                         tn = Cache.Recipe[selectedValue.Substring(2)];
                         break;
-                }
+
+					case 'T':
+						tn = Cache.Tag[selectedValue.Substring(2)];
+						break;				
+				}
             }
 
 

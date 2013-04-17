@@ -43,8 +43,7 @@
         </div>
     </div>
     <div class="resultdetails">
-        <div class="resultphotoframe">
-
+        <div class="resultphotoframe" onclick="javascript:flipToSideA@(Model.Index)('@Model.UniqueName.Replace("[","_").Replace("]","_")')">
             <div class="nivoSlider" id="nivoSlider@(Model.Index)">
                 @foreach (string photo in Model.Photos)
                 {

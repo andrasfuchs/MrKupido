@@ -12,6 +12,7 @@ namespace MrKupido.Library.Recipe
     [NameAlias("eng", "muffin with cinemon")]
     [NameAlias("hun", "fahéjas muffin")]
 
+	[IngredientConsts(ManTags = "Cake")]
     public class FahejasMuffin : RecipeBase
     {
         public FahejasMuffin(float amount, MeasurementUnit unit = MeasurementUnit.gramm)

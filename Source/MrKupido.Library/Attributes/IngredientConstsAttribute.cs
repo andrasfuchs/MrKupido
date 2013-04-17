@@ -81,5 +81,10 @@ namespace MrKupido.Library.Attributes
         /// Ingrecs are recipes which should be handled as ingredients. 
         /// </summary>
         public bool IsIngrec;
+
+		/// <summary>
+		/// ManTags are defined here, separated by comma. ManTags stands for manual tags and they are used on recipes only.
+		/// </summary>
+		public string ManTags;
     }
 }

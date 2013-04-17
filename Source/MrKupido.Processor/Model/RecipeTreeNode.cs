@@ -13,44 +13,46 @@ using MrKupido.Library.Ingredient;
 
 namespace MrKupido.Processor.Model
 {
-    public class RecipeTreeNode : TreeNode
-    {
-        public delegate EquipmentGroup SelectEquipmentDelegate(float amount);
-        public delegate PreparedIngredients PrepareDelegate(float amount, EquipmentGroup eg);
-        public delegate CookedFoodParts CookDelegate(float amount, PreparedIngredients preps, EquipmentGroup eg);
-        public delegate void ServeDelegate(float amount, CookedFoodParts food, EquipmentGroup eg);
+	public class RecipeTreeNode : TreeNode
+	{
+		public delegate EquipmentGroup SelectEquipmentDelegate(float amount);
+		public delegate PreparedIngredients PrepareDelegate(float amount, EquipmentGroup eg);
+		public delegate CookedFoodParts CookDelegate(float amount, PreparedIngredients preps, EquipmentGroup eg);
+		public delegate void ServeDelegate(float amount, CookedFoodParts food, EquipmentGroup eg);
 
-        [ScriptIgnore]
-        public DateTime? ExpiresAt;
+		[ScriptIgnore]
+		public DateTime? ExpiresAt;
 
-        public string Version { get; protected set; }
+		public string Version { get; protected set; }
 
-        [ScriptIgnore]
-        public SelectEquipmentDelegate SelectEquipment;
-        [ScriptIgnore]
-        public PrepareDelegate Prepare;
-        [ScriptIgnore]
-        public CookDelegate Cook;
-        [ScriptIgnore]
-        public ServeDelegate Serve;
+		[ScriptIgnore]
+		public SelectEquipmentDelegate SelectEquipment;
+		[ScriptIgnore]
+		public PrepareDelegate Prepare;
+		[ScriptIgnore]
+		public CookDelegate Cook;
+		[ScriptIgnore]
+		public ServeDelegate Serve;
 
-        [ScriptIgnore]
-        private Dictionary<float, IIngredient[]> ingredientCache = new Dictionary<float, IIngredient[]>();
-        [ScriptIgnore]
-        private Dictionary<float, IDirection[]> directionCache = new Dictionary<float, IDirection[]>();
+		[ScriptIgnore]
+		private Dictionary<float, IIngredient[]> ingredientCache = new Dictionary<float, IIngredient[]>();
+		[ScriptIgnore]
+		private Dictionary<float, IDirection[]> directionCache = new Dictionary<float, IDirection[]>();
 
-        [ScriptIgnore]
-        public Type RecipeType { get; private set; }
+		[ScriptIgnore]
+		public Type RecipeType { get; private set; }
 
-        [ScriptIgnore]
-        public string[] SearchStrings { get; private set; }
+		[ScriptIgnore]
+		public string[] SearchStrings { get; private set; }
 
 		public ShoppingListCategory MainCategory;
 
-        public bool IsImplemented = false;
-        public bool IsAbtract = false;
-        public bool IsInline = false;
-        public bool IsIngrec = false;
+		public bool IsImplemented = false;
+		public bool IsAbtract = false;
+		public bool IsInline = false;
+		public bool IsIngrec = false;
+
+		public string ManTags = "";
 
 		public float TotalWeight;
 		public float? TotalCalories = null;
@@ -65,107 +67,104 @@ namespace MrKupido.Processor.Model
 		public float StandardPortionCalories = 1000.0f;
 		public float PortionMultiplier = 1.00f;
 
-        public CommercialProductAttribute CommercialAttribute = null;
+		public CommercialProductAttribute CommercialAttribute = null;
 
-        public RecipeTreeNode(Type recipeType, string languageISO)
-            : base(recipeType, languageISO)
-        {
-            int bracketStart = LongName.IndexOf('[');
-            int bracketEnd = bracketStart >= 0 ? LongName.IndexOf(']', bracketStart) : -1;
+		public RecipeTreeNode(Type recipeType, string languageISO)
+			: base(recipeType, languageISO)
+		{
+			int bracketStart = LongName.IndexOf('[');
+			int bracketEnd = bracketStart >= 0 ? LongName.IndexOf(']', bracketStart) : -1;
 
-            Version = bracketStart == -1 ? "" : LongName.Substring(bracketStart + 1, bracketEnd - bracketStart - 1);
-            LongName = bracketStart == -1 ? LongName : LongName.Substring(0, bracketStart);
+			Version = bracketStart == -1 ? "" : LongName.Substring(bracketStart + 1, bracketEnd - bracketStart - 1);
+			LongName = bracketStart == -1 ? LongName : LongName.Substring(0, bracketStart);
 
-            char[] name = LongName.ToCharArray();
-            name[0] = Char.ToUpper(name[0]);
-            LongName = new string(name);
+			char[] name = LongName.ToCharArray();
+			name[0] = Char.ToUpper(name[0]);
+			LongName = new string(name);
 
-            RecipeType = recipeType; 
+			RecipeType = recipeType;
 
-            MethodInfo mi = RecipeType.GetMethod("SelectEquipment");
-            if (mi != null)
-            {
-                SelectEquipment = (SelectEquipmentDelegate)Delegate.CreateDelegate(typeof(SelectEquipmentDelegate), mi);
-            }
+			MethodInfo mi = RecipeType.GetMethod("SelectEquipment");
+			if (mi != null)
+			{
+				SelectEquipment = (SelectEquipmentDelegate)Delegate.CreateDelegate(typeof(SelectEquipmentDelegate), mi);
+			}
 
-            mi = RecipeType.GetMethod("Prepare");
-            if (mi != null)
-            {
-                Prepare = (PrepareDelegate)Delegate.CreateDelegate(typeof(PrepareDelegate), mi);
-                IsImplemented = true;
-            }
+			mi = RecipeType.GetMethod("Prepare");
+			if (mi != null)
+			{
+				Prepare = (PrepareDelegate)Delegate.CreateDelegate(typeof(PrepareDelegate), mi);
+				IsImplemented = true;
+			}
 
-            mi = RecipeType.GetMethod("Cook");
-            if (mi != null)
-            {
-                Cook = (CookDelegate)Delegate.CreateDelegate(typeof(CookDelegate), mi);
-                IsImplemented = true;
-            }
+			mi = RecipeType.GetMethod("Cook");
+			if (mi != null)
+			{
+				Cook = (CookDelegate)Delegate.CreateDelegate(typeof(CookDelegate), mi);
+				IsImplemented = true;
+			}
 
-            mi = RecipeType.GetMethod("Serve");
-            if (mi != null)
-            {
-                Serve = (ServeDelegate)Delegate.CreateDelegate(typeof(ServeDelegate), mi);
-            }
+			mi = RecipeType.GetMethod("Serve");
+			if (mi != null)
+			{
+				Serve = (ServeDelegate)Delegate.CreateDelegate(typeof(ServeDelegate), mi);
+			}
 
-            IngredientConstsAttribute[] ica = (IngredientConstsAttribute[])recipeType.GetCustomAttributes(typeof(IngredientConstsAttribute), false);
-            if (ica.Length > 0)
-            {
-                IsAbtract = ica[0].IsAbstract;
-                IsInline = ica[0].IsInline;
-                IsIngrec = ica[0].IsIngrec;
+			IngredientConstsAttribute[] ica = (IngredientConstsAttribute[])recipeType.GetCustomAttributes(typeof(IngredientConstsAttribute), false);
+			if (ica.Length > 0)
+			{
+				IsAbtract = ica[0].IsAbstract;
+				IsInline = ica[0].IsInline && IsImplemented;  // if it's not implemented, we should not handle it as inline
+				IsIngrec = ica[0].IsIngrec;
+
+				ManTags = String.IsNullOrEmpty(ica[0].ManTags) ? "" : ica[0].ManTags;
 
 				if (ica[0].StandardPortionCalories != Single.MinValue)
 				{
 					StandardPortionCalories = ica[0].StandardPortionCalories;
 				}
-            }
+			}
 
-            CommercialProductAttribute[] commercialAttributes = (CommercialProductAttribute[])recipeType.GetCustomAttributes(typeof(CommercialProductAttribute), false);
-            if (commercialAttributes.Length > 0)
-            {
-                CommercialAttribute = commercialAttributes[0];
-            }
+			CommercialProductAttribute[] commercialAttributes = (CommercialProductAttribute[])recipeType.GetCustomAttributes(typeof(CommercialProductAttribute), false);
+			if (commercialAttributes.Length > 0)
+			{
+				CommercialAttribute = commercialAttributes[0];
+			}
 
-            SearchStrings = new string[0];
-        }
+			SearchStrings = new string[0];
+		}
 
-        public string[] GetTags()
-        {
-            return new string[0];
-        }
+		public RuntimeIngredient[] GetIngredients(float amount, int multiplier)
+		{
+			List<RuntimeIngredient> result = new List<RuntimeIngredient>();
 
-        public RuntimeIngredient[] GetIngredients(float amount, int multiplier)
-        {
-            List<RuntimeIngredient> result = new List<RuntimeIngredient>();
+			IIngredient[] ingredients = GetRecipeIngredients(amount, multiplier);
 
-            IIngredient[] ingredients = GetRecipeIngredients(amount, multiplier);
+			foreach (IngredientBase i in ingredients)
+			{
+				string classFullName = i.GetType().FullName;
 
-            foreach (IngredientBase i in ingredients)
-            {
-                string classFullName = i.GetType().FullName;
+				if (i is RecipeBase)
+				{
+					RecipeTreeNode rtn = Cache.Recipe[classFullName];
+					if (rtn != null)
+					{
+						result.Add(new RuntimeIngredient(i, rtn));
+						continue;
+					}
+				}
+				else
+				{
+					IngredientTreeNode itn = Cache.Ingredient[classFullName];
+					if (itn != null)
+					{
+						result.Add(new RuntimeIngredient(i, itn));
+						continue;
+					}
+				}
 
-                if (i is RecipeBase)
-                {
-                    RecipeTreeNode rtn = Cache.Recipe[classFullName];
-                    if (rtn != null)
-                    {
-                        result.Add(new RuntimeIngredient(i, rtn));
-                        continue;
-                    }
-                }
-                else
-                {
-                    IngredientTreeNode itn = Cache.Ingredient[classFullName];
-                    if (itn != null)
-                    {
-                        result.Add(new RuntimeIngredient(i, itn));
-                        continue;
-                    }
-                }
-
-                throw new MrKupidoException("Ingredient '{0}' was not found eighter in the ingredients or recipes trees.");
-            }
+				throw new MrKupidoException("Ingredient '{0}' was not found eighter in the ingredients or recipes trees.");
+			}
 
 
 			float completionStep = ingredients.Length > 0 ? 1.0f / ingredients.Length : 0.0f;
@@ -195,9 +194,17 @@ namespace MrKupido.Processor.Model
 			if (this.TotalProteinCompletion > 1.00) this.TotalProteinCompletion = 1.00f;
 			if (this.TotalFatCompletion > 1.00) this.TotalFatCompletion = 1.00f;
 
-			if ((this.PortionMultiplier == 1.0) && (this.TotalCaloriesCompletion == 1.0) && (amount == 1.0f))
+			if ((this.PortionMultiplier == 1.0))// && (amount == 1.0f))
 			{
-				this.PortionMultiplier = this.StandardPortionCalories / this.TotalCalories.Value / amount;
+				if (this.TotalCaloriesCompletion == 1.0)
+				{
+					this.PortionMultiplier = this.StandardPortionCalories / this.TotalCalories.Value / amount;
+				}
+				else
+				{
+					// let's suppose that the original recipe is 4000 calories
+					this.PortionMultiplier = this.StandardPortionCalories / 4000.0f / amount;
+				}
 			}
 
 			if ((this.PortionMultiplier == 1.0) && (this.TotalCaloriesCompletion > 0.0) && (this.TotalCaloriesCompletion < 1.0))
@@ -205,86 +212,110 @@ namespace MrKupido.Processor.Model
 				Trace.TraceWarning("Recipe '{0}' does not have all the ingredients' calories information, so the portion multiplier can not be calculated.", this.UniqueName);
 			}
 
-            return result.ToArray();
-        }
+			return result.ToArray();
+		}
 
-        private IIngredient[] GetRecipeIngredients(float amount, int multiplier)
-        {
-			float am = amount * this.PortionMultiplier * multiplier;     
-                   
-            lock (ingredientCache)
-            {
-                if (!ingredientCache.ContainsKey(am))
-                {
-                    ingredientCache.Add(am, RecipeAnalyzer.GenerateIngredients(this, am));
-                }
-            }
+		public TagTreeNode[] GetTags()
+		{
+			List<TagTreeNode> result = new List<TagTreeNode>();
 
-            if (SearchStrings.Length == 0)
-            {
-                List<string> ingredientsForSearch = new List<string>();
+			foreach (TagTreeNode tag in Cache.Tag.Indexer.All)
+			{
+				ITag tagObject = (ITag)Activator.CreateInstance(tag.ClassType);
+				if (tagObject.IsMatch(this)) result.Add(tag);
+			}
 
-                // add this class and its parent
-                ingredientsForSearch.Add(this.NodeType + ":" + this.UniqueName);
+			return result.ToArray();
+		}
 
-                TreeNode currentParent = this.Parent;
-                while (currentParent != null)
-                {
-                    ingredientsForSearch.Add(currentParent.NodeType + ":" + currentParent.UniqueName);
-                    currentParent = currentParent.Parent;
-                }
+		public void BuildSearchStrings()
+		{
+			List<string> searchStrings = new List<string>();
 
-                // add all ingredients and all of their parents to the ingredientsForSearch collection
-                foreach (IngredientBase ib in ingredientCache[am])
-                {
-                    IngredientBase currentIb = ib;
-                    string ibTypeFullName = ib.GetType().FullName;
+			// --- Ingredients
+			IIngredient[] ingredients = this.GetRecipeIngredients(1.0f, 1);
 
-                    TreeNode itn = Cache.Ingredient.All.FirstOrDefault(tn => tn.ClassType.FullName == ibTypeFullName);
-                    if (itn == null) itn = Cache.Recipe.All.FirstOrDefault(tn => tn.ClassType.FullName == ibTypeFullName);
+			// add this class and its parent
+			searchStrings.Add(this.NodeType + ":" + this.UniqueName);
 
-                    while (itn != null)
-                    {
-                        ingredientsForSearch.Add(itn.NodeType + ":" + itn.UniqueName);
+			TreeNode currentParent = this.Parent;
+			while (currentParent != null)
+			{
+				searchStrings.Add(currentParent.NodeType + ":" + currentParent.UniqueName);
+				currentParent = currentParent.Parent;
+			}
 
-                        itn = itn.Parent;
-                    }
-                }
+			// add all ingredients and all of their parents to the ingredientsForSearch collection
+			foreach (IngredientBase ib in ingredients)
+			{
+				IngredientBase currentIb = ib;
+				string ibTypeFullName = ib.GetType().FullName;
 
-                // if this is a commercial product, let's inherit its parent's ingredientlist
-                if ((this.CommercialAttribute != null) && (this.Parent != null) && (this.Parent is RecipeTreeNode))
-                {
-                    ingredientsForSearch.AddRange(((RecipeTreeNode)this.Parent).SearchStrings);
-                }
+				TreeNode itn = Cache.Ingredient.All.FirstOrDefault(tn => tn.ClassType.FullName == ibTypeFullName);
+				if (itn == null) itn = Cache.Recipe.All.FirstOrDefault(tn => tn.ClassType.FullName == ibTypeFullName);
 
-                this.SearchStrings = ingredientsForSearch.ToArray();
-            }
+				while (itn != null)
+				{
+					searchStrings.Add(itn.NodeType + ":" + itn.UniqueName);
+
+					itn = itn.Parent;
+				}
+			}
+
+			// if this is a commercial product, let's inherit its parent's ingredientlist
+			if ((this.CommercialAttribute != null) && (this.Parent != null) && (this.Parent is RecipeTreeNode))
+			{
+				searchStrings.AddRange(((RecipeTreeNode)this.Parent).SearchStrings);
+			}
 
 
 
-            return ingredientCache[am];
-        }
+			// --- Tags
 
-        public IEquipment[] GetEquipments(float amount, int multiplier)
-        {
-            return new MrKupido.Library.Equipment.EquipmentBase[0];
-        }
+			foreach (TagTreeNode tag in this.GetTags())
+			{
+				searchStrings.Add(tag.NodeType + ":" + tag.UniqueName);
+			}
 
-        public IDirection[] GetDirections(float amount, int multiplier)
-        {
+
+			this.SearchStrings = searchStrings.ToArray();
+		}
+
+		private IIngredient[] GetRecipeIngredients(float amount, int multiplier)
+		{
 			float am = amount * this.PortionMultiplier * multiplier;
 
-            if (!directionCache.ContainsKey(am))
-            {
-                directionCache.Add(am, RecipeAnalyzer.GenerateDirections(this, am));
-            }
+			lock (ingredientCache)
+			{
+				if (!ingredientCache.ContainsKey(am))
+				{
+					ingredientCache.Add(am, RecipeAnalyzer.GenerateIngredients(this, am));
+				}
+			}
 
-            return directionCache[am];
-        }
+			return ingredientCache[am];
+		}
 
-        public INutritionInfo[] GetNutritions(float amount, int multiplier)
-        {
-            return new NutritionInfo[0];
-        }
-    }
+		public IEquipment[] GetEquipments(float amount, int multiplier)
+		{
+			return new MrKupido.Library.Equipment.EquipmentBase[0];
+		}
+
+		public IDirection[] GetDirections(float amount, int multiplier)
+		{
+			float am = amount * this.PortionMultiplier * multiplier;
+
+			if (!directionCache.ContainsKey(am))
+			{
+				directionCache.Add(am, RecipeAnalyzer.GenerateDirections(this, am));
+			}
+
+			return directionCache[am];
+		}
+
+		public INutritionInfo[] GetNutritions(float amount, int multiplier)
+		{
+			return new NutritionInfo[0];
+		}
+	}
 }

@@ -107,6 +107,7 @@
   <ItemGroup>
     <Compile Include="Cache\BaseCache.cs" />
     <Compile Include="Cache.cs" />
+    <Compile Include="Cache\TagCache.cs" />
     <Compile Include="Cache\EquipmentCache.cs" />
     <Compile Include="Exceptions\ProcessorException.cs" />
     <Compile Include="ILReader\FormatProvider.cs" />
@@ -117,6 +118,7 @@
     <Compile Include="ILReader\TokenResolver.cs" />
     <Compile Include="Cache\IngredientCache.cs" />
     <Compile Include="Model\AccentFolderStringComparer.cs" />
+    <Compile Include="Model\TagTreeNode.cs" />
     <Compile Include="Model\DynamicMethodHelper.cs" />
     <Compile Include="Model\EquipmentCommand.cs" />
     <Compile Include="Model\EquipmentTreeNode.cs" />
@@ -139,6 +141,10 @@
     <Compile Include="Indexer.cs" />
     <Compile Include="Cache\RecipeSearchCache.cs" />
     <Compile Include="RecipeTagger.cs" />
+    <Compile Include="Tag\Diet\Vegetarian.cs" />
+    <Compile Include="Tag\Difficulty\Cheap.cs" />
+    <Compile Include="Tag\DishType\Cake.cs" />
+    <Compile Include="Tag\Price\Cheap.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MrKupido.DataAccess\MrKupido.DataAccess.csproj">

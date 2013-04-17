@@ -28,17 +28,18 @@ namespace MrKupido.Library.Recipe
         {
             PreparedIngredients result = new PreparedIngredients();
 
-			eg.Use<NagyEdeny>(1).Berakni(new Liszt(100.0f * amount), new So(2.0f * amount, MeasurementUnit.evokanal), new Oregano(1.0f * amount, MeasurementUnit.evokanal), new FeketeBorsOrolt(2.0f * amount, MeasurementUnit.evokanal));
+			eg.Use<NagyEdeny>(1).Berakni(new Liszt(50.0f * amount), new So(2.0f * amount, MeasurementUnit.evokanal), new OreganoOrolt(1.0f * amount, MeasurementUnit.evokanal), new FeketeBorsOrolt(2.0f * amount, MeasurementUnit.evokanal));
 			eg.Use<Fakanal>(1).ElkeverniC(eg.Use<NagyEdeny>(1));
 
-			eg.Use<Bogre>(1).Berakni(new Eleszto(5.0f * amount), new Cukor(1.0f * amount, MeasurementUnit.teaskanal), new Viz(6.0f * amount), new OlivaOlaj(6.0f * amount, MeasurementUnit.evokanal));
+			eg.Use<Bogre>(1).Berakni(new Eleszto(2.5f * amount), new Cukor(1.0f * amount, MeasurementUnit.teaskanal), new Viz(3.0f * amount), new OlivaOlaj(3.0f * amount, MeasurementUnit.evokanal));
 			eg.Use<Fakanal>(1).ElkeverniC(eg.Use<Bogre>(1));
 
 			eg.Use<Fakanal>(1).OsszekeverniCC(eg.Use<NagyEdeny>(1), eg.Use<Bogre>(1));
 			eg.Use<NagyEdeny>(1).Varni(45);
 
-			eg.Use<NyujtoDeszka>(1).NyujtaniC(eg.Use<NagyEdeny>(1), 1.0f);
+			eg.Use<NyujtoDeszka>(1).NyujtaniC(eg.Use<NagyEdeny>(1), 0.5f);
 
+			eg.Use<Tepsi>(1).Kibelelni(new Sutopapir());
 			eg.Use<Tepsi>(1).BerakniC(eg.Use<NyujtoDeszka>(1));
 
 			result.Add("pizzateszta", eg.Use<Tepsi>(1));

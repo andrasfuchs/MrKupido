@@ -198,18 +198,21 @@
             <h1>
                 @{string name = ((MrKupido.Processor.Model.RecipeTreeNode)Model[0]).LongName;}
                 @name</h1>
+            @{string version = ((MrKupido.Processor.Model.RecipeTreeNode)Model[0]).Version;}
+            @if (!String.IsNullOrEmpty(version))
+            {
             <hr class="single" />
-            <h3>
-                @{string version = ((MrKupido.Processor.Model.RecipeTreeNode)Model[0]).Version;}
-                @version</h3>
-            <hr class="single" />
+            <h3>@version</h3>
+            }
         </summary>
+        <hr class="single" />
+        @if (((Array)Model[1]).Length > 0) {
+        <div id="taglist">
+            @{ Html.RenderPartial("_RecipeTags", Model[1]); }
+        </div>
+        }
+        <hr />
         <div style="display: none">
-            <div id="taglist">
-                <div id="_RecipeTags">
-                    @*@{ Html.RenderPartial("_RecipeTags", Model[1]); }*@
-                </div>
-            </div>
             <hr />
             <div id="equipmentlist">
                 <h2>@MrKupido.Web.Resources.Recipe.Details.NecessaryEquipment</h2>
@@ -219,7 +222,6 @@
                 </div>
             </div>
         </div>
-        <hr />
         <div id="ingredientlist">
             <h2>@MrKupido.Web.Resources.Recipe.Details.Ingredients</h2>
             <h3 class="portionselector-trigger">@String.Format(MrKupido.Web.Resources.Recipe.Details.PortionHint, 4)</h3>

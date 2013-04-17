@@ -203,6 +203,10 @@ namespace MrKupido.Web.Models
 				}
 			}
 			this.Photos = photos.ToArray();
+
+
+			// check true/false properties
+			this.IsVegetarian = rtn.GetTags().Any(tag => tag.ClassName == "Vegetarian");
         }
 
         public override string ToString()

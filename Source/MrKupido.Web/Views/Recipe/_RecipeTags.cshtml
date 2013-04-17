@@ -1,0 +1,12 @@
+﻿@model MrKupido.Processor.Model.TagTreeNode[]
+@if (Model != null)
+{
+    foreach (MrKupido.Processor.Model.TagTreeNode tag in Model)
+    { 
+    <div class="taglistitem">
+        <img runat="server" src="~/Content/svg/tag_left.svg" height="20" />
+        <label>@tag.LongName</label>
+        <img runat="server" src="~/Content/svg/tag_right.svg" height="20" />
+    </div>
+    }
+}

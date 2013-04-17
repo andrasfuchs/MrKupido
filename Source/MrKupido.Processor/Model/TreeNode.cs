@@ -87,6 +87,7 @@ namespace MrKupido.Processor.Model
             else if (nodeClass.IsSubclassOf(typeof(MrKupido.Library.Recipe.RecipeBase)) || (nodeClass == typeof(MrKupido.Library.Recipe.RecipeBase))) NodeType = 'R';
             else if (nodeClass.IsSubclassOf(typeof(MrKupido.Library.Ingredient.IngredientBase)) || (nodeClass == typeof(MrKupido.Library.Ingredient.IngredientBase))) NodeType = 'I';
             else if (nodeClass.IsSubclassOf(typeof(MrKupido.Library.Nature.NatureBase)) || (nodeClass == typeof(MrKupido.Library.Nature.NatureBase))) NodeType = 'N';
+			else if (nodeClass.IsSubclassOf(typeof(MrKupido.Library.Tag.TagBase)) || (nodeClass == typeof(MrKupido.Library.Tag.TagBase))) NodeType = 'T';
             else NodeType = 'U';
 
             IconUrls = IconUriFragmentAttribute.GetUrls(nodeClass, "~/Content/svg/" + Char.ToLower(NodeType) + "_{0}.svg");

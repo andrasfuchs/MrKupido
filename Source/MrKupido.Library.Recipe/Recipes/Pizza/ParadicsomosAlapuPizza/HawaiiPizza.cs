@@ -30,15 +30,18 @@ namespace MrKupido.Library.Recipe
             IIngredientContainer pizzateszta = result["pizzateszta"];
             result.Remove("pizzateszta");
             
-            ISingleIngredient ananaszdarabok = new Ananasz(100.0f * amount);
+            ISingleIngredient ananaszdarabok = new Ananasz(20.0f * amount);
 			eg.Use<Kes>(1).FeldarabolniI(ananaszdarabok, 0.5f);
 
-			ISingleIngredient sonka = new Sonka(5.0f * amount);
+			ISingleIngredient sonka = new Sonka(10.0f * amount);
 			eg.Use<Kes>(1).FeldarabolniI(sonka, 1.0f);
 
 			IIngredient kukorica = new MorzsoltFottKukorica(5.0f * amount);
 
-			eg.Use<Kez>(1).Rarakni(pizzateszta, sonka, kukorica, ananaszdarabok);
+			ISingleIngredient sajt = new Sajt(20.0f * amount);
+			eg.Use<Reszelo>(1).LereszelniI(eg.Use<LaposKisTanyer>(2), sajt);
+
+			eg.Use<Kez>(1).Rarakni(pizzateszta, sonka, kukorica, ananaszdarabok, sajt);
             
             result.Add("pizzateszta", pizzateszta);
 

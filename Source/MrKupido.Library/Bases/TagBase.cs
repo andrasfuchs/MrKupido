@@ -10,22 +10,12 @@ namespace MrKupido.Library.Tag
     [NameAlias("hun", "címke")]
     public class TagBase : NamedObject, ITag
     {
-		public virtual float Match(IIngredient i)
-		{
-			return (i is IRecipe) ? Match((IRecipe)i) : 0.0f;
-		}
-
-		public virtual bool IsMatch(IIngredient i)
-		{
-			return (i is IRecipe) ? IsMatch((IRecipe)i) : Match(i) == 1.0f;
-		}
-
-		public virtual float Match(IRecipe r)
+		public virtual float Match(ITreeNode r)
 		{
 			return 0.0f;
 		}
 
-		public virtual bool IsMatch(IRecipe r)
+		public virtual bool IsMatch(ITreeNode r)
 		{
 			return Match(r) == 1.0f;
 		}	

@@ -123,6 +123,16 @@ namespace MrKupido.Library.Equipment
 		}
 
 
+		[NameAlias("eng", "sprinkle", Priority = 200)]
+		[NameAlias("hun", "rászór", Priority = 200)]
+		[NameAlias("hun", "szórd rá a(z) {R} a következőket: ({0*}, )")]
+		public void Raszorni(params IIngredient[] ingredients)
+		{
+			this.contents.AddIngredients(ingredients);
+			this.LastActionDuration = 60 * (uint)ingredients.Length;
+		}
+
+
 
         [NameAlias("eng", "add", Priority = 200)]
         [NameAlias("hun", "hozzáad", Priority = 200)]

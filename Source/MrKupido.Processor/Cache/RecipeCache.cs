@@ -77,7 +77,7 @@ namespace MrKupido.Processor
             {
                 if (rtn.SearchStrings.Length == 0)
                 {
-                    rtn.GetIngredients(1.0f, 1);
+					rtn.BuildSearchStrings();
                 }
             }
         }

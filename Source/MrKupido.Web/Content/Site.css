@@ -1012,7 +1012,7 @@ background              bgc         #fffcf5
     hr {
         clear: both;
         border: 0;
-        height: 20px;
+        height: 0px;
         margin: 1em 0;
     }
 
@@ -1904,6 +1904,7 @@ ul#ingredientlist li.ingredientlistitem input[type=radio]:disabled:checked + lab
         border-radius: 20px;
         -webkit-box-shadow: 1px 1px 0px #553e31;
         box-shadow: 1px 1px 0px #553e31;
+        cursor: pointer;
     }
 
         .resultphotoframe img {
@@ -1979,3 +1980,32 @@ ul#ingredientlist li.ingredientlistitem input[type=radio]:disabled:checked + lab
         clear: both;
     }
 }
+
+/* ----------- tag list ------------ */
+
+div#taglist {
+    text-align: center;
+
+    margin: 15px;
+    height: 20px;
+}
+
+div#taglist .taglistitem {
+    display: inline;
+    border: 0px;
+    font-size: 14px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+    div#taglist .taglistitem label {
+        display: inline-block;
+        margin-left: -4px;
+        margin-right: -4px;
+        padding-left: 5px;
+        padding-right: 5px;
+        vertical-align: top;
+        background: url('../Content/svg/tag_middle.svg') 0 0 repeat-x;
+        border-top: 1px;
+        border-bottom: 2px;
+    }

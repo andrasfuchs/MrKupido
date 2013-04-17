@@ -168,6 +168,8 @@
     <Compile Include="Exceptions\MrKupidoException.cs" />
     <Compile Include="Exceptions\RecipeUnknownException.cs" />
     <Compile Include="Ingredient\Fruit\CitromLe.cs" />
+    <Compile Include="Ingredient\Spice\Zsalya.cs" />
+    <Compile Include="Ingredient\Spice\Kakukkfu.cs" />
     <Compile Include="Ingredient\Tarkabab.cs" />
     <Compile Include="Ingredient\Ecet.cs" />
     <Compile Include="Ingredient\Meat\SertesCsulok.cs" />
@@ -344,9 +346,6 @@
     <Compile Include="Nature\Plantae\Pinopsida\Cupressaceae\JuniperusCommunis.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Bases\RecipeBase.cs" />
-    <Compile Include="Tag\Diet\Vegetarian.cs" />
-    <Compile Include="Tag\DishType\Cake.cs" />
-    <Compile Include="Tag\Price\Cheap.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Nature\Animalia\Chondrichthyes\" />

@@ -8,12 +8,8 @@ namespace MrKupido.Library
 {
     public interface ITag
     {
-		float Match(IIngredient i);
+		float Match(ITreeNode r);
 
-		bool IsMatch(IIngredient i);
-
-		float Match(IRecipe r);
-
-		bool IsMatch(IRecipe r);
+		bool IsMatch(ITreeNode r);
     }
 }

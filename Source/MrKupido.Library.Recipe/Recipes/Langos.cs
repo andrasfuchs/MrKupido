@@ -10,6 +10,8 @@ namespace MrKupido.Library.Recipe
 {
     [NameAlias("eng", "scone")]
     [NameAlias("hun", "lángos")]
+
+	[IngredientConsts(ManTags="Cheap")]
     public class Langos : RecipeBase
     {
         public Langos(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
