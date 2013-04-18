@@ -689,6 +689,9 @@
     <Content Include="Content\svg\r_recipe.svg" />
     <Content Include="Content\svg\r_soup.svg" />
     <Content Include="Content\svg\stars_00_light.svg" />
+    <Content Include="Content\svg\tag_left.svg" />
+    <Content Include="Content\svg\tag_middle.svg" />
+    <Content Include="Content\svg\tag_right.svg" />
     <Content Include="Content\svg\tnt_exclamation.svg" />
     <Content Include="Content\svg\tnt_idea.svg" />
     <Content Include="Content\svg\tnt_question.svg" />
@@ -898,6 +901,7 @@
     <Content Include="Views\Help\FirstTimeTutorial.cshtml" />
     <Content Include="Views\Help\Poll001.cshtml" />
     <Content Include="Views\Recipe\_RecipeTags.cshtml" />
+    <Content Include="Views\Ingredient\_TagTree.cshtml" />
     <None Include="Web.Debug_at_localhost.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1023,7 +1027,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="1975/10/21" BuildVersion_UpdateFileVersion="False" BuildVersion_BuildVersioningStyle="None.None.None.None" />
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.None" BuildVersion_UpdateFileVersion="False" BuildVersion_StartDate="1975/10/21" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
   <ItemGroup>

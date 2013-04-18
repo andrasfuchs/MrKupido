@@ -9,6 +9,7 @@ using MrKupido.Library.Attributes;
 namespace MrKupido.Library.Recipe
 {
     [NameAlias("hun", "pizza tészta")]
+	[NameAlias("hun", "pizza", Priority = 200)]
     [NameAlias("eng", "pizza")]
 
     [IngredientConsts(Category = ShoppingListCategory.Pizza, IsInline = true)]
@@ -58,6 +59,9 @@ namespace MrKupido.Library.Recipe
             eg.Use<Suto>(1).BehelyezniC(tepsi);
             eg.Use<Suto>(1).Varni(30);
             eg.Use<Suto>(1).KiemelniC(tepsi);
+
+			tepsi.Varni(10);
+			//eg.Use<Kes>(1).FelszeletelC(tepsi);
 
             cfp.Add("pizzaalap", tepsi);
 

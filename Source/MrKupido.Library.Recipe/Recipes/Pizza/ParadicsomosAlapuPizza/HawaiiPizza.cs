@@ -36,9 +36,9 @@ namespace MrKupido.Library.Recipe
 			ISingleIngredient sonka = new Sonka(10.0f * amount);
 			eg.Use<Kes>(1).FeldarabolniI(sonka, 1.0f);
 
-			IIngredient kukorica = new MorzsoltFottKukorica(5.0f * amount);
+			IIngredient kukorica = new MorzsoltFottKukorica(13.5f * amount);
 
-			ISingleIngredient sajt = new Sajt(20.0f * amount);
+			ISingleIngredient sajt = new Sajt(15.0f * amount);
 			eg.Use<Reszelo>(1).LereszelniI(eg.Use<LaposKisTanyer>(2), sajt);
 
 			eg.Use<Kez>(1).Rarakni(pizzateszta, sonka, kukorica, ananaszdarabok, sajt);

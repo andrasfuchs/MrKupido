@@ -11,7 +11,19 @@ namespace MrKupido.Library.Recipe
     [NameAlias("eng", "yogurt")]
     [NameAlias("hun", "joghurt")]
 
-    [IngredientConsts(GrammsPerLiter = 1750, StorageTemperature = 5, IsIngrec = true)]
+    [IngredientConsts(
+		GrammsPerLiter = 1750, 
+		StorageTemperature = 5, 
+		IsIngrec = true,
+
+		Category = ShoppingListCategory.Other,
+		CaloriesPer100Gramms = 61.0f,
+		CarbohydratesPer100Gramms = 17.6f,
+		FatPer100Gramms = 28.6f,
+		ProteinPer100Gramms = 14.8f,
+		GlichemicalIndex = 3,
+		InflammationFactor = -32
+	)]
     public class Joghurt : RecipeBase
     {
         public Joghurt(float amount, MeasurementUnit unit = MeasurementUnit.liter)

@@ -11,7 +11,11 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "babérlevél")]
 
     // TODO: GrammsPerPiece
-    [IngredientConsts(Category = ShoppingListCategory.Spice, GrammsPerPiece = 3)]
+    [IngredientConsts(
+		Category = ShoppingListCategory.Spice, 
+		GrammsPerPiece = 3,
+		CaloriesPer100Gramms = 313
+	)]
 
     [LeafOf(typeof(LaurusNobilis))]
     public class Baberlevel : SingleIngredient

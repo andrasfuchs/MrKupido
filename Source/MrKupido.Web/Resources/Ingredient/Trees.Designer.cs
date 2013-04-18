@@ -97,6 +97,15 @@ namespace MrKupido.Web.Resources.Ingredient {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tags.
+        /// </summary>
+        public static string Tag {
+            get {
+                return ResourceManager.GetString("Tag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Filogenetica.
         /// </summary>
         public static string Taxonomy {

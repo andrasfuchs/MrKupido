@@ -11,7 +11,16 @@ namespace MrKupido.Library.Recipe
     [NameAlias("eng", "cottage cheese")]
     [NameAlias("hun", "túró")]
 
-    [IngredientConsts(IsIngrec = true)]
+	[IngredientConsts(
+		IsIngrec = true,
+		Category = ShoppingListCategory.Other,
+		CaloriesPer100Gramms = 98.0f,
+		CarbohydratesPer100Gramms = 12.7f,
+		FatPer100Gramms = 37.8f,
+		ProteinPer100Gramms = 47.5f,
+		GlichemicalIndex = 3,
+		InflammationFactor = -22
+	)]
     public class Turo : RecipeBase
     {
         public Turo(float amount, MeasurementUnit unit = MeasurementUnit.gramm)

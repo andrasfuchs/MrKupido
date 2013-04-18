@@ -110,6 +110,18 @@ namespace MrKupido.Library.Ingredient
             }
         }
 
+		public ISingleIngredient RemoveIngredient(ISingleIngredient i)
+		{
+			ISingleIngredient result = ingredients.FirstOrDefault(ing => ing.Name == i.Name);
+
+			if (result != null)
+			{
+				ingredients.Remove((SingleIngredient)result);
+			}
+
+			return result;
+		}
+
         public void SetName(string value)
         {
             nameOverride = value;

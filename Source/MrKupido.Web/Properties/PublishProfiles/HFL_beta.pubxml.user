@@ -69,7 +69,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/11/2012 16:27:27</publishTime>
     </File>
     <File Include="bin/hu/MrKupido.Web.resources.dll">
-      <publishTime>04/14/2013 10:54:13</publishTime>
+      <publishTime>04/17/2013 08:19:14</publishTime>
     </File>
     <File Include="bin/Hunspellx64.dll">
       <publishTime>10/31/2011 17:30:18</publishTime>
@@ -93,52 +93,52 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/18/2013 16:40:56</publishTime>
     </File>
     <File Include="bin/MrKupido.DataAccess.dll">
-      <publishTime>04/14/2013 10:54:10</publishTime>
+      <publishTime>04/17/2013 08:17:19</publishTime>
     </File>
     <File Include="bin/MrKupido.DataAccess.pdb">
-      <publishTime>04/14/2013 10:54:10</publishTime>
+      <publishTime>04/17/2013 08:17:19</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.dll">
-      <publishTime>04/14/2013 10:54:09</publishTime>
+      <publishTime>04/17/2013 08:17:18</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.pdb">
-      <publishTime>04/14/2013 10:54:09</publishTime>
+      <publishTime>04/17/2013 08:17:18</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.Provider.dll">
-      <publishTime>04/14/2013 10:54:10</publishTime>
+      <publishTime>04/17/2013 08:17:18</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.Provider.pdb">
-      <publishTime>04/14/2013 10:54:10</publishTime>
+      <publishTime>04/17/2013 08:17:18</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.Recipe.dll">
-      <publishTime>04/14/2013 10:54:12</publishTime>
+      <publishTime>04/17/2013 08:19:13</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.Recipe.pdb">
-      <publishTime>04/14/2013 10:54:11</publishTime>
+      <publishTime>04/17/2013 08:17:20</publishTime>
     </File>
     <File Include="bin/MrKupido.Model.dll">
-      <publishTime>04/14/2013 10:54:09</publishTime>
+      <publishTime>04/17/2013 08:17:18</publishTime>
     </File>
     <File Include="bin/MrKupido.Model.pdb">
-      <publishTime>04/14/2013 10:54:09</publishTime>
+      <publishTime>04/17/2013 08:17:18</publishTime>
     </File>
     <File Include="bin/MrKupido.Processor.dll">
-      <publishTime>04/14/2013 10:54:11</publishTime>
+      <publishTime>04/17/2013 08:17:20</publishTime>
     </File>
     <File Include="bin/MrKupido.Processor.pdb">
-      <publishTime>04/14/2013 10:54:10</publishTime>
+      <publishTime>04/17/2013 08:17:20</publishTime>
     </File>
     <File Include="bin/MrKupido.Utils.dll">
-      <publishTime>04/13/2013 12:02:58</publishTime>
+      <publishTime>04/17/2013 08:17:18</publishTime>
     </File>
     <File Include="bin/MrKupido.Utils.pdb">
-      <publishTime>04/13/2013 12:02:58</publishTime>
+      <publishTime>04/17/2013 08:17:18</publishTime>
     </File>
     <File Include="bin/MrKupido.Web.dll">
-      <publishTime>04/14/2013 10:54:13</publishTime>
+      <publishTime>04/17/2013 08:19:14</publishTime>
     </File>
     <File Include="bin/MrKupido.Web.pdb">
-      <publishTime>04/14/2013 10:54:13</publishTime>
+      <publishTime>04/17/2013 08:19:14</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>07/22/2012 09:51:29</publishTime>
@@ -588,10 +588,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/13/2013 11:36:08</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>04/12/2013 20:53:31</publishTime>
+      <publishTime>04/17/2013 08:01:36</publishTime>
     </File>
     <File Include="Content/Site.min.css">
-      <publishTime>04/12/2013 20:53:31</publishTime>
+      <publishTime>04/17/2013 08:01:36</publishTime>
     </File>
     <File Include="Content/svg/action_bake.svg">
       <publishTime>03/24/2013 19:39:35</publishTime>
@@ -1511,6 +1511,15 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/svg/stars_50.svg">
       <publishTime>07/25/2012 14:23:11</publishTime>
     </File>
+    <File Include="Content/svg/tag_left.svg">
+      <publishTime>04/16/2013 14:06:20</publishTime>
+    </File>
+    <File Include="Content/svg/tag_middle.svg">
+      <publishTime>04/16/2013 15:23:31</publishTime>
+    </File>
+    <File Include="Content/svg/tag_right.svg">
+      <publishTime>04/16/2013 14:06:20</publishTime>
+    </File>
     <File Include="Content/svg/tick_off.svg">
       <publishTime>03/16/2013 19:48:28</publishTime>
     </File>
@@ -1884,7 +1893,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/07/2013 22:36:26</publishTime>
     </File>
     <File Include="Views/Home/_RecipeSearchResultSideB.cshtml">
-      <publishTime>04/07/2013 19:20:14</publishTime>
+      <publishTime>04/17/2013 08:00:08</publishTime>
     </File>
     <File Include="Views/Import/Recipe.cshtml">
       <publishTime>02/21/2013 17:07:15</publishTime>
@@ -1932,13 +1941,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/15/2012 14:44:48</publishTime>
     </File>
     <File Include="Views/Recipe/Details.cshtml">
-      <publishTime>04/09/2013 20:44:53</publishTime>
+      <publishTime>04/16/2013 15:48:11</publishTime>
     </File>
     <File Include="Views/Recipe/_RecipeDirections.cshtml">
       <publishTime>03/25/2013 11:33:42</publishTime>
     </File>
     <File Include="Views/Recipe/_RecipeIngredients.cshtml">
       <publishTime>02/14/2013 19:51:33</publishTime>
+    </File>
+    <File Include="Views/Recipe/_RecipeTags.cshtml">
+      <publishTime>04/16/2013 15:41:52</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
       <publishTime>01/28/2013 11:53:10</publishTime>
@@ -1962,7 +1974,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/22/2012 09:51:18</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/14/2013 10:54:17</publishTime>
+      <publishTime>04/17/2013 08:17:25</publishTime>
     </File>
   </ItemGroup>
 </Project>

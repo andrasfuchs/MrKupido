@@ -81,5 +81,28 @@ namespace MrKupido.Library.Equipment
 
             return i;
         }
-    }
+
+		[NameAlias("eng", "pull out", Priority = 200)]
+		[NameAlias("hun", "kivesz", Priority = 200)]
+		[NameAlias("hun", "vedd ki a(z) {K} a(z) {0T}")]
+		public ISingleIngredient KivenniI(ISingleIngredient i)
+		{
+			ISingleIngredient result = null;
+
+			if (this.Contents is IIngredientGroup)
+			{
+				result = ((IIngredientGroup)this.Contents).RemoveIngredient(i);
+			}
+			else if ((this.Contents is ISingleIngredient) && (this.Contents.Name == i.Name))
+			{
+				result = (ISingleIngredient)this.Contents;
+				this.Empty();
+			}
+
+			this.LastActionDuration = 60;
+
+			return result;
+		}
+	
+	}
 }

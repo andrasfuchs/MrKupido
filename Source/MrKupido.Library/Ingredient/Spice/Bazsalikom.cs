@@ -10,8 +10,16 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("eng", "basil leaf")]
     [NameAlias("hun", "bazsalikomlevél")]
 
-    // TODO: GrammsPerPiece
-    [IngredientConsts(Category = ShoppingListCategory.Spice, GrammsPerPiece = 3)]
+    [IngredientConsts(
+		Category = ShoppingListCategory.Spice, 
+		GrammsPerPiece = 1.0f,
+		CaloriesPer100Gramms = 251.0f,
+		CarbohydratesPer100Gramms = 183.0f,
+		FatPer100Gramms = 33.3f,
+		ProteinPer100Gramms = 35.1f,
+		GlichemicalIndex = 8,
+		InflammationFactor = 536	
+	)]
 
     [LeafOf(typeof(OcimumBasilicum))]
     public class Bazsalikom : SingleIngredient

@@ -14,5 +14,7 @@ namespace MrKupido.Library
         int IngredientCount { get; }
 
         void AddIngredients(params IIngredient[] ingredients);
+
+		ISingleIngredient RemoveIngredient(ISingleIngredient i);
     }
 }

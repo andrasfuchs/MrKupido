@@ -10,7 +10,11 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("eng", "juniper")]
     [NameAlias("hun", "borókabogyó")]
 
-    [IngredientConsts(Category = ShoppingListCategory.Spice, GrammsPerPiece = 3)]
+    [IngredientConsts(
+		Category = ShoppingListCategory.Spice, 
+		GrammsPerPiece = 3,
+		CaloriesPer100Gramms = 525.0f
+	)]
 
     //[YieldOf(typeof())]
     public class Borokabogyo : SingleIngredient

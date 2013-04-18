@@ -59,9 +59,12 @@ namespace MrKupido.Library.Recipe
 
 			IIngredientContainer fokhagyma = preps["fokhagyma"];
 			labas.Berakni(new So(2.0f * amount), fokhagyma.Contents, new SuritettParadicsom(1.0f * amount), new Viz(0.5f * amount));
-			labas.Raszorni(new OreganoOrolt(1.0f * amount, MeasurementUnit.teaskanal), new Majoranna(1.0f * amount, MeasurementUnit.teaskanal), new FeketeBorsOrolt(1.0f * amount, MeasurementUnit.teaskanal), new BazsalikomOrolt(1.0f * amount, MeasurementUnit.teaskanal), new Baberlevel(2.0f * amount), new Zsalya(1.0f * amount, MeasurementUnit.teaskanal), new Kakukkfu(1.0f * amount, MeasurementUnit.teaskanal), new KristalyCukor(0.5f * amount, MeasurementUnit.teaskanal));
+			ISingleIngredient baberLevel = new Baberlevel(1.0f * amount);
+			labas.Raszorni(new OreganoOrolt(0.5f * amount, MeasurementUnit.teaskanal), new Majoranna(0.5f * amount, MeasurementUnit.teaskanal), new FeketeBorsOrolt(0.5f * amount, MeasurementUnit.teaskanal), new BazsalikomOrolt(0.5f * amount, MeasurementUnit.teaskanal), baberLevel, new Zsalya(0.5f * amount, MeasurementUnit.teaskanal), new Kakukkfu(0.5f * amount, MeasurementUnit.teaskanal), new KristalyCukor(0.5f * amount, MeasurementUnit.teaskanal));
 
 			eg.Use<Tuzhely>(1).Varni(5);
+
+			labas.KivenniI(baberLevel);
 
 			cfp.Add("pizzaszosz", labas);
 

@@ -49,6 +49,11 @@
                 {
                     <img runat="server" src="@(photo)"/>
                 }
+
+                @if (Model.Photos.Length == 0)
+                {
+                    <img runat="server" src="~/Content/svg/nophoto.svg" width="240" height="120"/>
+                }
             </div>
 
         </div>
