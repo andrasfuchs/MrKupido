@@ -79,6 +79,15 @@ namespace MrKupido.Web.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mr. Kupido: Delicious like hell - the best source for recipes, diets and nutrition on the web.
+        /// </summary>
+        public static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to disclaimer.
         /// </summary>
         public static string Disclaimer {
@@ -102,6 +111,24 @@ namespace MrKupido.Web.Resources.Shared {
         public static string Homepage {
             get {
                 return ResourceManager.GetString("Homepage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to recipe, diet, ingredient, nutrition, health, cake, chicken breast, pizza.
+        /// </summary>
+        public static string Keywords {
+            get {
+                return ResourceManager.GetString("Keywords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to en-us.
+        /// </summary>
+        public static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
             }
         }
         

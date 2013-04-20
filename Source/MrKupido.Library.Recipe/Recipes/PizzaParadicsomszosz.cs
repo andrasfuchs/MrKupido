@@ -30,17 +30,17 @@ namespace MrKupido.Library.Recipe
 		{
 			PreparedIngredients result = new PreparedIngredients();
 
-			eg.Use<Labas>(1).BeonteniI(new OlivaOlaj(0.25f));
+			eg.Use<Serpenyo>(1).BeonteniI(new OlivaOlaj(0.25f));
 
 			ISingleIngredient hagyma = new Hagyma(1.0f * amount);
 			eg.Use<Kes>(1).FeldarabolniI(hagyma, 0.1f);
-			eg.Use<Labas>(1).BerakniI(hagyma);
+			eg.Use<Serpenyo>(1).BerakniI(hagyma);
 
 			ISingleIngredient fokhagyma = new Fokhagyma(3.0f);
 			eg.Use<FokhagymaPres>(1).PreselniI(fokhagyma);
 			eg.Use<LaposKisTanyer>(1).RarakniI(fokhagyma);
 
-			result.Add("hagyma", eg.Use<Labas>(1));
+			result.Add("hagyma", eg.Use<Serpenyo>(1));
 			result.Add("fokhagyma", eg.Use<LaposKisTanyer>(1));
 
 			eg.WashUp();
@@ -51,22 +51,22 @@ namespace MrKupido.Library.Recipe
 		{
 			CookedFoodParts cfp = new CookedFoodParts();
 
-			Labas labas = (Labas)preps["hagyma"];
+			Serpenyo serpenyo = (Serpenyo)preps["hagyma"];
 
-			eg.Use<Tuzhely>(1).RahelyezniC(labas);
+			eg.Use<Tuzhely>(1).RahelyezniC(serpenyo);
 			eg.Use<Tuzhely>(1).Homerseklet(150);
 			eg.Use<Tuzhely>(1).Varni(3);
 
 			IIngredientContainer fokhagyma = preps["fokhagyma"];
-			labas.Berakni(new So(2.0f * amount), fokhagyma.Contents, new SuritettParadicsom(1.0f * amount), new Viz(0.5f * amount));
+			serpenyo.Berakni(new So(2.0f * amount), fokhagyma.Contents, new SuritettParadicsom(1.0f * amount), new Viz(0.5f * amount));
 			ISingleIngredient baberLevel = new Baberlevel(1.0f * amount);
-			labas.Raszorni(new OreganoOrolt(0.5f * amount, MeasurementUnit.teaskanal), new Majoranna(0.5f * amount, MeasurementUnit.teaskanal), new FeketeBorsOrolt(0.5f * amount, MeasurementUnit.teaskanal), new BazsalikomOrolt(0.5f * amount, MeasurementUnit.teaskanal), baberLevel, new Zsalya(0.5f * amount, MeasurementUnit.teaskanal), new Kakukkfu(0.5f * amount, MeasurementUnit.teaskanal), new KristalyCukor(0.5f * amount, MeasurementUnit.teaskanal));
+			serpenyo.Raszorni(new OreganoOrolt(0.5f * amount, MeasurementUnit.teaskanal), new Majoranna(0.5f * amount, MeasurementUnit.teaskanal), new FeketeBorsOrolt(0.5f * amount, MeasurementUnit.teaskanal), new BazsalikomOrolt(0.5f * amount, MeasurementUnit.teaskanal), baberLevel, new Zsalya(0.5f * amount, MeasurementUnit.teaskanal), new Kakukkfu(0.5f * amount, MeasurementUnit.teaskanal), new KristalyCukor(0.5f * amount, MeasurementUnit.teaskanal));
 
 			eg.Use<Tuzhely>(1).Varni(5);
 
-			labas.KivenniI(baberLevel);
+			serpenyo.KivenniI(baberLevel);
 
-			cfp.Add("pizzaszosz", labas);
+			cfp.Add("pizzaszosz", serpenyo);
 
 			return cfp;
 		}

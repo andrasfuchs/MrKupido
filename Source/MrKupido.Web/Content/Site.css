@@ -374,6 +374,7 @@ background              bgc         #fffcf5
         display: none;
     }
 
+    div.summary h1,
     details summary h1 {
         font-size: 44px;
         font-family: tangerineabold, Sans-Serif;
@@ -388,6 +389,7 @@ background              bgc         #fffcf5
             outline: /*mcm*/ #cdb8ab dashed 1px;
         }
 
+    div.summary h2,
     details summary h2 {
         font-size: 26px;
         font-family: tangerinearegular, Sans-Serif;
@@ -399,6 +401,7 @@ background              bgc         #fffcf5
         background: transparent;
     }
 
+    div.summary h3,
     details summary h3 {
         font-size: 26px;
         font-family: tangerinearegular, Sans-Serif;
@@ -408,7 +411,7 @@ background              bgc         #fffcf5
         text-align: center;
     }
 
-    details h2 {
+    h2 {
         font-size: 44px;
         font-family: tangerineabold, Sans-Serif;
         color: /*mcd*/ #553e31;
@@ -420,7 +423,7 @@ background              bgc         #fffcf5
     }
 
 
-    details h3 {
+    h3 {
         font-size: 26px;
         font-family: tangerinearegular, Sans-Serif;
         color: /*mcd*/ #553e31;
@@ -429,7 +432,7 @@ background              bgc         #fffcf5
         margin: -70px 10px 10px 0;
     }
 
-
+    div.details ul,
     details ul {
         float: left;
         font-size: 20px;
@@ -571,7 +574,7 @@ background              bgc         #fffcf5
         border-radius: 5px;
     }
 
-    details#recipe li {
+    div#recipe li {
         display: list-item;
         float: left;
         width: auto;
@@ -582,7 +585,7 @@ background              bgc         #fffcf5
         border-radius: 0px;
     }
 
-    details#recipe div#directionlist li {
+    div#recipe div#directionlist li {
         display: list-item;
         float: left;
         width: 880px;
@@ -592,38 +595,38 @@ background              bgc         #fffcf5
         border: 0;
     }
 
-        details#recipe div#directionlist li span {
+        div#recipe div#directionlist li span {
             display: inline-block;
             vertical-align: middle;
         }
 
-            details#recipe div#directionlist li span.stagePreparation {
+            div#recipe div#directionlist li span.stagePreparation {
                 width: 25px;
                 height: 70px;
                 background: #d5e6cc;
             }
 
-            details#recipe div#directionlist li span.stageCooking {
+            div#recipe div#directionlist li span.stageCooking {
                 width: 25px;
                 height: 70px;
                 background: #e8d6cd;
             }
 
-            details#recipe div#directionlist li span.stageServing {
+            div#recipe div#directionlist li span.stageServing {
                 width: 25px;
                 height: 70px;
                 background: #d6e4ea;
             }
 
-            details#recipe div#directionlist li span.time {
+            div#recipe div#directionlist li span.time {
                 margin: -10px 5px 0 10px;
             }
 
-            details#recipe div#directionlist li span.timer {
+            div#recipe div#directionlist li span.timer {
                 margin-top: 4px;
             }
 
-        details#recipe div#directionlist li div.directionRightPart {
+        div#recipe div#directionlist li div.directionRightPart {
             position: relative;
             display: block;
             float: right;
@@ -633,7 +636,7 @@ background              bgc         #fffcf5
             /*border: solid 1px green;*/
         }
 
-            details#recipe div#directionlist li div.directionRightPart span.directionBigIcons {
+            div#recipe div#directionlist li div.directionRightPart span.directionBigIcons {
                 display: inline-block;
                 opacity: 0.0;
                 padding: 5px;
@@ -642,7 +645,7 @@ background              bgc         #fffcf5
                 /*border: solid 1px red;*/
             }
 
-            details#recipe div#directionlist li div.directionRightPart span.directionText {
+            div#recipe div#directionlist li div.directionRightPart span.directionText {
                 position: absolute;
                 bottom: 0px;
                 left: 0px;
@@ -652,7 +655,7 @@ background              bgc         #fffcf5
                 /*border: solid 1px blue;*/
             }
 
-                details#recipe div#directionlist li div.directionRightPart span.directionText span.directionTextContent {
+                div#recipe div#directionlist li div.directionRightPart span.directionText span.directionTextContent {
                     display: inline-block;
                     vertical-align: middle;
                     line-height: 25px;
@@ -661,7 +664,7 @@ background              bgc         #fffcf5
                     /*border: solid 1px black;*/
                 }
 
-        details#recipe div#directionlist li span.directionTextContent img2 {
+        div#recipe div#directionlist li span.directionTextContent img2 {
             position: relative;
             top: 4px;
             display: inline-block;
@@ -670,7 +673,7 @@ background              bgc         #fffcf5
             vertical-align: bottom;
         }
 
-        details#recipe div#directionlist li span.directionTextContent span2 {
+        div#recipe div#directionlist li span.directionTextContent span2 {
             position: relative;
             margin-top: -32px;
             margin-left: -28px;
@@ -686,7 +689,7 @@ background              bgc         #fffcf5
             text-shadow: 0px 0px 0 #fffcf5, -1px -1px 0 #fffcf5, 1px -1px 0 #fffcf5, -1px 1px 0 #fffcf5, 1px 1px 0 #fffcf5;
         }
 
-        details#recipe div#directionlist li span.directionTextContent span {
+        div#recipe div#directionlist li span.directionTextContent span {
             vertical-align: baseline;
         }
 
@@ -1480,6 +1483,10 @@ background              bgc         #fffcf5
     /* background-image: url('../Content/svg/tick_on.svg'); */
 
     /* Custom checkbox and radio styles */
+
+    ul#ingredientlist {
+        margin: 10px;
+    }
 
     ul#ingredientlist li.ingredientlistitem {
         margin: 0px 40px 0px 5px;

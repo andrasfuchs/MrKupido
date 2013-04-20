@@ -193,8 +193,8 @@
 </header>
 <hr class="single" />
 <article>
-    <details id="recipe" open class="alwaysopen">
-        <summary>
+    <div class="details" id="recipe">
+        <div class="summary">
             <h1>
                 @{string name = ((MrKupido.Processor.Model.RecipeTreeNode)Model[0]).LongName;}
                 @name</h1>
@@ -204,7 +204,7 @@
             <hr class="single" />
             <h3>@version</h3>
             }
-        </summary>
+        </div>
         <hr class="single" />
         @if (((Array)Model[1]).Length > 0) {
         <div id="taglist">
@@ -282,6 +282,6 @@
                 </div>
             </div>
         </div>
-    </details>
+    </div>
     <hr class="space" />
 </article>

@@ -123,6 +123,9 @@
   <data name="Contact" xml:space="preserve">
     <value>kapcsolat</value>
   </data>
+  <data name="Description" xml:space="preserve">
+    <value>Mr. Kupidó: Ördögien finom - a legjobb hely a weben, ha receptet, diétát, tápértéket keresel</value>
+  </data>
   <data name="Disclaimer" xml:space="preserve">
     <value>jogi nyilatkozat</value>
   </data>
@@ -131,6 +134,12 @@
   </data>
   <data name="Homepage" xml:space="preserve">
     <value>főoldal</value>
+  </data>
+  <data name="Keywords" xml:space="preserve">
+    <value>recept, receptek, diéta, étrend, hozzávaló, tápérték, egészség, elkészítés, sütemény, csirkemell, pizza</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>hu-hu</value>
   </data>
   <data name="PageTitle" xml:space="preserve">
     <value>Mr. Kupidó</value>

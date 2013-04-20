@@ -123,6 +123,9 @@
   <data name="Contact" xml:space="preserve">
     <value>contact</value>
   </data>
+  <data name="Description" xml:space="preserve">
+    <value>Mr. Kupido: Delicious like hell - the best source for recipes, diets and nutrition on the web</value>
+  </data>
   <data name="Disclaimer" xml:space="preserve">
     <value>disclaimer</value>
   </data>
@@ -131,6 +134,12 @@
   </data>
   <data name="Homepage" xml:space="preserve">
     <value>home</value>
+  </data>
+  <data name="Keywords" xml:space="preserve">
+    <value>recipe, diet, ingredient, nutrition, health, cake, chicken breast, pizza</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>en-us</value>
   </data>
   <data name="PageTitle" xml:space="preserve">
     <value>Mr. Kupido</value>

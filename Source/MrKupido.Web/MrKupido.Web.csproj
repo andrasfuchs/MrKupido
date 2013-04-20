@@ -650,6 +650,7 @@
     <Content Include="Content\svg\i_wheat.svg" />
     <Content Include="Content\svg\logo_mrkupido.svg" />
     <Content Include="Content\svg\logo_mrkupido_wide.svg" />
+    <Content Include="Content\svg\nophoto.svg" />
     <Content Include="Content\svg\nutlevel_0.svg" />
     <Content Include="Content\svg\nutlevel_1.svg" />
     <Content Include="Content\svg\nutlevel_2.svg" />
@@ -698,6 +699,7 @@
     <Content Include="Content\svg\tnt_smile.svg" />
     <Content Include="Content\svg\type_commercial.svg" />
     <Content Include="Content\svg\type_orderable.svg" />
+    <Content Include="Content\svg\t_tag.svg" />
     <Content Include="Content\themes\base\jquery.ui.accordion.min.css">
       <DependentUpon>jquery.ui.accordion.css</DependentUpon>
     </Content>
@@ -1027,7 +1029,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.None" BuildVersion_UpdateFileVersion="False" BuildVersion_StartDate="1975/10/21" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="1975/10/21" BuildVersion_UpdateFileVersion="False" BuildVersion_BuildVersioningStyle="None.None.None.None" />
     </VisualStudio>
   </ProjectExtensions>
   <ItemGroup>

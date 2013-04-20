@@ -40,7 +40,9 @@ namespace MrKupido.Library.Recipe
 
 			eg.Use<NyujtoDeszka>(1).NyujtaniC(eg.Use<NagyEdeny>(1), 0.5f);
 
-			eg.Use<Tepsi>(1).Kibelelni(new Sutopapir());
+			eg.Use<Pohar>(1).BeonteniI(new OlivaOlaj(0.5f));
+			eg.Use<Ecset>(1).KikenniC(eg.Use<Pohar>(1), eg.Use<Tepsi>(1));
+			eg.Use<Tepsi>(1).Raszorni(new Liszt(1.0f));
 			eg.Use<Tepsi>(1).BerakniC(eg.Use<NyujtoDeszka>(1));
 
 			result.Add("pizzateszta", eg.Use<Tepsi>(1));
