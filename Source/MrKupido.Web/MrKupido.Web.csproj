@@ -468,7 +468,9 @@
     <Content Include="Content\photos\960x480\cheese-ball_01.jpg" />
     <Content Include="Content\photos\960x480\chicken-breast-with-cream-[Fuchs-style]_01.jpg" />
     <Content Include="Content\photos\960x480\chicken-breast-with-cream-[Mathe-style]_01.jpg" />
-    <Content Include="Content\photos\960x480\cocoa-spiral_01.jpg" />
+    <Content Include="Content\photos\960x480\cocoa-spiral_02.jpg" />
+    <Content Include="Content\photos\960x480\cocoa-spiral_03.jpg" />
+    <Content Include="Content\photos\960x480\cocoa-spiral_04.jpg" />
     <Content Include="Content\photos\960x480\cottage-cheese-coconut-ball_01.jpg" />
     <Content Include="Content\photos\960x480\hawaii-pizza_01.jpg" />
     <Content Include="Content\photos\960x480\hortobagy-meat-pancake_01.jpg" />
@@ -477,7 +479,9 @@
     <Content Include="Content\photos\960x480\mustard-garlic-chicken_01.jpg" />
     <Content Include="Content\photos\960x480\pita-for-gyros_01.jpg" />
     <Content Include="Content\photos\960x480\scone_01.jpg" />
-    <Content Include="Content\photos\960x480\spicy-chicken-breast_01.jpg" />
+    <Content Include="Content\photos\960x480\spicy-chicken-breast_02.jpg" />
+    <Content Include="Content\photos\960x480\spicy-chicken-breast_03.jpg" />
+    <Content Include="Content\photos\960x480\spicy-chicken-breast_04.jpg" />
     <Content Include="Content\Print.css" />
     <Content Include="Content\Site.min.css">
       <DependentUpon>Site.css</DependentUpon>

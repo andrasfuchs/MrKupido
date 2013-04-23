@@ -34,9 +34,9 @@ namespace MrKupido.Library.Recipe
 
 			eg.Use<MelyTanyer>(1).BerakniI(csirkemell);
 
-			eg.Use<Kez>(1).Raszorni(eg.Use<MelyTanyer>(1), new So(5.0f * amount));
+			eg.Use<Kez>(1).RaszorniI(eg.Use<MelyTanyer>(1), new So(1.5f * amount, MeasurementUnit.teaskanal));
 
-			eg.Use<Edeny>(1).Berakni(new Liszt(7.0f * amount), new So(10.0f * amount), new Fuszerpaprika(3.0f * amount), new FeketeBors(8.0f * amount), new Majoranna(1.0f * amount));
+			eg.Use<Edeny>(1).Berakni(new Liszt(6.0f * amount), new So(2.0f * amount, MeasurementUnit.teaskanal), new Fuszerpaprika(1.0f * amount, MeasurementUnit.teaskanal), new FeketeBorsOrolt(2.0f * amount, MeasurementUnit.teaskanal), new Majoranna(1.0f * amount, MeasurementUnit.teaskanal));
 
 			eg.Use<Fakanal>(1).ElkeverniC(eg.Use<Edeny>(1));
 			eg.Use<Kez>(1).MegforgatniI(eg.Use<Edeny>(1), csirkemell, eg.Use<LaposTanyer>(2));

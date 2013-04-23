@@ -30,7 +30,7 @@ namespace MrKupido.Library.Equipment
         public void BerakniI(ISingleIngredient i)
         {
             this.contents.AddIngredients(i);
-			this.LastActionDuration = 60 * (uint)i.PieceCount;
+			this.LastActionDuration = 60;
         }
 
         [NameAlias("eng", "put in", Priority = 200)]

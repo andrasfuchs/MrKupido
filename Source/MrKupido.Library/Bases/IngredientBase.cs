@@ -5,6 +5,7 @@ using System.Text;
 using MrKupido.Library.Attributes;
 using System.Threading;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace MrKupido.Library.Ingredient
 {
@@ -33,9 +34,25 @@ namespace MrKupido.Library.Ingredient
 		{
 			get
 			{
+				MeasurementUnit unitToCheck = this.Unit;
+
+				if ((unitToCheck == MeasurementUnit.bogre) || (unitToCheck == MeasurementUnit.csesze) || (unitToCheck == MeasurementUnit.evokanal) || (unitToCheck == MeasurementUnit.gyermekkanal) 
+					|| (unitToCheck == MeasurementUnit.kaveskanal) || (unitToCheck == MeasurementUnit.mokkaskanal) || (unitToCheck == MeasurementUnit.teaskanal))
+				{
+					foreach (ConstructorInfo ci in this.GetType().GetConstructors())
+					{
+						ParameterInfo pi = ci.GetParameters().FirstOrDefault(p => p.IsOptional && (p.ParameterType == typeof(MeasurementUnit)));
+						if (pi != null)
+						{
+							unitToCheck = (MeasurementUnit)pi.DefaultValue;
+							break;
+						}
+					}
+				}
+
 				return (
-				(this.Unit == MeasurementUnit.milligramm) || (this.Unit == MeasurementUnit.gramm) || (this.Unit == MeasurementUnit.dekagramm) || (this.Unit == MeasurementUnit.kilogramm)
-				|| (this.Unit == MeasurementUnit.piece) || (this.Unit == MeasurementUnit.csipet));
+				(unitToCheck == MeasurementUnit.milligramm) || (unitToCheck == MeasurementUnit.gramm) || (unitToCheck == MeasurementUnit.dekagramm) || (unitToCheck == MeasurementUnit.kilogramm)
+				|| (unitToCheck == MeasurementUnit.piece) || (unitToCheck == MeasurementUnit.csipet));
 			}
 		}
 
@@ -43,7 +60,23 @@ namespace MrKupido.Library.Ingredient
 		{
 			get
 			{
-				return ((this.Unit == MeasurementUnit.milliliter) || (this.Unit == MeasurementUnit.centiliter) || (this.Unit == MeasurementUnit.deciliter) || (this.Unit == MeasurementUnit.liter));
+				MeasurementUnit unitToCheck = this.Unit;
+
+				if ((unitToCheck == MeasurementUnit.bogre) || (unitToCheck == MeasurementUnit.csesze) || (unitToCheck == MeasurementUnit.evokanal) || (unitToCheck == MeasurementUnit.gyermekkanal)
+					|| (unitToCheck == MeasurementUnit.kaveskanal) || (unitToCheck == MeasurementUnit.mokkaskanal) || (unitToCheck == MeasurementUnit.teaskanal))
+				{
+					foreach (ConstructorInfo ci in this.GetType().GetConstructors())
+					{
+						ParameterInfo pi = ci.GetParameters().FirstOrDefault(p => p.IsOptional && (p.ParameterType == typeof(MeasurementUnit)));
+						if (pi != null)
+						{
+							unitToCheck = (MeasurementUnit)pi.DefaultValue;
+							break;
+						}
+					}
+				}
+
+				return ((unitToCheck == MeasurementUnit.milliliter) || (unitToCheck == MeasurementUnit.centiliter) || (unitToCheck == MeasurementUnit.deciliter) || (unitToCheck == MeasurementUnit.liter));
 			}
 		}	
 

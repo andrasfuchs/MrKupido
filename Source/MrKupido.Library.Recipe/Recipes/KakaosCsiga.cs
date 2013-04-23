@@ -84,7 +84,7 @@ namespace MrKupido.Library.Recipe
             eg.Use<Tuzhely>(1).LeemelniC(eg.Use<Edeny>(2));
 
             eg.Use<Kez>(1).RaonteniC(eg.Use<Tepsi>(1), eg.Use<Edeny>(2));
-            eg.Use<Suto>(1).Homerseklet(100);
+            eg.Use<Suto>(1).Homerseklet(150);
             eg.Use<Suto>(1).BehelyezniC(eg.Use<Tepsi>(1));
             eg.Use<Suto>(1).Varni(10);
             eg.Use<Suto>(1).KiemelniC(eg.Use<Tepsi>(1));

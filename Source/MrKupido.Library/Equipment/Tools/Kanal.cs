@@ -24,5 +24,12 @@ namespace MrKupido.Library.Equipment
             return i;
         }
 
+		[NameAlias("eng", "mix together", Priority = 200)]
+		[NameAlias("hun", "összekever", Priority = 200)]
+		[NameAlias("hun", "alaposan keverd össze a(z) {0.Contents.T}")]
+		public void ElkeverniC(IIngredientContainer container)
+		{
+			this.LastActionDuration = 180;
+		}
     }
 }

@@ -29,13 +29,15 @@ namespace MrKupido.Library.Recipe
 		{
 			PreparedIngredients result = new PreparedIngredients();
 
-			eg.Use<Edeny>(1).BeonteniI(new Tej(0.5f * amount));
-			eg.Use<Kez>(1).Morzsol(new Eleszto(1.0f * amount), eg.Use<Edeny>(1));
+			eg.Use<Pohar>(1).BeonteniI(new Tej(0.5f * amount));
+			eg.Use<Pohar>(1).BerakniI(new Cukor(1.0f * amount, MeasurementUnit.teaskanal));
+			eg.Use<Kanal>(1).ElkeverniC(eg.Use<Pohar>(1));
+			eg.Use<Kez>(1).Morzsol(new Eleszto(1.0f * amount), eg.Use<Pohar>(1));
 
-			eg.Use<Futotest>(1).RahelyezniC(eg.Use<Edeny>(1));
-			eg.Use<Edeny>(1).Varni(20);
+			eg.Use<Futotest>(1).RahelyezniC(eg.Use<Pohar>(1));
+			eg.Use<Pohar>(1).Varni(20);
 
-			result.Add("eleszto", eg.Use<Edeny>(1));
+			result.Add("eleszto", eg.Use<Pohar>(1));
 
 			eg.WashUp();
 			return result;

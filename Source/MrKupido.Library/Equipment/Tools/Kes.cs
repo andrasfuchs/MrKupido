@@ -56,7 +56,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "circle", Priority = 200)]
         [NameAlias("hun", "felkarikáz", Priority = 200)]
-        [NameAlias("hun", "karikázd fel a(z) {0T} kb. {1} dekás darabokra")]
+        [NameAlias("hun", "karikázd fel a(z) {0T}")]
         public void FelkarikazniI(ISingleIngredient i, float weight)
         {
             weight *= 10; //dkg -> gramm
