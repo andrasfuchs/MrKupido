@@ -43,12 +43,12 @@ background              bgc         #fffcf5
     body {
         font-size: 14px;
         font-family: Cardo, Sans-Serif;
-        color: #000000;
-        background-color: #000000;
+        color: #ffffff;
+        background-color: #ffffff;
     }
 
     .wrapper {
-        background-color: /*bgc*/ #fff;
+        background-color: /*bgc*/ #ffffff;
         border-width: 0px;
     }
 
@@ -60,7 +60,7 @@ background              bgc         #fffcf5
     hr.single {
         border: 0;
         height: 3px;
-        background: url('../Content/svg/hr_single.svg') 0 0 no-repeat;
+        background: #ffffff;
         background-position: center;
         margin: 3px;
     }
@@ -68,7 +68,7 @@ background              bgc         #fffcf5
     hr.double {
         border: 0;
         height: 11px;
-        background: url('../Content/svg/hr_double.svg') 0 0 no-repeat;
+        background: #ffffff;
         background-position: center;
         margin: 2px;
     }
@@ -90,13 +90,10 @@ background              bgc         #fffcf5
         color: /*mcd*/ #553e31;
         text-align: center;
         margin: 0;
-        background: url('../Content/svg/h1_bg.svg') 0 0 repeat-y;
+        /*background: url('../Content/svg/h1_bg.svg') 0 0 repeat-y;*/
+        background: #ffffff;
         background-position: center;
     }
-
-        details summary h1:hover, details summary h1:focus {
-            outline: /*mcm*/ #cdb8ab dashed 1px;
-        }
 
     div.summary h2,
     details summary h2 {
@@ -127,7 +124,7 @@ background              bgc         #fffcf5
         text-align: center;
         margin-top: -8px;
         margin-bottom: 35px;
-        background: url('../Content/svg/h1_bg.svg') 0 0 repeat-y;
+        background: #ffffff;
         background-position: center;
     }
 
