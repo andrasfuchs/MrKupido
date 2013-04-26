@@ -12,6 +12,7 @@ namespace MrKupido.Library.Ingredient
 
 	[IngredientConsts(
 		Category = ShoppingListCategory.Meat,
+		GrammsPerPiece = 100.0f,
 		CaloriesPer100Gramms = 263.0f,
 		CarbohydratesPer100Gramms = 58.0f,
 		FatPer100Gramms = 142.0f,

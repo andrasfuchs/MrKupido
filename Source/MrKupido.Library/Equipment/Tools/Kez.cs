@@ -184,19 +184,15 @@ namespace MrKupido.Library.Equipment
             this.LastActionDuration = 120;
         }
 
-        [NameAlias("eng", "plow", Priority = 200)]
-        [NameAlias("hun", "megforgat", Priority = 200)]
-        [NameAlias("hun", "forgasd meg a(z) {1T} a(z) {0N}")]
-		public void MegforgatniI(IIngredientContainer iIn, IIngredient i, IIngredientContainer c2)
-        {
-			if (!i.IsSolid) throw new InvalidActionForIngredientException("Megforgatni", i);
+		[NameAlias("eng", "ted", Priority = 200)]
+		[NameAlias("hun", "megforgat", Priority = 200)]
+		[NameAlias("hun", "forgasd meg a(z) {0T} a(z) ({1*N}, )")]
+		public void MegforgatniI(ISingleIngredient i, params IIngredientContainer[] c)
+		{
+			if (!i.IsSolid) throw new InvalidActionForIngredientException("MegforgatniI", i);
 
-            // TODO: a small amount of iIn.Contents must be separated
-
-            this.LastActionDuration = 180;
-
-			c2.AddRange(new IIngredient[] { i, iIn.Contents });
-        }
+			this.LastActionDuration = 60;
+		}
 
         [NameAlias("eng", "plow", Priority = 200)]
         [NameAlias("hun", "megforgat", Priority = 200)]
@@ -304,5 +300,25 @@ namespace MrKupido.Library.Equipment
 			this.LastActionDuration = 60;
 		}
 
-    }
+		[NameAlias("eng", "wash", Priority = 200)]
+		[NameAlias("hun", "megmos", Priority = 200)]
+		[NameAlias("hun", "alaposan mosd meg a(z) {0T}")]
+		public void MegmosniI(ISingleIngredient i)
+		{
+			if (!i.IsSolid) throw new InvalidActionForIngredientException("Megmosni", i);
+
+			this.LastActionDuration = 60;
+		}
+
+		[NameAlias("eng", "wrape around", Priority = 200)]
+		[NameAlias("hun", "köréteker", Priority = 200)]
+		[NameAlias("hun", "tekerd a(z) {0T} a(z) {1} köré")]
+		public void KoretekerniI(ISingleIngredient i1, ISingleIngredient i2)
+		{
+			if (!i1.IsSolid) throw new InvalidActionForIngredientException("KoretekerniI", i1);
+			if (!i2.IsSolid) throw new InvalidActionForIngredientException("KoretekerniI", i2);
+
+			this.LastActionDuration = 60;
+		}
+	}
 }

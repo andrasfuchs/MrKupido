@@ -109,7 +109,7 @@
 
             if ((Model.Photos != null) && (Model.Photos.Length > 0))
             { 
-                <a href="javascript:flipToSideB@(Model.Index)('@Model.UniqueName')">
+                <a href="javascript:flipToSideB@(Model.Index)('@Model.UniqueName.Replace("[","_").Replace("]","_")')">
                     <img runat="server" src="~/Content/svg/icon_photos.svg" alt="@Model.Photos.Length kép" width="40px" height="45px" />
                 </a>
             }

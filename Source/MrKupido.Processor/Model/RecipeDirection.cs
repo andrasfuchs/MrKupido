@@ -39,7 +39,7 @@ namespace MrKupido.Processor.Model
 		public IDirectionSegment[] DirectionSegments { get; private set; }
 
 		// replace exceptional words
-		private string[] correctionReplacements = { "tált", "tálat", "olajt", "olajat", "olívaolajt", "olívaolajat", "mély tányér", "mélytányér", "tésztadarabokot", "tésztadarabokat", "citromhéjt", "citromhéjat", "tejt", "tejet", "sütőpapírrel", "sütőpapírral", "vízt", "vizet", "dióbélt", "dióbelet", "cukort", "cukrot", "fahéjt", "fahéjat", "sertéscombet", "sertéscombot", "sertéscombes", "sertéscombos", "csirkecombet", "csirkecombot", "csirkecombes", "csirkecombos", "tejföles", "tejfölös", "vízes", "vizes", "vajt", "vajat", "vajos", "vajas", "dióbéles", "dióbeles", "babérlevélt", "babérlevelet" };
+		private string[] correctionReplacements = { "tált", "tálat", "olajt", "olajat", "olívaolajt", "olívaolajat", "mély tányér", "mélytányér", "tésztadarabokot", "tésztadarabokat", "citromhéjt", "citromhéjat", "tejt", "tejet", "sütőpapírrel", "sütőpapírral", "vízt", "vizet", "dióbélt", "dióbelet", "cukort", "cukrot", "fahéjt", "fahéjat", "sertéscombet", "sertéscombot", "sertéscombes", "sertéscombos", "csirkecombet", "csirkecombot", "csirkecombes", "csirkecombos", "tejföles", "tejfölös", "vízes", "vizes", "vajt", "vajat", "vajos", "vajas", "dióbéles", "dióbeles", "babérlevélt", "babérlevelet", "sajtes", "sajtos" };
 
         public RecipeDirection(string languageISO, string assemblyName, string command, object[] operands = null, object result = null, RecipeStage stage = RecipeStage.Unknown, int actorIndex = 1, List<string> seenIngredients = null)
         {
@@ -149,7 +149,7 @@ namespace MrKupido.Processor.Model
                 int textClauseEnd = clauseStartIndex;
 
                 clauseEndIndex = expression.IndexOf("}", clauseStartIndex);
-                bool isIteration = expression[clauseEndIndex - 1] == '*';
+				bool isIteration = ((clauseEndIndex >= 1) && (expression[clauseEndIndex - 1] == '*')) || ((clauseEndIndex >= 2) && (expression[clauseEndIndex - 2] == '*'));
                 int iterationClauseStart = -1;
                 int iterationClauseEnd = -1;
 
@@ -192,7 +192,11 @@ namespace MrKupido.Processor.Model
                 if (!Char.IsLetter(affixId)) affixId = Char.MinValue;
 
                 // operand can be a number OR a number followed by an asterix (in case of an iteration)
-                string operandIndexStr = clause.Substring(0, clause.Length - (isIteration || affixId != Char.MinValue ? 1 : 0));
+				int removeChartsFromTheEnd = 0;
+				if (isIteration) removeChartsFromTheEnd++;
+				if (affixId != Char.MinValue) removeChartsFromTheEnd++;
+
+				string operandIndexStr = clause.Substring(0, clause.Length - removeChartsFromTheEnd);
                 int operandIndex = String.IsNullOrEmpty(operandIndexStr) || (operandIndexStr == "-") ? 0 : Int32.Parse(operandIndexStr) + 1;
 
                 object operand = operandIndexStr == "-" ? returnedValue : operands[operandIndex];
@@ -230,50 +234,56 @@ namespace MrKupido.Processor.Model
                     }
                 }
 
+				Array items = new object[0];
                 if (isIteration)
                 {
                     if (!(operand is Array)) throw new MrKupidoException("If you use the {0*} clause in the action, you must pass an array as a parameter. The parameter number " + (operandIndex - 1) + " is not an array.");
 
-                    Array items = (Array)operand;
-
-                    if (items.Length > 0)
-                    {
-                        foreach (object item in items)
-                        {
-                            if (!String.IsNullOrEmpty(beforeString)) result.Add(new RecipeDirectionSegment(beforeString));
-                            result.Add(new RecipeDirectionSegmentReference(languageISO, item, seenIngredients));
-                            if (!String.IsNullOrEmpty(afterString)) result.Add(new RecipeDirectionSegment(afterString));
-                        }
-                        if (!String.IsNullOrEmpty(afterString)) result.RemoveAt(result.Count - 1);
-                    }
+                    items = (Array)operand;
                 }
                 else
                 {
-                    RecipeDirectionSegmentReference rdsr = new RecipeDirectionSegmentReference(languageISO, operand, seenIngredients);
-					if (!String.IsNullOrEmpty(rdsr.Name))
+					items = new object[] { operand };
+				}
+
+
+				if (items.Length > 0)
+				{
+					foreach (object item in items)
 					{
-						rdsr.Name = Affixate(PrepareForAffix(rdsr.Name), 'S');
+						if (!String.IsNullOrEmpty(beforeString)) result.Add(new RecipeDirectionSegment(beforeString));
+
+						//result.Add(new RecipeDirectionSegmentReference(languageISO, item, seenIngredients));
+
+						RecipeDirectionSegmentReference rdsr = new RecipeDirectionSegmentReference(languageISO, item, seenIngredients);
+						if (!String.IsNullOrEmpty(rdsr.Name))
+						{
+							rdsr.Name = Affixate(PrepareForAffix(rdsr.Name), 'S');
+						}
+
+						// TODO: special (culture dependent) formatting for {0T} {0N} etc. etc.
+						if (affixId != Char.MinValue)
+						{
+							// only the last word needs affixation
+							string[] words = rdsr.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+							string lastWord = PrepareForAffix(words[words.Length - 1]);
+							lastWord = Affixate(lastWord, affixId);
+
+							if (!String.IsNullOrEmpty(rdsr.IconAlt) && (lastWord.StartsWith(rdsr.IconAlt)))
+							{
+								lastWord = lastWord.Replace(rdsr.IconAlt, "-");
+							}
+
+							// replace the last word
+							rdsr.Text = rdsr.Text.Remove(rdsr.Text.Length - words[words.Length - 1].Length) + lastWord;
+						}
+
+						result.Add(rdsr);
+
+						if (!String.IsNullOrEmpty(afterString)) result.Add(new RecipeDirectionSegment(afterString));
 					}
-
-                    // TODO: special (culture dependent) formatting for {0T} {0N} etc. etc.
-                    if (affixId != Char.MinValue)
-                    {
-                        // only the last word needs affixation
-                        string[] words = rdsr.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                        string lastWord = PrepareForAffix(words[words.Length - 1]);
-                        lastWord = Affixate(lastWord, affixId);
-
-                        if (!String.IsNullOrEmpty(rdsr.IconAlt) && (lastWord.StartsWith(rdsr.IconAlt)))
-                        {
-                            lastWord = lastWord.Replace(rdsr.IconAlt, "-");
-                        }
-
-                        // replace the last word
-                        rdsr.Text = rdsr.Text.Remove(rdsr.Text.Length - words[words.Length - 1].Length) + lastWord;
-                    }
-
-                    result.Add(rdsr);
-                }
+					if (!String.IsNullOrEmpty(afterString)) result.RemoveAt(result.Count - 1);
+				}
 
                 clauseEndIndex = iterationClauseEnd >= 0 ? iterationClauseEnd + 1 : clauseEndIndex + 1;
                 clauseStartIndex = clauseEndIndex;

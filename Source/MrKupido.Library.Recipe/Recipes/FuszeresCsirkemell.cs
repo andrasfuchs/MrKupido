@@ -39,7 +39,8 @@ namespace MrKupido.Library.Recipe
 			eg.Use<Edeny>(1).Berakni(new Liszt(6.0f * amount), new So(2.0f * amount, MeasurementUnit.teaskanal), new Fuszerpaprika(1.0f * amount, MeasurementUnit.teaskanal), new FeketeBorsOrolt(2.0f * amount, MeasurementUnit.teaskanal), new Majoranna(1.0f * amount, MeasurementUnit.teaskanal));
 
 			eg.Use<Fakanal>(1).ElkeverniC(eg.Use<Edeny>(1));
-			eg.Use<Kez>(1).MegforgatniI(eg.Use<Edeny>(1), csirkemell, eg.Use<LaposTanyer>(2));
+			eg.Use<Kez>(1).MegforgatniI(csirkemell, eg.Use<Edeny>(1));
+			eg.Use<LaposTanyer>(2).RarakniI(csirkemell);
             
             ISingleIngredient hagyma = new Hagyma(1.0f * amount, MeasurementUnit.piece);
 			eg.Use<Kes>(1).FelkarikazniI(hagyma, 0.5f);

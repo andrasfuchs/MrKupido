@@ -11,7 +11,7 @@ namespace MrKupido.Library.Recipe
     [NameAlias("eng", "chicken breast with cream [Fuchs style]")]
     [NameAlias("hun", "tejszínes csirkemell [Fuchs módra]")]
 
-    //TODO: [Recommend(FootRizs, BurgonyaPure)]
+    //TODO: [Recommend(FottRizs, BurgonyaPure)]
     public class TejszinesCsirkemellFuchs : TejszinesCsirkemell
     {
         public TejszinesCsirkemellFuchs(float amount, MeasurementUnit unit = MeasurementUnit.portion)
@@ -22,18 +22,6 @@ namespace MrKupido.Library.Recipe
         public static EquipmentGroup SelectEquipment(float amount)
         {
             EquipmentGroup result = new EquipmentGroup();
-
-            result.Containers.Add(new NagyEdeny());
-            result.Containers.Add(new JenaiTal());
-            result.Containers.Add(new LaposTanyer());
-            result.Containers.Add(new LaposKisTanyer());
-
-            result.Devices.Add(new Suto());
-
-            result.Tools.Add(new Kez());
-            result.Tools.Add(new Fakanal());
-            result.Tools.Add(new Reszelo());
-
             return result;
         }
 
@@ -48,30 +36,31 @@ namespace MrKupido.Library.Recipe
         {
             CookedFoodParts cfp = new CookedFoodParts();
 
-            LaposKisTanyer laposKisTanyer = eg.Use<LaposKisTanyer>();
+			ISingleIngredient csirkemell = new Csirkemell(10 * amount, MeasurementUnit.piece);
+			eg.Use<Kez>(1).MegmosniI(csirkemell);
+			eg.Use<NagyEdeny>(1).BerakniI(csirkemell);
+			eg.Use<NagyEdeny>(1).Raszorni(new So(2.0f * amount, MeasurementUnit.teaskanal));
 
-            Reszelo reszelo = eg.Use<Reszelo>();
-            reszelo.LereszelniI(laposKisTanyer, new FustoltSajt(10.0f * amount));
+			eg.Use<MelyTanyer>(1).BerakniI(new Liszt(10.0f * amount));
+			eg.Use<MelyTanyer>(2).BerakniI(new Tojas(1.8f * amount));
+			eg.Use<Reszelo>(1).LereszelniI(eg.Use<LaposTanyer>(1), new FustoltSajt(10.0f * amount));
+			eg.Use<Reszelo>(1).LereszelniI(eg.Use<LaposTanyer>(1), new Sajt(10.0f * amount));
 
-            NagyEdeny edeny = eg.Use<NagyEdeny>();
-			edeny.Berakni(new Liszt(25.0f * amount), new So(20.0f * amount), new Tojas(2.0f * amount), laposKisTanyer.Contents);
+			eg.Use<Kez>(1).MegforgatniI(csirkemell, eg.Use<MelyTanyer>(1), eg.Use<MelyTanyer>(2), eg.Use<LaposTanyer>(1));
+			eg.Use<Kez>(1).KoretekerniI(new FustoltSzalonna(10 * amount, MeasurementUnit.piece), csirkemell);
 
-            Kez kez = eg.Use<Kez>();
-			kez.MegforgatniI(edeny, new Csirkemell(25 * 10 * amount), eg.Use<JenaiTal>(1));
-
-			eg.Use<JenaiTal>(1).Berakni(new FustoltSzalonna(5, MeasurementUnit.piece));
-			eg.Use<JenaiTal>(1).BeonteniI(new Tejszin(3.0f));
+			eg.Use<JenaiTal>(1).BerakniI(csirkemell);
+			eg.Use<JenaiTal>(1).BeonteniI(new Tejszin(3.0f * amount));
 			eg.Use<JenaiTal>(1).Lefedni(eg.Use<JenaiTal>(1).Fedo);
 
-            Suto suto = eg.Use<Suto>();
-            suto.Homerseklet(200);
-			suto.BehelyezniC(eg.Use<JenaiTal>(1));
-            suto.Varni(30);
-			suto.KiemelniC(eg.Use<JenaiTal>(1));
+            eg.Use<Suto>(1).Homerseklet(180);
+			eg.Use<Suto>(1).BehelyezniC(eg.Use<JenaiTal>(1));
+            eg.Use<Suto>(1).Varni(60);
+			eg.Use<Suto>(1).KiemelniC(eg.Use<JenaiTal>(1));
 			eg.Use<JenaiTal>(1).FedotLevenni();
-			suto.BehelyezniC(eg.Use<JenaiTal>(1));
-            suto.Varni(10);
-			suto.KiemelniC(eg.Use<JenaiTal>(1));
+			eg.Use<Suto>(1).BehelyezniC(eg.Use<JenaiTal>(1));
+            eg.Use<Suto>(1).Varni(10);
+			eg.Use<Suto>(1).KiemelniC(eg.Use<JenaiTal>(1));
 
 			cfp.Add("csirkemellek", eg.Use<JenaiTal>(1));
 
@@ -81,8 +70,7 @@ namespace MrKupido.Library.Recipe
 
         public static void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
-            Kez kez = eg.Use<Kez>();
-            kez.TalalniC(food["csirkemellek"], eg.Use<LaposTanyer>());
+            eg.Use<Kez>(1).TalalniC(food["csirkemellek"], eg.Use<LaposTanyer>(2));
 
             eg.WashUp();
         }
