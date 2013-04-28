@@ -25,7 +25,7 @@ namespace MrKupido.Library
 		[NameAlias("hun", "dag", Priority = 2)]
 		[NameAlias("hun", "dekagramm")]
 		[NameAlias("hun", "deka", Priority = 200)]
-		[UnitConsts(SmallestAmount = 0.25f, BiggestAmount = 100.0f, UnitDown = MeasurementUnit.gramm, UnitUp = MeasurementUnit.kilogramm)]
+		[UnitConsts(SmallestAmount = 0.5f, BiggestAmount = 100.0f, UnitDown = MeasurementUnit.gramm, UnitUp = MeasurementUnit.kilogramm)]
 		dekagramm,
 		
 		[NameAlias("hun", "g", Priority = 1)]

@@ -30,7 +30,7 @@ namespace MrKupido.Library.Recipe
 		{
 			PreparedIngredients result = new PreparedIngredients();
 
-			eg.Use<Serpenyo>(1).BeonteniI(new OlivaOlaj(0.25f));
+			eg.Use<Serpenyo>(1).BeonteniI(new OlivaOlaj(5.0f, MeasurementUnit.evokanal));
 
 			ISingleIngredient hagyma = new Hagyma(1.0f * amount);
 			eg.Use<Kes>(1).FeldarabolniI(hagyma, 0.1f);

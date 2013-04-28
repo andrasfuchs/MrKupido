@@ -46,16 +46,16 @@ namespace MrKupido.Library.Recipe
             ISingleIngredient kolbasz = new Kolbasz(250.0f * amount);
             kes.FelkarikazniI(kolbasz, 2.5f);
 
-            ISingleIngredient hagyma = new Hagyma(5.0f * amount);
+            ISingleIngredient hagyma = new Hagyma(2.5f * amount);
             kes.FelkarikazniI(hagyma, 1.5f);
 
-            ISingleIngredient paprika = new Paprika(10.0f * amount, MeasurementUnit.dekagramm);
+            ISingleIngredient paprika = new Paprika(4.5f * amount, MeasurementUnit.piece);
             kes.FelkarikazniI(paprika, 1.5f);
 
             Reszelo reszelo = eg.Use<Reszelo>();
             LaposKisTanyer laposKisTanyer = eg.Use<LaposKisTanyer>();
 
-            ISingleIngredient sajt = new Sajt(10.0f * amount);
+            ISingleIngredient sajt = new Sajt(15.0f * amount);
             reszelo.LereszelniI(laposKisTanyer, sajt);
 
             Kez kez = eg.Use<Kez>();

@@ -32,7 +32,8 @@ namespace MrKupido.Library.Recipe
 			eg.Use<NagyEdeny>(1).Berakni(new Liszt(50.0f * amount), new So(2.0f * amount, MeasurementUnit.evokanal), new OreganoOrolt(1.0f * amount, MeasurementUnit.evokanal), new FeketeBorsOrolt(2.0f * amount, MeasurementUnit.evokanal));
 			eg.Use<Fakanal>(1).ElkeverniC(eg.Use<NagyEdeny>(1));
 
-			eg.Use<Bogre>(1).Berakni(new Eleszto(2.5f * amount), new Cukor(1.0f * amount, MeasurementUnit.teaskanal), new Viz(3.0f * amount), new OlivaOlaj(3.0f * amount, MeasurementUnit.evokanal));
+			eg.Use<Kez>(1).Morzsol(new Eleszto(2.5f * amount), eg.Use<Bogre>(1));
+			eg.Use<Bogre>(1).Berakni(new Cukor(1.0f * amount, MeasurementUnit.teaskanal), new Viz(3.0f * amount), new OlivaOlaj(3.0f * amount, MeasurementUnit.evokanal));
 			eg.Use<Fakanal>(1).ElkeverniC(eg.Use<Bogre>(1));
 
 			eg.Use<Fakanal>(1).OsszekeverniCC(eg.Use<NagyEdeny>(1), eg.Use<Bogre>(1));
