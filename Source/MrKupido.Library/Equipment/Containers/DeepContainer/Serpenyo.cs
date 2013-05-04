@@ -23,15 +23,13 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "bake", Priority = 200)]
         [NameAlias("hun", "kisüt", Priority = 200)]
-        [NameAlias("hun", "süsd ki a(z) {N} a(z) {0.Contents.T}, egyenként {1} percig (kb. {0.Contents.PieceCount.} db)")]
-        public IIngredient KisutniOsszesetC(IIngredientContainer c, float timeForOne)
+		[NameAlias("hun", "süsd ki a(z) {N} a(z) {0.Contents.T}, egyenként {1} percig (kb. {0.Contents.PieceCount.} db), majd helyezd őket a {2R}")]
+		public void KisutniOsszesetC(IIngredientContainer c, float timeForOne, IIngredientContainer cTo)
         {
-            IIngredient i = c.Contents;
+			cTo.Add(c.Contents);
+			c.Empty();
 
-            LastActionDuration = (uint)Math.Ceiling(i.PieceCount * timeForOne * 60);
-            c.Empty();
-
-            return i;
+			LastActionDuration = (uint)Math.Ceiling(cTo.Contents.PieceCount * timeForOne * 60 + cTo.Contents.PieceCount * 30);
         }
     }
 }

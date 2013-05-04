@@ -39,9 +39,9 @@ namespace MrKupido.Processor.Model
 		public IDirectionSegment[] DirectionSegments { get; private set; }
 
 		// replace exceptional words
-		private string[] correctionReplacements = { "tált", "tálat", "olajt", "olajat", "olívaolajt", "olívaolajat", "mély tányér", "mélytányér", "tésztadarabokot", "tésztadarabokat", "citromhéjt", "citromhéjat", "tejt", "tejet", "sütőpapírrel", "sütőpapírral", "vízt", "vizet", "dióbélt", "dióbelet", "cukort", "cukrot", "fahéjt", "fahéjat", "sertéscombet", "sertéscombot", "sertéscombes", "sertéscombos", "csirkecombet", "csirkecombot", "csirkecombes", "csirkecombos", "tejföles", "tejfölös", "vízes", "vizes", "vajt", "vajat", "vajos", "vajas", "dióbéles", "dióbeles", "babérlevélt", "babérlevelet", "sajtes", "sajtos" };
+		private string[] correctionReplacements = { "tált", "tálat", "olajt", "olajat", "olívaolajt", "olívaolajat", "mély tányér", "mélytányér", "tésztadarabokot", "tésztadarabokat", "citromhéjt", "citromhéjat", "tejt", "tejet", "sütőpapírrel", "sütőpapírral", "vízt", "vizet", "dióbélt", "dióbelet", "cukort", "cukrot", "fahéjt", "fahéjat", "sertéscombet", "sertéscombot", "sertéscombes", "sertéscombos", "csirkecombet", "csirkecombot", "csirkecombes", "csirkecombos", "tejföles", "tejfölös", "vízes", "vizes", "vajt", "vajat", "vajos", "vajas", "dióbéles", "dióbeles", "babérlevélt", "babérlevelet", "sajtes", "sajtos", "pohárt", "poharat" };
 
-        public RecipeDirection(string languageISO, string assemblyName, string command, object[] operands = null, object result = null, RecipeStage stage = RecipeStage.Unknown, int actorIndex = 1, List<string> seenIngredients = null)
+        public RecipeDirection(string languageISO, string assemblyName, string command, object[] operands = null, object result = null, RecipeStage stage = RecipeStage.Unknown, int actorIndex = 1, List<string> seenIngredients = null, IEquipment[] seenEquipment = null)
         {
             ActorIndex = actorIndex;
             Stage = stage;
@@ -104,10 +104,10 @@ namespace MrKupido.Processor.Model
 			}
 			Parameters = parameters.ToArray();
 
-            this.DirectionSegments = GenerateSegments(languageISO, seenIngredients);
+            this.DirectionSegments = GenerateSegments(languageISO, seenIngredients, seenEquipment);
         }
 
-        private RecipeDirectionSegment[] GenerateSegments(string languageISO, List<string> seenIngredients)
+		private RecipeDirectionSegment[] GenerateSegments(string languageISO, List<string> seenIngredients, IEquipment[] seenEquipment)
         {
             List<RecipeDirectionSegment> result = new List<RecipeDirectionSegment>();
 
@@ -122,14 +122,14 @@ namespace MrKupido.Processor.Model
 
                     for (int i = 0; i < Operands.Length; i++)
                     {
-                        result.Add(new RecipeDirectionSegmentReference(languageISO, Operands[i], seenIngredients));
+                        result.Add(new RecipeDirectionSegmentReference(languageISO, Operands[i], seenIngredients, seenEquipment));
                         if (i < Operands.Length - 1) result.Add(new RecipeDirectionSegment(", "));
                     }
                 }
             }
             else
             {
-                result.AddRange(EvaluateNameAliasExpression(languageISO, Direction, Operands, Result, seenIngredients));
+                result.AddRange(EvaluateNameAliasExpression(languageISO, Direction, Operands, Result, seenIngredients, seenEquipment));
             }
 
             result[0].Text = Char.ToUpper(result[0].Text[0]) + result[0].Text.Substring(1);
@@ -137,7 +137,7 @@ namespace MrKupido.Processor.Model
             return result.ToArray();
         }
 
-        private RecipeDirectionSegment[] EvaluateNameAliasExpression(string languageISO, string expression, object[] operands, object returnedValue, List<string> seenIngredients)
+		private RecipeDirectionSegment[] EvaluateNameAliasExpression(string languageISO, string expression, object[] operands, object returnedValue, List<string> seenIngredients, IEquipment[] seenEquipment)
         {
             List<RecipeDirectionSegment> result = new List<RecipeDirectionSegment>();
 
@@ -220,7 +220,7 @@ namespace MrKupido.Processor.Model
                             }
                             else
                             {
-                                result.AddRange(EvaluateNameAliasExpression(languageISO, propertyNameAlias, new object[] { operand }, null, seenIngredients));
+                                result.AddRange(EvaluateNameAliasExpression(languageISO, propertyNameAlias, new object[] { operand }, null, seenIngredients, seenEquipment));
                                 operand = result.Last().ToString();
                                 result.RemoveAt(result.Count - 1);
                             }
@@ -255,7 +255,7 @@ namespace MrKupido.Processor.Model
 
 						//result.Add(new RecipeDirectionSegmentReference(languageISO, item, seenIngredients));
 
-						RecipeDirectionSegmentReference rdsr = new RecipeDirectionSegmentReference(languageISO, item, seenIngredients);
+						RecipeDirectionSegmentReference rdsr = new RecipeDirectionSegmentReference(languageISO, item, seenIngredients, seenEquipment);
 						if (!String.IsNullOrEmpty(rdsr.Name))
 						{
 							rdsr.Name = Affixate(PrepareForAffix(rdsr.Name), 'S');

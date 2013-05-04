@@ -10,38 +10,51 @@ using MrKupido.Processor.Model;
 using System.Diagnostics;
 using MrKupido.Library.Ingredient;
 using MrKupido.Library.Recipe;
+using MrKupido.Library.Equipment;
 
 namespace MrKupido.Processor
 {
     public class RecipeAnalyzer
     {
-        private static List<IngredientBase> ingredients = new List<IngredientBase>();
+		private static string currentRecipeUniqieName = "";
+		private static Dictionary<string, List<IngredientBase>> ingredients = new Dictionary<string, List<IngredientBase>>();
         private static List<string> seenIngredients = new List<string>();
         private static Dictionary<int, int> containerIds = new Dictionary<int, int>();
         private static List<RecipeDirection> directions = new List<RecipeDirection>();
+		private static List<IEquipment> equipment = new List<IEquipment>();
         private static RecipeStage stage = RecipeStage.Unknown;        
         private static List<object> tempParameters = new List<object>();
         private static bool ignoreDirections = false;
         private static string languageISO = "";
 
-        public static IIngredient[] GenerateIngredients(RecipeTreeNode rtn, float amount)
+        public static IDictionary<string, IIngredient[]> GenerateIngredients(RecipeTreeNode rtn, float amount)
         {
+			ClearStatics();
 			//directions.Clear();
-            ingredients.Clear();
-            seenIngredients.Clear();
-            containerIds.Clear();
 
             ignoreDirections = true;
             
             RunRecipe(rtn, amount);
 
-            return ingredients.ToArray();
+
+			IDictionary<string, IIngredient[]> result = new Dictionary<string, IIngredient[]>();
+			foreach (string key in ingredients.Keys)
+			{
+				result.Add(key, ingredients[key].ToArray());
+			}
+
+			return result;
         }
 
         public static object NewIngredient(object returnedObject)
         {
             RecipeBase rb = null;
             RecipeTreeNode rtn = null;
+
+			if (!ingredients.ContainsKey(currentRecipeUniqieName))
+			{
+				ingredients.Add(currentRecipeUniqieName, new List<IngredientBase>());
+			}
 
             if (returnedObject is RecipeBase)
             {
@@ -54,13 +67,13 @@ namespace MrKupido.Processor
             {
                 IngredientBase ib = (IngredientBase)((IngredientBase)returnedObject).Clone();
 
-                IngredientBase item = ingredients.FirstOrDefault(i => (i.Name == ib.Name) && (i.Unit == ib.Unit));
+                IngredientBase item = ingredients[currentRecipeUniqieName].FirstOrDefault(i => (i.Name == ib.Name) && (i.Unit == ib.Unit));
 
                 if (item == null)
                 {
                     if ((rtn == null) || (!rtn.IsInline))
                     {
-                        ingredients.Add(ib);
+						ingredients[currentRecipeUniqieName].Add(ib);
                     }
                 } else item.Add(ib);
             }
@@ -70,6 +83,9 @@ namespace MrKupido.Processor
                 // if the recipe is inline then we need to run it (without the serving part)
                 if ((rtn != null) && (rtn.IsInline))
                 {
+					string parentRecipeUniqueName = currentRecipeUniqieName;
+					currentRecipeUniqieName = rtn.UniqueName;
+
                     //RunRecipe(rtn, rb.Portion);
                     if (rtn.SelectEquipment != null)
                     {
@@ -86,6 +102,8 @@ namespace MrKupido.Processor
                             }
                         }
                     }
+
+					currentRecipeUniqieName = parentRecipeUniqueName;
                 }
             }
 
@@ -107,7 +125,7 @@ namespace MrKupido.Processor
                 if (duration == 0) Trace.TraceWarning("The duration of the action '{0}' is not set.", methodFullName);
             }
 
-            directions.Add(new RecipeDirection(languageISO, assemblyFullName, methodFullName, tempParameters.ToArray(), result, stage, 1, seenIngredients));
+			directions.Add(new RecipeDirection(languageISO, assemblyFullName, methodFullName, tempParameters.ToArray(), result, stage, 1, seenIngredients, equipment.ToArray()));
         }
 
         public static void DirectionGeneratorBefore(string assemblyFullName, string methodFullName, object[] parameters)
@@ -117,6 +135,7 @@ namespace MrKupido.Processor
             tempParameters.Clear();
 
             SetIds(parameters);
+			RecordsEquipment(parameters);
 
             foreach (object p in parameters)
             {
@@ -157,39 +176,65 @@ namespace MrKupido.Processor
             }
         }
 
+		private static void RecordsEquipment(object[] parameters)
+		{
+			foreach (object p in parameters)
+			{
+				if (p is IEquipment)
+				{
+					if (!equipment.Contains(p))
+					{
+						equipment.Add((IEquipment)p);
+					}
+				}
+			}
+		}
+
         public static RecipeDirection[] GenerateDirections(RecipeTreeNode rtn, float amount)
         {
-            directions.Clear();
-			ingredients.Clear();
-			seenIngredients.Clear();
-            containerIds.Clear();
-
-            ignoreDirections = false;
+            ClearStatics();
 
             RunRecipe(rtn, amount);
 
             return directions.ToArray();
         }
 
-        public static IEquipment[] EquipmentNeeded()
+		public static IEquipment[] EquipmentNeeded(RecipeTreeNode rtn, float amount)
         {
-            List<IEquipment> result = new List<IEquipment>();
+			ClearStatics();
 
-            return result.ToArray();
+			RunRecipe(rtn, amount);
+
+			return equipment.OrderBy(e => e.GetName(languageISO)).ToArray();
         }
 
         public static string[] Nutritions()
         {
+			ClearStatics();
+
             List<string> result = new List<string>();
 
             return result.ToArray();
         }
 
+		private static void ClearStatics()
+		{
+			directions.Clear();
+			ingredients.Clear();
+			seenIngredients.Clear();
+			containerIds.Clear();
+			equipment.Clear();
+
+			ignoreDirections = false;
+		}
+
         private static void RunRecipe(RecipeTreeNode rtn, float amount)
         {
             if (!rtn.IsImplemented) return;
 
+			currentRecipeUniqieName = rtn.UniqueName;
             languageISO = rtn.LanguageISO;
+
             if (rtn.SelectEquipment != null)
             {
                 stage = RecipeStage.EquipmentSelection;

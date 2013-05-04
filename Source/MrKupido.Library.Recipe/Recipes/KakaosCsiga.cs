@@ -74,9 +74,6 @@ namespace MrKupido.Library.Recipe
 
 
             eg.Use<Edeny>(2).BeonteniI(new Tejszin(2.0f * amount));
-            ISingleIngredient cukor = new Cukor(3.0f * amount);
-            cukor.ChangeUnitTo(MeasurementUnit.liter);
-            eg.Use<Edeny>(2).BerakniI(cukor);
 
             eg.Use<Tuzhely>(1).RahelyezniC(eg.Use<Edeny>(2));
             eg.Use<Tuzhely>(1).Homerseklet(50);

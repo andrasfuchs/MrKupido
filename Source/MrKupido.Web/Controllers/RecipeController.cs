@@ -30,11 +30,20 @@ namespace MrKupido.Web.Controllers
                 return RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Home", action = "RecipeNotAvailableYet", lan = (string)Session["Language"], un = id });
             }
             Session["SelectedRecipeId"] = id;
+
+			RuntimeIngredient[] ingredients = rtn.GetIngredients(1.0f, 4);
+			foreach (RuntimeIngredient i in ingredients)
+			{
+				if (!String.IsNullOrEmpty(i.RecipeUniqueName) && String.IsNullOrEmpty(i.RecipeName))
+				{
+					i.RecipeName = Cache.Recipe[i.RecipeUniqueName].ShortName;
+				}
+			}
             
             result[0] = rtn;
             result[1] = rtn.GetTags();
-            result[2] = rtn.GetEquipments(1.0f, 4);
-            result[3] = rtn.GetIngredients(1.0f, 4);
+            result[2] = rtn.GetEquipment(1.0f, 4);
+			result[3] = ingredients;
             result[4] = rtn.GetDirections(1.0f, 4);
             result[5] = rtn.GetNutritions(1.0f, 4);
 
@@ -88,7 +97,16 @@ namespace MrKupido.Web.Controllers
 
             RecipeTreeNode rtn = Cache.Recipe[(string)Session["SelectedRecipeId"]];
 
-            return PartialView("_RecipeIngredients", rtn.GetIngredients(portion, multiplier));
+			RuntimeIngredient[] ingredients = rtn.GetIngredients(portion, multiplier);
+			foreach (RuntimeIngredient i in ingredients)
+			{
+				if (!String.IsNullOrEmpty(i.RecipeUniqueName) && String.IsNullOrEmpty(i.RecipeName))
+				{
+					i.RecipeName = Cache.Recipe[i.RecipeUniqueName].ShortName;
+				}
+			}
+
+            return PartialView("_RecipeIngredients", ingredients);
         }
 
         [HttpPost]

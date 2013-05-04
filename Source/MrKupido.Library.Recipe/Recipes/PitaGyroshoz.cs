@@ -40,7 +40,7 @@ namespace MrKupido.Library.Recipe
             eg.Use<NagyEdeny>(1).Varni(60);
             eg.Use<NagyEdeny>(1).FedotLevenni();
 
-			eg.Use<Kez>(1).GolyovaGyurniC(eg.Use<NagyEdeny>(1), 20.0f, eg.Use<LaposTanyer>(1));
+			eg.Use<Kez>(1).GolyovaGyurniC(eg.Use<NagyEdeny>(1), 2.0f, eg.Use<LaposTanyer>(1));
 			eg.Use<LaposTanyer>(1).Varni(15);
 
 			eg.Use<MelyTanyer>(1).BerakniI(new Liszt(20.0f * amount));

@@ -22,6 +22,8 @@ namespace MrKupido.Processor.Model
         public TreeNode Parent { get; protected set; }
         [ScriptIgnore]
         public TreeNode[] Children { get; set; }
+		[ScriptIgnore]
+		public DateTime CreatedAt { get; private set; }
 
         public char NodeType { get; private set; }
         public string LanguageISO { get; private set; }
@@ -59,6 +61,8 @@ namespace MrKupido.Processor.Model
 
         public TreeNode(Type nodeClass, string languageISO)
         {
+			CreatedAt = DateTime.Now;
+
             LanguageISO = languageISO;
             ClassName = nodeClass.Name;
             ClassType = nodeClass;

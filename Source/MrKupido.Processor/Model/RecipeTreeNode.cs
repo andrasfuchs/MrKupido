@@ -35,9 +35,11 @@ namespace MrKupido.Processor.Model
 		public ServeDelegate Serve;
 
 		[ScriptIgnore]
-		private Dictionary<float, IIngredient[]> ingredientCache = new Dictionary<float, IIngredient[]>();
+		private Dictionary<float, IDictionary<string, IIngredient[]>> ingredientCache = new Dictionary<float, IDictionary<string, IIngredient[]>>();
 		[ScriptIgnore]
 		private Dictionary<float, IDirection[]> directionCache = new Dictionary<float, IDirection[]>();
+		[ScriptIgnore]
+		private Dictionary<float, IEquipment[]> equipmentCache = new Dictionary<float, IEquipment[]>();
 
 		[ScriptIgnore]
 		public Type RecipeType { get; private set; }
@@ -138,36 +140,39 @@ namespace MrKupido.Processor.Model
 		{
 			List<RuntimeIngredient> result = new List<RuntimeIngredient>();
 
-			IIngredient[] ingredients = GetRecipeIngredients(amount, multiplier);
+			IDictionary<string, IIngredient[]> ingredients = GetRecipeIngredients(amount, multiplier);
 
-			foreach (IngredientBase i in ingredients)
+			foreach (string recipeUniqueName in ingredients.Keys)
 			{
-				string classFullName = i.GetType().FullName;
-
-				if (i is RecipeBase)
+				foreach (IngredientBase i in ingredients[recipeUniqueName])
 				{
-					RecipeTreeNode rtn = Cache.Recipe[classFullName];
-					if (rtn != null)
-					{
-						result.Add(new RuntimeIngredient(i, rtn));
-						continue;
-					}
-				}
-				else
-				{
-					IngredientTreeNode itn = Cache.Ingredient[classFullName];
-					if (itn != null)
-					{
-						result.Add(new RuntimeIngredient(i, itn));
-						continue;
-					}
-				}
+					string classFullName = i.GetType().FullName;
 
-				throw new MrKupidoException("Ingredient '{0}' was not found eighter in the ingredients or recipes trees.");
+					if (i is RecipeBase)
+					{
+						RecipeTreeNode rtn = Cache.Recipe[classFullName];
+						if (rtn != null)
+						{
+							result.Add(new RuntimeIngredient(i, rtn, recipeUniqueName));
+							continue;
+						}
+					}
+					else
+					{
+						IngredientTreeNode itn = Cache.Ingredient[classFullName];
+						if (itn != null)
+						{
+							result.Add(new RuntimeIngredient(i, itn, recipeUniqueName));
+							continue;
+						}
+					}
+
+					throw new MrKupidoException("Ingredient '{0}' was not found eighter in the ingredients or recipes trees.");
+				}
 			}
 
 
-			float completionStep = ingredients.Length > 0 ? 1.0f / ingredients.Length : 0.0f;
+			float completionStep = result.Count > 0 ? 1.0f / result.Count : 0.0f;
 
 			foreach (RuntimeIngredient i in result)
 			{
@@ -189,10 +194,10 @@ namespace MrKupido.Processor.Model
 				AddOrSet(ref this.TotalProtein, i.Ingredient.ProteinPer100Gramms * ingredientGramms / 100, ref this.TotalProteinCompletion, completionStep);
 				AddOrSet(ref this.TotalFat, i.Ingredient.FatPer100Gramms * ingredientGramms / 100, ref this.TotalFatCompletion, completionStep);
 			}
-			if (this.TotalCaloriesCompletion > 1.00) this.TotalCaloriesCompletion = 1.00f;
-			if (this.TotalCarbohydratesCompletion > 1.00) this.TotalCarbohydratesCompletion = 1.00f;
-			if (this.TotalProteinCompletion > 1.00) this.TotalProteinCompletion = 1.00f;
-			if (this.TotalFatCompletion > 1.00) this.TotalFatCompletion = 1.00f;
+			if (this.TotalCaloriesCompletion > 0.9999) this.TotalCaloriesCompletion = 1.00f;
+			if (this.TotalCarbohydratesCompletion > 0.9999) this.TotalCarbohydratesCompletion = 1.00f;
+			if (this.TotalProteinCompletion > 0.9999) this.TotalProteinCompletion = 1.00f;
+			if (this.TotalFatCompletion > 0.9999) this.TotalFatCompletion = 1.00f;
 
 			if ((this.PortionMultiplier == 1.0))// && (amount == 1.0f))
 			{
@@ -233,7 +238,7 @@ namespace MrKupido.Processor.Model
 			List<string> searchStrings = new List<string>();
 
 			// --- Ingredients
-			IIngredient[] ingredients = this.GetRecipeIngredients(1.0f, 1);
+			IDictionary<string, IIngredient[]> ingredients = this.GetRecipeIngredients(1.0f, 1);
 
 			// add this class and its parent
 			searchStrings.Add(this.NodeType + ":" + this.UniqueName);
@@ -246,19 +251,22 @@ namespace MrKupido.Processor.Model
 			}
 
 			// add all ingredients and all of their parents to the ingredientsForSearch collection
-			foreach (IngredientBase ib in ingredients)
+			foreach (string recipeUniqueName in ingredients.Keys)
 			{
-				IngredientBase currentIb = ib;
-				string ibTypeFullName = ib.GetType().FullName;
-
-				TreeNode itn = Cache.Ingredient.All.FirstOrDefault(tn => tn.ClassType.FullName == ibTypeFullName);
-				if (itn == null) itn = Cache.Recipe.All.FirstOrDefault(tn => tn.ClassType.FullName == ibTypeFullName);
-
-				while (itn != null)
+				foreach (IngredientBase ib in ingredients[recipeUniqueName])
 				{
-					searchStrings.Add(itn.NodeType + ":" + itn.UniqueName);
+					IngredientBase currentIb = ib;
+					string ibTypeFullName = ib.GetType().FullName;
 
-					itn = itn.Parent;
+					TreeNode itn = Cache.Ingredient.All.FirstOrDefault(tn => tn.ClassType.FullName == ibTypeFullName);
+					if (itn == null) itn = Cache.Recipe.All.FirstOrDefault(tn => tn.ClassType.FullName == ibTypeFullName);
+
+					while (itn != null)
+					{
+						searchStrings.Add(itn.NodeType + ":" + itn.UniqueName);
+
+						itn = itn.Parent;
+					}
 				}
 			}
 
@@ -281,7 +289,7 @@ namespace MrKupido.Processor.Model
 			this.SearchStrings = searchStrings.ToArray();
 		}
 
-		private IIngredient[] GetRecipeIngredients(float amount, int multiplier)
+		private IDictionary<string, IIngredient[]> GetRecipeIngredients(float amount, int multiplier)
 		{
 			float am = amount * this.PortionMultiplier * multiplier;
 
@@ -296,9 +304,16 @@ namespace MrKupido.Processor.Model
 			return ingredientCache[am];
 		}
 
-		public IEquipment[] GetEquipments(float amount, int multiplier)
+		public IEquipment[] GetEquipment(float amount, int multiplier)
 		{
-			return new MrKupido.Library.Equipment.EquipmentBase[0];
+			float am = amount * this.PortionMultiplier * multiplier;
+
+			if (!equipmentCache.ContainsKey(am))
+			{
+				equipmentCache.Add(am, RecipeAnalyzer.EquipmentNeeded(this, am));
+			}
+
+			return equipmentCache[am];
 		}
 
 		public IDirection[] GetDirections(float amount, int multiplier)

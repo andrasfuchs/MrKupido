@@ -82,6 +82,11 @@ namespace MrKupido.Web.Models
 			RuntimeIngredient[] ingredients = rtn.GetIngredients(1.0f, 1);
 			foreach (RuntimeIngredient i in ingredients)
 			{
+				if (!String.IsNullOrEmpty(i.RecipeUniqueName) && String.IsNullOrEmpty(i.RecipeName))
+				{
+					i.RecipeName = Cache.Recipe[i.RecipeUniqueName].ShortName;
+				}
+
 				sb.Append(i.Ingredient.GetName(rtn.LanguageISO));
 				sb.Append(", ");
 			}

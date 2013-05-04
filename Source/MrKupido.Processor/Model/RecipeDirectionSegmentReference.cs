@@ -18,7 +18,7 @@ namespace MrKupido.Processor.Model
 		public object Reference { get; private set; }
 		public TreeNode TreeNode { get; set; }
 
-		public RecipeDirectionSegmentReference(string languageISO, object reference, List<string> seenIngredients)
+		public RecipeDirectionSegmentReference(string languageISO, object reference, List<string> seenIngredients, IEquipment[] seenEquipment)
 			: base("")
         {
             this.Reference = reference;
@@ -109,7 +109,7 @@ namespace MrKupido.Processor.Model
                     this.Id = c.Id;
                     this.IconAlt = IntegerToStringHun(c.Id);
 
-					if (c.Contents != null)
+					if ((c.Contents != null) && (seenEquipment.Count(e => e.GetName(languageISO) == c.GetName(languageISO)) > 1))
 					{
 						this.Name = c.Contents.GetName(languageISO);
 					}
@@ -183,7 +183,8 @@ namespace MrKupido.Processor.Model
 				}
 			}
 
-			return (String.IsNullOrEmpty(this.Name) ? (String.IsNullOrEmpty(this.IconAlt) ? sb.ToString() : this.IconAlt + " " + sb.ToString()) : this.Name + " " + sb.ToString());
+			//return (String.IsNullOrEmpty(this.Name) ? (String.IsNullOrEmpty(this.IconAlt) ? sb.ToString() : this.IconAlt + " " + sb.ToString()) : this.Name + " " + sb.ToString());
+			return (String.IsNullOrEmpty(this.Name) ? sb.ToString() : this.Name + " " + sb.ToString());
 		}
 	}
 }

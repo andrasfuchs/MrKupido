@@ -47,6 +47,18 @@ namespace MrKupido.Library
         Szetszedett = 512,
         [NameAlias("eng", "beaten")]
         [NameAlias("hun", "felvert")]
-        Felvert = 1024
+        Felvert = 1024,
+		[NameAlias("eng", "cold")]
+		[NameAlias("hun", "hideg")]
+		Hideg = 2048,
+		[NameAlias("eng", "lukewarm")]
+		[NameAlias("hun", "langyos")]
+		Langyos = 4096,
+		[NameAlias("eng", "warm")]
+		[NameAlias("hun", "meleg")]
+		Meleg = 8192,
+		[NameAlias("eng", "hot")]
+		[NameAlias("hun", "forró")]
+		Forro = 16384,
     }
 }

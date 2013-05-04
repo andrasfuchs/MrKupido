@@ -181,13 +181,23 @@ background              bgc         #fffcf5
         }
 
 
-    ul#ingredientlist li.ingredientlistitem {
-        margin: 0px 40px 0px 5px;
-        min-width: 240px;
-        max-width: 240px;
+    div.ingredientlistrecipename {
+        margin-top: 15px;
+        margin-left: 10px;
+        font-size: 20px;
+        text-decoration: underline;
     }
 
-        ul#ingredientlist li.ingredientlistitem input {
+    ul.ingredientlist {
+        margin: 10px;
+    }
+
+    div#recipe ul.ingredientlist li.ingredientlistitem {
+        margin: 0px 20px 0px 5px;
+        width: 265px;
+    }
+
+        ul.ingredientlist li.ingredientlistitem input {
             padding: 0;
             margin: 0;
             height: 32px;
@@ -198,7 +208,7 @@ background              bgc         #fffcf5
             opacity: 0;
         }
 
-        ul#ingredientlist li.ingredientlistitem label {
+        ul.ingredientlist li.ingredientlistitem label {
             float: left;
             padding-left: 24px;
             padding-right: 10px;

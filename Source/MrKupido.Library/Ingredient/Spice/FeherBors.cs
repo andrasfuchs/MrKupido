@@ -7,8 +7,8 @@ using MrKupido.Library.Nature;
 
 namespace MrKupido.Library.Ingredient
 {
-    [NameAlias("eng", "whole white pepper")]
-    [NameAlias("hun", "egész fehér bors")]
+    [NameAlias("eng", "white pepper")]
+    [NameAlias("hun", "fehér bors")]
 
 	[IngredientConsts(
 		Category = ShoppingListCategory.Spice,

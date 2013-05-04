@@ -40,9 +40,11 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "knead to balls", Priority = 200)]
         [NameAlias("hun", "golyóvá gyúr", Priority = 200)]
-        [NameAlias("hun", "gyúrj {1} grammos golyókat a(z) {0.Contents.K}, majd tedd őket a {2B}")]
+        [NameAlias("hun", "gyúrj {1} dekás golyókat a(z) {0.Contents.K}, majd tedd őket a {2B}")]
 		public void GolyovaGyurniC(IIngredientContainer c1, float weight, IIngredientContainer c2)
         {
+			weight *= 10; // deka -> gramm
+
             IIngredient i = c1.Contents;
 
 			if (!i.IsSolid) throw new InvalidActionForIngredientException("GolyovaGyurni", i);

@@ -8,7 +8,7 @@ namespace MrKupido.Library
     public interface IIngredient
     {
         [Obsolete]
-        string Name { get; }        
+        string Name { get; }
 
         MeasurementUnit Unit { get; }
 

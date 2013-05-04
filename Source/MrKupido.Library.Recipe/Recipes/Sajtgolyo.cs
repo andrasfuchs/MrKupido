@@ -84,7 +84,7 @@ namespace MrKupido.Library.Recipe
             eg.Use<Fakanal>(1).ElkeverniC(eg.Use<NagyEdeny>(1));
 
             //IngredientGroup golyok = kez.Kiszaggatni(eg.Use<NagyEdeny>(1).Contents, 30.0f);
-			eg.Use<Kez>(1).GolyovaGyurniC(eg.Use<NagyEdeny>(1), 30.0f, eg.Use<LaposTanyer>(1));
+			eg.Use<Kez>(1).GolyovaGyurniC(eg.Use<NagyEdeny>(1), 3.0f, eg.Use<LaposTanyer>(1));
 
 			result.Add("golyok", eg.Use<LaposTanyer>(1));
 
@@ -106,7 +106,7 @@ namespace MrKupido.Library.Recipe
             //IIngredient golyok = preps["golyok"].Contents;
 			eg.Use<Kez>(1).MegforgatniC(eg.Use<MelyTanyer>(1), preps["golyok"], eg.Use<MelyTanyer>(3));
 
-			eg.Use<MelyTanyer>(2).Berakni(eg.Use<Serpenyo>(1).KisutniOsszesetC(eg.Use<MelyTanyer>(3), 5));
+			eg.Use<Serpenyo>(1).KisutniOsszesetC(eg.Use<MelyTanyer>(3), 5, eg.Use<MelyTanyer>(2));
 
 			eg.Use<Kez>(1).LecsepegtetniC(eg.Use<MelyTanyer>(2));
 

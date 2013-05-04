@@ -25,8 +25,8 @@ namespace MrKupido.Library.Ingredient
     [MilkOf(typeof(BosPrimigenius))]
     public class Tej : SingleIngredient
     {
-        public Tej(float amount, MeasurementUnit unit = MeasurementUnit.deciliter)
-            : base(amount, unit)
+        public Tej(float amount, MeasurementUnit unit = MeasurementUnit.deciliter, IngredientState state = IngredientState.Normal)
+            : base(amount, unit, state)
         {
         }
     }

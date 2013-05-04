@@ -38,25 +38,6 @@ namespace MrKupido.Library.Ingredient
             AddIngredients(ingredients);
         }
 
-        [Obsolete]
-        public IngredientGroup Clone(float amount, MeasurementUnit unit)
-        {
-            List<IngredientBase> ibs = new List<IngredientBase>();
-
-            float ratio = amount / GetAmount(unit);
-
-            foreach (IIngredient i in this.Ingredients)
-            {
-                IngredientBase ib = (IngredientBase)i.GetType().DefaultConstructor(ratio * i.GetAmount(unit), unit);
-                ib.ChangeUnitTo(i.Unit);
-
-                ibs.Add(ib);
-            }
-
-            IngredientGroup ig = new IngredientGroup(ibs.ToArray());
-            return ig;
-        }
-
         public void AddIngredients(params IIngredient[] ingredients)
         {
             bool changed = false;
@@ -70,6 +51,12 @@ namespace MrKupido.Library.Ingredient
                 if (ingredient is IngredientGroup)
                 {
                     AddIngredients(((IngredientGroup)ingredient).Ingredients);
+
+					if (ingredient.PieceCount > this.PieceCount)
+					{
+						this.PieceCount = ingredient.PieceCount;
+					}
+
                     continue;
                 }
 

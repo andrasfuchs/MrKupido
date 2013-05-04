@@ -36,10 +36,10 @@ namespace MrKupido.Library.Recipe
         {
             CookedFoodParts cfp = new CookedFoodParts();
 
-            ISingleIngredient karfiol = new Karfiol(6.0f * amount);
+            ISingleIngredient karfiol = new Karfiol(2.0f * amount);
             eg.Use<Kez>(1).SzetszedniI(karfiol);
 
-            eg.Use<KisLabas>(1).Berakni(new Vaj(5.0f * amount), new Liszt(3.0f * amount));
+            eg.Use<KisLabas>(1).Berakni(new Vaj(5.0f * amount), new Liszt(2.0f * amount, MeasurementUnit.evokanal));
 
             eg.Use<Tuzhely>(1).RahelyezniC(eg.Use<KisLabas>(1));
             eg.Use<Tuzhely>(1).Homerseklet(80);
@@ -51,12 +51,12 @@ namespace MrKupido.Library.Recipe
             eg.Use<Labas>(1).BerakniC(eg.Use<KisLabas>(1));
             eg.Use<Fakanal>(1).KevergetniC(eg.Use<Labas>(1), 10);
 
-            ISingleIngredient hagyma = new Ujhagyma(1.0f * amount, MeasurementUnit.piece);
+            ISingleIngredient hagyma = new Ujhagyma(5.0f * amount, MeasurementUnit.piece);
             eg.Use<Kes>(1).FelkarikazniI(hagyma, 1.0f);
 
             eg.Use<Reszelo>(1).LereszelniI(eg.Use<LaposTanyer>(1), new FustoltSajt(10.0f * amount));
 
-            eg.Use<Labas>(1).Berakni(new Fuszerpaprika(3.0f * amount), new So(5.0f * amount), new FeherBors(3.0f * amount), new Borokabogyo(2.0f * amount), hagyma);
+            eg.Use<Labas>(1).Berakni(new Fuszerpaprika(1.0f * amount, MeasurementUnit.teaskanal), new So(1.0f * amount, MeasurementUnit.teaskanal), new FeherBors(1.0f * amount, MeasurementUnit.mokkaskanal, IngredientState.Orolt), new Borokabogyo(2.0f * amount, MeasurementUnit.csipet), hagyma);
             eg.Use<Labas>(1).BerakniC(eg.Use<LaposTanyer>(1));
 
             eg.Use<Tuzhely>(1).Homerseklet(30);

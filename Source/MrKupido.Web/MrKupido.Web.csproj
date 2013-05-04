@@ -464,6 +464,10 @@
     <Content Include="Content\images\mrkupido.ico" />
     <Content Include="Content\nivo-slider.css" />
     <Content Include="Content\photos\960x480\apple-cinemon-cookie_01.jpg" />
+    <Content Include="Content\photos\960x480\apple-cinemon-cookie_02.jpg" />
+    <Content Include="Content\photos\960x480\apple-cinemon-cookie_03.jpg" />
+    <Content Include="Content\photos\960x480\apple-cinemon-cookie_04.jpg" />
+    <Content Include="Content\photos\960x480\apple-cinemon-cookie_05.jpg" />
     <Content Include="Content\photos\960x480\baked-cauliflower_01.jpg" />
     <Content Include="Content\photos\960x480\cheese-ball_01.jpg" />
     <Content Include="Content\photos\960x480\chicken-breast-with-cream-[Fuchs-style]_01.jpg" />
@@ -475,6 +479,10 @@
     <Content Include="Content\photos\960x480\hawaii-pizza_01.jpg" />
     <Content Include="Content\photos\960x480\hortobagy-meat-pancake_01.jpg" />
     <Content Include="Content\photos\960x480\hungarian-pizza_01.jpg" />
+    <Content Include="Content\photos\960x480\hungarian-pizza_02.jpg" />
+    <Content Include="Content\photos\960x480\hungarian-pizza_03.jpg" />
+    <Content Include="Content\photos\960x480\hungarian-pizza_04.jpg" />
+    <Content Include="Content\photos\960x480\hungarian-pizza_05.jpg" />
     <Content Include="Content\photos\960x480\muffin-with-cinemon_01.jpg" />
     <Content Include="Content\photos\960x480\mustard-garlic-chicken_01.jpg" />
     <Content Include="Content\photos\960x480\pita-for-gyros_01.jpg" />
@@ -607,6 +615,7 @@
     <Content Include="Content\svg\icon_figuresmall.svg" />
     <Content Include="Content\svg\icon_flag.svg" />
     <Content Include="Content\svg\icon_glutenfree_disabled.svg" />
+    <Content Include="Content\svg\icon_iflag.svg" />
     <Content Include="Content\svg\icon_lactosefree_disabled.svg" />
     <Content Include="Content\svg\icon_menutrigger.svg" />
     <Content Include="Content\svg\icon_photos.svg" />

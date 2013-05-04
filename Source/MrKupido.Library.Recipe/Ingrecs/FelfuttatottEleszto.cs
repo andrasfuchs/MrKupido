@@ -29,8 +29,8 @@ namespace MrKupido.Library.Recipe
 		{
 			PreparedIngredients result = new PreparedIngredients();
 
-			eg.Use<Pohar>(1).BeonteniI(new Tej(0.5f * amount));
-			eg.Use<Pohar>(1).BerakniI(new Cukor(1.0f * amount, MeasurementUnit.teaskanal));
+			eg.Use<Pohar>(1).BeonteniI(new Tej(0.5f * amount, MeasurementUnit.deciliter, IngredientState.Langyos));
+			eg.Use<Pohar>(1).BerakniI(new Cukor(0.8f * amount, MeasurementUnit.teaskanal));
 			eg.Use<Kanal>(1).ElkeverniC(eg.Use<Pohar>(1));
 			eg.Use<Kez>(1).Morzsol(new Eleszto(1.0f * amount), eg.Use<Pohar>(1));
 

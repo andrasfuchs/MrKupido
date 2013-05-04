@@ -1029,6 +1029,17 @@ background              bgc         #fffcf5
         font-size: 14px;
     }
 
+    input[type='button'].littlebutton {
+        margin: auto;
+        width: 15px;
+        height: 15px;
+        padding: 0px;
+        line-height: 0px;
+        font-size: 14px;
+        font-family: Cardo, Sans-Serif;
+        font-weight: bold;
+    }
+
         input[type='button'].submit,
         input[type='submit'] {
             font-size: 20px;
@@ -1484,19 +1495,25 @@ background              bgc         #fffcf5
 
     /* Custom checkbox and radio styles */
 
-    ul#ingredientlist {
+    div.ingredientlistrecipename {
+        margin-top: 15px;
+        margin-left: 10px;
+        font-size: 20px;
+        text-decoration: underline;
+    }
+
+    ul.ingredientlist {
         margin: 10px;
     }
 
-    ul#ingredientlist li.ingredientlistitem {
-        margin: 0px 40px 0px 5px;
-        min-width: 240px;
-        max-width: 240px;
+    div#recipe ul.ingredientlist li.ingredientlistitem {
+        margin: 0px 20px 0px 5px;
+        width: 265px;
     }
 
         div#profile div#gender input,
         div#profile div#language input,
-        ul#ingredientlist li.ingredientlistitem input {
+        ul.ingredientlist li.ingredientlistitem input {
             padding: 0;
             margin: 0;
             height: 32px;
@@ -1509,7 +1526,7 @@ background              bgc         #fffcf5
 
         div#profile div#gender label,
         div#profile div#language label,
-        ul#ingredientlist li.ingredientlistitem label {
+        ul.ingredientlist li.ingredientlistitem label {
             float: left;
             padding-left: 24px;
             padding-right: 10px;
@@ -1544,44 +1561,44 @@ background              bgc         #fffcf5
     }
 
     /* Hover & Focus styles */
-    /*ul#ingredientlist li.ingredientlistitem input[type=checkbox]:hover + label,
-ul#ingredientlist li.ingredientlistitem input[type=checkbox]:focus + label,
-ul#ingredientlist li.ingredientlistitem input[type=checkbox] + label:hover 							{ background-position: 0 -21px; }*/
-    /*ul#ingredientlist li.ingredientlistitem input[type=radio]:hover + label,
-ul#ingredientlist li.ingredientlistitem input[type=radio]:focus + label,
-ul#ingredientlist li.ingredientlistitem input[type=radio] + label:hover								{ background-position: 0 -181px; }*/
+    /*ul.ingredientlist li.ingredientlistitem input[type=checkbox]:hover + label,
+ul.ingredientlist li.ingredientlistitem input[type=checkbox]:focus + label,
+ul.ingredientlist li.ingredientlistitem input[type=checkbox] + label:hover 							{ background-position: 0 -21px; }*/
+    /*ul.ingredientlist li.ingredientlistitem input[type=radio]:hover + label,
+ul.ingredientlist li.ingredientlistitem input[type=radio]:focus + label,
+ul.ingredientlist li.ingredientlistitem input[type=radio] + label:hover								{ background-position: 0 -181px; }*/
 
     /* Active styles */
-    /*ul#ingredientlist li.ingredientlistitem input[type=checkbox]:active + label,
-ul#ingredientlist li.ingredientlistitem input[type=checkbox] + label:hover:active						{ background-position: 0 -41px; }
-ul#ingredientlist li.ingredientlistitem input[type=radio]:active + label,
-ul#ingredientlist li.ingredientlistitem input[type=radio] + label:hover:active						{ background-position: 0 -201px; }
-ul#ingredientlist li.ingredientlistitem input[type=checkbox]:active:checked + label,
-ul#ingredientlist li.ingredientlistitem input[type=checkbox]:checked + label:hover:active				{ background-position: 0 -121px; }
-ul#ingredientlist li.ingredientlistitem input[type=radio]:active:checked + label,
-ul#ingredientlist li.ingredientlistitem input[type=radio]:checked + label:hover:active				{ background-position: 0 -281px; }*/
+    /*ul.ingredientlist li.ingredientlistitem input[type=checkbox]:active + label,
+ul.ingredientlist li.ingredientlistitem input[type=checkbox] + label:hover:active						{ background-position: 0 -41px; }
+ul.ingredientlist li.ingredientlistitem input[type=radio]:active + label,
+ul.ingredientlist li.ingredientlistitem input[type=radio] + label:hover:active						{ background-position: 0 -201px; }
+ul.ingredientlist li.ingredientlistitem input[type=checkbox]:active:checked + label,
+ul.ingredientlist li.ingredientlistitem input[type=checkbox]:checked + label:hover:active				{ background-position: 0 -121px; }
+ul.ingredientlist li.ingredientlistitem input[type=radio]:active:checked + label,
+ul.ingredientlist li.ingredientlistitem input[type=radio]:checked + label:hover:active				{ background-position: 0 -281px; }*/
 
     /* Disabled styles */
-    /*ul#ingredientlist li.ingredientlistitem input[type=checkbox]:disabled + label,
-ul#ingredientlist li.ingredientlistitem input[type=checkbox]:hover:disabled + label,
-ul#ingredientlist li.ingredientlistitem input[type=checkbox]:focus:disabled + label,
-ul#ingredientlist li.ingredientlistitem input[type=checkbox]:disabled + label:hover,
-ul#ingredientlist li.ingredientlistitem input[type=checkbox]:disabled + label:hover:active			{ background-position: 0 -61px; }*/
-    /*ul#ingredientlist li.ingredientlistitem input[type=radio]:disabled + label,
-ul#ingredientlist li.ingredientlistitem input[type=radio]:hover:disabled + label,
-ul#ingredientlist li.ingredientlistitem input[type=radio]:focus:disabled + label,
-ul#ingredientlist li.ingredientlistitem input[type=radio]:disabled + label:hover,
-ul#ingredientlist li.ingredientlistitem input[type=radio]:disabled + label:hover:active				{ background-position: 0 -221px; }*/
-    /*ul#ingredientlist li.ingredientlistitem input[type=checkbox]:disabled:checked + label,
-ul#ingredientlist li.ingredientlistitem input[type=checkbox]:hover:disabled:checked + label,
-ul#ingredientlist li.ingredientlistitem input[type=checkbox]:focus:disabled:checked + label,
-ul#ingredientlist li.ingredientlistitem input[type=checkbox]:disabled:checked + label:hover,
-ul#ingredientlist li.ingredientlistitem input[type=checkbox]:disabled:checked + label:hover:active	{ background-position: 0 -141px; }*/
-    /*ul#ingredientlist li.ingredientlistitem input[type=radio]:disabled:checked + label,
-ul#ingredientlist li.ingredientlistitem input[type=radio]:hover:disabled:checked + label,
-ul#ingredientlist li.ingredientlistitem input[type=radio]:focus:disabled:checked + label,
-ul#ingredientlist li.ingredientlistitem input[type=radio]:disabled:checked + label:hover,
-ul#ingredientlist li.ingredientlistitem input[type=radio]:disabled:checked + label:hover:active		{ background-position: 0 -301px; }*/
+    /*ul.ingredientlist li.ingredientlistitem input[type=checkbox]:disabled + label,
+ul.ingredientlist li.ingredientlistitem input[type=checkbox]:hover:disabled + label,
+ul.ingredientlist li.ingredientlistitem input[type=checkbox]:focus:disabled + label,
+ul.ingredientlist li.ingredientlistitem input[type=checkbox]:disabled + label:hover,
+ul.ingredientlist li.ingredientlistitem input[type=checkbox]:disabled + label:hover:active			{ background-position: 0 -61px; }*/
+    /*ul.ingredientlist li.ingredientlistitem input[type=radio]:disabled + label,
+ul.ingredientlist li.ingredientlistitem input[type=radio]:hover:disabled + label,
+ul.ingredientlist li.ingredientlistitem input[type=radio]:focus:disabled + label,
+ul.ingredientlist li.ingredientlistitem input[type=radio]:disabled + label:hover,
+ul.ingredientlist li.ingredientlistitem input[type=radio]:disabled + label:hover:active				{ background-position: 0 -221px; }*/
+    /*ul.ingredientlist li.ingredientlistitem input[type=checkbox]:disabled:checked + label,
+ul.ingredientlist li.ingredientlistitem input[type=checkbox]:hover:disabled:checked + label,
+ul.ingredientlist li.ingredientlistitem input[type=checkbox]:focus:disabled:checked + label,
+ul.ingredientlist li.ingredientlistitem input[type=checkbox]:disabled:checked + label:hover,
+ul.ingredientlist li.ingredientlistitem input[type=checkbox]:disabled:checked + label:hover:active	{ background-position: 0 -141px; }*/
+    /*ul.ingredientlist li.ingredientlistitem input[type=radio]:disabled:checked + label,
+ul.ingredientlist li.ingredientlistitem input[type=radio]:hover:disabled:checked + label,
+ul.ingredientlist li.ingredientlistitem input[type=radio]:focus:disabled:checked + label,
+ul.ingredientlist li.ingredientlistitem input[type=radio]:disabled:checked + label:hover,
+ul.ingredientlist li.ingredientlistitem input[type=radio]:disabled:checked + label:hover:active		{ background-position: 0 -301px; }*/
 
     /* --------------- unit selection ---------------------- */
 
@@ -1652,8 +1669,8 @@ ul#ingredientlist li.ingredientlistitem input[type=radio]:disabled:checked + lab
 
 
 
-    /* ----------- potion selector ------------ */
-    h3.portionselector-trigger {
+    /* ----------- portion selector ------------ */
+    h3 span.portionselector-trigger {
         cursor: pointer;
     }
 
@@ -1737,22 +1754,16 @@ ul#ingredientlist li.ingredientlistitem input[type=radio]:disabled:checked + lab
     }
 
 
-        div#portionbuttonblock input[type='button'] {
-            width: 15px;
-            height: 15px;
-            padding: 0px;
-            line-height: 0px;
-            font-size: 14px;
-            font-family: Cardo, Sans-Serif;
-            font-weight: bold;
-        }
+    div#portionbuttonblock input[type='button'] {
+        margin: 0px;
+    }
 
-        div#portionbuttonblock input#plusbutton {
+        div#portionbuttonblock input#plusbutton2 {
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
         }
 
-        div#portionbuttonblock input#minusbutton {
+        div#portionbuttonblock input#minusbutton2 {
             position: relative;
             bottom: 6px;
             border-top-left-radius: 0;

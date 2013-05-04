@@ -131,7 +131,7 @@
                 success: function (json) {
                     var data = $.parseJSON(json);
                     $('div#equipmentlist h3').html(data[0]);
-                    $('div#ingredientlist h3').html(data[1]);
+                    $('div#ingredientlist h3 span').html(data[1]);
                     $('div#directionlist h3').html(data[2]);
                 }, // success
                 error: function (xhr, textStatus, errorThrown) {
@@ -217,14 +217,18 @@
             <div id="equipmentlist">
                 <h2>@MrKupido.Web.Resources.Recipe.Details.NecessaryEquipment</h2>
                 <h3>@String.Format(MrKupido.Web.Resources.Recipe.Details.EquipmentMissing, 2)</h3>
-                <div id="_RecipeEquipments">
-                    @*@{ Html.RenderPartial("_RecipeEquipments", (MrKupido.Library.IEquipment[])Model[2]); }*@
+                <div id="_RecipeEquipment">
+                    @*@{ Html.RenderPartial("_RecipeEquipment", (MrKupido.Library.IEquipment[])Model[2]); }*@
                 </div>
             </div>
         </div>
         <div id="ingredientlist">
             <h2>@MrKupido.Web.Resources.Recipe.Details.Ingredients</h2>
-            <h3 class="portionselector-trigger">@String.Format(MrKupido.Web.Resources.Recipe.Details.PortionHint, 4)</h3>
+            <h3>
+                <input type="button" id="minusbutton1" value="-" onclick="portionSubtract();" class="littlebutton"/>
+                <span class="portionselector-trigger">@String.Format(MrKupido.Web.Resources.Recipe.Details.PortionHint, 4)</span>
+                <input type="button" id="plusbutton1" value="+" onclick="portionAdd();" class="littlebutton"/>
+            </h3>
             <div id="portionselectorwrapper">
                 <div id="portionselector">
                     <div id="portionsliderblock">
@@ -246,8 +250,8 @@
                         <img id="portionimage_4" runat="server" src="~/Content/svg/crowd_4.svg" width="45px" height="35px" />
                         <img id="portionimage_5" runat="server" src="~/Content/svg/crowd_5.svg" width="45px" height="35px" class="hidden" />
                         <div id="portionbuttonblock">
-                            <input type="button" id="plusbutton" value="+" onclick="portionAdd();" /><br />
-                            <input type="button" id="minusbutton" value="-" onclick="portionSubtract();" />
+                            <input type="button" id="plusbutton2" value="+" onclick="portionAdd();"  class="littlebutton"/><br />
+                            <input type="button" id="minusbutton2" value="-" onclick="portionSubtract();"  class="littlebutton"/>
                         </div>
                     </div>
                 </div>
@@ -257,7 +261,7 @@
                 @{ Html.RenderPartial("_RecipeIngredients", (MrKupido.Processor.Model.RuntimeIngredient[])Model[3], new ViewDataDictionary()); }
             </div>
         </div>
-        <hr />
+        <hr class="space" />
         <div id="directionlist">
             <h2>@MrKupido.Web.Resources.Recipe.Details.Directions</h2>
             <h3>@MrKupido.Web.Resources.Recipe.Details.ChefNumberOne</h3>
