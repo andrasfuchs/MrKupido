@@ -12,13 +12,13 @@
 
                 // switch to positive query
                 if (code == 107 || code == 189 || code == 187) {
-                    $("#querySign").html("+");
+                    positiveQuerySign();
                     e.preventDefault();
                 }
 
                 // switch to negative query
                 if (code == 109 || code == 189) {
-                    $("#querySign").html("-");
+                    negativeQuerySign();
                     e.preventDefault();
                 }
 
@@ -200,12 +200,20 @@
         }); // ajax
     }
 
-    function toggleQuerySign() {
-        if ($("#querySign").html() == "+") $("#querySign").html("-")
-        else $("#querySign").html("+");
-    }
+         
+         function positiveQuerySign() {
+             $("#querySign").html("+");
+             $("#queryminusbutton").removeAttr('disabled');
+             $("#queryplusbutton").attr('disabled', 'disabled');
+         }
 
-    $(document).ready(function () {
+         function negativeQuerySign() {
+             $("#querySign").html("-");
+             $("#queryplusbutton").removeAttr('disabled');
+             $("#queryminusbutton").attr('disabled', 'disabled');
+         }
+
+         $(document).ready(function () {
         var knownLocation = "@(new HtmlString(Session["Location"] as string))";
 
         if (knownLocation == "") {
@@ -316,7 +324,12 @@
     <p class="inputfield">
         <label for="query">
             @MrKupido.Web.Resources.Shared.SearchHeader.Query:</label>
-        <span id="querySign" onclick="toggleQuerySign();">+</span>
+        <span id="querySign" style="display:none">+</span>
+        <span id="querySignButtons">
+            <input type="button" id="queryplusbutton" value="+" onclick="positiveQuerySign();" class="littlebutton" disabled="disabled"/><br />
+            <input type="button" id="queryminusbutton" value="-" onclick="negativeQuerySign();" class="littlebutton"/>
+        </span>
+
         <input id="query" type="search" placeholder="@MrKupido.Web.Resources.Shared.SearchHeader.QueryPlaceholder" autofocus />
     </p>
     <div id="deleteall">

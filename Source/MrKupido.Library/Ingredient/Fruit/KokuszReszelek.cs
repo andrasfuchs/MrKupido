@@ -15,7 +15,7 @@ namespace MrKupido.Library.Ingredient
 	)]
     public class KokuszReszelek : KokuszBel
     {
-        public KokuszReszelek(float amount, MeasurementUnit unit = MeasurementUnit.gramm, IngredientState state = IngredientState.Orolt)
+        public KokuszReszelek(float amount, MeasurementUnit unit = MeasurementUnit.dekagramm, IngredientState state = IngredientState.Orolt)
             : base(amount, unit, state)
         {
         }

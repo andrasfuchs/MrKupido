@@ -12,30 +12,24 @@ background              bgc         #fffcf5
 
     @font-face {
         font-family: 'Cardo';
-        src: url('../Content/fonts/Cardo/cardo-regular-webfont.eot');
-        src: url('../Content/fonts/Cardo/cardo-regular-webfont.eot?#iefix') format('embedded-opentype'),
-        /*url('../Content/fonts/Cardo/cardo-regular-webfont.woff') format('woff'),*/
-        url('../Content/fonts/Cardo/cardo-regular-webfont.ttf') format('truetype'), url('../Content/fonts/Cardo/cardo-regular-webfont.svg#cardoregular') format('svg');
+        src: url('../Content/fonts/Cardo/cardo-regular-webfont.woff') format('woff'),
+        url('../Content/fonts/Cardo/cardo-regular-webfont.ttf') format('truetype');
         font-weight: normal;
         font-style: normal;
     }
 
     @font-face {
         font-family: 'tangerinearegular';
-        src: url('../Content/fonts/Tangerine/tangerinea-webfont.eot');
-        src: url('../Content/fonts/Tangerine/tangerinea-webfont.eot?#iefix') format('embedded-opentype'),
-        /*url('../Content/fonts/Tangerine/tangerinea-webfont.woff') format('woff'),*/
-        url('../Content/fonts/Tangerine/tangerinea-webfont.ttf') format('truetype'), url('../Content/fonts/Tangerine/tangerinea-webfont.svg#tangerinearegular') format('svg');
+        src: url('../Content/fonts/Tangerine/tangerinea-webfont.woff') format('woff'),
+        url('../Content/fonts/Tangerine/tangerinea-webfont.ttf') format('truetype');
         font-weight: normal;
         font-style: normal;
     }
 
     @font-face {
         font-family: 'tangerineabold';
-        src: url('../Content/fonts/Tangerine/tangerinea_bold-webfont.eot');
-        src: url('../Content/fonts/Tangerine/tangerinea_bold-webfont.eot?#iefix') format('embedded-opentype'),
-        /*url('../Content/fonts/Tangerine/tangerinea_bold-webfont.woff') format('woff'),*/
-        url('../Content/fonts/Tangerine/tangerinea_bold-webfont.ttf') format('truetype'), url('../Content/fonts/Tangerine/tangerinea_bold-webfont.svg#tangerineabold') format('svg');
+        src: url('../Content/fonts/Tangerine/tangerinea_bold-webfont.woff') format('woff'),
+            url('../Content/fonts/Tangerine/tangerinea_bold-webfont.ttf') format('truetype');
         font-weight: normal;
         font-style: normal;
     }
@@ -262,12 +256,9 @@ background              bgc         #fffcf5
         margin-right: 71px;
     }
 
-    .searchbox #querySign {
+    .searchbox #querySignButtons {
         position: absolute;
-        margin-left: 3px;
-        margin-top: 5px;
-        font-size: 24px;
-        cursor: pointer;
+        margin-top: 8px;
     }
 
 
@@ -585,113 +576,6 @@ background              bgc         #fffcf5
         border-radius: 0px;
     }
 
-    div#recipe div#directionlist li {
-        display: list-item;
-        float: left;
-        width: 880px;
-        height: 70px;
-        margin: 0;
-        padding: 0;
-        border: 0;
-    }
-
-        div#recipe div#directionlist li span {
-            display: inline-block;
-            vertical-align: middle;
-        }
-
-            div#recipe div#directionlist li span.stagePreparation {
-                width: 25px;
-                height: 70px;
-                background: #d5e6cc;
-            }
-
-            div#recipe div#directionlist li span.stageCooking {
-                width: 25px;
-                height: 70px;
-                background: #e8d6cd;
-            }
-
-            div#recipe div#directionlist li span.stageServing {
-                width: 25px;
-                height: 70px;
-                background: #d6e4ea;
-            }
-
-            div#recipe div#directionlist li span.time {
-                margin: -10px 5px 0 10px;
-            }
-
-            div#recipe div#directionlist li span.timer {
-                margin-top: 4px;
-            }
-
-        div#recipe div#directionlist li div.directionRightPart {
-            position: relative;
-            display: block;
-            float: right;
-            height: 70px;
-            width: 700px;
-            line-height: 70px;
-            /*border: solid 1px green;*/
-        }
-
-            div#recipe div#directionlist li div.directionRightPart span.directionBigIcons {
-                display: inline-block;
-                opacity: 0.0;
-                padding: 5px;
-                height: 70px;
-                width: 630px;
-                /*border: solid 1px red;*/
-            }
-
-            div#recipe div#directionlist li div.directionRightPart span.directionText {
-                position: absolute;
-                bottom: 0px;
-                left: 0px;
-                display: inline-block;
-                width: 700px;
-                height: 70px;
-                /*border: solid 1px blue;*/
-            }
-
-                div#recipe div#directionlist li div.directionRightPart span.directionText span.directionTextContent {
-                    display: inline-block;
-                    vertical-align: middle;
-                    line-height: 25px;
-                    -ms-word-wrap: break-word;
-                    word-wrap: break-word;
-                    /*border: solid 1px black;*/
-                }
-
-        div#recipe div#directionlist li span.directionTextContent img2 {
-            position: relative;
-            top: 4px;
-            display: inline-block;
-            padding-top: 0px;
-            margin-top: -10px;
-            vertical-align: bottom;
-        }
-
-        div#recipe div#directionlist li span.directionTextContent span2 {
-            position: relative;
-            margin-top: -32px;
-            margin-left: -28px;
-            margin-right: -10px;
-            font-size: 12px;
-            font-family: Arial;
-            color: /*mcd*/ #553e31;
-            font-weight: bold;
-            width: 32px;
-            text-align: center;
-            z-index: 3;
-            -webkit-text-shadow: 0px 0px 0 #fffcf5, -1px -1px 0 #fffcf5, 1px -1px 0 #fffcf5, -1px 1px 0 #fffcf5, 1px 1px 0 #fffcf5;
-            text-shadow: 0px 0px 0 #fffcf5, -1px -1px 0 #fffcf5, 1px -1px 0 #fffcf5, -1px 1px 0 #fffcf5, 1px 1px 0 #fffcf5;
-        }
-
-        div#recipe div#directionlist li span.directionTextContent span {
-            vertical-align: baseline;
-        }
 
     details#searchresults div.resultbox div.resulthead div.title {
         display: table;
@@ -1038,6 +922,12 @@ background              bgc         #fffcf5
         font-size: 14px;
         font-family: Cardo, Sans-Serif;
         font-weight: bold;
+        border: 1px solid #cdb8ab;
+    }
+
+    input[type='button']:disabled {
+        cursor: default;
+        background: #eadfd4;
     }
 
         input[type='button'].submit,
@@ -1065,7 +955,8 @@ background              bgc         #fffcf5
         margin-bottom: 10px;
     }
 
-        input[type='button']:hover, input[type='submit'] {
+        input[type='button']:hover:enabled, 
+        input[type='submit'] {
             cursor: pointer;
             border: 1px solid #553e31;
         }
@@ -1107,7 +998,7 @@ background              bgc         #fffcf5
         header .inputfield input {
             -moz-appearance: none;
             -webkit-appearance: none;
-            width: 300px;
+            width: 280px;
             font-size: 20px;
             font-family: Cardo, Sans-Serif;
             vertical-align: super;
@@ -1120,6 +1011,7 @@ background              bgc         #fffcf5
             border-right-width: 0;
             border-bottom-color: /*mcd*/ #553e31;
             outline: none;
+            margin-left: 20px;
         }
 
     .sortorderselect {
@@ -1660,14 +1552,154 @@ ul.ingredientlist li.ingredientlistitem input[type=radio]:disabled:checked + lab
 
 
     /* ----------- directions ------------ */
-    ul#directions span.action img {
-        padding: 5px;
-        margin-top: -44px;
-        margin-left: -70px;
-        cursor: pointer;
+   div#recipe div#directionlist li {
+        display: list-item;
+        float: left;
+        width: 880px;
+        height: 70px;
+        margin: 0;
+        padding: 0;
+        border: 0;
     }
 
+        div#recipe div#directionlist li span {
+            display: inline-block;
+            vertical-align: middle;
+        }
 
+            div#recipe div#directionlist li span.stagePreparation {
+                width: 25px;
+                height: 70px;
+                background: #d5e6cc;
+            }
+
+            div#recipe div#directionlist li span.stageCooking {
+                width: 25px;
+                height: 70px;
+                background: #e8d6cd;
+            }
+
+            div#recipe div#directionlist li span.stageServing {
+                width: 25px;
+                height: 70px;
+                background: #d6e4ea;
+            }
+
+            div#recipe div#directionlist li span.time {
+                margin: -10px 5px 0 10px;
+            }
+
+            div#recipe div#directionlist li span.timer {
+                width: 80px;
+                height: 70px;
+            }
+
+            div#recipe div#directionlist li span.timer>img {
+                padding: 5px;                
+            }
+
+
+        div#recipe div#directionlist li div.directionRightPart {
+            position: relative;
+            display: block;
+            float: right;
+            height: 70px;
+            width: 700px;
+            line-height: 70px;
+            /*border: solid 1px green;*/
+        }
+
+            div#recipe div#directionlist li div.directionRightPart span.directionBigIcons {
+                display: inline-block;
+                opacity: 0.0;
+                padding: 5px;
+                height: 70px;
+                width: 630px;
+                /*border: solid 1px red;*/
+            }
+
+            div#recipe div#directionlist li div.directionRightPart span.directionText {
+                position: absolute;
+                bottom: 0px;
+                left: 0px;
+                display: inline-block;
+                width: 700px;
+                height: 70px;
+                /*border: solid 1px blue;*/
+            }
+
+                div#recipe div#directionlist li div.directionRightPart span.directionText span.directionTextContent {
+                    display: inline-block;
+                    vertical-align: middle;
+                    line-height: 25px;
+                    -ms-word-wrap: break-word;
+                    word-wrap: break-word;
+                    /*border: solid 1px black;*/
+                }
+
+        div#recipe div#directionlist li span.directionTextContent img2 {
+            position: relative;
+            top: 4px;
+            display: inline-block;
+            padding-top: 0px;
+            margin-top: -10px;
+            vertical-align: bottom;
+        }
+
+        div#recipe div#directionlist li span.directionTextContent span2 {
+            position: relative;
+            margin-top: -32px;
+            margin-left: -28px;
+            margin-right: -10px;
+            font-size: 12px;
+            font-family: Arial;
+            color: /*mcd*/ #553e31;
+            font-weight: bold;
+            width: 32px;
+            text-align: center;
+            z-index: 3;
+            -webkit-text-shadow: 0px 0px 0 #fffcf5, -1px -1px 0 #fffcf5, 1px -1px 0 #fffcf5, -1px 1px 0 #fffcf5, 1px 1px 0 #fffcf5;
+            text-shadow: 0px 0px 0 #fffcf5, -1px -1px 0 #fffcf5, 1px -1px 0 #fffcf5, -1px 1px 0 #fffcf5, 1px 1px 0 #fffcf5;
+        }
+
+        div#recipe div#directionlist li span.directionTextContent span {
+            vertical-align: baseline;
+        }
+
+    ul#directions span.action {
+        display: inline;
+        margin-top: -54px;
+        margin-left: -75px;
+    }
+
+    ul#directions span.action>img {
+        padding: 5px;
+        cursor: pointer;
+    }
+   
+    div.clickabledirection div {
+        display: inline-block;
+        cursor: pointer;
+        background: #eadfd4;
+    }
+    
+    div.clickabledirection div.icon {
+        margin: 0px;
+        width: 19px;
+        height: 22px;
+        padding: 6px 3px 5px 3px;
+    }
+
+    div.clickabledirection div.text {
+        float: right;
+
+        width: 831px;
+        padding-left: 20px;
+
+        font-size: 22px;
+        font-family: Cardo, Sans-Serif;
+        color: /*mcd*/ #553e31;
+    }
 
     /* ----------- portion selector ------------ */
     h3 span.portionselector-trigger {
@@ -1758,11 +1790,13 @@ ul.ingredientlist li.ingredientlistitem input[type=radio]:disabled:checked + lab
         margin: 0px;
     }
 
+        input#queryplusbutton,
         div#portionbuttonblock input#plusbutton2 {
             border-bottom-left-radius: 0;
             border-bottom-right-radius: 0;
         }
 
+        input#queryminusbutton,
         div#portionbuttonblock input#minusbutton2 {
             position: relative;
             bottom: 6px;

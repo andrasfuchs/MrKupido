@@ -333,6 +333,11 @@ namespace MrKupido.Web.Controllers
 
         public ActionResult FindRecipeInLanguage(string language, string id, string originalLanguage)
         {
+			if (String.IsNullOrEmpty(originalLanguage)) 
+			{
+				originalLanguage = language;
+			}
+
             RecipeTreeNode targetRtn = null;
             RecipeTreeNode rtn = Cache.GetRecipeCache(originalLanguage)[id];
 

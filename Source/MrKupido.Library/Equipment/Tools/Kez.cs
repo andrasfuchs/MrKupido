@@ -54,7 +54,7 @@ namespace MrKupido.Library.Equipment
 
             i.PieceCount = count;
 
-            LastActionDuration = 8 * (uint)count;
+            LastActionDuration = 30 * (uint)count;
 
             c1.Empty();
 

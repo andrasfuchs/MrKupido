@@ -407,11 +407,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="ClickTaleScripts.xml" />
-    <Content Include="Content\fonts\Cardo\cardo-regular-webfont.svg" />
-    <Content Include="Content\fonts\Cardo\OFL.txt" />
-    <Content Include="Content\fonts\Tangerine\OFL.txt" />
-    <Content Include="Content\fonts\Tangerine\tangerinea-webfont.svg" />
-    <Content Include="Content\fonts\Tangerine\tangerinea_bold-webfont.svg" />
     <Content Include="Content\images\background.jpg" />
     <Content Include="Content\images\brand_bakony.png" />
     <Content Include="Content\images\brand_karavan.png" />
@@ -476,6 +471,8 @@
     <Content Include="Content\photos\960x480\cocoa-spiral_03.jpg" />
     <Content Include="Content\photos\960x480\cocoa-spiral_04.jpg" />
     <Content Include="Content\photos\960x480\cottage-cheese-coconut-ball_01.jpg" />
+    <Content Include="Content\photos\960x480\cottage-cheese-coconut-ball_02.jpg" />
+    <Content Include="Content\photos\960x480\cottage-cheese-coconut-ball_03.jpg" />
     <Content Include="Content\photos\960x480\hawaii-pizza_01.jpg" />
     <Content Include="Content\photos\960x480\hortobagy-meat-pancake_01.jpg" />
     <Content Include="Content\photos\960x480\hungarian-pizza_01.jpg" />
@@ -487,6 +484,9 @@
     <Content Include="Content\photos\960x480\mustard-garlic-chicken_01.jpg" />
     <Content Include="Content\photos\960x480\pita-for-gyros_01.jpg" />
     <Content Include="Content\photos\960x480\scone_01.jpg" />
+    <Content Include="Content\photos\960x480\scone_02.jpg" />
+    <Content Include="Content\photos\960x480\scone_03.jpg" />
+    <Content Include="Content\photos\960x480\scone_04.jpg" />
     <Content Include="Content\photos\960x480\spicy-chicken-breast_02.jpg" />
     <Content Include="Content\photos\960x480\spicy-chicken-breast_03.jpg" />
     <Content Include="Content\photos\960x480\spicy-chicken-breast_04.jpg" />
@@ -620,6 +620,7 @@
     <Content Include="Content\svg\icon_menutrigger.svg" />
     <Content Include="Content\svg\icon_photos.svg" />
     <Content Include="Content\svg\icon_photos_disabled.svg" />
+    <Content Include="Content\svg\icon_recipestart.svg" />
     <Content Include="Content\svg\icon_sliderhandle.svg" />
     <Content Include="Content\svg\icon_slidersigns.svg" />
     <Content Include="Content\svg\icon_vegetarian_disabled.svg" />
@@ -833,12 +834,12 @@
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Content\fonts\Tangerine\tangerinea-webfont.eot" />
     <Content Include="Content\fonts\Tangerine\tangerinea-webfont.ttf" />
-    <Content Include="Content\fonts\Tangerine\tangerinea_bold-webfont.eot" />
     <Content Include="Content\fonts\Tangerine\tangerinea_bold-webfont.ttf" />
     <Content Include="Content\Web.config" />
     <Content Include="ClassDiagram.cd" />
+    <Content Include="Content\fonts\Tangerine\tangerinea_bold-webfont.woff" />
+    <Content Include="Content\fonts\Tangerine\tangerinea-webfont.woff" />
     <None Include="Properties\PublishProfiles\HFL_live.pubxml" />
     <None Include="Properties\PublishProfiles\HFL_beta.pubxml" />
     <Content Include="Resources\Web.config" />
@@ -1003,7 +1004,6 @@
     <Content Include="Views\Import\_BasicRecipe.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\fonts\Cardo\cardo-regular-webfont.eot" />
     <Content Include="Content\fonts\Cardo\cardo-regular-webfont.ttf" />
     <Content Include="Content\fonts\Cardo\cardo-regular-webfont.woff" />
     <None Include="Content\spelling\en_US\en_US.aff" />
@@ -1042,7 +1042,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="1975/10/21" BuildVersion_UpdateFileVersion="False" BuildVersion_BuildVersioningStyle="None.None.None.None" />
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.None" BuildVersion_UpdateFileVersion="False" BuildVersion_StartDate="1975/10/21" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
   <ItemGroup>

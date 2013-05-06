@@ -34,13 +34,13 @@ namespace MrKupido.Library.Recipe
         {
             PreparedIngredients result = new PreparedIngredients();
 
-			eg.Use<Reszelo>(1).LereszelniI(eg.Use<Edeny>(1), new CitromHej(1.0f * amount, MeasurementUnit.piece));
-			eg.Use<Edeny>(1).Berakni(new Turo(250.0f * amount), new PorCukor(20.0f * amount), new KokuszReszelek(150.0f * amount), new VaniliasCukor(10.0f * amount));
+			eg.Use<Reszelo>(1).LereszelniI(eg.Use<Edeny>(1), new CitromHej(0.5f * amount, MeasurementUnit.piece));
+			eg.Use<Edeny>(1).Berakni(new Turo(250.0f * amount), new PorCukor(15.0f * amount), new KokuszReszelek(12.5f * amount), new VaniliasCukor(10.0f * amount));
 
 			eg.Use<Kez>(1).OsszegyurniC(eg.Use<Edeny>(1));
-			eg.Use<Kez>(1).GolyovaGyurniC(eg.Use<Edeny>(1), 5.0f, eg.Use<LaposKisTanyer>(1));
+			eg.Use<Kez>(1).GolyovaGyurniC(eg.Use<Edeny>(1), 3.0f, eg.Use<LaposKisTanyer>(1));
 
-			eg.Use<MelyTanyer>(1).BerakniI(new KokuszReszelek(100.0f * amount));
+			eg.Use<MelyTanyer>(1).BerakniI(new KokuszReszelek(1.5f * amount));
 			eg.Use<Kez>(1).MegforgatniC(eg.Use<MelyTanyer>(1), eg.Use<LaposKisTanyer>(1), eg.Use<LaposTanyer>(1));
 
 			result.Add("golyok", eg.Use<LaposTanyer>(1));
