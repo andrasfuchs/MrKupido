@@ -116,6 +116,7 @@
     <Compile Include="Enums\VowelHarmony.cs" />
     <Compile Include="Equipment\Containers\DeepContainer.cs" />
     <Compile Include="Equipment\Containers\CoverableContainer.cs" />
+    <Compile Include="Equipment\Containers\DeepContainer\CoverableContainer\KozepesEdeny.cs" />
     <Compile Include="Equipment\Containers\DeepContainer\CoverableContainer\KisLabas.cs" />
     <Compile Include="Equipment\Containers\DeepContainer\Pohar.cs" />
     <Compile Include="Equipment\Containers\DeepContainer\PalacsintaSuto.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Equipment\Containers\DeepContainer\CoverableContainer\JenaiTal.cs" />
     <Compile Include="Equipment\Containers\DeepContainer\CoverableContainer\Labas.cs" />
     <Compile Include="Equipment\Devices\DeepDevice.cs" />
+    <Compile Include="Equipment\Devices\DeepDevice\MikrohullamuSuto.cs" />
     <Compile Include="Equipment\Devices\FlatDevice.cs" />
     <Compile Include="Equipment\Devices\DeepDevice\Hutogep.cs" />
     <Compile Include="Equipment\Devices\FlatDevice\Tuzhely.cs" />

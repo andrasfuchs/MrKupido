@@ -44,7 +44,14 @@ namespace MrKupido.Web.Models
             User user = GetCurrentUser(session);
             isAvatarCached |= displayAvatar;
             return ((user != null) && (user.AvatarUrl != null) ? user.AvatarUrl.ToString() : "Content/svg/icon_avatar.svg");
-        }        
+        }
+
+		public static string GetCurrentLanguageString(this HttpSessionStateBase session)
+		{
+			string propertyName = System.Threading.Thread.CurrentThread.CurrentUICulture.ThreeLetterISOLanguageName;
+			propertyName = "Language" + Char.ToUpper(propertyName[0]) + propertyName.Substring(1);
+			return typeof(Resources.Shared.SearchHeader).GetProperty(propertyName).GetValue(null) as string;
+		}
 
         private static bool isAvatarCached = false;
         public static bool IsAvatarCached(this HttpSessionStateBase session)

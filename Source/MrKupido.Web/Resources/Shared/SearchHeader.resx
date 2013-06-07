@@ -162,6 +162,9 @@
   <data name="QueryPlaceholder" xml:space="preserve">
     <value>(ingredient, diet, equipment)</value>
   </data>
+  <data name="Recipes" xml:space="preserve">
+    <value>Recipes</value>
+  </data>
   <data name="Taxonomy" xml:space="preserve">
     <value>Taxonomy</value>
   </data>

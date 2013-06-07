@@ -60,5 +60,8 @@ namespace MrKupido.Library
 		[NameAlias("eng", "hot")]
 		[NameAlias("hun", "forró")]
 		Forro = 16384,
-    }
+		[NameAlias("eng", "melted")]
+		[NameAlias("hun", "olvasztott")]
+		Olvasztott = 32768,
+	}
 }

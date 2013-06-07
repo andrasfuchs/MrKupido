@@ -55,7 +55,7 @@ namespace MrKupido.Library.Recipe
             edeny.Beonteni(new Tejszin(100.0f * amount));
 
             Habvero habvero = eg.Use<Habvero>();
-            habvero.FelverniI(edeny.Contents);
+            //TODO: habvero.FelverniI(edeny.Contents);
 
             cfp.Add("vaj", edeny);
 

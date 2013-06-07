@@ -27,21 +27,7 @@ namespace MrKupido.Library.Recipe
 
         public static PreparedIngredients Prepare(float amount, EquipmentGroup eg)
         {
-            PreparedIngredients result = new PreparedIngredients();
-
-            ISingleIngredient fokhagyma = new Fokhagyma(3.00f * amount);
-            eg.Use<FokhagymaPres>(1).PreselniI(fokhagyma);
-
-            eg.Use<Edeny>(1).Berakni(new Tejfol(4.0f * amount), new Mustar(1.0f * amount), new Etelizesito(1.0f * amount), new FeketeBorsOrolt(5.0f * amount), fokhagyma, new NapraforgoOlaj(1.0f * amount));
-            eg.Use<Edeny>(1).Contents.ChangeUnitTo(MeasurementUnit.liter);
-
-            eg.Use<MelyTanyer>(1).BerakniI(new Csirkecomb(8.0f * amount, MeasurementUnit.piece));
-            eg.Use<Ecset>(1).BekenniI(new Vaj(5.0f * amount), eg.Use<MelyTanyer>(1));
-
-            eg.Use<Kez>(1).BelemartaniC(eg.Use<MelyTanyer>(1), eg.Use<Edeny>(1));
-
-            result.Add("csirkecomb", eg.Use<MelyTanyer>(1));
-            
+            PreparedIngredients result = new PreparedIngredients();            
             eg.WashUp();
             return result;
         }
@@ -50,8 +36,21 @@ namespace MrKupido.Library.Recipe
         {
             CookedFoodParts cfp = new CookedFoodParts();
 
-            eg.Use<Tepsi>(1).BerakniC(preps["csirkecomb"]);
-            eg.Use<Tepsi>(1).Lefedni(new Alufolia());
+			ISingleIngredient fokhagyma = new Fokhagyma(3.00f * amount);
+			eg.Use<FokhagymaPres>(1).PreselniI(fokhagyma);
+
+			eg.Use<NagyEdeny>(1).Berakni(new Tejfol(4.0f * amount), new Mustar(1.0f * amount), new Etelizesito(1.0f * amount), new FeketeBorsOrolt(5.0f * amount), fokhagyma, new NapraforgoOlaj(1.0f * amount));
+			eg.Use<NagyEdeny>(1).Contents.ChangeUnitTo(MeasurementUnit.liter);
+
+			eg.Use<Edeny>(1).BerakniI(new Csirkecomb(8.0f * amount, MeasurementUnit.piece));
+			ISingleIngredient vaj = new Vaj(5.0f * amount);
+			eg.Use<Ecset>(1).BekenniI(vaj, eg.Use<Edeny>(1));
+
+			eg.Use<Kez>(1).BelemartaniC(eg.Use<Edeny>(1), eg.Use<NagyEdeny>(1));
+
+			eg.Use<Tepsi>(1).BerakniC(eg.Use<Edeny>(1));
+			eg.Use<Tepsi>(1).BerakniI(vaj);
+			eg.Use<Tepsi>(1).Lefedni(new Alufolia());
 
             eg.Use<Suto>(1).Homerseklet(200);
             eg.Use<Suto>(1).BehelyezniC(eg.Use<Tepsi>(1));

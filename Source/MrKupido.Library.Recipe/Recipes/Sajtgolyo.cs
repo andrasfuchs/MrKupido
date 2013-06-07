@@ -20,27 +20,6 @@ namespace MrKupido.Library.Recipe
         public static EquipmentGroup SelectEquipment(float amount)
         {
             EquipmentGroup result = new EquipmentGroup();
-
-			//result.Containers.Add(new Labas());
-			//result.Containers.Add(new Serpenyo());
-			//result.Containers.Add(new Edeny());
-			//result.Containers.Add(new LaposTanyer());
-			//result.Containers.Add(new LaposTanyer());
-			//result.Containers.Add(new MelyTanyer());
-			//result.Containers.Add(new MelyTanyer());
-			//result.Containers.Add(new MelyTanyer());
-			//result.Containers.Add(new LaposKisTanyer());
-
-			//result.Devices.Add(new Tuzhely());
-
-			//result.Tools.Add(new Kez());
-			//result.Tools.Add(new Fakanal());
-			//result.Tools.Add(new Reszelo());
-			//result.Tools.Add(new KrumpliPucolo());
-			//result.Tools.Add(new BurgonyaPres());
-			//result.Tools.Add(new FokhagymaPres());
-			//result.Tools.Add(new Habvero());
-
             return result;
         }
 
@@ -65,22 +44,17 @@ namespace MrKupido.Library.Recipe
             ISingleIngredient fokhagyma = new Fokhagyma(1.0f * amount);
 			eg.Use<FokhagymaPres>(1).PreselniI(fokhagyma);
 
-            ISingleIngredient sajt = new Sajt(7.0f * amount);
+            ISingleIngredient sajt = new Sajt(14.0f * amount);
             eg.Use<Reszelo>(1).LereszelniI(eg.Use<LaposKisTanyer>(1), sajt);
 
             IIngredient tojas = new Tojas(1.0f * amount);
-            IIngredient tojasfeherje = eg.Use<Kez>(1).SzetvalasztaniI(tojas)[1];
+            //IIngredient tojasfeherje = eg.Use<Kez>(1).SzetvalasztaniI(tojas)[1];
+			tojas = eg.Use<Habvero>(1).FelverniI(tojas);
+		
+			ISingleIngredient vaj = new Vaj(4.0f * amount);
+			eg.Use<MikrohullamuSuto>(1).Megolvasztani(vaj);
 
-			tojas = eg.Use<Habvero>(1).FelverniI(tojasfeherje);
-
-            eg.Use<Serpenyo>(1).Berakni(new Vaj(4.0f * amount));
-            eg.Use<Tuzhely>(1).RahelyezniC(eg.Use<Serpenyo>(1));
-            eg.Use<Tuzhely>(1).Homerseklet(200);
-            eg.Use<Serpenyo>(1).Varni(5);
-            eg.Use<Tuzhely>(1).LeemelniC(eg.Use<Serpenyo>(1));
-            IIngredient vaj = eg.Use<Serpenyo>(1).Kivenni();
-
-            eg.Use<NagyEdeny>(1).Berakni(new Liszt(50.0f * amount), new FeketeBorsOrolt(3.0f * amount), new So(6.0f * amount), vaj, burgonya, tojas, fokhagyma, sajt);
+            eg.Use<NagyEdeny>(1).Berakni(new Liszt(8.0f * amount), new FeketeBorsOrolt(1.0f * amount, MeasurementUnit.teaskanal), new So(1.0f * amount, MeasurementUnit.teaskanal), vaj, burgonya, tojas, fokhagyma, sajt);
             eg.Use<Fakanal>(1).ElkeverniC(eg.Use<NagyEdeny>(1));
 
             //IngredientGroup golyok = kez.Kiszaggatni(eg.Use<NagyEdeny>(1).Contents, 30.0f);
@@ -96,7 +70,7 @@ namespace MrKupido.Library.Recipe
         {
             CookedFoodParts cfp = new CookedFoodParts();
 
-            eg.Use<Serpenyo>(1).Berakni(new NapraforgoOlaj(1.0f));
+            eg.Use<Serpenyo>(1).BerakniI(new NapraforgoOlaj(3.0f));
 
             eg.Use<Tuzhely>(1).Homerseklet(350);
             eg.Use<Tuzhely>(1).RahelyezniC(eg.Use<Serpenyo>(1));
@@ -106,7 +80,7 @@ namespace MrKupido.Library.Recipe
             //IIngredient golyok = preps["golyok"].Contents;
 			eg.Use<Kez>(1).MegforgatniC(eg.Use<MelyTanyer>(1), preps["golyok"], eg.Use<MelyTanyer>(3));
 
-			eg.Use<Serpenyo>(1).KisutniOsszesetC(eg.Use<MelyTanyer>(3), 5, eg.Use<MelyTanyer>(2));
+			eg.Use<Serpenyo>(1).KisutniOsszesetC(eg.Use<MelyTanyer>(3), 3.0f, eg.Use<MelyTanyer>(2));
 
 			eg.Use<Kez>(1).LecsepegtetniC(eg.Use<MelyTanyer>(2));
 

@@ -12,30 +12,24 @@ background              bgc         #fffcf5
 
     @font-face {
         font-family: 'Cardo';
-        src: url('../Content/fonts/Cardo/cardo-regular-webfont.eot');
-        src: url('../Content/fonts/Cardo/cardo-regular-webfont.eot?#iefix') format('embedded-opentype'),
-        /*url('../Content/fonts/Cardo/cardo-regular-webfont.woff') format('woff'),*/
-        url('../Content/fonts/Cardo/cardo-regular-webfont.ttf') format('truetype'), url('../Content/fonts/Cardo/cardo-regular-webfont.svg#cardoregular') format('svg');
+        src: url('../Content/fonts/Cardo/cardo-regular-webfont.woff') format('woff'),
+        url('../Content/fonts/Cardo/cardo-regular-webfont.ttf') format('truetype');
         font-weight: normal;
         font-style: normal;
     }
 
     @font-face {
         font-family: 'tangerinearegular';
-        src: url('../Content/fonts/Tangerine/tangerinea-webfont.eot');
-        src: url('../Content/fonts/Tangerine/tangerinea-webfont.eot?#iefix') format('embedded-opentype'),
-        /*url('../Content/fonts/Tangerine/tangerinea-webfont.woff') format('woff'),*/
-        url('../Content/fonts/Tangerine/tangerinea-webfont.ttf') format('truetype'), url('../Content/fonts/Tangerine/tangerinea-webfont.svg#tangerinearegular') format('svg');
+        src: url('../Content/fonts/Tangerine/tangerinea-webfont.woff') format('woff'),
+        url('../Content/fonts/Tangerine/tangerinea-webfont.ttf') format('truetype');
         font-weight: normal;
         font-style: normal;
     }
 
     @font-face {
         font-family: 'tangerineabold';
-        src: url('../Content/fonts/Tangerine/tangerinea_bold-webfont.eot');
-        src: url('../Content/fonts/Tangerine/tangerinea_bold-webfont.eot?#iefix') format('embedded-opentype'),
-        /*url('../Content/fonts/Tangerine/tangerinea_bold-webfont.woff') format('woff'),*/
-        url('../Content/fonts/Tangerine/tangerinea_bold-webfont.ttf') format('truetype'), url('../Content/fonts/Tangerine/tangerinea_bold-webfont.svg#tangerineabold') format('svg');
+        src: url('../Content/fonts/Tangerine/tangerinea_bold-webfont.woff') format('woff'),
+        url('../Content/fonts/Tangerine/tangerinea_bold-webfont.ttf') format('truetype');
         font-weight: normal;
         font-style: normal;
     }
@@ -85,7 +79,7 @@ background              bgc         #fffcf5
 
     div.summary h1,
     details summary h1 {
-        font-size: 44px;
+        font-size: 21px;
         font-family: tangerineabold, Sans-Serif;
         color: /*mcd*/ #553e31;
         text-align: center;
@@ -97,7 +91,7 @@ background              bgc         #fffcf5
 
     div.summary h2,
     details summary h2 {
-        font-size: 26px;
+        font-size: 13px;
         font-family: tangerinearegular, Sans-Serif;
         color: /*mcd*/ #553e31;
         float: right;
@@ -109,7 +103,7 @@ background              bgc         #fffcf5
 
     div.summary h3,
     details summary h3 {
-        font-size: 26px;
+        font-size: 13px;
         font-family: tangerinearegular, Sans-Serif;
         color: /*mcd*/ #553e31;
         margin: 0;
@@ -118,7 +112,7 @@ background              bgc         #fffcf5
     }
 
     h2 {
-        font-size: 44px;
+        font-size: 21px;
         font-family: tangerineabold, Sans-Serif;
         color: /*mcd*/ #553e31;
         text-align: center;
@@ -130,7 +124,7 @@ background              bgc         #fffcf5
 
 
     h3 {
-        font-size: 26px;
+        font-size: 13px;
         font-family: tangerinearegular, Sans-Serif;
         color: /*mcd*/ #553e31;
         width: auto;
@@ -260,7 +254,7 @@ background              bgc         #fffcf5
             display: block;
             float: right;
             height: 70px;
-            width: 700px;
+            width: 690px;
             line-height: 70px;
             /*border: solid 1px green;*/
         }
@@ -270,7 +264,7 @@ background              bgc         #fffcf5
                 bottom: 0px;
                 left: 0px;
                 display: inline-block;
-                width: 700px;
+                width: 690px;
                 height: 70px;
                 /*border: solid 1px blue;*/
             }

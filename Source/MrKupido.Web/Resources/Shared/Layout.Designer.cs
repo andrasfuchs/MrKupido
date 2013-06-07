@@ -97,6 +97,15 @@ namespace MrKupido.Web.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Feedback &amp; Support.
+        /// </summary>
+        public static string FeedbackAndSupport {
+            get {
+                return ResourceManager.GetString("FeedbackAndSupport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mr. Kupido help.
         /// </summary>
         public static string HelpPageTitle {

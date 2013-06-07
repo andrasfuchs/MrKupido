@@ -129,6 +129,9 @@
   <data name="Disclaimer" xml:space="preserve">
     <value>jogi nyilatkozat</value>
   </data>
+  <data name="FeedbackAndSupport" xml:space="preserve">
+    <value>Visszajelzés &amp; Segítség</value>
+  </data>
   <data name="HelpPageTitle" xml:space="preserve">
     <value>Mr. Kupidó súgó</value>
   </data>

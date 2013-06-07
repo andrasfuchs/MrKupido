@@ -129,6 +129,9 @@
   <data name="Disclaimer" xml:space="preserve">
     <value>disclaimer</value>
   </data>
+  <data name="FeedbackAndSupport" xml:space="preserve">
+    <value>Feedback &amp; Support</value>
+  </data>
   <data name="HelpPageTitle" xml:space="preserve">
     <value>Mr. Kupido help</value>
   </data>

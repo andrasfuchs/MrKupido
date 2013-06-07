@@ -1,6 +1,6 @@
 ﻿@model object[]
 @{
-    ViewBag.Title = String.Format(MrKupido.Web.Resources.Recipe.Details.PageTitle, ((MrKupido.Processor.Model.RecipeTreeNode)Model[0]).LongName) + " - " + MrKupido.Web.Resources.Shared.Layout.PageTitle; ;
+    ViewBag.Title = String.Format(MrKupido.Web.Resources.Recipe.Details.PageTitle, ((MrKupido.Processor.Model.RecipeTreeNode)Model[0]).LongName) + " - " + MrKupido.Web.Resources.Shared.Layout.PageTitle;
 }
 @using MrKupido.Web.Models
 @this.ScriptBlock(
@@ -184,7 +184,19 @@
                     blockRefresh--;
                 }
             });   // ajax
-        }
+         }
+
+
+
+         $(function () {
+             //$('#svgbasics').svg();
+             //$('#svgbasics').svg('get').load('http://localhost/MrKupido.Web/Content/svg/multilayer_test04.svg', { onLoad: svgLoadDone });
+         });
+
+         function svgLoadDone(svg, error) {
+             $('g#forditottpe', svg.root()).css({ opacity: 0 });
+         }
+
     </script>
 )
 
@@ -193,6 +205,9 @@
 </header>
 <hr class="single" />
 <article>
+
+    @*<div id="svgbasics" style="width: 70px; height: 70px"></div>*@
+
     <div class="details" id="recipe">
         <div class="summary">
             <h1>

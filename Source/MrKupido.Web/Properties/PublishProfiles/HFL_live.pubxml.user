@@ -18,10 +18,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/09/2013 15:16:13</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.ApplicationBlock.dll">
-      <publishTime>05/01/2013 13:04:27</publishTime>
+      <publishTime>06/07/2013 15:53:00</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.ApplicationBlock.pdb">
-      <publishTime>05/01/2013 13:04:27</publishTime>
+      <publishTime>06/07/2013 15:53:00</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.Core.dll">
       <publishTime>02/17/2013 13:34:16</publishTime>
@@ -63,7 +63,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/11/2012 16:27:27</publishTime>
     </File>
     <File Include="bin/hu/MrKupido.Web.resources.dll">
-      <publishTime>05/02/2013 14:00:20</publishTime>
+      <publishTime>06/07/2013 18:49:04</publishTime>
     </File>
     <File Include="bin/Hunspellx64.dll">
       <publishTime>10/31/2011 17:30:18</publishTime>
@@ -81,52 +81,52 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/18/2013 16:40:56</publishTime>
     </File>
     <File Include="bin/MrKupido.DataAccess.dll">
-      <publishTime>05/02/2013 13:56:06</publishTime>
+      <publishTime>06/07/2013 15:53:02</publishTime>
     </File>
     <File Include="bin/MrKupido.DataAccess.pdb">
-      <publishTime>05/02/2013 13:56:06</publishTime>
+      <publishTime>06/07/2013 15:53:02</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.dll">
-      <publishTime>05/02/2013 13:56:05</publishTime>
+      <publishTime>06/07/2013 15:53:00</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.pdb">
-      <publishTime>05/02/2013 13:56:05</publishTime>
+      <publishTime>06/07/2013 15:53:00</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.Provider.dll">
-      <publishTime>05/02/2013 13:56:05</publishTime>
+      <publishTime>06/07/2013 15:53:01</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.Provider.pdb">
-      <publishTime>05/02/2013 13:56:05</publishTime>
+      <publishTime>06/07/2013 15:53:01</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.Recipe.dll">
-      <publishTime>05/02/2013 14:00:19</publishTime>
+      <publishTime>06/07/2013 18:49:02</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.Recipe.pdb">
-      <publishTime>05/02/2013 13:56:07</publishTime>
+      <publishTime>06/07/2013 15:53:04</publishTime>
     </File>
     <File Include="bin/MrKupido.Model.dll">
-      <publishTime>05/02/2013 13:56:05</publishTime>
+      <publishTime>06/07/2013 15:53:01</publishTime>
     </File>
     <File Include="bin/MrKupido.Model.pdb">
-      <publishTime>05/02/2013 13:56:05</publishTime>
+      <publishTime>06/07/2013 15:53:01</publishTime>
     </File>
     <File Include="bin/MrKupido.Processor.dll">
-      <publishTime>05/02/2013 13:56:06</publishTime>
+      <publishTime>06/07/2013 15:53:03</publishTime>
     </File>
     <File Include="bin/MrKupido.Processor.pdb">
-      <publishTime>05/02/2013 13:56:06</publishTime>
+      <publishTime>06/07/2013 15:53:03</publishTime>
     </File>
     <File Include="bin/MrKupido.Utils.dll">
-      <publishTime>05/01/2013 13:04:27</publishTime>
+      <publishTime>06/07/2013 15:53:00</publishTime>
     </File>
     <File Include="bin/MrKupido.Utils.pdb">
-      <publishTime>05/01/2013 13:04:27</publishTime>
+      <publishTime>06/07/2013 15:53:00</publishTime>
     </File>
     <File Include="bin/MrKupido.Web.dll">
-      <publishTime>05/02/2013 14:00:20</publishTime>
+      <publishTime>06/07/2013 18:49:04</publishTime>
     </File>
     <File Include="bin/MrKupido.Web.pdb">
-      <publishTime>05/02/2013 14:00:20</publishTime>
+      <publishTime>06/07/2013 18:49:04</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>07/22/2012 09:51:29</publishTime>
@@ -189,10 +189,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/09/2013 05:00:12</publishTime>
     </File>
     <File Include="Content/fonts/Cardo/cardo-regular-webfont.ttf">
-      <publishTime>01/09/2013 05:00:12</publishTime>
+      <publishTime>06/03/2013 07:30:38</publishTime>
     </File>
     <File Include="Content/fonts/Cardo/cardo-regular-webfont.woff">
-      <publishTime>01/09/2013 05:00:12</publishTime>
+      <publishTime>06/03/2013 07:30:38</publishTime>
     </File>
     <File Include="Content/fonts/Cardo/OFL.txt">
       <publishTime>07/22/2012 15:05:54</publishTime>
@@ -207,7 +207,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/16/2012 14:01:40</publishTime>
     </File>
     <File Include="Content/fonts/Tangerine/tangerinea-webfont.ttf">
-      <publishTime>11/16/2012 14:03:37</publishTime>
+      <publishTime>06/03/2013 06:20:00</publishTime>
+    </File>
+    <File Include="Content/fonts/Tangerine/tangerinea-webfont.woff">
+      <publishTime>06/03/2013 06:20:00</publishTime>
     </File>
     <File Include="Content/fonts/Tangerine/tangerinea_bold-webfont.eot">
       <publishTime>11/16/2012 14:01:40</publishTime>
@@ -216,7 +219,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/16/2012 14:01:40</publishTime>
     </File>
     <File Include="Content/fonts/Tangerine/tangerinea_bold-webfont.ttf">
-      <publishTime>11/16/2012 14:03:37</publishTime>
+      <publishTime>06/03/2013 06:20:00</publishTime>
+    </File>
+    <File Include="Content/fonts/Tangerine/tangerinea_bold-webfont.woff">
+      <publishTime>06/03/2013 06:20:00</publishTime>
     </File>
     <File Include="Content/images/background.jpg">
       <publishTime>07/22/2012 14:24:07</publishTime>
@@ -387,16 +393,64 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/30/2013 03:39:06</publishTime>
     </File>
     <File Include="Content/photos/960x480/baked-cauliflower_01.jpg">
-      <publishTime>04/08/2013 04:20:49</publishTime>
+      <publishTime>05/24/2013 11:06:21</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/baked-cauliflower_02.jpg">
+      <publishTime>05/24/2013 11:06:32</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/baked-cauliflower_03.jpg">
+      <publishTime>05/24/2013 11:06:42</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/baked-cauliflower_04.jpg">
+      <publishTime>05/24/2013 11:06:57</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/baked-cauliflower_05.jpg">
+      <publishTime>05/24/2013 11:07:15</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/baked-cauliflower_06.jpg">
+      <publishTime>05/24/2013 11:07:26</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/baked-cauliflower_07.jpg">
+      <publishTime>05/24/2013 11:07:37</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/baked-cauliflower_08.jpg">
+      <publishTime>05/24/2013 11:07:46</publishTime>
     </File>
     <File Include="Content/photos/960x480/cheese-ball_01.jpg">
-      <publishTime>04/08/2013 05:09:40</publishTime>
+      <publishTime>05/24/2013 11:32:26</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/cheese-ball_02.jpg">
+      <publishTime>05/24/2013 11:32:38</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/cheese-ball_03.jpg">
+      <publishTime>05/24/2013 11:32:51</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/cheese-ball_04.jpg">
+      <publishTime>05/24/2013 11:32:59</publishTime>
     </File>
     <File Include="Content/photos/960x480/chicken-breast-with-cream-[Fuchs-style]_01.jpg">
       <publishTime>04/08/2013 04:35:33</publishTime>
     </File>
     <File Include="Content/photos/960x480/chicken-breast-with-cream-[Mathe-style]_01.jpg">
-      <publishTime>04/08/2013 04:44:23</publishTime>
+      <publishTime>05/24/2013 10:56:49</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/chicken-breast-with-cream-[Mathe-style]_02.jpg">
+      <publishTime>05/24/2013 10:57:03</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/chicken-breast-with-cream-[Mathe-style]_03.jpg">
+      <publishTime>05/24/2013 10:57:16</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/chicken-breast-with-cream-[Mathe-style]_04.jpg">
+      <publishTime>05/24/2013 10:57:29</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/chicken-breast-with-cream-[Mathe-style]_05.jpg">
+      <publishTime>05/24/2013 10:57:41</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/chicken-breast-with-cream-[Mathe-style]_06.jpg">
+      <publishTime>05/24/2013 10:57:59</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/chicken-breast-with-cream-[Mathe-style]_07.jpg">
+      <publishTime>05/24/2013 10:58:08</publishTime>
     </File>
     <File Include="Content/photos/960x480/cocoa-spiral_01.jpg">
       <publishTime>04/08/2013 04:11:28</publishTime>
@@ -411,7 +465,25 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/23/2013 20:34:33</publishTime>
     </File>
     <File Include="Content/photos/960x480/cottage-cheese-coconut-ball_01.jpg">
-      <publishTime>04/08/2013 05:13:14</publishTime>
+      <publishTime>05/06/2013 04:36:27</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/cottage-cheese-coconut-ball_02.jpg">
+      <publishTime>05/06/2013 04:20:30</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/cottage-cheese-coconut-ball_03.jpg">
+      <publishTime>05/06/2013 04:39:42</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/greek-salad_01.jpg">
+      <publishTime>05/24/2013 11:43:04</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/greek-salad_02.jpg">
+      <publishTime>05/24/2013 11:43:18</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/greek-salad_03.jpg">
+      <publishTime>05/24/2013 11:43:30</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/greek-salad_04.jpg">
+      <publishTime>05/24/2013 11:43:38</publishTime>
     </File>
     <File Include="Content/photos/960x480/hawaii-pizza_01.jpg">
       <publishTime>04/08/2013 05:16:59</publishTime>
@@ -435,16 +507,49 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/30/2013 03:46:36</publishTime>
     </File>
     <File Include="Content/photos/960x480/muffin-with-cinemon_01.jpg">
-      <publishTime>04/08/2013 04:17:30</publishTime>
+      <publishTime>05/24/2013 10:34:14</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/muffin-with-cinemon_02.jpg">
+      <publishTime>05/24/2013 10:34:28</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/muffin-with-cinemon_03.jpg">
+      <publishTime>05/24/2013 10:34:36</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/muffin-with-cinemon_04.jpg">
+      <publishTime>05/24/2013 10:34:45</publishTime>
     </File>
     <File Include="Content/photos/960x480/mustard-garlic-chicken_01.jpg">
-      <publishTime>04/08/2013 04:07:23</publishTime>
+      <publishTime>05/24/2013 10:46:24</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/mustard-garlic-chicken_02.jpg">
+      <publishTime>05/24/2013 10:46:39</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/mustard-garlic-chicken_03.jpg">
+      <publishTime>05/24/2013 10:46:55</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/mustard-garlic-chicken_04.jpg">
+      <publishTime>05/24/2013 10:47:10</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/mustard-garlic-chicken_05.jpg">
+      <publishTime>05/24/2013 10:47:24</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/mustard-garlic-chicken_06.jpg">
+      <publishTime>05/24/2013 10:47:33</publishTime>
     </File>
     <File Include="Content/photos/960x480/pita-for-gyros_01.jpg">
       <publishTime>04/08/2013 04:13:43</publishTime>
     </File>
     <File Include="Content/photos/960x480/scone_01.jpg">
-      <publishTime>04/08/2013 04:46:49</publishTime>
+      <publishTime>05/06/2013 05:01:26</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/scone_02.jpg">
+      <publishTime>05/06/2013 04:50:52</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/scone_03.jpg">
+      <publishTime>05/06/2013 03:02:09</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/scone_04.jpg">
+      <publishTime>05/06/2013 05:10:02</publishTime>
     </File>
     <File Include="Content/photos/960x480/spicy-chicken-breast_01.jpg">
       <publishTime>04/08/2013 04:57:25</publishTime>
@@ -459,13 +564,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/23/2013 15:07:09</publishTime>
     </File>
     <File Include="Content/Print.css">
-      <publishTime>05/01/2013 13:01:38</publishTime>
+      <publishTime>06/07/2013 18:45:47</publishTime>
     </File>
     <File Include="Content/Site.css">
-      <publishTime>05/01/2013 13:00:36</publishTime>
+      <publishTime>06/07/2013 18:46:04</publishTime>
     </File>
     <File Include="Content/Site.min.css">
-      <publishTime>05/01/2013 13:00:36</publishTime>
+      <publishTime>06/07/2013 18:46:04</publishTime>
     </File>
     <File Include="Content/svg/action_bake.svg">
       <publishTime>03/24/2013 19:39:35</publishTime>
@@ -899,6 +1004,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/svg/icon_glutenfree_disabled.svg">
       <publishTime>01/28/2013 14:17:47</publishTime>
     </File>
+    <File Include="Content/svg/icon_iflag.svg">
+      <publishTime>05/05/2013 00:02:01</publishTime>
+    </File>
     <File Include="Content/svg/icon_lactosefree.svg">
       <publishTime>01/28/2013 14:17:47</publishTime>
     </File>
@@ -906,13 +1014,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/28/2013 14:17:47</publishTime>
     </File>
     <File Include="Content/svg/icon_menutrigger.svg">
-      <publishTime>01/28/2013 14:17:48</publishTime>
+      <publishTime>05/05/2013 16:51:08</publishTime>
     </File>
     <File Include="Content/svg/icon_photos.svg">
       <publishTime>01/28/2013 14:17:48</publishTime>
     </File>
     <File Include="Content/svg/icon_photos_disabled.svg">
       <publishTime>01/28/2013 14:43:09</publishTime>
+    </File>
+    <File Include="Content/svg/icon_recipestart.svg">
+      <publishTime>05/05/2013 16:51:08</publishTime>
     </File>
     <File Include="Content/svg/icon_sliderhandle.svg">
       <publishTime>01/22/2013 14:24:48</publishTime>
@@ -1045,6 +1156,21 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="Content/svg/logo_mrkupido_wide.svg">
       <publishTime>01/19/2013 23:32:29</publishTime>
+    </File>
+    <File Include="Content/svg/menu_help.svg">
+      <publishTime>06/07/2013 14:10:10</publishTime>
+    </File>
+    <File Include="Content/svg/menu_language.svg">
+      <publishTime>06/07/2013 14:10:10</publishTime>
+    </File>
+    <File Include="Content/svg/menu_location.svg">
+      <publishTime>06/07/2013 14:10:10</publishTime>
+    </File>
+    <File Include="Content/svg/menu_profile.svg">
+      <publishTime>06/07/2013 14:10:10</publishTime>
+    </File>
+    <File Include="Content/svg/menu_recipes.svg">
+      <publishTime>06/07/2013 14:10:10</publishTime>
     </File>
     <File Include="Content/svg/nophoto.svg">
       <publishTime>04/17/2013 13:41:12</publishTime>
@@ -1394,6 +1520,24 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Scripts/jquery.nivo.slider.js">
       <publishTime>03/29/2013 09:14:42</publishTime>
     </File>
+    <File Include="Scripts/jquery.svg.js">
+      <publishTime>05/11/2013 20:08:08</publishTime>
+    </File>
+    <File Include="Scripts/jquery.svganim.js">
+      <publishTime>04/27/2012 14:51:50</publishTime>
+    </File>
+    <File Include="Scripts/jquery.svgdom.js">
+      <publishTime>05/23/2013 11:56:33</publishTime>
+    </File>
+    <File Include="Scripts/jquery.svgfilter.js">
+      <publishTime>04/27/2012 15:52:50</publishTime>
+    </File>
+    <File Include="Scripts/jquery.svggraph.js">
+      <publishTime>04/27/2012 15:52:44</publishTime>
+    </File>
+    <File Include="Scripts/jquery.svgplot.js">
+      <publishTime>04/27/2012 15:52:42</publishTime>
+    </File>
     <File Include="Scripts/jquery.unobtrusive-ajax.js">
       <publishTime>07/22/2012 09:51:26</publishTime>
     </File>
@@ -1515,7 +1659,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/26/2013 13:26:23</publishTime>
     </File>
     <File Include="Views/Home/_RecipeSearchResultSideB.cshtml">
-      <publishTime>04/17/2013 13:43:32</publishTime>
+      <publishTime>05/05/2013 00:02:39</publishTime>
     </File>
     <File Include="Views/Import/Recipe.cshtml">
       <publishTime>02/21/2013 17:07:15</publishTime>
@@ -1563,10 +1707,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/15/2012 14:44:48</publishTime>
     </File>
     <File Include="Views/Recipe/Details.cshtml">
-      <publishTime>05/02/2013 12:50:57</publishTime>
+      <publishTime>06/07/2013 18:39:53</publishTime>
     </File>
     <File Include="Views/Recipe/_RecipeDirections.cshtml">
-      <publishTime>03/25/2013 11:33:42</publishTime>
+      <publishTime>06/07/2013 18:45:30</publishTime>
     </File>
     <File Include="Views/Recipe/_RecipeIngredients.cshtml">
       <publishTime>05/01/2013 11:04:05</publishTime>
@@ -1581,10 +1725,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/03/2013 11:41:35</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>04/19/2013 11:14:13</publishTime>
+      <publishTime>06/07/2013 13:13:12</publishTime>
     </File>
     <File Include="Views/Shared/_SearchHeader.cshtml">
-      <publishTime>04/07/2013 19:28:42</publishTime>
+      <publishTime>06/07/2013 18:18:25</publishTime>
     </File>
     <File Include="Views/Shared/_ValidationErrors.cshtml">
       <publishTime>03/18/2013 00:35:36</publishTime>
@@ -1596,7 +1740,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/22/2012 09:51:18</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/02/2013 14:00:23</publishTime>
+      <publishTime>06/07/2013 18:49:06</publishTime>
     </File>
   </ItemGroup>
 </Project>

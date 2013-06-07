@@ -2,7 +2,7 @@
 @this.ScriptBlock(
     @<script type="text/javascript">
 
-         /* Downloaded from http://www.whatwg.org/specs/web-apps/current-work/reviewer.js */
+@*         /* Downloaded from http://www.whatwg.org/specs/web-apps/current-work/reviewer.js */
 
          function submitReviewComment() {
 
@@ -49,7 +49,7 @@
             $('input#reviewCommentButton').removeAttr('disabled');
 
             if (event.keyCode == 13) { submitReviewComment() };
-        }
+        }*@
 
 
         idleTime = 0;
@@ -85,6 +85,7 @@
     <link runat="server" href="~/Content/themes/base/jquery.ui.autocomplete.css" rel="stylesheet" type="text/css">
     <link runat="server" href="~/Content/themes/base/jquery.ui.slider.css" rel="stylesheet" type="text/css">
     <link runat="server" href="~/Content/themes/base/jquery.ui.theme.css" rel="stylesheet" type="text/css">
+    @*@Styles.Render("~/bundles/jquery.svg")*@
     @Styles.Render("~/Content/css")
 @*    <link rel="stylesheet" href="~/Content/css/Print.css" type="text/css" media="print" />*@
 
@@ -128,12 +129,12 @@
 
 
 
-    <div id="reviewer" class="on">
+@*    <div id="reviewer" class="on">
         <span id="reviewSection">@MrKupido.Web.Resources.Shared.Layout.ReviewText</span>
         @{ string placeHolderText = MrKupido.Web.Resources.Shared.Layout.ReviewPlaceholder + " v" + (Session["WebAppFileVersion"] as string); }
         <input id="reviewCommentText" placeholder='@placeHolderText' size="60" onkeydown="javascript:reviewCommentChanged(event);">
         <input id="reviewCommentButton" value="@MrKupido.Web.Resources.Shared.Layout.ReviewButton" type="button" onclick="javascript: submitReviewComment();">
-    </div>
+    </div>*@
 
 
 @*    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>*@
@@ -143,8 +144,32 @@
     @Scripts.Render("~/Scripts/wTimer.js")
     @Scripts.Render("~/Scripts/jquery.nivo.slider.js")
     @Styles.Render("~/Content/nivo-slider.css")
+    @*@Scripts.Render("~/bundles/jquery.svg")*@
 
     @this.WriteScriptBlocks()
+
+    @{ string placeHolderText = @MrKupido.Web.Resources.Shared.Layout.FeedbackAndSupport + " v" + (Session["WebAppFileVersion"] as string); }
+
+    <!-- UserVoice JavaScript SDK (only needed once on a page) -->
+    <script>(function () { var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true; uv.src = '//widget.uservoice.com/bQqIiv9tekPJeh4cNURJQ.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s) })()</script>
+
+    <!-- A tab to launch the Classic Widget -->
+    <script>
+        var placeHolderTextHtml = $("<div />").html('@placeHolderText').contents();
+
+        UserVoice = window.UserVoice || [];
+        UserVoice.push(['showTab', 'classic_widget', {
+            mode: 'full',
+            primary_color: '#553e31',
+            link_color: '#cdb8ab',
+            default_mode: 'support',
+            forum_id: 201766,
+            tab_label: placeHolderTextHtml[0].data,
+            tab_color: '#553e31',
+            tab_position: 'middle-right',
+            tab_inverted: false
+        }]);
+    </script>
 
 </body>
 </html>

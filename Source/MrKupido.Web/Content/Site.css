@@ -29,7 +29,7 @@ background              bgc         #fffcf5
     @font-face {
         font-family: 'tangerineabold';
         src: url('../Content/fonts/Tangerine/tangerinea_bold-webfont.woff') format('woff'),
-            url('../Content/fonts/Tangerine/tangerinea_bold-webfont.ttf') format('truetype');
+        url('../Content/fonts/Tangerine/tangerinea_bold-webfont.ttf') format('truetype');
         font-weight: normal;
         font-style: normal;
     }
@@ -37,7 +37,7 @@ background              bgc         #fffcf5
 
     body {
         font-size: 14px;
-        font-family: Cardo, Sans-Serif;
+        font-family: Cardo, Arial;
         color: /*mcd*/ #553e31;
         background-color: #6f5d41;
         background-image: url('../Content/images/background.jpg');
@@ -90,14 +90,14 @@ background              bgc         #fffcf5
         }
 
         header label {
-            font-size: 44px;
-            font-family: tangerinearegular, Sans-Serif;
+            font-size: 21px;
+            font-family: tangerinearegular, Trebuchet;
             color: /*mcd*/ #553e31;
         }
 
         header .userbar {
             float: right;
-            width: 210px;
+            width: 70px;
             height: 51px;
             text-align: right;
             margin-top: 0;
@@ -117,6 +117,11 @@ background              bgc         #fffcf5
             margin-left: -53px;
         }
 
+        div.mainmenu img,
+        div.mainmenu label {
+            cursor: pointer;
+        }
+
         header .userbar img#menu-trigger {
             cursor: pointer;
             display: inline-block;
@@ -130,26 +135,35 @@ background              bgc         #fffcf5
 
         /* ---------- usermenu ---------------- */
 
-        header nav#menu-wrap {
+        header nav.menuwrap {
             position: relative;
+            width: 152px;
         }
 
-        header ul#usermenu,
-        header ul#usermenu ul {
+        header ul.menu,
+        header ul.menu ul {
+            position: relative;
             margin: 0;
             padding: 0;
             list-style: none;
-            position: relative;
             top: 0px;
-            left: 75px;
             z-index: 2;
         }
 
-        header ul#usermenu {
+        header ul.menu {
+            position: absolute;
             display: none;
         }
 
-            header ul#usermenu ul {
+        header ul#user-menu {
+            left: -65px;
+        }
+
+        header ul#language-menu {
+            left: 0px;
+        }
+
+            header ul.menu ul {
                 position: absolute;
                 top: 0px;
                 left: -160px;
@@ -163,19 +177,19 @@ background              bgc         #fffcf5
                 transition: all .2s ease-in-out;
             }
 
-            header ul#usermenu li:hover > ul {
+            header ul.menu li:hover > ul {
                 opacity: 1;
                 visibility: visible;
                 margin: 0;
             }
 
 
-            header ul#usermenu li {
+            header ul.menu li {
                 float: none;
                 display: block;
             }
 
-            header ul#usermenu a {
+            header ul.menu a {
                 padding-left: 10px;
                 padding-right: 10px;
                 width: 130px;
@@ -190,27 +204,34 @@ background              bgc         #fffcf5
                 background: #eadfd4;
             }
 
-                header ul#usermenu a:hover {
+                header ul.menu a:hover {
                     color: #eadfd4;
                     background-color: #553e31;
                 }
 
-            header ul#usermenu li:first-child > a {
+            header ul.menu li:first-child > a {
                 border-radius: 3px 3px 0 0;
                 border-top: 1px solid #cdb8ab;
             }
 
-                header ul#usermenu li:first-child > a:after {
+                header ul.menu li:first-child > a:after {
                     content: '';
                     position: absolute;
-                    left: 123px;
                     top: -6px;
                     border-left: 6px solid transparent;
                     border-right: 6px solid transparent;
                     border-bottom: 6px solid #cdb8ab;
                 }
 
-            header ul#usermenu ul li:first-child a:after {
+                header ul#user-menu li:first-child > a:after {
+                    left: 123px;
+                }
+
+                header ul#language-menu li:first-child > a:after {
+                    left: 70px;
+                }
+
+            header ul.menu ul li:first-child a:after {
                 left: 150px;
                 top: 50%;
                 margin-top: -6px;
@@ -220,11 +241,11 @@ background              bgc         #fffcf5
                 border-left: 6px solid #cdb8ab;
             }
 
-            header ul#usermenu li:first-child a:hover:after {
+            header ul.menu li:first-child a:hover:after {
                 border-bottom-color: #cdb8ab;
             }
 
-            header ul#usermenu ul li:first-child a:hover:after {
+            header ul.menu ul li:first-child a:hover:after {
                 content: '';
                 position: absolute;
                 left: 150px;
@@ -234,7 +255,7 @@ background              bgc         #fffcf5
                 border-bottom: 6px solid transparent;
             }
 
-            header ul#usermenu li:last-child > a {
+            header ul.menu li:last-child > a {
                 border-radius: 0 0 3px 3px;
                 border-bottom: 1px solid #cdb8ab;
             }
@@ -253,7 +274,7 @@ background              bgc         #fffcf5
     }
 
     .searchbox #query {
-        margin-right: 71px;
+        margin-right: 41px;
     }
 
     .searchbox #querySignButtons {
@@ -367,8 +388,8 @@ background              bgc         #fffcf5
 
     div.summary h1,
     details summary h1 {
-        font-size: 44px;
-        font-family: tangerineabold, Sans-Serif;
+        font-size: 21px;
+        font-family: tangerineabold, Trebuchet;
         color: /*mcd*/ #553e31;
         text-align: center;
         margin: 0;
@@ -382,8 +403,8 @@ background              bgc         #fffcf5
 
     div.summary h2,
     details summary h2 {
-        font-size: 26px;
-        font-family: tangerinearegular, Sans-Serif;
+        font-size: 12px;
+        font-family: tangerinearegular, Trebuchet;
         color: /*mcd*/ #553e31;
         float: right;
         width: auto;
@@ -394,8 +415,8 @@ background              bgc         #fffcf5
 
     div.summary h3,
     details summary h3 {
-        font-size: 26px;
-        font-family: tangerinearegular, Sans-Serif;
+        font-size: 12px;
+        font-family: tangerinearegular, Trebuchet;
         color: /*mcd*/ #553e31;
         margin: 0;
         width: auto;
@@ -403,8 +424,8 @@ background              bgc         #fffcf5
     }
 
     h2 {
-        font-size: 44px;
-        font-family: tangerineabold, Sans-Serif;
+        font-size: 21px;
+        font-family: tangerineabold, Trebuchet;
         color: /*mcd*/ #553e31;
         text-align: center;
         margin-top: -8px;
@@ -415,8 +436,8 @@ background              bgc         #fffcf5
 
 
     h3 {
-        font-size: 26px;
-        font-family: tangerinearegular, Sans-Serif;
+        font-size: 12px;
+        font-family: tangerinearegular, Trebuchet;
         color: /*mcd*/ #553e31;
         width: auto;
         text-align: right;
@@ -426,8 +447,8 @@ background              bgc         #fffcf5
     div.details ul,
     details ul {
         float: left;
-        font-size: 20px;
-        font-family: Cardo, Sans-Serif;
+        font-size: 21px;
+        font-family: Cardo, Arial;
         color: /*mcd*/ #553e31;
         margin: 0 auto 0 auto;
         padding: 0;
@@ -472,8 +493,8 @@ background              bgc         #fffcf5
         }
 
     details div.openidoption {
-        font-size: 22px;
-        font-family: Cardo, Sans-Serif;
+        font-size: 21px;
+        font-family: Cardo, Arial;
         color: /*mcd*/ #553e31;
         text-align: center;
     }
@@ -705,7 +726,7 @@ background              bgc         #fffcf5
         details#searchresults li div.resultbody {
             height: 58px;
             font-size: 14px;
-            font-family: Cardo, Sans-Serif;
+            font-family: Cardo, Arial;
             color: /*mcd*/ #553e31;
             padding: 5px;
             text-align: justify;
@@ -799,8 +820,8 @@ background              bgc         #fffcf5
                 margin-top: 0;
                 width: 375px;
                 vertical-align: super;
-                font-size: 20px;
-                font-family: Cardo, Sans-Serif;
+                font-size: 21px;
+                font-family: Cardo, Arial;
                 text-align: center;
                 outline: none;
                 border: 1px solid #cdb8ab;
@@ -920,7 +941,7 @@ background              bgc         #fffcf5
         padding: 0px;
         line-height: 0px;
         font-size: 14px;
-        font-family: Cardo, Sans-Serif;
+        font-family: Cardo, Arial;
         font-weight: bold;
         border: 1px solid #cdb8ab;
     }
@@ -932,11 +953,11 @@ background              bgc         #fffcf5
 
         input[type='button'].submit,
         input[type='submit'] {
-            font-size: 20px;
+            font-size: 21px;
         }
 
     input[type='button'], input[type='submit'] {
-        font-family: Cardo, Sans-Serif;
+        font-family: Cardo, Arial;
         color: /*mcd*/ #553e31;
         border: 1px solid #cdb8ab;
         -moz-border-radius: 3px;
@@ -989,18 +1010,38 @@ background              bgc         #fffcf5
         margin: 0.5em 0 0 0;
     }
 
+    header div.mainmenu {
+        width: 500px;
+        text-align: right;
+        margin-top: 10px;
+        margin-left: 210px;
+    }
+
+    header div.mainmenu a:hover{
+        text-decoration: none;
+    }
+
+        header div.mainmenu label {
+            display: inline-block;
+            width: 91px;
+            text-align: center;
+            white-space: nowrap;
+            font-size: 14px;
+            font-family: Cardo, Arial;
+        }
+
     header .inputfield {
         width: 530px;
         text-align: right;
-        margin-left: 210px;
+        margin: 3px 0px 2px 210px;
     }
 
         header .inputfield input {
             -moz-appearance: none;
             -webkit-appearance: none;
-            width: 280px;
-            font-size: 20px;
-            font-family: Cardo, Sans-Serif;
+            width: 310px;
+            font-size: 21px;
+            font-family: Cardo, Arial;
             vertical-align: super;
             color: /*mcd*/ #553e31;
             background-color: /*bgc*/ #fffcf5;
@@ -1016,8 +1057,8 @@ background              bgc         #fffcf5
 
     .sortorderselect {
         float: right;
-        font-size: 26px;
-        font-family: tangerinearegular, Sans-Serif;
+        font-size: 12px;
+        font-family: tangerinearegular, Trebuchet;
         color: /*mcd*/ #553e31;
         margin-top: -20px;
     }
@@ -1390,7 +1431,7 @@ background              bgc         #fffcf5
     div.ingredientlistrecipename {
         margin-top: 15px;
         margin-left: 10px;
-        font-size: 20px;
+        font-size: 21px;
         text-decoration: underline;
     }
 
@@ -1604,7 +1645,7 @@ ul.ingredientlist li.ingredientlistitem input[type=radio]:disabled:checked + lab
             display: block;
             float: right;
             height: 70px;
-            width: 700px;
+            width: 690px;
             line-height: 70px;
             /*border: solid 1px green;*/
         }
@@ -1623,7 +1664,7 @@ ul.ingredientlist li.ingredientlistitem input[type=radio]:disabled:checked + lab
                 bottom: 0px;
                 left: 0px;
                 display: inline-block;
-                width: 700px;
+                width: 690px;
                 height: 70px;
                 /*border: solid 1px blue;*/
             }
@@ -1696,8 +1737,8 @@ ul.ingredientlist li.ingredientlistitem input[type=radio]:disabled:checked + lab
         width: 831px;
         padding-left: 20px;
 
-        font-size: 22px;
-        font-family: Cardo, Sans-Serif;
+        font-size: 21px;
+        font-family: Cardo, Arial;
         color: /*mcd*/ #553e31;
     }
 
@@ -1723,7 +1764,7 @@ ul.ingredientlist li.ingredientlistitem input[type=radio]:disabled:checked + lab
         background: #eadfd4;
         color: #553e31;
         font-size: 14px;
-        font-family: Cardo, Sans-Serif;
+        font-family: Cardo, Arial;
         text-align: center;
     }
 
@@ -1840,7 +1881,7 @@ ul.ingredientlist li.ingredientlistitem input[type=radio]:disabled:checked + lab
     /* ----------- help ------------ */
     article.help {
         font-size: 14px;
-        font-family: Cardo, Sans-Serif;
+        font-family: Cardo, Arial;
         color: /*mcd*/ #553e31;
     }
 
@@ -1869,8 +1910,8 @@ ul.ingredientlist li.ingredientlistitem input[type=radio]:disabled:checked + lab
             }
 
         article.help h1 {
-            font-size: 44px;
-            font-family: tangerinearegular, Sans-Serif;
+            font-size: 21px;
+            font-family: tangerinearegular, Trebuchet;
             color: /*mcd*/ #553e31;
             text-align: center;
             text-decoration: underline;
@@ -1879,8 +1920,8 @@ ul.ingredientlist li.ingredientlistitem input[type=radio]:disabled:checked + lab
         }
 
         article.help h2 {
-            font-size: 22px;
-            font-family: Cardo, Sans-Serif;
+            font-size: 21px;
+            font-family: Cardo, Arial;
             color: /*mcd*/ #553e31;
             text-decoration: underline;
             padding: 10px;
@@ -1889,8 +1930,8 @@ ul.ingredientlist li.ingredientlistitem input[type=radio]:disabled:checked + lab
         }
 
         article.help h3 {
-            font-size: 20px;
-            font-family: Cardo, Sans-Serif;
+            font-size: 18px;
+            font-family: Cardo, Arial;
             color: /*mcd*/ #553e31;
             text-decoration: underline;
             margin-top: 15px;
@@ -1980,7 +2021,7 @@ ul.ingredientlist li.ingredientlistitem input[type=radio]:disabled:checked + lab
 
     /* ----------- login page description ------------ */
     div.description h2 {
-        font-size: 22px;
+        font-size: 21px;
         text-align: center;
         margin: 25px;
     }

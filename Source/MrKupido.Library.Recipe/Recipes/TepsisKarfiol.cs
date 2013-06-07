@@ -42,14 +42,15 @@ namespace MrKupido.Library.Recipe
             eg.Use<KisLabas>(1).Berakni(new Vaj(5.0f * amount), new Liszt(2.0f * amount, MeasurementUnit.evokanal));
 
             eg.Use<Tuzhely>(1).RahelyezniC(eg.Use<KisLabas>(1));
-            eg.Use<Tuzhely>(1).Homerseklet(80);
+			eg.Use<Tuzhely>(1).Homerseklet(80); // kis langon
+			eg.Use<KisLabas>(1).Varni(3);
 
             eg.Use<Labas>(1).BeonteniI(new Tej(2.0f * amount));
             eg.Use<Tuzhely>(1).RahelyezniC(eg.Use<Labas>(1));
             eg.Use<Tuzhely>(1).Homerseklet(60);
 
             eg.Use<Labas>(1).BerakniC(eg.Use<KisLabas>(1));
-            eg.Use<Fakanal>(1).KevergetniC(eg.Use<Labas>(1), 10);
+            eg.Use<Fakanal>(1).KevergetniC(eg.Use<Labas>(1), 5);
 
             ISingleIngredient hagyma = new Ujhagyma(5.0f * amount, MeasurementUnit.piece);
             eg.Use<Kes>(1).FelkarikazniI(hagyma, 1.0f);
@@ -59,30 +60,32 @@ namespace MrKupido.Library.Recipe
             eg.Use<Labas>(1).Berakni(new Fuszerpaprika(1.0f * amount, MeasurementUnit.teaskanal), new So(1.0f * amount, MeasurementUnit.teaskanal), new FeherBors(1.0f * amount, MeasurementUnit.mokkaskanal, IngredientState.Orolt), new Borokabogyo(2.0f * amount, MeasurementUnit.csipet), hagyma);
             eg.Use<Labas>(1).BerakniC(eg.Use<LaposTanyer>(1));
 
-            eg.Use<Tuzhely>(1).Homerseklet(30);
+            eg.Use<Tuzhely>(1).Homerseklet(30); // minimumra
+			eg.Use<Tuzhely>(1).Varni(5);
 
             eg.Use<Labas>(1).BerakniI(new Tojas(2.0f * amount));
+			eg.Use<Fakanal>(1).ElkeverniC(eg.Use<Labas>(1));
 
             eg.Use<Labas>(1).Varni(2);
 
-            eg.Use<Tepsi>(1).BerakniI(karfiol);
-            eg.Use<Tepsi>(1).BeonteniC(eg.Use<Labas>(1));
-            eg.Use<Tepsi>(1).Lefedni(new Alufolia());
+            eg.Use<JenaiTal>(1).BerakniI(karfiol);
+            eg.Use<JenaiTal>(1).BeonteniC(eg.Use<Labas>(1));
+            eg.Use<JenaiTal>(1).Lefedni(new Alufolia());
 
             eg.Use<Suto>(1).Homerseklet(200);
-            eg.Use<Suto>(1).BehelyezniC(eg.Use<Tepsi>(1));
+            eg.Use<Suto>(1).BehelyezniC(eg.Use<JenaiTal>(1));
 
             eg.Use<Suto>(1).Varni(30);
 
-            eg.Use<Suto>(1).KiemelniC(eg.Use<Tepsi>(1));
-            eg.Use<Tepsi>(1).FedotLevenni();
-            eg.Use<Suto>(1).BehelyezniC(eg.Use<Tepsi>(1));
+            eg.Use<Suto>(1).KiemelniC(eg.Use<JenaiTal>(1));
+            eg.Use<JenaiTal>(1).FedotLevenni();
+            eg.Use<Suto>(1).BehelyezniC(eg.Use<JenaiTal>(1));
 
             eg.Use<Suto>(1).Varni(5);
 
-            eg.Use<Suto>(1).KiemelniC(eg.Use<Tepsi>(1));
+            eg.Use<Suto>(1).KiemelniC(eg.Use<JenaiTal>(1));
 
-            cfp.Add("karfiol", eg.Use<Tepsi>(1));
+            cfp.Add("karfiol", eg.Use<JenaiTal>(1));
 
             eg.WashUp();
             return cfp;

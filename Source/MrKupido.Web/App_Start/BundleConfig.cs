@@ -14,7 +14,10 @@ namespace MrKupido.Web
             //            "~/Scripts/jquery-ui*",
             //            "~/Scripts/jquery.ui*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+			bundles.Add(new ScriptBundle("~/bundles/jquery.svg").Include(
+						"~/Scripts/jquery.svg*"));
+			
+			bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                         "~/Scripts/jquery.unobtrusive*",
                         "~/Scripts/jquery.validate*"));
 

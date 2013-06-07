@@ -162,6 +162,9 @@
   <data name="QueryPlaceholder" xml:space="preserve">
     <value>(hozzávaló, diéta, eszköz)</value>
   </data>
+  <data name="Recipes" xml:space="preserve">
+    <value>Receptek</value>
+  </data>
   <data name="Taxonomy" xml:space="preserve">
     <value>Taxonómia</value>
   </data>

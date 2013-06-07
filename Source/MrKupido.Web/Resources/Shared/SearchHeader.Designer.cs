@@ -196,6 +196,15 @@ namespace MrKupido.Web.Resources.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Recipes.
+        /// </summary>
+        public static string Recipes {
+            get {
+                return ResourceManager.GetString("Recipes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Taxonomy.
         /// </summary>
         public static string Taxonomy {

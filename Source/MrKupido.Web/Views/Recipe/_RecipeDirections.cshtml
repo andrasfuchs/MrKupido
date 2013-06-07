@@ -102,9 +102,9 @@
              //li.find("span.timer>img").animate({ height: 60, width: 60 }, { duration: 400, easing: "easeInOutCubic", queue: false });
              //li.find("span.timer>span.action").animate({ marginTop: -54, marginLeft: -75 }, { duration: 400, easing: "easeInOutCubic", queue: false });
              //li.find("span.timer>span.action>img").animate({ height: 60, width: 60, marginTop: -44, marginLeft: -70 }, { duration: 400, easing: "easeInOutCubic", queue: false });
-             li.find("div.directionRightPart").animate({ width: 700, height: 70 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             li.find("div.directionRightPart").animate({ width: 690, height: 70 }, { duration: 400, easing: "easeInOutCubic", queue: false });
              li.find("div.directionRightPart>span.directionBigIcons").animate({ opacity: 0.0 }, { duration: 400, easing: "easeInOutCubic", queue: false });
-             li.find("div.directionRightPart>span.directionText").animate({ width: 700 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             li.find("div.directionRightPart>span.directionText").animate({ width: 690 }, { duration: 400, easing: "easeInOutCubic", queue: false });
          }
     </script>
 )
@@ -115,8 +115,9 @@
 }
 else
 { 
-    <div class="clickabledirection">
-        <div class="icon"><img runat="server" src="~/Content/svg/icon_recipestart.svg" width="19" height="22" /></div>
+    <div class="clickabledirection" onclick="javascript: timerCounter = 0; timer.start();">
+        <div class="icon">
+            <img runat="server" src="~/Content/svg/icon_recipestart.svg" width="19" height="22" /></div>
         <div class="text">Kezdődhet a főzés!</div>
     </div>
     
@@ -141,7 +142,7 @@ else
                         {
                             if (tn != null)
                             {
-                                <img runat="server" src="@tn.IconUrl" width="60px" height="60px" />
+                            <img runat="server" src="@tn.IconUrl" width="60px" height="60px" />
                             }
                         }
                     </span>
@@ -155,18 +156,18 @@ else
 
                                     if (!String.IsNullOrEmpty(refSegment.IconUrl))
                                     {
-                                        @*<img runat="server" src="@refSegment.IconUrl" alt="@refSegment.IconAlt" title="@refSegment.IconAlt" width="32px" height="32px" />*@
+@*<img runat="server" src="@refSegment.IconUrl" alt="@refSegment.IconAlt" title="@refSegment.IconAlt" width="32px" height="32px" />*@
                                     }
 
                                     if (refSegment.Id > 0)
                                     {
-                                        @*<span>@refSegment.Id</span>*@
-                                        @*<span>@refSegment.IconAlt</span>*@
+@*<span>@refSegment.Id</span>*@
+@*<span>@refSegment.IconAlt</span>*@
                                     }
-                                    
+
                                     if (!String.IsNullOrEmpty(refSegment.Name))
                                     {
-                                        <span>@refSegment.Name</span>
+                                <span>@refSegment.Name</span>
                                     }
                             
                                 @refSegment.Text
@@ -185,7 +186,7 @@ else
         }
     </ul>
 
-    <div class="clickabledirection">
+    <div class="clickabledirection" onclick="javascript: timerCounter = 65535; timer.start();">
         <div class="icon"></div>
         <div class="text">Elkészültem!</div>
     </div>

@@ -19,8 +19,8 @@ namespace MrKupido.Library.Ingredient
     //[YieldOf(typeof())]
     public class Borokabogyo : SingleIngredient
     {
-        public Borokabogyo(float amount, MeasurementUnit unit = MeasurementUnit.piece)
-            : base(amount, unit)
+		public Borokabogyo(float amount, MeasurementUnit unit = MeasurementUnit.piece, IngredientState state = IngredientState.Orolt)
+            : base(amount, unit, state)
         {
         }
     }

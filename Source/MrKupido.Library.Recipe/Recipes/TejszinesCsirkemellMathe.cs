@@ -74,7 +74,7 @@ namespace MrKupido.Library.Recipe
             IIngredientContainer tejesCsirkemell = preps["tejescsirkemell"];
 			kez.Raszorni(tejesCsirkemell, new So(10.0f * amount));
 
-			ISingleIngredient alma = new Alma(4.0f * amount);
+			ISingleIngredient alma = new Alma(7.5f * amount);
             alma.ChangeUnitTo(MeasurementUnit.gramm);
 
             LaposKisTanyer laposKisTanyer1 = eg.Use<LaposKisTanyer>();
@@ -82,15 +82,15 @@ namespace MrKupido.Library.Recipe
             reszelo.LereszelniI(laposKisTanyer1, alma);
 
             LaposKisTanyer laposKisTanyer2 = eg.Use<LaposKisTanyer>();
-			ISingleIngredient sajt = new FustoltSajt(20.0f * amount);
+			ISingleIngredient sajt = new FustoltSajt(50.0f * amount);
             reszelo.LereszelniI(laposKisTanyer2, sajt);
 
             JenaiTal jenai = eg.Use<JenaiTal>();
             jenai.BerakniC(tejesCsirkemell);
-			jenai.Berakni(new FustoltSzalonna(5 * amount, MeasurementUnit.piece), alma);
+			jenai.Berakni(new FustoltSzalonna(25 * amount, MeasurementUnit.piece), alma);
 			jenai.BeonteniI(new Tejszin(3.0f * amount));
             kez.Raszorni(jenai, sajt);
-			jenai.BerakniI(new FustoltSzalonna(5 * amount, MeasurementUnit.piece));
+			//jenai.BerakniI(new FustoltSzalonna(5 * amount, MeasurementUnit.piece));
 
             jenai.Lefedni(new Alufolia());
 

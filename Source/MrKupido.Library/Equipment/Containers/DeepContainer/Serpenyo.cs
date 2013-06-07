@@ -7,7 +7,9 @@ using MrKupido.Library.Ingredient;
 
 namespace MrKupido.Library.Equipment
 {
-    [NameAlias("eng", "pan")]
+	[NameAlias("eng", "skillet", Priority = 1)]
+	[NameAlias("eng", "pan", Priority = 2)]
+	[NameAlias("eng", "frying pan")]
     [NameAlias("hun", "serpenyő")]
     public class Serpenyo : DeepContainer
     {
