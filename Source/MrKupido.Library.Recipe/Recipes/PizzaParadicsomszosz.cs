@@ -55,14 +55,14 @@ namespace MrKupido.Library.Recipe
 
 			eg.Use<Tuzhely>(1).RahelyezniC(serpenyo);
 			eg.Use<Tuzhely>(1).Homerseklet(150);
-			eg.Use<Tuzhely>(1).Varni(3);
+			eg.Use<Tuzhely>(1).Varni(new Quantity(3, MeasurementUnit.minute));
 
 			IIngredientContainer fokhagyma = preps["fokhagyma"];
 			serpenyo.Berakni(new So(2.0f * amount), fokhagyma.Contents, new SuritettParadicsom(1.0f * amount), new Viz(0.5f * amount));
 			ISingleIngredient baberLevel = new Baberlevel(1.0f * amount);
 			serpenyo.Raszorni(new OreganoOrolt(0.5f * amount, MeasurementUnit.teaskanal), new Majoranna(0.5f * amount, MeasurementUnit.teaskanal), new FeketeBorsOrolt(0.5f * amount, MeasurementUnit.teaskanal), new BazsalikomOrolt(0.5f * amount, MeasurementUnit.teaskanal), baberLevel, new Zsalya(0.5f * amount, MeasurementUnit.teaskanal), new Kakukkfu(0.5f * amount, MeasurementUnit.teaskanal), new KristalyCukor(0.5f * amount, MeasurementUnit.teaskanal));
 
-			eg.Use<Tuzhely>(1).Varni(5);
+			eg.Use<Tuzhely>(1).Varni(new Quantity(5, MeasurementUnit.minute));
 
 			serpenyo.KivenniI(baberLevel);
 

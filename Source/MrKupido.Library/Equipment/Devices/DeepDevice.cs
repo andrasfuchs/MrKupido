@@ -17,6 +17,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "put in", Priority = 200)]
         [NameAlias("hun", "behelyez", Priority = 200)]
+		[NameAlias("eng", "put the {0} into the {}")]
         [NameAlias("hun", "helyezd be a(z) {B} a(z) {0T}")]
         public void BehelyezniC(IIngredientContainer c)
         {
@@ -27,6 +28,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "pull out", Priority = 200)]
         [NameAlias("hun", "kiemel", Priority = 200)]
+		[NameAlias("eng", "pull the {0} out of the {}")]
         [NameAlias("hun", "emeld ki a(z) {K} a(z) {0T}")]
         public void KiemelniC(IIngredientContainer c)
         {

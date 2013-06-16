@@ -22,6 +22,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "cotton", Priority = 200)]
         [NameAlias("hun", "kibélel", Priority = 200)]
+		[NameAlias("eng", "cotton the {} with the {0}")]
         [NameAlias("hun", "béleld ki a(z) {T} {0V}")]
         public void Kibelelni(Material material)
         {

@@ -29,7 +29,18 @@ namespace MrKupido.Processor.Model
             }
             else
             {
-                this.Text = reference is NamedObject ? ((NamedObject)reference).GetName(languageISO) : reference.ToString();
+				if (reference is NamedObject)
+				{
+					this.Text = ((NamedObject)reference).GetName(languageISO);
+				}
+				else if (reference is Quantity)
+				{
+					this.Text = ((Quantity)reference).ToString(languageISO);
+				}
+				else
+				{
+					this.Text = reference.ToString();
+				}
 
                 if (reference is SingleIngredient)
                 {

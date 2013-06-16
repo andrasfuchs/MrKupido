@@ -66,7 +66,7 @@ namespace MrKupido.Library.Recipe
             eg.Use<MuffinForma>(1).BerakniC(preps["muffinmassza"]);
 
             eg.Use<Suto>(1).BehelyezniC(eg.Use<MuffinForma>(1));
-            eg.Use<Suto>(1).Varni(30);
+			eg.Use<Suto>(1).Varni(new Quantity(30, MeasurementUnit.minute));
             eg.Use<Suto>(1).KiemelniC(eg.Use<MuffinForma>(1));
 
             cfp.Add("muffin", eg.Use<MuffinForma>(1));

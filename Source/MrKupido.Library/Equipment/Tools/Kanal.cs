@@ -12,6 +12,7 @@ namespace MrKupido.Library.Equipment
     {
         [NameAlias("eng", "skim", Priority = 200)]
         [NameAlias("hun", "lefölöz", Priority = 200)]
+		[NameAlias("eng", "skim the contents of {}")]
         [NameAlias("hun", "fölözd le a(z) {} tartalmát")]
         public IIngredient LefolozniC(IIngredientContainer container, float percent)
         {
@@ -26,6 +27,7 @@ namespace MrKupido.Library.Equipment
 
 		[NameAlias("eng", "mix together", Priority = 200)]
 		[NameAlias("hun", "összekever", Priority = 200)]
+		[NameAlias("eng", "mix the {0.Contents.} together")]
 		[NameAlias("hun", "alaposan keverd össze a(z) {0.Contents.T}")]
 		public void ElkeverniC(IIngredientContainer container)
 		{

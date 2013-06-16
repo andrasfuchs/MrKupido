@@ -63,10 +63,10 @@ namespace MrKupido.Library.Recipe
             Tuzhely tuzhely = eg.Use<Tuzhely>();
             tuzhely.Homerseklet(110);
             tuzhely.RahelyezniC(edeny);
-            edeny.Varni(10);
+			edeny.Varni(new Quantity(10, MeasurementUnit.minute));
             
             tuzhely.LeemelniC(edeny);
-            edeny.Varni(5);
+			edeny.Varni(new Quantity(5, MeasurementUnit.minute));
 
             Habvero habvero = eg.Use<Habvero>();
             edeny.Berakni(new Joghurt(0.1f));
@@ -75,7 +75,7 @@ namespace MrKupido.Library.Recipe
             Futotest futotest = eg.Use<Futotest>();
             futotest.RahelyezniC(edeny);
             //futotest.Homerseklet(40);
-            edeny.Varni((int)(1.5 * 24 * 60));
+            edeny.Varni(new Quantity(1.5f, MeasurementUnit.day));
             futotest.LeemelniC(edeny);
 
             cfp.Add("joghurt", edeny);

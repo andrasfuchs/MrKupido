@@ -12,6 +12,7 @@ namespace MrKupido.Library.Equipment
     {
         [NameAlias("eng", "peel", Priority = 200)]
         [NameAlias("hun", "meghámoz", Priority = 200)]
+		[NameAlias("eng", "peel the {0}")]
         [NameAlias("hun", "hámozd meg a(z) {0T}")]
         public void MeghamozniI(ISingleIngredient i)
         {

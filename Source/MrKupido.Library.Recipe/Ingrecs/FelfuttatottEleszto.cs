@@ -35,7 +35,7 @@ namespace MrKupido.Library.Recipe
 			eg.Use<Kez>(1).Morzsol(new Eleszto(1.0f * amount), eg.Use<Pohar>(1));
 
 			eg.Use<Futotest>(1).RahelyezniC(eg.Use<Pohar>(1));
-			eg.Use<Pohar>(1).Varni(20);
+			eg.Use<Pohar>(1).Varni(new Quantity(20, MeasurementUnit.minute));
 
 			result.Add("eleszto", eg.Use<Pohar>(1));
 

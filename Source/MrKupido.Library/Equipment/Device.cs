@@ -34,11 +34,12 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "wait", Priority = 200)]
         [NameAlias("hun", "vár", Priority = 200)]
-        [NameAlias("hun", "várj {0} percet")]
+		[NameAlias("eng", "wait {0}")]
+        [NameAlias("hun", "várj {0T}")]
         [PassiveAction]
-        public void Varni(int minutes)
+        public void Varni(Quantity duration)
         {
-            this.LastActionDuration = (uint)(minutes * 60);
+			this.LastActionDuration = (uint)(duration.GetAmount(MeasurementUnit.minute) * 60);
         }
     }
 }

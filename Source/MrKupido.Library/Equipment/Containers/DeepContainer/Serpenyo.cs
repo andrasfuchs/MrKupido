@@ -25,6 +25,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "bake", Priority = 200)]
         [NameAlias("hun", "kisüt", Priority = 200)]
+		[NameAlias("eng", "bake the {0.Contents.} in the {}, spending {1} minutes on each (approx. {0.Contents.PieceCount.} pieces), and put them into {2}")]
 		[NameAlias("hun", "süsd ki a(z) {N} a(z) {0.Contents.T}, egyenként {1} percig (kb. {0.Contents.PieceCount.} db), majd helyezd őket a {2R}")]
 		public void KisutniOsszesetC(IIngredientContainer c, float timeForOne, IIngredientContainer cTo)
         {

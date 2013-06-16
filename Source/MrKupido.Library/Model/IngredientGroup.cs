@@ -83,7 +83,7 @@ namespace MrKupido.Library.Ingredient
 
             if (changed)
             {
-                amounts.Clear();
+				Quantity.Clear();
 
                 if (this.Unit != MeasurementUnit.none)
                 {

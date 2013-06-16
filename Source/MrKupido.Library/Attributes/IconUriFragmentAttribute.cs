@@ -60,6 +60,12 @@ namespace MrKupido.Library.Attributes
                 }
 
                 memberLevelEngNames = NameAliasAttribute.GetNames(mi.DeclaringType, mi.Name, "eng");
+
+				if (mi.MemberType == System.Reflection.MemberTypes.Method)
+				{
+					memberLevelEngNames = memberLevelEngNames.Where(mlen => mlen.Priority == 200).ToArray();
+				}
+
                 mi = mi.DeclaringType;
             }
 

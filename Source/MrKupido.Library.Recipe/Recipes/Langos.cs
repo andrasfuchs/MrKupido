@@ -33,7 +33,7 @@ namespace MrKupido.Library.Recipe
 
 			eg.Use<Kez>(1).OsszegyurniC(eg.Use<NagyEdeny>(1));
 			eg.Use<NagyEdeny>(1).Lefedni(eg.Use<NagyEdeny>(1).Fedo);
-			eg.Use<NagyEdeny>(1).Varni(30);
+			eg.Use<NagyEdeny>(1).Varni(new Quantity(30, MeasurementUnit.minute));
 
 			eg.Use<NyujtoDeszka>(1).NyujtaniC(eg.Use<NagyEdeny>(1), 5.0f);
 			eg.Use<Szaggato>(1).KiszaggatniC(eg.Use<NyujtoDeszka>(1), 15.0f, 20.0f);

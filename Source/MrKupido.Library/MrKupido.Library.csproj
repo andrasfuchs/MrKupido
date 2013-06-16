@@ -238,6 +238,7 @@
     <Compile Include="Model\Dimensions.cs" />
     <Compile Include="Model\EnumToMultilingualString.cs" />
     <Compile Include="Model\EquipmentGroup.cs" />
+    <Compile Include="Model\Quantity.cs" />
     <Compile Include="Model\SignificantDigits.cs" />
     <Compile Include="Model\SingleIngredient.cs" />
     <Compile Include="Model\IngredientGroup.cs" />

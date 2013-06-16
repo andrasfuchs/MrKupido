@@ -121,7 +121,7 @@
              var multiplier = parseInt($("#portioncountervalue").html(), 10);
 
              $.ajax({
-                 url: '@Url.Action("GetNewStrings", "Recipe")',
+                 url: '@Url.Action("GetNewStrings", "Recipe", new { id = 0 })',
                 type: "POST",
                 dataType: "html",
                 data: {
@@ -142,7 +142,7 @@
             });   // ajax
 
             $.ajax({
-                url: '@Url.Action("GetIngredients", "Recipe")',
+                url: '@Url.Action("GetIngredients", "Recipe", new { id = 0 })',
                 type: "POST",
                 dataType: "html",
                 data: {
@@ -164,7 +164,7 @@
             });   // ajax
 
             $.ajax({
-                url: '@Url.Action("GetDirections", "Recipe")',
+                url: '@Url.Action("GetDirections", "Recipe", new { id = 0 })',
                 type: "POST",
                 dataType: "html",
                 data: {

@@ -13,7 +13,7 @@ namespace MrKupido.Library
 
         IIngredient Contents { get; }
 
-        void Varni(int minutes);
+        void Varni(Quantity duration);
 
         string GetName(string languageISO);
 

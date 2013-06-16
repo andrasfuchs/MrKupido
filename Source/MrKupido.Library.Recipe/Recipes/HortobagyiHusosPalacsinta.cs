@@ -67,11 +67,11 @@ namespace MrKupido.Library.Recipe
 
 			eg.Use<Tuzhely>(1).Homerseklet(150);
 			eg.Use<Tuzhely>(1).RahelyezniC(eg.Use<Edeny>(1));
-			eg.Use<Tuzhely>(1).Varni(5);
+			eg.Use<Tuzhely>(1).Varni(new Quantity(5, MeasurementUnit.minute));
 
 			eg.Use<Tuzhely>(1).Homerseklet(200);
 			eg.Use<Edeny>(1).BerakniC(preps["sertesComb"]);
-			eg.Use<Tuzhely>(1).Varni(5);
+			eg.Use<Tuzhely>(1).Varni(new Quantity(5, MeasurementUnit.minute));
 
 			eg.Use<Tuzhely>(1).LeemelniC(eg.Use<Edeny>(1));
 
@@ -83,13 +83,13 @@ namespace MrKupido.Library.Recipe
 			eg.Use<Tuzhely>(1).Homerseklet(120);
 			eg.Use<Edeny>(1).Lefedni(eg.Use<Edeny>(1).Fedo);
 			eg.Use<Tuzhely>(1).RahelyezniC(eg.Use<Edeny>(1));
-			eg.Use<Tuzhely>(1).Varni(25);
+			eg.Use<Tuzhely>(1).Varni(new Quantity(25, MeasurementUnit.minute));
 
 
 			eg.Use<NagyEdeny>(1).Berakni(new Liszt(15.0f * amount), new Tojas(3.0f * amount), new So(2.0f * amount), new Tej(4.0f * amount), new NapraforgoOlaj(0.5f));
 			eg.Use<Fakanal>(1).ElkeverniC(eg.Use<NagyEdeny>(1));
 			eg.Use<NagyEdeny>(1).Lefedni(new Konyharuha());
-			eg.Use<NagyEdeny>(1).Varni(30);
+			eg.Use<NagyEdeny>(1).Varni(new Quantity(30, MeasurementUnit.minute));
 
 			IIngredient palacsinta = eg.Use<PalacsintaSuto>(1).KisutniOsszesetC(eg.Use<NagyEdeny>(1), 3);
 			eg.Use<LaposTanyer>(1).Rarakni(palacsinta);
@@ -102,13 +102,13 @@ namespace MrKupido.Library.Recipe
 			
 			eg.Use<Tuzhely>(1).RahelyezniC(eg.Use<Edeny>(2));
 			eg.Use<Tuzhely>(1).Homerseklet(150);
-			eg.Use<Tuzhely>(1).Varni(5);
+			eg.Use<Tuzhely>(1).Varni(new Quantity(5, MeasurementUnit.minute));
 
 			eg.Use<Edeny>(2).Szetvalasztani(eg.Use<Edeny>(2), eg.Use<Edeny>(4), 20.0f);
 			eg.Use<Edeny>(2).FolyadekotAtonteni(eg.Use<Edeny>(3));
 
 			eg.Use<Suto>(1).Homerseklet(200);
-			eg.Use<Suto>(1).Varni(10);
+			eg.Use<Suto>(1).Varni(new Quantity(10, MeasurementUnit.minute));
 
 
 			eg.Use<Kes>(1).Megkenni(eg.Use<LaposTanyer>(1), eg.Use<Edeny>(3));
@@ -118,7 +118,7 @@ namespace MrKupido.Library.Recipe
 			eg.Use<Kez>(1).Ralocsolni(eg.Use<Tepsi>(1), eg.Use<Edeny>(4));
 
 			eg.Use<Suto>(1).BehelyezniC(eg.Use<Tepsi>(1));
-			eg.Use<Suto>(1).Varni(10);
+			eg.Use<Suto>(1).Varni(new Quantity(10, MeasurementUnit.minute));
 			eg.Use<Suto>(1).KiemelniC(eg.Use<Tepsi>(1));
 
 			eg.Use<Pohar>(1).Beonteni(new Tejfol(1.0f * amount));

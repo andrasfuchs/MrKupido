@@ -56,7 +56,7 @@ namespace MrKupido.Library.Recipe
             fakanal.ElkeverniC(edeny);
 
 			edeny.Berakni(new Csirkemell(25 * 10 * amount));
-            edeny.Varni(8 * 60);
+            edeny.Varni(new Quantity(8, MeasurementUnit.hour));
             edeny.FolyadekotLeonteni();            
 
             result.Add("tejescsirkemell", edeny);
@@ -97,11 +97,11 @@ namespace MrKupido.Library.Recipe
             Suto suto = eg.Use<Suto>();
             suto.Homerseklet(200);
             suto.BehelyezniC(jenai);
-            suto.Varni(60);
+			suto.Varni(new Quantity(60, MeasurementUnit.minute));
             suto.KiemelniC(jenai);
             jenai.FedotLevenni();
             suto.BehelyezniC(jenai);
-            suto.Varni(15);
+			suto.Varni(new Quantity(15, MeasurementUnit.minute));
             suto.KiemelniC(jenai);
 
             cfp.Add("csirkemellek", jenai);

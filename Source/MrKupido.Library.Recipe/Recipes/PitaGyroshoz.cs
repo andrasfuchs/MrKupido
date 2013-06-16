@@ -37,11 +37,11 @@ namespace MrKupido.Library.Recipe
             eg.Use<NagyEdeny>(1).BeonteniI(new Viz(5.0f * amount));
 
             eg.Use<NagyEdeny>(1).Lefedni(new Konyharuha());
-            eg.Use<NagyEdeny>(1).Varni(60);
+			eg.Use<NagyEdeny>(1).Varni(new Quantity(1, MeasurementUnit.hour));
             eg.Use<NagyEdeny>(1).FedotLevenni();
 
 			eg.Use<Kez>(1).GolyovaGyurniC(eg.Use<NagyEdeny>(1), 2.0f, eg.Use<LaposTanyer>(1));
-			eg.Use<LaposTanyer>(1).Varni(15);
+			eg.Use<LaposTanyer>(1).Varni(new Quantity(15, MeasurementUnit.minute));
 
 			eg.Use<MelyTanyer>(1).BerakniI(new Liszt(20.0f * amount));
 			eg.Use<Kez>(1).MegforgatniC(eg.Use<MelyTanyer>(1), eg.Use<LaposTanyer>(1), eg.Use<LaposTanyer>(2));
@@ -63,13 +63,13 @@ namespace MrKupido.Library.Recipe
             eg.Use<Tepsi>(1).BerakniC(eg.Use<NyujtoDeszka>(1));
 
             eg.Use<Suto>(1).BehelyezniC(eg.Use<Tepsi>(1));
-            eg.Use<Suto>(1).Varni(3);
+			eg.Use<Suto>(1).Varni(new Quantity(3, MeasurementUnit.minute));
             eg.Use<Suto>(1).KiemelniC(eg.Use<Tepsi>(1));
 
             eg.Use<Kez>(1).MegforditaniC(eg.Use<Tepsi>(1));
 
             eg.Use<Suto>(1).BehelyezniC(eg.Use<Tepsi>(1));
-            eg.Use<Suto>(1).Varni(3);
+			eg.Use<Suto>(1).Varni(new Quantity(3, MeasurementUnit.minute));
             eg.Use<Suto>(1).KiemelniC(eg.Use<Tepsi>(1));
 
             cfp.Add("pita", eg.Use<Tepsi>(1));

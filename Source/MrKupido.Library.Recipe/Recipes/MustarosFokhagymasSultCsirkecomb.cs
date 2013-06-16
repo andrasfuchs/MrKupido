@@ -54,7 +54,7 @@ namespace MrKupido.Library.Recipe
 
             eg.Use<Suto>(1).Homerseklet(200);
             eg.Use<Suto>(1).BehelyezniC(eg.Use<Tepsi>(1));
-            eg.Use<Suto>(1).Varni(40);
+			eg.Use<Suto>(1).Varni(new Quantity(40, MeasurementUnit.minute));
             eg.Use<Suto>(1).KiemelniC(eg.Use<Tepsi>(1));
 
             eg.Use<Reszelo>(1).LereszelniI(eg.Use<LaposKisTanyer>(1), new Sajt(20.0f * amount));
@@ -63,7 +63,7 @@ namespace MrKupido.Library.Recipe
             eg.Use<Kez>(1).RaszorniC(eg.Use<Tepsi>(1), eg.Use<LaposKisTanyer>(1));
 
             eg.Use<Suto>(1).BehelyezniC(eg.Use<Tepsi>(1));
-            eg.Use<Suto>(1).Varni(10);
+			eg.Use<Suto>(1).Varni(new Quantity(10, MeasurementUnit.minute));
             eg.Use<Suto>(1).KiemelniC(eg.Use<Tepsi>(1));
 
             cfp.Add("csirkecomb", eg.Use<Tepsi>(1));

@@ -19,6 +19,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "cover", Priority = 200)]
         [NameAlias("hun", "lefed", Priority = 200)]
+		[NameAlias("eng", "cover the {} with {0}")]
         [NameAlias("hun", "fedd le a(z) {T} {0V}")]
         public void Lefedni(Material material)
         {
@@ -29,6 +30,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "take off", Priority = 200)]
         [NameAlias("hun", "levesz", Priority = 200)]
+		[NameAlias("eng", "take off the {-} from the {}")]
         [NameAlias("hun", "vedd le a(z) {L} a(z) {-T}")]
         public Material FedotLevenni()
         {

@@ -31,7 +31,7 @@ namespace MrKupido.Library.Recipe
 
             eg.Use<Tuzhely>(1).RahelyezniC(eg.Use<Labas>(1));
             eg.Use<Tuzhely>(1).Homerseklet(350);
-            eg.Use<Labas>(1).Varni(20);
+			eg.Use<Labas>(1).Varni(new Quantity(20, MeasurementUnit.minute));
             eg.Use<Tuzhely>(1).LeemelniC(eg.Use<Labas>(1));
             eg.Use<Labas>(1).FolyadekotLeonteni();
 

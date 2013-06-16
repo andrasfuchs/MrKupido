@@ -63,7 +63,7 @@ namespace MrKupido.Library.Recipe
 
             futotest.RahelyezniC(edeny);
             //futotest.Homerseklet(40);
-            edeny.Varni((int)(1.5 * 24 * 60));
+            edeny.Varni(new Quantity(1.5f, MeasurementUnit.day));
             futotest.LeemelniC(edeny);
 
             Kanal kanal = eg.Use<Kanal>();

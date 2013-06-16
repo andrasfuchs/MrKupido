@@ -13,6 +13,7 @@ namespace MrKupido.Library.Equipment
     {
         [NameAlias("eng", "hunt out", Priority = 200)]
         [NameAlias("hun", "felver", Priority = 200)]
+		[NameAlias("eng", "hunt the {0} out")]
         [NameAlias("hun", "verd fel a(z) {0T}")]
         public IIngredient FelverniI(IIngredient i)
         {
@@ -29,6 +30,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "mix together", Priority = 200)]
         [NameAlias("hun", "összekever", Priority = 200)]
+		[NameAlias("eng", "mix the {0} together")]
         [NameAlias("hun", "alaposan keverd össze a(z) {0T}")]
         public IIngredientGroup ElkeverniIG(IIngredientGroup ingredients)
         {
@@ -39,6 +41,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "mix up", Priority = 200)]
         [NameAlias("hun", "kikever", Priority = 200)]
+		[NameAlias("eng", "mix the {0.Contents.} up")]
         [NameAlias("hun", "keverd ki a(z) {0.Contents.T}")]
         public void KikeverniC(IIngredientContainer c)
         {

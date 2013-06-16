@@ -17,6 +17,7 @@ namespace MrKupido.Library.Equipment
 
         protected IngredientGroup contents = new IngredientGroup();
 
+		[NameAlias("eng", "contents of the {}")]
         [NameAlias("hun", "{} tartalma")]
         public IIngredient Contents 
         {
@@ -49,15 +50,17 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "wait", Priority = 200)]
         [NameAlias("hun", "vár", Priority = 200)]
-        [NameAlias("hun", "várj {0} percet")]
+		[NameAlias("eng", "wait {0}")]
+        [NameAlias("hun", "várj {0T}")]
         [PassiveAction]
-        public void Varni(int minutes) 
+        public void Varni(Quantity duration) 
         {
-            this.LastActionDuration = (uint)(minutes * 60);
+            this.LastActionDuration = (uint)(duration.GetAmount(MeasurementUnit.minute) * 60);
         }
 
         [NameAlias("eng", "pour off", Priority = 200)]
         [NameAlias("hun", "leönt", Priority = 200)]
+		[NameAlias("eng", "pour off the fluid from the {}")]
         [NameAlias("hun", "öntsd le a folyadékot a(z) {L}")]
         public void FolyadekotLeonteni() 
         {
@@ -76,6 +79,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "pour off", Priority = 200)]
         [NameAlias("hun", "átönt", Priority = 200)]
+		[NameAlias("eng", "pour off the fluid from the {} into the {0}")]
         [NameAlias("hun", "öntsd át a folyadékot a(z) {L} a(z) {0B}")]
         public void FolyadekotAtonteni(IIngredientContainer c)
         {
@@ -105,6 +109,7 @@ namespace MrKupido.Library.Equipment
 
 		[NameAlias("eng", "separate", Priority = 200)]
 		[NameAlias("hun", "szétválaszt", Priority = 200)]
+		[NameAlias("eng", "separate the {.Contents.} into the {0} and {1} in a way, that the first has {2}% of it")]
 		[NameAlias("hun", "válaszd szét a(z) {.Contents.T} a(z) {0B} és a(z) {1B}, úgy hogy az elsőbe kb. {2}% kerüljön")]
 		public void Szetvalasztani(Container c1, Container c2, float p)
 		{
@@ -125,6 +130,7 @@ namespace MrKupido.Library.Equipment
 
 		[NameAlias("eng", "sprinkle", Priority = 200)]
 		[NameAlias("hun", "rászór", Priority = 200)]
+		[NameAlias("eng", "sprinkle onto the {} the following: ({0*}, )")]
 		[NameAlias("hun", "szórd rá a(z) {R} a következőket: ({0*}, )")]
 		public void Raszorni(params IIngredient[] ingredients)
 		{

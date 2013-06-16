@@ -55,11 +55,11 @@ namespace MrKupido.Library.Recipe
 
             eg.Use<Suto>(1).Homerseklet(180);
 			eg.Use<Suto>(1).BehelyezniC(eg.Use<JenaiTal>(1));
-            eg.Use<Suto>(1).Varni(60);
+			eg.Use<Suto>(1).Varni(new Quantity(60, MeasurementUnit.minute));
 			eg.Use<Suto>(1).KiemelniC(eg.Use<JenaiTal>(1));
 			eg.Use<JenaiTal>(1).FedotLevenni();
 			eg.Use<Suto>(1).BehelyezniC(eg.Use<JenaiTal>(1));
-            eg.Use<Suto>(1).Varni(10);
+			eg.Use<Suto>(1).Varni(new Quantity(10, MeasurementUnit.minute));
 			eg.Use<Suto>(1).KiemelniC(eg.Use<JenaiTal>(1));
 
 			cfp.Add("csirkemellek", eg.Use<JenaiTal>(1));

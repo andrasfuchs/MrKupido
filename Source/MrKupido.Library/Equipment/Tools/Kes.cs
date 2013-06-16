@@ -13,6 +13,7 @@ namespace MrKupido.Library.Equipment
     {
         [NameAlias("eng", "cut", Priority = 200)]
         [NameAlias("hun", "feldarabol", Priority = 200)]
+		[NameAlias("eng", "cut the {0} into pieces")]
         [NameAlias("hun", "darabold fel a(z) {0T}")]
 		[NameAlias("hun", "darabold fel a(z) {0T} kb. {1} dekás darabokra", Priority = 101)]
         public void FeldarabolniI(ISingleIngredient i, float weight)
@@ -34,6 +35,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "cut", Priority = 200)]
         [NameAlias("hun", "feldarabol", Priority = 200)]
+		[NameAlias("eng", "cut the {0.Contents.} into {1}-dkg pieces")]
         [NameAlias("hun", "darabold fel a(z) {0.Contents.T} kb. {1} dekás darabokra")]
         public void FeldarabolniC(IIngredientContainer c, float weight)
         {
@@ -56,6 +58,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "circle", Priority = 200)]
         [NameAlias("hun", "felkarikáz", Priority = 200)]
+		[NameAlias("eng", "circle the {0}")]
         [NameAlias("hun", "karikázd fel a(z) {0T}")]
         public void FelkarikazniI(ISingleIngredient i, float weight)
         {
@@ -76,6 +79,7 @@ namespace MrKupido.Library.Equipment
 
 		[NameAlias("eng", "peel", Priority = 200)]
 		[NameAlias("hun", "meghámoz", Priority = 200)]
+		[NameAlias("eng", "peel the {0}")]
 		[NameAlias("hun", "hámozd meg a(z) {0T}")]
 		public void MeghamozniI(ISingleIngredient i)
 		{
@@ -86,6 +90,7 @@ namespace MrKupido.Library.Equipment
 
 		[NameAlias("eng", "spread", Priority = 200)]
 		[NameAlias("hun", "megken", Priority = 200)]
+		[NameAlias("eng", "spread the {0.Contents.} with {1}")]
 		[NameAlias("hun", "kend meg a(z) {0.Contents.T} a(z) {1.Contents.V}")]
 		public void Megkenni(IIngredientContainer c1, IIngredientContainer c2)
 		{

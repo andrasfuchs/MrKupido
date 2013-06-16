@@ -13,6 +13,7 @@ namespace MrKupido.Library.Equipment
     {
         [NameAlias("eng", "crush", Priority = 200)]
         [NameAlias("hun", "darál", Priority = 200)]
+		[NameAlias("eng", "crush the {1} into the {0}")]
         [NameAlias("hun", "daráld le a(z) {1T} a(z) {0B}")]
         public void DaralniI(IIngredientContainer ic, ISingleIngredient i)
         {

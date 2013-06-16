@@ -37,7 +37,7 @@ namespace MrKupido.Library.Recipe
 			eg.Use<Fakanal>(1).ElkeverniC(eg.Use<Bogre>(1));
 
 			eg.Use<Fakanal>(1).OsszekeverniCC(eg.Use<NagyEdeny>(1), eg.Use<Bogre>(1));
-			eg.Use<NagyEdeny>(1).Varni(45);
+			eg.Use<NagyEdeny>(1).Varni(new Quantity(45, MeasurementUnit.minute));
 
 			eg.Use<NyujtoDeszka>(1).NyujtaniC(eg.Use<NagyEdeny>(1), 0.5f);
 
@@ -60,10 +60,10 @@ namespace MrKupido.Library.Recipe
 
             eg.Use<Suto>(1).Homerseklet(200);
             eg.Use<Suto>(1).BehelyezniC(tepsi);
-            eg.Use<Suto>(1).Varni(30);
+			eg.Use<Suto>(1).Varni(new Quantity(30, MeasurementUnit.minute));
             eg.Use<Suto>(1).KiemelniC(tepsi);
 
-			tepsi.Varni(10);
+			tepsi.Varni(new Quantity(10, MeasurementUnit.minute));
 			//eg.Use<Kes>(1).FelszeletelC(tepsi);
 
             cfp.Add("pizzaalap", tepsi);

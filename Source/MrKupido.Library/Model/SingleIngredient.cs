@@ -88,67 +88,15 @@ namespace MrKupido.Library.Ingredient
             return ToString(languageISO, true, true);
         }
 
-        public string ToString(string languageISO, bool includeAmount, bool includeState)
+        public string ToString(string languageISO, bool includeQuantity, bool includeState)
         {
             string amountStr = "";
 
-            if (includeAmount)
+            if (includeQuantity)
             {
                 try
                 {
-					MeasurementUnit displayUnit = this.PreferredUnit;
-					bool getNewAmount = true;
-					float amount = 0.0f;
-					UnitConstsAttribute uca = null;
-
-					while (getNewAmount)
-					{
-						amount = GetAmount(displayUnit);
-						getNewAmount = false;
-
-						UnitConstsAttribute[] ucas = (UnitConstsAttribute[])displayUnit.GetType().GetField(displayUnit.ToString()).GetCustomAttributes(typeof(UnitConstsAttribute), false);
-						if (ucas.Length > 0)
-						{
-							uca = ucas[0];
-
-							if (amount < uca.SmallestAmount)
-							{
-								if (uca.UnitDown != MeasurementUnit.none)
-								{
-									displayUnit = uca.UnitDown;
-									getNewAmount = true;
-								}
-								else
-								{
-									amount = uca.SmallestAmount;
-								}
-							}
-
-							if (amount > uca.BiggestAmount)
-							{
-								if (uca.UnitUp != MeasurementUnit.none)
-								{
-									displayUnit = uca.UnitUp;
-									getNewAmount = true;
-								}
-								else
-								{
-									amount = uca.BiggestAmount;
-								}
-							}
-
-							int counter = (int)(amount / uca.SmallestAmount);
-							if ((amount / uca.SmallestAmount) != counter)
-							{
-								amount = (counter + 1) * uca.SmallestAmount;
-							}
-						}
-					}
-
-                    if (amount > 0)
-                    {
-						amountStr += amount.ToString() + " " + NameAliasAttribute.GetName(languageISO, typeof(MeasurementUnit), displayUnit.ToString()) + " ";
-                    }
+					amountStr = this.Quantity.ToString(languageISO, this.PreferredUnit);
                 }
                 catch (AmountUnknownException)
                 {

@@ -22,6 +22,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "melt", Priority = 200)]
         [NameAlias("hun", "megolvaszt", Priority = 200)]
+		[NameAlias("eng", "melt the {0}")]
         [NameAlias("hun", "olvaszd meg a(z) {0T}")]
 		[PassiveAction]
         public virtual void Megolvasztani(ISingleIngredient i)

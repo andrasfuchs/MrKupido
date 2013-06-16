@@ -30,7 +30,8 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "roll out", Priority = 200)]
         [NameAlias("hun", "kinyújt", Priority = 200)]
-        [NameAlias("hun", "nyújtsd ki nyújtódeszkán a(z) {0.Contents.T} {1} cm-esre")]
+		[NameAlias("eng", "roll the {0.Contents.} out on the {} to have a {1}-cm think pasta")]
+        [NameAlias("hun", "nyújtsd ki {N} a(z) {0.Contents.T} {1} cm-esre")]
         public void NyujtaniC(IIngredientContainer c, float thicknessInCm)
         {
             this.Add(c.Contents);

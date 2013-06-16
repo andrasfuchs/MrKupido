@@ -51,31 +51,35 @@ namespace MrKupido.Processor
             RecipeBase rb = null;
             RecipeTreeNode rtn = null;
 
-			if (!ingredients.ContainsKey(currentRecipeUniqieName))
-			{
-				ingredients.Add(currentRecipeUniqieName, new List<IngredientBase>());
-			}
-
             if (returnedObject is RecipeBase)
             {
                 rb = ((RecipeBase)returnedObject);
                 string rbTypeName = rb.GetType().Name;
                 rtn = Cache.Recipe.All.FirstOrDefault(tn => tn.ClassName == rbTypeName);
             }
-
-            if (returnedObject is IngredientBase)
+			
+			if (returnedObject is IngredientBase)
             {
                 IngredientBase ib = (IngredientBase)((IngredientBase)returnedObject).Clone();
 
-                IngredientBase item = ingredients[currentRecipeUniqieName].FirstOrDefault(i => (i.Name == ib.Name) && (i.Unit == ib.Unit));
+				lock (ingredients)
+				{
+					if (!ingredients.ContainsKey(currentRecipeUniqieName))
+					{
+						ingredients.Add(currentRecipeUniqieName, new List<IngredientBase>());
+					}
 
-                if (item == null)
-                {
-                    if ((rtn == null) || (!rtn.IsInline))
-                    {
-						ingredients[currentRecipeUniqieName].Add(ib);
-                    }
-                } else item.Add(ib);
+					IngredientBase item = ingredients[currentRecipeUniqieName].FirstOrDefault(i => (i.Name == ib.Name) && (i.Unit == ib.Unit));
+
+					if (item == null)
+					{
+						if ((rtn == null) || (!rtn.IsInline))
+						{
+							ingredients[currentRecipeUniqieName].Add(ib);
+						}
+					}
+					else item.Add(ib);
+				}
             }
 
             if (returnedObject is RecipeBase)

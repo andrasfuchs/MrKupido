@@ -13,6 +13,7 @@ namespace MrKupido.Library.Equipment
     {
         [NameAlias("eng", "rasp", Priority = 200)]
         [NameAlias("hun", "lereszel", Priority = 200)]
+		[NameAlias("eng", "rasp the {1} into the {0B}")]
         [NameAlias("hun", "reszeld le a(z) {1T} a(z) {0B}")]
         public void LereszelniI(IIngredientContainer ic, ISingleIngredient i)
         {

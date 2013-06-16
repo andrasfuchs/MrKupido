@@ -22,6 +22,7 @@ namespace MrKupido.Library.Equipment
         [NameAlias("eng", "heat up", Priority = 200)]
         [NameAlias("hun", "előmelegít", Priority = 200)]
         [NameAlias("hun", "felmelegít", Priority = 201)]
+		[NameAlias("eng", "heat the {} up to {0} degrees (level: {-})")]
         [NameAlias("hun", "melegítsd elő a(z) {T} {0} fokra (fokozat: {-})")]
 		[PassiveAction]
         public virtual int Homerseklet(int temperature)

@@ -62,7 +62,7 @@ namespace MrKupido.Library.Recipe
 
             futotest.RahelyezniC(edeny);
             //futotest.Homerseklet(40);
-            edeny.Varni((int)(1.5 * 24 * 60));
+            edeny.Varni(new Quantity(1.5f, MeasurementUnit.minute));
             futotest.LeemelniC(edeny);
 
             Kanal kanal = eg.Use<Kanal>();
@@ -74,10 +74,10 @@ namespace MrKupido.Library.Recipe
             tuzhely.RahelyezniC(edeny);
             Fakanal fakanal = eg.Use<Fakanal>();
             fakanal.KevergetniC(edeny, 1);
-            edeny.Varni(30); // itt keletkezik a turo a tejből
+			edeny.Varni(new Quantity(30, MeasurementUnit.minute)); // itt keletkezik a turo a tejből
 
             tuzhely.LeemelniC(edeny);
-            edeny.Varni(10);
+			edeny.Varni(new Quantity(10, MeasurementUnit.minute));
             edeny.FolyadekotLeonteni();
 
             cfp.Add("turo", edeny);

@@ -1710,7 +1710,7 @@ ul.ingredientlist li.ingredientlistitem input[type=radio]:disabled:checked + lab
     ul#directions span.action {
         display: inline;
         margin-top: -54px;
-        margin-left: -75px;
+        margin-left: -76px;
     }
 
     ul#directions span.action>img {

@@ -62,7 +62,7 @@ namespace MrKupido.Library.Recipe
 
             Edeny edeny1 = eg.Use<Edeny>();
             edeny1.Beonteni(new Tej(12.0f * amount, MeasurementUnit.liter));
-            edeny1.Varni(180);
+			edeny1.Varni(new Quantity(3, MeasurementUnit.hour));
 
             Kanal kanal = eg.Use<Kanal>();
             IIngredient nyersTejszin = kanal.LefolozniC(edeny1, 0.15f);
@@ -73,14 +73,14 @@ namespace MrKupido.Library.Recipe
             Tuzhely tuzhely = eg.Use<Tuzhely>();
             tuzhely.RahelyezniC(edeny2);
             tuzhely.Homerseklet(110);
-            edeny2.Varni(10);
+			edeny2.Varni(new Quantity(10, MeasurementUnit.minute));
 
             tuzhely.LeemelniC(edeny2);
-            edeny2.Varni(30);
+			edeny2.Varni(new Quantity(30, MeasurementUnit.minute));
 
             Hutogep huto = eg.Use<Hutogep>();
             huto.BehelyezniC(edeny2);
-            edeny2.Varni(60);
+			edeny2.Varni(new Quantity(60, MeasurementUnit.minute));
 
             cfp.Add("tejszin", edeny2);
 

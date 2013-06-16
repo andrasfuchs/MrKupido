@@ -74,7 +74,7 @@ namespace MrKupido.Library.Recipe
 
             eg.Use<Suto>(1).Homerseklet(190);
             eg.Use<Suto>(1).BehelyezniC(eg.Use<Tepsi>(1));
-            eg.Use<Suto>(1).Varni(40);
+			eg.Use<Suto>(1).Varni(new Quantity(40, MeasurementUnit.minute));
 
             eg.Use<Suto>(1).KiemelniC(eg.Use<Tepsi>(1));
             eg.Use<Kez>(1).RaszorniI(eg.Use<Tepsi>(1), new PorCukor(2.0f * amount));

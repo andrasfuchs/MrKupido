@@ -17,6 +17,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "put in", Priority = 200)]
         [NameAlias("hun", "berak", Priority = 200)]
+		[NameAlias("eng", "put into the {} the following: ({0*}, )")]
         [NameAlias("hun", "rakd be a(z) {B} a következőket: ({0*}, )")]
         public void Berakni(params IIngredient[] ingredients)
         {
@@ -26,6 +27,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "put in", Priority = 200)]
         [NameAlias("hun", "berak", Priority = 200)]
+		[NameAlias("eng", "put into the {} the {0}")]
         [NameAlias("hun", "rakd be a(z) {B} a(z) {0T}")]
         public void BerakniI(ISingleIngredient i)
         {
@@ -35,6 +37,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "put in", Priority = 200)]
         [NameAlias("hun", "berak", Priority = 200)]
+		[NameAlias("eng", "put into the {} the {0.Contents.}")]
         [NameAlias("hun", "rakd be a(z) {B} a(z) {0.Contents.T}")]
         public void BerakniC(IIngredientContainer c)
         {
@@ -44,6 +47,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "pour into", Priority = 200)]
         [NameAlias("hun", "beleönt", Priority = 200)]
+		[NameAlias("eng", "pour into the {} the following: ({0*}, )")]
         [NameAlias("hun", "öntsd bele a(z) {B} a következőket: ({0*}, )")]
         public void Beonteni(params IIngredient[] ingredients)
         {
@@ -53,6 +57,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "pour into", Priority = 200)]
         [NameAlias("hun", "beleönt", Priority = 200)]
+		[NameAlias("eng", "pour into the {} the {0}")]
         [NameAlias("hun", "öntsd bele a(z) {B} a(z) {0T}")]
         public void BeonteniI(ISingleIngredient i)
         {
@@ -62,6 +67,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "pour into", Priority = 200)]
         [NameAlias("hun", "beleönt", Priority = 200)]
+		[NameAlias("eng", "pour into the {} the {0.Contents.}")]
         [NameAlias("hun", "öntsd bele a(z) {B} a(z) {0.Contents.T}")]
         public void BeonteniC(IIngredientContainer c)
         {
@@ -71,6 +77,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "pull out", Priority = 200)]
         [NameAlias("hun", "kivesz", Priority = 200)]
+		[NameAlias("eng", "pull out the contents of {}")]
         [NameAlias("hun", "vedd ki a(z) {} tartalmát")]
         public IIngredient Kivenni()
         {
@@ -84,6 +91,7 @@ namespace MrKupido.Library.Equipment
 
 		[NameAlias("eng", "pull out", Priority = 200)]
 		[NameAlias("hun", "kivesz", Priority = 200)]
+		[NameAlias("eng", "pull out the {} from the {}")]
 		[NameAlias("hun", "vedd ki a(z) {K} a(z) {0T}")]
 		public ISingleIngredient KivenniI(ISingleIngredient i)
 		{
