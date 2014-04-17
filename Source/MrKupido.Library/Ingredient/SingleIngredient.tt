@@ -1,0 +1,69 @@
+﻿<#@ template debug="true" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ assembly name="System.Xml" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Xml" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="System.Runtime.Remoting.Messaging" #>
+<#@ output extension=".cs" #>
+
+<# var properties = new string [] {"P1", "P2", "P3", "P4", "P5", "P6"}; #>
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using MrKupido.Library.Attributes;
+using MrKupido.Library.Nature;
+
+namespace MrKupido.Library.Ingredient
+{
+	[NameAlias("eng", "flour")]
+	[NameAlias("hun", "liszt", Priority = 1)]
+	[NameAlias("hun", "búzaliszt")]
+
+	[IngredientConsts(
+		Category = ShoppingListCategory.Other,
+		CaloriesPer100Gramms = 366.0f,
+		CarbohydratesPer100Gramms = 314.0f,
+		FatPer100Gramms = 12.4f,
+		ProteinPer100Gramms = 39.3f,
+		GlichemicalIndex = 53,
+		InflammationFactor = -387
+	)]
+
+
+	[GristOf(typeof(TriticumAestivum))]
+	public class LisztXXX : SingleIngredient
+	{
+		public LisztXXX(float amount, MeasurementUnit unit = MeasurementUnit.dekagramm)
+			: base(amount, unit)
+		{
+			Console.WriteLine("This is file 1 <#= Parameter #>");
+		}
+	}
+}
+
+<#+
+	public List<string> GetNames()
+	{
+		List<string> result = new List<string>(); 
+		XmlDocument doc = new XmlDocument();
+		string absolutePath = Path.GetFullPath("Ingredients.xml");                
+		doc.Load(absolutePath);
+		foreach (XmlNode node in doc.SelectNodes("/Root/Element"))
+		{
+			result.Add(node.Attributes["Name"].InnerText);
+		}
+		return result;
+	}
+#>
+
+<#+
+	string Parameter
+	{
+		get { return (string)CallContext.GetData("Ingredient.Parameter"); }
+	}
+#>

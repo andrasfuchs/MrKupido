@@ -7,9 +7,9 @@ using MrKupido.Library.Nature;
 
 namespace MrKupido.Library.Ingredient
 {
-    [NameAlias("eng", "flour")]
-    [NameAlias("hun", "liszt", Priority = 1)]
-    [NameAlias("hun", "búzaliszt")]
+	[NameAlias("eng", "flour")]
+	[NameAlias("hun", "liszt", Priority = 1)]
+	[NameAlias("hun", "búzaliszt")]
 
 	[IngredientConsts(
 		Category = ShoppingListCategory.Other,
@@ -22,12 +22,12 @@ namespace MrKupido.Library.Ingredient
 	)]
 
 
-    [GristOf(typeof(TriticumAestivum))]
-    public class Liszt : SingleIngredient
-    {
-        public Liszt(float amount, MeasurementUnit unit = MeasurementUnit.dekagramm)
-            : base(amount, unit)
-        {
-        }
-    }
+	[GristOf(typeof(TriticumAestivum))]
+	public class Liszt : SingleIngredient
+	{
+		public Liszt(float amount, MeasurementUnit unit = MeasurementUnit.dekagramm)
+			: base(amount, unit)
+		{
+		}
+	}
 }

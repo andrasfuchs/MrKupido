@@ -1,0 +1,11 @@
+﻿<#@ import namespace="System.Runtime.Remoting.Messaging" #>
+<#@ include file="MultiOutput.tt" #>
+<#
+	CallContext.SetData("Ingredient.Parameter", "XML Data Value 1");
+	ProcessTemplate("SingleIngredient.tt", "RetesesLiszt.cs");  
+	
+	CallContext.SetData("Ingredient.Parameter", "XML Data Value 2");
+	ProcessTemplate("SingleIngredient.tt", "NemRetesesLiszt.cs");  
+	
+	DeleteOldOutputs();
+#>
