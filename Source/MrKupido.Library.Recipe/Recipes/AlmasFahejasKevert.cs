@@ -9,7 +9,7 @@ using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Recipe
 {
-    [NameAlias("eng", "apple-cinemon cookie")]
+	[NameAlias("eng", "apple-cinnamon cookie")]
     [NameAlias("hun", "almás-fahéjas süti")]
 
 	[IngredientConsts(ManTags = "Cake")]

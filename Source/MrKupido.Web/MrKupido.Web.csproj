@@ -166,8 +166,12 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -214,12 +218,15 @@
     </Reference>
     <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20505.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20505.0\lib\net40\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20505.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Optimization">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0-beta2\lib\net40\System.Web.Optimization.dll</HintPath>
@@ -468,11 +475,11 @@
     <Content Include="Content\images\logo_mrkupido_wide.png" />
     <Content Include="Content\images\mrkupido.ico" />
     <Content Include="Content\nivo-slider.css" />
-    <Content Include="Content\photos\960x480\apple-cinemon-cookie_01.jpg" />
-    <Content Include="Content\photos\960x480\apple-cinemon-cookie_02.jpg" />
-    <Content Include="Content\photos\960x480\apple-cinemon-cookie_03.jpg" />
-    <Content Include="Content\photos\960x480\apple-cinemon-cookie_04.jpg" />
-    <Content Include="Content\photos\960x480\apple-cinemon-cookie_05.jpg" />
+    <Content Include="Content\photos\960x480\apple-cinnamon-cookie_01.jpg" />
+    <Content Include="Content\photos\960x480\apple-cinnamon-cookie_02.jpg" />
+    <Content Include="Content\photos\960x480\apple-cinnamon-cookie_03.jpg" />
+    <Content Include="Content\photos\960x480\apple-cinnamon-cookie_04.jpg" />
+    <Content Include="Content\photos\960x480\apple-cinnamon-cookie_05.jpg" />
     <Content Include="Content\photos\960x480\baked-cauliflower_01.jpg" />
     <Content Include="Content\photos\960x480\baked-cauliflower_02.jpg" />
     <Content Include="Content\photos\960x480\baked-cauliflower_03.jpg" />
@@ -510,10 +517,10 @@
     <Content Include="Content\photos\960x480\hungarian-pizza_03.jpg" />
     <Content Include="Content\photos\960x480\hungarian-pizza_04.jpg" />
     <Content Include="Content\photos\960x480\hungarian-pizza_05.jpg" />
-    <Content Include="Content\photos\960x480\muffin-with-cinemon_01.jpg" />
-    <Content Include="Content\photos\960x480\muffin-with-cinemon_02.jpg" />
-    <Content Include="Content\photos\960x480\muffin-with-cinemon_03.jpg" />
-    <Content Include="Content\photos\960x480\muffin-with-cinemon_04.jpg" />
+    <Content Include="Content\photos\960x480\muffin-with-cinnamon_01.jpg" />
+    <Content Include="Content\photos\960x480\muffin-with-cinnamon_02.jpg" />
+    <Content Include="Content\photos\960x480\muffin-with-cinnamon_03.jpg" />
+    <Content Include="Content\photos\960x480\muffin-with-cinnamon_04.jpg" />
     <Content Include="Content\photos\960x480\mustard-garlic-chicken_01.jpg" />
     <Content Include="Content\photos\960x480\mustard-garlic-chicken_02.jpg" />
     <Content Include="Content\photos\960x480\mustard-garlic-chicken_03.jpg" />
@@ -967,11 +974,13 @@
     <Content Include="Views\Help\Poll001.cshtml" />
     <Content Include="Views\Recipe\_RecipeTags.cshtml" />
     <Content Include="Views\Ingredient\_TagTree.cshtml" />
+    <None Include="Properties\PublishProfiles\mrkupido.com - Web Deploy.pubxml" />
     <None Include="Web.Debug_at_localhost.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
     <None Include="Web.Release_at_HFL.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -1221,7 +1230,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <Target Name="BeforeBuild">
-    <Exec Command="&quot;$(PROGRAMFILES)\Microsoft SDKs\TypeScript\0.9\tsc&quot; @(TypeScriptCompile ->'&quot;%(fullpath)&quot;', ' ')" />
+    <Exec Command="&quot;$(PROGRAMFILES)\Microsoft SDKs\TypeScript\1.0\tsc&quot; @(TypeScriptCompile ->'&quot;%(fullpath)&quot;', ' ')" />
   </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

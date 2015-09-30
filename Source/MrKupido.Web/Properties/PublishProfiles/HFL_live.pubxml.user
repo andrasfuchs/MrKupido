@@ -9,46 +9,47 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <LastUsedPlatform>Any CPU</LastUsedPlatform>
     <TimeStampOfAssociatedLegacyPublishXmlFile />
     <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAbm3iNybK60GSxE2R7OcEzgAAAAACAAAAAAAQZgAAAAEAACAAAAAVdJVteG4nN8a/ek5f4tfRvmP0bQbUBSzkxAoG9p+AeAAAAAAOgAAAAAIAACAAAAAjZKb6PFvFjAIH1y0d/vJ5SrBfEBsI4FXxldlkJBiNoSAAAADB0QIp1Vwm5SOnwec4QLJ+JfkcAfd7tSztloqa/nHT4kAAAADyBoVxFCP3xAI0t3YQh6ejwjLvt8xLowdwi7N9J+3a68Tcw/hC2Qq3Qhzec4FCqPuB8zHP11bngaYT7Zief4e8</EncryptedPassword>
+    <_PublishTargetUrl>ftp://ftp.mrkupido.com/httpdocs</_PublishTargetUrl>
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/Antlr3.Runtime.dll">
-      <publishTime>07/22/2012 09:51:32</publishTime>
+      <publishTime>08/18/2013 16:04:14</publishTime>
     </File>
     <File Include="bin/ClickTaleIntegrationModule.dll">
       <publishTime>04/09/2013 15:16:13</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.ApplicationBlock.dll">
-      <publishTime>07/30/2013 20:30:07</publishTime>
+      <publishTime>09/21/2014 10:09:13</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.ApplicationBlock.pdb">
-      <publishTime>07/30/2013 20:30:07</publishTime>
+      <publishTime>09/21/2014 10:09:13</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.Core.dll">
       <publishTime>02/17/2013 13:34:16</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.OAuth.Common.dll">
-      <publishTime>02/18/2013 16:46:11</publishTime>
+      <publishTime>08/18/2013 16:04:10</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.OAuth.Consumer.dll">
-      <publishTime>02/18/2013 16:46:11</publishTime>
+      <publishTime>08/18/2013 16:04:10</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.OAuth.dll">
-      <publishTime>02/18/2013 16:42:49</publishTime>
+      <publishTime>08/18/2013 16:04:10</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.OAuth.ServiceProvider.dll">
-      <publishTime>02/18/2013 16:46:11</publishTime>
+      <publishTime>08/18/2013 16:04:10</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.OAuth2.Client.dll">
-      <publishTime>02/17/2013 13:34:18</publishTime>
+      <publishTime>08/18/2013 16:04:10</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.OAuth2.ClientAuthorization.dll">
-      <publishTime>02/17/2013 13:34:18</publishTime>
+      <publishTime>08/18/2013 16:04:10</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.OAuth2.dll">
-      <publishTime>02/17/2013 13:34:18</publishTime>
+      <publishTime>08/18/2013 16:04:10</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.OpenId.dll">
-      <publishTime>02/18/2013 16:40:56</publishTime>
+      <publishTime>08/18/2013 16:04:11</publishTime>
     </File>
     <File Include="bin/DotNetOpenAuth.OpenId.Provider.dll">
       <publishTime>02/18/2013 16:51:41</publishTime>
@@ -63,7 +64,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/11/2012 16:27:27</publishTime>
     </File>
     <File Include="bin/hu/MrKupido.Web.resources.dll">
-      <publishTime>07/30/2013 20:30:16</publishTime>
+      <publishTime>09/21/2014 10:13:05</publishTime>
     </File>
     <File Include="bin/Hunspellx64.dll">
       <publishTime>10/31/2011 17:30:18</publishTime>
@@ -72,61 +73,61 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/31/2011 17:30:18</publishTime>
     </File>
     <File Include="bin/Microsoft.Web.Infrastructure.dll">
-      <publishTime>07/22/2012 09:51:26</publishTime>
+      <publishTime>08/18/2013 16:04:14</publishTime>
     </File>
     <File Include="bin/Mono.Cecil.dll">
-      <publishTime>12/11/2012 16:16:31</publishTime>
+      <publishTime>08/18/2013 16:04:14</publishTime>
     </File>
     <File Include="bin/Mono.Math.dll">
-      <publishTime>02/18/2013 16:40:56</publishTime>
+      <publishTime>08/18/2013 16:04:11</publishTime>
     </File>
     <File Include="bin/MrKupido.DataAccess.dll">
-      <publishTime>07/30/2013 20:30:10</publishTime>
+      <publishTime>09/21/2014 10:09:14</publishTime>
     </File>
     <File Include="bin/MrKupido.DataAccess.pdb">
-      <publishTime>07/30/2013 20:30:10</publishTime>
+      <publishTime>09/21/2014 10:09:14</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.dll">
-      <publishTime>07/30/2013 20:30:07</publishTime>
+      <publishTime>09/21/2014 10:09:13</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.pdb">
-      <publishTime>07/30/2013 20:30:07</publishTime>
+      <publishTime>09/21/2014 10:09:13</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.Provider.dll">
-      <publishTime>07/30/2013 20:30:08</publishTime>
+      <publishTime>09/21/2014 10:09:14</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.Provider.pdb">
-      <publishTime>07/30/2013 20:30:08</publishTime>
+      <publishTime>09/21/2014 10:09:14</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.Recipe.dll">
-      <publishTime>07/30/2013 20:30:13</publishTime>
+      <publishTime>09/21/2014 10:13:04</publishTime>
     </File>
     <File Include="bin/MrKupido.Library.Recipe.pdb">
-      <publishTime>07/30/2013 20:30:12</publishTime>
+      <publishTime>09/21/2014 10:09:15</publishTime>
     </File>
     <File Include="bin/MrKupido.Model.dll">
-      <publishTime>07/30/2013 20:30:07</publishTime>
+      <publishTime>09/21/2014 10:09:13</publishTime>
     </File>
     <File Include="bin/MrKupido.Model.pdb">
-      <publishTime>07/30/2013 20:30:07</publishTime>
+      <publishTime>09/21/2014 10:09:13</publishTime>
     </File>
     <File Include="bin/MrKupido.Processor.dll">
-      <publishTime>07/30/2013 20:30:11</publishTime>
+      <publishTime>09/21/2014 10:09:15</publishTime>
     </File>
     <File Include="bin/MrKupido.Processor.pdb">
-      <publishTime>07/30/2013 20:30:11</publishTime>
+      <publishTime>09/21/2014 10:09:15</publishTime>
     </File>
     <File Include="bin/MrKupido.Utils.dll">
-      <publishTime>07/30/2013 20:30:06</publishTime>
+      <publishTime>09/21/2014 10:09:13</publishTime>
     </File>
     <File Include="bin/MrKupido.Utils.pdb">
-      <publishTime>07/30/2013 20:30:06</publishTime>
+      <publishTime>09/21/2014 10:09:13</publishTime>
     </File>
     <File Include="bin/MrKupido.Web.dll">
-      <publishTime>07/30/2013 20:30:16</publishTime>
+      <publishTime>09/21/2014 10:13:05</publishTime>
     </File>
     <File Include="bin/MrKupido.Web.pdb">
-      <publishTime>07/30/2013 20:30:16</publishTime>
+      <publishTime>09/21/2014 10:13:05</publishTime>
     </File>
     <File Include="bin/Newtonsoft.Json.dll">
       <publishTime>07/22/2012 09:51:29</publishTime>
@@ -135,43 +136,43 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>10/31/2011 17:30:18</publishTime>
     </File>
     <File Include="bin/Org.Mentalis.Security.Cryptography.dll">
-      <publishTime>02/18/2013 16:40:56</publishTime>
+      <publishTime>08/18/2013 16:04:11</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
-      <publishTime>07/22/2012 09:51:30</publishTime>
+      <publishTime>08/18/2013 16:04:18</publishTime>
     </File>
     <File Include="bin/System.Web.Helpers.dll">
-      <publishTime>12/09/2012 11:35:24</publishTime>
+      <publishTime>08/18/2013 16:04:18</publishTime>
     </File>
     <File Include="bin/System.Web.Http.dll">
-      <publishTime>07/22/2012 09:51:31</publishTime>
+      <publishTime>08/18/2013 16:04:18</publishTime>
     </File>
     <File Include="bin/System.Web.Http.WebHost.dll">
-      <publishTime>07/22/2012 09:51:31</publishTime>
+      <publishTime>08/18/2013 16:04:18</publishTime>
     </File>
     <File Include="bin/System.Web.Mvc.dll">
-      <publishTime>12/09/2012 11:35:24</publishTime>
+      <publishTime>08/18/2013 16:04:18</publishTime>
     </File>
     <File Include="bin/System.Web.Optimization.dll">
-      <publishTime>07/22/2012 09:51:32</publishTime>
+      <publishTime>08/18/2013 16:04:18</publishTime>
     </File>
     <File Include="bin/System.Web.Providers.dll">
-      <publishTime>07/22/2012 09:51:31</publishTime>
+      <publishTime>08/18/2013 16:04:18</publishTime>
     </File>
     <File Include="bin/System.Web.Razor.dll">
-      <publishTime>12/09/2012 11:35:24</publishTime>
+      <publishTime>08/18/2013 16:04:18</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Deployment.dll">
-      <publishTime>12/09/2012 11:35:24</publishTime>
+      <publishTime>08/18/2013 16:04:18</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.dll">
-      <publishTime>12/09/2012 11:35:24</publishTime>
+      <publishTime>08/18/2013 16:04:18</publishTime>
     </File>
     <File Include="bin/System.Web.WebPages.Razor.dll">
-      <publishTime>12/09/2012 11:35:24</publishTime>
+      <publishTime>08/18/2013 16:04:18</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
-      <publishTime>07/22/2012 09:51:32</publishTime>
+      <publishTime>08/18/2013 16:04:14</publishTime>
     </File>
     <File Include="ClassDiagram.cd">
       <publishTime>02/15/2013 11:12:09</publishTime>
@@ -392,6 +393,21 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Content/photos/960x480/apple-cinemon-cookie_05.jpg">
       <publishTime>04/30/2013 03:39:06</publishTime>
     </File>
+    <File Include="Content/photos/960x480/apple-cinnamon-cookie_01.jpg">
+      <publishTime>04/30/2013 03:44:02</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/apple-cinnamon-cookie_02.jpg">
+      <publishTime>04/30/2013 03:42:47</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/apple-cinnamon-cookie_03.jpg">
+      <publishTime>04/30/2013 03:41:28</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/apple-cinnamon-cookie_04.jpg">
+      <publishTime>04/30/2013 03:40:14</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/apple-cinnamon-cookie_05.jpg">
+      <publishTime>04/30/2013 03:39:06</publishTime>
+    </File>
     <File Include="Content/photos/960x480/baked-cauliflower_01.jpg">
       <publishTime>05/24/2013 11:06:21</publishTime>
     </File>
@@ -516,6 +532,18 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/24/2013 10:34:36</publishTime>
     </File>
     <File Include="Content/photos/960x480/muffin-with-cinemon_04.jpg">
+      <publishTime>05/24/2013 10:34:45</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/muffin-with-cinnamon_01.jpg">
+      <publishTime>05/24/2013 10:34:14</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/muffin-with-cinnamon_02.jpg">
+      <publishTime>05/24/2013 10:34:28</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/muffin-with-cinnamon_03.jpg">
+      <publishTime>05/24/2013 10:34:36</publishTime>
+    </File>
+    <File Include="Content/photos/960x480/muffin-with-cinnamon_04.jpg">
       <publishTime>05/24/2013 10:34:45</publishTime>
     </File>
     <File Include="Content/photos/960x480/mustard-garlic-chicken_01.jpg">
@@ -1611,7 +1639,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/18/2013 01:13:43</publishTime>
     </File>
     <File Include="Views/Help/BetaTesterGuide.cshtml">
-      <publishTime>04/03/2013 13:46:54</publishTime>
+      <publishTime>03/13/2014 09:16:26</publishTime>
     </File>
     <File Include="Views/Help/FeatureGuideLevel1.cshtml">
       <publishTime>03/13/2013 19:16:09</publishTime>
@@ -1635,10 +1663,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/13/2013 15:59:22</publishTime>
     </File>
     <File Include="Views/Help/VersionChangeLog020.cshtml">
-      <publishTime>03/18/2013 19:43:14</publishTime>
+      <publishTime>09/21/2014 10:08:15</publishTime>
     </File>
     <File Include="Views/Help/WhoIsMrKupido.cshtml">
-      <publishTime>03/13/2013 18:39:56</publishTime>
+      <publishTime>07/05/2014 17:42:47</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
       <publishTime>04/02/2013 09:39:27</publishTime>
