@@ -8,3 +8,6 @@ TestResults
 #MS-SQL database files
 *.mdf
 *.ldf
+
+#Visual Studio 2015 config files
+Source/.vs/*
