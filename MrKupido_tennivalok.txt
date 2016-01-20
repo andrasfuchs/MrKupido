@@ -1,0 +1,20 @@
+﻿- A logót finomíthatnánk, és ha az megvan, kellene egy ikon is, aminek
+szabvány méretei: 57x57, 114x114, 72x72, 144x144, 128x128 (bár ez még
+ráér)
+
+- Egy olyan hierarchikus fát kellene megjeleniteni, ami elemeket
+tartalmaz, maximum 5 szintig. Erdekelnenek az otleteid, de errol majd
+szoban.
+
+- Bolti kategoriák ikonjai
+
+- Megvannak az alaptevekenysegek, amikhez majd kellene ikon, pl.
+összegyúrni, kiszaggatni, rászórni stb.stb.
+
+- Illetve az eszkozok is alakulnak: 4 fő kategória van (tárolók,
+műszaki berendezések, szerszámok, anyagok), azon belül is jópár dolog, azokhoz ikon
+
+- tag-ek szalagja
+
+- Érdekelnének az ötleteid, a recept-szerkesztővel kapcsolatban is, én
+is törtem már rajta a fejem, majd átdumáljuk...
