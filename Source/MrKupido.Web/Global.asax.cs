@@ -66,7 +66,7 @@ namespace MrKupido.Web
 
 				routeData.Values["language"] = language;
 				Response.RedirectToRoute(routeData.Values);
-				Response.End();
+				//Response.End();
 				return;
 			}
 			//
