@@ -1,163 +1,89 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8BD91A7F-5098-4728-BDBD-02E0802D04D2}</ProjectGuid>
+    <TargetFramework>net472</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MrKupido.DataAccess</RootNamespace>
-    <AssemblyName>MrKupido.DataAccess</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-    <NuGetPackageImportStamp>
-    </NuGetPackageImportStamp>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
     <CodeAnalysisLogFile>bin\Debug\MrKupido.DataAccess.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
-    <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
     <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
     <CodeAnalysisLogFile>bin\Release\MrKupido.DataAccess.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
-    <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
-    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.WebRequest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
-    </Reference>
     <Reference Include="System.ServiceModel.DomainServices.EntityFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201212111043343_MrKupido_20121211a.cs" />
-    <Compile Include="Migrations\201212111043343_MrKupido_20121211a.Designer.cs">
+    <Compile Update="Migrations\201212111043343_MrKupido_20121211a.Designer.cs">
       <DependentUpon>201212111043343_MrKupido_20121211a.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201301021511340_MrKupido-20130102a.cs" />
-    <Compile Include="Migrations\201301021511340_MrKupido-20130102a.Designer.cs">
+    <Compile Update="Migrations\201301021511340_MrKupido-20130102a.Designer.cs">
       <DependentUpon>201301021511340_MrKupido-20130102a.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201301041552473_MrKupido-20130104a.cs" />
-    <Compile Include="Migrations\201301041552473_MrKupido-20130104a.Designer.cs">
+    <Compile Update="Migrations\201301041552473_MrKupido-20130104a.Designer.cs">
       <DependentUpon>201301041552473_MrKupido-20130104a.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201302141454474_MrKupido-20130214a.cs" />
-    <Compile Include="Migrations\201302141454474_MrKupido-20130214a.Designer.cs">
+    <Compile Update="Migrations\201302141454474_MrKupido-20130214a.Designer.cs">
       <DependentUpon>201302141454474_MrKupido-20130214a.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201302171050276_MrKupido-20130217a.cs" />
-    <Compile Include="Migrations\201302171050276_MrKupido-20130217a.Designer.cs">
+    <Compile Update="Migrations\201302171050276_MrKupido-20130217a.Designer.cs">
       <DependentUpon>201302171050276_MrKupido-20130217a.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201302190026539_MrKupido-20130218a.cs" />
-    <Compile Include="Migrations\201302190026539_MrKupido-20130218a.Designer.cs">
+    <Compile Update="Migrations\201302190026539_MrKupido-20130218a.Designer.cs">
       <DependentUpon>201302190026539_MrKupido-20130218a.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201302190127320_MrKupido-20130218b.cs" />
-    <Compile Include="Migrations\201302190127320_MrKupido-20130218b.Designer.cs">
+    <Compile Update="Migrations\201302190127320_MrKupido-20130218b.Designer.cs">
       <DependentUpon>201302190127320_MrKupido-20130218b.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201303151758330_MrKupido_20130315a.cs" />
-    <Compile Include="Migrations\201303151758330_MrKupido_20130315a.Designer.cs">
+    <Compile Update="Migrations\201303151758330_MrKupido_20130315a.Designer.cs">
       <DependentUpon>201303151758330_MrKupido_20130315a.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="MrKupidoContext.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <ProjectReference Include="..\MrKupido.Model\MrKupido.Model.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MrKupido.Model\MrKupido.Model.csproj">
-      <Project>{35A67DC3-381C-43E3-B424-6C170E216D49}</Project>
-      <Name>MrKupido.Model</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201212111043343_MrKupido_20121211a.resx">
+    <EmbeddedResource Update="Migrations\201212111043343_MrKupido_20121211a.resx">
       <DependentUpon>201212111043343_MrKupido_20121211a.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201301021511340_MrKupido-20130102a.resx">
+    <EmbeddedResource Update="Migrations\201301021511340_MrKupido-20130102a.resx">
       <DependentUpon>201301021511340_MrKupido-20130102a.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201301041552473_MrKupido-20130104a.resx">
+    <EmbeddedResource Update="Migrations\201301041552473_MrKupido-20130104a.resx">
       <DependentUpon>201301041552473_MrKupido-20130104a.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201302141454474_MrKupido-20130214a.resx">
+    <EmbeddedResource Update="Migrations\201302141454474_MrKupido-20130214a.resx">
       <DependentUpon>201302141454474_MrKupido-20130214a.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201302171050276_MrKupido-20130217a.resx">
+    <EmbeddedResource Update="Migrations\201302171050276_MrKupido-20130217a.resx">
       <DependentUpon>201302171050276_MrKupido-20130217a.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201302190026539_MrKupido-20130218a.resx">
+    <EmbeddedResource Update="Migrations\201302190026539_MrKupido-20130218a.resx">
       <DependentUpon>201302190026539_MrKupido-20130218a.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201302190127320_MrKupido-20130218b.resx">
+    <EmbeddedResource Update="Migrations\201302190127320_MrKupido-20130218b.resx">
       <DependentUpon>201302190127320_MrKupido-20130218b.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201303151758330_MrKupido_20130315a.resx">
+    <EmbeddedResource Update="Migrations\201303151758330_MrKupido_20130315a.resx">
       <DependentUpon>201303151758330_MrKupido_20130315a.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
@@ -165,18 +91,13 @@
     <PackageReference Include="EntityFramework">
       <Version>6.4.4</Version>
     </PackageReference>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.ComponentModel.Annotations" Version="4.7.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
       <UserProperties BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

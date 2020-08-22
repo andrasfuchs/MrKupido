@@ -1,360 +1,36 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{44930A70-2BFF-4634-BD17-1ECB20D9C683}</ProjectGuid>
+    <TargetFramework>net472</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MrKupido.Library</RootNamespace>
-    <AssemblyName>MrKupido.Library</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
-    <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\x86\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
     <CodeAnalysisLogFile>bin\Debug\MrKupido.Library.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
-    <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>bin\x86\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
     <CodeAnalysisLogFile>bin\Release\MrKupido.Library.dll.CodeAnalysisLog.xml</CodeAnalysisLogFile>
     <CodeAnalysisUseTypeNameInSuppression>true</CodeAnalysisUseTypeNameInSuppression>
     <CodeAnalysisModuleSuppressionsFile>GlobalSuppressions.cs</CodeAnalysisModuleSuppressionsFile>
-    <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <CodeAnalysisRuleSetDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\\Rule Sets</CodeAnalysisRuleSetDirectories>
     <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
     <CodeAnalysisRuleDirectories>;C:\Program Files (x86)\Microsoft Visual Studio 10.0\Team Tools\Static Analysis Tools\FxCop\\Rules</CodeAnalysisRuleDirectories>
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
     <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Build" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
     <Reference Include="System.Device" />
-    <Reference Include="System.Net.Http, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http.WebRequest, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Net.Http.2.0.20710.0\lib\net40\System.Net.Http.WebRequest.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Action\Active.cs" />
-    <Compile Include="Action\Passive.cs" />
-    <Compile Include="Attributes\CommercialProductAttribute.cs" />
-    <Compile Include="Attributes\ContainsGlutenAttribute.cs" />
-    <Compile Include="Attributes\UnitConstsAttribute.cs" />
-    <Compile Include="Attributes\IconUriFragmentAttribute.cs" />
-    <Compile Include="Attributes\IngredientConstsAttribute.cs" />
-    <Compile Include="Attributes\NatureRelation\EggOfAttribute.cs" />
-    <Compile Include="Attributes\NatureRelation\GranulesOfAttribute.cs" />
-    <Compile Include="Attributes\NatureRelation\GristOfAttribute.cs" />
-    <Compile Include="Attributes\NatureRelation\LeafOfAttribute.cs" />
-    <Compile Include="Attributes\NatureRelation\MilkOfAttribute.cs" />
-    <Compile Include="Attributes\NatureRelation\KindOfAttribute.cs" />
-    <Compile Include="Attributes\NameAliasAttribute.cs" />
-    <Compile Include="Attributes\PassiveActionAttribute.cs" />
-    <Compile Include="Attributes\Taxonomy\NatureClassAttribute.cs" />
-    <Compile Include="Attributes\Taxonomy\NatureFamilyAttribute.cs" />
-    <Compile Include="Attributes\Taxonomy\NatureKingdomAttribute.cs" />
-    <Compile Include="Attributes\NatureRelationAttribute.cs" />
-    <Compile Include="Attributes\Taxonomy\NatureSpeciesAttribute.cs" />
-    <Compile Include="Attributes\Taxonomy\NatureSubspeciesAttribute.cs" />
-    <Compile Include="Attributes\NatureRelation\OilOfAttribute.cs" />
-    <Compile Include="Attributes\NatureRelation\PartOfAttribute.cs" />
-    <Compile Include="Attributes\NatureRelation\RootOfAttribute.cs" />
-    <Compile Include="Attributes\NatureRelation\YieldOfAttribute.cs" />
-    <Compile Include="Bases\TagBase.cs" />
-    <Compile Include="Bases\EquipmentBase.cs" />
-    <Compile Include="Bases\NamedObject.cs" />
-    <Compile Include="Bases\ProviderBase.cs" />
-    <Compile Include="Enums\ElementCategory.cs" />
-    <Compile Include="Enums\IngredientState.cs" />
-    <Compile Include="Enums\RecipeStage.cs" />
-    <Compile Include="Enums\VowelHarmony.cs" />
-    <Compile Include="Equipment\Containers\DeepContainer.cs" />
-    <Compile Include="Equipment\Containers\CoverableContainer.cs" />
-    <Compile Include="Equipment\Containers\DeepContainer\CoverableContainer\KozepesEdeny.cs" />
-    <Compile Include="Equipment\Containers\DeepContainer\CoverableContainer\KisLabas.cs" />
-    <Compile Include="Equipment\Containers\DeepContainer\Pohar.cs" />
-    <Compile Include="Equipment\Containers\DeepContainer\PalacsintaSuto.cs" />
-    <Compile Include="Equipment\Containers\DeepContainer\MuffinForma.cs" />
-    <Compile Include="Equipment\Containers\FlatContainer\NyujtoDeszka.cs" />
-    <Compile Include="Equipment\Containers\FlatContainer.cs" />
-    <Compile Include="Equipment\Containers\DeepContainer\Bogre.cs" />
-    <Compile Include="Equipment\Containers\DeepContainer\CoverableContainer\NagyEdeny.cs" />
-    <Compile Include="Equipment\Containers\DeepContainer\MelyTanyer.cs" />
-    <Compile Include="Equipment\Containers\FlatContainer\LaposKisTanyer.cs" />
-    <Compile Include="Equipment\Containers\DeepContainer\CoverableContainer\JenaiTal.cs" />
-    <Compile Include="Equipment\Containers\DeepContainer\CoverableContainer\Labas.cs" />
-    <Compile Include="Equipment\Devices\DeepDevice.cs" />
-    <Compile Include="Equipment\Devices\DeepDevice\MikrohullamuSuto.cs" />
-    <Compile Include="Equipment\Devices\FlatDevice.cs" />
-    <Compile Include="Equipment\Devices\DeepDevice\Hutogep.cs" />
-    <Compile Include="Equipment\Devices\FlatDevice\Tuzhely.cs" />
-    <Compile Include="Equipment\Devices\FlatDevice\Futotest.cs" />
-    <Compile Include="Equipment\Materials\Alufolia.cs" />
-    <Compile Include="Equipment\Container.cs" />
-    <Compile Include="Equipment\Device.cs" />
-    <Compile Include="Equipment\Containers\DeepContainer\CoverableContainer\Edeny.cs" />
-    <Compile Include="Equipment\Containers\FlatContainer\LaposTanyer.cs" />
-    <Compile Include="Equipment\Material.cs" />
-    <Compile Include="Equipment\Containers\DeepContainer\Serpenyo.cs" />
-    <Compile Include="Equipment\Devices\DeepDevice\Suto.cs" />
-    <Compile Include="Equipment\Containers\DeepContainer\CoverableContainer\Tepsi.cs" />
-    <Compile Include="Equipment\Materials\Konyharuha.cs" />
-    <Compile Include="Equipment\Materials\Sutopapir.cs" />
-    <Compile Include="Equipment\Materials\Fedo.cs" />
-    <Compile Include="Equipment\Tool.cs" />
-    <Compile Include="Equipment\Tools\HusDaralo.cs" />
-    <Compile Include="Equipment\Tools\Ecset.cs" />
-    <Compile Include="Equipment\Tools\Daralo.cs" />
-    <Compile Include="Equipment\Tools\Fakanal.cs" />
-    <Compile Include="Equipment\Tools\FokhagymaPres.cs" />
-    <Compile Include="Equipment\Tools\Villa.cs" />
-    <Compile Include="Equipment\Tools\Habvero.cs" />
-    <Compile Include="Equipment\Tools\Kes.cs" />
-    <Compile Include="Equipment\Tools\Kez.cs" />
-    <Compile Include="Equipment\Tools\BurgonyaPres.cs" />
-    <Compile Include="Equipment\Tools\KrumpliPucolo.cs" />
-    <Compile Include="Equipment\Tools\Reszelo.cs" />
-    <Compile Include="Equipment\Tools\Kanal.cs" />
-    <Compile Include="Equipment\Tools\Szaggato.cs" />
-    <Compile Include="Exceptions\AmountAlreadySetException.cs" />
-    <Compile Include="Exceptions\AmountUnknownException.cs" />
-    <Compile Include="Exceptions\CultureNotSupportedException.cs" />
-    <Compile Include="Exceptions\InvalidActionForIngredientException.cs" />
-    <Compile Include="Exceptions\InvalidUnitConversionException.cs" />
-    <Compile Include="Exceptions\MrKupidoException.cs" />
-    <Compile Include="Exceptions\RecipeUnknownException.cs" />
-    <Compile Include="Ingredient\Fruit\CitromLe.cs" />
-    <Compile Include="Ingredient\Spice\Zsalya.cs" />
-    <Compile Include="Ingredient\Spice\Kakukkfu.cs" />
-    <Compile Include="Ingredient\Tarkabab.cs" />
-    <Compile Include="Ingredient\Ecet.cs" />
-    <Compile Include="Ingredient\Meat\SertesCsulok.cs" />
-    <Compile Include="Ingredient\Meat\SertesComb.cs" />
-    <Compile Include="Ingredient\Meat\Csirkecomb.cs" />
-    <Compile Include="Ingredient\FeherRizs.cs" />
-    <Compile Include="Ingredient\Fruit\Ananasz.cs" />
-    <Compile Include="Ingredient\Spice\Borokabogyo.cs" />
-    <Compile Include="Ingredient\Meat\Szalonna.cs" />
-    <Compile Include="Ingredient\Mushroom\KertiCsiperke.cs" />
-    <Compile Include="Ingredient\Nut\DioOrolt.cs" />
-    <Compile Include="Ingredient\Nut\Kakaobab.cs" />
-    <Compile Include="Ingredient\Nut\Kakaopor.cs" />
-    <Compile Include="Ingredient\Nut\Szerecsendiobel.cs" />
-    <Compile Include="Ingredient\OilFat\Disznozsir.cs" />
-    <Compile Include="Ingredient\OilFat\AllatiZsiradek.cs" />
-    <Compile Include="Ingredient\Rizs.cs" />
-    <Compile Include="Ingredient\Spice\Baberlevel.cs" />
-    <Compile Include="Ingredient\Spice\Bazsalikom.cs" />
-    <Compile Include="Ingredient\Spice\BazsalikomOrolt.cs" />
-    <Compile Include="Ingredient\Spice\FeherBors.cs" />
-    <Compile Include="Ingredient\Vegetable\Burgonya.cs" />
-    <Compile Include="Ingredient\Fruit\Alma.cs" />
-    <Compile Include="Ingredient\Fruit\Citrom.cs" />
-    <Compile Include="Ingredient\Fruit\CitromHej.cs" />
-    <Compile Include="Ingredient\Nut\Diobel.cs" />
-    <Compile Include="Ingredient\Fluid\Honey.cs" />
-    <Compile Include="Ingredient\Fruit\Kokusz.cs" />
-    <Compile Include="Ingredient\Fruit\KokuszBel.cs" />
-    <Compile Include="Ingredient\Fruit\KokuszReszelek.cs" />
-    <Compile Include="Ingredient\Vegetable\Feherrepa.cs" />
-    <Compile Include="Ingredient\Vegetable\ZoldPaprika.cs" />
-    <Compile Include="Ingredient\Vegetable\Karfiol.cs" />
-    <Compile Include="Ingredient\Vegetable\Ujhagyma.cs" />
-    <Compile Include="Ingredient\Vegetable\Kukorica.cs" />
-    <Compile Include="Ingredient\Vegetable\Paprika.cs" />
-    <Compile Include="Ingredient\Vegetable\Paradicsom.cs" />
-    <Compile Include="Ingredient\Spice\Petrezselyem.cs" />
-    <Compile Include="Ingredient\RetesLiszt.cs" />
-    <Compile Include="Ingredient\Spice\Fahej.cs" />
-    <Compile Include="Ingredient\Spice\Fokhagyma.cs" />
-    <Compile Include="Ingredient\OilFat\OlivaOlaj.cs" />
-    <Compile Include="Ingredient\Vegetable\Sargarepa.cs" />
-    <Compile Include="Ingredient\Meat\Sonka.cs" />
-    <Compile Include="Ingredient\Spice\So\KoSo.cs" />
-    <Compile Include="Ingredient\Spice\Oregano.cs" />
-    <Compile Include="Ingredient\Spice\OreganoOrolt.cs" />
-    <Compile Include="Ingredient\Spice\So\TengeriSo.cs" />
-    <Compile Include="Ingredient\Egg\TojasFeherje.cs" />
-    <Compile Include="Ingredient\Egg\TojasSargaja.cs" />
-    <Compile Include="Interfaces\ITag.cs" />
-    <Compile Include="Interfaces\IDirection.cs" />
-    <Compile Include="Interfaces\IDirectionSegment.cs" />
-    <Compile Include="Interfaces\IIngredientContainer.cs" />
-    <Compile Include="Interfaces\IEquipment.cs" />
-    <Compile Include="Interfaces\IIngredient.cs" />
-    <Compile Include="Bases\IngredientBase.cs" />
-    <Compile Include="Enums\IngredientCategory.cs" />
-    <Compile Include="Interfaces\IIngredientGroup.cs" />
-    <Compile Include="Interfaces\INutritionInfo.cs" />
-    <Compile Include="Interfaces\ISingleIngredient.cs" />
-    <Compile Include="Interfaces\ITreeNode.cs" />
-    <Compile Include="Model\CookedFoodParts.cs" />
-    <Compile Include="Model\Dimensions.cs" />
-    <Compile Include="Model\EnumToMultilingualString.cs" />
-    <Compile Include="Model\EquipmentGroup.cs" />
-    <Compile Include="Model\Quantity.cs" />
-    <Compile Include="Model\SignificantDigits.cs" />
-    <Compile Include="Model\SingleIngredient.cs" />
-    <Compile Include="Model\IngredientGroup.cs" />
-    <Compile Include="Ingredient\Spice\FeketeBors.cs" />
-    <Compile Include="Ingredient\Meat\Csirkemell.cs" />
-    <Compile Include="Ingredient\Mushroom\Eleszto.cs" />
-    <Compile Include="Ingredient\Spice\FeketeBorsOrolt.cs" />
-    <Compile Include="Model\PreparedIngredients.cs" />
-    <Compile Include="Model\StringHelper.cs" />
-    <Compile Include="Model\TypeHelper.cs" />
-    <Compile Include="Model\UnitConversionRule.cs" />
-    <Compile Include="Nature\Animalia\Actinopterygii.cs" />
-    <Compile Include="Nature\Animalia\Chondrichthyes.cs" />
-    <Compile Include="Nature\Animalia\Insecta.cs" />
-    <Compile Include="Nature\Animalia\Insecta\Apidae.cs" />
-    <Compile Include="Nature\Animalia\Insecta\Apidae\ApisMellifera.cs" />
-    <Compile Include="Nature\Animalia\Mammalia\Suidae.cs" />
-    <Compile Include="Nature\Animalia\Mammalia\Suidae\SusScrofa.cs" />
-    <Compile Include="Nature\Animalia\Mammalia\Suidae\SusScrofaDomestica.cs" />
-    <Compile Include="Nature\Fungi\Homobasidiomycetes.cs" />
-    <Compile Include="Nature\Fungi\Homobasidiomycetes\Agaricaceae\AgaricusCampestris.cs" />
-    <Compile Include="Nature\Fungi\Homobasidiomycetes\Amanitaceae.cs" />
-    <Compile Include="Nature\Fungi\Homobasidiomycetes\Amanitaceae\AmanitaMuscaria.cs" />
-    <Compile Include="Nature\Fungi\Homobasidiomycetes\Amanitaceae\AmanitaPantherina.cs" />
-    <Compile Include="Nature\Fungi\Homobasidiomycetes\Agaricaceae.cs" />
-    <Compile Include="Nature\Fungi\Homobasidiomycetes\Strophariaceae.cs" />
-    <Compile Include="Nature\Fungi\Homobasidiomycetes\Strophariaceae\PsilocybeCubensis.cs" />
-    <Compile Include="Bases\NatureBase.cs" />
-    <Compile Include="Nature\Plantae\Magnoliophyta.cs" />
-    <Compile Include="Nature\Plantae\Liliopsida\Amaryllidaceae.cs" />
-    <Compile Include="Nature\Plantae\Liliopsida\Amaryllidaceae\AlliumCepa.cs" />
-    <Compile Include="Nature\Plantae\Liliopsida\Amaryllidaceae\AlliumCepaL.cs" />
-    <Compile Include="Nature\Plantae\Liliopsida\Amaryllidaceae\AlliumSativum.cs" />
-    <Compile Include="Nature\Plantae\Liliopsida\Arecaceae.cs" />
-    <Compile Include="Nature\Plantae\Liliopsida\Arecaceae\CocosNucifera.cs" />
-    <Compile Include="Nature\Plantae\Liliopsida\Bromeliaceae.cs" />
-    <Compile Include="Nature\Plantae\Liliopsida\Bromeliaceae\AnanasComosus.cs" />
-    <Compile Include="Nature\Plantae\Liliopsida\Poaceae\ZeaMays.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Apiaceae\DaucusCarotaSubspSativus.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Lamiaceae\OcimumBasilicum.cs" />
-    <Compile Include="Nature\Plantae\Magnoliophyta\Myristicaceae.cs" />
-    <Compile Include="Nature\Plantae\Magnoliophyta\Juglandaceae.cs" />
-    <Compile Include="Nature\Plantae\Magnoliophyta\Juglandaceae\JuglansRegia.cs" />
-    <Compile Include="Nature\Plantae\Magnoliophyta\Myristicaceae\MyristicaFragrans.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Apiaceae.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Apiaceae\Petroselinum.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Asteraceae.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Asteraceae\HelianthusAnnuus.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Brassicaceae.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Brassicaceae\BrassicaOleraceaConvarBotrytisVarBotrytis.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Lauraceae.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Lauraceae\CinnamomumVerum.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Lauraceae\LaurusNobilis.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Malvaceae.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Lamiaceae.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Lamiaceae\OriganumMajorana.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Lamiaceae\OriganumVulgareL.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Lamiaceae\SalviaDivinorum.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Malvaceae\TheobromaCacao.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Oleaceae.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Oleaceae\OleaEuropaea.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Orchidaceae.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Orchidaceae\VanillaPlanifolia.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Piperaceae.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Piperaceae\PiperNigrum.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Rosaceae.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Rosaceae\Malus.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Rutaceae.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Rutaceae\CitrusMedicaL.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Solanaceae.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Solanaceae\CapsicumAnnuumL.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Solanaceae\SolanumLycopersicum.cs" />
-    <Compile Include="Nature\Plantae\Magnoliopsida\Solanaceae\SolanumTuberosum.cs" />
-    <Compile Include="Ingredient\Vegetable\Hagyma.cs" />
-    <Compile Include="Ingredient\Liszt.cs" />
-    <Compile Include="Ingredient\Spice\Majoranna.cs" />
-    <Compile Include="Ingredient\OilFat\NapraforgoOlaj.cs" />
-    <Compile Include="Ingredient\Spice\Fuszerpaprika.cs" />
-    <Compile Include="Ingredient\Spice\So.cs" />
-    <Compile Include="Ingredient\Fluid\Tej.cs" />
-    <Compile Include="Ingredient\Egg\Tojas.cs" />
-    <Compile Include="Ingredient\Fluid\Viz.cs" />
-    <Compile Include="Interfaces\IRecipe.cs" />
-    <Compile Include="Enums\MeasurementUnit.cs" />
-    <Compile Include="Nature\Animalia.cs" />
-    <Compile Include="Nature\Animalia\Aves.cs" />
-    <Compile Include="Nature\Animalia\Aves\Phasianidae\GallusGallus.cs" />
-    <Compile Include="Nature\Animalia\Mammalia\Bovidae\BosPrimigenius.cs" />
-    <Compile Include="Nature\Animalia\Mammalia\Bovidae.cs" />
-    <Compile Include="Nature\Animalia\Mammalia.cs" />
-    <Compile Include="Nature\Fungi.cs" />
-    <Compile Include="Nature\Animalia\Aves\Phasianidae\GallusGallusDomesticus.cs" />
-    <Compile Include="Nature\Fungi\Hemiascomycetes.cs" />
-    <Compile Include="Nature\Nonliving\Minerale.cs" />
-    <Compile Include="Nature\Animalia\Aves\Phasianidae.cs" />
-    <Compile Include="Nature\Nonliving.cs" />
-    <Compile Include="Nature\Plantae\Liliopsida.cs" />
-    <Compile Include="Nature\Plantae\Liliopsida\Poaceae\HordeumVulgare.cs" />
-    <Compile Include="Nature\Plantae\Liliopsida\Poaceae.cs" />
-    <Compile Include="Nature\Plantae\Liliopsida\Poaceae\SecaleCereale.cs" />
-    <Compile Include="Nature\Plantae\Liliopsida\Poaceae\TriticumAestivum.cs" />
-    <Compile Include="Nature\Plantae.cs" />
-    <Compile Include="Nature\Fungi\Hemiascomycetes\Saccharomycetaceae\SaccharomycesCerevisiae.cs" />
-    <Compile Include="Nature\Fungi\Hemiascomycetes\Saccharomycetaceae.cs" />
-    <Compile Include="Nature\Plantae\Pinopsida.cs" />
-    <Compile Include="Nature\Plantae\Pinopsida\Cupressaceae.cs" />
-    <Compile Include="Nature\Plantae\Pinopsida\Cupressaceae\JuniperusCommunis.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Bases\RecipeBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Nature\Animalia\Chondrichthyes\" />
@@ -363,17 +39,21 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Equipment\Containers\RoundContainer.cs" />
+    <Compile Remove="Ingredient\NemRetesesLiszt.cs" />
+    <Compile Remove="Ingredient\RetesesLiszt.cs" />
+    <Compile Remove="Ingredient\SingleIngredient.cs" />
+    <Compile Remove="MultiOutput.cs" />
+    <Compile Remove="ProcessIngredients.cs" />
+  </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
       <UserProperties BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
