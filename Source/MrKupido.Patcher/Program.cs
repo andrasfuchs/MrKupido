@@ -14,7 +14,7 @@ namespace MrKupido.Patcher
         {
             if (args.Length != 6)
             {
-                Console.WriteLine("Usage: mrkupido.patcher.exe <dll to patch> <interception dll> <interception type name> <new ingredient method name> <direction generator method name>");
+                Console.WriteLine("Usage: mrkupido.patcher.exe <dll to patch> <interception dll> <interception type name> <new ingredient method name> <direction generator after method name> <direction generator before method name>");
                 Console.ReadKey();
                 return -1;
             }
