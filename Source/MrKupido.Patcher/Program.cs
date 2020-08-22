@@ -214,7 +214,7 @@ namespace MrKupido.Patcher
 
                         if (directionGeneratorBeforeMD != null)
                         {
-                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldstr, mr.Module.AssemblyResolver.Resolve(mr.DeclaringType.Scope.Name).FullName);
+                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldstr, mr.Module.AssemblyResolver.Resolve(new AssemblyNameReference(mr.DeclaringType.Scope.Name, null)).FullName);
                             processor.InsertBefore(instr, ii);
 
                             ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldstr, mr.DeclaringType.FullName + " " + mr.Name);
@@ -253,7 +253,7 @@ namespace MrKupido.Patcher
                         // AFTER the instruction
                         if (directionGeneratorAfterMD != null)
                         {
-                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldstr, mr.Module.AssemblyResolver.Resolve(mr.DeclaringType.Scope.Name).FullName);
+                            ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldstr, mr.Module.AssemblyResolver.Resolve(new AssemblyNameReference(mr.DeclaringType.Scope.Name, null)).FullName);
                             processor.InsertBefore(instrNext, ii);
 
                             ii = processor.Create(Mono.Cecil.Cil.OpCodes.Ldstr, mr.DeclaringType.FullName + " " + mr.Name);
