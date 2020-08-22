@@ -11,3 +11,6 @@ TestResults
 
 #Visual Studio 2015 config files
 Source/.vs/*
+
+#SQLite DB file
+MrKupido.DataAccess.MrKupidoContext.db
