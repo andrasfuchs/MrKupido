@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using MrKupido.Library.Attributes;
 using MrKupido.Library.Nature;
-using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Ingredient
 {
@@ -12,17 +8,17 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "foghagyma", Priority = 200)]
     [NameAlias("hun", "büdös hagyma", Priority = 201)]
 
-	[IngredientConsts(
-		Category = ShoppingListCategory.Spice,
-		GrammsPerPiece = 3,
-		GrammsPerLiter = 1000,  // ??
-		CaloriesPer100Gramms = 149.0f,
-		CarbohydratesPer100Gramms = 127.0f,
-		FatPer100Gramms = 4.2f,
-		ProteinPer100Gramms = 17.7f,
-		GlichemicalIndex = 16,
-		InflammationFactor = 3576
-	)]
+    [IngredientConsts(
+        Category = ShoppingListCategory.Spice,
+        GrammsPerPiece = 3,
+        GrammsPerLiter = 1000,  // ??
+        CaloriesPer100Gramms = 149.0f,
+        CarbohydratesPer100Gramms = 127.0f,
+        FatPer100Gramms = 4.2f,
+        ProteinPer100Gramms = 17.7f,
+        GlichemicalIndex = 16,
+        InflammationFactor = 3576
+    )]
 
     [RootOf(typeof(AlliumSativum))]
     public class Fokhagyma : SingleIngredient

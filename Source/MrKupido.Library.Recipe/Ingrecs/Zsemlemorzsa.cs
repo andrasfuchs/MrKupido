@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MrKupido.Library.Attributes;
+﻿using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Recipe
 {
@@ -11,9 +7,9 @@ namespace MrKupido.Library.Recipe
     [NameAlias("eng", "breadcrumb")]
 
     [IngredientConsts(
-		IsIngrec = true,
-		CaloriesPer100Gramms = 344.0f
-	)]
+        IsIngrec = true,
+        CaloriesPer100Gramms = 344.0f
+    )]
     public class Zsemlemorzsa : RecipeBase
     {
         public Zsemlemorzsa(float amount, MeasurementUnit unit = MeasurementUnit.gramm)

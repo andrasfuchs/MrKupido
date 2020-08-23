@@ -1,8 +1,4 @@
 ﻿using MrKupido.Library.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace MrKupido.Library.Ingredient
 {
@@ -10,9 +6,9 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "kókuszreszelék")]
 
     [IngredientConsts(
-		Category = ShoppingListCategory.Fruit,
-		CaloriesPer100Gramms = 609.0f
-	)]
+        Category = ShoppingListCategory.Fruit,
+        CaloriesPer100Gramms = 609.0f
+    )]
     public class KokuszReszelek : KokuszBel
     {
         public KokuszReszelek(float amount, MeasurementUnit unit = MeasurementUnit.dekagramm, IngredientState state = IngredientState.Orolt)

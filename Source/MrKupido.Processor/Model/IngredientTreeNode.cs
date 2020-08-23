@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using MrKupido.Library.Attributes;
+using System;
 using System.Diagnostics;
-using MrKupido.Library.Attributes;
-using MrKupido.Library.Ingredient;
-using MrKupido.DataAccess;
-using MrKupido.Model;
-using MrKupido.Library;
 
 namespace MrKupido.Processor.Model
 {
@@ -38,7 +31,7 @@ namespace MrKupido.Processor.Model
                 LongName += " [" + NameAliasAttribute.GetName(this.LanguageISO, taxonomyConnectionAttribute.NatureClass) + " " + NameAliasAttribute.GetName(this.LanguageISO, taxonomyConnectionAttribute.GetType()) + "]";
             }
 
-            
+
         }
     }
 }

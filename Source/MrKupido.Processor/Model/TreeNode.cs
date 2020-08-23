@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Reflection;
-using System.Threading;
-using System.Diagnostics;
+﻿using MrKupido.Library;
 using MrKupido.Library.Attributes;
-using MrKupido.DataAccess;
-using MrKupido.Library;
-using System.Web.Script.Serialization;
 using MrKupido.Utils;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
+using System.Web.Script.Serialization;
 
 namespace MrKupido.Processor.Model
 {
@@ -22,13 +19,13 @@ namespace MrKupido.Processor.Model
         public TreeNode Parent { get; protected set; }
         [ScriptIgnore]
         public TreeNode[] Children { get; set; }
-		[ScriptIgnore]
-		public DateTime CreatedAt { get; private set; }
+        [ScriptIgnore]
+        public DateTime CreatedAt { get; private set; }
 
         public char NodeType { get; private set; }
         public string LanguageISO { get; private set; }
-		public string UniqueName { get; private set; }
-		public string UniqueNameEng { get; private set; }
+        public string UniqueName { get; private set; }
+        public string UniqueNameEng { get; private set; }
         public string ShortName { get; protected set; }
         public string LongName { get; protected set; }
         public string ClassName { get; private set; }
@@ -61,7 +58,7 @@ namespace MrKupido.Processor.Model
 
         public TreeNode(Type nodeClass, string languageISO)
         {
-			CreatedAt = DateTime.Now;
+            CreatedAt = DateTime.Now;
 
             LanguageISO = languageISO;
             ClassName = nodeClass.Name;
@@ -70,7 +67,7 @@ namespace MrKupido.Processor.Model
             Children = new TreeNode[0];
 
             string name = NameAliasAttribute.GetName(languageISO, nodeClass);
-            
+
             if (String.IsNullOrEmpty(name))
             {
                 throw new MrKupidoException("Class '{0}' must have a name defined.", nodeClass.FullName);
@@ -85,13 +82,13 @@ namespace MrKupido.Processor.Model
             ShortName = ShortName.TrimEnd();
             LongName = name;
             UniqueName = LongName.ToUniqueString();
-			UniqueNameEng = NameAliasAttribute.GetName("eng", nodeClass).ToUniqueString();
+            UniqueNameEng = NameAliasAttribute.GetName("eng", nodeClass).ToUniqueString();
 
             if (nodeClass.IsSubclassOf(typeof(MrKupido.Library.Equipment.EquipmentBase)) || (nodeClass == typeof(MrKupido.Library.Equipment.EquipmentBase))) NodeType = 'E';
             else if (nodeClass.IsSubclassOf(typeof(MrKupido.Library.Recipe.RecipeBase)) || (nodeClass == typeof(MrKupido.Library.Recipe.RecipeBase))) NodeType = 'R';
             else if (nodeClass.IsSubclassOf(typeof(MrKupido.Library.Ingredient.IngredientBase)) || (nodeClass == typeof(MrKupido.Library.Ingredient.IngredientBase))) NodeType = 'I';
             else if (nodeClass.IsSubclassOf(typeof(MrKupido.Library.Nature.NatureBase)) || (nodeClass == typeof(MrKupido.Library.Nature.NatureBase))) NodeType = 'N';
-			else if (nodeClass.IsSubclassOf(typeof(MrKupido.Library.Tag.TagBase)) || (nodeClass == typeof(MrKupido.Library.Tag.TagBase))) NodeType = 'T';
+            else if (nodeClass.IsSubclassOf(typeof(MrKupido.Library.Tag.TagBase)) || (nodeClass == typeof(MrKupido.Library.Tag.TagBase))) NodeType = 'T';
             else NodeType = 'U';
 
             IconUrls = IconUriFragmentAttribute.GetUrls(nodeClass, "~/Content/svg/" + Char.ToLower(NodeType) + "_{0}.svg");
@@ -145,7 +142,7 @@ namespace MrKupido.Processor.Model
             {
                 if (nodeClass == rootType)
                 {
-                        root = t2tn(nodeClass);
+                    root = t2tn(nodeClass);
                 }
                 else
                 {
@@ -174,21 +171,21 @@ namespace MrKupido.Processor.Model
             return result;
         }
 
-		protected void AddOrSet(ref float? f1, float? f2, ref float completion, float completionStep)
-		{
-			if (f2.HasValue)
-			{
-				if (f1.HasValue)
-				{
-					f1 = f1 + f2;
-				}
-				else
-				{
-					f1 = f2;
-				}
-				completion += completionStep;
-			}
-		}
+        protected void AddOrSet(ref float? f1, float? f2, ref float completion, float completionStep)
+        {
+            if (f2.HasValue)
+            {
+                if (f1.HasValue)
+                {
+                    f1 = f1 + f2;
+                }
+                else
+                {
+                    f1 = f2;
+                }
+                completion += completionStep;
+            }
+        }
 
         public override string ToString()
         {

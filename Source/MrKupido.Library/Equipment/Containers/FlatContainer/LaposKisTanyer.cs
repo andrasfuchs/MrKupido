@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MrKupido.Library.Attributes;
+﻿using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Equipment
 {
     [NameAlias("eng", "flat small plate")]
     [NameAlias("hun", "lapos kis tányér")]
 
-	[IconUriFragment("flat plate")]
+    [IconUriFragment("flat plate")]
 
     public class LaposKisTanyer : FlatContainer
     {

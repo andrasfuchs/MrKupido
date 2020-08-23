@@ -1,14 +1,11 @@
-﻿using System;
+﻿using MrKupido.Library;
+using MrKupido.Library.Attributes;
+using MrKupido.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using MrKupido.Library;
-using MrKupido.Library.Ingredient;
-using MrKupido.Library.Attributes;
 using System.Reflection;
-using MrKupido.Library.Equipment;
-using System.Collections;
-using MrKupido.Utils;
+using System.Text;
 
 namespace MrKupido.Processor.Model
 {
@@ -27,19 +24,19 @@ namespace MrKupido.Processor.Model
         public object Result { get; private set; }
         public string Alias { get; private set; }
 
-		public ITreeNode Equipment { get; private set; }
+        public ITreeNode Equipment { get; private set; }
 
-		public uint ActionDuration { get; private set; }
+        public uint ActionDuration { get; private set; }
         public string[] ActionIconUrls { get; private set; }
         public string ActionIconUrl { get; set; }
-		public bool IsPassive { get; private set; }
+        public bool IsPassive { get; private set; }
 
-		public ITreeNode[] Parameters { get; private set; }
+        public ITreeNode[] Parameters { get; private set; }
 
-		public IDirectionSegment[] DirectionSegments { get; private set; }
+        public IDirectionSegment[] DirectionSegments { get; private set; }
 
-		// replace exceptional words
-		private string[] correctionReplacements = { "tált", "tálat", "olajt", "olajat", "olívaolajt", "olívaolajat", "mély tányér", "mélytányér", "tésztadarabokot", "tésztadarabokat", "citromhéjt", "citromhéjat", "tejt", "tejet", "sütőpapírrel", "sütőpapírral", "vízt", "vizet", "dióbélt", "dióbelet", "cukort", "cukrot", "fahéjt", "fahéjat", "sertéscombet", "sertéscombot", "sertéscombes", "sertéscombos", "csirkecombet", "csirkecombot", "csirkecombes", "csirkecombos", "tejföles", "tejfölös", "vízes", "vizes", "vajt", "vajat", "vajos", "vajas", "dióbéles", "dióbeles", "babérlevélt", "babérlevelet", "sajtes", "sajtos", "pohárt", "poharat" };
+        // replace exceptional words
+        private string[] correctionReplacements = { "tált", "tálat", "olajt", "olajat", "olívaolajt", "olívaolajat", "mély tányér", "mélytányér", "tésztadarabokot", "tésztadarabokat", "citromhéjt", "citromhéjat", "tejt", "tejet", "sütőpapírrel", "sütőpapírral", "vízt", "vizet", "dióbélt", "dióbelet", "cukort", "cukrot", "fahéjt", "fahéjat", "sertéscombet", "sertéscombot", "sertéscombes", "sertéscombos", "csirkecombet", "csirkecombot", "csirkecombes", "csirkecombos", "tejföles", "tejfölös", "vízes", "vizes", "vajt", "vajat", "vajos", "vajas", "dióbéles", "dióbeles", "babérlevélt", "babérlevelet", "sajtes", "sajtos", "pohárt", "poharat" };
 
         public RecipeDirection(string languageISO, string assemblyName, string command, object[] operands = null, object result = null, RecipeStage stage = RecipeStage.Unknown, int actorIndex = 1, List<string> seenIngredients = null, IEquipment[] seenEquipment = null)
         {
@@ -51,13 +48,13 @@ namespace MrKupido.Processor.Model
             Operands = (operands == null ? new string[0] : operands);
             Result = result;
 
-			if (operands[0] is IEquipment)
-			{
-				IEquipment eq = ((IEquipment)operands[0]);
-				this.Equipment = Cache.Equipment[eq.GetName(languageISO)];
-				ActionDuration = eq.LastActionDuration;
-				TimeToComplete = new TimeSpan(0, 0, (int)eq.LastActionDuration);
-			}
+            if (operands[0] is IEquipment)
+            {
+                IEquipment eq = ((IEquipment)operands[0]);
+                this.Equipment = Cache.Equipment[eq.GetName(languageISO)];
+                ActionDuration = eq.LastActionDuration;
+                TimeToComplete = new TimeSpan(0, 0, (int)eq.LastActionDuration);
+            }
 
             if (Result is IIngredientGroup)
             {
@@ -77,37 +74,37 @@ namespace MrKupido.Processor.Model
                 IsPassive = PassiveActionAttribute.IsMethodPassiveAction(mi);
             }
 
-			List<TreeNode> parameters = new List<TreeNode>();
-			for (int i = 1; i < operands.Length; i++)
-			{
-				if (operands[i] is IIngredient)
-				{
-					TreeNode tn = Cache.Ingredient[((IIngredient)operands[i]).GetName(languageISO)];
-					if (tn == null) tn = Cache.Recipe[((IIngredient)operands[i]).GetName(languageISO)];
+            List<TreeNode> parameters = new List<TreeNode>();
+            for (int i = 1; i < operands.Length; i++)
+            {
+                if (operands[i] is IIngredient)
+                {
+                    TreeNode tn = Cache.Ingredient[((IIngredient)operands[i]).GetName(languageISO)];
+                    if (tn == null) tn = Cache.Recipe[((IIngredient)operands[i]).GetName(languageISO)];
 
-					parameters.Add(tn);
-				}
-				else if (operands[i] is IIngredient[])
-				{
-					foreach (IIngredient ing in ((IIngredient[])operands[i]))
-					{
-						TreeNode tn = Cache.Ingredient[ing.GetName(languageISO)];
-						if (tn == null) tn = Cache.Recipe[ing.GetName(languageISO)];
+                    parameters.Add(tn);
+                }
+                else if (operands[i] is IIngredient[])
+                {
+                    foreach (IIngredient ing in ((IIngredient[])operands[i]))
+                    {
+                        TreeNode tn = Cache.Ingredient[ing.GetName(languageISO)];
+                        if (tn == null) tn = Cache.Recipe[ing.GetName(languageISO)];
 
-						parameters.Add(tn);
-					}
-				}
-				else if (operands[i] is IEquipment)
-				{
-					parameters.Add(Cache.Equipment[((IEquipment)operands[i]).GetName(languageISO)]);
-				}
-			}
-			Parameters = parameters.ToArray();
+                        parameters.Add(tn);
+                    }
+                }
+                else if (operands[i] is IEquipment)
+                {
+                    parameters.Add(Cache.Equipment[((IEquipment)operands[i]).GetName(languageISO)]);
+                }
+            }
+            Parameters = parameters.ToArray();
 
             this.DirectionSegments = GenerateSegments(languageISO, seenIngredients, seenEquipment);
         }
 
-		private RecipeDirectionSegment[] GenerateSegments(string languageISO, List<string> seenIngredients, IEquipment[] seenEquipment)
+        private RecipeDirectionSegment[] GenerateSegments(string languageISO, List<string> seenIngredients, IEquipment[] seenEquipment)
         {
             List<RecipeDirectionSegment> result = new List<RecipeDirectionSegment>();
 
@@ -137,7 +134,7 @@ namespace MrKupido.Processor.Model
             return result.ToArray();
         }
 
-		private RecipeDirectionSegment[] EvaluateNameAliasExpression(string languageISO, string expression, object[] operands, object returnedValue, List<string> seenIngredients, IEquipment[] seenEquipment)
+        private RecipeDirectionSegment[] EvaluateNameAliasExpression(string languageISO, string expression, object[] operands, object returnedValue, List<string> seenIngredients, IEquipment[] seenEquipment)
         {
             List<RecipeDirectionSegment> result = new List<RecipeDirectionSegment>();
 
@@ -149,7 +146,7 @@ namespace MrKupido.Processor.Model
                 int textClauseEnd = clauseStartIndex;
 
                 clauseEndIndex = expression.IndexOf("}", clauseStartIndex);
-				bool isIteration = ((clauseEndIndex >= 1) && (expression[clauseEndIndex - 1] == '*')) || ((clauseEndIndex >= 2) && (expression[clauseEndIndex - 2] == '*'));
+                bool isIteration = ((clauseEndIndex >= 1) && (expression[clauseEndIndex - 1] == '*')) || ((clauseEndIndex >= 2) && (expression[clauseEndIndex - 2] == '*'));
                 int iterationClauseStart = -1;
                 int iterationClauseEnd = -1;
 
@@ -192,11 +189,11 @@ namespace MrKupido.Processor.Model
                 if (!Char.IsLetter(affixId)) affixId = Char.MinValue;
 
                 // operand can be a number OR a number followed by an asterix (in case of an iteration)
-				int removeChartsFromTheEnd = 0;
-				if (isIteration) removeChartsFromTheEnd++;
-				if (affixId != Char.MinValue) removeChartsFromTheEnd++;
+                int removeChartsFromTheEnd = 0;
+                if (isIteration) removeChartsFromTheEnd++;
+                if (affixId != Char.MinValue) removeChartsFromTheEnd++;
 
-				string operandIndexStr = clause.Substring(0, clause.Length - removeChartsFromTheEnd);
+                string operandIndexStr = clause.Substring(0, clause.Length - removeChartsFromTheEnd);
                 int operandIndex = String.IsNullOrEmpty(operandIndexStr) || (operandIndexStr == "-") ? 0 : Int32.Parse(operandIndexStr) + 1;
 
                 object operand = operandIndexStr == "-" ? returnedValue : operands[operandIndex];
@@ -234,7 +231,7 @@ namespace MrKupido.Processor.Model
                     }
                 }
 
-				Array items = new object[0];
+                Array items = new object[0];
                 if (isIteration)
                 {
                     if (!(operand is Array)) throw new MrKupidoException("If you use the {0*} clause in the action, you must pass an array as a parameter. The parameter number " + (operandIndex - 1) + " is not an array.");
@@ -243,47 +240,47 @@ namespace MrKupido.Processor.Model
                 }
                 else
                 {
-					items = new object[] { operand };
-				}
+                    items = new object[] { operand };
+                }
 
 
-				if (items.Length > 0)
-				{
-					foreach (object item in items)
-					{
-						if (!String.IsNullOrEmpty(beforeString)) result.Add(new RecipeDirectionSegment(beforeString));
+                if (items.Length > 0)
+                {
+                    foreach (object item in items)
+                    {
+                        if (!String.IsNullOrEmpty(beforeString)) result.Add(new RecipeDirectionSegment(beforeString));
 
-						//result.Add(new RecipeDirectionSegmentReference(languageISO, item, seenIngredients));
+                        //result.Add(new RecipeDirectionSegmentReference(languageISO, item, seenIngredients));
 
-						RecipeDirectionSegmentReference rdsr = new RecipeDirectionSegmentReference(languageISO, item, seenIngredients, seenEquipment);
-						if (!String.IsNullOrEmpty(rdsr.Name))
-						{
-							rdsr.Name = Affixate(PrepareForAffix(rdsr.Name), 'S');
-						}
+                        RecipeDirectionSegmentReference rdsr = new RecipeDirectionSegmentReference(languageISO, item, seenIngredients, seenEquipment);
+                        if (!String.IsNullOrEmpty(rdsr.Name))
+                        {
+                            rdsr.Name = Affixate(PrepareForAffix(rdsr.Name), 'S');
+                        }
 
-						// TODO: special (culture dependent) formatting for {0T} {0N} etc. etc.
-						if (affixId != Char.MinValue)
-						{
-							// only the last word needs affixation
-							string[] words = rdsr.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-							string lastWord = PrepareForAffix(words[words.Length - 1]);
-							lastWord = Affixate(lastWord, affixId);
+                        // TODO: special (culture dependent) formatting for {0T} {0N} etc. etc.
+                        if (affixId != Char.MinValue)
+                        {
+                            // only the last word needs affixation
+                            string[] words = rdsr.Text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                            string lastWord = PrepareForAffix(words[words.Length - 1]);
+                            lastWord = Affixate(lastWord, affixId);
 
-							if (!String.IsNullOrEmpty(rdsr.IconAlt) && (lastWord.StartsWith(rdsr.IconAlt)))
-							{
-								lastWord = lastWord.Replace(rdsr.IconAlt, "-");
-							}
+                            if (!String.IsNullOrEmpty(rdsr.IconAlt) && (lastWord.StartsWith(rdsr.IconAlt)))
+                            {
+                                lastWord = lastWord.Replace(rdsr.IconAlt, "-");
+                            }
 
-							// replace the last word
-							rdsr.Text = rdsr.Text.Remove(rdsr.Text.Length - words[words.Length - 1].Length) + lastWord;
-						}
+                            // replace the last word
+                            rdsr.Text = rdsr.Text.Remove(rdsr.Text.Length - words[words.Length - 1].Length) + lastWord;
+                        }
 
-						result.Add(rdsr);
+                        result.Add(rdsr);
 
-						if (!String.IsNullOrEmpty(afterString)) result.Add(new RecipeDirectionSegment(afterString));
-					}
-					if (!String.IsNullOrEmpty(afterString)) result.RemoveAt(result.Count - 1);
-				}
+                        if (!String.IsNullOrEmpty(afterString)) result.Add(new RecipeDirectionSegment(afterString));
+                    }
+                    if (!String.IsNullOrEmpty(afterString)) result.RemoveAt(result.Count - 1);
+                }
 
                 clauseEndIndex = iterationClauseEnd >= 0 ? iterationClauseEnd + 1 : clauseEndIndex + 1;
                 clauseStartIndex = clauseEndIndex;
@@ -335,34 +332,34 @@ namespace MrKupido.Processor.Model
             // replace the word which are irregular
             foreach (RecipeDirectionSegment segment in result)
             {
-				segment.Text = ReplaceIrregularWord(segment.Text);
+                segment.Text = ReplaceIrregularWord(segment.Text);
 
-				if (segment is RecipeDirectionSegmentReference)
-				{
-					((RecipeDirectionSegmentReference)segment).Name = ReplaceIrregularWord(((RecipeDirectionSegmentReference)segment).Name);
-				}
+                if (segment is RecipeDirectionSegmentReference)
+                {
+                    ((RecipeDirectionSegmentReference)segment).Name = ReplaceIrregularWord(((RecipeDirectionSegmentReference)segment).Name);
+                }
             }
 
             return result.ToArray();
         }
 
-		private string ReplaceIrregularWord(string word)
-		{
-			string result = word;
+        private string ReplaceIrregularWord(string word)
+        {
+            string result = word;
 
-			if (result == "-") result = "";
+            if (result == "-") result = "";
 
-			result = " " + result + " ";
+            result = " " + result + " ";
 
-			for (int i = 0; i < correctionReplacements.Length / 2; i++)
-			{
-				result = result.Replace(" " + correctionReplacements[i * 2] + " ", " " + correctionReplacements[i * 2 + 1] + " ");
-			}
+            for (int i = 0; i < correctionReplacements.Length / 2; i++)
+            {
+                result = result.Replace(" " + correctionReplacements[i * 2] + " ", " " + correctionReplacements[i * 2 + 1] + " ");
+            }
 
-			result = result.Substring(1, result.Length - 2);
+            result = result.Substring(1, result.Length - 2);
 
-			return result;
-		}
+            return result;
+        }
 
         private static VowelHarmony VowelHarmonyOf(string word, bool separateHighTypes = false)
         {
@@ -470,19 +467,19 @@ namespace MrKupido.Processor.Model
                         if (vh == VowelHarmony.HighType2) result += "ön";
                     }
                     break;
-				case 'S':
-					if (StringUtils.IsVowel(result[result.Length - 1]))
-					{
-						result += "s";
-					}
-					else
-					{
-						if (vh == VowelHarmony.Low) result += "os";
-						if (vh == VowelHarmony.HighType1) result += "es";
-						if (vh == VowelHarmony.HighType2) result += "ös";
-						if (vh == VowelHarmony.Mixed) result += "s";
-					}
-					break;
+                case 'S':
+                    if (StringUtils.IsVowel(result[result.Length - 1]))
+                    {
+                        result += "s";
+                    }
+                    else
+                    {
+                        if (vh == VowelHarmony.Low) result += "os";
+                        if (vh == VowelHarmony.HighType1) result += "es";
+                        if (vh == VowelHarmony.HighType2) result += "ös";
+                        if (vh == VowelHarmony.Mixed) result += "s";
+                    }
+                    break;
                 default:
                     throw new MrKupidoException("The affix id '{0}' is unknown, so the word '{1}' can't be processed.", affixId, word);
             }

@@ -1,9 +1,5 @@
 ﻿using MrKupido.Library.Attributes;
 using MrKupido.Library.Nature;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace MrKupido.Library.Ingredient
 {
@@ -23,16 +19,16 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "zöldhagyma")]
     [NameAlias("hun", "téli sarjadékhagyma", Priority = 200)]
 
-	[IngredientConsts(
-		Category = ShoppingListCategory.Vegetable,
-		GrammsPerPiece = 15,
-		CaloriesPer100Gramms = 32.0f,
-		CarbohydratesPer100Gramms = 25.9f,
-		FatPer100Gramms = 1.6f,
-		ProteinPer100Gramms = 4.5f,
-		GlichemicalIndex = 3,
-		InflammationFactor = 304
-	)]
+    [IngredientConsts(
+        Category = ShoppingListCategory.Vegetable,
+        GrammsPerPiece = 15,
+        CaloriesPer100Gramms = 32.0f,
+        CarbohydratesPer100Gramms = 25.9f,
+        FatPer100Gramms = 1.6f,
+        ProteinPer100Gramms = 4.5f,
+        GlichemicalIndex = 3,
+        InflammationFactor = 304
+    )]
 
     [RootOf(typeof(AlliumCepa))]
     public class Ujhagyma : SingleIngredient

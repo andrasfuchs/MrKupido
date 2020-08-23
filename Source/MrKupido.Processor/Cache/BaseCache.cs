@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using MrKupido.Library;
 using MrKupido.Processor.Model;
-using System.Threading;
-using MrKupido.Library;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace MrKupido.Processor

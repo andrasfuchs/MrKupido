@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Mono.Cecil;
+﻿using Mono.Cecil;
 using MrKupido.Library;
-using System.Reflection;
-using MrKupido.Library.Recipe;
+using System;
+using System.Linq;
 
 namespace MrKupido.Processor.Model
 {

@@ -1,14 +1,12 @@
-﻿using System;
+﻿using MrKupido.Library.Attributes;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel;
-using MrKupido.Library.Attributes;
 using System.Globalization;
 
 namespace MrKupido.Library
 {
-    public class EnumToMultilingualString : TypeConverter       
+    public class EnumToMultilingualString : TypeConverter
     {
         private static Dictionary<string, string> cache = new Dictionary<string, string>();
 
@@ -18,7 +16,7 @@ namespace MrKupido.Library
             if (destinationType == typeof(string))
             {
                 Type valueType = value.GetType();
-                string valueStr = value.ToString().Replace(" ","");
+                string valueStr = value.ToString().Replace(" ", "");
                 string cacheKey = culture.ThreeLetterISOLanguageName + "-" + valueType.FullName + "-" + valueStr;
 
                 if (cache.ContainsKey(cacheKey))

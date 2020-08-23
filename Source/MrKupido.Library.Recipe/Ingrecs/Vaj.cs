@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MrKupido.Library.Attributes;
+﻿using MrKupido.Library.Attributes;
 using MrKupido.Library.Equipment;
 
 namespace MrKupido.Library.Recipe
@@ -10,16 +6,16 @@ namespace MrKupido.Library.Recipe
     [NameAlias("hun", "vaj")]
     [NameAlias("eng", "butter")]
 
-	[IngredientConsts(
-		IsIngrec = true,
-		Category = ShoppingListCategory.Other,
-		CaloriesPer100Gramms = 717.0f,
-		CarbohydratesPer100Gramms = 0.4f,
-		FatPer100Gramms = 713.0f,
-		ProteinPer100Gramms = 3.6f,
-		GlichemicalIndex = 0,
-		InflammationFactor = -317
-	)]
+    [IngredientConsts(
+        IsIngrec = true,
+        Category = ShoppingListCategory.Other,
+        CaloriesPer100Gramms = 717.0f,
+        CarbohydratesPer100Gramms = 0.4f,
+        FatPer100Gramms = 713.0f,
+        ProteinPer100Gramms = 3.6f,
+        GlichemicalIndex = 0,
+        InflammationFactor = -317
+    )]
 
     public class Vaj : RecipeBase
     {

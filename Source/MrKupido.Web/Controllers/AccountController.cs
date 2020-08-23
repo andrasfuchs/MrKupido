@@ -1,23 +1,15 @@
-﻿using System;
+﻿using DotNetOpenAuth.ApplicationBlock;
+using DotNetOpenAuth.OAuth2;
+using MrKupido.Model;
+using MrKupido.Web.Models;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Globalization;
 using System.Linq;
-using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using System.Configuration;
-using System.IO;
-using DotNetOpenAuth;
-using DotNetOpenAuth.Messaging;
-using DotNetOpenAuth.ApplicationBlock;
-using MrKupido.Model;
-using MrKupido.Web.Models;
-using System.Globalization;
-using MrKupido.Library.Attributes;
-using DotNetOpenAuth.OAuth2;
-using DotNetOpenAuth.OpenId.Extensions.AttributeExchange;
-using DotNetOpenAuth.OpenId;
-using DotNetOpenAuth.OpenId.RelyingParty;
 
 namespace MrKupido.Web.Controllers
 {
@@ -34,7 +26,7 @@ namespace MrKupido.Web.Controllers
         private static readonly WindowsLiveClient windowsLiveClient = new WindowsLiveClient
         {
             ClientIdentifier = ConfigurationManager.AppSettings["windowsLiveAppID"],
-            ClientCredentialApplicator = ClientCredentialApplicator.PostParameter(ConfigurationManager.AppSettings["windowsLiveAppSecret"])            
+            ClientCredentialApplicator = ClientCredentialApplicator.PostParameter(ConfigurationManager.AppSettings["windowsLiveAppSecret"])
         };
 
         private static readonly GoogleClient googleClient = new GoogleClient
@@ -64,7 +56,7 @@ namespace MrKupido.Web.Controllers
                     }
                     break;
 
-                case "Facebook":            
+                case "Facebook":
                     authState = facebookClient.ProcessUserAuthorization();
                     oauth2Graph = facebookClient.GetGraph(authState, new[] { FacebookGraph.Fields.Defaults, FacebookGraph.Fields.Email, FacebookGraph.Fields.Picture, FacebookGraph.Fields.Birthday });
 
@@ -75,7 +67,7 @@ namespace MrKupido.Web.Controllers
                     }
                     break;
 
-                case "WindowsLive":            
+                case "WindowsLive":
                     authState = windowsLiveClient.ProcessUserAuthorization();
                     oauth2Graph = windowsLiveClient.GetGraph(authState);
 
@@ -87,7 +79,7 @@ namespace MrKupido.Web.Controllers
                     break;
             }
             #endregion
-           
+
             // if we have a valid login
             if ((authState != null) && (authState.AccessToken != null) && (oauth2Graph != null))
             {
@@ -154,7 +146,7 @@ namespace MrKupido.Web.Controllers
                 {
                     user.DateOfBirth = oauth2Graph.BirthdayDT;
                 }
-               
+
                 if (String.IsNullOrEmpty(user.FullName))
                 {
                     if (user.CultureName == "hu-HU")
@@ -187,15 +179,15 @@ namespace MrKupido.Web.Controllers
                 if (String.IsNullOrEmpty(returnUrl))
                 {
 
-					if (user.FirstLoginUtc == user.LastLoginUtc)
-					{
-						// this is the first time he's here
-						return RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Help", action = "FirstTimeTutorial" });
-					}
-					else
-					{
-						return RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Home", action = "Index" });
-					}
+                    if (user.FirstLoginUtc == user.LastLoginUtc)
+                    {
+                        // this is the first time he's here
+                        return RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Help", action = "FirstTimeTutorial" });
+                    }
+                    else
+                    {
+                        return RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Home", action = "Index" });
+                    }
                 }
                 else
                 {
@@ -297,98 +289,99 @@ namespace MrKupido.Web.Controllers
         [HttpPost]
         public new ActionResult Profile(string userId)
         {
-			List<String> invalidProperties = new List<String>();
+            List<String> invalidProperties = new List<String>();
 
             User sessionUser = Session.GetCurrentUser();
             User user = context.Users.First(u => u.UserId == sessionUser.UserId);
 
             user.LastName = Request.Form["lastname"];
             user.FirstName = Request.Form["firstname"];
-			user.NickName = Request.Form["nickname"];
+            user.NickName = Request.Form["nickname"];
 
             user.CultureName = Request.Form["language"];
 
 
-			user.Gender = String.IsNullOrEmpty(Request.Form["gender"]) ? 0 : Request.Form["gender"] == "male" ? 1 : Request.Form["gender"] == "female" ? 2 : 0;
-            
-			if ((!String.IsNullOrEmpty(Request.Form["height"])))
-			{
-				float f;
-				if (Single.TryParse(Request.Form["height"], out f))
-				{
-					user.Height = f / 100;
-				}
-				else
-				{
-					invalidProperties.Add("Height");
-					invalidProperties.Add(MrKupido.Web.Resources.Account.Profile.ResourceManager.GetString("HeightValidation"));
-					user.Height = null;
-				}
-			} else
-			{
-				user.Height = null;
-			}
+            user.Gender = String.IsNullOrEmpty(Request.Form["gender"]) ? 0 : Request.Form["gender"] == "male" ? 1 : Request.Form["gender"] == "female" ? 2 : 0;
 
-			if ((!String.IsNullOrEmpty(Request.Form["weight"])))
-			{
-				float f;
-				if (Single.TryParse(Request.Form["weight"], out f))
-				{
-					user.Weight = f;
-				}
-				else
-				{
-					invalidProperties.Add("Weight");
-					invalidProperties.Add(MrKupido.Web.Resources.Account.Profile.ResourceManager.GetString("WeightValidation"));
-					user.Weight = null;
-				}
-			}
-			else
-			{
-				user.Weight = null;
-			}
+            if ((!String.IsNullOrEmpty(Request.Form["height"])))
+            {
+                float f;
+                if (Single.TryParse(Request.Form["height"], out f))
+                {
+                    user.Height = f / 100;
+                }
+                else
+                {
+                    invalidProperties.Add("Height");
+                    invalidProperties.Add(MrKupido.Web.Resources.Account.Profile.ResourceManager.GetString("HeightValidation"));
+                    user.Height = null;
+                }
+            }
+            else
+            {
+                user.Height = null;
+            }
 
-			if ((!String.IsNullOrEmpty(Request.Form["dateofbirth"])))
-			{
-				DateTime dt;
-				if (DateTime.TryParseExact(Request.Form["dateofbirth"], "yyyy-MM-dd", System.Threading.Thread.CurrentThread.CurrentUICulture, DateTimeStyles.None, out dt))
-				{
-					user.DateOfBirth = dt;
-				}
-				else
-				{
-					invalidProperties.Add("DateOfBirth");
-					invalidProperties.Add(MrKupido.Web.Resources.Account.Profile.ResourceManager.GetString("DateOfBirthValidation"));
-					user.DateOfBirth = null;
-				}
-			}
-			else
-			{
-				user.DateOfBirth = null;
-			}
+            if ((!String.IsNullOrEmpty(Request.Form["weight"])))
+            {
+                float f;
+                if (Single.TryParse(Request.Form["weight"], out f))
+                {
+                    user.Weight = f;
+                }
+                else
+                {
+                    invalidProperties.Add("Weight");
+                    invalidProperties.Add(MrKupido.Web.Resources.Account.Profile.ResourceManager.GetString("WeightValidation"));
+                    user.Weight = null;
+                }
+            }
+            else
+            {
+                user.Weight = null;
+            }
 
-			foreach (System.Data.Entity.Validation.DbEntityValidationResult error in context.GetValidationErrors())
-			{
-				foreach (System.Data.Entity.Validation.DbValidationError ve in error.ValidationErrors)
-				{
-					if (invalidProperties.Contains(ve.PropertyName)) continue;
+            if ((!String.IsNullOrEmpty(Request.Form["dateofbirth"])))
+            {
+                DateTime dt;
+                if (DateTime.TryParseExact(Request.Form["dateofbirth"], "yyyy-MM-dd", System.Threading.Thread.CurrentThread.CurrentUICulture, DateTimeStyles.None, out dt))
+                {
+                    user.DateOfBirth = dt;
+                }
+                else
+                {
+                    invalidProperties.Add("DateOfBirth");
+                    invalidProperties.Add(MrKupido.Web.Resources.Account.Profile.ResourceManager.GetString("DateOfBirthValidation"));
+                    user.DateOfBirth = null;
+                }
+            }
+            else
+            {
+                user.DateOfBirth = null;
+            }
 
-					invalidProperties.Add(ve.PropertyName);
+            foreach (System.Data.Entity.Validation.DbEntityValidationResult error in context.GetValidationErrors())
+            {
+                foreach (System.Data.Entity.Validation.DbValidationError ve in error.ValidationErrors)
+                {
+                    if (invalidProperties.Contains(ve.PropertyName)) continue;
 
-					string errorMsg = MrKupido.Web.Resources.Account.Profile.ResourceManager.GetString(ve.PropertyName + "Validation");
-					if (errorMsg == null) errorMsg = ve.ErrorMessage;
-					invalidProperties.Add(errorMsg);
-				}
-			}
+                    invalidProperties.Add(ve.PropertyName);
 
-			if (invalidProperties.Count > 0)
-			{
-				Session["InvalidProperties"] = invalidProperties.ToArray();
-								
-				return RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Account", action = "Profile" });
-			}
+                    string errorMsg = MrKupido.Web.Resources.Account.Profile.ResourceManager.GetString(ve.PropertyName + "Validation");
+                    if (errorMsg == null) errorMsg = ve.ErrorMessage;
+                    invalidProperties.Add(errorMsg);
+                }
+            }
 
-			Session["InvalidProperties"] = null;
+            if (invalidProperties.Count > 0)
+            {
+                Session["InvalidProperties"] = invalidProperties.ToArray();
+
+                return RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Account", action = "Profile" });
+            }
+
+            Session["InvalidProperties"] = null;
             context.SaveChanges();
 
             Session.SetCurrentUser(user);

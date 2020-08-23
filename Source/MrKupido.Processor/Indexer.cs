@@ -1,12 +1,9 @@
-﻿using System;
+﻿using MrKupido.Library;
+using MrKupido.Library.Attributes;
+using MrKupido.Processor.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using MrKupido.Library;
-using MrKupido.Library.Recipe;
-using MrKupido.Processor.Model;
-using MrKupido.Library.Attributes;
-using System.Diagnostics;
 
 namespace MrKupido.Processor
 {
@@ -22,8 +19,8 @@ namespace MrKupido.Processor
         private List<TreeNode> all = new List<TreeNode>();
         public string LanguageISO { get; private set; }
 
-        public TreeNode[] All 
-        { 
+        public TreeNode[] All
+        {
             get
             {
                 return all.ToArray();
@@ -43,7 +40,7 @@ namespace MrKupido.Processor
             if (node.LanguageISO != this.LanguageISO) return;
 
             all.Add(node);
-            
+
             if (classNameIndex.ContainsKey(node.ClassName)) throw new MrKupidoException("Class-name index already has an item with the key '{0}'", node.ClassName);
             classNameIndex.Add(node.ClassFullName, node);
 
@@ -68,7 +65,7 @@ namespace MrKupido.Processor
                 AddToIndex(tn);
             }
         }
-        
+
         public TreeNode GetByClassName(string className)
         {
             TreeNode tn = null;
@@ -108,6 +105,6 @@ namespace MrKupido.Processor
 
             return result;
         }
-    
+
     }
 }

@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MrKupido.Processor.Model;
 using System.Linq;
-using System.Text;
-using MrKupido.Processor.Model;
-using System.Reflection;
 
 namespace MrKupido.Processor
 {
     public class IngredientCache : BaseCache
-    {        
-        public new IngredientTreeNode this [string name]
+    {
+        public new IngredientTreeNode this[string name]
         {
             get
             {

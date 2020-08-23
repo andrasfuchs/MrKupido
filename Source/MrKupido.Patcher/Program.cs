@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.IO;
-using Mono.Cecil;
+﻿using Mono.Cecil;
 using Mono.Cecil.Rocks;
+using System;
+using System.IO;
+using System.Linq;
 
 namespace MrKupido.Patcher
 {
@@ -150,7 +148,7 @@ namespace MrKupido.Patcher
                         // parameters
                         for (int j = mr.Parameters.Count - 1; j >= 0; j--)
                         {
-                            nvs[j+1] = new Mono.Cecil.Cil.VariableDefinition(mr.Parameters[j].ParameterType);
+                            nvs[j + 1] = new Mono.Cecil.Cil.VariableDefinition(mr.Parameters[j].ParameterType);
                             md.Body.Variables.Add(nvs[j + 1]);
 
                             ii = processor.Create(Mono.Cecil.Cil.OpCodes.Stloc_S, nvs[j + 1]);

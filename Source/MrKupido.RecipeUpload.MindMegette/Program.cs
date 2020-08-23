@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using MrKupido.DataAccess;
 using MrKupido.Model;
-using MrKupido.DataAccess;
-using System.Data.Entity;
+using System;
 using System.IO;
-using MrKupido.Utils;
-using System.Web;
-using System.Runtime.Serialization.Json;
+using System.Linq;
 using System.Threading;
 
 namespace MrKupido.RecipeUpload.MindMegette

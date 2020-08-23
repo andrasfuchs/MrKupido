@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace MrKupido.Library
 {
@@ -18,13 +15,13 @@ namespace MrKupido.Library
         object Result { get; }
         string Alias { get; }
 
-		ITreeNode Equipment { get; }
+        ITreeNode Equipment { get; }
 
-		uint ActionDuration { get; }
+        uint ActionDuration { get; }
         bool IsPassive { get; }
         string ActionIconUrl { get; }
 
-		ITreeNode[] Parameters { get; }
+        ITreeNode[] Parameters { get; }
 
         IDirectionSegment[] DirectionSegments { get; }
     }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MrKupido.Library.Attributes;
+﻿using MrKupido.Library.Attributes;
 using MrKupido.Library.Nature;
 
 namespace MrKupido.Library.Ingredient
@@ -12,15 +8,15 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "piros fűszerpaprika", Priority = 2)]
     [NameAlias("hun", "fűszerpaprika")]
 
-	[IngredientConsts(
-		Category = ShoppingListCategory.Spice,
-		CaloriesPer100Gramms = 18.0f,
-		CarbohydratesPer100Gramms = 13.5f,
-		FatPer100Gramms = 2.5f,
-		ProteinPer100Gramms = 2.0f,
-		GlichemicalIndex = 1,
-		InflammationFactor = 13
-	)]
+    [IngredientConsts(
+        Category = ShoppingListCategory.Spice,
+        CaloriesPer100Gramms = 18.0f,
+        CarbohydratesPer100Gramms = 13.5f,
+        FatPer100Gramms = 2.5f,
+        ProteinPer100Gramms = 2.0f,
+        GlichemicalIndex = 1,
+        InflammationFactor = 13
+    )]
 
 
     [GristOf(typeof(CapsicumAnnuumL))]

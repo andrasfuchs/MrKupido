@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace MrKupido.Utils
 {
@@ -51,7 +48,7 @@ namespace MrKupido.Utils
 
             string ptString = timeCode.Substring(0, 2);
             if (ptString != "PT") return null;
-            
+
             timeCode = timeCode.Substring(2);
 
             int result = 0;

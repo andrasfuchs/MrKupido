@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Web;
 
 namespace MrKupido.Web.Models
-{    
+{
     //[DataContract(Name = "")]
     //public class WikiLocationActicle
     //{
@@ -48,7 +45,7 @@ namespace MrKupido.Web.Models
         public string Distance { get; set; }
     }
 
-    public class WikiLocationRoot    
+    public class WikiLocationRoot
     {
         public List<Article> articles { get; set; }
     }

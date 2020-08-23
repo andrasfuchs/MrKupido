@@ -1,9 +1,8 @@
-﻿using System;
+﻿using MrKupido.Library.Attributes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Reflection;
-using MrKupido.Library.Attributes;
 
 namespace MrKupido.Processor.Model
 {

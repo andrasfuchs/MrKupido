@@ -1,10 +1,7 @@
 namespace DataAccess.Migrations
 {
-    using System;
-    using System.Data.Entity;
+    using MrKupido.DataAccess;
     using System.Data.Entity.Migrations;
-    using System.Linq;
-using MrKupido.DataAccess;
 
     internal sealed class Configuration : DbMigrationsConfiguration<MrKupidoContext>
     {

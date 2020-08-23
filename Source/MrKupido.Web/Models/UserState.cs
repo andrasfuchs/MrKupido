@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using MrKupido.Model;
-using System.Web.Routing;
+﻿using MrKupido.Model;
+using System;
 using System.Text;
+using System.Web.Routing;
 
 namespace MrKupido.Web.Models
 {
@@ -30,11 +27,11 @@ namespace MrKupido.Web.Models
         {
             set
             {
-                if (value == null) 
+                if (value == null)
                 {
                     OnChanged("LOGOUT", null);
                 }
-                else 
+                else
                 {
                     if ((user == null) || (value.UserId != user.UserId))
                     {
@@ -60,7 +57,7 @@ namespace MrKupido.Web.Models
                 StringBuilder sb = new StringBuilder();
                 foreach (string key in value.HttpContext.Request.Params.AllKeys)
                 {
-					if ((key == "ASP.NET_SessionId") || (key.ToUpper() == key) || key.StartsWith("__") || (key.StartsWith("DotNetOpenAuth.WebServerClient.XSRF-Session"))) continue;
+                    if ((key == "ASP.NET_SessionId") || (key.ToUpper() == key) || key.StartsWith("__") || (key.StartsWith("DotNetOpenAuth.WebServerClient.XSRF-Session"))) continue;
                     sb.Append(key);
                     sb.Append(':');
                     sb.Append(value.HttpContext.Request.Params[key]);

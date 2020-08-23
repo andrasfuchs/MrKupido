@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MrKupido.Library.Attributes;
+﻿using MrKupido.Library.Attributes;
 using MrKupido.Library.Equipment;
 using MrKupido.Library.Ingredient;
 
@@ -11,16 +7,16 @@ namespace MrKupido.Library.Recipe
     [NameAlias("eng", "cottage cheese")]
     [NameAlias("hun", "túró")]
 
-	[IngredientConsts(
-		IsIngrec = true,
-		Category = ShoppingListCategory.Other,
-		CaloriesPer100Gramms = 98.0f,
-		CarbohydratesPer100Gramms = 12.7f,
-		FatPer100Gramms = 37.8f,
-		ProteinPer100Gramms = 47.5f,
-		GlichemicalIndex = 3,
-		InflammationFactor = -22
-	)]
+    [IngredientConsts(
+        IsIngrec = true,
+        Category = ShoppingListCategory.Other,
+        CaloriesPer100Gramms = 98.0f,
+        CarbohydratesPer100Gramms = 12.7f,
+        FatPer100Gramms = 37.8f,
+        ProteinPer100Gramms = 47.5f,
+        GlichemicalIndex = 3,
+        InflammationFactor = -22
+    )]
     public class Turo : RecipeBase
     {
         public Turo(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
@@ -74,10 +70,10 @@ namespace MrKupido.Library.Recipe
             tuzhely.RahelyezniC(edeny);
             Fakanal fakanal = eg.Use<Fakanal>();
             fakanal.KevergetniC(edeny, 1);
-			edeny.Varni(new Quantity(30, MeasurementUnit.minute)); // itt keletkezik a turo a tejből
+            edeny.Varni(new Quantity(30, MeasurementUnit.minute)); // itt keletkezik a turo a tejből
 
             tuzhely.LeemelniC(edeny);
-			edeny.Varni(new Quantity(10, MeasurementUnit.minute));
+            edeny.Varni(new Quantity(10, MeasurementUnit.minute));
             edeny.FolyadekotLeonteni();
 
             cfp.Add("turo", edeny);

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace MrKupido.Web.Controllers
 {
@@ -21,12 +17,12 @@ namespace MrKupido.Web.Controllers
             return View();
         }
 
-		public ActionResult FirstTimeTutorial()
-		{
-			return View();
-		}
-		
-		public ActionResult FeatureGuideLevel1()
+        public ActionResult FirstTimeTutorial()
+        {
+            return View();
+        }
+
+        public ActionResult FeatureGuideLevel1()
         {
             return View();
         }
@@ -46,19 +42,19 @@ namespace MrKupido.Web.Controllers
             return View();
         }
 
-		public ActionResult TermsOfUse()
-		{
-			return View();
-		}
-		
-		public ActionResult VersionChangeLog020()
+        public ActionResult TermsOfUse()
         {
             return View();
         }
 
-		public ActionResult Poll001()
-		{
-			return View();
-		}
-	}
+        public ActionResult VersionChangeLog020()
+        {
+            return View();
+        }
+
+        public ActionResult Poll001()
+        {
+            return View();
+        }
+    }
 }

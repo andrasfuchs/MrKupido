@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MrKupido.Library.Attributes;
+﻿using MrKupido.Library.Attributes;
+using System;
 using System.ComponentModel;
 
 namespace MrKupido.Library
 {
     [TypeConverter(typeof(EnumToMultilingualString))]
-    
+
     [Flags]
     public enum IngredientState
     {
@@ -48,20 +45,20 @@ namespace MrKupido.Library
         [NameAlias("eng", "beaten")]
         [NameAlias("hun", "felvert")]
         Felvert = 1024,
-		[NameAlias("eng", "cold")]
-		[NameAlias("hun", "hideg")]
-		Hideg = 2048,
-		[NameAlias("eng", "lukewarm")]
-		[NameAlias("hun", "langyos")]
-		Langyos = 4096,
-		[NameAlias("eng", "warm")]
-		[NameAlias("hun", "meleg")]
-		Meleg = 8192,
-		[NameAlias("eng", "hot")]
-		[NameAlias("hun", "forró")]
-		Forro = 16384,
-		[NameAlias("eng", "melted")]
-		[NameAlias("hun", "olvasztott")]
-		Olvasztott = 32768,
-	}
+        [NameAlias("eng", "cold")]
+        [NameAlias("hun", "hideg")]
+        Hideg = 2048,
+        [NameAlias("eng", "lukewarm")]
+        [NameAlias("hun", "langyos")]
+        Langyos = 4096,
+        [NameAlias("eng", "warm")]
+        [NameAlias("hun", "meleg")]
+        Meleg = 8192,
+        [NameAlias("eng", "hot")]
+        [NameAlias("hun", "forró")]
+        Forro = 16384,
+        [NameAlias("eng", "melted")]
+        [NameAlias("hun", "olvasztott")]
+        Olvasztott = 32768,
+    }
 }

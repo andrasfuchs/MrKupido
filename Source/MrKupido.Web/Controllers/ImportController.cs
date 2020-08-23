@@ -1,18 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using MrKupido.Model;
-using MrKupido.DataAccess;
-using System.Runtime.Serialization.Json;
-using System.IO;
-using System.Text;
-using NHunspell;
+﻿using MrKupido.DataAccess;
 using MrKupido.Library;
-using MrKupido.Utils;
+using MrKupido.Model;
 using MrKupido.Processor;
 using MrKupido.Processor.Model;
+using MrKupido.Utils;
+using NHunspell;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.Serialization.Json;
+using System.Text;
+using System.Web;
+using System.Web.Mvc;
 
 namespace MrKupido.Web.Controllers
 {
@@ -53,7 +53,7 @@ namespace MrKupido.Web.Controllers
             if (importedRecipe == null) return RedirectToAction("Index", "HomeController");
 
             DataContractJsonSerializer dcjs = new DataContractJsonSerializer(typeof(string[]));
-            
+
             // Ingredients
             List<string> ingredientList = new List<string>();
             ingredientList.AddRange(dcjs.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(importedRecipe.Ingredients))) as string[]);
@@ -86,7 +86,7 @@ namespace MrKupido.Web.Controllers
 
             return View(new object[] { importedRecipe, ingredients.ToString(), originalDirections, directionList });
         }
-        
+
         [HttpPost]
         public ActionResult LoadIngredientTable(string langISO, string ingredients)
         {
@@ -258,7 +258,7 @@ namespace MrKupido.Web.Controllers
         public ActionResult SaveRecipe(string recipeUniqueName, string ingredients, string directions)
         {
             ImportedRecipe recipe = db.ImportedRecipes.Where(rec => (rec.UniqueName == recipeUniqueName)).First();
-            
+
             // ingredients
             string[] ingredientList = ingredients.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
 

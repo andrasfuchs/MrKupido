@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MrKupido.Library;
+﻿using MrKupido.Library.Attributes;
 using MrKupido.Library.Equipment;
 using MrKupido.Library.Ingredient;
-using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Recipe
 {
@@ -42,8 +37,8 @@ namespace MrKupido.Library.Recipe
             eg.Use<KisLabas>(1).Berakni(new Vaj(5.0f * amount), new Liszt(2.0f * amount, MeasurementUnit.evokanal));
 
             eg.Use<Tuzhely>(1).RahelyezniC(eg.Use<KisLabas>(1));
-			eg.Use<Tuzhely>(1).Homerseklet(80); // kis langon
-			eg.Use<KisLabas>(1).Varni(new Quantity(3, MeasurementUnit.minute));
+            eg.Use<Tuzhely>(1).Homerseklet(80); // kis langon
+            eg.Use<KisLabas>(1).Varni(new Quantity(3, MeasurementUnit.minute));
 
             eg.Use<Labas>(1).BeonteniI(new Tej(2.0f * amount));
             eg.Use<Tuzhely>(1).RahelyezniC(eg.Use<Labas>(1));
@@ -61,12 +56,12 @@ namespace MrKupido.Library.Recipe
             eg.Use<Labas>(1).BerakniC(eg.Use<LaposTanyer>(1));
 
             eg.Use<Tuzhely>(1).Homerseklet(30); // minimumra
-			eg.Use<Tuzhely>(1).Varni(new Quantity(5, MeasurementUnit.minute));
+            eg.Use<Tuzhely>(1).Varni(new Quantity(5, MeasurementUnit.minute));
 
             eg.Use<Labas>(1).BerakniI(new Tojas(2.0f * amount));
-			eg.Use<Fakanal>(1).ElkeverniC(eg.Use<Labas>(1));
+            eg.Use<Fakanal>(1).ElkeverniC(eg.Use<Labas>(1));
 
-			eg.Use<Labas>(1).Varni(new Quantity(2, MeasurementUnit.minute));
+            eg.Use<Labas>(1).Varni(new Quantity(2, MeasurementUnit.minute));
 
             eg.Use<JenaiTal>(1).BerakniI(karfiol);
             eg.Use<JenaiTal>(1).BeonteniC(eg.Use<Labas>(1));
@@ -75,13 +70,13 @@ namespace MrKupido.Library.Recipe
             eg.Use<Suto>(1).Homerseklet(200);
             eg.Use<Suto>(1).BehelyezniC(eg.Use<JenaiTal>(1));
 
-			eg.Use<Suto>(1).Varni(new Quantity(30, MeasurementUnit.minute));
+            eg.Use<Suto>(1).Varni(new Quantity(30, MeasurementUnit.minute));
 
             eg.Use<Suto>(1).KiemelniC(eg.Use<JenaiTal>(1));
             eg.Use<JenaiTal>(1).FedotLevenni();
             eg.Use<Suto>(1).BehelyezniC(eg.Use<JenaiTal>(1));
 
-			eg.Use<Suto>(1).Varni(new Quantity(5, MeasurementUnit.minute));
+            eg.Use<Suto>(1).Varni(new Quantity(5, MeasurementUnit.minute));
 
             eg.Use<Suto>(1).KiemelniC(eg.Use<JenaiTal>(1));
 

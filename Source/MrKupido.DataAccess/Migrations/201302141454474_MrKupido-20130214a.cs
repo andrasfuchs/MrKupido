@@ -1,8 +1,7 @@
 namespace DataAccess.Migrations
 {
-    using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class MrKupido20130214a : DbMigration
     {
         public override void Up()
@@ -47,87 +46,87 @@ namespace DataAccess.Migrations
             DropTable("dbo.RecipeRatings");
             DropTable("dbo.RecipeTags");
         }
-        
+
         public override void Down()
         {
             CreateTable(
                 "dbo.RecipeTags",
                 c => new
-                    {
-                        RecipeTagId = c.Int(nullable: false, identity: true),
-                        AssignedAt = c.DateTime(nullable: false),
-                        Recipe_FilterItemId = c.Int(nullable: false),
-                        AssignedBy_UserId = c.Int(nullable: false),
-                    })
+                {
+                    RecipeTagId = c.Int(nullable: false, identity: true),
+                    AssignedAt = c.DateTime(nullable: false),
+                    Recipe_FilterItemId = c.Int(nullable: false),
+                    AssignedBy_UserId = c.Int(nullable: false),
+                })
                 .PrimaryKey(t => t.RecipeTagId);
-            
+
             CreateTable(
                 "dbo.RecipeRatings",
                 c => new
-                    {
-                        RecipeRatingId = c.Int(nullable: false, identity: true),
-                        Rating = c.Int(nullable: false),
-                        Date = c.DateTime(nullable: false),
-                        User_UserId = c.Int(nullable: false),
-                        Recipe_FilterItemId = c.Int(nullable: false),
-                    })
+                {
+                    RecipeRatingId = c.Int(nullable: false, identity: true),
+                    Rating = c.Int(nullable: false),
+                    Date = c.DateTime(nullable: false),
+                    User_UserId = c.Int(nullable: false),
+                    Recipe_FilterItemId = c.Int(nullable: false),
+                })
                 .PrimaryKey(t => t.RecipeRatingId);
-            
+
             CreateTable(
                 "dbo.IngredientRatings",
                 c => new
-                    {
-                        IngredientRatingId = c.Int(nullable: false, identity: true),
-                        Rating = c.Int(nullable: false),
-                        Date = c.DateTime(nullable: false),
-                        User_UserId = c.Int(nullable: false),
-                        Ingredient_FilterItemId = c.Int(nullable: false),
-                    })
+                {
+                    IngredientRatingId = c.Int(nullable: false, identity: true),
+                    Rating = c.Int(nullable: false),
+                    Date = c.DateTime(nullable: false),
+                    User_UserId = c.Int(nullable: false),
+                    Ingredient_FilterItemId = c.Int(nullable: false),
+                })
                 .PrimaryKey(t => t.IngredientRatingId);
-            
+
             CreateTable(
                 "dbo.Suppliers",
                 c => new
-                    {
-                        SupplierId = c.Int(nullable: false, identity: true),
-                    })
+                {
+                    SupplierId = c.Int(nullable: false, identity: true),
+                })
                 .PrimaryKey(t => t.SupplierId);
-            
+
             CreateTable(
                 "dbo.IngredientPrices",
                 c => new
-                    {
-                        IngredientPriceId = c.Int(nullable: false, identity: true),
-                        Store = c.String(),
-                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Date = c.DateTime(nullable: false),
-                        Ingredient_FilterItemId = c.Int(nullable: false),
-                        Supplier_SupplierId = c.Int(nullable: false),
-                        Currency_CurrencyId = c.Int(nullable: false),
-                    })
+                {
+                    IngredientPriceId = c.Int(nullable: false, identity: true),
+                    Store = c.String(),
+                    Price = c.Decimal(nullable: false, precision: 18, scale: 2),
+                    Date = c.DateTime(nullable: false),
+                    Ingredient_FilterItemId = c.Int(nullable: false),
+                    Supplier_SupplierId = c.Int(nullable: false),
+                    Currency_CurrencyId = c.Int(nullable: false),
+                })
                 .PrimaryKey(t => t.IngredientPriceId);
-            
+
             CreateTable(
                 "dbo.Nutritions",
                 c => new
-                    {
-                        NutritionId = c.Int(nullable: false, identity: true),
-                        Amount = c.Single(nullable: false),
-                        IngredientNutritionId = c.Int(),
-                        RecipeNutritionId = c.Int(),
-                        Discriminator = c.String(nullable: false, maxLength: 128),
-                        Element_FilterItemId = c.Int(nullable: false),
-                    })
+                {
+                    NutritionId = c.Int(nullable: false, identity: true),
+                    Amount = c.Single(nullable: false),
+                    IngredientNutritionId = c.Int(),
+                    RecipeNutritionId = c.Int(),
+                    Discriminator = c.String(nullable: false, maxLength: 128),
+                    Element_FilterItemId = c.Int(nullable: false),
+                })
                 .PrimaryKey(t => t.NutritionId);
-            
+
             CreateTable(
                 "dbo.Conditions",
                 c => new
-                    {
-                        ConditionId = c.Int(nullable: false, identity: true),
-                    })
+                {
+                    ConditionId = c.Int(nullable: false, identity: true),
+                })
                 .PrimaryKey(t => t.ConditionId);
-            
+
             AddColumn("dbo.FilterItems", "Discriminator", c => c.String(nullable: false, maxLength: 128));
             AddColumn("dbo.FilterItems", "RatingDate", c => c.DateTime());
             AddColumn("dbo.FilterItems", "RatingCount", c => c.Int());

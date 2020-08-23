@@ -4,51 +4,50 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace DotNetOpenAuth.ApplicationBlock {
-	using System;
-	using System.Collections.Generic;
-	using System.IO;
-	using System.Linq;
-	using System.Runtime.Serialization;
-	using System.Runtime.Serialization.Json;
-	using System.Text;
+namespace DotNetOpenAuth.ApplicationBlock
+{
+    using System;
+    using System.IO;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Json;
+    using System.Text;
 
     /// Documentation: http://msdn.microsoft.com/en-us/library/live/hh243648.aspx#user
 
-	[DataContract]
+    [DataContract]
     public class WindowsLiveGraph : IOAuth2Graph
     {
-		private static DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(WindowsLiveGraph));
+        private static DataContractJsonSerializer jsonSerializer = new DataContractJsonSerializer(typeof(WindowsLiveGraph));
 
         /// <summary>
         /// The user's ID.
         /// </summary>
 		[DataMember(Name = "id", IsRequired = true)]
-		public string Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// The user's full name.
         /// </summary>
 		[DataMember(Name = "name", IsRequired = true)]
-		public string Name { get; set; }
+        public string Name { get; set; }
 
         /// <summary>
         /// The user's first name.
         /// </summary>
 		[DataMember(Name = "first_name")]
-		public string FirstName { get; set; }
+        public string FirstName { get; set; }
 
         /// <summary>
         /// The user's last name.
         /// </summary>
 		[DataMember(Name = "last_name")]
-		public string LastName { get; set; }
+        public string LastName { get; set; }
 
         /// <summary>
         /// The URL of the user's profile page.
         /// </summary>
 		[DataMember(Name = "link")]
-		public Uri Link { get; set; }
+        public Uri Link { get; set; }
 
         /// <summary>
         /// The day of the user's birth date, or null if no birth date is specified.
@@ -78,7 +77,7 @@ namespace DotNetOpenAuth.ApplicationBlock {
         /// The user's gender. Valid values are "male", "female", or null if the user's gender is not specified.
         /// </summary>
         [DataMember(Name = "gender")]
-		public string Gender { get; set; }
+        public string Gender { get; set; }
 
         /// <summary>
         /// The user's email addresses.
@@ -102,7 +101,7 @@ namespace DotNetOpenAuth.ApplicationBlock {
         /// The user's locale code.
         /// </summary>
 		[DataMember(Name = "locale", IsRequired = true)]
-		public string Locale { get; set; }
+        public string Locale { get; set; }
 
         /// <summary>
         /// The time, in ISO 8601 format, at which the user last updated the object.
@@ -120,7 +119,7 @@ namespace DotNetOpenAuth.ApplicationBlock {
             }
         }
 
-        public Uri AvatarUrl { get; set; }        
+        public Uri AvatarUrl { get; set; }
 
         public DateTime? BirthdayDT
         {
@@ -151,23 +150,26 @@ namespace DotNetOpenAuth.ApplicationBlock {
                 return HumanGender.Unknown;
             }
         }
-        
+
         public static WindowsLiveGraph Deserialize(string json)
         {
-			if (string.IsNullOrEmpty(json)) {
-				throw new ArgumentNullException("json");
-			}
+            if (string.IsNullOrEmpty(json))
+            {
+                throw new ArgumentNullException("json");
+            }
 
-			return Deserialize(new MemoryStream(Encoding.UTF8.GetBytes(json)));
-		}
+            return Deserialize(new MemoryStream(Encoding.UTF8.GetBytes(json)));
+        }
 
-		public static WindowsLiveGraph Deserialize(Stream jsonStream) {
-			if (jsonStream == null) {
-				throw new ArgumentNullException("jsonStream");
-			}
+        public static WindowsLiveGraph Deserialize(Stream jsonStream)
+        {
+            if (jsonStream == null)
+            {
+                throw new ArgumentNullException("jsonStream");
+            }
 
-			return (WindowsLiveGraph)jsonSerializer.ReadObject(jsonStream);
-		}
+            return (WindowsLiveGraph)jsonSerializer.ReadObject(jsonStream);
+        }
 
 
         [DataContract]
@@ -317,5 +319,5 @@ namespace DotNetOpenAuth.ApplicationBlock {
             [DataMember(Name = "name")]
             public string Name { get; set; }
         }
-	}
+    }
 }

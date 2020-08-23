@@ -1,10 +1,6 @@
 ﻿using MrKupido.Library.Attributes;
 using MrKupido.Library.Equipment;
 using MrKupido.Library.Ingredient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace MrKupido.Library.Recipe
 {
@@ -12,18 +8,18 @@ namespace MrKupido.Library.Recipe
     [NameAlias("hun", "joghurt")]
 
     [IngredientConsts(
-		GrammsPerLiter = 1750, 
-		StorageTemperature = 5, 
-		IsIngrec = true,
+        GrammsPerLiter = 1750,
+        StorageTemperature = 5,
+        IsIngrec = true,
 
-		Category = ShoppingListCategory.Other,
-		CaloriesPer100Gramms = 61.0f,
-		CarbohydratesPer100Gramms = 17.6f,
-		FatPer100Gramms = 28.6f,
-		ProteinPer100Gramms = 14.8f,
-		GlichemicalIndex = 3,
-		InflammationFactor = -32
-	)]
+        Category = ShoppingListCategory.Other,
+        CaloriesPer100Gramms = 61.0f,
+        CarbohydratesPer100Gramms = 17.6f,
+        FatPer100Gramms = 28.6f,
+        ProteinPer100Gramms = 14.8f,
+        GlichemicalIndex = 3,
+        InflammationFactor = -32
+    )]
     public class Joghurt : RecipeBase
     {
         public Joghurt(float amount, MeasurementUnit unit = MeasurementUnit.liter)
@@ -63,10 +59,10 @@ namespace MrKupido.Library.Recipe
             Tuzhely tuzhely = eg.Use<Tuzhely>();
             tuzhely.Homerseklet(110);
             tuzhely.RahelyezniC(edeny);
-			edeny.Varni(new Quantity(10, MeasurementUnit.minute));
-            
+            edeny.Varni(new Quantity(10, MeasurementUnit.minute));
+
             tuzhely.LeemelniC(edeny);
-			edeny.Varni(new Quantity(5, MeasurementUnit.minute));
+            edeny.Varni(new Quantity(5, MeasurementUnit.minute));
 
             Habvero habvero = eg.Use<Habvero>();
             edeny.Berakni(new Joghurt(0.1f));

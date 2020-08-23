@@ -4,30 +4,28 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace DotNetOpenAuth.ApplicationBlock {
-	using System;
-	using System.Collections.Generic;
-	using System.Linq;
-	using System.Text;
-	using System.Web;
-	using DotNetOpenAuth.Messaging;
-	using DotNetOpenAuth.OAuth2;
-    using System.Net;
+namespace DotNetOpenAuth.ApplicationBlock
+{
+    using DotNetOpenAuth.OAuth2;
+    using System;
     using System.IO;
+    using System.Net;
 
     // https://accounts.google.com/o/oauth2/auth
 
-	public class GoogleClient : WebServerClient {
-		private static readonly AuthorizationServerDescription GoogleDescription = new AuthorizationServerDescription {
+    public class GoogleClient : WebServerClient
+    {
+        private static readonly AuthorizationServerDescription GoogleDescription = new AuthorizationServerDescription
+        {
             TokenEndpoint = new Uri("https://accounts.google.com/o/oauth2/token"),
             AuthorizationEndpoint = new Uri("https://accounts.google.com/o/oauth2/auth"),
             //RevokeEndpoint = new Uri("https://accounts.google.com/o/oauth2/revoke"),
             ProtocolVersion = ProtocolVersion.V20
-		};
+        };
 
-		/// <summary>
+        /// <summary>
         /// Initializes a new instance of the <see cref="GoogleClient"/> class.
-		/// </summary>
+        /// </summary>
         public GoogleClient()
             : base(GoogleDescription)
         {
@@ -52,7 +50,7 @@ namespace DotNetOpenAuth.ApplicationBlock {
             }
 
             return null;
-        }        
+        }
 
         /// <summary>
         /// Well-known scopes defined by Google.
@@ -62,7 +60,7 @@ namespace DotNetOpenAuth.ApplicationBlock {
         /// https://developers.google.com/accounts/docs/OAuth2Login
         /// </remarks>
         public static class Scopes
-        {            
+        {
             public static class UserInfo
             {
                 /// <summary>
@@ -112,5 +110,5 @@ namespace DotNetOpenAuth.ApplicationBlock {
             }
         }
 
-	}
+    }
 }

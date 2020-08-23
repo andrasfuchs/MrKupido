@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MrKupido.Library.Attributes;
+﻿using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Recipe
 {
@@ -10,10 +6,10 @@ namespace MrKupido.Library.Recipe
     [NameAlias("hun", "cukor")]
 
     [IngredientConsts(
-		DefaultChild = typeof(KristalyCukor), 
-		GrammsPerLiter = 1000, 
-		IsAbstract = true, 
-		IsIngrec = true)]
+        DefaultChild = typeof(KristalyCukor),
+        GrammsPerLiter = 1000,
+        IsAbstract = true,
+        IsIngrec = true)]
     public class Cukor : RecipeBase
     {
         public Cukor(float amount, MeasurementUnit unit = MeasurementUnit.evokanal)

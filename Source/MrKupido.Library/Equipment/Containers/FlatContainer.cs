@@ -1,8 +1,4 @@
 ﻿using MrKupido.Library.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace MrKupido.Library.Equipment
 {
@@ -17,7 +13,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "put onto", Priority = 200)]
         [NameAlias("hun", "rárak", Priority = 200)]
-		[NameAlias("eng", "put onto the {} the following: ({0*}, )")]
+        [NameAlias("eng", "put onto the {} the following: ({0*}, )")]
         [NameAlias("hun", "rakd rá a(z) {R} a következőket: ({0*}, )")]
         public void Rarakni(params IIngredient[] ingredients)
         {
@@ -27,7 +23,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "put onto", Priority = 200)]
         [NameAlias("hun", "rárak", Priority = 200)]
-		[NameAlias("eng", "put onto the {} the {0}")]
+        [NameAlias("eng", "put onto the {} the {0}")]
         [NameAlias("hun", "rakd rá a(z) {R} a(z) {0T}")]
         public void RarakniI(ISingleIngredient i)
         {
@@ -37,7 +33,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "put onto", Priority = 200)]
         [NameAlias("hun", "rárak", Priority = 200)]
-		[NameAlias("eng", "put onto the {} the {0.Contents.}")]
+        [NameAlias("eng", "put onto the {} the {0.Contents.}")]
         [NameAlias("hun", "rakd rá a(z) {R} a(z) {0.Contents.T}")]
         public void RarakniC(IIngredientContainer c)
         {
@@ -47,7 +43,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "pour into", Priority = 200)]
         [NameAlias("hun", "beleönt", Priority = 200)]
-		[NameAlias("eng", "pour into the {} the {0.Contents.}")]
+        [NameAlias("eng", "pour into the {} the {0.Contents.}")]
         [NameAlias("hun", "öntsd bele a(z) {B} a(z) {0.Contents.T}")]
         public void BeleonteniC(IIngredientContainer c)
         {
@@ -57,7 +53,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "get off", Priority = 200)]
         [NameAlias("hun", "levesz", Priority = 200)]
-		[NameAlias("eng", "get off the contents of {}")]
+        [NameAlias("eng", "get off the contents of {}")]
         [NameAlias("hun", "vedd le a(z) {} tartalmát")]
         public IIngredient Levenni()
         {

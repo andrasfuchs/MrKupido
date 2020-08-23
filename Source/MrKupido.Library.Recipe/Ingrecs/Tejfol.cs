@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MrKupido.Library.Attributes;
-using MrKupido.Library.Nature;
+﻿using MrKupido.Library.Attributes;
 using MrKupido.Library.Equipment;
 using MrKupido.Library.Ingredient;
 
@@ -12,17 +7,17 @@ namespace MrKupido.Library.Recipe
     [NameAlias("eng", "sour cream")]
     [NameAlias("hun", "tejföl")]
 
-	[IngredientConsts(
-		IsIngrec = true,
-		Category = ShoppingListCategory.Other,
-		GrammsPerLiter = 946,
-		CaloriesPer100Gramms = 193.0f,
-		CarbohydratesPer100Gramms = 10.8f,
-		FatPer100Gramms = 173.0f,
-		ProteinPer100Gramms = 8.8f,
-		GlichemicalIndex = 2,
-		InflammationFactor = -111
-	)]
+    [IngredientConsts(
+        IsIngrec = true,
+        Category = ShoppingListCategory.Other,
+        GrammsPerLiter = 946,
+        CaloriesPer100Gramms = 193.0f,
+        CarbohydratesPer100Gramms = 10.8f,
+        FatPer100Gramms = 173.0f,
+        ProteinPer100Gramms = 8.8f,
+        GlichemicalIndex = 2,
+        InflammationFactor = -111
+    )]
 
     public class Tejfol : RecipeBase
     {
@@ -39,7 +34,7 @@ namespace MrKupido.Library.Recipe
             result.Containers.Add(new Bogre());
 
             result.Devices.Add(new Futotest());
-            
+
             result.Tools.Add(new Kez());
             result.Tools.Add(new Kanal());
 

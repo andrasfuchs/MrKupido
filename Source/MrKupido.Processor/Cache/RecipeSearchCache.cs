@@ -1,9 +1,7 @@
-﻿using System;
+﻿using MrKupido.Processor.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using MrKupido.Processor.Model;
-using MrKupido.Library.Attributes;
 
 namespace MrKupido.Processor
 {
@@ -27,7 +25,7 @@ namespace MrKupido.Processor
                 searchResults[languageISO][filterKey].SearchStartedAt = DateTime.Now;
 
                 // TODO: do the actual search in an optimized way
-                
+
                 // rank filter conditions
 
                 // do the searches (or retrieve them from the cache)

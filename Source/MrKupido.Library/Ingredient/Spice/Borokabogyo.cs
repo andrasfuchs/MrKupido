@@ -1,9 +1,4 @@
 ﻿using MrKupido.Library.Attributes;
-using MrKupido.Library.Nature;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace MrKupido.Library.Ingredient
 {
@@ -11,15 +6,15 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "borókabogyó")]
 
     [IngredientConsts(
-		Category = ShoppingListCategory.Spice, 
-		GrammsPerPiece = 3,
-		CaloriesPer100Gramms = 525.0f
-	)]
+        Category = ShoppingListCategory.Spice,
+        GrammsPerPiece = 3,
+        CaloriesPer100Gramms = 525.0f
+    )]
 
     //[YieldOf(typeof())]
     public class Borokabogyo : SingleIngredient
     {
-		public Borokabogyo(float amount, MeasurementUnit unit = MeasurementUnit.piece, IngredientState state = IngredientState.Orolt)
+        public Borokabogyo(float amount, MeasurementUnit unit = MeasurementUnit.piece, IngredientState state = IngredientState.Orolt)
             : base(amount, unit, state)
         {
         }

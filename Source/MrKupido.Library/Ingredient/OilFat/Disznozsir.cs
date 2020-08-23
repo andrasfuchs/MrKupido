@@ -1,9 +1,4 @@
 ﻿using MrKupido.Library.Attributes;
-using MrKupido.Library.Nature;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace MrKupido.Library.Ingredient
 {
@@ -13,7 +8,7 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "sertészsír")]
 
     [IngredientConsts(GrammsPerLiter = 1000)]
-    
+
     //[OilOf(typeof(SusScrofaDomestica))]
     public class Disznozsir : AllatiZsiradek
     {

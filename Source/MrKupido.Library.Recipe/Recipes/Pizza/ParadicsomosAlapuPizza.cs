@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MrKupido.Library.Attributes;
+﻿using MrKupido.Library.Attributes;
 using MrKupido.Library.Equipment;
 
 namespace MrKupido.Library.Recipe
@@ -31,7 +27,7 @@ namespace MrKupido.Library.Recipe
             result.Remove("pizzateszta");
 
             IIngredient paradicsomosPizzaszosz = new PizzaParadicsomszosz(2.0f * amount);
-			eg.Use<Kez>(1).RaonteniI(tepsi, paradicsomosPizzaszosz);
+            eg.Use<Kez>(1).RaonteniI(tepsi, paradicsomosPizzaszosz);
 
             result.Add("pizzateszta", tepsi);
 
@@ -48,7 +44,7 @@ namespace MrKupido.Library.Recipe
 
         public static new void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
-			eg.Use<Kez>(1).TalalniC(food["pizzateszta"], eg.Use<LaposTanyer>(1));
+            eg.Use<Kez>(1).TalalniC(food["pizzateszta"], eg.Use<LaposTanyer>(1));
             eg.WashUp();
         }
 

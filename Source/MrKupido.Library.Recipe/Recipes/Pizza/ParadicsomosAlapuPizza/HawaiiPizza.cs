@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MrKupido.Library.Attributes;
+﻿using MrKupido.Library.Attributes;
 using MrKupido.Library.Equipment;
 using MrKupido.Library.Ingredient;
 
@@ -20,7 +16,7 @@ namespace MrKupido.Library.Recipe
         public static new EquipmentGroup SelectEquipment(float amount)
         {
             EquipmentGroup result = ParadicsomosAlapuPizza.SelectEquipment(amount);
-			return result;
+            return result;
         }
 
         public static new PreparedIngredients Prepare(float amount, EquipmentGroup eg)
@@ -29,20 +25,20 @@ namespace MrKupido.Library.Recipe
 
             IIngredientContainer pizzateszta = result["pizzateszta"];
             result.Remove("pizzateszta");
-            
+
             ISingleIngredient ananaszdarabok = new Ananasz(20.0f * amount);
-			eg.Use<Kes>(1).FeldarabolniI(ananaszdarabok, 0.5f);
+            eg.Use<Kes>(1).FeldarabolniI(ananaszdarabok, 0.5f);
 
-			ISingleIngredient sonka = new Sonka(10.0f * amount);
-			eg.Use<Kes>(1).FeldarabolniI(sonka, 1.0f);
+            ISingleIngredient sonka = new Sonka(10.0f * amount);
+            eg.Use<Kes>(1).FeldarabolniI(sonka, 1.0f);
 
-			IIngredient kukorica = new MorzsoltFottKukorica(13.5f * amount);
+            IIngredient kukorica = new MorzsoltFottKukorica(13.5f * amount);
 
-			ISingleIngredient sajt = new Sajt(15.0f * amount);
-			eg.Use<Reszelo>(1).LereszelniI(eg.Use<LaposKisTanyer>(2), sajt);
+            ISingleIngredient sajt = new Sajt(15.0f * amount);
+            eg.Use<Reszelo>(1).LereszelniI(eg.Use<LaposKisTanyer>(2), sajt);
 
-			eg.Use<Kez>(1).Rarakni(pizzateszta, sonka, kukorica, ananaszdarabok, sajt);
-            
+            eg.Use<Kez>(1).Rarakni(pizzateszta, sonka, kukorica, ananaszdarabok, sajt);
+
             result.Add("pizzateszta", pizzateszta);
 
             eg.WashUp();
@@ -57,7 +53,7 @@ namespace MrKupido.Library.Recipe
 
         public static new void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
-			eg.Use<Kez>(1).TalalniC(food["pizzateszta"], eg.Use<LaposTanyer>(1));
+            eg.Use<Kez>(1).TalalniC(food["pizzateszta"], eg.Use<LaposTanyer>(1));
             eg.WashUp();
         }
     }

@@ -1,9 +1,5 @@
 ﻿using MrKupido.Library.Attributes;
 using MrKupido.Library.Nature;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace MrKupido.Library.Ingredient
 {
@@ -11,15 +7,15 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "bazsalikomlevél")]
 
     [IngredientConsts(
-		Category = ShoppingListCategory.Spice, 
-		GrammsPerPiece = 1.0f,
-		CaloriesPer100Gramms = 251.0f,
-		CarbohydratesPer100Gramms = 183.0f,
-		FatPer100Gramms = 33.3f,
-		ProteinPer100Gramms = 35.1f,
-		GlichemicalIndex = 8,
-		InflammationFactor = 536	
-	)]
+        Category = ShoppingListCategory.Spice,
+        GrammsPerPiece = 1.0f,
+        CaloriesPer100Gramms = 251.0f,
+        CarbohydratesPer100Gramms = 183.0f,
+        FatPer100Gramms = 33.3f,
+        ProteinPer100Gramms = 35.1f,
+        GlichemicalIndex = 8,
+        InflammationFactor = 536
+    )]
 
     [LeafOf(typeof(OcimumBasilicum))]
     public class Bazsalikom : SingleIngredient

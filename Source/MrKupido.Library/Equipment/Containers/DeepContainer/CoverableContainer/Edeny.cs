@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MrKupido.Library.Attributes;
+﻿using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Equipment
 {
@@ -22,5 +18,5 @@ namespace MrKupido.Library.Equipment
             : base(14.0f * scale, 14.0f * scale, 6.0f * scale)
         {
         }
-	}
+    }
 }

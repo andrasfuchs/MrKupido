@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MrKupido.Library;
+﻿using MrKupido.Library.Attributes;
 using MrKupido.Library.Equipment;
 using MrKupido.Library.Ingredient;
-using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Recipe
 {
     [NameAlias("eng", "cocoa spiral")]
     [NameAlias("hun", "kakaós csiga")]
 
-	[IngredientConsts(ManTags = "Cake", PieceCountEstimation = 28, GrammsPerPiece = 34)]
+    [IngredientConsts(ManTags = "Cake", PieceCountEstimation = 28, GrammsPerPiece = 34)]
     public class KakaosCsiga : RecipeBase
     {
         public KakaosCsiga(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
@@ -34,7 +29,7 @@ namespace MrKupido.Library.Recipe
             eg.Use<Kez>(1).OsszegyurniC(eg.Use<NagyEdeny>(1));
 
             eg.Use<Futotest>(1).RahelyezniC(eg.Use<NagyEdeny>(1));
-			eg.Use<Futotest>(1).Varni(new Quantity(45, MeasurementUnit.minute));
+            eg.Use<Futotest>(1).Varni(new Quantity(45, MeasurementUnit.minute));
             eg.Use<Futotest>(1).LeemelniC(eg.Use<NagyEdeny>(1));
 
             result.Add("csigateszta", eg.Use<NagyEdeny>(1));
@@ -49,8 +44,8 @@ namespace MrKupido.Library.Recipe
 
             eg.Use<NyujtoDeszka>(1).NyujtaniC(preps["csigateszta"], 1.50f);
 
-			ISingleIngredient kakao = new Kakaopor(5.0f * amount, MeasurementUnit.teaskanal);
-			kakao.ChangeUnitTo(MeasurementUnit.gramm);
+            ISingleIngredient kakao = new Kakaopor(5.0f * amount, MeasurementUnit.teaskanal);
+            kakao.ChangeUnitTo(MeasurementUnit.gramm);
 
             eg.Use<Edeny>(1).Berakni(kakao, new PorCukor(14.0f * amount), new VaniliasCukor(20.0f * amount), new Vaj(10.0f * amount));
             eg.Use<Fakanal>(1).ElkeverniC(eg.Use<Edeny>(1));
@@ -65,11 +60,11 @@ namespace MrKupido.Library.Recipe
             eg.Use<Tepsi>(1).BerakniC(eg.Use<NyujtoDeszka>(1));
             eg.Use<Ecset>(1).MegkenniI(new TojasSargaja(2.0f * amount), eg.Use<Tepsi>(1));
             eg.Use<Tepsi>(1).Lefedni(new Konyharuha());
-			eg.Use<Tepsi>(1).Varni(new Quantity(30, MeasurementUnit.minute));
+            eg.Use<Tepsi>(1).Varni(new Quantity(30, MeasurementUnit.minute));
 
             eg.Use<Suto>(1).Homerseklet(180);
             eg.Use<Suto>(1).BehelyezniC(eg.Use<Tepsi>(1));
-			eg.Use<Suto>(1).Varni(new Quantity(20, MeasurementUnit.minute));
+            eg.Use<Suto>(1).Varni(new Quantity(20, MeasurementUnit.minute));
             eg.Use<Suto>(1).KiemelniC(eg.Use<Tepsi>(1));
 
 
@@ -77,13 +72,13 @@ namespace MrKupido.Library.Recipe
 
             eg.Use<Tuzhely>(1).RahelyezniC(eg.Use<Edeny>(2));
             eg.Use<Tuzhely>(1).Homerseklet(50);
-			eg.Use<Tuzhely>(1).Varni(new Quantity(3, MeasurementUnit.minute));
+            eg.Use<Tuzhely>(1).Varni(new Quantity(3, MeasurementUnit.minute));
             eg.Use<Tuzhely>(1).LeemelniC(eg.Use<Edeny>(2));
 
             eg.Use<Kez>(1).RaonteniC(eg.Use<Tepsi>(1), eg.Use<Edeny>(2));
             eg.Use<Suto>(1).Homerseklet(150);
             eg.Use<Suto>(1).BehelyezniC(eg.Use<Tepsi>(1));
-			eg.Use<Suto>(1).Varni(new Quantity(10, MeasurementUnit.minute));
+            eg.Use<Suto>(1).Varni(new Quantity(10, MeasurementUnit.minute));
             eg.Use<Suto>(1).KiemelniC(eg.Use<Tepsi>(1));
 
 

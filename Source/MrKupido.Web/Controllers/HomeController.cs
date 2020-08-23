@@ -1,16 +1,14 @@
-﻿using System;
+﻿using MrKupido.Processor;
+using MrKupido.Processor.Model;
+using MrKupido.Web.Models;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Net;
+using System.Runtime.Serialization.Json;
 using System.Web;
 using System.Web.Mvc;
-using MrKupido.Web.Models;
-using MrKupido.Processor;
-using MrKupido.Processor.Model;
-using System.Threading;
-using System.Net;
-using System.IO;
-using System.Globalization;
-using System.Runtime.Serialization.Json;
 
 namespace MrKupido.Web.Controllers
 {
@@ -18,10 +16,10 @@ namespace MrKupido.Web.Controllers
     {
         private static Dictionary<string, string[]> tipsTricks = new Dictionary<string, string[]>();
 
-		//[Authorize]
+        //[Authorize]
         public ActionResult Index()
         {
-			Session["InvalidProperties"] = null;
+            Session["InvalidProperties"] = null;
 
             if (Request.Params["q"] != null)
             {
@@ -36,13 +34,13 @@ namespace MrKupido.Web.Controllers
 
                     if ((colonIndex != 1) && (colonIndex != 2)) continue;
 
-                    char nodeType = filterString[colonIndex-1];
+                    char nodeType = filterString[colonIndex - 1];
 
                     TreeNode tn = null;
                     switch (nodeType)
                     {
                         case 'I':
-                            tn = Cache.Ingredient[filterString.Substring(colonIndex+1)];
+                            tn = Cache.Ingredient[filterString.Substring(colonIndex + 1)];
                             break;
 
                         case 'R':
@@ -66,7 +64,7 @@ namespace MrKupido.Web.Controllers
         {
             return View(new OldBrowserData() { BrowserName = browserName, BrowserVersion = browserVersion, ReturnUrl = returnUrl, UpdateUrl = updateUrl });
         }
-        
+
         [HttpPost]
         public ActionResult IgnoreOldBrowser(string returnUrl)
         {
@@ -115,10 +113,10 @@ namespace MrKupido.Web.Controllers
                         tn = Cache.Recipe[selectedValue.Substring(2)];
                         break;
 
-					case 'T':
-						tn = Cache.Tag[selectedValue.Substring(2)];
-						break;				
-				}
+                    case 'T':
+                        tn = Cache.Tag[selectedValue.Substring(2)];
+                        break;
+                }
             }
 
 
@@ -160,8 +158,8 @@ namespace MrKupido.Web.Controllers
             {
                 filters.Clear();
             }
-                
-            
+
+
             Session["filters"] = filters;
 
             return Json(filters.ToArray());
@@ -202,23 +200,23 @@ namespace MrKupido.Web.Controllers
             //}
 
             rsr.ItemsPerPage = 6;
-			rsr.PageIndex = 1; //Session["RecipeSearchResult"] == null ? 1 : ((RecipeSearchResult)Session["RecipeSearchResult"]).PageIndex;
+            rsr.PageIndex = 1; //Session["RecipeSearchResult"] == null ? 1 : ((RecipeSearchResult)Session["RecipeSearchResult"]).PageIndex;
 
             Session["RecipeSearchResult"] = rsr;
             return PartialView("_RecipeSearchResultHead", rsr);
         }
 
-		public ActionResult RenderSideA(string uniqueName)
-		{
-			return PartialView("_RecipeSearchResultSideA", ((RecipeSearchResult)Session["RecipeSearchResult"]).Items.First(rsri => rsri.UniqueName == uniqueName));
-		}
+        public ActionResult RenderSideA(string uniqueName)
+        {
+            return PartialView("_RecipeSearchResultSideA", ((RecipeSearchResult)Session["RecipeSearchResult"]).Items.First(rsri => rsri.UniqueName == uniqueName));
+        }
 
-		public ActionResult RenderSideB(string uniqueName)
-		{
-			return PartialView("_RecipeSearchResultSideB", ((RecipeSearchResult)Session["RecipeSearchResult"]).Items.First(rsri => rsri.UniqueName == uniqueName));
-		}
-		
-		[HttpPost]
+        public ActionResult RenderSideB(string uniqueName)
+        {
+            return PartialView("_RecipeSearchResultSideB", ((RecipeSearchResult)Session["RecipeSearchResult"]).Items.First(rsri => rsri.UniqueName == uniqueName));
+        }
+
+        [HttpPost]
         public ActionResult RefreshRecipeResults(string actionName)
         {
             if (Session["RecipeSearchResult"] == null) return null;
@@ -265,11 +263,11 @@ namespace MrKupido.Web.Controllers
 
                 DataContractJsonSerializer dcjs = new DataContractJsonSerializer(typeof(WikiLocationRoot));
 
-                req = (HttpWebRequest)HttpWebRequest.Create("http://api.wikilocation.org/articles?lat=" + latitude.ToString("0.000000", ci) + "&lng=" + longitude.ToString("0.000000", ci) + "&limit=1&radius=10000&type=city" );
+                req = (HttpWebRequest)HttpWebRequest.Create("http://api.wikilocation.org/articles?lat=" + latitude.ToString("0.000000", ci) + "&lng=" + longitude.ToString("0.000000", ci) + "&limit=1&radius=10000&type=city");
                 resp = (HttpWebResponse)req.GetResponse();
                 WikiLocationRoot responseJson = (WikiLocationRoot)dcjs.ReadObject(resp.GetResponseStream());
                 resp.Close();
-                
+
                 if (responseJson.articles.Count > 0) result = responseJson.articles[0].Title;
             }
             catch { }
@@ -318,13 +316,13 @@ namespace MrKupido.Web.Controllers
             return Json(temp[rnd.Next(temp.Length)]);
         }
 
-		[HttpPost]
-		public void QueryWordUnknown(string word)
-		{
-			Log("UNKNOWNQUERY", "The query word '{2}' was not recognized by the search indexer.", word);
-		}
-		
-		public ActionResult RecipeNotAvailableYet(string lan, string un)
+        [HttpPost]
+        public void QueryWordUnknown(string word)
+        {
+            Log("UNKNOWNQUERY", "The query word '{2}' was not recognized by the search indexer.", word);
+        }
+
+        public ActionResult RecipeNotAvailableYet(string lan, string un)
         {
             Log("NORECIPE", "Recipe '{2}' is not available yet.", lan + "|" + un);
 
@@ -333,10 +331,10 @@ namespace MrKupido.Web.Controllers
 
         public ActionResult FindRecipeInLanguage(string language, string id, string originalLanguage)
         {
-			if (String.IsNullOrEmpty(originalLanguage)) 
-			{
-				originalLanguage = language;
-			}
+            if (String.IsNullOrEmpty(originalLanguage))
+            {
+                originalLanguage = language;
+            }
 
             RecipeTreeNode targetRtn = null;
             RecipeTreeNode rtn = Cache.GetRecipeCache(originalLanguage)[id];

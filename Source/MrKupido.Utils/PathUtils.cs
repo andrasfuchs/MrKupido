@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using System.Web;
 
 namespace MrKupido.Utils
@@ -28,7 +23,7 @@ namespace MrKupido.Utils
         {
             foreach (string url in urls)
             {
-                string fileToCheck = url.Replace("~/",HttpContext.Current.Request.PhysicalApplicationPath).Replace('/','\\');
+                string fileToCheck = url.Replace("~/", HttpContext.Current.Request.PhysicalApplicationPath).Replace('/', '\\');
                 if (File.Exists(fileToCheck)) return PathUtils.ToAbsolute(url);
             }
 

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MrKupido.Library;
+﻿using MrKupido.Library;
+using System;
 
 namespace MrKupido.Processor
 {

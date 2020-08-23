@@ -1,8 +1,6 @@
 ﻿using MrKupido.Library.Attributes;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace MrKupido.Library.Ingredient
 {
@@ -18,8 +16,8 @@ namespace MrKupido.Library.Ingredient
         public int? GlichemicalIndex { get; protected set; }
         public float? PotencialAlkalinity { get; protected set; }
 
-		public float? PieceCountEstimation { get; private set; }
-		public float? StandardPortionCalories { get; protected set; }
+        public float? PieceCountEstimation { get; private set; }
+        public float? StandardPortionCalories { get; protected set; }
 
         public SingleIngredient(float amount, MeasurementUnit unit, IngredientState state = IngredientState.Normal) : base(amount, unit)
         {
@@ -29,59 +27,59 @@ namespace MrKupido.Library.Ingredient
             {
                 IngredientConstsAttribute ica = (IngredientConstsAttribute)icaObj;
 
-				while (ica != null)
-				{
-					CopyFieldsToPropertiesIfNeeded(this, ica, new string[] { "Category", "ExpirationTime", "GlichemicalIndex", "PotencialAlkalinity", "GrammsPerLiter", "GrammsPerPiece", "CaloriesPer100Gramms", "CarbohydratesPer100Gramms", "ProteinPer100Gramms", "FatPer100Gramms", "PieceCountEstimation", "StandardPortionCalories" });
+                while (ica != null)
+                {
+                    CopyFieldsToPropertiesIfNeeded(this, ica, new string[] { "Category", "ExpirationTime", "GlichemicalIndex", "PotencialAlkalinity", "GrammsPerLiter", "GrammsPerPiece", "CaloriesPer100Gramms", "CarbohydratesPer100Gramms", "ProteinPer100Gramms", "FatPer100Gramms", "PieceCountEstimation", "StandardPortionCalories" });
 
-					if (ica.DefaultChild != null)
-					{
-						ica = (IngredientConstsAttribute)ica.DefaultChild.GetCustomAttributes(typeof(IngredientConstsAttribute), false).FirstOrDefault();
-					}
-					else
-					{
-						break;
-					}
-				}
+                    if (ica.DefaultChild != null)
+                    {
+                        ica = (IngredientConstsAttribute)ica.DefaultChild.GetCustomAttributes(typeof(IngredientConstsAttribute), false).FirstOrDefault();
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
             }
 
-			if (!this.GrammsPerLiter.HasValue)
-			{
-				this.GrammsPerLiter = 1000.0f;
-			}
+            if (!this.GrammsPerLiter.HasValue)
+            {
+                this.GrammsPerLiter = 1000.0f;
+            }
 
-			this.PieceCount = this.PieceCountEstimation.HasValue ? (int)(this.PieceCountEstimation * amount) : 1;
+            this.PieceCount = this.PieceCountEstimation.HasValue ? (int)(this.PieceCountEstimation * amount) : 1;
         }
 
-		private void CopyFieldsToPropertiesIfNeeded(object o1, object o2, string[] propNames)
-		{
-			foreach (string propName in propNames)
-			{
-				System.Reflection.PropertyInfo o1pi = o1.GetType().GetProperty(propName);
+        private void CopyFieldsToPropertiesIfNeeded(object o1, object o2, string[] propNames)
+        {
+            foreach (string propName in propNames)
+            {
+                System.Reflection.PropertyInfo o1pi = o1.GetType().GetProperty(propName);
 
-				object o1Value = o1pi.GetValue(o1, null);
-				object o2Value = o2.GetType().GetField(propName).GetValue(o2);
+                object o1Value = o1pi.GetValue(o1, null);
+                object o2Value = o2.GetType().GetField(propName).GetValue(o2);
 
-				if ((o1Value == null) && (o2Value != null))
-				{
-					// check if it's minValue
-					object minValue = null;
-					bool isO2ValueEqualsToMinValue = false;
+                if ((o1Value == null) && (o2Value != null))
+                {
+                    // check if it's minValue
+                    object minValue = null;
+                    bool isO2ValueEqualsToMinValue = false;
 
-					System.Reflection.FieldInfo fi = o2Value.GetType().GetField("MinValue");
-					if (fi != null)
-					{
-						minValue = fi.GetValue(o2Value);
-						isO2ValueEqualsToMinValue = (bool)o2Value.GetType().GetMethod("Equals", new Type[] { o2Value.GetType() }).Invoke(o2Value, new object[] { minValue });
-					}
+                    System.Reflection.FieldInfo fi = o2Value.GetType().GetField("MinValue");
+                    if (fi != null)
+                    {
+                        minValue = fi.GetValue(o2Value);
+                        isO2ValueEqualsToMinValue = (bool)o2Value.GetType().GetMethod("Equals", new Type[] { o2Value.GetType() }).Invoke(o2Value, new object[] { minValue });
+                    }
 
-					if (!isO2ValueEqualsToMinValue)
-					{
-						// if it's not null and not minValue (this one is needed because Attributes can't have nullable optional parameters)
-						o1pi.SetValue(o1, o2Value, null);
-					}
-				}
-			}
-		}
+                    if (!isO2ValueEqualsToMinValue)
+                    {
+                        // if it's not null and not minValue (this one is needed because Attributes can't have nullable optional parameters)
+                        o1pi.SetValue(o1, o2Value, null);
+                    }
+                }
+            }
+        }
 
         public override string ToString(string languageISO)
         {
@@ -96,7 +94,7 @@ namespace MrKupido.Library.Ingredient
             {
                 try
                 {
-					amountStr = this.Quantity.ToString(languageISO, this.PreferredUnit);
+                    amountStr = this.Quantity.ToString(languageISO, this.PreferredUnit);
                 }
                 catch (AmountUnknownException)
                 {

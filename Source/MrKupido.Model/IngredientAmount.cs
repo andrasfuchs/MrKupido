@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MrKupido.Library;
+using System;
 using System.Linq;
-using System.Text;
-using MrKupido.Model;
-using MrKupido.Library;
 
 namespace MrKupido.Model
 {
     public class IngredientAmount
     {
         private const string validUrlChars = "abcdefghijklmnopqrstuvwxyz0123456789-_.";
-        
-        private static string[] knownMeasureUnits = { "gramm", "g", "dkg", "kilo", "kg", "darab", "db", "csomag", "csipet", "evőkanál", "dl", "l", "liter", "teáskanál", "mokkáskanál", 
+
+        private static string[] knownMeasureUnits = { "gramm", "g", "dkg", "kilo", "kg", "darab", "db", "csomag", "csipet", "evőkanál", "dl", "l", "liter", "teáskanál", "mokkáskanál",
                                                        "egész", "gerezd", "bögre", "késhegynyi", "kávéskanál", "pohár", "szál", "fej", "szelet", "kiskanál", "csipetnyi", "kevés", "szelet",
                                                        "csokor", "kanál", "pici", "közepes", "kisebb", "zacskó", "nagy" };
 
@@ -29,7 +26,7 @@ namespace MrKupido.Model
 
         public string IngredientUniqueName
         {
-            get 
+            get
             {
                 if (IngredientName == null) return null;
 
@@ -90,7 +87,7 @@ namespace MrKupido.Model
 
             if ((tokenIndex - 1 >= 0) && IsMeasurementUnit(tokens[tokenIndex]) && Double.TryParse(tokens[tokenIndex - 1], out value))
             {
-                TransformMeasurementUnit(tokens[tokenIndex - 1].Replace(',','.'), tokens[tokenIndex], ref ingredient);
+                TransformMeasurementUnit(tokens[tokenIndex - 1].Replace(',', '.'), tokens[tokenIndex], ref ingredient);
             }
             else if ((tokenIndex >= 0) && Double.TryParse(tokens[tokenIndex], out value))
             {
@@ -145,7 +142,7 @@ namespace MrKupido.Model
 
                 case MeasurementUnit.second:
                     return "s";
-                
+
                 default:
                     return "";
             }
@@ -158,7 +155,7 @@ namespace MrKupido.Model
 
         private static void TransformMeasurementUnit(string amount, string mu, ref IngredientAmount ia)
         {
-            float am = Single.Parse(amount.Replace(".",","));
+            float am = Single.Parse(amount.Replace(".", ","));
 
             switch (mu)
             {

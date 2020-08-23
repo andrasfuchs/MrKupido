@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using MrKupido.Model;
 using System.Data.Entity;
-using MrKupido.Model;
 
 namespace MrKupido.DataAccess
 {
@@ -20,6 +16,6 @@ namespace MrKupido.DataAccess
 
         public MrKupidoContext() : this("Name=MrKupidoContext") { }
 
-        public MrKupidoContext(string connectionStringId) : base(connectionStringId) {}
+        public MrKupidoContext(string connectionStringId) : base(connectionStringId) { }
     }
 }

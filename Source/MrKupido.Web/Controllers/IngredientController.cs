@@ -1,19 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using MrKupido.Model;
-using MrKupido.DataAccess;
-using System.Runtime.Serialization.Json;
-using System.IO;
-using System.Text;
-using MrKupido.Library;
+﻿using MrKupido.Processor;
 using MrKupido.Processor.Model;
-using MrKupido.Processor;
-using MrKupido.Utils;
+using System.Web.Mvc;
 
 namespace MrKupido.Web.Controllers
 {
@@ -28,7 +15,7 @@ namespace MrKupido.Web.Controllers
             result[1] = TreeNode.BuildTree(Cache.Assemblies, t => new IngredientTreeNode(t, (string)Session["Language"]), typeof(MrKupido.Library.Ingredient.IngredientBase));
             result[2] = TreeNode.BuildTree(Cache.Assemblies, t => new RecipeTreeNode(t, (string)Session["Language"]), typeof(MrKupido.Library.Recipe.RecipeBase));
             result[3] = TreeNode.BuildTree(Cache.Assemblies, t => new EquipmentTreeNode(t, (string)Session["Language"]), typeof(MrKupido.Library.Equipment.EquipmentBase));
-			result[4] = TreeNode.BuildTree(Cache.Assemblies, t => new TagTreeNode(t, (string)Session["Language"]), typeof(MrKupido.Library.Tag.TagBase));
+            result[4] = TreeNode.BuildTree(Cache.Assemblies, t => new TagTreeNode(t, (string)Session["Language"]), typeof(MrKupido.Library.Tag.TagBase));
 
             ValidateIconUrls(result);
 

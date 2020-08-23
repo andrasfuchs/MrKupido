@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Diagnostics;
+using System.Linq;
 
 namespace MrKupido.Library.Attributes
 {
@@ -61,10 +60,10 @@ namespace MrKupido.Library.Attributes
 
                 memberLevelEngNames = NameAliasAttribute.GetNames(mi.DeclaringType, mi.Name, "eng");
 
-				if (mi.MemberType == System.Reflection.MemberTypes.Method)
-				{
-					memberLevelEngNames = memberLevelEngNames.Where(mlen => mlen.Priority == 200).ToArray();
-				}
+                if (mi.MemberType == System.Reflection.MemberTypes.Method)
+                {
+                    memberLevelEngNames = memberLevelEngNames.Where(mlen => mlen.Priority == 200).ToArray();
+                }
 
                 mi = mi.DeclaringType;
             }
@@ -77,7 +76,7 @@ namespace MrKupido.Library.Attributes
                     classLevelIconUri = attr;
                 }
             }
-            
+
             classLevelEngNames = NameAliasAttribute.GetNames((Type)mi, null, "eng");
             if (classLevelEngNames.Length == 0)
             {

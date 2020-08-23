@@ -4,12 +4,11 @@
 // </copyright>
 //-----------------------------------------------------------------------
 
-namespace DotNetOpenAuth.ApplicationBlock {
+namespace DotNetOpenAuth.ApplicationBlock
+{
     using System;
-    using System.Collections.Generic;
     using System.Globalization;
     using System.IO;
-    using System.Linq;
     using System.Runtime.Serialization;
     using System.Runtime.Serialization.Json;
     using System.Text;
@@ -161,7 +160,7 @@ namespace DotNetOpenAuth.ApplicationBlock {
         [Obsolete]
         [DataMember(Name = "favorite_athletes")]
         public FacebookIdName[] FavoriteAthletes { get; set; }
-        
+
         /// <summary>
         /// The user's favorite teams; this field is deprecated and will be removed in the near future
         /// </summary>
@@ -226,7 +225,7 @@ namespace DotNetOpenAuth.ApplicationBlock {
             }
         }
 
-        public Uri AvatarUrl 
+        public Uri AvatarUrl
         {
             get
             {
@@ -256,16 +255,20 @@ namespace DotNetOpenAuth.ApplicationBlock {
             }
         }
 
-        public static FacebookGraph Deserialize(string json) {
-            if (string.IsNullOrEmpty(json)) {
+        public static FacebookGraph Deserialize(string json)
+        {
+            if (string.IsNullOrEmpty(json))
+            {
                 throw new ArgumentNullException("json");
             }
 
             return Deserialize(new MemoryStream(Encoding.UTF8.GetBytes(json)));
         }
 
-        public static FacebookGraph Deserialize(Stream jsonStream) {
-            if (jsonStream == null) {
+        public static FacebookGraph Deserialize(Stream jsonStream)
+        {
+            if (jsonStream == null)
+            {
                 throw new ArgumentNullException("jsonStream");
             }
 

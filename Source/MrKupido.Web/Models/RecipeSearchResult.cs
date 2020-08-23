@@ -1,10 +1,9 @@
-﻿using System;
+﻿using MrKupido.Library;
+using MrKupido.Processor.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using MrKupido.Processor.Model;
 using System.Reflection;
-using MrKupido.Library;
 
 namespace MrKupido.Web.Models
 {
@@ -41,7 +40,7 @@ namespace MrKupido.Web.Models
         }
 
         private int itemsPerPage;
-        public int ItemsPerPage 
+        public int ItemsPerPage
         {
             get
             {
@@ -71,39 +70,39 @@ namespace MrKupido.Web.Models
         public RecipeSearchResult(RecipeTreeNode[] results)
         {
             //Items = results.Select(r => new RecipeSearchResultItem(r)).ToList();
-            
+
             if (Items == null) Items = new List<RecipeSearchResultItem>();
-            
+
             Items.Clear();
-            
+
             foreach (RecipeTreeNode rtn in results)
             {
                 Items.Add(new RecipeSearchResultItem(rtn));
-				Items[Items.Count - 1].Index = Items.Count - 1;
+                Items[Items.Count - 1].Index = Items.Count - 1;
             }
 
-			// randomize items
-			//Random rnd = new Random();
-			//List<RecipeSearchResultItem> rndList = new List<RecipeSearchResultItem>();
-			//while (Items.Count > 0)
-			//{
-			//	RecipeSearchResultItem rsri = Items[rnd.Next(Items.Count - 1)];
-			//	rndList.Add(rsri);
-			//	Items.Remove(rsri);
-			//}
-			//Items = rndList;
+            // randomize items
+            //Random rnd = new Random();
+            //List<RecipeSearchResultItem> rndList = new List<RecipeSearchResultItem>();
+            //while (Items.Count > 0)
+            //{
+            //	RecipeSearchResultItem rsri = Items[rnd.Next(Items.Count - 1)];
+            //	rndList.Add(rsri);
+            //	Items.Remove(rsri);
+            //}
+            //Items = rndList;
 
-			Items = Items.OrderBy(rsri => rsri.DisplayName).ToList();
+            Items = Items.OrderBy(rsri => rsri.DisplayName).ToList();
 
             // TODO: build category groups
         }
 
-		private void ReorderItemList(string orderBy, bool isOrderDescending)
+        private void ReorderItemList(string orderBy, bool isOrderDescending)
         {
-            Items.Sort(delegate(RecipeSearchResultItem x, RecipeSearchResultItem y)
+            Items.Sort(delegate (RecipeSearchResultItem x, RecipeSearchResultItem y)
             {
                 IComparable objvalue1 = GetValue(x, orderBy);
-                IComparable objvalue2 = GetValue(y, orderBy); 
+                IComparable objvalue2 = GetValue(y, orderBy);
 
                 if (!isOrderDescending)
                     return objvalue1.CompareTo(objvalue2);
@@ -133,7 +132,7 @@ namespace MrKupido.Web.Models
 
             return result;
         }
-        
+
         public RecipeSearchResultItem[] GetItems(int startIndex, int count)
         {
             List<RecipeSearchResultItem> result = new List<RecipeSearchResultItem>(Items);

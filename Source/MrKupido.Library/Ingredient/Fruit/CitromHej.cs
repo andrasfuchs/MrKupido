@@ -1,9 +1,5 @@
 ﻿using MrKupido.Library.Attributes;
 using MrKupido.Library.Nature;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace MrKupido.Library.Ingredient
 {
@@ -11,15 +7,15 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "citromhéj")]
 
     [IngredientConsts(
-		Category = ShoppingListCategory.Fruit,
-		GrammsPerPiece = 4.0f,
-		CaloriesPer100Gramms = 47.0f,
-		CarbohydratesPer100Gramms = 38.3f,
-		FatPer100Gramms = 2.7f,
-		ProteinPer100Gramms = 6.0f,
-		GlichemicalIndex = 3,
-		InflammationFactor = 36
-	)]
+        Category = ShoppingListCategory.Fruit,
+        GrammsPerPiece = 4.0f,
+        CaloriesPer100Gramms = 47.0f,
+        CarbohydratesPer100Gramms = 38.3f,
+        FatPer100Gramms = 2.7f,
+        ProteinPer100Gramms = 6.0f,
+        GlichemicalIndex = 3,
+        InflammationFactor = 36
+    )]
 
     [PartOf(typeof(CitrusMedicaL))]
     public class CitromHej : SingleIngredient

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MrKupido.Library.Attributes;
+﻿using MrKupido.Library.Attributes;
+using System;
 
 namespace MrKupido.Library.Equipment
 {
@@ -22,23 +19,23 @@ namespace MrKupido.Library.Equipment
         [NameAlias("eng", "heat up", Priority = 200)]
         [NameAlias("hun", "előmelegít", Priority = 200)]
         [NameAlias("hun", "felmelegít", Priority = 201)]
-		[NameAlias("eng", "heat the {} up to {0} degrees (level: {-})")]
+        [NameAlias("eng", "heat the {} up to {0} degrees (level: {-})")]
         [NameAlias("hun", "melegítsd elő a(z) {T} {0} fokra (fokozat: {-})")]
-		[PassiveAction]
+        [PassiveAction]
         public virtual int Homerseklet(int temperature)
         {
             this.LastActionDuration = 60 * 15;
 
-			// source: http://diobisztro.blogspot.hu/2010/11/tudastar-gazsuto-versus-elektromos-suto.html
+            // source: http://diobisztro.blogspot.hu/2010/11/tudastar-gazsuto-versus-elektromos-suto.html
 
-			if (temperature < 150)
-			{
-				return 0;
-			}
-			else
-			{
-				return (int)Math.Ceiling((temperature - 150.0) / 16.5);
-			}
+            if (temperature < 150)
+            {
+                return 0;
+            }
+            else
+            {
+                return (int)Math.Ceiling((temperature - 150.0) / 16.5);
+            }
         }
     }
 }

@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MrKupido.IngredientRanking
 {
@@ -14,7 +12,7 @@ namespace MrKupido.IngredientRanking
             Dictionary<string, int> ingredients = new Dictionary<string, int>();
 
             StreamReader sr = File.OpenText("Ingredients.txt");
-            
+
             while (!sr.EndOfStream)
             {
                 string s = sr.ReadLine().Replace("\"", "").Replace("[", "").Replace("]", "").Replace("(", "").Replace(")", "").Replace("-", "").Replace(":", "");
@@ -38,7 +36,7 @@ namespace MrKupido.IngredientRanking
             }
             sw.Close();
         }
-        
+
         private static bool IsDigitsOnly(string str)
         {
             foreach (char c in str)

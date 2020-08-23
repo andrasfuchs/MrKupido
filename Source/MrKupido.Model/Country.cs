@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MrKupido.Model
 {
@@ -21,7 +17,7 @@ namespace MrKupido.Model
         public string DefaultCultureName { get; set; }
 
         [Required]
-        public string PostalCodeValidatorRegularExpression  { get; set; }
+        public string PostalCodeValidatorRegularExpression { get; set; }
         [Required]
         public string PostalCodeSample { get; set; }
         [Required]

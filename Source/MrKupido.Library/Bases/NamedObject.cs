@@ -1,8 +1,6 @@
 ﻿using MrKupido.Library.Attributes;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace MrKupido.Library
 {
@@ -11,7 +9,7 @@ namespace MrKupido.Library
 
     public class NamedObject : MarshalByRefObject, ICloneable
     {
-        private Dictionary<string ,string> names = new Dictionary<string,string>();
+        private Dictionary<string, string> names = new Dictionary<string, string>();
 
         [Obsolete("This must be used only internally for debugging")]
         public string Name

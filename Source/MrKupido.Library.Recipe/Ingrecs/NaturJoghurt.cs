@@ -1,5 +1,4 @@
-﻿using System;
-using MrKupido.Library.Attributes;
+﻿using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Recipe
 {

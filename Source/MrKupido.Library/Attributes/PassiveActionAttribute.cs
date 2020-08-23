@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Diagnostics;
 using System.Reflection;
 
 namespace MrKupido.Library.Attributes
@@ -17,7 +13,7 @@ namespace MrKupido.Library.Attributes
     [AttributeUsage(System.AttributeTargets.Method, AllowMultiple = false)]
     public class PassiveActionAttribute : Attribute
     {
-        public PassiveActionAttribute() {}
+        public PassiveActionAttribute() { }
 
         public static bool IsMethodPassiveAction(MemberInfo mi)
         {

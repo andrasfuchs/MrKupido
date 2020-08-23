@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MrKupido.Library.Attributes;
+﻿using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Equipment
 {
@@ -12,13 +8,13 @@ namespace MrKupido.Library.Equipment
     public class EquipmentBase : NamedObject, IEquipment
     {
         private int index = 0;
-        public int Index 
+        public int Index
         {
             get
             {
                 return index;
             }
-            
+
             set
             {
                 if (index > 0)
@@ -58,5 +54,5 @@ namespace MrKupido.Library.Equipment
         {
             IsDirty = false;
         }
-	}
+    }
 }

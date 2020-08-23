@@ -1,13 +1,16 @@
 using System;
-using System.Reflection.Emit;
 using System.Reflection;
+using System.Reflection.Emit;
 
-namespace ClrTest.Reflection {
-    public abstract class ILInstruction {
+namespace ClrTest.Reflection
+{
+    public abstract class ILInstruction
+    {
         protected Int32 m_offset;
         protected OpCode m_opCode;
 
-        internal ILInstruction(Int32 offset, OpCode opCode) {
+        internal ILInstruction(Int32 offset, OpCode opCode)
+        {
             this.m_offset = offset;
             this.m_opCode = opCode;
         }
@@ -18,18 +21,21 @@ namespace ClrTest.Reflection {
         public abstract void Accept(ILInstructionVisitor vistor);
     }
 
-    public class InlineNoneInstruction : ILInstruction {
+    public class InlineNoneInstruction : ILInstruction
+    {
         internal InlineNoneInstruction(Int32 offset, OpCode opCode)
             : base(offset, opCode) { }
 
         public override void Accept(ILInstructionVisitor vistor) { vistor.VisitInlineNoneInstruction(this); }
     }
 
-    public class InlineBrTargetInstruction : ILInstruction {
+    public class InlineBrTargetInstruction : ILInstruction
+    {
         private Int32 m_delta;
 
         internal InlineBrTargetInstruction(Int32 offset, OpCode opCode, Int32 delta)
-            : base(offset, opCode) {
+            : base(offset, opCode)
+        {
             this.m_delta = delta;
         }
 
@@ -39,11 +45,13 @@ namespace ClrTest.Reflection {
         public override void Accept(ILInstructionVisitor vistor) { vistor.VisitInlineBrTargetInstruction(this); }
     }
 
-    public class ShortInlineBrTargetInstruction : ILInstruction {
+    public class ShortInlineBrTargetInstruction : ILInstruction
+    {
         private SByte m_delta;
 
         internal ShortInlineBrTargetInstruction(Int32 offset, OpCode opCode, SByte delta)
-            : base(offset, opCode) {
+            : base(offset, opCode)
+        {
             this.m_delta = delta;
         }
 
@@ -53,19 +61,24 @@ namespace ClrTest.Reflection {
         public override void Accept(ILInstructionVisitor vistor) { vistor.VisitShortInlineBrTargetInstruction(this); }
     }
 
-    public class InlineSwitchInstruction : ILInstruction {
+    public class InlineSwitchInstruction : ILInstruction
+    {
         private Int32[] m_deltas;
         private Int32[] m_targetOffsets;
 
         internal InlineSwitchInstruction(Int32 offset, OpCode opCode, Int32[] deltas)
-            : base(offset, opCode) {
+            : base(offset, opCode)
+        {
             this.m_deltas = deltas;
         }
 
         public Int32[] Deltas { get { return (Int32[])m_deltas.Clone(); } }
-        public Int32[] TargetOffsets {
-            get {
-                if (m_targetOffsets == null) {
+        public Int32[] TargetOffsets
+        {
+            get
+            {
+                if (m_targetOffsets == null)
+                {
                     int cases = m_deltas.Length;
                     int itself = 1 + 4 + 4 * cases;
                     m_targetOffsets = new Int32[cases];
@@ -79,11 +92,13 @@ namespace ClrTest.Reflection {
         public override void Accept(ILInstructionVisitor vistor) { vistor.VisitInlineSwitchInstruction(this); }
     }
 
-    public class InlineIInstruction : ILInstruction {
+    public class InlineIInstruction : ILInstruction
+    {
         private Int32 m_int32;
 
         internal InlineIInstruction(Int32 offset, OpCode opCode, Int32 value)
-            : base(offset, opCode) {
+            : base(offset, opCode)
+        {
             this.m_int32 = value;
         }
 
@@ -91,11 +106,13 @@ namespace ClrTest.Reflection {
 
         public override void Accept(ILInstructionVisitor vistor) { vistor.VisitInlineIInstruction(this); }
     }
-    public class InlineI8Instruction : ILInstruction {
+    public class InlineI8Instruction : ILInstruction
+    {
         private Int64 m_int64;
 
         internal InlineI8Instruction(Int32 offset, OpCode opCode, Int64 value)
-            : base(offset, opCode) {
+            : base(offset, opCode)
+        {
             this.m_int64 = value;
         }
 
@@ -104,11 +121,13 @@ namespace ClrTest.Reflection {
         public override void Accept(ILInstructionVisitor vistor) { vistor.VisitInlineI8Instruction(this); }
 
     }
-    public class ShortInlineIInstruction : ILInstruction {
+    public class ShortInlineIInstruction : ILInstruction
+    {
         private Byte m_int8;
 
         internal ShortInlineIInstruction(Int32 offset, OpCode opCode, Byte value)
-            : base(offset, opCode) {
+            : base(offset, opCode)
+        {
             this.m_int8 = value;
         }
 
@@ -117,11 +136,13 @@ namespace ClrTest.Reflection {
         public override void Accept(ILInstructionVisitor vistor) { vistor.VisitShortInlineIInstruction(this); }
     }
 
-    public class InlineRInstruction : ILInstruction {
+    public class InlineRInstruction : ILInstruction
+    {
         private Double m_value;
 
         internal InlineRInstruction(Int32 offset, OpCode opCode, Double value)
-            : base(offset, opCode) {
+            : base(offset, opCode)
+        {
             this.m_value = value;
         }
 
@@ -130,11 +151,13 @@ namespace ClrTest.Reflection {
         public override void Accept(ILInstructionVisitor vistor) { vistor.VisitInlineRInstruction(this); }
     }
 
-    public class ShortInlineRInstruction : ILInstruction {
+    public class ShortInlineRInstruction : ILInstruction
+    {
         private Single m_value;
 
         internal ShortInlineRInstruction(Int32 offset, OpCode opCode, Single value)
-            : base(offset, opCode) {
+            : base(offset, opCode)
+        {
             this.m_value = value;
         }
 
@@ -143,20 +166,25 @@ namespace ClrTest.Reflection {
         public override void Accept(ILInstructionVisitor vistor) { vistor.VisitShortInlineRInstruction(this); }
     }
 
-    public class InlineFieldInstruction : ILInstruction {
+    public class InlineFieldInstruction : ILInstruction
+    {
         ITokenResolver m_resolver;
         Int32 m_token;
         FieldInfo m_field;
 
         internal InlineFieldInstruction(ITokenResolver resolver, Int32 offset, OpCode opCode, Int32 token)
-            : base(offset, opCode) {
+            : base(offset, opCode)
+        {
             this.m_resolver = resolver;
             this.m_token = token;
         }
 
-        public FieldInfo Field {
-            get {
-                if (m_field == null) {
+        public FieldInfo Field
+        {
+            get
+            {
+                if (m_field == null)
+                {
                     m_field = m_resolver.AsField(m_token);
                 }
                 return m_field;
@@ -166,20 +194,25 @@ namespace ClrTest.Reflection {
 
         public override void Accept(ILInstructionVisitor vistor) { vistor.VisitInlineFieldInstruction(this); }
     }
-    public class InlineMethodInstruction : ILInstruction {
+    public class InlineMethodInstruction : ILInstruction
+    {
         private ITokenResolver m_resolver;
         private Int32 m_token;
         private MethodBase m_method;
 
         internal InlineMethodInstruction(Int32 offset, OpCode opCode, Int32 token, ITokenResolver resolver)
-            : base(offset, opCode) {
+            : base(offset, opCode)
+        {
             this.m_resolver = resolver;
             this.m_token = token;
         }
 
-        public MethodBase Method {
-            get {
-                if (m_method == null) {
+        public MethodBase Method
+        {
+            get
+            {
+                if (m_method == null)
+                {
                     m_method = m_resolver.AsMethod(m_token);
                 }
                 return m_method;
@@ -189,20 +222,25 @@ namespace ClrTest.Reflection {
 
         public override void Accept(ILInstructionVisitor vistor) { vistor.VisitInlineMethodInstruction(this); }
     }
-    public class InlineTypeInstruction : ILInstruction {
+    public class InlineTypeInstruction : ILInstruction
+    {
         private ITokenResolver m_resolver;
         private Int32 m_token;
         private Type m_type;
 
         internal InlineTypeInstruction(Int32 offset, OpCode opCode, Int32 token, ITokenResolver resolver)
-            : base(offset, opCode) {
+            : base(offset, opCode)
+        {
             this.m_resolver = resolver;
             this.m_token = token;
         }
 
-        public Type Type {
-            get {
-                if (m_type == null) {
+        public Type Type
+        {
+            get
+            {
+                if (m_type == null)
+                {
                     m_type = m_resolver.AsType(m_token);
                 }
                 return m_type;
@@ -212,20 +250,25 @@ namespace ClrTest.Reflection {
 
         public override void Accept(ILInstructionVisitor vistor) { vistor.VisitInlineTypeInstruction(this); }
     }
-    public class InlineSigInstruction : ILInstruction {
+    public class InlineSigInstruction : ILInstruction
+    {
         private ITokenResolver m_resolver;
         private Int32 m_token;
         private byte[] m_signature;
 
         internal InlineSigInstruction(Int32 offset, OpCode opCode, Int32 token, ITokenResolver resolver)
-            : base(offset, opCode) {
+            : base(offset, opCode)
+        {
             this.m_resolver = resolver;
             this.m_token = token;
         }
 
-        public byte[] Signature {
-            get {
-                if (m_signature == null) {
+        public byte[] Signature
+        {
+            get
+            {
+                if (m_signature == null)
+                {
                     m_signature = m_resolver.AsSignature(m_token);
                 }
                 return m_signature;
@@ -235,20 +278,25 @@ namespace ClrTest.Reflection {
 
         public override void Accept(ILInstructionVisitor vistor) { vistor.VisitInlineSigInstruction(this); }
     }
-    public class InlineTokInstruction : ILInstruction {
+    public class InlineTokInstruction : ILInstruction
+    {
         private ITokenResolver m_resolver;
         private Int32 m_token;
         private MemberInfo m_member;
 
         internal InlineTokInstruction(Int32 offset, OpCode opCode, Int32 token, ITokenResolver resolver)
-            : base(offset, opCode) {
+            : base(offset, opCode)
+        {
             this.m_resolver = resolver;
             this.m_token = token;
         }
 
-        public MemberInfo Member {
-            get {
-                if (m_member == null) {
+        public MemberInfo Member
+        {
+            get
+            {
+                if (m_member == null)
+                {
                     m_member = m_resolver.AsMember(Token);
                 }
                 return m_member;
@@ -259,19 +307,23 @@ namespace ClrTest.Reflection {
         public override void Accept(ILInstructionVisitor vistor) { vistor.VisitInlineTokInstruction(this); }
     }
 
-    public class InlineStringInstruction : ILInstruction {
+    public class InlineStringInstruction : ILInstruction
+    {
         private ITokenResolver m_resolver;
         private Int32 m_token;
         private String m_string;
 
         internal InlineStringInstruction(Int32 offset, OpCode opCode, Int32 token, ITokenResolver resolver)
-            : base(offset, opCode) {
+            : base(offset, opCode)
+        {
             this.m_resolver = resolver;
             this.m_token = token;
         }
 
-        public String String {
-            get {
+        public String String
+        {
+            get
+            {
                 if (m_string == null) m_string = m_resolver.AsString(Token);
                 return m_string;
             }
@@ -281,11 +333,13 @@ namespace ClrTest.Reflection {
         public override void Accept(ILInstructionVisitor vistor) { vistor.VisitInlineStringInstruction(this); }
     }
 
-    public class InlineVarInstruction : ILInstruction {
+    public class InlineVarInstruction : ILInstruction
+    {
         private UInt16 m_ordinal;
 
         internal InlineVarInstruction(Int32 offset, OpCode opCode, UInt16 ordinal)
-            : base(offset, opCode) {
+            : base(offset, opCode)
+        {
             this.m_ordinal = ordinal;
         }
 
@@ -294,11 +348,13 @@ namespace ClrTest.Reflection {
         public override void Accept(ILInstructionVisitor vistor) { vistor.VisitInlineVarInstruction(this); }
     }
 
-    public class ShortInlineVarInstruction : ILInstruction {
+    public class ShortInlineVarInstruction : ILInstruction
+    {
         private Byte m_ordinal;
 
         internal ShortInlineVarInstruction(Int32 offset, OpCode opCode, Byte ordinal)
-            : base(offset, opCode) {
+            : base(offset, opCode)
+        {
             this.m_ordinal = ordinal;
         }
 

@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Diagnostics;
+using System.Linq;
 
 namespace MrKupido.Library
 {
@@ -24,7 +22,7 @@ namespace MrKupido.Library
 
             char[] result = str.ToLowerInvariant().ToArray();
 
-            for (int i=0; i<result.Length; i++)
+            for (int i = 0; i < result.Length; i++)
             {
                 if (result[i] == 'á') result[i] = 'a';
                 if (result[i] == 'é') result[i] = 'e';
@@ -37,7 +35,7 @@ namespace MrKupido.Library
                 if (result[i] == 'ű') result[i] = 'u';
 
                 if (result[i] == ' ') result[i] = '-';
-                
+
                 if (!allowedCharacters.Contains(result[i]))
                 {
                     Trace.TraceWarning("The string '{0}' contains a character '{1}' which is not allowed in the unique-name string.", str, result[i]);
@@ -49,12 +47,12 @@ namespace MrKupido.Library
                 Trace.TraceWarning("The string '{0}' should start with a letter if you want to use it as a unique-name string.", str);
             }
 
-			if (allowedCharacters.IndexOf(result[result.Length - 1]) > 26)
-			{
-				Trace.TraceWarning("The string '{0}' should end with a letter if you want to use it as a unique-name string.", str);
-			}
-			
-			return new String(result);
+            if (allowedCharacters.IndexOf(result[result.Length - 1]) > 26)
+            {
+                Trace.TraceWarning("The string '{0}' should end with a letter if you want to use it as a unique-name string.", str);
+            }
+
+            return new String(result);
         }
 
         public static string FromUniqueStringToClassName(this String str)

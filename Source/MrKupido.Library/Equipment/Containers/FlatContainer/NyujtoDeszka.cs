@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MrKupido.Library.Attributes;
+﻿using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Equipment
 {
@@ -30,7 +26,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "roll out", Priority = 200)]
         [NameAlias("hun", "kinyújt", Priority = 200)]
-		[NameAlias("eng", "roll the {0.Contents.} out on the {} to have a {1}-cm think pasta")]
+        [NameAlias("eng", "roll the {0.Contents.} out on the {} to have a {1}-cm think pasta")]
         [NameAlias("hun", "nyújtsd ki {N} a(z) {0.Contents.T} {1} cm-esre")]
         public void NyujtaniC(IIngredientContainer c, float thicknessInCm)
         {

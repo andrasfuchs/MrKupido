@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MrKupido.Library.Attributes;
+﻿using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Ingredient
 {
@@ -11,16 +7,16 @@ namespace MrKupido.Library.Ingredient
     [NameAlias("hun", "oregánó", Priority = 1)]
     [NameAlias("hun", "őrölt oregánó")]
 
-	[IngredientConsts(
-		Category = ShoppingListCategory.Spice,
-		GrammsPerPiece = 1.0f,
-		CaloriesPer100Gramms = 306.0f,
-		CarbohydratesPer100Gramms = 193.0f,
-		FatPer100Gramms = 85.8f,
-		ProteinPer100Gramms = 26.8f,
-		GlichemicalIndex = 8,
-		InflammationFactor = -305
-	)]
+    [IngredientConsts(
+        Category = ShoppingListCategory.Spice,
+        GrammsPerPiece = 1.0f,
+        CaloriesPer100Gramms = 306.0f,
+        CarbohydratesPer100Gramms = 193.0f,
+        FatPer100Gramms = 85.8f,
+        ProteinPer100Gramms = 26.8f,
+        GlichemicalIndex = 8,
+        InflammationFactor = -305
+    )]
 
 
     public class OreganoOrolt : Oregano

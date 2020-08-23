@@ -1,30 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MrKupido.Library.Attributes;
-using MrKupido.Library.Nature;
+﻿using MrKupido.Library.Attributes;
 using MrKupido.Library.Equipment;
 using MrKupido.Library.Ingredient;
 
 namespace MrKupido.Library.Recipe
 {
     [NameAlias("hun", "tejszín")]
-    [NameAlias("hun", "tejzsír", Priority=200)]
+    [NameAlias("hun", "tejzsír", Priority = 200)]
 
     [NameAlias("eng", "cream")]
 
-	[IngredientConsts(
-		IsIngrec = true,
-		Category = ShoppingListCategory.Other,
-		GrammsPerLiter = 1900,
-		CaloriesPer100Gramms = 130.0f,
-		CarbohydratesPer100Gramms = 16.3f,
-		FatPer100Gramms = 101.0f,
-		ProteinPer100Gramms = 12.6f,
-		GlichemicalIndex = 3,
-		InflammationFactor = -56
-	)]
+    [IngredientConsts(
+        IsIngrec = true,
+        Category = ShoppingListCategory.Other,
+        GrammsPerLiter = 1900,
+        CaloriesPer100Gramms = 130.0f,
+        CarbohydratesPer100Gramms = 16.3f,
+        FatPer100Gramms = 101.0f,
+        ProteinPer100Gramms = 12.6f,
+        GlichemicalIndex = 3,
+        InflammationFactor = -56
+    )]
 
     public class Tejszin : RecipeBase
     {
@@ -62,7 +57,7 @@ namespace MrKupido.Library.Recipe
 
             Edeny edeny1 = eg.Use<Edeny>();
             edeny1.Beonteni(new Tej(12.0f * amount, MeasurementUnit.liter));
-			edeny1.Varni(new Quantity(3, MeasurementUnit.hour));
+            edeny1.Varni(new Quantity(3, MeasurementUnit.hour));
 
             Kanal kanal = eg.Use<Kanal>();
             IIngredient nyersTejszin = kanal.LefolozniC(edeny1, 0.15f);
@@ -73,14 +68,14 @@ namespace MrKupido.Library.Recipe
             Tuzhely tuzhely = eg.Use<Tuzhely>();
             tuzhely.RahelyezniC(edeny2);
             tuzhely.Homerseklet(110);
-			edeny2.Varni(new Quantity(10, MeasurementUnit.minute));
+            edeny2.Varni(new Quantity(10, MeasurementUnit.minute));
 
             tuzhely.LeemelniC(edeny2);
-			edeny2.Varni(new Quantity(30, MeasurementUnit.minute));
+            edeny2.Varni(new Quantity(30, MeasurementUnit.minute));
 
             Hutogep huto = eg.Use<Hutogep>();
             huto.BehelyezniC(edeny2);
-			edeny2.Varni(new Quantity(60, MeasurementUnit.minute));
+            edeny2.Varni(new Quantity(60, MeasurementUnit.minute));
 
             cfp.Add("tejszin", edeny2);
 

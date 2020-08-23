@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MrKupido.Library.Attributes;
+﻿using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Recipe
 {
@@ -10,13 +6,13 @@ namespace MrKupido.Library.Recipe
     [NameAlias("hun", "ételízesítő")]
 
     [IngredientConsts(
-		IsIngrec = true, 
-		Category = ShoppingListCategory.Spice,
-		CaloriesPer100Gramms = 100.0f,
-		CarbohydratesPer100Gramms = 17.0f,
-		FatPer100Gramms = 1.0f,
-		ProteinPer100Gramms = 5.0f
-	)]
+        IsIngrec = true,
+        Category = ShoppingListCategory.Spice,
+        CaloriesPer100Gramms = 100.0f,
+        CarbohydratesPer100Gramms = 17.0f,
+        FatPer100Gramms = 1.0f,
+        ProteinPer100Gramms = 5.0f
+    )]
 
     public class Etelizesito : RecipeBase
     {

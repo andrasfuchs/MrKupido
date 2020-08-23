@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MrKupido.Library;
+﻿using MrKupido.Library.Attributes;
 using MrKupido.Library.Equipment;
 using MrKupido.Library.Ingredient;
-using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Recipe
 {
-	[NameAlias("eng", "apple-cinnamon cookie")]
+    [NameAlias("eng", "apple-cinnamon cookie")]
     [NameAlias("hun", "almás-fahéjas süti")]
 
-	[IngredientConsts(ManTags = "Cake")]
+    [IngredientConsts(ManTags = "Cake")]
     public class AlmasFahejasKevert : RecipeBase
     {
         public AlmasFahejasKevert(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
@@ -37,8 +32,8 @@ namespace MrKupido.Library.Recipe
 
             eg.Use<Kez>(1).MeglocsolniI(eg.Use<NagyEdeny>(1), new CitromLe(0.5f * amount));
 
-			ISingleIngredient tojas = new Tojas(3.0f * amount);
-			tojas.ChangeUnitTo(MeasurementUnit.gramm);
+            ISingleIngredient tojas = new Tojas(3.0f * amount);
+            tojas.ChangeUnitTo(MeasurementUnit.gramm);
 
             eg.Use<Edeny>(1).Berakni(tojas, new Cukor(3.0f * amount));
             eg.Use<Habvero>(1).KikeverniC(eg.Use<Edeny>(1));
@@ -48,8 +43,8 @@ namespace MrKupido.Library.Recipe
             eg.Use<Edeny>(1).Berakni(new NapraforgoOlaj(2.0f * amount), citromhej);
 
             eg.Use<Edeny>(1).Berakni(new Liszt(40.0f * amount), new Fahej(4.5f * amount, MeasurementUnit.teaskanal), new Szodabikarbona(2.0f * amount, MeasurementUnit.teaskanal));
-			eg.Use<NagyEdeny>(1).BeonteniC(eg.Use<Edeny>(1));
-			eg.Use<Fakanal>(1).ElkeverniC(eg.Use<NagyEdeny>(1));
+            eg.Use<NagyEdeny>(1).BeonteniC(eg.Use<Edeny>(1));
+            eg.Use<Fakanal>(1).ElkeverniC(eg.Use<NagyEdeny>(1));
 
             ISingleIngredient dio = new Diobel(12.0f * amount, MeasurementUnit.dekagramm);
             eg.Use<Daralo>(1).DaralniI(eg.Use<LaposKisTanyer>(2), dio);
@@ -74,7 +69,7 @@ namespace MrKupido.Library.Recipe
 
             eg.Use<Suto>(1).Homerseklet(190);
             eg.Use<Suto>(1).BehelyezniC(eg.Use<Tepsi>(1));
-			eg.Use<Suto>(1).Varni(new Quantity(40, MeasurementUnit.minute));
+            eg.Use<Suto>(1).Varni(new Quantity(40, MeasurementUnit.minute));
 
             eg.Use<Suto>(1).KiemelniC(eg.Use<Tepsi>(1));
             eg.Use<Kez>(1).RaszorniI(eg.Use<Tepsi>(1), new PorCukor(2.0f * amount));

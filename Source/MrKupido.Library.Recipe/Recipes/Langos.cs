@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MrKupido.Library.Ingredient;
+﻿using MrKupido.Library.Attributes;
 using MrKupido.Library.Equipment;
-using MrKupido.Library.Attributes;
+using MrKupido.Library.Ingredient;
 
 namespace MrKupido.Library.Recipe
 {
     [NameAlias("eng", "scone")]
     [NameAlias("hun", "lángos")]
 
-	[IngredientConsts(ManTags="Cheap")]
+    [IngredientConsts(ManTags = "Cheap")]
     public class Langos : RecipeBase
     {
         public Langos(float amount, MeasurementUnit unit = MeasurementUnit.gramm)
@@ -29,16 +25,16 @@ namespace MrKupido.Library.Recipe
         {
             PreparedIngredients result = new PreparedIngredients();
 
-			eg.Use<NagyEdeny>(1).Berakni(new Liszt(100.0f * amount), new FelfuttatottEleszto(5.0f * amount), new Tejfol(2.0f * amount), new So(15.0f * amount), new Viz(2.0f * amount));
+            eg.Use<NagyEdeny>(1).Berakni(new Liszt(100.0f * amount), new FelfuttatottEleszto(5.0f * amount), new Tejfol(2.0f * amount), new So(15.0f * amount), new Viz(2.0f * amount));
 
-			eg.Use<Kez>(1).OsszegyurniC(eg.Use<NagyEdeny>(1));
-			eg.Use<NagyEdeny>(1).Lefedni(eg.Use<NagyEdeny>(1).Fedo);
-			eg.Use<NagyEdeny>(1).Varni(new Quantity(30, MeasurementUnit.minute));
+            eg.Use<Kez>(1).OsszegyurniC(eg.Use<NagyEdeny>(1));
+            eg.Use<NagyEdeny>(1).Lefedni(eg.Use<NagyEdeny>(1).Fedo);
+            eg.Use<NagyEdeny>(1).Varni(new Quantity(30, MeasurementUnit.minute));
 
-			eg.Use<NyujtoDeszka>(1).NyujtaniC(eg.Use<NagyEdeny>(1), 5.0f);
-			eg.Use<Szaggato>(1).KiszaggatniC(eg.Use<NyujtoDeszka>(1), 15.0f, 20.0f);
+            eg.Use<NyujtoDeszka>(1).NyujtaniC(eg.Use<NagyEdeny>(1), 5.0f);
+            eg.Use<Szaggato>(1).KiszaggatniC(eg.Use<NyujtoDeszka>(1), 15.0f, 20.0f);
 
-			result.Add("tesztadarabok", eg.Use<NyujtoDeszka>(1));
+            result.Add("tesztadarabok", eg.Use<NyujtoDeszka>(1));
 
             eg.WashUp();
             return result;
@@ -48,16 +44,16 @@ namespace MrKupido.Library.Recipe
         {
             CookedFoodParts cfp = new CookedFoodParts();
 
-			eg.Use<Serpenyo>(1).Berakni(new NapraforgoOlaj(5.0f));
+            eg.Use<Serpenyo>(1).Berakni(new NapraforgoOlaj(5.0f));
 
-			eg.Use<Tuzhely>(1).Homerseklet(350);
-			eg.Use<Tuzhely>(1).RahelyezniC(eg.Use<Serpenyo>(1));
+            eg.Use<Tuzhely>(1).Homerseklet(350);
+            eg.Use<Tuzhely>(1).RahelyezniC(eg.Use<Serpenyo>(1));
 
             IIngredientContainer langosok = preps["tesztadarabok"];
 
-			eg.Use<Serpenyo>(1).KisutniOsszesetC(langosok, 2.0f, eg.Use<MelyTanyer>(1));
+            eg.Use<Serpenyo>(1).KisutniOsszesetC(langosok, 2.0f, eg.Use<MelyTanyer>(1));
 
-			cfp.Add("osszeslangos", eg.Use<MelyTanyer>(1));
+            cfp.Add("osszeslangos", eg.Use<MelyTanyer>(1));
 
             eg.WashUp();
             return cfp;
@@ -65,7 +61,7 @@ namespace MrKupido.Library.Recipe
 
         public static void Serve(float amount, CookedFoodParts food, EquipmentGroup eg)
         {
-			eg.Use<Kez>(1).TalalniC(food["osszeslangos"], eg.Use<LaposTanyer>(1));
+            eg.Use<Kez>(1).TalalniC(food["osszeslangos"], eg.Use<LaposTanyer>(1));
 
             eg.WashUp();
         }

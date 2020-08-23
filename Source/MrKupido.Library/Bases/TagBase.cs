@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MrKupido.Library.Attributes;
+﻿using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Tag
 {
@@ -10,14 +6,14 @@ namespace MrKupido.Library.Tag
     [NameAlias("hun", "címke")]
     public class TagBase : NamedObject, ITag
     {
-		public virtual float Match(ITreeNode r)
-		{
-			return 0.0f;
-		}
+        public virtual float Match(ITreeNode r)
+        {
+            return 0.0f;
+        }
 
-		public virtual bool IsMatch(ITreeNode r)
-		{
-			return Match(r) == 1.0f;
-		}	
-	}
+        public virtual bool IsMatch(ITreeNode r)
+        {
+            return Match(r) == 1.0f;
+        }
+    }
 }

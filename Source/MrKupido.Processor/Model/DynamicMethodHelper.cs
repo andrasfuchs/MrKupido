@@ -7,12 +7,11 @@
 // THIS CODE IS PROVIDED "AS IS", WITH NO WARRANTIES INTENDED OR IMPLIED. USE AT YOUR OWN RISK
 //
 
+using ClrTest.Reflection;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Reflection.Emit;
 using System.Reflection;
-using ClrTest.Reflection;
+using System.Reflection.Emit;
 
 namespace MrKupido.Processor.Model
 {

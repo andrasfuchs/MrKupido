@@ -1,8 +1,6 @@
-﻿using System;
+﻿using MrKupido.Library.Attributes;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Equipment
 {
@@ -17,15 +15,15 @@ namespace MrKupido.Library.Equipment
         protected List<IIngredientContainer> contents = new List<IIngredientContainer>();
         protected IIngredientContainer Contents
         {
-            get 
+            get
             {
                 if (contents.Count == 0) return null;
-                
-                return contents.Last(); 
+
+                return contents.Last();
             }
         }
 
-        public int AveragePowerConsumption { get; protected set; } 
+        public int AveragePowerConsumption { get; protected set; }
 
         public Device(float width, float height, float depth)
         {
@@ -34,12 +32,12 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "wait", Priority = 200)]
         [NameAlias("hun", "vár", Priority = 200)]
-		[NameAlias("eng", "wait {0}")]
+        [NameAlias("eng", "wait {0}")]
         [NameAlias("hun", "várj {0T}")]
         [PassiveAction]
         public void Varni(Quantity duration)
         {
-			this.LastActionDuration = (uint)(duration.GetAmount(MeasurementUnit.minute) * 60);
+            this.LastActionDuration = (uint)(duration.GetAmount(MeasurementUnit.minute) * 60);
         }
     }
 }

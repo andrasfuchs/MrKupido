@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using MrKupido.Processor.Model;
-using MrKupido.Utils;
+﻿using MrKupido.Processor.Model;
 
 namespace MrKupido.Web.Models
 {

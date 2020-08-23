@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MrKupido.Model;
-using System.Threading;
-using System.IO;
+﻿using MrKupido.Model;
 using MrKupido.Utils;
+using System;
+using System.IO;
 using System.Runtime.Serialization.Json;
+using System.Text;
+using System.Threading;
 using System.Web;
 
 namespace MrKupido.RecipeUpload.MindMegette
@@ -64,7 +62,7 @@ namespace MrKupido.RecipeUpload.MindMegette
             content = File.ReadAllText(filename, Encoding.GetEncoding(1250));
             int startIndex = content.IndexOf("<div class=\"recept-fej cf\">");
             int endIndex = content.IndexOf("<div class=\"megjegyzes-box-wrap fl\">");
-            
+
             sb.Clear();
             sb.Append(content.Substring(startIndex, endIndex - startIndex));
             sb.Replace("\n", "");

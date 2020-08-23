@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel.DataAnnotations;
 //using System.Data.Spatial;
 
@@ -16,11 +13,11 @@ namespace MrKupido.Model
 
         [Required]
         public Country Country { get; set; }
-        
+
         [Required]
         public string Province { get; set; }
 
-        [Required]        
+        [Required]
         public string Town { get; set; }
 
         [Required]

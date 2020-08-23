@@ -1,8 +1,4 @@
 ﻿using MrKupido.Library.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace MrKupido.Library.Equipment
 {
@@ -17,7 +13,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "put on", Priority = 200)]
         [NameAlias("hun", "ráhelyez", Priority = 200)]
-		[NameAlias("eng", "put the {0} on the {}")]
+        [NameAlias("eng", "put the {0} on the {}")]
         [NameAlias("hun", "helyezd rá a(z) {R} a(z) {0T}")]
         public void RahelyezniC(IIngredientContainer c)
         {
@@ -28,7 +24,7 @@ namespace MrKupido.Library.Equipment
 
         [NameAlias("eng", "get off", Priority = 200)]
         [NameAlias("hun", "leemel", Priority = 200)]
-		[NameAlias("eng", "get the {0} off the {}")]
+        [NameAlias("eng", "get the {0} off the {}")]
         [NameAlias("hun", "emeld le a(z) {L} a(z) {0T}")]
         public void LeemelniC(IIngredientContainer c)
         {

@@ -1,10 +1,6 @@
 ﻿using MrKupido.Library.Attributes;
 using MrKupido.Library.Equipment;
 using MrKupido.Library.Ingredient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace MrKupido.Library.Recipe
 {
@@ -35,7 +31,7 @@ namespace MrKupido.Library.Recipe
             result.Tools.Add(new Fakanal());
             result.Tools.Add(new FokhagymaPres());
             result.Tools.Add(new Reszelo());
-            
+
             //? result.Materials.Add(new Alufolia(30.0f, 40.0f));
 
             return result;
@@ -47,17 +43,17 @@ namespace MrKupido.Library.Recipe
 
             NagyEdeny edeny = eg.Use<NagyEdeny>();
 
-			ISingleIngredient fokhagyma = new Fokhagyma(6.0f * amount);
+            ISingleIngredient fokhagyma = new Fokhagyma(6.0f * amount);
             FokhagymaPres fp = eg.Use<FokhagymaPres>();
             fp.PreselniI(fokhagyma);
-			edeny.Berakni(fokhagyma, new Tej(10.0f * amount));
+            edeny.Berakni(fokhagyma, new Tej(10.0f * amount));
 
             Fakanal fakanal = eg.Use<Fakanal>();
             fakanal.ElkeverniC(edeny);
 
-			edeny.Berakni(new Csirkemell(25 * 10 * amount));
+            edeny.Berakni(new Csirkemell(25 * 10 * amount));
             edeny.Varni(new Quantity(8, MeasurementUnit.hour));
-            edeny.FolyadekotLeonteni();            
+            edeny.FolyadekotLeonteni();
 
             result.Add("tejescsirkemell", edeny);
 
@@ -72,9 +68,9 @@ namespace MrKupido.Library.Recipe
             Kez kez = eg.Use<Kez>();
 
             IIngredientContainer tejesCsirkemell = preps["tejescsirkemell"];
-			kez.Raszorni(tejesCsirkemell, new So(10.0f * amount));
+            kez.Raszorni(tejesCsirkemell, new So(10.0f * amount));
 
-			ISingleIngredient alma = new Alma(7.5f * amount);
+            ISingleIngredient alma = new Alma(7.5f * amount);
             alma.ChangeUnitTo(MeasurementUnit.gramm);
 
             LaposKisTanyer laposKisTanyer1 = eg.Use<LaposKisTanyer>();
@@ -82,26 +78,26 @@ namespace MrKupido.Library.Recipe
             reszelo.LereszelniI(laposKisTanyer1, alma);
 
             LaposKisTanyer laposKisTanyer2 = eg.Use<LaposKisTanyer>();
-			ISingleIngredient sajt = new FustoltSajt(50.0f * amount);
+            ISingleIngredient sajt = new FustoltSajt(50.0f * amount);
             reszelo.LereszelniI(laposKisTanyer2, sajt);
 
             JenaiTal jenai = eg.Use<JenaiTal>();
             jenai.BerakniC(tejesCsirkemell);
-			jenai.Berakni(new FustoltSzalonna(25 * amount, MeasurementUnit.piece), alma);
-			jenai.BeonteniI(new Tejszin(3.0f * amount));
+            jenai.Berakni(new FustoltSzalonna(25 * amount, MeasurementUnit.piece), alma);
+            jenai.BeonteniI(new Tejszin(3.0f * amount));
             kez.Raszorni(jenai, sajt);
-			//jenai.BerakniI(new FustoltSzalonna(5 * amount, MeasurementUnit.piece));
+            //jenai.BerakniI(new FustoltSzalonna(5 * amount, MeasurementUnit.piece));
 
             jenai.Lefedni(new Alufolia());
 
             Suto suto = eg.Use<Suto>();
             suto.Homerseklet(200);
             suto.BehelyezniC(jenai);
-			suto.Varni(new Quantity(60, MeasurementUnit.minute));
+            suto.Varni(new Quantity(60, MeasurementUnit.minute));
             suto.KiemelniC(jenai);
             jenai.FedotLevenni();
             suto.BehelyezniC(jenai);
-			suto.Varni(new Quantity(15, MeasurementUnit.minute));
+            suto.Varni(new Quantity(15, MeasurementUnit.minute));
             suto.KiemelniC(jenai);
 
             cfp.Add("csirkemellek", jenai);

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Device.Location;
-using System.Linq;
-using System.Text;
 
 namespace MrKupido.Library
 {
@@ -10,7 +7,7 @@ namespace MrKupido.Library
     {
         public string BrandName;
         public string CompanyName;
-        
+
         public string Country;
         public string CountryISO;
         public string County;
@@ -33,10 +30,10 @@ namespace MrKupido.Library
 
         public string OpenningHours;
         public string OrderingHours;
-        
+
         public string Currency;
         public string CurrencyISO;
 
-        public ProviderBase(string languageISOCode) {}
+        public ProviderBase(string languageISOCode) { }
     }
 }

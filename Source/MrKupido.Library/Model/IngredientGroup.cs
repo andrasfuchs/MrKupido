@@ -1,8 +1,7 @@
-﻿using System;
+﻿using MrKupido.Library.Attributes;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MrKupido.Library.Attributes;
 
 namespace MrKupido.Library.Ingredient
 {
@@ -52,10 +51,10 @@ namespace MrKupido.Library.Ingredient
                 {
                     AddIngredients(((IngredientGroup)ingredient).Ingredients);
 
-					if (ingredient.PieceCount > this.PieceCount)
-					{
-						this.PieceCount = ingredient.PieceCount;
-					}
+                    if (ingredient.PieceCount > this.PieceCount)
+                    {
+                        this.PieceCount = ingredient.PieceCount;
+                    }
 
                     continue;
                 }
@@ -65,25 +64,25 @@ namespace MrKupido.Library.Ingredient
                     this.ingredients.Add((SingleIngredient)ingredient);
                     if (this.Unit == MeasurementUnit.none)
                     {
-						if (ingredient.IsSolid)
-						{
-							this.Unit = MeasurementUnit.gramm;
-						}
-						else if (ingredient.IsFluid)
-						{
-							this.Unit = MeasurementUnit.liter;
-						}
-						else
-						{
-							this.Unit = ingredient.Unit;
-						}
+                        if (ingredient.IsSolid)
+                        {
+                            this.Unit = MeasurementUnit.gramm;
+                        }
+                        else if (ingredient.IsFluid)
+                        {
+                            this.Unit = MeasurementUnit.liter;
+                        }
+                        else
+                        {
+                            this.Unit = ingredient.Unit;
+                        }
                     }
                 }
             }
 
             if (changed)
             {
-				Quantity.Clear();
+                Quantity.Clear();
 
                 if (this.Unit != MeasurementUnit.none)
                 {
@@ -97,17 +96,17 @@ namespace MrKupido.Library.Ingredient
             }
         }
 
-		public ISingleIngredient RemoveIngredient(ISingleIngredient i)
-		{
-			ISingleIngredient result = ingredients.FirstOrDefault(ing => ing.Name == i.Name);
+        public ISingleIngredient RemoveIngredient(ISingleIngredient i)
+        {
+            ISingleIngredient result = ingredients.FirstOrDefault(ing => ing.Name == i.Name);
 
-			if (result != null)
-			{
-				ingredients.Remove((SingleIngredient)result);
-			}
+            if (result != null)
+            {
+                ingredients.Remove((SingleIngredient)result);
+            }
 
-			return result;
-		}
+            return result;
+        }
 
         public void SetName(string value)
         {
@@ -134,7 +133,7 @@ namespace MrKupido.Library.Ingredient
                 {
                     sb.Append(ingredients[i].ToString(languageISO));
 
-                    if (i < ingredients.Count()-1) sb.Append(", ");
+                    if (i < ingredients.Count() - 1) sb.Append(", ");
                 }
 
                 sb.Append("]");
@@ -163,7 +162,7 @@ namespace MrKupido.Library.Ingredient
 
         public override bool ChangeUnitTo(MeasurementUnit unit)
         {
-			if (this.Unit == unit) return true;
+            if (this.Unit == unit) return true;
 
             foreach (SingleIngredient si in ingredients)
             {
@@ -177,9 +176,9 @@ namespace MrKupido.Library.Ingredient
             {
                 amount += i.GetAmount(this.Unit);
             }
-            
-			SetAmount(amount, this.Unit);
-			return true;
+
+            SetAmount(amount, this.Unit);
+            return true;
         }
     }
 }

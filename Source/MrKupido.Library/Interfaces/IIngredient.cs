@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace MrKupido.Library
 {
@@ -16,10 +13,10 @@ namespace MrKupido.Library
 
         int PieceCount { get; set; }
 
-		bool IsSolid { get; }
-		bool IsFluid { get; }
+        bool IsSolid { get; }
+        bool IsFluid { get; }
 
-               
+
         float GetAmount();
 
         float GetAmount(MeasurementUnit unit);

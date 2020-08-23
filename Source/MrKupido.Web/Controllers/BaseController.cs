@@ -1,17 +1,14 @@
-﻿using System;
+﻿using MrKupido.Model;
+using MrKupido.Web.Models;
+using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
-using MrKupido.Model;
 using System.Web.Routing;
 using System.Web.Security;
-using MrKupido.Web.Models;
-using System.Net;
-using System.IO;
-using System.Reflection;
-using System.Diagnostics;
-using System.ComponentModel;
 
 namespace MrKupido.Web.Controllers
 {
@@ -117,9 +114,9 @@ namespace MrKupido.Web.Controllers
             }
 
             Log log = new Log() { UtcTime = utc, IPAddress = ip, SessionId = sessionId, Action = action, Parameters = parameters, FormattedMessage = fm };
-            LogAsync(log, forceDBWrite);            
+            LogAsync(log, forceDBWrite);
         }
-        
+
         private static void LogAsync(Log log, bool forceDBWrite)
         {
             BackgroundWorker bgWorker = new BackgroundWorker();
@@ -130,7 +127,7 @@ namespace MrKupido.Web.Controllers
                     context.Configuration.AutoDetectChangesEnabled = false;
                     context.Logs.Add((Log)e.Argument);
                     context.Configuration.AutoDetectChangesEnabled = true;
-                    
+
                     if (logItemsToWrite == 0)
                     {
                         logMustBeWrittenAt = DateTime.UtcNow.AddMinutes(5);
@@ -166,14 +163,14 @@ namespace MrKupido.Web.Controllers
             string username = Session.GetCurrentUser() == null ? "Anonymous" : Session.GetCurrentUser().FullName;
 
             Log log = new Log()
-                {
-                    UtcTime = DateTime.UtcNow,
-                    IPAddress = CurrentSessions[HttpContext.Session.SessionID].IPAddress,
-                    SessionId = HttpContext.Session.SessionID,
-                    Action = action,
-                    Parameters = parameters,
-                    FormattedMessage = String.Format(formatterText, username, (Session["WebAppFileVersion"] == null ? "v?" : (string)Session["WebAppFileVersion"]), parameters)
-                };
+            {
+                UtcTime = DateTime.UtcNow,
+                IPAddress = CurrentSessions[HttpContext.Session.SessionID].IPAddress,
+                SessionId = HttpContext.Session.SessionID,
+                Action = action,
+                Parameters = parameters,
+                FormattedMessage = String.Format(formatterText, username, (Session["WebAppFileVersion"] == null ? "v?" : (string)Session["WebAppFileVersion"]), parameters)
+            };
 
 
             LogAsync(log, true);

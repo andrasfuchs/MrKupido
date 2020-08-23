@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Reflection;
-using System.IO;
-using Mono.Cecil;
-using MrKupido.Processor.Model;
-using System.Diagnostics;
+﻿using Mono.Cecil;
 using MrKupido.Library;
-using System.Reflection.Emit;
-using System.Threading;
+using MrKupido.Processor.Model;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 
 namespace MrKupido.Processor
 {
@@ -17,8 +14,8 @@ namespace MrKupido.Processor
     {
         private static AppDomain dynamicDomain = null;
         private static Dictionary<string, Assembly> dynamicAssemblies = new Dictionary<string, Assembly>();
-        
-        public new RecipeTreeNode this [string name]
+
+        public new RecipeTreeNode this[string name]
         {
             get
             {
@@ -77,7 +74,7 @@ namespace MrKupido.Processor
             {
                 if (rtn.SearchStrings.Length == 0)
                 {
-					rtn.BuildSearchStrings();
+                    rtn.BuildSearchStrings();
                 }
             }
         }
@@ -115,7 +112,7 @@ namespace MrKupido.Processor
             ad.MainModule.AssemblyReferences.Add(adOrig.Name);
             ad.Name = new AssemblyNameDefinition(ad.Name.Name + ".Dynamic." + dynamicId, ad.Name.Version);
             ad.MainModule.Name = dynamicId + ".dll";
-            
+
             TypeDefinition td = ad.MainModule.Types.First(t => t.Name == result.ClassName);
             td.Namespace = td.Namespace + ".Dynamic";
             td.Name = newTypeName;
@@ -162,7 +159,7 @@ namespace MrKupido.Processor
                     }
                 }
             }
-            
+
             // remove types we don't need
             for (int i = ad.MainModule.Types.Count - 1; i >= 0; i--)
             {
@@ -197,7 +194,7 @@ namespace MrKupido.Processor
 
             //assembliesDynamic = dynamicDomain.GetAssemblies().OrderBy(a => a.FullName).ToArray();
             //assemblies = AppDomain.CurrentDomain.GetAssemblies().OrderBy(a => a.FullName).ToArray();
-            
+
             //AppDomain.Unload(dynamicDomain);
 
             return result;
@@ -217,7 +214,7 @@ namespace MrKupido.Processor
 
             // merge into the cook method
             CookedFoodParts cps = Cache.Recipe["Sajt"].Cook(amount, preps, eq);
-            
+
             // replace the original constructor of the ingredient class with the following
             MrKupido.Library.IIngredientContainer sajt = cps[0];
 

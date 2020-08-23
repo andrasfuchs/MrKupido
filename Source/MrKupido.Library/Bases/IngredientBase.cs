@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MrKupido.Library.Attributes;
+using System;
 using System.Linq;
-using System.Text;
-using MrKupido.Library.Attributes;
-using System.Threading;
-using System.Diagnostics;
 using System.Reflection;
 
 namespace MrKupido.Library.Ingredient
@@ -14,90 +10,90 @@ namespace MrKupido.Library.Ingredient
 
     public class IngredientBase : NamedObject, IIngredient
     {
-		public MeasurementUnit PreferredUnit { get; private set; }
+        public MeasurementUnit PreferredUnit { get; private set; }
 
-		public MeasurementUnit Unit
-		{
-			get 
-			{
-				return Quantity.Unit;
-			}
-			
-			protected set
-			{				
-				Quantity.Unit = value;
-			}
-		}
+        public MeasurementUnit Unit
+        {
+            get
+            {
+                return Quantity.Unit;
+            }
 
-		protected Quantity Quantity { get; private set; }
+            protected set
+            {
+                Quantity.Unit = value;
+            }
+        }
+
+        protected Quantity Quantity { get; private set; }
 
         public float? GrammsPerLiter { get; protected set; }
         public float? GrammsPerPiece { get; protected set; }
         public float? CaloriesPer100Gramms { get; protected set; }
-		public float? CarbohydratesPer100Gramms { get; protected set; }
-		public float? ProteinPer100Gramms { get; protected set; }
-		public float? FatPer100Gramms { get; protected set; }
+        public float? CarbohydratesPer100Gramms { get; protected set; }
+        public float? ProteinPer100Gramms { get; protected set; }
+        public float? FatPer100Gramms { get; protected set; }
 
         public IngredientState State { get; set; }
 
         public int PieceCount { get; set; }
 
-		public bool IsSolid
-		{
-			get
-			{
-				MeasurementUnit unitToCheck = this.Unit;
+        public bool IsSolid
+        {
+            get
+            {
+                MeasurementUnit unitToCheck = this.Unit;
 
-				if ((unitToCheck == MeasurementUnit.bogre) || (unitToCheck == MeasurementUnit.csesze) || (unitToCheck == MeasurementUnit.evokanal) || (unitToCheck == MeasurementUnit.gyermekkanal) 
-					|| (unitToCheck == MeasurementUnit.kaveskanal) || (unitToCheck == MeasurementUnit.mokkaskanal) || (unitToCheck == MeasurementUnit.teaskanal))
-				{
-					foreach (ConstructorInfo ci in this.GetType().GetConstructors())
-					{
-						ParameterInfo pi = ci.GetParameters().FirstOrDefault(p => p.IsOptional && (p.ParameterType == typeof(MeasurementUnit)));
-						if (pi != null)
-						{
-							unitToCheck = (MeasurementUnit)pi.DefaultValue;
-							break;
-						}
-					}
-				}
+                if ((unitToCheck == MeasurementUnit.bogre) || (unitToCheck == MeasurementUnit.csesze) || (unitToCheck == MeasurementUnit.evokanal) || (unitToCheck == MeasurementUnit.gyermekkanal)
+                    || (unitToCheck == MeasurementUnit.kaveskanal) || (unitToCheck == MeasurementUnit.mokkaskanal) || (unitToCheck == MeasurementUnit.teaskanal))
+                {
+                    foreach (ConstructorInfo ci in this.GetType().GetConstructors())
+                    {
+                        ParameterInfo pi = ci.GetParameters().FirstOrDefault(p => p.IsOptional && (p.ParameterType == typeof(MeasurementUnit)));
+                        if (pi != null)
+                        {
+                            unitToCheck = (MeasurementUnit)pi.DefaultValue;
+                            break;
+                        }
+                    }
+                }
 
-				return (
-				(unitToCheck == MeasurementUnit.milligramm) || (unitToCheck == MeasurementUnit.gramm) || (unitToCheck == MeasurementUnit.dekagramm) || (unitToCheck == MeasurementUnit.kilogramm)
-				|| (unitToCheck == MeasurementUnit.piece) || (unitToCheck == MeasurementUnit.csipet));
-			}
-		}
+                return (
+                (unitToCheck == MeasurementUnit.milligramm) || (unitToCheck == MeasurementUnit.gramm) || (unitToCheck == MeasurementUnit.dekagramm) || (unitToCheck == MeasurementUnit.kilogramm)
+                || (unitToCheck == MeasurementUnit.piece) || (unitToCheck == MeasurementUnit.csipet));
+            }
+        }
 
-		public bool IsFluid
-		{
-			get
-			{
-				MeasurementUnit unitToCheck = this.Unit;
+        public bool IsFluid
+        {
+            get
+            {
+                MeasurementUnit unitToCheck = this.Unit;
 
-				if ((unitToCheck == MeasurementUnit.bogre) || (unitToCheck == MeasurementUnit.csesze) || (unitToCheck == MeasurementUnit.evokanal) || (unitToCheck == MeasurementUnit.gyermekkanal)
-					|| (unitToCheck == MeasurementUnit.kaveskanal) || (unitToCheck == MeasurementUnit.mokkaskanal) || (unitToCheck == MeasurementUnit.teaskanal))
-				{
-					foreach (ConstructorInfo ci in this.GetType().GetConstructors())
-					{
-						ParameterInfo pi = ci.GetParameters().FirstOrDefault(p => p.IsOptional && (p.ParameterType == typeof(MeasurementUnit)));
-						if (pi != null)
-						{
-							unitToCheck = (MeasurementUnit)pi.DefaultValue;
-							break;
-						}
-					}
-				}
+                if ((unitToCheck == MeasurementUnit.bogre) || (unitToCheck == MeasurementUnit.csesze) || (unitToCheck == MeasurementUnit.evokanal) || (unitToCheck == MeasurementUnit.gyermekkanal)
+                    || (unitToCheck == MeasurementUnit.kaveskanal) || (unitToCheck == MeasurementUnit.mokkaskanal) || (unitToCheck == MeasurementUnit.teaskanal))
+                {
+                    foreach (ConstructorInfo ci in this.GetType().GetConstructors())
+                    {
+                        ParameterInfo pi = ci.GetParameters().FirstOrDefault(p => p.IsOptional && (p.ParameterType == typeof(MeasurementUnit)));
+                        if (pi != null)
+                        {
+                            unitToCheck = (MeasurementUnit)pi.DefaultValue;
+                            break;
+                        }
+                    }
+                }
 
-				return ((unitToCheck == MeasurementUnit.milliliter) || (unitToCheck == MeasurementUnit.centiliter) || (unitToCheck == MeasurementUnit.deciliter) || (unitToCheck == MeasurementUnit.liter));
-			}
-		}	
+                return ((unitToCheck == MeasurementUnit.milliliter) || (unitToCheck == MeasurementUnit.centiliter) || (unitToCheck == MeasurementUnit.deciliter) || (unitToCheck == MeasurementUnit.liter));
+            }
+        }
 
         public IngredientBase(float amount, MeasurementUnit unit)
         {
             this.PieceCount = 1;
-			this.Quantity = new Quantity(this);
+            this.Quantity = new Quantity(this);
             this.Unit = unit;
-			this.PreferredUnit = unit;
+            this.PreferredUnit = unit;
 
             if ((this.Unit == MeasurementUnit.piece) || (this.Unit == MeasurementUnit.csipet))
             {
@@ -107,25 +103,25 @@ namespace MrKupido.Library.Ingredient
             this.SetAmount(amount, unit);
         }
 
-		public float GetAmount()
-		{
-			return Quantity.GetAmount();
-		}
+        public float GetAmount()
+        {
+            return Quantity.GetAmount();
+        }
 
-		public float GetAmount(MeasurementUnit unit)
-		{
-			return Quantity.GetAmount(unit);
-		}
+        public float GetAmount(MeasurementUnit unit)
+        {
+            return Quantity.GetAmount(unit);
+        }
 
-		protected void SetAmount(float amount, MeasurementUnit unit)
-		{
-			Quantity.SetAmount(amount, unit);
-		}
+        protected void SetAmount(float amount, MeasurementUnit unit)
+        {
+            Quantity.SetAmount(amount, unit);
+        }
 
-		public virtual bool ChangeUnitTo(MeasurementUnit unit)
-		{
-			return Quantity.ChangeUnitTo(unit);
-		}
+        public virtual bool ChangeUnitTo(MeasurementUnit unit)
+        {
+            return Quantity.ChangeUnitTo(unit);
+        }
 
         public void Add(IngredientBase operand)
         {

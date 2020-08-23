@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace MrKupido.Processor.Model
 {
     public class AccentFolderStringComparer : IComparer<string>
     {
-        private static char[] accentFoldingMap = 
-                {   
+        private static char[] accentFoldingMap =
+                {
                     'ẚ', 'a',
                     'Á', 'a',
                     'á', 'a',
@@ -648,7 +646,7 @@ namespace MrKupido.Processor.Model
                     'ⱬ', 'z',
                     'Ǯ', 'z',
                     'ǯ', 'z',
-                    'ƺ', 'z' 
+                    'ƺ', 'z'
                 };
 
 

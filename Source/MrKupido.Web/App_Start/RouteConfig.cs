@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using MrKupido.Web.Models;
 using System.Web.Http;
 using System.Web.Routing;
-using MrKupido.Web.Models;
 
 namespace MrKupido.Web
 {
@@ -36,7 +32,7 @@ namespace MrKupido.Web
                 name: "Default",
                 url: "{language}/{controller}/{action}/{id}",
                 defaults: new { language = "xxx", controller = "Home", action = "Index", id = System.Web.Mvc.UrlParameter.Optional }
-            );        
+            );
 
         }
     }

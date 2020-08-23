@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.ComponentModel.DataAnnotations;
 
 namespace MrKupido.Model
@@ -20,9 +17,9 @@ namespace MrKupido.Model
 
         [Required]
         public string Action { get; set; }
-        
+
         public string Parameters { get; set; }
-        
+
         public string FormattedMessage { get; set; }
     }
 }

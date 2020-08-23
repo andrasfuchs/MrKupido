@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace MrKupido.Processor
+﻿namespace MrKupido.Processor
 {
     public class RecipeTagger
     {
