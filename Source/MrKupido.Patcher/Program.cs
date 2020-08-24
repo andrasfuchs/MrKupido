@@ -13,14 +13,16 @@ namespace MrKupido.Patcher
             if (args.Length != 6)
             {
                 Console.WriteLine("Usage: mrkupido.patcher.exe <dll to patch> <interception dll> <interception type name> <new ingredient method name> <direction generator after method name> <direction generator before method name>");
-                Console.ReadKey();
                 return -1;
             }
 
-            AssemblyDefinition patchAD = AssemblyDefinition.ReadAssembly(args[0]);
+            string patchFullPath = Path.GetFullPath(args[0]);
+            string patchFilename = Path.GetFileName(args[0]);
+
+            AssemblyDefinition patchAD = AssemblyDefinition.ReadAssembly(patchFullPath);
             if (patchAD == null)
             {
-                Console.WriteLine("The dll to patch '{0}' could not be loaded.", args[0]);
+                Console.WriteLine("The dll to patch '{0}' could not be loaded.", patchFullPath);
                 return -2;
             }
 
@@ -74,15 +76,42 @@ namespace MrKupido.Patcher
                 return -9;
             }
 
+            string patchFilenameWithoutExtension = Path.GetFileNameWithoutExtension(patchFullPath);
+
             Console.Write("Patching...");
             PatchAssembly(patchAD, newIngredientMD, directionGeneratorBeforeMD, directionGeneratorAfterMD);
-            patchInfo.Fields[0].Constant = File.GetLastWriteTime(args[0]).ToString("yyyy-MM-dd HH:mm:ss");
+            patchInfo.Fields[0].Constant = File.GetLastWriteTime(patchFullPath).ToString("yyyy-MM-dd HH:mm:ss");
+            
+            int i = 1;
+            while (File.Exists(Path.Combine(Path.GetDirectoryName(patchFullPath), $"{patchFilenameWithoutExtension}_v{i}.dll"))) { i++; }
 
-            if (File.Exists(args[0] + ".orig.dll")) File.Delete(args[0] + ".orig.dll");
-            File.Move(args[0], args[0] + ".orig.dll");
-            patchAD.Write(args[0]);
-            Console.WriteLine("done!");
-            //Console.ReadKey();
+            string patchedFilename = $"{patchFilenameWithoutExtension}_v{i}.dll";
+            patchAD.Write(Path.Combine(Path.GetDirectoryName(patchFullPath), patchedFilename));
+            Console.Write($"Patched file was saved as '{patchedFilename}'.");
+
+            Console.Write("Making backup...");
+            string patchFilenameBackup = patchFullPath + ".bak";
+            try
+            {
+                if (File.Exists(patchFilenameBackup)) File.Delete(patchFilenameBackup);
+                File.Move(patchFullPath, patchFilenameBackup);
+                Console.WriteLine(" done!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+            Console.Write($"Copying '{patchedFilename}' to '{patchFilename}'...");
+            try
+            {
+                File.Copy(Path.Combine(Path.GetDirectoryName(patchFullPath), patchedFilename), patchFullPath, true);
+                Console.WriteLine(" done!");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }            
 
             return 0;
         }
