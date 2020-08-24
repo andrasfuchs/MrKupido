@@ -47,6 +47,6 @@
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="$(SolutionDir)MrKupido.Patcher\bin\Debug\MrKupido.Patcher.exe $(TargetPath) $(SolutionDir)MrKupido.Processor\bin\Debug\MrKupido.Processor.dll MrKupido.Processor.RecipeAnalyzer NewIngredient DirectionGeneratorAfter DirectionGeneratorBefore" />
+    <!--<Exec Command="$(SolutionDir)MrKupido.Patcher\bin\Debug\net472\MrKupido.Patcher.exe $(TargetPath) $(SolutionDir)MrKupido.Processor\bin\Debug\net472\MrKupido.Processor.dll MrKupido.Processor.RecipeAnalyzer NewIngredient DirectionGeneratorAfter DirectionGeneratorBefore" />-->
   </Target>
 </Project>

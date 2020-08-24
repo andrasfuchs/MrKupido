@@ -137,12 +137,12 @@ else
                 </span>
                 <div class="directionRightPart">
                     <span class="directionBigIcons">
-                        <img runat="server" src="@dir.Equipment.IconUrl" width="60px" height="60px" />
+                        <img runat="server" src="@dir.Equipment.GetIconUrl("http://localhost:8416")" width="60px" height="60px" />
                         @foreach (MrKupido.Library.ITreeNode tn in dir.Parameters)
                         {
                             if (tn != null)
                             {
-                            <img runat="server" src="@tn.IconUrl" width="60px" height="60px" />
+                            <img runat="server" src="@tn.GetIconUrl("http://localhost:8416")" width="60px" height="60px" />
                             }
                         }
                     </span>

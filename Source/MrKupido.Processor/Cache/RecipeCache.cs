@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Loader;
 
 namespace MrKupido.Processor
 {
@@ -79,6 +80,7 @@ namespace MrKupido.Processor
             }
         }
 
+        /*
         public RecipeTreeNode RenderInline(string masterRecipeClass, string[] inlineRecipeClasses)
         {
             RecipeTreeNode result;
@@ -89,8 +91,7 @@ namespace MrKupido.Processor
             if (dynamicDomain == null)
             {
                 dynamicDomain = AppDomain.CreateDomain("DynamicAssemblies", AppDomain.CurrentDomain.Evidence, AppDomain.CurrentDomain.BaseDirectory, AppDomain.CurrentDomain.RelativeSearchPath, AppDomain.CurrentDomain.ShadowCopyFiles);
-
-
+                
                 dynamicDomain.AssemblyResolve += new ResolveEventHandler(dynamicDomain_AssemblyResolve);
                 // NOTE: Is this a bug??
                 AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(mainDomain_AssemblyResolve);
@@ -224,9 +225,7 @@ namespace MrKupido.Processor
         static Assembly dynamicDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
             // good
-            Assembly result = null;
-
-            dynamicAssemblies.TryGetValue(args.Name, out result);
+            dynamicAssemblies.TryGetValue(args.Name, out Assembly result);
 
             return result;
         }
@@ -234,11 +233,10 @@ namespace MrKupido.Processor
         static Assembly mainDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
             // NOT GOOD
-            Assembly result = null;
-
-            dynamicAssemblies.TryGetValue(args.Name, out result);
+            dynamicAssemblies.TryGetValue(args.Name, out Assembly result);
 
             return result;
         }
+        */
     }
 }
