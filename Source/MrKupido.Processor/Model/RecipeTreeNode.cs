@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Web.Script.Serialization;
+using System.Text.Json.Serialization;
 
 namespace MrKupido.Processor.Model
 {
@@ -18,31 +18,33 @@ namespace MrKupido.Processor.Model
         public delegate CookedFoodParts CookDelegate(float amount, PreparedIngredients preps, EquipmentGroup eg);
         public delegate void ServeDelegate(float amount, CookedFoodParts food, EquipmentGroup eg);
 
-        [ScriptIgnore]
-        public DateTime? ExpiresAt;
+        [JsonIgnore]
+        public DateTime? ExpiresAt { get; set; }
 
         public string Version { get; protected set; }
 
-        [ScriptIgnore]
-        public SelectEquipmentDelegate SelectEquipment;
-        [ScriptIgnore]
-        public PrepareDelegate Prepare;
-        [ScriptIgnore]
-        public CookDelegate Cook;
-        [ScriptIgnore]
-        public ServeDelegate Serve;
+        [JsonIgnore]
+        public SelectEquipmentDelegate SelectEquipment { get; set; }
+        [JsonIgnore]
+        public PrepareDelegate Prepare { get; set; }
+        [JsonIgnore]
+        public CookDelegate Cook { get; set; }
+        [JsonIgnore]
+        public ServeDelegate Serve { get; set; }
 
-        [ScriptIgnore]
-        private Dictionary<float, IDictionary<string, IIngredient[]>> ingredientCache = new Dictionary<float, IDictionary<string, IIngredient[]>>();
-        [ScriptIgnore]
-        private Dictionary<float, IDirection[]> directionCache = new Dictionary<float, IDirection[]>();
-        [ScriptIgnore]
-        private Dictionary<float, IEquipment[]> equipmentCache = new Dictionary<float, IEquipment[]>();
+        [JsonIgnore]
+        private Dictionary<float, IDictionary<string, IIngredient[]>> ingredientCache { get; set; } = new Dictionary<float, IDictionary<string, IIngredient[]>>();
 
-        [ScriptIgnore]
+        [JsonIgnore]
+        private Dictionary<float, IDirection[]> directionCache { get; set; } = new Dictionary<float, IDirection[]>();
+
+        [JsonIgnore]
+        private Dictionary<float, IEquipment[]> equipmentCache { get; set; } = new Dictionary<float, IEquipment[]>();
+
+        [JsonIgnore]
         public Type RecipeType { get; private set; }
 
-        [ScriptIgnore]
+        [JsonIgnore]
         public string[] SearchStrings { get; private set; }
 
         public ShoppingListCategory MainCategory;

@@ -6,7 +6,7 @@ namespace MrKupido.Utils
     public static class PathUtils
     {
         /// <summary>
-        /// Rules to determine the iamge URLs
+        /// Rules to determine the image URLs
         /// </summary>
         private static string[] MatchDefaults = { "*.svg", "~/" };
 
