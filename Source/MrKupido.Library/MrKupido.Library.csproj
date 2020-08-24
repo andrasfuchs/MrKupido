@@ -30,7 +30,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Build" />
-    <Reference Include="System.Device" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Nature\Animalia\Chondrichthyes\" />
@@ -50,6 +49,9 @@
     <Compile Remove="Ingredient\SingleIngredient.cs" />
     <Compile Remove="MultiOutput.cs" />
     <Compile Remove="ProcessIngredients.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GeoCoordinate\src\GeoCoordinate.NetStandard1\GeoCoordinate.NetStandard1.csproj" />
   </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>

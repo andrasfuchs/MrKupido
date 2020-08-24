@@ -1,5 +1,5 @@
-﻿using System;
-using System.Device.Location;
+﻿using GeoCoordinatePortable;
+using System;
 
 namespace MrKupido.Library.Provider
 {

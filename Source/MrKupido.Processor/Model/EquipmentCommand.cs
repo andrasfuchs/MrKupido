@@ -1,4 +1,5 @@
 ﻿using System.Web.Script.Serialization;
+using System.Text.Json.Serialization;
 
 namespace MrKupido.Processor.Model
 {
