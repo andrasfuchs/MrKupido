@@ -2,6 +2,6 @@
 {
     public interface ITreeNode
     {
-        string IconUrl { get; }
+        string GetIconUrl(string rootUrl);
     }
 }

@@ -67,7 +67,7 @@ namespace MrKupido.Web.Models
         public List<RecipeCategoryGroup> CategoryGroups = new List<RecipeCategoryGroup>();
         public List<RecipeSearchResultItem> Items = new List<RecipeSearchResultItem>();
 
-        public RecipeSearchResult(RecipeTreeNode[] results)
+        public RecipeSearchResult(RecipeTreeNode[] results, string rootUrl)
         {
             //Items = results.Select(r => new RecipeSearchResultItem(r)).ToList();
 
@@ -77,7 +77,7 @@ namespace MrKupido.Web.Models
 
             foreach (RecipeTreeNode rtn in results)
             {
-                Items.Add(new RecipeSearchResultItem(rtn));
+                Items.Add(new RecipeSearchResultItem(rtn, rootUrl));
                 Items[Items.Count - 1].Index = Items.Count - 1;
             }
 

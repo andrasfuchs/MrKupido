@@ -53,7 +53,7 @@ namespace MrKupido.Web.Controllers
         {
             foreach (RecipeDirection direction in directions)
             {
-                if (direction.ActionIconUrl == null) direction.ActionIconUrl = PathUtils.GetActualUrl(direction.ActionIconUrls);
+                if (direction.ActionIconUrl == null) direction.ActionIconUrl = PathUtils.GetAbsoluteUrlOfFirstExisting(rootUrl, direction.ActionIconUrls);
 
                 foreach (RecipeDirectionSegment segment in direction.DirectionSegments)
                 {
@@ -63,12 +63,12 @@ namespace MrKupido.Web.Controllers
 
                         if (String.IsNullOrEmpty(rdsr.IconUrl) && (rdsr.TreeNode != null) && ((rdsr.TreeNode is EquipmentTreeNode) || (rdsr.Reference is MrKupido.Library.Ingredient.IngredientGroup)))
                         {
-                            rdsr.IconUrl = rdsr.TreeNode.IconUrl;
+                            rdsr.IconUrl = rdsr.TreeNode.GetIconUrl(rootUrl);
                         }
 
                         if (String.IsNullOrEmpty(rdsr.IconUrl)) continue;
 
-                        rdsr.IconUrl = PathUtils.ToAbsolute(rdsr.IconUrl);
+                        rdsr.IconUrl = PathUtils.ConvertRelativeUrlToAbsoluteUrl(rootUrl, rdsr.IconUrl);
                     }
                 }
             }

@@ -81,7 +81,7 @@ namespace MrKupido.Web.Controllers
                 name_startsWith = name_startsWith.Substring(1);
             }
 
-            List<RecipeSearchQueryResults> sqrs = Cache.NodesQuery(name_startsWith.ToLower()).Select(o => new RecipeSearchQueryResults(o.Key, o.Value)).ToList();
+            List<RecipeSearchQueryResults> sqrs = Cache.NodesQuery(name_startsWith.ToLower()).Select(o => new RecipeSearchQueryResults(o.Key, o.Value, rootUrl)).ToList();
 
             foreach (RecipeSearchQueryResults sqr in sqrs.ToArray())
             {
@@ -171,7 +171,7 @@ namespace MrKupido.Web.Controllers
             if (Session["filters"] == null) Session["filters"] = new List<FilterCondition>();
             List<FilterCondition> filters = (List<FilterCondition>)Session["filters"];
 
-            RecipeSearchResult rsr = new RecipeSearchResult(Cache.Search.Search(filters.ToArray(), (string)Session["Language"]).ToArray());
+            RecipeSearchResult rsr = new RecipeSearchResult(Cache.Search.Search(filters.ToArray(), (string)Session["Language"]).ToArray(), rootUrl);
 
             //foreach (RecipeSearchResultItem rsri in rsr.Items)
             //{

@@ -35,23 +35,6 @@ namespace MrKupido.Processor.Model
         public string[] IconUrls { get; private set; }
 
         private string iconUrl;
-        public string IconUrl
-        {
-            get
-            {
-                if (this.iconUrl == null)
-                {
-                    this.iconUrl = PathUtils.GetActualUrl(this.IconUrls);
-                }
-
-                return this.iconUrl;
-            }
-
-            private set
-            {
-                this.iconUrl = value;
-            }
-        }
 
         public TreeNode(Type nodeClass, string languageISO)
         {
@@ -183,6 +166,17 @@ namespace MrKupido.Processor.Model
                 completion += completionStep;
             }
         }
+
+        public string GetIconUrl(string rootUrl)
+        {
+            if (this.iconUrl == null)
+            {
+                this.iconUrl = PathUtils.GetAbsoluteUrlOfFirstExisting(rootUrl, this.IconUrls);
+            }
+
+            return this.iconUrl;
+        }
+
 
         public override string ToString()
         {

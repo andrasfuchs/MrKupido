@@ -12,13 +12,13 @@ namespace MrKupido.Web.Models
 
         public RecipeSearchQueryResults() { }
 
-        public RecipeSearchQueryResults(string displayString, TreeNode treeNode)
+        public RecipeSearchQueryResults(string displayString, TreeNode treeNode, string rootUrl)
         {
             this.DisplayString = displayString;
             this.SearchString = displayString;
             this.UniqueName = treeNode.UniqueName;
             this.NodeType = treeNode.NodeType;
-            this.IconUrl = treeNode.IconUrl;
+            this.IconUrl = treeNode.GetIconUrl(rootUrl);
         }
     }
 }

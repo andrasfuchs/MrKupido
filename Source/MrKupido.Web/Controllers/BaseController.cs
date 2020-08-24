@@ -20,6 +20,8 @@ namespace MrKupido.Web.Controllers
         private static DateTime logMustBeWrittenAt = DateTime.MinValue;
         private static int logItemsToWrite = 0;
 
+        protected string rootUrl = "www.mrkupido.com";
+
         //public User CurrentUser
         //{
         //    set

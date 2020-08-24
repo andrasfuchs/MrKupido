@@ -57,7 +57,7 @@ namespace MrKupido.Web.Models
         public bool IsHidden;
         public string CSSClass;
 
-        public RecipeSearchResultItem(RecipeTreeNode rtn)
+        public RecipeSearchResultItem(RecipeTreeNode rtn, string rootUrl)
         {
             if (String.IsNullOrEmpty(rtn.ShortName)) throw new MrKupidoException("Recipe '{0}' should have a ShortName defined.", rtn.UniqueName);
 
@@ -72,7 +72,7 @@ namespace MrKupido.Web.Models
             this.Version = rtn.Version;
 
             this.SubVersions = TreeNode.GetDescendantCount(rtn);
-            this.IconUrl = rtn.IconUrl;
+            this.IconUrl = rtn.GetIconUrl(rootUrl);
 
             StringBuilder sb = new StringBuilder();
 
@@ -103,7 +103,7 @@ namespace MrKupido.Web.Models
 
             if (this.IconUrl == null)
             {
-                this.IconUrl = PathUtils.GetActualUrl(IconUriFragmentAttribute.GetUrls(this.MainCategory.GetType(), "~/Content/svg/cat_{0}.svg", this.MainCategory.ToString()));
+                this.IconUrl = PathUtils.GetAbsoluteUrlOfFirstExisting(rootUrl, IconUriFragmentAttribute.GetUrls(this.MainCategory.GetType(), "~/Content/svg/cat_{0}.svg", this.MainCategory.ToString()));
             }
 
             IDirection[] directions = rtn.GetDirections(1.0f, 1);
@@ -197,7 +197,7 @@ namespace MrKupido.Web.Models
             {
                 string url = String.Format("~/Content/photos/960x480/{0}_{1}.jpg", rtn.UniqueNameEng, i.ToString("00"));
 
-                url = PathUtils.GetActualUrl(new string[] { url });
+                url = PathUtils.GetAbsoluteUrlOfFirstExisting(rootUrl, new string[] { url });
 
                 if (url != null)
                 {
