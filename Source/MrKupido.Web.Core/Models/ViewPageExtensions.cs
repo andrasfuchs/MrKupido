@@ -1,7 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Razor;
+using System;
 using System.Text;
-using System.Web.Mvc;
-using System.Web.WebPages;
 
 namespace MrKupido.Web.Core.Models
 {

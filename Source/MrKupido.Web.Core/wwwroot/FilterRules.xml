@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Rules>
+	<RegexRule>
+		<Name>Empty comment region with &lt;!-- ClickTaleExcludeBlock --&gt;</Name>
+		<Pattern><![CDATA[(?is)<!--\s*ClickTaleExcludeBlock\s*-->.*?<!--\s*EndClickTaleExcludeBlock\s*(.*?)-->]]></Pattern>
+		<Replace><![CDATA[$1]]></Replace>
+		<Options IgnoreCase="true"/>
+	</RegexRule>
+	<RegexRule>
+		<Name>Empty javascript comment region with /* ClickTaleExcludeBlock */ substitution allowed in closing comment "ClickTaleExcludeBlock"</Name>
+		<Pattern><![CDATA[(?is)/\*\s*ClickTaleExcludeBlock\s*\*/.*?/\*\s*EndClickTaleExcludeBlock\s*(.*?)\*/]]></Pattern>
+		<Replace><![CDATA[$1]]></Replace>
+		<Options IgnoreCase="true"/>
+	</RegexRule>
+</Rules>

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace MrKupido.Web.Core.Controllers
 {
@@ -21,13 +22,15 @@ namespace MrKupido.Web.Core.Controllers
         {
             object[] result = new object[7];
 
-            Session["SelectedRecipeId"] = null;
+            string sessionLanguage = HttpContext.Session.GetString("Language");
+
+            HttpContext.Session.SetString("SelectedRecipeId", null);
             RecipeTreeNode rtn = Cache.Recipe[id];
             if (rtn == null)
             {
-                return RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Home", action = "RecipeNotAvailableYet", lan = (string)Session["Language"], un = id });
+                return RedirectToRoute("Default", new { language = sessionLanguage, controller = "Home", action = "RecipeNotAvailableYet", lan = sessionLanguage, un = id });
             }
-            Session["SelectedRecipeId"] = id;
+            HttpContext.Session.SetString("SelectedRecipeId", id);
 
             RuntimeIngredient[] ingredients = rtn.GetIngredients(1.0f, 4);
             foreach (RuntimeIngredient i in ingredients)

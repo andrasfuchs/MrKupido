@@ -1,12 +1,15 @@
 ﻿using DotNetOpenAuth.ApplicationBlock;
 using DotNetOpenAuth.OAuth2;
 using MrKupido.Model;
-using MrKupido.Web.Models;
+using MrKupido.Web.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using System.Globalization;
+using System.Net;
 
 namespace MrKupido.Web.Core.Controllers
 {
@@ -264,7 +267,7 @@ namespace MrKupido.Web.Core.Controllers
                                                                  rememberMe, userState.ToJSONString());
 
             string ticketString = FormsAuthentication.Encrypt(ticket);
-            HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, ticketString);
+            Cookie cookie = new Cookie(FormsAuthentication.FormsCookieName, ticketString);
             if (rememberMe) cookie.Expires = DateTime.Now.AddDays(10);
 
             HttpContext.Response.Cookies.Add(cookie);

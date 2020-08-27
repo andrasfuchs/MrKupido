@@ -9,6 +9,8 @@
     <Content Remove="wwwroot\Content\spelling\en_US\en_US.dic" />
     <Content Remove="wwwroot\Content\spelling\hu_HU\hu_HU.aff" />
     <Content Remove="wwwroot\Content\spelling\hu_HU\hu_HU.dic" />
+    <Content Remove="wwwroot\Web.Debug_at_localhost.config" />
+    <Content Remove="wwwroot\Web.Release.config" />
   </ItemGroup>
 
   <ItemGroup>
@@ -307,9 +309,23 @@
     <None Include="wwwroot\Content\spelling\en_US\en_US.dic" />
     <None Include="wwwroot\Content\spelling\hu_HU\hu_HU.aff" />
     <None Include="wwwroot\Content\spelling\hu_HU\hu_HU.dic" />
+    <None Include="wwwroot\Web.Debug_at_localhost.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="wwwroot\Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="DotNetOpenAuth.OAuth2.Client" Version="4.3.4.13329" />
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\ClickTaleIntegrationModule.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Update="wwwroot\Content\Site.min.css">
       <DependentUpon>Site.css</DependentUpon>
     </Content>
@@ -354,6 +370,15 @@
     </Content>
     <Content Update="wwwroot\Content\themes\base\jquery.ui.theme.min.css">
       <DependentUpon>jquery.ui.theme.css</DependentUpon>
+    </Content>
+    <Content Update="wwwroot\Hunspellx64.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\Hunspellx86.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Update="wwwroot\Web.config">
+      <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
 
