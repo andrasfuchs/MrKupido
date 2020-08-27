@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "FirstTimeTutorial";
+}
+
+@{ Html.RenderPartial("_HelpHeader"); }
+
+<article class="help">
+
+    <h1>Első lépések - használati útmutató</h1>
+
+    <p>Üdvözöllek az oldalon! A nevem Mr. Kupidó, és engedd meg, hogy röviden elmondjam, mit és hogyan tudsz itt csinálni:</p>
+
+    <ul>
+        <li>Bejelentkezés után ez az oldal többször nem fog megjelenni, azonban bármikor eléred majd a menüből.</li>
+        <li>A menüt a fényképed melletti kis háromszögre kattinva éred el. Itt a súgót választva minden kérdésedre választ próbálok adni.<br />
+            <img runat="server" src="~/content/images/firsttime_usermenu.png" width="500" height="250" class="middleframed"/>
+        </li>
+        <li>A főoldal felső részén láthatod a keresőmezőt, amit reményeim szerint rengeteget fogsz használni!<br />
+            <img runat="server" src="~/content/images/firsttime_searchfield.png" width="500" height="250" class="middleframed"/>
+        </li>
+        <li>Ide amint elkezdesz beírni valamit, felajánlok neked minden olyan szót kiválasztásra, amit ismerek. Ez lehet recept, hozzávaló, későbbiekben diéta vagy egészségügyi probléma.<br />
+            <img runat="server" src="~/content/images/firsttime_searchdropdown.png" width="500" height="250" class="middleframed"/>
+        </li>
+        <li>Amint kiválasztasz egy - mondjuk - összetevőt, én leszűröm a találati listát annak megfelelően.</li>
+        <li>A keresőmező elején lévő + jelre kattinva vagy a mínusz billentyűt leütve, negatív szűrési módba kapcsolhatsz. Az ilyen üzemmódban beütött kritérium tiltási értelmezésben lesz alkalmazva.<br />
+            <img runat="server" src="~/content/images/firsttime_negsearch.png" width="500" height="250" class="middleframed"/>
+        </li>
+        <li>Nézzünk néhány példát, hogy egyértelmű legyen! Tegyük fel, hogy szeretnél valamit csirkemellből készíteni, de nem szereted a kaprot. Nincs más dolgod, mint beütni a csirkemell szót, átváltani negatív szűrési módba, majd beütni a kapor szót.</li>
+        <li>A találati lista villámgyorsan frissül a kívánságodnak megfelelően.</li>
+        <li>Ha a találati listád több, mint 6 elemet tartalmaz, akkor azt a fenti kijelzőn láthatod, valamint a lenti léptetőkkel lapozhatsz.<br />
+            <img runat="server" src="~/content/images/firsttime_paging.png" width="500" height="250" class="middleframed"/>
+        </li>
+        <li>Alapértelmezésben a találati lista elemei az ételek fényképei, de ha többet szeretnél tudni egy adott ételről, akkor azt a "kártyát" meg is fordíthatod. Ennek módja, hogy a jobb felső sarkában található kis szallagra kattintasz.<br />
+            <img runat="server" src="~/content/images/firsttime_sidea.png" width="500" height="250" class="middleframed"/>
+        </li>
+        <li>A hátoldal többek közt tartalmazza a főbb összetevőket, leszármazottak számát (lásd lentebb), hogy vegetáriánus barát-e, glutén vagy laktózmentes-e az adott étel, a képeket, valamint az elkészítési nettó időt.</li>
+        <li>Én 3 időt különböztetek meg, amikor egy étel elkészítéséről beszéltek:
+            <ul>
+                <li>Előkészítési idő: az étel előkészítéséhez szükséges idő. Ebben a fázisban még nem főzünk vagy sütünk, tehát ezt a fázis a nagy vendégség előtti napon is végrehajthatjuk.</li>
+                <li>Főzési idő: az étel előkészítése után a teljes elkészülésig szükséges idő.</li>
+                <li>Várakozási idő: gyakran előfordul, hogy a sütés-főzés során rövidebb-hosszabb időre magára hagyhatjuk az ételt. Ide tartozik tehát például a kis lángú főzés, sütés vagy akár a pácolás.</li>
+                <li>Fontos a nettó és bruttó idők megkülönböztetése is: a nettó elkészítési idő nem tartalmazza a passzív lépéseket (várakozásokat, erjesztéseket, felfuttatásokat, pácolásokat), a bruttó viszont igen.</li>
+            </ul>
+        </li>
+        <li>Itt a hátoldalon található az étel aktuális értékelése, valamint az összesített, kalória-, cukor-, zsír- és só-tartalom jelzője is.</li>
+        <li>A leszármazottak nyilvántartása az egyik egyedi vonásom, amit ha elkezdesz használni, szerintem imádni fogsz!</li>
+        <li>Az ételek az én fejemben úgy vannak elrendezve, hogy például a pizza fajtái, azok az alap pizza receptjének leszármazottjai, hiszen annak egy kibővített, módosított változatai.<br />
+            <img runat="server" src="~/content/images/firsttime_sideadetails.png" width="500" height="250" class="middleframed"/>
+        </li>
+        <li>Ugyanígy például a sajt leszármazottja a pármai és a trappista sajt, a fűszeres csirkemellnek pedig leszármazottjai a Mari-néni és Jóska-bácsi féle különlegesen banánnal vagy csípőskolbásszal megbolondított verziói.</li>
+        <li>Ez a felosztás különösen hasznos, ha például nem tudod konkrétan milyen pizzát kívánsz, csak azt, hogy legyen pizza, és legyen rajta pepperóni. Akkor nincs más dolgod, mint ezt a két szűrőt felvinni, és végigböngészni a találatokat!</li>
+        <li>Ha a villámgyors keresés után megvan a kiválasztott recept, akkor annak nevére kattintva jutsz át a recept elkészítésének leírásához.</li>
+        <li>Itt arra törekedtem, hogy minden legyen világos, akkor is, ha most főzől életedben először!</li>
+        <li>A hozzávalók rész egyértelmű: a recepthez szükséges hozzávalókat listázzuk. Minden elem előtt találsz egy pipát, amit kivehetsz/berakhatsz attól függően, hogy van-e otthon.<br />
+            <img runat="server" src="~/content/images/firsttime_recipeingredients.png" width="500" height="250" class="middleframed"/>
+        </li>
+        <li>Az elkészítésnél arra törekszem, hogy minden lépés egyszerű és egyértelmű legyen. Az bal oldali ikonok segítenek a megértésben, és az azok melleti számok a művelet időzítését jelölik.<br />
+            <img runat="server" src="~/content/images/firsttime_recipestep.png" width="500" height="250" class="middleframed"/>
+        </li>
+        <li>Mivel kicsit töröm még a magyart, elképzelhető, hogy néhol nem helyes a szöveg, de igyekszem gyorsan tanulni! Gondolom sokaktól hallottad már, de a magyar nem egy könnyű nyelv!</li>
+        <li>Ha szeretednéd, hogy végigkísérjem a főzésed, csak nyomj rá az első lépés ikonjára, amikor kezdeni szeretnél. Ekkor én kinagyítom neked a lépést, illetve elindítom az órát, majd automatikusan továbblépek a következő lépésre. Igy te maximálisan a főzésre tudsz öszpontosítani!</li>
+        <li>Egyelőre ennyit árulok el, de azért van még pár meglepetés a tarsolyomban, amit majd idővel elárulok!</li>
+        <li>Remélem meghoztam a kedved, és még sokat főzunk majd együtt, sok örömet okozva szeretteidnek!</li>
+    </ul>
+
+    <div class="formbuttons">
+        <input type="button" value="Mindent értek, gyerünk keresni!" onclick="window.location='../../@(Session["Language"])'" />
+    </div>
+
+</article>

@@ -1,0 +1,6 @@
+﻿@model IEnumerable<MrKupido.Model.ImportedRecipe>
+
+@foreach (MrKupido.Model.ImportedRecipe item in Model)
+{
+    <a href="./Recipe/@item.UniqueName">@item.DisplayName</a><br />
+}

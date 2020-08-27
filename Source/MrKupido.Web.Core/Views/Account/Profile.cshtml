@@ -1,0 +1,255 @@
+﻿@using MrKupido.Web.Models
+@{
+    ViewBag.Title = MrKupido.Web.Resources.Account.Profile.PageTitle + " - " + MrKupido.Web.Resources.Shared.Layout.PageTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@this.ScriptBlock(
+@<script type="text/javascript">
+     $(document).ready(function () {
+         $('input').change(function (e) {
+             if (!e.target.validity.valid) {
+                 var errorMessage = "";
+
+                 if (e.target.validity.valueMissing) {
+                     errorMessage = "@MrKupido.Web.Resources.Shared.Validation.Missing";
+                 } else if (e.target.validity.patternMismatch) {
+                     errorMessage = "@MrKupido.Web.Resources.Shared.Validation.Format";
+                 } else if (e.target.validity.rangeUnderflow) {
+                     errorMessage = "@MrKupido.Web.Resources.Shared.Validation.Underflow";
+                 } else if (e.target.validity.rangeOverflow) {
+                     errorMessage = "@MrKupido.Web.Resources.Shared.Validation.Overflow";
+                 } else {
+                     errorMessage = "@MrKupido.Web.Resources.Shared.Validation.General";
+                 }
+
+                 if (e.target.title != "") {
+                     errorMessage = errorMessage.replace("{}", e.target.title);
+                 } else {
+                     errorMessage = errorMessage.replace("{}", "@MrKupido.Web.Resources.Shared.Validation.ThisValue");
+                 }
+
+                 errorMessage = $("<div/>").html(errorMessage).text();
+
+                 e.target.setCustomValidity(errorMessage);
+             }
+         });
+
+         $('input[type="text"]').hover(function () {
+             $(this).animate({ borderColor: '#553e31' }, { duration: 400, easing: "easeInOutCubic", queue: false });
+         }, function () {
+             if (!$(this).is(":focus")) {
+                 $(this).animate({ borderColor: '#cdb8ab' }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             }
+         });
+
+         $('input[type="text"]').focusin(function () {
+             $(this).animate({ borderColor: '#553e31' }, { duration: 400, easing: "easeInOutCubic", queue: false });
+         });
+         $('input[type="text"]').focusout(function () {
+             $(this).animate({ borderColor: '#cdb8ab' }, { duration: 400, easing: "easeInOutCubic", queue: false });
+         });
+
+         $('input[type="submit"]').hover(function () {
+             $(this).animate({ borderColor: '#553e31' }, { duration: 400, easing: "easeInOutCubic", queue: false });
+         }, function () {
+             $(this).animate({ borderColor: '#cdb8ab' }, { duration: 400, easing: "easeInOutCubic", queue: false });
+         });
+
+     });
+
+     function toggleHeightUnit(btn) {
+         btn.value = btn.value == "cm" ? "in" : "cm";
+         btn.previousSibling.previousSibling.focus();
+         btn.previousSibling.previousSibling.selectionStart = btn.previousSibling.previousSibling.value.length;
+         btn.previousSibling.previousSibling.selectionEnd = btn.previousSibling.previousSibling.value.length;
+     }
+
+     function toggleWeightUnit(btn) {
+         btn.value = btn.value == "kg" ? "lbs" : "kg";
+         btn.previousSibling.previousSibling.focus();
+         btn.previousSibling.previousSibling.selectionStart = btn.previousSibling.previousSibling.value.length;
+         btn.previousSibling.previousSibling.selectionEnd = btn.previousSibling.previousSibling.value.length;
+     }
+</script>
+)
+
+<header class="nosearch">
+    <a runat="server" href="~/">
+        <img runat="server" src="~/Content/svg/logo_mrkupido_wide.svg" alt="Mr. Kupido" width="600" height="157" />
+    </a>
+</header>
+@using (Html.BeginForm("Profile", "Account", FormMethod.Post, new { @id = "profileForm" }))
+{
+    MrKupido.Model.User user = Session.GetCurrentUser();
+        
+    <div id="profile">
+        <details id="basicinfo" open class="alwaysopen">
+            <summary>
+                <h1>@MrKupido.Web.Resources.Account.Profile.General</h1>
+                <h2></h2>
+            </summary>
+            <ul>
+                <li>
+                    <div class="label">
+                        <label for="language">
+                            @MrKupido.Web.Resources.Account.Profile.Language:</label>
+                    </div>
+                    <div id="language" class="input">
+                        <input id="languageHun" name="language" type="radio" value="hu-HU" @(user.CultureName == "hu-HU" ? "checked" : "")/><label for="languageHun">@MrKupido.Web.Resources.Account.Profile.LanguageHun</label>
+                        <input id="languageEng" name="language" type="radio" value="en-GB" @(user.CultureName == "en-GB" ? "checked" : "")/><label for="languageEng">@MrKupido.Web.Resources.Account.Profile.LanguageEng</label>
+                        <input id="languageDeu" name="language" type="radio" value="de-DE" @(user.CultureName == "de-DE" ? "checked" : "")/><label for="languageDeu">@MrKupido.Web.Resources.Account.Profile.LanguageDeu</label>
+                        <input id="languageSpa" name="language" type="radio" value="es-ES" @(user.CultureName == "es-ES" ? "checked" : "")/><label for="languageSpa">@MrKupido.Web.Resources.Account.Profile.LanguageSpa</label>
+                    </div>
+                </li>
+                <li>
+                    <div class="label">
+                        <label for="email">
+                            @MrKupido.Web.Resources.Account.Profile.Email:</label>
+                    </div>
+                    <div class="input">
+                        <input type="email" id="email" name="email" autocomplete="off" required disabled value='@(user.Email)'/>
+                    </div>
+                </li>
+                <li>
+                    <div class="label">
+                        <label for="lastname">
+                            @MrKupido.Web.Resources.Account.Profile.LastName:</label>
+                    </div>
+                    <div class="input">
+                        <input type="text" id="lastname" name="lastname" autocomplete="off" required value='@(user.LastName)'/>
+                    </div>
+                </li>
+                <li>
+                    <div class="label">
+                        <label for="firstname">
+                            @MrKupido.Web.Resources.Account.Profile.FirstName:</label>
+                    </div>
+                    <div class="input">
+                        <input type="text" id="firstname" name="firstname" autocomplete="off" required value='@(user.FirstName)'/>
+                    </div>
+                </li>
+                <li>
+                    <div class="label">
+                        <label for="nickname">
+                            @MrKupido.Web.Resources.Account.Profile.NickName:</label>
+                    </div>
+                    <div class="input">
+                        <input type="text" id="nickname" name="nickname" autocomplete="off" value='@(user.NickName)'/>
+                    </div>
+                </li>
+            </ul>
+            @{ Html.RenderPartial("_ValidationErrors", new string[] { "Language", "Email", "FirstName", "LastName", "NickName" }); }    
+        </details>
+        <hr />
+        <details id="physicalinfo" open class="alwaysopen">
+            <summary>
+                <h1>@MrKupido.Web.Resources.Account.Profile.Physical</h1>
+                <h2>
+                    <a href="~/@Session["Language"]/help/defaultportionsize">@MrKupido.Web.Resources.Account.Profile.PhysicalWhy</a>
+                </h2>
+            </summary>
+            <ul>
+                <li>
+                    <div class="label">
+                        <label for="language">
+                            @MrKupido.Web.Resources.Account.Profile.Gender:</label>
+                    </div>
+                    <div id="gender" class="input">
+                        <input id="genderMale" name="gender" type="radio" value="male" @(user.Gender ==  1 ? "checked" : "")/><label for="genderMale">@MrKupido.Web.Resources.Account.Profile.GenderMale</label>
+                        <input id="genderFemale" name="gender" type="radio" value="female" @(user.Gender == 2 ? "checked" : "")/><label for="genderFemale">@MrKupido.Web.Resources.Account.Profile.GenderFemale</label>
+                    </div>
+                </li>
+                <li>
+                    <div class="label">
+                        <label for="height" title="@MrKupido.Web.Resources.Account.Profile.HeightDescription">
+                            @MrKupido.Web.Resources.Account.Profile.Height:</label>
+                    </div>
+                    <div class="input">
+                        <input type="text" id="height" name="height" class="unit" autocomplete="off" placeholder="165" value='@(user.Height.HasValue ? (user.Height.Value * 100).ToString("0") : "")' title="@MrKupido.Web.Resources.Account.Profile.HeightValidation"/>
+                        <input type="button" id="heightUnit" class="unit" value="cm" onclick="javascript:toggleHeightUnit(this);" tabindex="-1"/>
+                    </div>
+                </li>
+                <li>
+                    <div class="label">
+                        <label for="weight">
+                            @MrKupido.Web.Resources.Account.Profile.Weight:</label>
+                    </div>
+                    <div class="input">
+                        <input type="text" id="weight" name="weight" class="unit" autocomplete="off" placeholder="@((61.50f).ToString("0.00"))" value='@(user.Weight.HasValue ? user.Weight.Value.ToString("0.00") : "")'/>
+                        <input type="button" id="weightUnit" class="unit" value="kg" onclick="javascript: toggleWeightUnit(this);" tabindex="-1" />
+                    </div>
+                </li>
+                <li>
+                    <div class="label">
+                        <label for="dateofbirth">
+                            @MrKupido.Web.Resources.Account.Profile.DateOfBirth:</label>
+                    </div>
+                    <div class="input">
+                        <input type="text" id="dateofbirth" name="dateofbirth" autocomplete="off" placeholder="1975-05-24" value='@(user.DateOfBirth.HasValue ? user.DateOfBirth.Value.ToString("yyyy-MM-dd") : "")'/>
+                    </div>
+                </li>
+            </ul>
+            @{ Html.RenderPartial("_ValidationErrors", new string[] { "Gender", "Height", "Weight", "DateOfBirth" }); }    
+        </details>
+        @*<div style="clear: both"></div>*@
+        <hr />
+        <div style="display: none">            
+            
+            <details id="likes" class="alwaysopen">
+                <summary>
+                    <h1>Mit szeretsz és mit nem?</h1>
+                    <h2>
+                        <a href="#">Miért hasznos?</a>
+                    </h2>
+                </summary>
+                <ul>
+                    <li></li>
+                </ul>
+            </details>
+            <hr class="single" />
+            <details id="conditions" class="alwaysopen">
+                <summary>
+                    <h1>Egészségügyi állapot</h1>
+                    <h2>
+                        <a href="#">Miért is mondanád el nekünk?</a>
+                    </h2>
+                </summary>
+                <ul>
+                    <li></li>
+                </ul>
+            </details>
+            <hr class="single" />
+            <details id="advanced" class="alwaysopen">
+                <summary>
+                    <h1>Haladó beállítások</h1>
+                </summary>
+                <ul>
+                    <li>
+                        <div class="label">
+                            <label for="betatester">
+                                Béta-teszter vagyok:</label>
+                        </div>
+                        <div class="input">
+                            <input type="checkbox" id="betatester" name="betatester" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="label">
+                            <label for="githubuser">
+                                A GitHub felhasználónevem:</label>
+                        </div>
+                        <div class="input">
+                            <input type="text" id="githubuser" name="githubuser" required value='@(user.FullName)'/>
+                        </div>
+                    </li>
+                </ul>
+            </details>
+        </div>
+    </div>    
+    <div class="formbuttons">
+        <input type="button" class="submit" value="@MrKupido.Web.Resources.Account.Profile.Save" onclick="javascipt:$('form:first').submit();" />
+    </div>
+
+}

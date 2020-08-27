@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = MrKupido.Web.Resources.Help.BetaTesterGuide.PageTitle + " - " + MrKupido.Web.Resources.Shared.Layout.HelpPageTitle;
+}
+
+@{ Html.RenderPartial("_HelpHeader"); }
+
+<article class="help">
+
+    <h1>Irányelvek béta teszteléshez</h1>
+
+    <p>Üdvözöllek a béta teszterek között! Nagyon köszönöm, hogy időt és energiát szánsz arra, hogy az oldal napról napra jobb is jobb lehessen! Mr. Kupidónak minden felhasználója fontos, és igyekszik minden igényt kielégíteni, így a Te véleményedet is nagyra becsüljük!</p>
+
+    <p>Amikor tesztelsz, kérlek figyelj a következőkre, hogy reprodukálni tudjam a problémát.</p>
+
+    <ul>
+        <li>Mindig a jobb alsó sarokban lévő mezőt használd és mindig nyomj rá a "Vélemény elküldése" gombra, ha végeztél.</li>
+        <li>Minden hibát alaposan írj le, lépésről lépésre. Hogy jutottál a hibáig, mit vártál volna, és mi történt helyette?</li>
+        <li>Próbálgasd többször a funkciót, és próbáld kitalálni, hogy mik a körülmények, amik előidézik a hibát (pl. csak angol nyelven jelentkezik, csak Firefoxban, csak bizonyos szűrőkkel stb.).</li>
+        <li>Elsősorban a funkcionalitásra figyelj, és másodsorban a designra. Egyelőre prototípusként kezeljük az oldalt, tehát nem kell makulátlannak lennie. <a runat="server" href="~/xxx/help">A funkciók részletes listáit a súgó tartalomjegyzékéből éred el.</a></li>
+        <li>Ha van az aktuális verzióhoz leírás az újdonságokról (change log), akkor használd azt a tesztelés alapjául. Az új funkciók nagyobb valószínűséggel működnek hibásan, mint a régiek. <a runat="server" href="~/xxx/help/VersionChangeLog020">A v0.2-eshez itt találod.</a></li>
+        <li>Mindig jelentkezz be! Ez fontos, hiszen akkor fogom tudni, hogy ki küldi a reportot, és esetleg fel tudlak utána hívni a részletekért.</li>
+        <li>Próbáld elképzelni, hogyan is használnád te magad az oldalt. Aztán próbáld meg úgy használni, mint ahogy a nagymamád használná. Mi lenne neki rossz helyen vagy nehézkes?</li>
+        <li>Ha van rá módod, tesztelj különböző eszközökön is. Jelenleg nem követelmény a mobilon vagy tableten való hibátlan megjelenés, de sokat segít, ha már most tudjuk, mely részek nem működnek ott abszolút.</li>
+        <li>Ha olyan hibát találsz, amit jobb megmutatni, mint leírni, készíts screenshot-ot és küldd el nekem e-mailben az <a href="mailto:andras.fuchs@gmail.com">andras.fuchs@gmail.com</a> címre.</li>
+        <li>Ha valami tetszik, azt is leírhatod, Atival biztos szívesen fogjuk olvasni.</li>
+        <li>És végül: csak akkor tesztelj, amikor kedved van! Ez nálunk alapszabály, mi is csak akkor dolgozunk, ha szívesen csináljuk. Ezért nem nagyon tartjuk - az alig létező - határidejeinket :)</li>
+    </ul>
+
+</article>

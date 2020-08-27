@@ -1,0 +1,51 @@
+﻿@model object[]
+@{
+    ViewBag.Title = MrKupido.Web.Resources.Ingredient.Trees.PageTitle + " - " + MrKupido.Web.Resources.Shared.Layout.PageTitle; ;
+}
+
+
+<header class="nosearch">
+    <a runat="server" href="~/">
+        <img runat="server" src="~/Content/svg/logo_mrkupido_wide.svg" alt="Mr. Kupido" width="600" height="157" />
+    </a>
+</header>
+<details open class="alwaysopen">
+    <summary>
+        <h1>
+             @MrKupido.Web.Resources.Ingredient.Trees.Taxonomy</h1>
+    </summary>
+</details>
+   @{ Html.RenderPartial("_TaxonomyTree", Model[0]); }
+
+<details open class="alwaysopen">
+    <summary>
+        <h1>
+            @MrKupido.Web.Resources.Ingredient.Trees.Ingredients</h1>
+    </summary>
+</details>
+   @{ Html.RenderPartial("_IngredientTree", Model[1]); }
+
+<details open class="alwaysopen">
+    <summary>
+        <h1>
+            @MrKupido.Web.Resources.Ingredient.Trees.Recipes</h1>
+    </summary>
+</details>
+   @{ Html.RenderPartial("_RecipeTree", Model[2]); }
+
+<details open class="alwaysopen">
+    <summary>
+        <h1>
+            @MrKupido.Web.Resources.Ingredient.Trees.Equipment</h1>
+    </summary>
+</details>
+   @{ Html.RenderPartial("_EquipmentTree", Model[3]); }
+
+
+<details open class="alwaysopen">
+    <summary>
+        <h1>
+            @MrKupido.Web.Resources.Ingredient.Trees.Tag</h1>
+    </summary>
+</details>
+   @{ Html.RenderPartial("_TagTree", Model[4]); }

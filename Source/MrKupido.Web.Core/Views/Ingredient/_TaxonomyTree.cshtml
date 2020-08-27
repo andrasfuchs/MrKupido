@@ -1,0 +1,92 @@
+﻿@model MrKupido.Processor.Model.NatureTreeNode
+@using MrKupido.Processor.Model
+@using MrKupido.Utils
+<div class="css-treeview">
+    <ul>
+        <li>
+            <img runat="server" alt="@Model.ShortName" src="@PathUtils.ToAbsolute(Model.IconUrl)" />
+            <input type="checkbox"  checked="checked" id="@Model.ClassName" /><label for="@Model.ClassName">@Model</label>
+            <ul>
+                @foreach (NatureTreeNode level1 in Model.Children)
+                { 
+                    <li>
+                        @if (level1.Children.Length > 0)
+                        {
+                            <input type="checkbox"  checked="checked" id="@level1.ClassName" />
+                            <img runat="server" alt="@level1.ShortName" src="@PathUtils.ToAbsolute(level1.IconUrl)" />
+                            <label for="@level1.ClassName">@level1</label>
+                            <ul>
+                                @foreach (NatureTreeNode level2 in level1.Children)
+                                { 
+                                    <li>
+                                        @if (level2.Children.Length > 0)
+                                        {
+                                            <input type="checkbox" id="@level2.ClassName" />
+                                            <img runat="server" alt="@level2.ShortName" src="@PathUtils.ToAbsolute(level2.IconUrl)" />
+                                            <label for="@level2.ClassName">@level2</label>
+                                            <ul>
+                                                @foreach (NatureTreeNode level3 in level2.Children)
+                                                { 
+                                                    <li>
+                                                        @if (level3.Children.Length > 0)
+                                                        {
+                                                            <input type="checkbox" id="@level3.ClassName" />
+                                                            <img runat="server" alt="@level3.ShortName" src="@PathUtils.ToAbsolute(level3.IconUrl)" />
+                                                            <label for="@level3.ClassName">@level3</label>
+                                                            <ul>
+                                                                @foreach (NatureTreeNode level4 in level3.Children)
+                                                                { 
+                                                                    <li>
+                                                                        @if (level4.Children.Length > 0)
+                                                                        {
+                                                                            <input type="checkbox" id="@level4.ClassName" />
+                                                                            <img runat="server" alt="@level4.ShortName" src="@PathUtils.ToAbsolute(level4.IconUrl)" />
+                                                                            <label for="@level4.ClassName">@level4</label>
+                                                                            <ul>
+                                                                                @foreach (NatureTreeNode level5 in level4.Children)
+                                                                                { 
+                                                                                    <li>
+                                                                                    <img runat="server" alt="@level5.ShortName" src="@PathUtils.ToAbsolute(level5.IconUrl)" />
+                                                                                    <a href="./Nature/@level5.ClassName">@level5</a>
+                                                                                    </li>
+                                                                                }
+                                                                            </ul>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <img runat="server" alt="@level4.ShortName" src="@PathUtils.ToAbsolute(level4.IconUrl)" />
+                                                                            <a href="./Nature/@level4.ClassName">@level4</a>
+                                                                        }
+                                                                    </li>
+                                                                }
+                                                            </ul>
+                                                        }
+                                                        else
+                                                        {
+                                                            <img runat="server" alt="@level3.ShortName" src="@PathUtils.ToAbsolute(level3.IconUrl)" />
+                                                            <a href="./Nature/@level3.ClassName">@level3</a>
+                                                        }
+                                                    </li>
+                                                }
+                                            </ul>
+                                        }
+                                        else
+                                        {
+                                            <img runat="server" alt="@level2.ShortName" src="@PathUtils.ToAbsolute(level2.IconUrl)" />
+                                            <a href="./Nature/@level2.ClassName">@level2</a>
+                                        }
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <img runat="server" alt="@level1.ShortName" src="@PathUtils.ToAbsolute(level1.IconUrl)" />
+                            <a href="./Nature/@level1.ClassName">@level1</a>
+                        }
+                    </li>
+                }
+            </ul>
+        </li>
+    </ul>
+</div>

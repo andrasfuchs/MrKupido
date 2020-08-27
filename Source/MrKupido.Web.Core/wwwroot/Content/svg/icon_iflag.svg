@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="40px" height="23px" viewBox="0 0 40 23" enable-background="new 0 0 40 23" xml:space="preserve">
+<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="32.9893" y1="2.3711" x2="38.999" y2="2.3711">
+	<stop  offset="0" style="stop-color:#CDB8AB"/>
+	<stop  offset="1" style="stop-color:#553E31"/>
+</linearGradient>
+<path fill="url(#SVGID_1_)" stroke="#553E31" stroke-miterlimit="10" d="M32.989,4.242c3.319,0,6.01-0.838,6.01-1.871
+	S36.309,0.5,32.989,0.5"/>
+<path fill="#CDB8AB" d="M32.031,23H3.016c-0.21,0-0.398-0.123-0.478-0.312c-0.08-0.188-0.034-0.403,0.114-0.546l8.571-8.148
+	L2.652,5.853C2.504,5.711,2.458,5.494,2.538,5.307c0.079-0.188,0.268-0.311,0.478-0.311h29.016V23z"/>
+<g>
+	<defs>
+		<path id="XMLID_7_" d="M32.989,4.242h-29l8.306,8.148c0.199,0.195,0.199,0.512,0,0.707l-8.306,8.148h29
+			c3.319,0,6.01-0.838,6.01-1.871V2.371C38.999,3.404,36.309,4.242,32.989,4.242z"/>
+	</defs>
+	<linearGradient id="XMLID_3_" gradientUnits="userSpaceOnUse" x1="32.0244" y1="11.8086" x2="39.6347" y2="11.8086">
+		<stop  offset="0" style="stop-color:#EBE0D5"/>
+		<stop  offset="1" style="stop-color:#FFFFFF"/>
+	</linearGradient>
+	<use xlink:href="#XMLID_7_"  overflow="visible" fill="url(#XMLID_3_)"/>
+	<clipPath id="XMLID_4_">
+		<use xlink:href="#XMLID_7_"  overflow="visible"/>
+	</clipPath>
+	<use xlink:href="#XMLID_7_"  overflow="visible" fill="none" stroke="#553E31" stroke-linejoin="round" stroke-miterlimit="10"/>
+</g>
+<g>
+	<g id="Ebene_4_2_">
+		<circle id="circle8387_2_" fill="none" stroke="#553E31" stroke-miterlimit="10" cx="23.494" cy="12.752" r="6.5"/>
+	</g>
+	<g>
+		<g id="Ebene_2_1_">
+			<path id="path8390_2_" fill="#553E31" d="M25.578,17.224H21.65v-0.567c0.237,0,0.342,0,0.313,0c0.371,0,0.58-0.128,0.624-0.387
+				c0-0.184,0.009-0.462,0.026-0.841c0.051-0.653,0.076-1.076,0.076-1.27c0-0.809-0.036-1.504-0.111-2.084
+				c-0.029-0.193-0.125-0.317-0.288-0.372c-0.088-0.02-0.301-0.027-0.64-0.027v-0.58h3.056c0,0.616-0.015,1.168-0.04,1.656
+				c-0.067,0.947-0.102,1.462-0.102,1.545c0,0.883,0.044,1.541,0.132,1.973c0.03,0.185,0.119,0.3,0.265,0.345
+				c0.088,0.028,0.294,0.041,0.617,0.041V17.224L25.578,17.224L25.578,17.224z"/>
+		</g>
+		<g id="Ebene_5_2_">
+			<path id="path4611_2_" fill="#553E31" d="M24.867,9.089c0,0.334-0.124,0.623-0.375,0.869s-0.563,0.369-0.931,0.369
+				c-0.384,0-0.701-0.123-0.952-0.369c-0.251-0.247-0.377-0.535-0.377-0.869c0-0.319,0.126-0.603,0.377-0.849
+				s0.568-0.369,0.952-0.369c0.368,0,0.68,0.123,0.931,0.369S24.867,8.77,24.867,9.089z"/>
+		</g>
+	</g>
+</g>
+</svg>
