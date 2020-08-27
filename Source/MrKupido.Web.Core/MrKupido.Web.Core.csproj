@@ -5,12 +5,201 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\ViewPageExtensions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="wwwroot\Content\spelling\en_US\en_US.aff" />
     <Content Remove="wwwroot\Content\spelling\en_US\en_US.dic" />
     <Content Remove="wwwroot\Content\spelling\hu_HU\hu_HU.aff" />
     <Content Remove="wwwroot\Content\spelling\hu_HU\hu_HU.dic" />
     <Content Remove="wwwroot\Web.Debug_at_localhost.config" />
     <Content Remove="wwwroot\Web.Release.config" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="Resources\Account\LogIn.hu.resx" />
+    <EmbeddedResource Remove="Resources\Account\LogIn.resx" />
+    <EmbeddedResource Remove="Resources\Account\Profile.hu.resx" />
+    <EmbeddedResource Remove="Resources\Account\Profile.resx" />
+    <EmbeddedResource Remove="Resources\Help\BetaTesterGuide.resx" />
+    <EmbeddedResource Remove="Resources\Help\Index.resx" />
+    <EmbeddedResource Remove="Resources\Help\VersionChangeLog020.resx" />
+    <EmbeddedResource Remove="Resources\Help\WhoIsMrKupido.resx" />
+    <EmbeddedResource Remove="Resources\Home\Index.hu.resx" />
+    <EmbeddedResource Remove="Resources\Home\Index.resx" />
+    <EmbeddedResource Remove="Resources\Home\NotSupportedBrowser.hu.resx" />
+    <EmbeddedResource Remove="Resources\Home\NotSupportedBrowser.resx" />
+    <EmbeddedResource Remove="Resources\Home\RecipeNotAvailableYet.hu.resx" />
+    <EmbeddedResource Remove="Resources\Home\RecipeNotAvailableYet.resx" />
+    <EmbeddedResource Remove="Resources\Home\RecipeSearchResultsHead.hu.resx" />
+    <EmbeddedResource Remove="Resources\Home\RecipeSearchResultsHead.resx" />
+    <EmbeddedResource Remove="Resources\Import\Recipe.resx" />
+    <EmbeddedResource Remove="Resources\Import\RecipeList.resx" />
+    <EmbeddedResource Remove="Resources\Ingredient\Trees.hu.resx" />
+    <EmbeddedResource Remove="Resources\Ingredient\Trees.resx" />
+    <EmbeddedResource Remove="Resources\Recipe\Details.hu.resx" />
+    <EmbeddedResource Remove="Resources\Recipe\Details.resx" />
+    <EmbeddedResource Remove="Resources\Shared\Layout.hu.resx" />
+    <EmbeddedResource Remove="Resources\Shared\Layout.resx" />
+    <EmbeddedResource Remove="Resources\Shared\SearchHeader.hu.resx" />
+    <EmbeddedResource Remove="Resources\Shared\SearchHeader.resx" />
+    <EmbeddedResource Remove="Resources\Shared\TipsAndTricks.resx" />
+    <EmbeddedResource Remove="Resources\Shared\Validation.hu.resx" />
+    <EmbeddedResource Remove="Resources\Shared\Validation.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\Account\LogIn.hu.resx">
+      <LastGenOutput>LogIn.hu.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Account\LogIn.resx">
+      <LastGenOutput>LogIn.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Account\Profile.hu.resx">
+      <LastGenOutput>Profile.hu.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Account\Profile.resx">
+      <LastGenOutput>Profile.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\BetaTesterGuide.resx">
+      <LastGenOutput>BetaTesterGuide.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Index.resx">
+      <LastGenOutput>Index.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\VersionChangeLog020.resx">
+      <LastGenOutput>VersionChangeLog020.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\WhoIsMrKupido.resx">
+      <LastGenOutput>WhoIsMrKupido.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Home\Index.hu.resx">
+      <LastGenOutput>Index.hu.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Home\Index.resx">
+      <LastGenOutput>Index.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Home\NotSupportedBrowser.hu.resx">
+      <LastGenOutput>NotSupportedBrowser.hu.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Home\NotSupportedBrowser.resx">
+      <LastGenOutput>NotSupportedBrowser.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Home\RecipeNotAvailableYet.hu.resx">
+      <LastGenOutput>RecipeNotAvailableYet.hu.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Home\RecipeNotAvailableYet.resx">
+      <LastGenOutput>RecipeNotAvailableYet.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Home\RecipeSearchResultsHead.hu.resx">
+      <LastGenOutput>RecipeSearchResultsHead.hu.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Home\RecipeSearchResultsHead.resx">
+      <LastGenOutput>RecipeSearchResultsHead.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Import\Recipe.resx">
+      <LastGenOutput>Recipe.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Import\RecipeList.resx">
+      <LastGenOutput>RecipeList.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Ingredient\Trees.hu.resx">
+      <LastGenOutput>Trees.hu.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Ingredient\Trees.resx">
+      <LastGenOutput>Trees.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Recipe\Details.hu.resx">
+      <SubType>Designer</SubType>
+      <LastGenOutput>Details.hu.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Recipe\Details.resx">
+      <SubType>Designer</SubType>
+      <LastGenOutput>Details.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Shared\Layout.hu.resx">
+      <SubType>Designer</SubType>
+      <LastGenOutput>Layout.hu.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Shared\Layout.resx">
+      <LastGenOutput>Layout.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Shared\SearchHeader.hu.resx">
+      <SubType>Designer</SubType>
+      <LastGenOutput>SearchHeader.hu.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Shared\SearchHeader.resx">
+      <LastGenOutput>SearchHeader.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Shared\TipsAndTricks.resx">
+      <SubType>Designer</SubType>
+      <LastGenOutput>TipsAndTricks.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Shared\Validation.hu.resx">
+      <LastGenOutput>Validation.hu.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Shared\Validation.resx">
+      <LastGenOutput>Validation.Designer.cs</LastGenOutput>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -30,274 +219,95 @@
 
   <ItemGroup>
     <Compile Update="Resources\Account\LogIn.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
       <DependentUpon>LogIn.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Update="Resources\Account\LogIn.hu.Designer.cs">
-      <DependentUpon>LogIn.hu.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Update="Resources\Account\Profile.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
       <DependentUpon>Profile.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Update="Resources\Account\Profile.hu.Designer.cs">
-      <DependentUpon>Profile.hu.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Update="Resources\Help\BetaTesterGuide.Designer.cs">
-      <DependentUpon>BetaTesterGuide.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DependentUpon>BetaTesterGuide.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\Help\Index.Designer.cs">
-      <DependentUpon>Index.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DependentUpon>Index.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\Help\VersionChangeLog020.Designer.cs">
-      <DependentUpon>VersionChangeLog020.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DependentUpon>VersionChangeLog020.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\Help\WhoIsMrKupido.Designer.cs">
-      <DependentUpon>WhoIsMrKupido.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DependentUpon>WhoIsMrKupido.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\Home\Index.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
       <DependentUpon>Index.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Update="Resources\Home\Index.hu.Designer.cs">
-      <DependentUpon>Index.hu.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Update="Resources\Home\NotSupportedBrowser.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
       <DependentUpon>NotSupportedBrowser.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Update="Resources\Home\NotSupportedBrowser.hu.Designer.cs">
-      <DependentUpon>NotSupportedBrowser.hu.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Update="Resources\Home\RecipeNotAvailableYet.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
       <DependentUpon>RecipeNotAvailableYet.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Update="Resources\Home\RecipeNotAvailableYet.hu.Designer.cs">
-      <DependentUpon>RecipeNotAvailableYet.hu.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Update="Resources\Home\RecipeSearchResultsHead.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
       <DependentUpon>RecipeSearchResultsHead.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Update="Resources\Home\RecipeSearchResultsHead.hu.Designer.cs">
-      <DependentUpon>RecipeSearchResultsHead.hu.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Update="Resources\Import\Recipe.Designer.cs">
-      <DependentUpon>Recipe.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DependentUpon>Recipe.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\Import\RecipeList.Designer.cs">
-      <DependentUpon>RecipeList.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DependentUpon>RecipeList.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\Ingredient\Trees.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
       <DependentUpon>Trees.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Update="Resources\Ingredient\Trees.hu.Designer.cs">
-      <DependentUpon>Trees.hu.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Update="Resources\Recipe\Details.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
       <DependentUpon>Details.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Update="Resources\Recipe\Details.hu.Designer.cs">
-      <DependentUpon>Details.hu.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Update="Resources\Shared\Layout.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
       <DependentUpon>Layout.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Update="Resources\Shared\Layout.hu.Designer.cs">
-      <DependentUpon>Layout.hu.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Update="Resources\Shared\SearchHeader.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
       <DependentUpon>SearchHeader.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-    <Compile Update="Resources\Shared\SearchHeader.hu.Designer.cs">
-      <DependentUpon>SearchHeader.hu.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
     </Compile>
     <Compile Update="Resources\Shared\TipsAndTricks.Designer.cs">
-      <DependentUpon>TipsAndTricks.resx</DependentUpon>
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
+      <DependentUpon>TipsAndTricks.resx</DependentUpon>
     </Compile>
     <Compile Update="Resources\Shared\Validation.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
       <DependentUpon>Validation.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Update="Resources\Shared\Validation.hu.Designer.cs">
-      <DependentUpon>Validation.hu.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Resources\Account\LogIn.hu.resx">
-      <LastGenOutput>LogIn.hu.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Account\LogIn.resx">
-      <LastGenOutput>LogIn.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Account\Profile.hu.resx">
-      <LastGenOutput>Profile.hu.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Account\Profile.resx">
-      <LastGenOutput>Profile.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Help\BetaTesterGuide.resx">
-      <LastGenOutput>BetaTesterGuide.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Help\Index.resx">
-      <LastGenOutput>Index.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Help\VersionChangeLog020.resx">
-      <LastGenOutput>VersionChangeLog020.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Help\WhoIsMrKupido.resx">
-      <LastGenOutput>WhoIsMrKupido.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Home\Index.hu.resx">
-      <LastGenOutput>Index.hu.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Home\Index.resx">
-      <LastGenOutput>Index.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Home\NotSupportedBrowser.hu.resx">
-      <LastGenOutput>NotSupportedBrowser.hu.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Home\NotSupportedBrowser.resx">
-      <LastGenOutput>NotSupportedBrowser.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Home\RecipeNotAvailableYet.hu.resx">
-      <LastGenOutput>RecipeNotAvailableYet.hu.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Home\RecipeNotAvailableYet.resx">
-      <LastGenOutput>RecipeNotAvailableYet.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Home\RecipeSearchResultsHead.hu.resx">
-      <LastGenOutput>RecipeSearchResultsHead.hu.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Home\RecipeSearchResultsHead.resx">
-      <LastGenOutput>RecipeSearchResultsHead.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Import\Recipe.resx">
-      <LastGenOutput>Recipe.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Import\RecipeList.resx">
-      <LastGenOutput>RecipeList.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Ingredient\Trees.hu.resx">
-      <LastGenOutput>Trees.hu.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Ingredient\Trees.resx">
-      <LastGenOutput>Trees.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Recipe\Details.hu.resx">
-      <SubType>Designer</SubType>
-      <LastGenOutput>Details.hu.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Recipe\Details.resx">
-      <SubType>Designer</SubType>
-      <LastGenOutput>Details.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Shared\Layout.hu.resx">
-      <SubType>Designer</SubType>
-      <LastGenOutput>Layout.hu.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Shared\Layout.resx">
-      <LastGenOutput>Layout.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Shared\SearchHeader.hu.resx">
-      <SubType>Designer</SubType>
-      <LastGenOutput>SearchHeader.hu.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Shared\SearchHeader.resx">
-      <LastGenOutput>SearchHeader.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Shared\TipsAndTricks.resx">
-      <SubType>Designer</SubType>
-      <LastGenOutput>TipsAndTricks.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Shared\Validation.hu.resx">
-      <LastGenOutput>Validation.hu.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Resources\Shared\Validation.resx">
-      <LastGenOutput>Validation.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>

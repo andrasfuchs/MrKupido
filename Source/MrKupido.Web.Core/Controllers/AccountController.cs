@@ -122,17 +122,17 @@ namespace MrKupido.Web.Core.Controllers
 
                 if (String.IsNullOrEmpty(user.FirstName))
                 {
-                    user.FirstName = HttpUtility.HtmlDecode(oauth2Graph.FirstName);
+                    user.FirstName = WebUtility.HtmlDecode(oauth2Graph.FirstName);
                 }
 
                 if (String.IsNullOrEmpty(user.LastName))
                 {
-                    user.LastName = HttpUtility.HtmlDecode(oauth2Graph.LastName);
+                    user.LastName = WebUtility.HtmlDecode(oauth2Graph.LastName);
                 }
 
                 if (String.IsNullOrEmpty(user.FullName))
                 {
-                    user.FullName = HttpUtility.HtmlDecode(oauth2Graph.Name);
+                    user.FullName = WebUtility.HtmlDecode(oauth2Graph.Name);
                 }
 
                 if (user.Gender == (int)MrKupido.Model.Gender.Unknown)
@@ -294,7 +294,7 @@ namespace MrKupido.Web.Core.Controllers
         {
             List<String> invalidProperties = new List<String>();
 
-            User sessionUser = HttpContext.Session.SetCurrentUser GetCurrentUser();
+            User sessionUser = HttpContext.Session.GetCurrentUser();
             User user = context.Users.First(u => u.UserId == sessionUser.UserId);
 
             user.LastName = Request.Form["lastname"];

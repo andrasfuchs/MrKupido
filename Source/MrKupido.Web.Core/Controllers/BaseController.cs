@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -49,43 +52,44 @@ namespace MrKupido.Web.Core.Controllers
         //    }
         //}
 
-        protected override void Initialize(RequestContext requestContext)
+        protected override void Initialize(HttpContext requestContext)
         {
             base.Initialize(requestContext);
 
+            string sessionId = requestContext.Session.Id;
             lock (CurrentSessions)
             {
-                if (!CurrentSessions.ContainsKey(requestContext.HttpContext.Session.SessionID))
+                if (!CurrentSessions.ContainsKey(sessionId))
                 {
-                    CurrentSessions.Add(requestContext.HttpContext.Session.SessionID, new UserState());
+                    CurrentSessions.Add(sessionId, new UserState());
 
-                    lock (CurrentSessions[requestContext.HttpContext.Session.SessionID])
+                    lock (CurrentSessions[sessionId])
                     {
-                        CurrentSessions[requestContext.HttpContext.Session.SessionID].Changed += new UserStateChangedEventHandler(BaseController_UserStateChanged);
-                        CurrentSessions[requestContext.HttpContext.Session.SessionID].SessionID = requestContext.HttpContext.Session.SessionID;
+                        CurrentSessions[sessionId].Changed += new UserStateChangedEventHandler(BaseController_UserStateChanged);
+                        CurrentSessions[sessionId].SessionID = sessionId;
                     }
                 }
-                CurrentSessions[requestContext.HttpContext.Session.SessionID].IPAddress = GetIPAddress(Request);
+                CurrentSessions[sessionId].IPAddress = GetIPAddress(HttpContext.Request);
             }
 
 
-            CurrentSessions[requestContext.HttpContext.Session.SessionID].RequestContext = requestContext;
+            CurrentSessions[sessionId].RequestContext = requestContext;
             // Grab the user's login information from FormsAuth
             if (this.User.Identity != null && this.User.Identity is FormsIdentity)
             {
-                User loggedInUser = CurrentSessions[requestContext.HttpContext.Session.SessionID].User.FromJSONString(((FormsIdentity)this.User.Identity).Ticket.UserData);
+                User loggedInUser = CurrentSessions[sessionId].User.FromJSONString(((FormsIdentity)this.User.Identity).Ticket.UserData);
 
-                if ((CurrentSessions[requestContext.HttpContext.Session.SessionID].User == null) || (CurrentSessions[requestContext.HttpContext.Session.SessionID].User.UserId != loggedInUser.UserId))
+                if ((CurrentSessions[sessionId].User == null) || (CurrentSessions[sessionId].User.UserId != loggedInUser.UserId))
                 {
-                    CurrentSessions[requestContext.HttpContext.Session.SessionID].User = loggedInUser;
+                    CurrentSessions[sessionId].User = loggedInUser;
                 }
             }
 
-            if (this.Session["WebAppFileVersion"] == null)
+            if (requestContext.Session.GetString("WebAppFileVersion") == null)
             {
                 Assembly assembly = Assembly.GetExecutingAssembly();
                 FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-                this.Session["WebAppFileVersion"] = fvi.ProductVersion;
+                requestContext.Session.SetString("WebAppFileVersion", fvi.ProductVersion);
             }
         }
 
@@ -98,7 +102,7 @@ namespace MrKupido.Web.Core.Controllers
             if (action == "LOGIN")
             {
                 fm = String.Format("User '{0}' logged in.", username);
-                parameters += String.Format(", user-agent: '{0}'", CurrentSessions[sessionId].RequestContext.HttpContext.Request.UserAgent);
+                parameters += String.Format(", user-agent: '{0}'", CurrentSessions[sessionId].RequestContext.Request.UserAgent);
             }
 
             if (action == "LOGOUT")
@@ -166,8 +170,8 @@ namespace MrKupido.Web.Core.Controllers
             Log log = new Log()
             {
                 UtcTime = DateTime.UtcNow,
-                IPAddress = CurrentSessions[HttpContext.Session.SessionID].IPAddress,
-                SessionId = HttpContext.Session.SessionID,
+                IPAddress = CurrentSessions[HttpContext.Session.Id].IPAddress,
+                SessionId = HttpContext.Session.Id,
                 Action = action,
                 Parameters = parameters,
                 FormattedMessage = String.Format(formatterText, username, (webAppVersion == null ? "v?" : webAppVersion), parameters)
@@ -177,35 +181,7 @@ namespace MrKupido.Web.Core.Controllers
             LogAsync(log, true);
         }
 
-
-        /// <summary>
-        /// Allow external initialization of this controller by explicitly
-        /// passing in a request context
-        /// </summary>
-        /// <param name="requestContext"></param>
-        public void InitializeForced(RequestContext requestContext)
-        {
-            this.Initialize(requestContext);
-        }
-
-
-        /// <summary>
-        /// Displays a self contained error page without redirecting.
-        /// Depends on ErrorController.ShowError() to exist
-        /// </summary>
-        /// <param name="title"></param>
-        /// <param name="message"></param>
-        /// <param name="redirectTo"></param>
-        /// <returns></returns>
-        //protected internal ActionResult DisplayErrorPage(string title, string message, string redirectTo = null)
-        //{
-        //ErrorController controller = new ErrorController();
-        //controller.InitializeForced(this.ControllerContext.RequestContext);
-        //return controller.ShowError(title, message, redirectTo);
-        //}
-
-
-        public static string GetIPAddress(HttpRequestBase request)
+        public static string GetIPAddress(HttpRequest request)
         {
             string szRemoteAddr = request.UserHostAddress;
             string szXForwardedFor = request.Headers["Via"] ?? request.ServerVariables["X_FORWARDED_FOR"];

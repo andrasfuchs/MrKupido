@@ -3,5 +3,11 @@
   <PropertyGroup>
     <Controller_SelectedScaffolderID>MvcControllerEmptyScaffolder</Controller_SelectedScaffolderID>
     <Controller_SelectedScaffolderCategoryPath>root/Controller</Controller_SelectedScaffolderCategoryPath>
+    <ShowAllFiles>true</ShowAllFiles>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Update="Resources\Home\NotSupportedBrowser.hu.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
 </Project>

@@ -1,4 +1,5 @@
-﻿using MrKupido.Model;
+﻿using Microsoft.AspNetCore.Http;
+using MrKupido.Model;
 using System;
 using System.Text;
 
@@ -48,22 +49,22 @@ namespace MrKupido.Web.Core.Models
             }
         }
 
-        private RequestContext lastRequest;
-        public RequestContext RequestContext
+        private HttpContext lastRequest;
+        public HttpContext RequestContext
         {
             set
             {
                 StringBuilder sb = new StringBuilder();
-                foreach (string key in value.HttpContext.Request.Params.AllKeys)
+                foreach (string key in value.Request.Params.AllKeys)
                 {
                     if ((key == "ASP.NET_SessionId") || (key.ToUpper() == key) || key.StartsWith("__") || (key.StartsWith("DotNetOpenAuth.WebServerClient.XSRF-Session"))) continue;
                     sb.Append(key);
                     sb.Append(':');
-                    sb.Append(value.HttpContext.Request.Params[key]);
+                    sb.Append(value.Request.Params[key]);
                     sb.Append(',');
                 }
 
-                OnChanged("URL:" + value.HttpContext.Request.Url, sb.ToString());
+                OnChanged("URL:" + value.Request.Url, sb.ToString());
 
                 lastRequest = value;
                 LastActionUTC = DateTime.UtcNow;
