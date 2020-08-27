@@ -11,6 +11,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using System.IO;
+using System.Text;
 
 namespace MrKupido.Web.Core.Controllers
 {
@@ -46,8 +49,9 @@ namespace MrKupido.Web.Core.Controllers
         [Authorize]
         public ActionResult Recipe(string id)
         {
-            string language = (string)Session["Language"];
-            ImportedRecipe importedRecipe = db.ImportedRecipes.FirstOrDefault(r => (r.UniqueName == id) && (r.Language == language));
+            string sessionLanguage = HttpContext.Session.GetString("Language");
+
+            ImportedRecipe importedRecipe = db.ImportedRecipes.FirstOrDefault(r => (r.UniqueName == id) && (r.Language == sessionLanguage));
             if (importedRecipe == null) return RedirectToAction("Index", "HomeController");
 
             DataContractJsonSerializer dcjs = new DataContractJsonSerializer(typeof(string[]));

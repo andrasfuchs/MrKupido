@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MrKupido.Model;
+using MrKupido.Web.Core.Models;
 
 namespace MrKupido.Web.Core.Controllers
 {
@@ -150,13 +153,15 @@ namespace MrKupido.Web.Core.Controllers
         [HttpPost]
         public ActionResult LogException()
         {
-            Log("EXCEPTION", "User '{0}' caused an exception using the version {1}: '{2}'", Session["LastErrorMessage"] as string);
+            Log("EXCEPTION", "User '{0}' caused an exception using the version {1}: '{2}'", HttpContext.Session.GetString("LastErrorMessage"));
             return null;
         }
 
         protected void Log(string action, string formatterText, string parameters)
         {
-            string username = Session.GetCurrentUser() == null ? "Anonymous" : Session.GetCurrentUser().FullName;
+            string username = HttpContext.Session.GetCurrentUser() == null ? "Anonymous" : HttpContext.Session.GetCurrentUser().FullName;
+
+            string webAppVersion = HttpContext.Session.GetString("WebAppFileVersion");
 
             Log log = new Log()
             {
@@ -165,7 +170,7 @@ namespace MrKupido.Web.Core.Controllers
                 SessionId = HttpContext.Session.SessionID,
                 Action = action,
                 Parameters = parameters,
-                FormattedMessage = String.Format(formatterText, username, (Session["WebAppFileVersion"] == null ? "v?" : (string)Session["WebAppFileVersion"]), parameters)
+                FormattedMessage = String.Format(formatterText, username, (webAppVersion == null ? "v?" : webAppVersion), parameters)
             };
 
 

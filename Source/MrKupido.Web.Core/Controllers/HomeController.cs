@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MrKupido.Processor;
+using MrKupido.Processor.Model;
 using MrKupido.Web.Core.Models;
 
 namespace MrKupido.Web.Core.Controllers
@@ -22,7 +25,7 @@ namespace MrKupido.Web.Core.Controllers
         //[Authorize]
         public ActionResult Index()
         {
-            Session["InvalidProperties"] = null;
+            HttpContext.Session.SetObject("InvalidProperties", new string[0]);
 
             if (Request.Params["q"] != null)
             {
@@ -57,7 +60,7 @@ namespace MrKupido.Web.Core.Controllers
                     }
                 }
 
-                Session["filters"] = filters;
+                HttpContext.Session.SetObject("filters", filters.ToArray());
             }
 
             return View();
@@ -71,9 +74,10 @@ namespace MrKupido.Web.Core.Controllers
         [HttpPost]
         public ActionResult IgnoreOldBrowser(string returnUrl)
         {
-            Session["IgnoreOldBrowser"] = true;
+            HttpContext.Session.SetInt32("IgnoreOldBrowser", 1);
 
-            return String.IsNullOrEmpty(returnUrl) ? (ActionResult)RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Home", action = "Index" }) : (ActionResult)Redirect(returnUrl);
+            string sessionLanguage = HttpContext.Session.GetString("Language");
+            return String.IsNullOrEmpty(returnUrl) ? (ActionResult)RedirectToRoute("Default", new { language = sessionLanguage, controller = "Home", action = "Index" }) : (ActionResult)Redirect(returnUrl);
         }
 
         [HttpPost]
@@ -97,9 +101,7 @@ namespace MrKupido.Web.Core.Controllers
         [HttpPost]
         public JsonResult SearchSelected(string selectedValue, bool wasItemSelected, bool isNegative)
         {
-            if (Session["filters"] == null) Session["filters"] = new List<FilterCondition>();
-
-            List<FilterCondition> filters = (List<FilterCondition>)Session["filters"];
+            List<FilterCondition> filters = new List<FilterCondition>(HttpContext.Session.GetObject<FilterCondition[]>("filters"));
 
             TreeNode tn = null;
             if (wasItemSelected)
@@ -131,7 +133,7 @@ namespace MrKupido.Web.Core.Controllers
                 {
                     filters.Add(fli);
                 }
-                Session["filters"] = filters;
+                HttpContext.Session.SetObject("filters", filters.ToArray());
             }
 
             return Json(filters.ToArray());
@@ -140,9 +142,7 @@ namespace MrKupido.Web.Core.Controllers
         [HttpPost]
         public JsonResult DeleteFilter(string value)
         {
-            if (Session["filters"] == null) Session["filters"] = new List<FilterCondition>();
-
-            List<FilterCondition> filters = (List<FilterCondition>)Session["filters"];
+            List<FilterCondition> filters = new List<FilterCondition>(HttpContext.Session.GetObject<FilterCondition[]>("filters"));
 
             if (value != null)
             {
@@ -163,7 +163,7 @@ namespace MrKupido.Web.Core.Controllers
             }
 
 
-            Session["filters"] = filters;
+            HttpContext.Session.SetObject("filters", filters.ToArray());
 
             return Json(filters.ToArray());
         }
@@ -171,10 +171,10 @@ namespace MrKupido.Web.Core.Controllers
         [HttpPost]
         public ActionResult Search()
         {
-            if (Session["filters"] == null) Session["filters"] = new List<FilterCondition>();
-            List<FilterCondition> filters = (List<FilterCondition>)Session["filters"];
+            List<FilterCondition> filters = new List<FilterCondition>(HttpContext.Session.GetObject<FilterCondition[]>("filters"));
 
-            RecipeSearchResult rsr = new RecipeSearchResult(Cache.Search.Search(filters.ToArray(), (string)Session["Language"]).ToArray(), rootUrl);
+            string sessionLanguage = HttpContext.Session.GetString("Language");
+            RecipeSearchResult rsr = new RecipeSearchResult(Cache.Search.Search(filters.ToArray(), sessionLanguage).ToArray(), rootUrl);
 
             //foreach (RecipeSearchResultItem rsri in rsr.Items)
             //{
@@ -205,25 +205,29 @@ namespace MrKupido.Web.Core.Controllers
             rsr.ItemsPerPage = 6;
             rsr.PageIndex = 1; //Session["RecipeSearchResult"] == null ? 1 : ((RecipeSearchResult)Session["RecipeSearchResult"]).PageIndex;
 
-            Session["RecipeSearchResult"] = rsr;
+            HttpContext.Session.SetObject("RecipeSearchResult", rsr);
             return PartialView("_RecipeSearchResultHead", rsr);
         }
 
         public ActionResult RenderSideA(string uniqueName)
         {
-            return PartialView("_RecipeSearchResultSideA", ((RecipeSearchResult)Session["RecipeSearchResult"]).Items.First(rsri => rsri.UniqueName == uniqueName));
+            var rsr = HttpContext.Session.GetObject<RecipeSearchResult>("RecipeSearchResult");
+
+            return PartialView("_RecipeSearchResultSideA", rsr.Items.First(rsri => rsri.UniqueName == uniqueName));
         }
 
         public ActionResult RenderSideB(string uniqueName)
         {
-            return PartialView("_RecipeSearchResultSideB", ((RecipeSearchResult)Session["RecipeSearchResult"]).Items.First(rsri => rsri.UniqueName == uniqueName));
+            var rsr = HttpContext.Session.GetObject<RecipeSearchResult>("RecipeSearchResult");
+
+            return PartialView("_RecipeSearchResultSideB", rsr.Items.First(rsri => rsri.UniqueName == uniqueName));
         }
 
         [HttpPost]
         public ActionResult RefreshRecipeResults(string actionName)
         {
-            if (Session["RecipeSearchResult"] == null) return null;
-            RecipeSearchResult rsr = (RecipeSearchResult)Session["RecipeSearchResult"];
+            var rsr = HttpContext.Session.GetObject<RecipeSearchResult>("RecipeSearchResult");
+            if (rsr == null) return null;
 
             switch (actionName)
             {
@@ -243,7 +247,7 @@ namespace MrKupido.Web.Core.Controllers
                     break;
             }
 
-            Session["RecipeSearchResult"] = rsr;
+            HttpContext.Session.SetObject("RecipeSearchResult", rsr);
 
             return PartialView("_RecipeSearchResultHead", rsr);
         }
@@ -288,7 +292,7 @@ namespace MrKupido.Web.Core.Controllers
                 }
             }
 
-            Session["Location"] = result;
+            HttpContext.Session.SetString("Location", result);
 
             return Json(result);
         }
@@ -296,7 +300,9 @@ namespace MrKupido.Web.Core.Controllers
         [HttpPost]
         public JsonResult GetTipsNTricks()
         {
-            if (!tipsTricks.ContainsKey((string)Session["Language"]))
+            string sessionLanguage = HttpContext.Session.GetString("Language");
+
+            if (!tipsTricks.ContainsKey(sessionLanguage))
             {
                 List<string> lines = new List<string>();
 
@@ -310,10 +316,10 @@ namespace MrKupido.Web.Core.Controllers
                     }
                 }
 
-                tipsTricks.Add((string)Session["Language"], lines.ToArray());
+                tipsTricks.Add(sessionLanguage, lines.ToArray());
             }
 
-            string[] temp = tipsTricks[(string)Session["Language"]];
+            string[] temp = tipsTricks[sessionLanguage];
 
             Random rnd = new Random();
             return Json(temp[rnd.Next(temp.Length)]);
@@ -354,7 +360,7 @@ namespace MrKupido.Web.Core.Controllers
             }
             else if (rtn != null)
             {
-                CultureInitializer.InitializeCulture(null, Session, originalLanguage);
+                CultureInitializer.InitializeCulture(null, HttpContext.Session, originalLanguage);
                 return RedirectToRoute("Recipe" + originalLanguage, new { language = originalLanguage, controller = "Recipe", action = "Details", id = rtn.UniqueName });
             }
             else

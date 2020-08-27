@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using System.Globalization;
 using System.Net;
+using Microsoft.AspNetCore.Http;
 
 namespace MrKupido.Web.Core.Controllers
 {
@@ -43,7 +44,7 @@ namespace MrKupido.Web.Core.Controllers
             User user = null;
 
             #region get the user
-            switch ((string)Session["LoginType"])
+            switch (HttpContext.Session.GetString("LoginType"))
             {
                 case "Google":
                     authState = googleClient.ProcessUserAuthorization();
@@ -91,7 +92,7 @@ namespace MrKupido.Web.Core.Controllers
                     user = new User();
                     user.Email = oauth2Graph.Email;
 
-                    switch ((string)Session["LoginType"])
+                    switch (HttpContext.Session.GetString("LoginType"))
                     {
                         case "Google":
                             user.GoogleId = oauth2Graph.Id;
@@ -173,30 +174,31 @@ namespace MrKupido.Web.Core.Controllers
 
                 this.IssueAuthTicket(user.UserId.ToString(), user, true);
 
-                Session.SetCurrentUser(user);
+                HttpContext.Session.SetCurrentUser(user);
+                string sessionLanguage = HttpContext.Session.GetString("Language");
 
-                string returnUrl = (string)Session["ReturnUrl"];
+                string returnUrl = HttpContext.Session.GetString("ReturnUrl");
                 if (String.IsNullOrEmpty(returnUrl))
                 {
 
                     if (user.FirstLoginUtc == user.LastLoginUtc)
                     {
                         // this is the first time he's here
-                        return RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Help", action = "FirstTimeTutorial" });
+                        return RedirectToRoute("Default", new { language = sessionLanguage, controller = "Help", action = "FirstTimeTutorial" });
                     }
                     else
                     {
-                        return RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Home", action = "Index" });
+                        return RedirectToRoute("Default", new { language = sessionLanguage, controller = "Home", action = "Index" });
                     }
                 }
                 else
                 {
-                    Session["ReturnUrl"] = null;
+                    HttpContext.Session.SetString("ReturnUrl", null);
                     return new RedirectResult(returnUrl);
                 }
             }
 
-            Session["ReturnUrl"] = HttpContext.Request.QueryString["ReturnUrl"];
+            HttpContext.Session.SetString("ReturnUrl", HttpContext.Request.QueryString["ReturnUrl"]);
 
             return View();
         }
@@ -206,7 +208,7 @@ namespace MrKupido.Web.Core.Controllers
         {
             if (loginType == "Facebook")
             {
-                Session["LoginType"] = "Facebook";
+                HttpContext.Session.SetString("LoginType", "Facebook");
 
                 IAuthorizationState authorization = facebookClient.ProcessUserAuthorization();
                 if (authorization == null)
@@ -218,7 +220,7 @@ namespace MrKupido.Web.Core.Controllers
             }
             else if (loginType == "WindowsLive")
             {
-                Session["LoginType"] = "WindowsLive";
+                HttpContext.Session.SetString("LoginType", "WindowsLive");
 
                 IAuthorizationState authorization = windowsLiveClient.ProcessUserAuthorization();
                 if (authorization == null)
@@ -230,7 +232,7 @@ namespace MrKupido.Web.Core.Controllers
             }
             else if (loginType == "Google")
             {
-                Session["LoginType"] = "Google";
+                HttpContext.Session.SetString("LoginType", "Google");
 
                 IAuthorizationState authorization = googleClient.ProcessUserAuthorization();
                 if (authorization == null)
@@ -248,10 +250,11 @@ namespace MrKupido.Web.Core.Controllers
         public ActionResult LogOut()
         {
             FormsAuthentication.SignOut();
-            Session.SetCurrentUser(null);
-            Session.Abandon();
+            HttpContext.Session.SetCurrentUser(null);
+            HttpContext.Session.Abandon();
 
-            return RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Account", action = "LogIn" });
+            string sessionLanguage = HttpContext.Session.GetString("Language");
+            return RedirectToRoute("Default", new { language = sessionLanguage, controller = "Account", action = "LogIn" });
         }
 
 
@@ -277,7 +280,7 @@ namespace MrKupido.Web.Core.Controllers
         [HttpGet]
         public new ActionResult Profile()
         {
-            if (Session.GetCurrentUser() == null)
+            if (HttpContext.Session.GetCurrentUser() == null)
             {
                 return RedirectToAction("LogIn");
             }
@@ -291,7 +294,7 @@ namespace MrKupido.Web.Core.Controllers
         {
             List<String> invalidProperties = new List<String>();
 
-            User sessionUser = Session.GetCurrentUser();
+            User sessionUser = HttpContext.Session.SetCurrentUser GetCurrentUser();
             User user = context.Users.First(u => u.UserId == sessionUser.UserId);
 
             user.LastName = Request.Form["lastname"];
@@ -374,21 +377,23 @@ namespace MrKupido.Web.Core.Controllers
                 }
             }
 
+            string sessionLanguage = HttpContext.Session.GetString("Language");
+
             if (invalidProperties.Count > 0)
             {
-                Session["InvalidProperties"] = invalidProperties.ToArray();
+                HttpContext.Session.SetObject("InvalidProperties", invalidProperties.ToArray());
 
-                return RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Account", action = "Profile" });
+                return RedirectToRoute("Default", new { language = sessionLanguage, controller = "Account", action = "Profile" });
             }
 
-            Session["InvalidProperties"] = null;
+            HttpContext.Session.SetObject("InvalidProperties", new string[0]);
             context.SaveChanges();
 
-            Session.SetCurrentUser(user);
+            HttpContext.Session.SetCurrentUser(user);
 
             System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(user.CultureName);
 
-            return RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Home", action = "Index" });
+            return RedirectToRoute("Default", new { language = sessionLanguage, controller = "Home", action = "Index" });
         }
     }
 }

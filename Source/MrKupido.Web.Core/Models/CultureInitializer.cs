@@ -8,7 +8,7 @@ namespace MrKupido.Web.Core.Models
 {
     public static class CultureInitializer
     {
-        public static string InitializeCulture(HttpRequest request, HttpSessionStateBase session, string routeLanguage)
+        public static string InitializeCulture(HttpRequest request, ISession session, string routeLanguage)
         {
             string cultureName = null;
 
@@ -25,9 +25,9 @@ namespace MrKupido.Web.Core.Models
                 cultureName = "en-GB";
             }
 
-            if (String.IsNullOrEmpty(cultureName) && (session != null) && (session["Language"] != null))
+            if (String.IsNullOrEmpty(cultureName) && (session != null) && (!String.IsNullOrEmpty(session.GetString("Language"))))
             {
-                cultureName = (string)session["Language"];
+                cultureName = session.GetString("Language");
             }
 
             if (String.IsNullOrEmpty(cultureName))
@@ -37,10 +37,10 @@ namespace MrKupido.Web.Core.Models
 
             if ("en-GB,hu-HU".IndexOf(cultureName, StringComparison.InvariantCultureIgnoreCase) == -1) cultureName = "en-GB";
 
-            if ((session != null) && ((string)session["CultureName"] != cultureName))
+            if ((session != null) && (session.GetString("CultureName") != cultureName))
             {
-                session["CultureName"] = cultureName;
-                session["Language"] = new CultureInfo(cultureName).ThreeLetterISOLanguageName;
+                session.SetString("CultureName", cultureName);
+                session.SetString("Language", new CultureInfo(cultureName).ThreeLetterISOLanguageName);
             }
 
             if ((Thread.CurrentThread.CurrentCulture.Name != cultureName) || (Thread.CurrentThread.CurrentUICulture.Name != cultureName))

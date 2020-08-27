@@ -96,7 +96,7 @@ namespace MrKupido.Web.Core.Controllers
         {
             portion = portion / 1000.0f;
 
-            RecipeTreeNode rtn = Cache.Recipe[(string)Session["SelectedRecipeId"]];
+            RecipeTreeNode rtn = Cache.Recipe[HttpContext.Session.GetString("SelectedRecipeId")];
 
             RuntimeIngredient[] ingredients = rtn.GetIngredients(portion, multiplier);
             foreach (RuntimeIngredient i in ingredients)
@@ -115,7 +115,7 @@ namespace MrKupido.Web.Core.Controllers
         {
             portion = portion / 1000.0f;
 
-            RecipeTreeNode rtn = Cache.Recipe[(string)Session["SelectedRecipeId"]];
+            RecipeTreeNode rtn = Cache.Recipe[HttpContext.Session.GetString("SelectedRecipeId")];
 
             IDirection[] dirs = rtn.GetDirections(portion, multiplier);
             ValidateDirectionUrls(dirs);
