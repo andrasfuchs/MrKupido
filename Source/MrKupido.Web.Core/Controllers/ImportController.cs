@@ -68,7 +68,7 @@ namespace MrKupido.Web.Core.Controllers
 
             // Original directions
             List<string> originalDirections = new List<string>();
-            originalDirections.AddRange(JsonSerializer.Deserialize<string[]>(WebUtility.HtmlDecode(importedRecipe.OriginalDirections))));
+            originalDirections.AddRange(JsonSerializer.Deserialize<string[]>(WebUtility.HtmlDecode(importedRecipe.OriginalDirections)));
 
 
             // Directions

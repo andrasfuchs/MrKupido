@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -268,11 +270,9 @@ namespace MrKupido.Web.Core.Controllers
                 float latitude = Single.Parse(lat, ci);
                 float longitude = Single.Parse(lon, ci);
 
-                DataContractJsonSerializer dcjs = new DataContractJsonSerializer(typeof(WikiLocationRoot));
-
                 req = (HttpWebRequest)HttpWebRequest.Create("http://api.wikilocation.org/articles?lat=" + latitude.ToString("0.000000", ci) + "&lng=" + longitude.ToString("0.000000", ci) + "&limit=1&radius=10000&type=city");
                 resp = (HttpWebResponse)req.GetResponse();
-                WikiLocationRoot responseJson = (WikiLocationRoot)dcjs.ReadObject(resp.GetResponseStream());
+                WikiLocationRoot responseJson = JsonSerializer.Deserialize<WikiLocationRoot>(resp.GetResponseStream());
                 resp.Close();
 
                 if (responseJson.articles.Count > 0) result = responseJson.articles[0].Title;
