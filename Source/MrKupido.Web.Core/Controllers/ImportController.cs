@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Text;
+using System.Net;
 
 namespace MrKupido.Web.Core.Controllers
 {
@@ -68,12 +69,12 @@ namespace MrKupido.Web.Core.Controllers
 
             // Original directions
             List<string> originalDirections = new List<string>();
-            originalDirections.AddRange(dcjs.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(HttpUtility.HtmlDecode(importedRecipe.OriginalDirections)))) as string[]);
+            originalDirections.AddRange(dcjs.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(WebUtility.HtmlDecode(importedRecipe.OriginalDirections)))) as string[]);
 
 
             // Directions
             List<string> directions = new List<string>();
-            directions.AddRange(dcjs.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(HttpUtility.HtmlDecode(importedRecipe.Directions)))) as string[]);
+            directions.AddRange(dcjs.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(WebUtility.HtmlDecode(importedRecipe.Directions)))) as string[]);
 
             List<string> directionList = new List<string>();
             foreach (string direction in directions)
@@ -128,7 +129,7 @@ namespace MrKupido.Web.Core.Controllers
 
             // TODO: remove special characters
             bool isHtmlTag = false;
-            directions = HttpUtility.HtmlDecode(directions);
+            directions = WebUtility.HtmlDecode(directions);
             foreach (char d in directions.Replace("\n", "").Replace("</li>", "\n"))
             {
                 if (d == '<') isHtmlTag = true;
