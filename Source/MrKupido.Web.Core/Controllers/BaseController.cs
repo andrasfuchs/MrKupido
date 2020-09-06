@@ -52,10 +52,8 @@ namespace MrKupido.Web.Core.Controllers
         //    }
         //}
 
-        protected override void Initialize(HttpContext requestContext)
+        protected void Initialize(HttpContext requestContext)
         {
-            base.Initialize(requestContext);
-
             string sessionId = requestContext.Session.Id;
             lock (CurrentSessions)
             {
