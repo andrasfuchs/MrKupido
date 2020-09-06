@@ -85,9 +85,9 @@ namespace MrKupido.Web.Core.Controllers
         {
             return Json(
                 new string[] {
-                    String.Format(MrKupido.Web.Resources.Recipe.Details.EquipmentMissing, 1),
-                    String.Format(MrKupido.Web.Resources.Recipe.Details.PortionHint, multiplier),
-                    MrKupido.Web.Resources.Recipe.Details.ChefNumberOne
+                    String.Format(MrKupido.Web.Core.Resources.Recipe.Details.EquipmentMissing, 1),
+                    String.Format(MrKupido.Web.Core.Resources.Recipe.Details.PortionHint, multiplier),
+                    MrKupido.Web.Core.Resources.Recipe.Details.ChefNumberOne
                 });
         }
 

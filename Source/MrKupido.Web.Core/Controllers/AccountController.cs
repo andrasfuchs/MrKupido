@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using System.Globalization;
 using System.Net;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Configuration;
 
 namespace MrKupido.Web.Core.Controllers
 {
@@ -18,23 +19,36 @@ namespace MrKupido.Web.Core.Controllers
     {
         private static MrKupido.DataAccess.MrKupidoContext context = new MrKupido.DataAccess.MrKupidoContext("Name=MrKupidoContext");
 
-        private static readonly FacebookClient facebookClient = new FacebookClient
-        {
-            ClientIdentifier = ConfigurationManager.AppSettings["facebookAppID"],
-            ClientCredentialApplicator = ClientCredentialApplicator.PostParameter(ConfigurationManager.AppSettings["facebookAppSecret"])
-        };
+        private readonly IConfiguration _config;
 
-        private static readonly WindowsLiveClient windowsLiveClient = new WindowsLiveClient
-        {
-            ClientIdentifier = ConfigurationManager.AppSettings["windowsLiveAppID"],
-            ClientCredentialApplicator = ClientCredentialApplicator.PostParameter(ConfigurationManager.AppSettings["windowsLiveAppSecret"])
-        };
+        private readonly FacebookClient facebookClient;
 
-        private static readonly GoogleClient googleClient = new GoogleClient
+        private readonly WindowsLiveClient windowsLiveClient;
+
+        private readonly GoogleClient googleClient;
+
+        public AccountController([FromServices] IConfiguration config)
         {
-            ClientIdentifier = ConfigurationManager.AppSettings["googleClientID"],
-            ClientCredentialApplicator = ClientCredentialApplicator.PostParameter(ConfigurationManager.AppSettings["googleClientSecret"])
-        };
+            _config = config;
+
+            facebookClient = new FacebookClient
+            {
+                ClientIdentifier = _config["facebookAppID"],
+                ClientCredentialApplicator = ClientCredentialApplicator.PostParameter(_config["facebookAppSecret"])
+            };
+
+            windowsLiveClient = new WindowsLiveClient
+            {
+                ClientIdentifier = _config["windowsLiveAppID"],
+                ClientCredentialApplicator = ClientCredentialApplicator.PostParameter(_config["windowsLiveAppSecret"])
+            };
+
+            googleClient = new GoogleClient
+            {
+                ClientIdentifier = _config["googleClientID"],
+                ClientCredentialApplicator = ClientCredentialApplicator.PostParameter(_config["googleClientSecret"])
+            };
+        }
 
         [HttpGet]
         public ActionResult LogIn()
@@ -273,7 +287,7 @@ namespace MrKupido.Web.Core.Controllers
             Cookie cookie = new Cookie(FormsAuthentication.FormsCookieName, ticketString);
             if (rememberMe) cookie.Expires = DateTime.Now.AddDays(10);
 
-            HttpContext.Response.Cookies.Add(cookie);
+            HttpContext.Response.Cookies.Append(cookie);
         }
 
         [Authorize]
