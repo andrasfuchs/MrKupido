@@ -308,7 +308,7 @@ namespace MrKupido.Web.Core.Controllers
 
                 for (int i = 0; i < 100; i++)
                 {
-                    string line = MrKupido.Web.Resources.Shared.TipsAndTricks.ResourceManager.GetString("TipsAndTricks" + i);
+                    string line = MrKupido.Web.Core.Resources.Shared.TipsAndTricks.ResourceManager.GetString("TipsAndTricks" + i);
 
                     if (!String.IsNullOrEmpty(line))
                     {

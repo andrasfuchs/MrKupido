@@ -316,7 +316,7 @@ namespace MrKupido.Web.Core.Controllers
                 else
                 {
                     invalidProperties.Add("Height");
-                    invalidProperties.Add(MrKupido.Web.Resources.Account.Profile.ResourceManager.GetString("HeightValidation"));
+                    invalidProperties.Add(MrKupido.Web.Core.Resources.Account.Profile.ResourceManager.GetString("HeightValidation"));
                     user.Height = null;
                 }
             }
@@ -335,7 +335,7 @@ namespace MrKupido.Web.Core.Controllers
                 else
                 {
                     invalidProperties.Add("Weight");
-                    invalidProperties.Add(MrKupido.Web.Resources.Account.Profile.ResourceManager.GetString("WeightValidation"));
+                    invalidProperties.Add(MrKupido.Web.Core.Resources.Account.Profile.ResourceManager.GetString("WeightValidation"));
                     user.Weight = null;
                 }
             }
@@ -354,7 +354,7 @@ namespace MrKupido.Web.Core.Controllers
                 else
                 {
                     invalidProperties.Add("DateOfBirth");
-                    invalidProperties.Add(MrKupido.Web.Resources.Account.Profile.ResourceManager.GetString("DateOfBirthValidation"));
+                    invalidProperties.Add(MrKupido.Web.Core.Resources.Account.Profile.ResourceManager.GetString("DateOfBirthValidation"));
                     user.DateOfBirth = null;
                 }
             }
@@ -371,7 +371,7 @@ namespace MrKupido.Web.Core.Controllers
 
                     invalidProperties.Add(ve.PropertyName);
 
-                    string errorMsg = MrKupido.Web.Resources.Account.Profile.ResourceManager.GetString(ve.PropertyName + "Validation");
+                    string errorMsg = MrKupido.Web.Core.Resources.Account.Profile.ResourceManager.GetString(ve.PropertyName + "Validation");
                     if (errorMsg == null) errorMsg = ve.ErrorMessage;
                     invalidProperties.Add(errorMsg);
                 }
