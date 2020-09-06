@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Http;
 using System.IO;
 using System.Text;
 using System.Net;
+using System.Text.Json;
 
 namespace MrKupido.Web.Core.Controllers
 {
@@ -55,11 +56,9 @@ namespace MrKupido.Web.Core.Controllers
             ImportedRecipe importedRecipe = db.ImportedRecipes.FirstOrDefault(r => (r.UniqueName == id) && (r.Language == sessionLanguage));
             if (importedRecipe == null) return RedirectToAction("Index", "HomeController");
 
-            DataContractJsonSerializer dcjs = new DataContractJsonSerializer(typeof(string[]));
-
             // Ingredients
             List<string> ingredientList = new List<string>();
-            ingredientList.AddRange(dcjs.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(importedRecipe.Ingredients))) as string[]);
+            ingredientList.AddRange(JsonSerializer.Deserialize<string[]>(importedRecipe.Ingredients));
 
             StringBuilder ingredients = new StringBuilder();
             foreach (string ingredient in ingredientList)
@@ -69,12 +68,12 @@ namespace MrKupido.Web.Core.Controllers
 
             // Original directions
             List<string> originalDirections = new List<string>();
-            originalDirections.AddRange(dcjs.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(WebUtility.HtmlDecode(importedRecipe.OriginalDirections)))) as string[]);
+            originalDirections.AddRange(JsonSerializer.Deserialize<string[]>(WebUtility.HtmlDecode(importedRecipe.OriginalDirections))));
 
 
             // Directions
             List<string> directions = new List<string>();
-            directions.AddRange(dcjs.ReadObject(new MemoryStream(Encoding.UTF8.GetBytes(WebUtility.HtmlDecode(importedRecipe.Directions)))) as string[]);
+            directions.AddRange(JsonSerializer.Deserialize<string[]>(WebUtility.HtmlDecode(importedRecipe.Directions)));
 
             List<string> directionList = new List<string>();
             foreach (string direction in directions)
@@ -265,10 +264,7 @@ namespace MrKupido.Web.Core.Controllers
             // ingredients
             string[] ingredientList = ingredients.Split(new string[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
 
-            DataContractJsonSerializer dcjs = new DataContractJsonSerializer(typeof(string[]));
-            MemoryStream ms = new MemoryStream();
-            dcjs.WriteObject(ms, ingredientList);
-            recipe.Ingredients = Encoding.UTF8.GetString(ms.ToArray());
+            recipe.Ingredients = JsonSerializer.Serialize(ingredientList);
 
 
             // directions
@@ -277,7 +273,7 @@ namespace MrKupido.Web.Core.Controllers
             {
                 throw new MrKupidoException("Invalid directions! Every step should be in an ordered list!");
             }
-            directions = HttpUtility.HtmlDecode(directions.Replace("<ol>", "").Replace("</ol>", ""));
+            directions = WebUtility.HtmlDecode(directions.Replace("<ol>", "").Replace("</ol>", ""));
 
             while (directions.IndexOf("  ") > -1)
             {
@@ -290,9 +286,8 @@ namespace MrKupido.Web.Core.Controllers
                 directionsList[i] = HtmlUtils.StripTagsCharArray(directionsList[i]).Trim();
             }
 
-            ms = new MemoryStream();
-            dcjs.WriteObject(ms, directionsList);
-            recipe.Directions = Encoding.UTF8.GetString(ms.ToArray());
+
+            recipe.Directions = JsonSerializer.Serialize(directionsList);
 
             db.SaveChanges();
 
