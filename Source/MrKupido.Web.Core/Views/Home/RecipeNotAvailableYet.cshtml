@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = MrKupido.Web.Resources.Home.RecipeNotAvailableYet.PageTitle + " - " + MrKupido.Web.Resources.Shared.Layout.PageTitle;
+    ViewBag.Title = MrKupido.Web.Core.Resources.Home.RecipeNotAvailableYet.PageTitle + " - " + MrKupido.Web.Core.Resources.Shared.Layout.PageTitle;
 }
 <header class="nosearch">
     <a runat="server" href="~/">
@@ -9,16 +9,16 @@
 <div>
     <details id="browser" open class="alwaysopen">
         <summary>
-            <h1>@MrKupido.Web.Resources.Home.RecipeNotAvailableYet.ErrorHead</h1>
-            <h3>@MrKupido.Web.Resources.Home.RecipeNotAvailableYet.ErrorSummary</h3>
+            <h1>@MrKupido.Web.Core.Resources.Home.RecipeNotAvailableYet.ErrorHead</h1>
+            <h3>@MrKupido.Web.Core.Resources.Home.RecipeNotAvailableYet.ErrorSummary</h3>
         </summary>
         <hr class="space" />        
     </details>
 </div>
 <div class="formbuttons">
-    <input type="button" value="@MrKupido.Web.Resources.Home.RecipeNotAvailableYet.HomeButton" onclick="window.location='../../@Session["Language"]'" />
+    <input type="button" value="@MrKupido.Web.Core.Resources.Home.RecipeNotAvailableYet.HomeButton" onclick="window.location='../../@Session["Language"]'" />
     @using (Html.BeginForm("IgnoreOldBrowser", "Home", new { }))
     {
-        <input type="submit" value="@MrKupido.Web.Resources.Home.RecipeNotAvailableYet.UploadRecipeButton" />
+        <input type="submit" value="@MrKupido.Web.Core.Resources.Home.RecipeNotAvailableYet.UploadRecipeButton" />
     }
 </div>

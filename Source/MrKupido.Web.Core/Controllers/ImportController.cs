@@ -16,6 +16,7 @@ using System.IO;
 using System.Text;
 using System.Net;
 using System.Text.Json;
+using Microsoft.AspNetCore.Hosting;
 
 namespace MrKupido.Web.Core.Controllers
 {
@@ -23,6 +24,12 @@ namespace MrKupido.Web.Core.Controllers
     {
         private static MrKupidoContext db = new MrKupidoContext("Name=MrKupidoContext");
         private static char[] whiteSpaces = new char[] { ' ', ',', '.', '!', '?', ')', '(', '"', '&', ';', '\'', '[', ']', ':', '\\', '_', '`', '„', '<', '>', '\r', '\n', '”' };
+        private IWebHostEnvironment _env;
+
+        public ImportController([FromServices] IWebHostEnvironment env)
+        {
+            _env = env;
+        }
 
         [Authorize]
         public ActionResult RecipeList()
@@ -148,7 +155,7 @@ namespace MrKupido.Web.Core.Controllers
             // use openoffice (hunspell)
             string culture = System.Threading.Thread.CurrentThread.CurrentUICulture.Name.Replace("-", "_");
             string hunspellFilename = Path.GetFullPath(@".\" + culture + @"\") + culture;
-            hunspellFilename = Server.MapPath(@"~\Content\spelling\" + culture + @"\") + culture;
+            hunspellFilename = $"{_env.ContentRootPath}\\spelling\\{culture}\\{culture}";
             Hunspell hunspell = new Hunspell(hunspellFilename + ".aff", hunspellFilename + ".dic");
 
             foreach (string dir in dirs.ToString().Split(new char[] { '\n' }, StringSplitOptions.RemoveEmptyEntries))

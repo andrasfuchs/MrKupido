@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -73,15 +74,15 @@ namespace MrKupido.Web.Core.Controllers
 
             CurrentSessions[sessionId].RequestContext = requestContext;
             // Grab the user's login information from FormsAuth
-            if (this.User.Identity != null && this.User.Identity is FormsIdentity)
-            {
-                User loggedInUser = CurrentSessions[sessionId].User.FromJSONString(((FormsIdentity)this.User.Identity).Ticket.UserData);
+            //if (this.User.Identity != null && this.User.Identity is FormsIdentity)
+            //{
+            //    User loggedInUser = CurrentSessions[sessionId].User.FromJSONString(((FormsIdentity)this.User.Identity).Ticket.UserData);
 
-                if ((CurrentSessions[sessionId].User == null) || (CurrentSessions[sessionId].User.UserId != loggedInUser.UserId))
-                {
-                    CurrentSessions[sessionId].User = loggedInUser;
-                }
-            }
+            //    if ((CurrentSessions[sessionId].User == null) || (CurrentSessions[sessionId].User.UserId != loggedInUser.UserId))
+            //    {
+            //        CurrentSessions[sessionId].User = loggedInUser;
+            //    }
+            //}
 
             if (requestContext.Session.GetString("WebAppFileVersion") == null)
             {
@@ -100,7 +101,7 @@ namespace MrKupido.Web.Core.Controllers
             if (action == "LOGIN")
             {
                 fm = String.Format("User '{0}' logged in.", username);
-                parameters += String.Format(", user-agent: '{0}'", CurrentSessions[sessionId].RequestContext.Request.UserAgent);
+                parameters += String.Format(", user-agent: '{0}'", CurrentSessions[sessionId].RequestContext.Request.Headers["User-Agent"]);
             }
 
             if (action == "LOGOUT")
@@ -181,19 +182,17 @@ namespace MrKupido.Web.Core.Controllers
 
         public static string GetIPAddress(HttpRequest request)
         {
-            string szRemoteAddr = request.UserHostAddress;
-            string szXForwardedFor = request.Headers["Via"] ?? request.ServerVariables["X_FORWARDED_FOR"];
-            string szIP = "";
+            string ip = request.HttpContext.Connection.RemoteIpAddress.ToString();
 
-            if (szXForwardedFor == null)
+            //https://en.wikipedia.org/wiki/Localhost
+            //127.0.0.1    localhost
+            //::1          localhost
+            if (ip == "::1")
             {
-                szIP = szRemoteAddr;
+                ip = Dns.GetHostEntry(Dns.GetHostName()).AddressList[2].ToString();
             }
-            else
-            {
-                szIP = szXForwardedFor;
-            }
-            return szIP;
+
+            return ip.ToString();
         }
     }
 }

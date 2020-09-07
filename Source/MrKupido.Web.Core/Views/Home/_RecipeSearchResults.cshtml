@@ -1,7 +1,7 @@
-﻿@model MrKupido.Web.Models.RecipeSearchResultItem[]
-@using MrKupido.Web.Models
+﻿@model MrKupido.Web.Core.Models.RecipeSearchResultItem[]
+@using MrKupido.Web.Core.Models
 <ul>
-    @{MrKupido.Web.Models.RecipeSearchResultItem[] rsri = (Model == null ? new MrKupido.Web.Models.RecipeSearchResultItem[0] : Model);}
+    @{MrKupido.Web.Core.Models.RecipeSearchResultItem[] rsri = (Model == null ? new MrKupido.Web.Core.Models.RecipeSearchResultItem[0] : Model);}
     @for (int i = 0; i < rsri.Length; i++)
     { 
         <li id="@rsri[i].UniqueName.Replace("[","_").Replace("]","_")">

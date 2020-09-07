@@ -1,7 +1,7 @@
-﻿@using MrKupido.Web.Models
+﻿@using MrKupido.Web.Core.Models
 
 @{
-    ViewBag.Title = MrKupido.Web.Resources.Account.LogIn.PageTitle + " - " + MrKupido.Web.Resources.Shared.Layout.PageTitle;
+    ViewBag.Title = MrKupido.Web.Core.Resources.Account.LogIn.PageTitle + " - " + MrKupido.Web.Core.Resources.Shared.Layout.PageTitle;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -47,18 +47,18 @@
     <details id="login" open class="alwaysopen">
         <summary>
             <h1>
-                @MrKupido.Web.Resources.Account.LogIn.LogInHeader</h1>
+                @MrKupido.Web.Core.Resources.Account.LogIn.LogInHeader</h1>
             <h2>
                 
             </h2>
         </summary>
         <hr />
         <ul>
-            <li><a href="javascript:_gaq.push(['_trackEvent', 'UserAction', 'Login', 'Google']); $('#loginType').val('Google'); $('#openIdForm').submit();">@MrKupido.Web.Resources.Account.LogIn.LogInWith
+            <li><a href="javascript:_gaq.push(['_trackEvent', 'UserAction', 'Login', 'Google']); $('#loginType').val('Google'); $('#openIdForm').submit();">@MrKupido.Web.Core.Resources.Account.LogIn.LogInWith
                 <img runat="server" src="~/Content/svg/authlogo_google.svg" alt="Google" width="270px" /></a> </li>
-            <li><a href="javascript:_gaq.push(['_trackEvent', 'UserAction', 'Login', 'Facebook']); $('#loginType').val('Facebook'); $('#openIdForm').submit();">@MrKupido.Web.Resources.Account.LogIn.ConnectWith
+            <li><a href="javascript:_gaq.push(['_trackEvent', 'UserAction', 'Login', 'Facebook']); $('#loginType').val('Facebook'); $('#openIdForm').submit();">@MrKupido.Web.Core.Resources.Account.LogIn.ConnectWith
                 <img runat="server" src="~/Content/svg/authlogo_facebook.svg" alt="Facebook" width="270px" /></a> </li>
-            <li><a href="javascript:_gaq.push(['_trackEvent', 'UserAction', 'Login', 'Windows Live']); $('#loginType').val('WindowsLive'); $('#openIdForm').submit();">@MrKupido.Web.Resources.Account.LogIn.LogInWith
+            <li><a href="javascript:_gaq.push(['_trackEvent', 'UserAction', 'Login', 'Windows Live']); $('#loginType').val('WindowsLive'); $('#openIdForm').submit();">@MrKupido.Web.Core.Resources.Account.LogIn.LogInWith
                 <img runat="server" src="~/Content/svg/authlogo_windowslive.svg" alt="Windows Live" width="270px" /></a> </li>
         </ul>
     </details>

@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -16,27 +18,29 @@ namespace MrKupido.Web.Core.Controllers
 {
     public class HomeController : BaseController
     {
+        private readonly IWebHostEnvironment _env;
         private readonly ILogger<HomeController> _logger;
         private static Dictionary<string, string[]> tipsTricks = new Dictionary<string, string[]>();
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController([FromServices] IWebHostEnvironment env, [FromServices] ILogger<HomeController> logger)
         {
+            _env = env;
             _logger = logger;
         }
 
         //[Authorize]
-        public ActionResult Index()
+        public ActionResult Index([FromQuery] string q)
         {
             HttpContext.Session.SetObject("InvalidProperties", new string[0]);
 
-            if (Request.Params["q"] != null)
+            if (q != null)
             {
                 List<FilterCondition> filters = new List<FilterCondition>();
 
 
-                foreach (string q in Request.Params["q"].Split(','))
+                foreach (string query in q.Split(','))
                 {
-                    string filterString = q.Trim();
+                    string filterString = query.Trim();
 
                     int colonIndex = filterString.IndexOf(':');
 
@@ -94,7 +98,7 @@ namespace MrKupido.Web.Core.Controllers
 
             foreach (RecipeSearchQueryResults sqr in sqrs.ToArray())
             {
-                sqr.IconUrl = String.IsNullOrEmpty(sqr.IconUrl) ? null : VirtualPathUtility.ToAbsolute(sqr.IconUrl);
+                sqr.IconUrl = String.IsNullOrEmpty(sqr.IconUrl) ? null : $"{_env.ContentRootPath}\\{sqr.IconUrl}";
             }
 
             return Json(sqrs.ToArray());
@@ -261,36 +265,20 @@ namespace MrKupido.Web.Core.Controllers
 
             // http://api.wikilocation.org/articles?lat=51.500688&lng=-0.124411&limit=1
 
-            HttpWebRequest req = null;
-            HttpWebResponse resp = null;
-
             try
             {
                 CultureInfo ci = new CultureInfo("en-US");
                 float latitude = Single.Parse(lat, ci);
                 float longitude = Single.Parse(lon, ci);
 
-                req = (HttpWebRequest)HttpWebRequest.Create("http://api.wikilocation.org/articles?lat=" + latitude.ToString("0.000000", ci) + "&lng=" + longitude.ToString("0.000000", ci) + "&limit=1&radius=10000&type=city");
-                resp = (HttpWebResponse)req.GetResponse();
-                WikiLocationRoot responseJson = JsonSerializer.Deserialize<WikiLocationRoot>(resp.GetResponseStream());
-                resp.Close();
+                HttpClient apiClient = new HttpClient();
+                string jsonResponse = apiClient.GetStringAsync($"http://api.wikilocation.org/articles?lat={latitude.ToString("0.000000", ci)}&lng={longitude.ToString("0.000000", ci)}&limit=1&radius=10000&type=city").Result;
 
-                if (responseJson.articles.Count > 0) result = responseJson.articles[0].Title;
+                WikiLocationRoot wikiLocation = JsonSerializer.Deserialize<WikiLocationRoot>(jsonResponse);
+
+                if (wikiLocation.articles.Count > 0) result = wikiLocation.articles[0].Title;
             }
             catch { }
-            finally
-            {
-                if (req != null)
-                {
-                    req = null;
-                }
-
-                if (resp != null)
-                {
-                    resp.Close();
-                    resp = null;
-                }
-            }
 
             HttpContext.Session.SetString("Location", result);
 

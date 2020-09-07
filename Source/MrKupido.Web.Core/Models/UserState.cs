@@ -55,16 +55,16 @@ namespace MrKupido.Web.Core.Models
             set
             {
                 StringBuilder sb = new StringBuilder();
-                foreach (string key in value.Request.Params.AllKeys)
+                foreach (string key in value.Request.Query.Keys)
                 {
                     if ((key == "ASP.NET_SessionId") || (key.ToUpper() == key) || key.StartsWith("__") || (key.StartsWith("DotNetOpenAuth.WebServerClient.XSRF-Session"))) continue;
                     sb.Append(key);
                     sb.Append(':');
-                    sb.Append(value.Request.Params[key]);
+                    sb.Append(value.Request.Query[key]);
                     sb.Append(',');
                 }
 
-                OnChanged("URL:" + value.Request.Url, sb.ToString());
+                OnChanged("URL:" + value.Request.Path, sb.ToString());
 
                 lastRequest = value;
                 LastActionUTC = DateTime.UtcNow;

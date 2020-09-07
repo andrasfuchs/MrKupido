@@ -1,4 +1,4 @@
-﻿@using MrKupido.Web.Models
+﻿@using MrKupido.Web.Core.Models
 @this.ScriptBlock(
     @<script type="text/javascript">
 
@@ -76,9 +76,9 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="content-language" content="@MrKupido.Web.Resources.Shared.Layout.Language" />
-    <meta name="description" content="@MrKupido.Web.Resources.Shared.Layout.Description" />
-    <meta name="keywords" content="@MrKupido.Web.Resources.Shared.Layout.Keywords">
+    <meta http-equiv="content-language" content="@MrKupido.Web.Core.Resources.Shared.Layout.Language" />
+    <meta name="description" content="@MrKupido.Web.Core.Resources.Shared.Layout.Description" />
+    <meta name="keywords" content="@MrKupido.Web.Core.Resources.Shared.Layout.Keywords">
 
     <title>@ViewBag.Title</title>
    
@@ -116,13 +116,13 @@
         <hr class="single" />
         <footer>
             <p>
-                <a runat="server" href="~/@Session["Language"]">@MrKupido.Web.Resources.Shared.Layout.Homepage</a>
-                |<a runat="server" href="~/@Session["Language"]/account/Profile">@MrKupido.Web.Resources.Shared.Layout.Profile</a>
-                |<a href="mailto:help@mrkupido.com">@MrKupido.Web.Resources.Shared.Layout.Contact</a>
-                |<a runat="server" href="~/@Session["Language"]/help/PrivacyPolicy">@MrKupido.Web.Resources.Shared.Layout.Disclaimer</a>
+                <a runat="server" href="~/@Session["Language"]">@MrKupido.Web.Core.Resources.Shared.Layout.Homepage</a>
+                |<a runat="server" href="~/@Session["Language"]/account/Profile">@MrKupido.Web.Core.Resources.Shared.Layout.Profile</a>
+                |<a href="mailto:help@mrkupido.com">@MrKupido.Web.Core.Resources.Shared.Layout.Contact</a>
+                |<a runat="server" href="~/@Session["Language"]/help/PrivacyPolicy">@MrKupido.Web.Core.Resources.Shared.Layout.Disclaimer</a>
             </p>
             <p>
-                &copy; 2012-@DateTime.Now.Year.ToString() <a href="http://hu.linkedin.com/pub/andras-fuchs/32/355/924">Andras Fuchs</a> @MrKupido.Web.Resources.Shared.Layout.AllRightsReserved
+                &copy; 2012-@DateTime.Now.Year.ToString() <a href="http://hu.linkedin.com/pub/andras-fuchs/32/355/924">Andras Fuchs</a> @MrKupido.Web.Core.Resources.Shared.Layout.AllRightsReserved
             </p>
         </footer>
     </div>
@@ -130,10 +130,10 @@
 
 
 @*    <div id="reviewer" class="on">
-        <span id="reviewSection">@MrKupido.Web.Resources.Shared.Layout.ReviewText</span>
-        @{ string placeHolderText = MrKupido.Web.Resources.Shared.Layout.ReviewPlaceholder + " v" + (Session["WebAppFileVersion"] as string); }
+        <span id="reviewSection">@MrKupido.Web.Core.Resources.Shared.Layout.ReviewText</span>
+        @{ string placeHolderText = MrKupido.Web.Core.Resources.Shared.Layout.ReviewPlaceholder + " v" + (Session["WebAppFileVersion"] as string); }
         <input id="reviewCommentText" placeholder='@placeHolderText' size="60" onkeydown="javascript:reviewCommentChanged(event);">
-        <input id="reviewCommentButton" value="@MrKupido.Web.Resources.Shared.Layout.ReviewButton" type="button" onclick="javascript: submitReviewComment();">
+        <input id="reviewCommentButton" value="@MrKupido.Web.Core.Resources.Shared.Layout.ReviewButton" type="button" onclick="javascript: submitReviewComment();">
     </div>*@
 
 
@@ -148,7 +148,7 @@
 
     @this.WriteScriptBlocks()
 
-    @{ string placeHolderText = @MrKupido.Web.Resources.Shared.Layout.FeedbackAndSupport + " v" + (Session["WebAppFileVersion"] as string); }
+    @{ string placeHolderText = @MrKupido.Web.Core.Resources.Shared.Layout.FeedbackAndSupport + " v" + (Session["WebAppFileVersion"] as string); }
 
     <!-- UserVoice JavaScript SDK (only needed once on a page) -->
     <script>(function () { var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true; uv.src = '//widget.uservoice.com/bQqIiv9tekPJeh4cNURJQ.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s) })()</script>

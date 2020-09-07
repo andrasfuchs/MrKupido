@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using MrKupido.Model;
 using System;
+using System.Net;
 using System.Text.Json;
 
 namespace MrKupido.Web.Core.Models
@@ -9,16 +10,15 @@ namespace MrKupido.Web.Core.Models
     {
         public static User GetCurrentUser(this ISession session)
         {
-            if (session.GetCurrentUser() == null)
-            {
-                HttpCookie authCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
-                if (authCookie != null)
-                {
-                    FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
-                    session.SetCurrentUser(new User().FromJSONString(ticket.UserData));
-                }
-            }
-
+            //if (session.GetCurrentUser() == null)
+            //{
+            //    HttpCookie authCookie = HttpContext.Current.Request.Cookies[FormsAuthentication.FormsCookieName];
+            //    if (authCookie != null)
+            //    {
+            //        FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+            //        session.SetCurrentUser(new User().FromJSONString(ticket.UserData));
+            //    }
+            //}
 
             return session.GetObject<MrKupido.Model.User>("CurrentUser");
         }

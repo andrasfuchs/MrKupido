@@ -5,6 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controllers\AccountController.cs" />
+    <Compile Remove="Models\NamedRoute.cs" />
+    <Compile Remove="Models\RouteCollectionExtensions.cs" />
     <Compile Remove="Models\ViewPageExtensions.cs" />
   </ItemGroup>
 

@@ -1,8 +1,8 @@
 ﻿@model object[]
 @{
-    ViewBag.Title = String.Format(MrKupido.Web.Resources.Recipe.Details.PageTitle, ((MrKupido.Processor.Model.RecipeTreeNode)Model[0]).LongName) + " - " + MrKupido.Web.Resources.Shared.Layout.PageTitle;
+    ViewBag.Title = String.Format(MrKupido.Web.Core.Resources.Recipe.Details.PageTitle, ((MrKupido.Processor.Model.RecipeTreeNode)Model[0]).LongName) + " - " + MrKupido.Web.Core.Resources.Shared.Layout.PageTitle;
 }
-@using MrKupido.Web.Models
+@using MrKupido.Web.Core.Models
 @this.ScriptBlock(
     @<script type="text/javascript">
          var popupToClose = null;
@@ -230,18 +230,18 @@
         <div style="display: none">
             <hr />
             <div id="equipmentlist">
-                <h2>@MrKupido.Web.Resources.Recipe.Details.NecessaryEquipment</h2>
-                <h3>@String.Format(MrKupido.Web.Resources.Recipe.Details.EquipmentMissing, 2)</h3>
+                <h2>@MrKupido.Web.Core.Resources.Recipe.Details.NecessaryEquipment</h2>
+                <h3>@String.Format(MrKupido.Web.Core.Resources.Recipe.Details.EquipmentMissing, 2)</h3>
                 <div id="_RecipeEquipment">
                     @*@{ Html.RenderPartial("_RecipeEquipment", (MrKupido.Library.IEquipment[])Model[2]); }*@
                 </div>
             </div>
         </div>
         <div id="ingredientlist">
-            <h2>@MrKupido.Web.Resources.Recipe.Details.Ingredients</h2>
+            <h2>@MrKupido.Web.Core.Resources.Recipe.Details.Ingredients</h2>
             <h3>
                 <input type="button" id="minusbutton1" value="-" onclick="portionSubtract();" class="littlebutton"/>
-                <span class="portionselector-trigger">@String.Format(MrKupido.Web.Resources.Recipe.Details.PortionHint, 4)</span>
+                <span class="portionselector-trigger">@String.Format(MrKupido.Web.Core.Resources.Recipe.Details.PortionHint, 4)</span>
                 <input type="button" id="plusbutton1" value="+" onclick="portionAdd();" class="littlebutton"/>
             </h3>
             <div id="portionselectorwrapper">
@@ -273,13 +273,13 @@
             </div>
 
             <div id="_RecipeIngredients">
-                @{ Html.RenderPartial("_RecipeIngredients", (MrKupido.Processor.Model.RuntimeIngredient[])Model[3], new ViewDataDictionary()); }
+                @{ Html.RenderPartial("_RecipeIngredients", (MrKupido.Processor.Model.RuntimeIngredient[])Model[3], new ViewDataDictionary()); }                
             </div>
         </div>
         <hr class="space" />
         <div id="directionlist">
-            <h2>@MrKupido.Web.Resources.Recipe.Details.Directions</h2>
-            <h3>@MrKupido.Web.Resources.Recipe.Details.ChefNumberOne</h3>
+            <h2>@MrKupido.Web.Core.Resources.Recipe.Details.Directions</h2>
+            <h3>@MrKupido.Web.Core.Resources.Recipe.Details.ChefNumberOne</h3>
             <div id="_RecipeDirections">
                 @{ Html.RenderPartial("_RecipeDirections", (MrKupido.Library.IDirection[])Model[4], new ViewDataDictionary()); }
             </div>
@@ -287,15 +287,15 @@
         <div style="display: none">
             <hr />
             <div id="serving">
-                <h2>@MrKupido.Web.Resources.Recipe.Details.Serving</h2>
+                <h2>@MrKupido.Web.Core.Resources.Recipe.Details.Serving</h2>
                 <div id="_RecipeServing">
                     @*@{ Html.RenderPartial("_RecipeServing", (MrKupido.Library.EquipmentGroup)Model[5]); }*@
                 </div>
             </div>
             <hr />
             <div id="nutritionlist">
-                <h2>@MrKupido.Web.Resources.Recipe.Details.NutritionList</h2>
-                <h3>@MrKupido.Web.Resources.Recipe.Details.NutritionListDetailed</h3>
+                <h2>@MrKupido.Web.Core.Resources.Recipe.Details.NutritionList</h2>
+                <h3>@MrKupido.Web.Core.Resources.Recipe.Details.NutritionListDetailed</h3>
                 <div id="_RecipeNutritions">
                     @*@{ Html.RenderPartial("_RecipeNutritions", (MrKupido.Library.INutritionInfo[])Model[6]); }*@
                 </div>
