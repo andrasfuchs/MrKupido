@@ -332,7 +332,8 @@
 
   <ItemGroup>
     <PackageReference Include="DotNetOpenAuth.OAuth2.Client" Version="4.3.4.13329" />
-    <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="EntityFramework" Version="6.5.1" />
+    <PackageReference Include="Microsoft.Net.Http" Version="2.2.29" />
   </ItemGroup>
 
   <ItemGroup>
