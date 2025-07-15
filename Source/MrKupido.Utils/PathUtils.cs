@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Runtime.Remoting.Channels;
+﻿using System.Net;
 
 namespace MrKupido.Utils
 {
@@ -29,29 +28,19 @@ namespace MrKupido.Utils
             bool result = true;
 
             System.Net.WebRequest webRequest = System.Net.WebRequest.Create(url);
-            webRequest.Timeout = 1200; // miliseconds
+            webRequest.Timeout = 1200; // milliseconds
             webRequest.Method = "HEAD";
 
             try
             {
                 webRequest.GetResponse();
             }
-            catch
+            catch (WebException)
             {
                 result = false;
             }
 
             return result;
         }
-
-        //private static async Task<bool> WebResourceExists(string url)
-        //{
-        //    using (HttpClient client = new HttpClient())
-        //    {
-        //        var response = await client.GetAsync(url);
-
-        //        return response.StatusCode == System.Net.HttpStatusCode.OK;
-        //    }
-        //}
     }
 }

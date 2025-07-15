@@ -249,44 +249,37 @@ namespace MrKupido.Web.Controllers
         public JsonResult GetLocationName(string lat, string lon)
         {
             string result = null;
-
-            // http://api.wikilocation.org/articles?lat=51.500688&lng=-0.124411&limit=1
-
-            HttpWebRequest req = null;
-            HttpWebResponse resp = null;
-
+            CultureInfo ci = new CultureInfo("en-US");
             try
             {
-                CultureInfo ci = new CultureInfo("en-US");
+                // Ensure TLS 1.2 is enabled for HTTPS requests
+                System.Net.ServicePointManager.SecurityProtocol |= System.Net.SecurityProtocolType.Tls12;
+
                 float latitude = Single.Parse(lat, ci);
                 float longitude = Single.Parse(lon, ci);
 
-                DataContractJsonSerializer dcjs = new DataContractJsonSerializer(typeof(WikiLocationRoot));
-
-                req = (HttpWebRequest)HttpWebRequest.Create("http://api.wikilocation.org/articles?lat=" + latitude.ToString("0.000000", ci) + "&lng=" + longitude.ToString("0.000000", ci) + "&limit=1&radius=10000&type=city");
-                resp = (HttpWebResponse)req.GetResponse();
-                WikiLocationRoot responseJson = (WikiLocationRoot)dcjs.ReadObject(resp.GetResponseStream());
-                resp.Close();
-
-                if (responseJson.articles.Count > 0) result = responseJson.articles[0].Title;
+                string url = $"https://nominatim.openstreetmap.org/reverse?format=json&lat={latitude.ToString(ci)}&lon={longitude.ToString(ci)}&addressdetails=1";
+                HttpWebRequest req = (HttpWebRequest)WebRequest.Create(url);
+                req.UserAgent = "MrKupidoWebApp/1.0"; // Nominatim requires a valid User-Agent
+                using (HttpWebResponse resp = (HttpWebResponse)req.GetResponse())
+                using (var stream = resp.GetResponseStream())
+                using (var reader = new System.IO.StreamReader(stream))
+                {
+                    string json = reader.ReadToEnd();
+                    dynamic obj = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
+                    var address = obj.address;
+                    string town = address.town != null ? address.town.ToString() : (address.city != null ? address.city.ToString() : (address.village != null ? address.village.ToString() : null));
+                    string country = address.country != null ? address.country.ToString() : null;
+                    if (!string.IsNullOrEmpty(town) && !string.IsNullOrEmpty(country))
+                        result = town + ", " + country;
+                    else if (!string.IsNullOrEmpty(country))
+                        result = country;
+                    else
+                        result = null;
+                }
             }
             catch { }
-            finally
-            {
-                if (req != null)
-                {
-                    req = null;
-                }
-
-                if (resp != null)
-                {
-                    resp.Close();
-                    resp = null;
-                }
-            }
-
             Session["Location"] = result;
-
             return Json(result);
         }
 
