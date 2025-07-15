@@ -1,62 +1,59 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="WindowsLiveClient.cs" company="Andrew Arnott">
-//     Copyright (c) Andrew Arnott. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------
-
-namespace DotNetOpenAuth.ApplicationBlock
+﻿namespace MrKupido.Web.Authentication
 {
-    using DotNetOpenAuth.OAuth2;
     using System;
-    using System.IO;
-    using System.Net;
+    using System.Collections.Generic;
+    using System.Net.Http;
+    using System.Threading.Tasks;
 
-    public class WindowsLiveClient : WebServerClient
+    public class WindowsLiveClient
     {
-        private static readonly AuthorizationServerDescription WindowsLiveDescription = new AuthorizationServerDescription
-        {
-            TokenEndpoint = new Uri("https://oauth.live.com/token"),
-            AuthorizationEndpoint = new Uri("https://oauth.live.com/authorize"),
-            ProtocolVersion = ProtocolVersion.V20
-        };
+        private const string TokenEndpoint = "https://oauth.live.com/token";
+        private const string AuthorizationEndpoint = "https://oauth.live.com/authorize";
+        private const string UserInfoEndpoint = "https://apis.live.net/v5.0/me";
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WindowsLiveClient"/> class.
-        /// </summary>
-        public WindowsLiveClient()
-            : base(WindowsLiveDescription)
+        public WindowsLiveClient() { }
+
+        public string GetAuthorizationUrl(string clientId, string redirectUri, string scope)
         {
+            return $"{AuthorizationEndpoint}?client_id={Uri.EscapeDataString(clientId)}&redirect_uri={Uri.EscapeDataString(redirectUri)}&response_type=code&scope={Uri.EscapeDataString(scope)}";
         }
 
-        public IOAuth2Graph GetGraph(IAuthorizationState authState, string[] fields = null)
+        public async Task<string> ExchangeCodeForTokenAsync(string clientId, string clientSecret, string redirectUri, string code)
         {
-            if ((authState != null) && (authState.AccessToken != null))
+            using (var client = new HttpClient())
             {
-                WebRequest request = WebRequest.Create("https://apis.live.net/v5.0/me?access_token=" + Uri.EscapeDataString(authState.AccessToken));
-                WebResponse response = request.GetResponse();
-
-                if (response != null)
+                var request = new HttpRequestMessage(HttpMethod.Post, TokenEndpoint)
                 {
-                    Stream responseStream = response.GetResponseStream();
-
-                    if (responseStream != null)
+                    Content = new FormUrlEncodedContent(new[]
                     {
-                        //string debugJsonStr = new StreamReader(responseStream).ReadToEnd();
-                        WindowsLiveGraph windowsLiveGraph = WindowsLiveGraph.Deserialize(responseStream);
-
-                        // picture type resolution test 1
-                        // &type=small 96x96
-                        // &type=medium 96x96
-                        // &type=large 448x448
-
-                        windowsLiveGraph.AvatarUrl = new Uri("https://apis.live.net/v5.0/me/picture?access_token=" + Uri.EscapeDataString(authState.AccessToken));
-
-                        return windowsLiveGraph;
-                    }
-                }
+                        new KeyValuePair<string, string>("code", code),
+                        new KeyValuePair<string, string>("client_id", clientId),
+                        new KeyValuePair<string, string>("client_secret", clientSecret),
+                        new KeyValuePair<string, string>("redirect_uri", redirectUri),
+                        new KeyValuePair<string, string>("grant_type", "authorization_code")
+                    })
+                };
+                var response = await client.SendAsync(request);
+                response.EnsureSuccessStatusCode();
+                var content = await response.Content.ReadAsStringAsync();
+                // Parse access_token from content (JSON)
+                // ...parse logic here...
+                return content;
             }
+        }
 
-            return null;
+        public async Task<IOAuth2Graph> GetGraphAsync(string accessToken)
+        {
+            using (var client = new HttpClient())
+            {
+                var requestUri = $"{UserInfoEndpoint}?access_token={Uri.EscapeDataString(accessToken)}";
+                var response = await client.GetAsync(requestUri);
+                response.EnsureSuccessStatusCode();
+                var stream = await response.Content.ReadAsStreamAsync();
+                var windowsLiveGraph = WindowsLiveGraph.Deserialize(stream);
+                windowsLiveGraph.AvatarUrl = new Uri($"https://apis.live.net/v5.0/me/picture?access_token={Uri.EscapeDataString(accessToken)}");
+                return windowsLiveGraph;
+            }
         }
 
         /// <summary>

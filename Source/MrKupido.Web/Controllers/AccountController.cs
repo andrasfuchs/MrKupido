@@ -1,6 +1,5 @@
-﻿using DotNetOpenAuth.ApplicationBlock;
-using DotNetOpenAuth.OAuth2;
-using MrKupido.Model;
+﻿using MrKupido.Model;
+using MrKupido.Web.Authentication;
 using MrKupido.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -16,231 +15,173 @@ namespace MrKupido.Web.Controllers
     public class AccountController : BaseController
     {
         private static MrKupido.DataAccess.MrKupidoContext context = new MrKupido.DataAccess.MrKupidoContext("Name=MrKupidoContext");
-
-        private static readonly FacebookClient facebookClient = new FacebookClient
-        {
-            ClientIdentifier = ConfigurationManager.AppSettings["facebookAppID"],
-            ClientCredentialApplicator = ClientCredentialApplicator.PostParameter(ConfigurationManager.AppSettings["facebookAppSecret"])
-        };
-
-        private static readonly WindowsLiveClient windowsLiveClient = new WindowsLiveClient
-        {
-            ClientIdentifier = ConfigurationManager.AppSettings["windowsLiveAppID"],
-            ClientCredentialApplicator = ClientCredentialApplicator.PostParameter(ConfigurationManager.AppSettings["windowsLiveAppSecret"])
-        };
-
-        private static readonly GoogleClient googleClient = new GoogleClient
-        {
-            ClientIdentifier = ConfigurationManager.AppSettings["googleClientID"],
-            ClientCredentialApplicator = ClientCredentialApplicator.PostParameter(ConfigurationManager.AppSettings["googleClientSecret"])
-        };
+        private static readonly FacebookClient facebookClient = new FacebookClient();
+        private static readonly WindowsLiveClient windowsLiveClient = new WindowsLiveClient();
+        private static readonly GoogleClient googleClient = new GoogleClient();
 
         [HttpGet]
-        public ActionResult LogIn()
+        public ActionResult LogIn(string code, string state)
         {
-            IAuthorizationState authState = null;
+            string loginType = (string)Session["LoginType"];
             IOAuth2Graph oauth2Graph = null;
             User user = null;
+            string redirectUri = Url.Action("LogIn", "Account", null, Request.Url.Scheme);
 
-            #region get the user
-            switch ((string)Session["LoginType"])
+            if (!string.IsNullOrEmpty(code) && !string.IsNullOrEmpty(loginType))
             {
-                case "Google":
-                    authState = googleClient.ProcessUserAuthorization();
-                    oauth2Graph = googleClient.GetGraph(authState);
-
-                    if (oauth2Graph != null)
-                    {
-                        // check if the user already exists
-                        user = context.Users.FirstOrDefault(u => u.GoogleId == oauth2Graph.Id);
-                    }
-                    break;
-
-                case "Facebook":
-                    authState = facebookClient.ProcessUserAuthorization();
-                    oauth2Graph = facebookClient.GetGraph(authState, new[] { FacebookGraph.Fields.Defaults, FacebookGraph.Fields.Email, FacebookGraph.Fields.Picture, FacebookGraph.Fields.Birthday });
-
-                    if (oauth2Graph != null)
-                    {
-                        // check if the user already exists
-                        user = context.Users.FirstOrDefault(u => u.FacebookId == oauth2Graph.Id);
-                    }
-                    break;
-
-                case "WindowsLive":
-                    authState = windowsLiveClient.ProcessUserAuthorization();
-                    oauth2Graph = windowsLiveClient.GetGraph(authState);
-
-                    if (oauth2Graph != null)
-                    {
-                        // check if the user already exists
-                        user = context.Users.FirstOrDefault(u => u.WindowsLiveId == oauth2Graph.Id);
-                    }
-                    break;
-            }
-            #endregion
-
-            // if we have a valid login
-            if ((authState != null) && (authState.AccessToken != null) && (oauth2Graph != null))
-            {
-
-                // check if we have an existing user
-                if (user == null)
+                string accessToken = null;
+                if (loginType == "Facebook")
                 {
-                    // if we don't, just create a new one
-                    user = new User();
-                    user.Email = oauth2Graph.Email;
-
-                    switch ((string)Session["LoginType"])
+                    var tokenResponse = facebookClient.ExchangeCodeForTokenAsync(
+                        ConfigurationManager.AppSettings["facebookAppID"],
+                        ConfigurationManager.AppSettings["facebookAppSecret"],
+                        redirectUri,
+                        code).GetAwaiter().GetResult();
+                    var query = HttpUtility.ParseQueryString(tokenResponse);
+                    accessToken = query["access_token"];
+                    if (!string.IsNullOrEmpty(accessToken))
                     {
-                        case "Google":
-                            user.GoogleId = oauth2Graph.Id;
-                            break;
-                        case "Facebook":
-                            user.FacebookId = oauth2Graph.Id;
-                            break;
-                        case "WindowsLive":
-                            user.WindowsLiveId = oauth2Graph.Id;
-                            break;
+                        oauth2Graph = facebookClient.GetGraphAsync(accessToken, new[] { "id", "name", "email", "picture", "birthday" }).GetAwaiter().GetResult();
+                        if (oauth2Graph != null)
+                        {
+                            user = context.Users.FirstOrDefault(u => u.FacebookId == oauth2Graph.Id);
+                        }
+                    }
+                }
+                else if (loginType == "Google")
+                {
+                    var tokenResponse = googleClient.ExchangeCodeForTokenAsync(
+                        ConfigurationManager.AppSettings["googleClientID"],
+                        ConfigurationManager.AppSettings["googleClientSecret"],
+                        redirectUri,
+                        code).GetAwaiter().GetResult();
+                    var tokenObj = Newtonsoft.Json.Linq.JObject.Parse(tokenResponse);
+                    accessToken = (string)tokenObj["access_token"];
+                    if (!string.IsNullOrEmpty(accessToken))
+                    {
+                        oauth2Graph = googleClient.GetGraphAsync(accessToken).GetAwaiter().GetResult();
+                        if (oauth2Graph != null)
+                        {
+                            user = context.Users.FirstOrDefault(u => u.GoogleId == oauth2Graph.Id);
+                        }
+                    }
+                }
+                else if (loginType == "WindowsLive")
+                {
+                    var tokenResponse = windowsLiveClient.ExchangeCodeForTokenAsync(
+                        ConfigurationManager.AppSettings["windowsLiveAppID"],
+                        ConfigurationManager.AppSettings["windowsLiveAppSecret"],
+                        redirectUri,
+                        code).GetAwaiter().GetResult();
+                    var tokenObj = Newtonsoft.Json.Linq.JObject.Parse(tokenResponse);
+                    accessToken = (string)tokenObj["access_token"];
+                    if (!string.IsNullOrEmpty(accessToken))
+                    {
+                        oauth2Graph = windowsLiveClient.GetGraphAsync(accessToken).GetAwaiter().GetResult();
+                        if (oauth2Graph != null)
+                        {
+                            user = context.Users.FirstOrDefault(u => u.WindowsLiveId == oauth2Graph.Id);
+                        }
                     }
                 }
 
-                // let's set all the user's properties
-                user.AvatarUrl = oauth2Graph.AvatarUrl;
-
-                if (String.IsNullOrEmpty(user.CultureName))
+                if (!string.IsNullOrEmpty(accessToken) && oauth2Graph != null)
                 {
-                    user.CultureName = oauth2Graph.Locale.Replace('_', '-');
-
-                    user.CultureName = user.CultureName.Replace("_", "-");
-                    if (user.CultureName == "hu") user.CultureName = "hu-HU";
-                    if (user.CultureName == "en") user.CultureName = "en-GB";
-                    if (user.CultureName == "en-US") user.CultureName = "en-GB";
-
-                }
-
-                if (String.IsNullOrEmpty(user.FirstName))
-                {
-                    user.FirstName = HttpUtility.HtmlDecode(oauth2Graph.FirstName);
-                }
-
-                if (String.IsNullOrEmpty(user.LastName))
-                {
-                    user.LastName = HttpUtility.HtmlDecode(oauth2Graph.LastName);
-                }
-
-                if (String.IsNullOrEmpty(user.FullName))
-                {
-                    user.FullName = HttpUtility.HtmlDecode(oauth2Graph.Name);
-                }
-
-                if (user.Gender == (int)MrKupido.Model.Gender.Unknown)
-                {
-                    if (oauth2Graph.GenderEnum == HumanGender.Male) user.Gender = (int)MrKupido.Model.Gender.Male;
-                    if (oauth2Graph.GenderEnum == HumanGender.Female) user.Gender = (int)MrKupido.Model.Gender.Female;
-                    if (oauth2Graph.GenderEnum == HumanGender.Other) user.Gender = (int)MrKupido.Model.Gender.Other;
-                    if (oauth2Graph.GenderEnum == HumanGender.Unknown) user.Gender = (int)MrKupido.Model.Gender.Unknown;
-                }
-
-                if (user.DateOfBirth == null)
-                {
-                    user.DateOfBirth = oauth2Graph.BirthdayDT;
-                }
-
-                if (String.IsNullOrEmpty(user.FullName))
-                {
-                    if (user.CultureName == "hu-HU")
+                    if (user == null)
                     {
-                        user.FullName = user.LastName + " " + user.FirstName;
+                        user = new User();
+                        user.Email = oauth2Graph.Email;
+                        switch (loginType)
+                        {
+                            case "Google": user.GoogleId = oauth2Graph.Id; break;
+                            case "Facebook": user.FacebookId = oauth2Graph.Id; break;
+                            case "WindowsLive": user.WindowsLiveId = oauth2Graph.Id; break;
+                        }
+                    }
+                    user.AvatarUrl = oauth2Graph.AvatarUrl;
+                    if (String.IsNullOrEmpty(user.CultureName))
+                    {
+                        user.CultureName = oauth2Graph.Locale.Replace('_', '-');
+                        if (user.CultureName == "hu") user.CultureName = "hu-HU";
+                        if (user.CultureName == "en") user.CultureName = "en-GB";
+                        if (user.CultureName == "en-US") user.CultureName = "en-GB";
+                    }
+                    if (String.IsNullOrEmpty(user.FirstName)) user.FirstName = HttpUtility.HtmlDecode(oauth2Graph.FirstName);
+                    if (String.IsNullOrEmpty(user.LastName)) user.LastName = HttpUtility.HtmlDecode(oauth2Graph.LastName);
+                    if (String.IsNullOrEmpty(user.FullName)) user.FullName = HttpUtility.HtmlDecode(oauth2Graph.Name);
+                    if (user.Gender == (int)MrKupido.Model.Gender.Unknown)
+                    {
+                        if (oauth2Graph.GenderEnum == HumanGender.Male) user.Gender = (int)MrKupido.Model.Gender.Male;
+                        if (oauth2Graph.GenderEnum == HumanGender.Female) user.Gender = (int)MrKupido.Model.Gender.Female;
+                        if (oauth2Graph.GenderEnum == HumanGender.Other) user.Gender = (int)MrKupido.Model.Gender.Other;
+                        if (oauth2Graph.GenderEnum == HumanGender.Unknown) user.Gender = (int)MrKupido.Model.Gender.Unknown;
+                    }
+                    if (user.DateOfBirth == null) user.DateOfBirth = oauth2Graph.BirthdayDT;
+                    if (String.IsNullOrEmpty(user.FullName))
+                    {
+                        if (user.CultureName == "hu-HU") user.FullName = user.LastName + " " + user.FirstName;
+                        else user.FullName = user.FirstName + " " + user.LastName;
+                    }
+                    System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(user.CultureName);
+                    if (user.UserId == 0)
+                    {
+                        context.Users.Add(user);
+                        user.FirstLoginUtc = DateTime.UtcNow;
+                    }
+                    user.LastLoginUtc = DateTime.UtcNow;
+                    context.SaveChanges();
+                    this.IssueAuthTicket(user.UserId.ToString(), user, true);
+                    Session.SetCurrentUser(user);
+                    string returnUrl = (string)Session["ReturnUrl"];
+                    if (String.IsNullOrEmpty(returnUrl))
+                    {
+                        if (user.FirstLoginUtc == user.LastLoginUtc)
+                            return RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Help", action = "FirstTimeTutorial" });
+                        else
+                            return RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Home", action = "Index" });
                     }
                     else
                     {
-                        user.FullName = user.FirstName + " " + user.LastName;
+                        Session["ReturnUrl"] = null;
+                        return new RedirectResult(returnUrl);
                     }
-                }
-
-                System.Threading.Thread.CurrentThread.CurrentUICulture = new CultureInfo(user.CultureName);
-
-                if (user.UserId == 0)
-                {
-                    context.Users.Add(user);
-                    user.FirstLoginUtc = DateTime.UtcNow;
-                }
-
-                user.LastLoginUtc = DateTime.UtcNow;
-
-                context.SaveChanges();
-
-                this.IssueAuthTicket(user.UserId.ToString(), user, true);
-
-                Session.SetCurrentUser(user);
-
-                string returnUrl = (string)Session["ReturnUrl"];
-                if (String.IsNullOrEmpty(returnUrl))
-                {
-
-                    if (user.FirstLoginUtc == user.LastLoginUtc)
-                    {
-                        // this is the first time he's here
-                        return RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Help", action = "FirstTimeTutorial" });
-                    }
-                    else
-                    {
-                        return RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Home", action = "Index" });
-                    }
-                }
-                else
-                {
-                    Session["ReturnUrl"] = null;
-                    return new RedirectResult(returnUrl);
                 }
             }
-
             Session["ReturnUrl"] = HttpContext.Request.QueryString["ReturnUrl"];
-
             return View();
         }
 
         [HttpPost]
         public ActionResult LogIn(string loginType)
         {
+            string redirectUri = Url.Action("LogIn", "Account", null, Request.Url.Scheme);
             if (loginType == "Facebook")
             {
                 Session["LoginType"] = "Facebook";
-
-                IAuthorizationState authorization = facebookClient.ProcessUserAuthorization();
-                if (authorization == null)
-                {
-                    // Kick off authorization request
-                    facebookClient.RequestUserAuthorization(scope: new[] { FacebookClient.Scopes.Email, FacebookClient.Scopes.UserBirthday });
-                }
-                return View();
+                string authUrl = facebookClient.GetAuthorizationUrl(
+                    ConfigurationManager.AppSettings["facebookAppID"],
+                    redirectUri,
+                    FacebookClient.Scopes.Email + "," + FacebookClient.Scopes.UserBirthday);
+                return Redirect(authUrl);
             }
             else if (loginType == "WindowsLive")
             {
                 Session["LoginType"] = "WindowsLive";
-
-                IAuthorizationState authorization = windowsLiveClient.ProcessUserAuthorization();
-                if (authorization == null)
-                {
-                    // Kick off authorization request
-                    windowsLiveClient.RequestUserAuthorization(scope: new[] { WindowsLiveClient.Scopes.SignIn, WindowsLiveClient.Scopes.Emails, WindowsLiveClient.Scopes.Birthday });
-                }
-                return View();
+                string authUrl = windowsLiveClient.GetAuthorizationUrl(
+                    ConfigurationManager.AppSettings["windowsLiveAppID"],
+                    redirectUri,
+                    WindowsLiveClient.Scopes.SignIn + " " + WindowsLiveClient.Scopes.Emails + " " + WindowsLiveClient.Scopes.Birthday);
+                return Redirect(authUrl);
             }
             else if (loginType == "Google")
             {
                 Session["LoginType"] = "Google";
-
-                IAuthorizationState authorization = googleClient.ProcessUserAuthorization();
-                if (authorization == null)
-                {
-                    // Kick off authorization request
-                    googleClient.RequestUserAuthorization(scope: new[] { GoogleClient.Scopes.UserInfo.Profile, GoogleClient.Scopes.UserInfo.Email });
-                }
-                return View();
+                string authUrl = googleClient.GetAuthorizationUrl(
+                    ConfigurationManager.AppSettings["googleClientID"],
+                    redirectUri,
+                    GoogleClient.Scopes.UserInfo.Profile + " " + GoogleClient.Scopes.UserInfo.Email);
+                return Redirect(authUrl);
             }
-
             return View();
         }
 
@@ -250,26 +191,17 @@ namespace MrKupido.Web.Controllers
             FormsAuthentication.SignOut();
             Session.SetCurrentUser(null);
             Session.Abandon();
-
             return RedirectToRoute("Default", new { language = (string)Session["Language"], controller = "Account", action = "LogIn" });
         }
 
-
-        /// <summary>
-        /// Issues an authentication issue from a userState instance
-        /// </summary>
-        /// <param name="userState"></param>
-        /// <param name="rememberMe"></param>
         private void IssueAuthTicket(string id, User userState, bool rememberMe)
         {
             FormsAuthenticationTicket ticket = new FormsAuthenticationTicket(1, id,
                                                                  DateTime.Now, DateTime.Now.AddDays(10),
                                                                  rememberMe, userState.ToJSONString());
-
             string ticketString = FormsAuthentication.Encrypt(ticket);
             HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, ticketString);
             if (rememberMe) cookie.Expires = DateTime.Now.AddDays(10);
-
             HttpContext.Response.Cookies.Add(cookie);
         }
 
@@ -281,7 +213,6 @@ namespace MrKupido.Web.Controllers
             {
                 return RedirectToAction("LogIn");
             }
-
             return View();
         }
 

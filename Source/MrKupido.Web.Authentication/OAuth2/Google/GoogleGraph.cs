@@ -1,9 +1,4 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="GoogleGraph.cs" company="Andras Fuchs">
-// </copyright>
-//-----------------------------------------------------------------------
-
-namespace DotNetOpenAuth.ApplicationBlock
+﻿namespace MrKupido.Web.Authentication
 {
     using System;
     using System.IO;

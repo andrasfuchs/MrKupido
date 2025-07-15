@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DotNetOpenAuth.ApplicationBlock
+namespace MrKupido.Web.Authentication
 {
     public interface IOAuth2Graph
     {

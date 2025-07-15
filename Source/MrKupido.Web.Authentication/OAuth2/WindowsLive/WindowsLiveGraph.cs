@@ -1,10 +1,4 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="WindowsLiveGraph.cs" company="Andrew Arnott">
-//     Copyright (c) Andrew Arnott. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------
-
-namespace DotNetOpenAuth.ApplicationBlock
+﻿namespace MrKupido.Web.Authentication
 {
     using System;
     using System.IO;

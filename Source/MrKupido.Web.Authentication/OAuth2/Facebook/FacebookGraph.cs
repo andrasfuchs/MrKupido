@@ -1,10 +1,4 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="FacebookGraph.cs" company="Outercurve Foundation">
-//     Copyright (c) Outercurve Foundation. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------
-
-namespace DotNetOpenAuth.ApplicationBlock
+﻿namespace MrKupido.Web.Authentication
 {
     using System;
     using System.Globalization;

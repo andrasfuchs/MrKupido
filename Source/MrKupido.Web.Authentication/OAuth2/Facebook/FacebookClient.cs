@@ -1,54 +1,50 @@
-﻿//-----------------------------------------------------------------------
-// <copyright file="FacebookClient.cs" company="Outercurve Foundation">
-//     Copyright (c) Outercurve Foundation. All rights reserved.
-// </copyright>
-//-----------------------------------------------------------------------
-
-namespace DotNetOpenAuth.ApplicationBlock
+﻿namespace MrKupido.Web.Authentication
 {
-    using DotNetOpenAuth.OAuth2;
     using System;
-    using System.IO;
-    using System.Net;
+    using System.Net.Http;
+    using System.Threading.Tasks;
 
-    public class FacebookClient : WebServerClient
+    public class FacebookClient
     {
-        private static readonly AuthorizationServerDescription FacebookDescription = new AuthorizationServerDescription
-        {
-            TokenEndpoint = new Uri("https://graph.facebook.com/oauth/access_token"),
-            AuthorizationEndpoint = new Uri("https://graph.facebook.com/oauth/authorize"),
-            ProtocolVersion = ProtocolVersion.V20
-        };
+        private const string TokenEndpoint = "https://graph.facebook.com/oauth/access_token";
+        private const string AuthorizationEndpoint = "https://graph.facebook.com/oauth/authorize";
+        private const string GraphApiEndpoint = "https://graph.facebook.com/me";
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FacebookClient"/> class.
-        /// </summary>
-        public FacebookClient()
-            : base(FacebookDescription)
+        public FacebookClient() { }
+
+        // Example: Get Facebook OAuth2 authorization URL
+        public string GetAuthorizationUrl(string clientId, string redirectUri, string scope)
         {
+            return $"{AuthorizationEndpoint}?client_id={Uri.EscapeDataString(clientId)}&redirect_uri={Uri.EscapeDataString(redirectUri)}&response_type=code&scope={Uri.EscapeDataString(scope)}";
         }
 
-        public IOAuth2Graph GetGraph(IAuthorizationState authState, string[] fields = null)
+        // Example: Exchange code for access token
+        public async Task<string> ExchangeCodeForTokenAsync(string clientId, string clientSecret, string redirectUri, string code)
         {
-            if ((authState != null) && (authState.AccessToken != null))
+            using (var client = new HttpClient())
             {
-                string fieldsStr = ((fields == null) || (fields.Length == 0) ? FacebookGraph.Fields.Defaults : String.Join(",", fields));
-
-                WebRequest request = WebRequest.Create("https://graph.Facebook.com/me?access_token=" + Uri.EscapeDataString(authState.AccessToken) + "&fields=" + fieldsStr);
-                WebResponse response = request.GetResponse();
-
-                if (response != null)
-                {
-                    Stream responseStream = response.GetResponseStream();
-
-                    if (responseStream != null)
-                    {
-                        return FacebookGraph.Deserialize(responseStream);
-                    }
-                }
+                var requestUri = $"{TokenEndpoint}?client_id={Uri.EscapeDataString(clientId)}&redirect_uri={Uri.EscapeDataString(redirectUri)}&client_secret={Uri.EscapeDataString(clientSecret)}&code={Uri.EscapeDataString(code)}";
+                var response = await client.GetAsync(requestUri);
+                response.EnsureSuccessStatusCode();
+                var content = await response.Content.ReadAsStringAsync();
+                // Parse access_token from content (JSON or query string)
+                // ...parse logic here...
+                return content;
             }
+        }
 
-            return null;
+        // Example: Get user info from Graph API
+        public async Task<IOAuth2Graph> GetGraphAsync(string accessToken, string[] fields = null)
+        {
+            string fieldsStr = (fields == null || fields.Length == 0) ? "id,name,email" : string.Join(",", fields);
+            using (var client = new HttpClient())
+            {
+                var requestUri = $"{GraphApiEndpoint}?access_token={Uri.EscapeDataString(accessToken)}&fields={fieldsStr}";
+                var response = await client.GetAsync(requestUri);
+                response.EnsureSuccessStatusCode();
+                var stream = await response.Content.ReadAsStreamAsync();
+                return FacebookGraph.Deserialize(stream);
+            }
         }
 
         /// <summary>

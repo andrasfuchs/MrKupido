@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36301.6 d17.14
+VisualStudioVersion = 17.14.36301.6
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MrKupido.RecipeUpload.MindMegette", "MrKupido.RecipeUpload.MindMegette\MrKupido.RecipeUpload.MindMegette.csproj", "{B212328C-8464-4E99-8EB4-1702650284CE}"
 EndProject
@@ -41,7 +41,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MrKupido.Library.Provider",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{BE275D11-927B-475B-BBD3-E10597BC2298}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DotNetOpenAuth.ApplicationBlock", "DotNetOpenAuth.ApplicationBlock\DotNetOpenAuth.ApplicationBlock.csproj", "{AA78D112-D889-414B-A7D4-467B34C7B663}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MrKupido.Web.Authentication", "MrKupido.Web.Authentication\MrKupido.Web.Authentication.csproj", "{AA78D112-D889-414B-A7D4-467B34C7B663}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeoCoordinate.NetStandard1", "GeoCoordinate\src\GeoCoordinate.NetStandard1\GeoCoordinate.NetStandard1.csproj", "{3CEFC329-E5A4-47F6-9B1D-33A0D5804641}"
 EndProject
