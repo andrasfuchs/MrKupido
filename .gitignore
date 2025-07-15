@@ -1,16 +1,44 @@
-# Build Folders (you can keep bin if you'd like, to store dlls and pdbs)
-bin
-obj
+# Build Folders
+[Bb]in/
+[Oo]bj/
 
-# mstest test results
-TestResults
+# User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
 
-#MS-SQL database files
+# Visual Studio 2022 workspace settings
+.vs/
+
+# NuGet packages
+*.nupkg
+packages/
+*.nuget.props
+*.nuget.targets
+
+# Test results
+TestResults/
+*.TestResult.xml
+
+# Publish output
+publish/
+
+# Code analysis logs
+*.CodeAnalysisLog.xml
+
+# Bootstrapper packages
+*.bootstrapper
+
+# Others
+_ReSharper*/
+*.resharper
+*.DotSettings.user
+
+# Database files
 *.mdf
 *.ldf
+*.db
 
-#Visual Studio 2015 config files
-Source/.vs/*
-
-#SQLite DB file
+# SQLite DB file
 MrKupido.DataAccess.MrKupidoContext.db
