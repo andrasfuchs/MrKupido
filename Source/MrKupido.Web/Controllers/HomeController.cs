@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
-using System.Runtime.Serialization.Json;
 using System.Web;
 using System.Web.Mvc;
 
@@ -271,7 +270,7 @@ namespace MrKupido.Web.Controllers
                     string town = address.town != null ? address.town.ToString() : (address.city != null ? address.city.ToString() : (address.village != null ? address.village.ToString() : null));
                     string country = address.country != null ? address.country.ToString() : null;
                     if (!string.IsNullOrEmpty(town) && !string.IsNullOrEmpty(country))
-                        result = town + ", " + country;
+                        result = town;
                     else if (!string.IsNullOrEmpty(country))
                         result = country;
                     else
