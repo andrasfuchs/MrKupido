@@ -195,13 +195,11 @@ namespace MrKupido.Web.Models
             List<string> photos = new List<string>();
             for (int i = 1; i <= 99; i++)
             {
-                string url = String.Format("~/Content/photos/960x480/{0}_{1}.jpg", rtn.UniqueNameEng, i.ToString("00"));
-
-                url = PathUtils.GetAbsoluteUrlOfFirstExisting(rootUrl, new string[] { url });
-
-                if (url != null)
+                string virtualPath = String.Format("~/Content/photos/960x480/{0}_{1}.jpg", rtn.UniqueNameEng, i.ToString("00"));
+                string foundPath = PathUtils.GetAbsoluteUrlOfFirstExisting(rootUrl, new string[] { virtualPath });
+                if (foundPath != null)
                 {
-                    photos.Add(url);
+                    photos.Add(foundPath);
                 }
             }
             this.Photos = photos.ToArray();

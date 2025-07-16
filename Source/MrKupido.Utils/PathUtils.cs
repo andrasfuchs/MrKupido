@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using System.IO;
+using System.Net;
+using System.Web;
 
 namespace MrKupido.Utils
 {
@@ -17,7 +19,7 @@ namespace MrKupido.Utils
             {
                 string absoluteUrl = ConvertRelativeUrlToAbsoluteUrl(rootUrl, url);
 
-                if (WebResourceExists(absoluteUrl)) return absoluteUrl;
+                if (LocalResourceExists(url)) return absoluteUrl;
             }
 
             return null;
@@ -41,6 +43,12 @@ namespace MrKupido.Utils
             }
 
             return result;
+        }
+
+        public static bool LocalResourceExists(string virtualPath)
+        {
+            string physicalPath = HttpContext.Current.Server.MapPath(virtualPath);
+            return File.Exists(physicalPath);
         }
     }
 }
