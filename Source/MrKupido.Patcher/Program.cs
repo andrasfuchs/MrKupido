@@ -79,7 +79,7 @@ namespace MrKupido.Patcher
 
             string patchFilenameWithoutExtension = Path.GetFileNameWithoutExtension(patchFullPath);
 
-            Console.Write("Patching...");
+            Console.Write("Patching... ");
             PatchAssembly(patchAD, newIngredientMD, directionGeneratorBeforeMD, directionGeneratorAfterMD);
             patchInfo.Fields[0].Constant = File.GetLastWriteTime(patchFullPath).ToString("yyyy-MM-dd HH:mm:ss");
 
@@ -88,7 +88,7 @@ namespace MrKupido.Patcher
 
             string patchedFilename = $"{patchFilenameWithoutExtension}_v{i}.dll";
             patchAD.Write(Path.Combine(Path.GetDirectoryName(patchFullPath), patchedFilename));
-            Console.Write($"Patched file was saved as '{patchedFilename}'.");
+            Console.WriteLine($"done! Saved as '{patchedFilename}'.");
 
             Console.Write("Making backup...");
             string patchFilenameBackup = patchFullPath + ".bak";
@@ -100,7 +100,9 @@ namespace MrKupido.Patcher
             }
             catch (Exception ex)
             {
+                Console.WriteLine(" failed");
                 Console.WriteLine(ex.Message);
+                Console.WriteLine($"Backing up the original file failed, so it needs to be backed up manually.");
             }
 
             Console.Write($"Copying '{patchedFilename}' to '{patchFilename}'...");
@@ -111,7 +113,9 @@ namespace MrKupido.Patcher
             }
             catch (Exception ex)
             {
+                Console.WriteLine(" failed!");
                 Console.WriteLine(ex.Message);
+                Console.WriteLine($"'{patchFullPath}' needs to be overwritten manually with '{patchedFilename}'.");
             }
 
             return 0;
