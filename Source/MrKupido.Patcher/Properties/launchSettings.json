@@ -2,7 +2,7 @@
   "profiles": {
     "MrKupido.Patcher": {
       "commandName": "Project",
-      "commandLineArgs": "..\\..\\..\\..\\MrKupido.Library.Recipe\\bin\\Debug\\MrKupido.Library.Recipe.dll ..\\..\\..\\..\\MrKupido.Processor\\bin\\Debug\\MrKupido.Processor.dll MrKupido.Processor.RecipeAnalyzer NewIngredient DirectionGeneratorAfter DirectionGeneratorBefore"
+      "commandLineArgs": "..\\..\\..\\..\\MrKupido.Library.Recipe\\bin\\Debug\\net481\\MrKupido.Library.Recipe.dll ..\\..\\..\\..\\MrKupido.Processor\\bin\\Debug\\net481\\MrKupido.Processor.dll MrKupido.Processor.RecipeAnalyzer NewIngredient DirectionGeneratorAfter DirectionGeneratorBefore"
     }
   }
 }
