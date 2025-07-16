@@ -13,6 +13,7 @@ namespace MrKupido.Patcher
             if (args.Length != 6)
             {
                 Console.WriteLine("Usage: mrkupido.patcher.exe <dll to patch> <interception dll> <interception type name> <new ingredient method name> <direction generator after method name> <direction generator before method name>");
+                Console.WriteLine("eg. MrKupido.Patcher.exe MrKupido.Library.Recipe.dll MrKupido.Processor.dll MrKupido.Processor.RecipeAnalyzer NewIngredient DirectionGeneratorAfter DirectionGeneratorBefore");
                 return -1;
             }
 
@@ -81,7 +82,7 @@ namespace MrKupido.Patcher
             Console.Write("Patching...");
             PatchAssembly(patchAD, newIngredientMD, directionGeneratorBeforeMD, directionGeneratorAfterMD);
             patchInfo.Fields[0].Constant = File.GetLastWriteTime(patchFullPath).ToString("yyyy-MM-dd HH:mm:ss");
-            
+
             int i = 1;
             while (File.Exists(Path.Combine(Path.GetDirectoryName(patchFullPath), $"{patchFilenameWithoutExtension}_v{i}.dll"))) { i++; }
 
@@ -111,7 +112,7 @@ namespace MrKupido.Patcher
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-            }            
+            }
 
             return 0;
         }
