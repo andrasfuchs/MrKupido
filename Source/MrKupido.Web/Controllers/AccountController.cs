@@ -19,6 +19,21 @@ namespace MrKupido.Web.Controllers
         private static readonly WindowsLiveClient windowsLiveClient = new WindowsLiveClient();
         private static readonly GoogleClient googleClient = new GoogleClient();
 
+        // Helper to get authentication secrets from environment variables
+        private static class AuthSecrets
+        {
+            public static string GoogleClientId => ConfigurationManager.AppSettings["GoogleClientID"];
+            public static string GoogleClientSecret => Environment.GetEnvironmentVariable("MRKUPIDO__GOOGLE__CLIENTSECRET");
+            public static string FacebookAppId => ConfigurationManager.AppSettings["FacebookAppID"];
+            public static string FacebookAppSecret => Environment.GetEnvironmentVariable("MRKUPIDO__FACEBOOK__APPSECRET");
+            public static string MicrosoftAccountClientId => ConfigurationManager.AppSettings["MicrosoftAccountClientID"];
+            public static string MicrosoftAccountClientSecret => Environment.GetEnvironmentVariable("MRKUPIDO__MICROSOFTACCOUNT__CLIENTSECRET");
+            public static string GitHubClientId => ConfigurationManager.AppSettings["GitHubClientID"];
+            public static string GitHubClientSecret => Environment.GetEnvironmentVariable("MRKUPIDO__GITHUB__CLIENTSECRET");
+            public static string TwitterConsumerKey => ConfigurationManager.AppSettings["TwitterConsumerKey"];
+            public static string TwitterConsumerSecret => Environment.GetEnvironmentVariable("MRKUPIDO__TWITTER__CONSUMERSECRET");
+        }
+
         [HttpGet]
         public ActionResult LogIn(string code, string state)
         {
@@ -33,8 +48,8 @@ namespace MrKupido.Web.Controllers
                 if (loginType == "Facebook")
                 {
                     var tokenResponse = facebookClient.ExchangeCodeForTokenAsync(
-                        ConfigurationManager.AppSettings["facebookAppID"],
-                        ConfigurationManager.AppSettings["facebookAppSecret"],
+                        AuthSecrets.FacebookAppId,
+                        AuthSecrets.FacebookAppSecret,
                         redirectUri,
                         code).GetAwaiter().GetResult();
                     var query = HttpUtility.ParseQueryString(tokenResponse);
@@ -51,8 +66,8 @@ namespace MrKupido.Web.Controllers
                 else if (loginType == "Google")
                 {
                     var tokenResponse = googleClient.ExchangeCodeForTokenAsync(
-                        ConfigurationManager.AppSettings["googleClientID"],
-                        ConfigurationManager.AppSettings["googleClientSecret"],
+                        AuthSecrets.GoogleClientId,
+                        AuthSecrets.GoogleClientSecret,
                         redirectUri,
                         code).GetAwaiter().GetResult();
                     var tokenObj = Newtonsoft.Json.Linq.JObject.Parse(tokenResponse);
@@ -69,8 +84,8 @@ namespace MrKupido.Web.Controllers
                 else if (loginType == "WindowsLive")
                 {
                     var tokenResponse = windowsLiveClient.ExchangeCodeForTokenAsync(
-                        ConfigurationManager.AppSettings["windowsLiveAppID"],
-                        ConfigurationManager.AppSettings["windowsLiveAppSecret"],
+                        AuthSecrets.MicrosoftAccountClientId,
+                        AuthSecrets.MicrosoftAccountClientSecret,
                         redirectUri,
                         code).GetAwaiter().GetResult();
                     var tokenObj = Newtonsoft.Json.Linq.JObject.Parse(tokenResponse);
@@ -83,6 +98,16 @@ namespace MrKupido.Web.Controllers
                             user = context.Users.FirstOrDefault(u => u.WindowsLiveId == oauth2Graph.Id);
                         }
                     }
+                }
+                else if (loginType == "GitHub")
+                {
+                    // Stub: Add GitHub OAuth logic here
+                    // Use AuthSecrets.GitHubClientId and AuthSecrets.GitHubClientSecret
+                }
+                else if (loginType == "Twitter")
+                {
+                    // Stub: Add Twitter/X.com OAuth logic here
+                    // Use AuthSecrets.TwitterConsumerKey and AuthSecrets.TwitterConsumerSecret
                 }
 
                 if (!string.IsNullOrEmpty(accessToken) && oauth2Graph != null)
@@ -159,7 +184,7 @@ namespace MrKupido.Web.Controllers
             {
                 Session["LoginType"] = "Facebook";
                 string authUrl = facebookClient.GetAuthorizationUrl(
-                    ConfigurationManager.AppSettings["facebookAppID"],
+                    AuthSecrets.FacebookAppId,
                     redirectUri,
                     FacebookClient.Scopes.Email + "," + FacebookClient.Scopes.UserBirthday);
                 return Redirect(authUrl);
@@ -168,7 +193,7 @@ namespace MrKupido.Web.Controllers
             {
                 Session["LoginType"] = "WindowsLive";
                 string authUrl = windowsLiveClient.GetAuthorizationUrl(
-                    ConfigurationManager.AppSettings["windowsLiveAppID"],
+                    AuthSecrets.MicrosoftAccountClientId,
                     redirectUri,
                     WindowsLiveClient.Scopes.SignIn + " " + WindowsLiveClient.Scopes.Emails + " " + WindowsLiveClient.Scopes.Birthday);
                 return Redirect(authUrl);
@@ -177,10 +202,24 @@ namespace MrKupido.Web.Controllers
             {
                 Session["LoginType"] = "Google";
                 string authUrl = googleClient.GetAuthorizationUrl(
-                    ConfigurationManager.AppSettings["googleClientID"],
+                    AuthSecrets.GoogleClientId,
                     redirectUri,
                     GoogleClient.Scopes.UserInfo.Profile + " " + GoogleClient.Scopes.UserInfo.Email);
                 return Redirect(authUrl);
+            }
+            else if (loginType == "GitHub")
+            {
+                Session["LoginType"] = "GitHub";
+                // Stub: Add GitHub OAuth authorization URL logic here
+                // Use AuthSecrets.GitHubClientId
+                return View();
+            }
+            else if (loginType == "Twitter")
+            {
+                Session["LoginType"] = "Twitter";
+                // Stub: Add Twitter/X.com OAuth authorization URL logic here
+                // Use AuthSecrets.TwitterConsumerKey
+                return View();
             }
             return View();
         }
