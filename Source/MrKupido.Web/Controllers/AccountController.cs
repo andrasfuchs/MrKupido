@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using System.Web.Security;
 
 namespace MrKupido.Web.Controllers
@@ -70,8 +71,9 @@ namespace MrKupido.Web.Controllers
                         AuthSecrets.GoogleClientSecret,
                         redirectUri,
                         code).GetAwaiter().GetResult();
-                    var tokenObj = Newtonsoft.Json.Linq.JObject.Parse(tokenResponse);
-                    accessToken = (string)tokenObj["access_token"];
+                    var serializer = new JavaScriptSerializer();
+                    var tokenObj = serializer.Deserialize<Dictionary<string, object>>(tokenResponse);
+                    accessToken = tokenObj.ContainsKey("access_token") ? tokenObj["access_token"] as string : null;
                     if (!string.IsNullOrEmpty(accessToken))
                     {
                         oauth2Graph = googleClient.GetGraphAsync(accessToken).GetAwaiter().GetResult();
@@ -88,8 +90,9 @@ namespace MrKupido.Web.Controllers
                         AuthSecrets.MicrosoftAccountClientSecret,
                         redirectUri,
                         code).GetAwaiter().GetResult();
-                    var tokenObj = Newtonsoft.Json.Linq.JObject.Parse(tokenResponse);
-                    accessToken = (string)tokenObj["access_token"];
+                    var serializer = new JavaScriptSerializer();
+                    var tokenObj = serializer.Deserialize<Dictionary<string, object>>(tokenResponse);
+                    accessToken = tokenObj.ContainsKey("access_token") ? tokenObj["access_token"] as string : null;
                     if (!string.IsNullOrEmpty(accessToken))
                     {
                         oauth2Graph = windowsLiveClient.GetGraphAsync(accessToken).GetAwaiter().GetResult();

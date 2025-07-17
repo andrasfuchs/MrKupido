@@ -1,5 +1,4 @@
 ﻿using System.Web.Script.Serialization;
-using System.Text.Json.Serialization;
 
 namespace MrKupido.Processor.Model
 {
@@ -7,7 +6,7 @@ namespace MrKupido.Processor.Model
     {
         public string[] Names { get; set; }
 
-        [JsonIgnore]
+        [ScriptIgnore]
         public System.Reflection.MethodInfo Method { get; set; }
 
         public override string ToString()

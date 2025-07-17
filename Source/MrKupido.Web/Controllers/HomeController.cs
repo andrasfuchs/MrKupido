@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 
 namespace MrKupido.Web.Controllers
 {
@@ -270,16 +271,24 @@ namespace MrKupido.Web.Controllers
                 using (var reader = new System.IO.StreamReader(stream))
                 {
                     string json = reader.ReadToEnd();
-                    dynamic obj = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
-                    var address = obj.address;
-                    string town = address.town != null ? address.town.ToString() : (address.city != null ? address.city.ToString() : (address.village != null ? address.village.ToString() : null));
-                    string country = address.country != null ? address.country.ToString() : null;
-                    if (!string.IsNullOrEmpty(town) && !string.IsNullOrEmpty(country))
-                        result = town;
-                    else if (!string.IsNullOrEmpty(country))
-                        result = country;
-                    else
-                        result = null;
+                    var serializer = new JavaScriptSerializer();
+                    var obj = serializer.Deserialize<Dictionary<string, object>>(json);
+
+                    object addressObj;
+                    result = null;
+                    if (obj.TryGetValue("address", out addressObj) && addressObj is Dictionary<string, object> address)
+                    {
+                        // Now you can access address["town"], address["city"], etc.
+                        string town = address.ContainsKey("town") ? address["town"] as string :
+                                      address.ContainsKey("city") ? address["city"] as string :
+                                      address.ContainsKey("village") ? address["village"] as string : null;
+                        string country = address.ContainsKey("country") ? address["country"] as string : null;
+
+                        if (!string.IsNullOrEmpty(town) && !string.IsNullOrEmpty(country))
+                            result = town;
+                        else if (!string.IsNullOrEmpty(country))
+                            result = country;
+                    }
                 }
             }
             catch { }
