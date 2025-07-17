@@ -1,10 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace MrKupido.Web.Authentication
 {
+    public class GoogleTokenResponse
+    {
+        public string access_token { get; set; }
+        public string token_type { get; set; }
+        public int expires_in { get; set; }
+        public string refresh_token { get; set; }
+        public string scope { get; set; }
+        public string id_token { get; set; }
+    }
+
     public class GoogleClient
     {
         private const string TokenEndpoint = "https://accounts.google.com/o/oauth2/token";
@@ -18,7 +29,7 @@ namespace MrKupido.Web.Authentication
             return $"{AuthorizationEndpoint}?client_id={Uri.EscapeDataString(clientId)}&redirect_uri={Uri.EscapeDataString(redirectUri)}&response_type=code&scope={Uri.EscapeDataString(scope)}";
         }
 
-        public async Task<string> ExchangeCodeForTokenAsync(string clientId, string clientSecret, string redirectUri, string code)
+        public async Task<GoogleTokenResponse> ExchangeCodeForTokenAsync(string clientId, string clientSecret, string redirectUri, string code)
         {
             using (var client = new HttpClient())
             {
@@ -36,9 +47,7 @@ namespace MrKupido.Web.Authentication
                 var response = await client.SendAsync(request);
                 response.EnsureSuccessStatusCode();
                 var content = await response.Content.ReadAsStringAsync();
-                // Parse access_token from content (JSON)
-                // ...parse logic here...
-                return content;
+                return JsonSerializer.Deserialize<GoogleTokenResponse>(content);
             }
         }
 

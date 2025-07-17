@@ -6,9 +6,10 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
+using System.Text.Json;
 using System.Web.Security;
 
 namespace MrKupido.Web.Controllers
@@ -36,7 +37,7 @@ namespace MrKupido.Web.Controllers
         }
 
         [HttpGet]
-        public ActionResult LogIn(string code, string state)
+        public async Task<ActionResult> LogIn(string code, string state)
         {
             string loginType = (string)Session["LoginType"];
             IOAuth2Graph oauth2Graph = null;
@@ -66,17 +67,15 @@ namespace MrKupido.Web.Controllers
                 }
                 else if (loginType == "Google")
                 {
-                    var tokenResponse = googleClient.ExchangeCodeForTokenAsync(
+                    var tokenResponse = await googleClient.ExchangeCodeForTokenAsync(
                         AuthSecrets.GoogleClientId,
                         AuthSecrets.GoogleClientSecret,
                         redirectUri,
-                        code).GetAwaiter().GetResult();
-                    var serializer = new JavaScriptSerializer();
-                    var tokenObj = serializer.Deserialize<Dictionary<string, object>>(tokenResponse);
-                    accessToken = tokenObj.ContainsKey("access_token") ? tokenObj["access_token"] as string : null;
+                        code);
+                    accessToken = tokenResponse?.access_token;
                     if (!string.IsNullOrEmpty(accessToken))
                     {
-                        oauth2Graph = googleClient.GetGraphAsync(accessToken).GetAwaiter().GetResult();
+                        oauth2Graph = await googleClient.GetGraphAsync(accessToken);
                         if (oauth2Graph != null)
                         {
                             user = context.Users.FirstOrDefault(u => u.GoogleId == oauth2Graph.Id);
@@ -90,7 +89,7 @@ namespace MrKupido.Web.Controllers
                         AuthSecrets.MicrosoftAccountClientSecret,
                         redirectUri,
                         code).GetAwaiter().GetResult();
-                    var serializer = new JavaScriptSerializer();
+                    var serializer = new System.Web.Script.Serialization.JavaScriptSerializer();
                     var tokenObj = serializer.Deserialize<Dictionary<string, object>>(tokenResponse);
                     accessToken = tokenObj.ContainsKey("access_token") ? tokenObj["access_token"] as string : null;
                     if (!string.IsNullOrEmpty(accessToken))
