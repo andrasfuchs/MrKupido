@@ -3,8 +3,14 @@
     ViewBag.Title = MrKupido.Web.Resources.Home.Index.PageTitle + " - " + MrKupido.Web.Resources.Shared.Layout.PageTitle;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@using System.Configuration
+@{
+    var rootUrl = ConfigurationManager.AppSettings["RootUrl"];
+}
 @this.ScriptBlock(
     @<script type="text/javascript">
+
+         var rootUrl = '@rootUrl';
 
          var tipsTimer = new wTimer({
              fps: 0.05,
@@ -31,13 +37,13 @@
                     var htmlStr = "";
 
                     if (tipsAndTricksText[0] == "B") {
-                        htmlStr += "<img runat=\"server\" src=\"./Content/svg/tnt_idea.svg\" width=\"24\" height=\"32\" />";
+                        htmlStr += "<img runat=\"server\" src=\"" + rootUrl + "/Content/svg/tnt_idea.svg\" width=\"24\" height=\"32\" />";
                     } else if (tipsAndTricksText[0] == "Q") {
-                        htmlStr += "<img runat=\"server\" src=\"./Content/svg/tnt_question.svg\" width=\"24\" height=\"32\" />";
+                        htmlStr += "<img runat=\"server\" src=\"" + rootUrl + "/Content/svg/tnt_question.svg\" width=\"24\" height=\"32\" />";
                     } else if (tipsAndTricksText[0] == "S") {
-                        htmlStr += "<img runat=\"server\" src=\"./Content/svg/tnt_smile.svg\" width=\"24\" height=\"32\" />";
+                        htmlStr += "<img runat=\"server\" src=\"" + rootUrl + "/Content/svg/tnt_smile.svg\" width=\"24\" height=\"32\" />";
                     } else if (tipsAndTricksText[0] == "E") {
-                        htmlStr += "<img runat=\"server\" src=\"./Content/svg/tnt_exclamation.svg\" width=\"24\" height=\"32\" />";
+                        htmlStr += "<img runat=\"server\" src=\"" + rootUrl + "/Content/svg/tnt_exclamation.svg\" width=\"24\" height=\"32\" />";
                     }
 
                     htmlStr += "<span>";
@@ -88,7 +94,7 @@
          function loadingNextStep(index) {
              var cardOrder = new Array(0, 0, 0, 0, 0, 0, 1, 2, 3, 6, 5, 4, 1, 2, 3, 6, 5, 4, 1, 2, 3, 6, 5, 4);
              index += 12;
-             
+
              var selectorAll = "details#searchresults li";
 
              var selector = selectorAll + ":nth-child(" + cardOrder[index] + ")";
