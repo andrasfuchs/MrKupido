@@ -3,6 +3,7 @@ using MrKupido.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Diagnostics;
 using System.Reflection;
 using System.Web;
@@ -20,7 +21,7 @@ namespace MrKupido.Web.Controllers
         private static DateTime logMustBeWrittenAt = DateTime.MinValue;
         private static int logItemsToWrite = 0;
 
-        protected string rootUrl = "http://localhost:8416";
+        protected string rootUrl => ConfigurationManager.AppSettings["RootUrl"];
 
         //public User CurrentUser
         //{

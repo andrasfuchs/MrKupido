@@ -84,6 +84,11 @@ namespace MrKupido.Web.Controllers
 
             foreach (RecipeSearchQueryResults sqr in sqrs.ToArray())
             {
+                if (!VirtualPathUtility.IsAppRelative(sqr.IconUrl))
+                {
+                    continue;
+                }
+
                 sqr.IconUrl = String.IsNullOrEmpty(sqr.IconUrl) ? null : VirtualPathUtility.ToAbsolute(sqr.IconUrl);
             }
 
