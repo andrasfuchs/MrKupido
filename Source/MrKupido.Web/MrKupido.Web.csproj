@@ -297,6 +297,13 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Authentication\Facebook\FacebookClient.cs" />
+    <Compile Include="Authentication\Facebook\FacebookGraph.cs" />
+    <Compile Include="Authentication\Google\GoogleClient.cs" />
+    <Compile Include="Authentication\Google\GoogleGraph.cs" />
+    <Compile Include="Authentication\IOAuth2Graph.cs" />
+    <Compile Include="Authentication\WindowsLive\WindowsLiveClient.cs" />
+    <Compile Include="Authentication\WindowsLive\WindowsLiveGraph.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HelpController.cs" />
@@ -1070,10 +1077,6 @@
       <Project>{00DAE49E-6106-4252-902D-AACC3D4018D2}</Project>
       <Name>MrKupido.Utils</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MrKupido.Web.Authentication\MrKupido.Web.Authentication.csproj">
-      <Project>{aa78d112-d889-414b-a7d4-467b34c7b663}</Project>
-      <Name>MrKupido.Web.Authentication</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Recipe\_RecipeDirections.cshtml" />
@@ -1129,7 +1132,7 @@
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_StartDate="1975/10/21" BuildVersion_UpdateFileVersion="False" BuildVersion_BuildVersioningStyle="None.None.None.None" />
+      <UserProperties BuildVersion_BuildVersioningStyle="None.None.None.None" BuildVersion_UpdateFileVersion="False" BuildVersion_StartDate="1975/10/21" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
   <ItemGroup>

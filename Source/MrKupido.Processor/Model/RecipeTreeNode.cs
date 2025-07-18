@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Web.Script.Serialization;
+using System.Text.Json.Serialization;
 
 namespace MrKupido.Processor.Model
 {
@@ -18,33 +18,33 @@ namespace MrKupido.Processor.Model
         public delegate CookedFoodParts CookDelegate(float amount, PreparedIngredients preps, EquipmentGroup eg);
         public delegate void ServeDelegate(float amount, CookedFoodParts food, EquipmentGroup eg);
 
-        [ScriptIgnore]
+        [JsonIgnore]
         public DateTime? ExpiresAt { get; set; }
 
         public string Version { get; protected set; }
 
-        [ScriptIgnore]
+        [JsonIgnore]
         public SelectEquipmentDelegate SelectEquipment { get; set; }
-        [ScriptIgnore]
+        [JsonIgnore]
         public PrepareDelegate Prepare { get; set; }
-        [ScriptIgnore]
+        [JsonIgnore]
         public CookDelegate Cook { get; set; }
-        [ScriptIgnore]
+        [JsonIgnore]
         public ServeDelegate Serve { get; set; }
 
-        [ScriptIgnore]
+        [JsonIgnore]
         private Dictionary<float, IDictionary<string, IIngredient[]>> ingredientCache { get; set; } = new Dictionary<float, IDictionary<string, IIngredient[]>>();
 
-        [ScriptIgnore]
+        [JsonIgnore]
         private Dictionary<float, IDirection[]> directionCache { get; set; } = new Dictionary<float, IDirection[]>();
 
-        [ScriptIgnore]
+        [JsonIgnore]
         private Dictionary<float, IEquipment[]> equipmentCache { get; set; } = new Dictionary<float, IEquipment[]>();
 
-        [ScriptIgnore]
+        [JsonIgnore]
         public Type RecipeType { get; private set; }
 
-        [ScriptIgnore]
+        [JsonIgnore]
         public string[] SearchStrings { get; private set; }
 
         public ShoppingListCategory MainCategory;

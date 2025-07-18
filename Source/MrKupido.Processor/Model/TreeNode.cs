@@ -6,17 +6,17 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Web.Script.Serialization;
+using System.Text.Json.Serialization;
 
 namespace MrKupido.Processor.Model
 {
     public class TreeNode : ITreeNode
     {
-        [ScriptIgnore]
+        [JsonIgnore]
         public TreeNode Parent { get; protected set; }
-        [ScriptIgnore]
+        [JsonIgnore]
         public TreeNode[] Children { get; set; }
-        [ScriptIgnore]
+        [JsonIgnore]
         public DateTime CreatedAt { get; private set; }
 
         public char NodeType { get; private set; }
@@ -26,7 +26,7 @@ namespace MrKupido.Processor.Model
         public string ShortName { get; protected set; }
         public string LongName { get; protected set; }
         public string ClassName { get; private set; }
-        [ScriptIgnore]
+        [JsonIgnore]
         public Type ClassType { get; private set; }
         public string ClassFullName { get; private set; }
         public bool IsOpen { get; set; }
