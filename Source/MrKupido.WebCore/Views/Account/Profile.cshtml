@@ -1,0 +1,218 @@
+﻿@using MrKupido.Web.Models
+@{
+    ViewBag.Title = "Profil - Mr. Kupido";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+ $(document).ready(function () {
+     $('input').change(function (e) {
+         if (!e.target.validity.valid) {
+             var errorMessage = "Hibás érték!";
+             if (e.target.validity.valueMissing) {
+                 errorMessage = "Hiányzó érték!";
+             } else if (e.target.validity.patternMismatch) {
+                 errorMessage = "Hibás formátum!";
+             } else if (e.target.validity.rangeUnderflow) {
+                 errorMessage = "Túl kicsi érték!";
+             } else if (e.target.validity.rangeOverflow) {
+                 errorMessage = "Túl nagy érték!";
+             }
+             errorMessage = $("<div/>").html(errorMessage).text();
+             e.target.setCustomValidity(errorMessage);
+         }
+     });
+     $('input[type="text"]').hover(function () {
+         $(this).animate({ borderColor: '#553e31' }, { duration: 400, easing: "easeInOutCubic", queue: false });
+     }, function () {
+         if (!$(this).is(":focus")) {
+             $(this).animate({ borderColor: '#cdb8ab' }, { duration: 400, easing: "easeInOutCubic", queue: false });
+         }
+     });
+     $('input[type="text"]').focusin(function () {
+         $(this).animate({ borderColor: '#553e31' }, { duration: 400, easing: "easeInOutCubic", queue: false });
+     });
+     $('input[type="text"]').focusout(function () {
+         $(this).animate({ borderColor: '#cdb8ab' }, { duration: 400, easing: "easeInOutCubic", queue: false });
+     });
+     $('input[type="submit"]').hover(function () {
+         $(this).animate({ borderColor: '#553e31' }, { duration: 400, easing: "easeInOutCubic", queue: false });
+     }, function () {
+         $(this).animate({ borderColor: '#cdb8ab' }, { duration: 400, easing: "easeInOutCubic", queue: false });
+     });
+ });
+ function toggleHeightUnit(btn) {
+     btn.value = btn.value == "cm" ? "in" : "cm";
+     btn.previousSibling.previousSibling.focus();
+     btn.previousSibling.previousSibling.selectionStart = btn.previousSibling.previousSibling.value.length;
+     btn.previousSibling.previousSibling.selectionEnd = btn.previousSibling.previousSibling.value.length;
+ }
+ function toggleWeightUnit(btn) {
+     btn.value = btn.value == "kg" ? "lbs" : "kg";
+     btn.previousSibling.previousSibling.focus();
+     btn.previousSibling.previousSibling.selectionStart = btn.previousSibling.previousSibling.value.length;
+     btn.previousSibling.previousSibling.selectionEnd = btn.previousSibling.previousSibling.value.length;
+ }
+</script>
+<header class="nosearch">
+    <a href="~/">
+        <img src="~/Content/svg/logo_mrkupido_wide.svg" alt="Mr. Kupido" width="600" height="157" />
+    </a>
+</header>
+@using (Html.BeginForm("Profile", "Account", FormMethod.Post, new { @id = "profileForm" }))
+{
+    MrKupido.Model.User user = null; // Replace Session.GetCurrentUser() with DI or ViewModel
+    <div id="profile">
+        <details id="basicinfo" open class="alwaysopen">
+            <summary>
+                <h1>Általános adatok</h1>
+                <h2></h2>
+            </summary>
+            <ul>
+                <li>
+                    <div class="label">
+                        <label for="language">Nyelv:</label>
+                    </div>
+                    <div id="language" class="input">
+                        <input id="languageHun" name="language" type="radio" value="hu-HU" /><label for="languageHun">Magyar</label>
+                        <input id="languageEng" name="language" type="radio" value="en-GB" /><label for="languageEng">Angol</label>
+                        <input id="languageDeu" name="language" type="radio" value="de-DE" /><label for="languageDeu">Német</label>
+                        <input id="languageSpa" name="language" type="radio" value="es-ES" /><label for="languageSpa">Spanyol</label>
+                    </div>
+                </li>
+                <li>
+                    <div class="label">
+                        <label for="email">Email:</label>
+                    </div>
+                    <div class="input">
+                        <input type="email" id="email" name="email" autocomplete="off" required disabled value='' />
+                    </div>
+                </li>
+                <li>
+                    <div class="label">
+                        <label for="lastname">Vezetéknév:</label>
+                    </div>
+                    <div class="input">
+                        <input type="text" id="lastname" name="lastname" autocomplete="off" required value='' />
+                    </div>
+                </li>
+                <li>
+                    <div class="label">
+                        <label for="firstname">Keresztnév:</label>
+                    </div>
+                    <div class="input">
+                        <input type="text" id="firstname" name="firstname" autocomplete="off" required value='' />
+                    </div>
+                </li>
+                <li>
+                    <div class="label">
+                        <label for="nickname">Becenév:</label>
+                    </div>
+                    <div class="input">
+                        <input type="text" id="nickname" name="nickname" autocomplete="off" value='' />
+                    </div>
+                </li>
+            </ul>
+            @await Html.PartialAsync("_ValidationErrors", new string[] { "Language", "Email", "FirstName", "LastName", "NickName" })
+        </details>
+        <hr />
+        <details id="physicalinfo" open class="alwaysopen">
+            <summary>
+                <h1>Fizikai adatok</h1>
+                <h2>
+                    <a href="~/help/defaultportionsize">Miért?</a>
+                </h2>
+            </summary>
+            <ul>
+                <li>
+                    <div class="label">
+                        <label for="gender">Nem:</label>
+                    </div>
+                    <div id="gender" class="input">
+                        <input id="genderMale" name="gender" type="radio" value="male" /><label for="genderMale">Férfi</label>
+                        <input id="genderFemale" name="gender" type="radio" value="female" /><label for="genderFemale">Nő</label>
+                    </div>
+                </li>
+                <li>
+                    <div class="label">
+                        <label for="height" title="Magasság leírása">Magasság:</label>
+                    </div>
+                    <div class="input">
+                        <input type="text" id="height" name="height" class="unit" autocomplete="off" placeholder="165" value='' title="Magasság ellenőrzése"/>
+                        <input type="button" id="heightUnit" class="unit" value="cm" onclick="javascript:toggleHeightUnit(this);" tabindex="-1"/>
+                    </div>
+                </li>
+                <li>
+                    <div class="label">
+                        <label for="weight">Súly:</label>
+                    </div>
+                    <div class="input">
+                        <input type="text" id="weight" name="weight" class="unit" autocomplete="off" placeholder="61.50" value='' />
+                        <input type="button" id="weightUnit" class="unit" value="kg" onclick="javascript: toggleWeightUnit(this);" tabindex="-1" />
+                    </div>
+                </li>
+                <li>
+                    <div class="label">
+                        <label for="dateofbirth">Születési dátum:</label>
+                    </div>
+                    <div class="input">
+                        <input type="text" id="dateofbirth" name="dateofbirth" autocomplete="off" placeholder="1975-05-24" value='' />
+                    </div>
+                </li>
+            </ul>
+            @await Html.PartialAsync("_ValidationErrors", new string[] { "Gender", "Height", "Weight", "DateOfBirth" })
+        </details>
+        <hr />
+        <div style="display: none">            
+            <details id="likes" class="alwaysopen">
+                <summary>
+                    <h1>Mit szeretsz és mit nem?</h1>
+                    <h2>
+                        <a href="#">Miért hasznos?</a>
+                    </h2>
+                </summary>
+                <ul>
+                    <li></li>
+                </ul>
+            </details>
+            <hr class="single" />
+            <details id="conditions" class="alwaysopen">
+                <summary>
+                    <h1>Egészségügyi állapot</h1>
+                    <h2>
+                        <a href="#">Miért is mondanád el nekünk?</a>
+                    </h2>
+                </summary>
+                <ul>
+                    <li></li>
+                </ul>
+            </details>
+            <hr class="single" />
+            <details id="advanced" class="alwaysopen">
+                <summary>
+                    <h1>Haladó beállítások</h1>
+                </summary>
+                <ul>
+                    <li>
+                        <div class="label">
+                            <label for="betatester">Béta-teszter vagyok:</label>
+                        </div>
+                        <div class="input">
+                            <input type="checkbox" id="betatester" name="betatester" />
+                        </div>
+                    </li>
+                    <li>
+                        <div class="label">
+                            <label for="githubuser">GitHub felhasználónév:</label>
+                        </div>
+                        <div class="input">
+                            <input type="text" id="githubuser" name="githubuser" required value='' />
+                        </div>
+                    </li>
+                </ul>
+            </details>
+        </div>
+    </div>    
+    <div class="formbuttons">
+        <input type="button" class="submit" value="Mentés" onclick="javascipt:$('form:first').submit();" />
+    </div>
+}

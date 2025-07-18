@@ -1,0 +1,49 @@
+﻿@model MrKupido.Web.Models.OldBrowserData
+@{
+    ViewBag.Title = $"Nem támogatott böngésző ({Model.BrowserName} v{Model.BrowserVersion}) - Mr. Kupido";
+}
+<header class="nosearch">
+    <a href="~/">
+        <img src="~/Content/images/logo_mrkupido_wide.png" alt="Mr. Kupido" width="600" height="157" />
+    </a>
+</header>
+<div>
+    <details id="browser" open class="alwaysopen">
+        <summary>
+            <h1>Figyelmeztetés</h1>
+            <h3>Ez a böngésző nem támogatott.</h3>
+        </summary>
+        <hr class="space" />
+        <ul>
+            <li>
+                <a href="http://www.google.com/chrome">Google Chrome
+                <img src="~/Content/images/browser_chrome.png" alt="Google Chrome" width="230px" height="190px" /></a> </li>
+            <li>
+                <a href="http://www.mozilla.com/firefox/">Firefox
+                <img src="~/Content/images/browser_firefox.png" alt="Firefox" width="230px" height="190px" /></a>
+            </li>
+            <li>
+                <a href="http://www.microsoft.com/windows/Internet-explorer/default.aspx">Internet Explorer
+                <img src="~/Content/images/browser_ie.png" alt="Internet Explorer" width="230px" height="190px" /></a>
+            </li>
+            <li>
+                <a href="http://www.apple.com/safari/download/">Apple Safari
+                <img src="~/Content/images/browser_safari.png" alt="Apple Safari" width="230px" height="190px" /></a>
+            </li>
+            <li>
+                <a href="http://www.opera.com/download/">Opera
+                <img src="~/Content/images/browser_opera.png" alt="Opera" width="230px" height="190px" /></a>
+            </li>
+            <li>
+                <a href="https://play.google.com/store/apps/details?id=org.mozilla.firefox">Android Browser
+                <img src="~/Content/images/browser_android.png" alt="Android Browser" width="230px" height="190px" /></a>
+            </li>
+        </ul>
+    </details>
+</div>
+<div class="formbuttons">
+    @using (Html.BeginForm("IgnoreOldBrowser", "Home", new { returnUrl = Model.ReturnUrl }))
+    {
+        <input type="submit" value="Figyelmen kívül hagyom" />
+    }
+</div>

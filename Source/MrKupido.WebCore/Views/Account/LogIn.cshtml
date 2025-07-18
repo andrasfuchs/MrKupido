@@ -1,0 +1,44 @@
+﻿@using MrKupido.Web.Models
+@{
+    ViewBag.Title = "Bejelentkezés - Mr. Kupido";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+    $(window).on('load', function() {
+        $('#slider').nivoSlider({ effect: 'fade', animSpeed: 1000, pauseTime: 7500, directionNav: false, controlNav: false, controlNavThumbs: false });
+    });
+</script>
+<header class="nosearch">
+    <a href="~/">
+        <img src="~/Content/svg/logo_mrkupido_wide.svg" alt="Mr. Kupido" width="600" height="157" />
+    </a>
+</header>
+<div class="login-slider-wrapper">
+    <div id="slider" class="nivoSlider">
+        <img src="~/content/images/loginslide_01.png" width="500" height="250" title="Kupidó segít kiválogatni, mi kell a boltból. Ha tudna be is vásárolna helyetted!" />
+        <img src="~/content/images/loginslide_02.png" width="500" height="250" title="Szűrés egy új dimenzióban: keress hozzávalóra, receptre vagy diétára!"/>
+        <img src="~/content/images/loginslide_03.png" width="500" height="250" title="Egyszerű és nagyszerű lépések minden recepthez, kezdőknek is!" />
+        <img src="~/content/images/loginslide_04.png" width="500" height="250" title="Bajban voltál a mennyiségekkel? Mától nem! Kupidó mindent számol helyetted!"/>
+        <img src="~/content/images/loginslide_05.png" width="500" height="250" title="Mit? Miből? Mennyi idő? Meglátszik majd még egy süti?"/>
+    </div>
+</div>
+@using (Html.BeginForm("LogIn", "Account", FormMethod.Post, new { @id = "openIdForm" }))
+{
+    @Html.Hidden("loginType", "")
+    <details id="login" open class="alwaysopen">
+        <summary>
+            <h1>Bejelentkezés</h1>
+            <h2></h2>
+        </summary>
+        <hr />
+        <ul>
+            <li><a href="javascript:_gaq.push(['_trackEvent', 'UserAction', 'Login', 'Google']); $('#loginType').val('Google'); $('#openIdForm').submit();">Google
+                <img src="~/Content/svg/authlogo_google.svg" alt="Google" width="270px" /></a> </li>
+            <li><a href="javascript:_gaq.push(['_trackEvent', 'UserAction', 'Login', 'Facebook']); $('#loginType').val('Facebook'); $('#openIdForm').submit();">Facebook
+                <img src="~/Content/svg/authlogo_facebook.svg" alt="Facebook" width="270px" /></a> </li>
+            <li><a href="javascript:_gaq.push(['_trackEvent', 'UserAction', 'Login', 'Windows Live']); $('#loginType').val('WindowsLive'); $('#openIdForm').submit();">Windows Live
+                <img src="~/Content/svg/authlogo_windowslive.svg" alt="Windows Live" width="270px" /></a> </li>
+        </ul>
+    </details>
+}
+<hr />

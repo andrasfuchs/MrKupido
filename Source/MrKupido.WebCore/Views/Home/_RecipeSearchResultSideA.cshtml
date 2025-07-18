@@ -1,0 +1,352 @@
+﻿@model MrKupido.Web.Models.RecipeSearchResultItem
+@using MrKupido.Web.Models
+
+<script type="text/javascript">
+    function flipToSideB@(Model.Index)(uniqueName) {
+        $("li#" + uniqueName).animate({ opacity: 0.0 }, 500, "easeInOutCubic", function () {
+            $.ajax({
+                url: '@Url.Action("RenderSideB","Home", new { uniqueName = Model.UniqueName } )',
+                success: function (data) {
+                    $("li#" + uniqueName).html(data);
+                    $("div#nivoSlider" + @(Model.Index)).nivoSlider({ effect: 'fade', animSpeed: 1000, pauseTime: 5000, directionNav: false, controlNav: false, controlNavThumbs: false, pauseOnHover: false, beforeChange: beforeSliderChange, afterChange: afterSliderChange });
+                },
+                complete: function () {
+                    $("li#" + uniqueName).animate({ opacity: 1.0 }, 500, "easeInOutCubic");
+                }
+            });
+        });
+    }
+</script>
+
+<div class="resultbox">
+    <div class="resulthead @Model.CSSClass">
+        <div class="category">
+            <img src="@Model.IconUrl" alt="@Model.MainCategory.ToString()" width="32" height="32" />
+        </div>
+        <div class="title">
+            <span class="titlecontent">
+
+                <a href="~/recipe/@Model.UniqueName" onclick="_gaq.push(['_trackEvent', 'UserAction', 'RecipeDetails', '@Model.UniqueName']);" class='@(Model.IsImplemented ? "enabled" : "disabled")'>
+
+                    @Model.DisplayName
+
+                </a>
+
+                @if (Model.IsHidden)
+                { 
+                    <span>*</span>
+                }
+            </span>
+        </div>
+        <div class="flag">
+            <a href="javascript:flipToSideB@(Model.Index)('@Model.UniqueName.Replace("[","_").Replace("]","_")')">
+                <img class="flag" src="~/Content/svg/icon_flag.svg" width="40" height="23" />
+            </a>
+        </div>
+    </div>
+    <div class="resulticons">
+        @if (Model.CSSClass == "commercial")
+        {
+            if (String.IsNullOrEmpty(Model.CommercialIconFilename))
+            {
+                // this must be an item to order from restaurants
+            <img src="~/Content/svg/type_orderable.svg" width="35" height="35" />
+            }
+            else
+            {
+                // this must be an item to buy in stores
+            <img src="~/Content/svg/type_commercial.svg" width="35" height="35" />
+            }
+        }
+        else
+        {
+                    
+            <div class="versions">
+                @if (Model.SubVersions > 0)
+                {
+                    <a href="javascript:searchKeywordSelected(null,{item: {value:'R:@Model.UniqueName'}}); doSearch();">
+                        <img src="~/Content/svg/icon_versions.svg" width="50" height="45" /><span>@Model.SubVersions</span></a>
+                }
+                else
+                {
+                    <img src="~/Content/svg/icon_versions_disabled.svg" width="50" height="45" />
+                }
+            </div>
+
+
+        }
+
+
+        @if (Model.IsVegetarian)
+        { 
+            <img src="~/Content/svg/icon_vegetarian.svg" alt="vegetáriánus" width="35" height="35" />
+        }
+        else
+        { 
+            <img src="~/Content/svg/icon_vegetarian_disabled.svg" alt="nem vegetáriánus" width="35" height="35" />
+        }
+
+        @if (Model.IsGlutenFree)
+        { 
+            <img src="~/Content/svg/icon_glutenfree.svg" alt="gluténmentes" width="35" height="35" />
+        }
+        else
+        { 
+            <img src="~/Content/svg/icon_glutenfree_disabled.svg" alt="glutént tartalmaz" width="35" height="35" />
+        }
+
+        @if (Model.IsLactoseFree)
+        { 
+            <img src="~/Content/svg/icon_lactosefree.svg" alt="laktózmentes" width="35" height="35" />
+        }
+        else
+        { 
+            <img src="~/Content/svg/icon_lactosefree_disabled.svg" alt="laktózt tartalmaz" width="35" height="35" />
+        }
+
+        @if (String.IsNullOrEmpty(Model.CommercialIconFilename))
+        {
+
+            if ((Model.Photos != null) && (Model.Photos.Length > 0))
+            { 
+                <a href="javascript:flipToSideB@(Model.Index)('@Model.UniqueName.Replace("[","_").Replace("]","_")')">
+                    <img src="~/Content/svg/icon_photos.svg" alt="@Model.Photos.Length kép" width="40" height="45" />
+                </a>
+            }
+            else
+            { 
+            <img src="~/Content/svg/icon_photos_disabled.svg" alt="0 kép" width="40" height="45" />
+            }
+
+            <div class="preptime">
+                @if (Model.NetTime >= 60)
+                {
+                    <img src="~/Content/svg/clock_60.svg" alt="@Model.NetTime perc" width="35" height="35" />
+                }
+                else if (Model.NetTime >= 52)
+                {
+                    <img src="~/Content/svg/clock_52.svg" alt="@Model.NetTime perc" width="35" height="35" />
+                }
+                else if (Model.NetTime >= 45)
+                {
+                    <img src="~/Content/svg/clock_45.svg" alt="@Model.NetTime perc" width="35" height="35" />
+                }
+                else if (Model.NetTime >= 37)
+                {
+                    <img src="~/Content/svg/clock_37.svg" alt="@Model.NetTime perc" width="35" height="35" />
+                }
+                else if (Model.NetTime >= 30)
+                {
+                    <img src="~/Content/svg/clock_30.svg" alt="@Model.NetTime perc" width="35" height="35" />
+                }
+                else if (Model.NetTime >= 22)
+                {
+                    <img src="~/Content/svg/clock_22.svg" alt="@Model.NetTime perc" width="35" height="35" />
+                }
+                else if (Model.NetTime >= 15)
+                {
+                    <img src="~/Content/svg/clock_15.svg" alt="@Model.NetTime perc" width="35" height="35" />
+                }
+                else if (Model.NetTime >= 7)
+                {
+                    <img src="~/Content/svg/clock_07.svg" alt="@Model.NetTime perc" width="35" height="35" />
+                }
+                else if (Model.NetTime > 0)
+                {
+                    <img src="~/Content/svg/clock_00.svg" alt="@Model.NetTime perc" width="35" height="35" />
+                }
+                else
+                {
+                    <img src="~/Content/svg/clock_disabled.svg" alt="? perc" width="35" height="35" />
+                }
+
+                @if (Model.NetTime >= 199)
+                {
+                    <span>++</span>
+                }
+                else if (Model.NetTime > 0)
+                {
+                    <span>@Model.NetTime.ToString("00")</span>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="commerciallogo">
+                <img src="~/Content/images/brand_@(Model.CommercialIconFilename).png" />
+            </div>
+        }
+
+    </div>
+    <div class="resultbody">
+        @if (Model.CommercialInfo != null)
+        {
+            @Model.CommercialInfo
+        }
+        else
+        {
+            @Model.MainIngredients
+        }
+    </div>
+    <div class="resultfooter">
+        @if ((Model.RatingCount == 0) || (!Model.Rating.HasValue))
+        { 
+            <img src="~/Content/svg/stars_00_light.svg" alt="nincs értékelés" width="111" height="20" />
+        }
+        else
+        {
+            if (Model.Rating.Value >= 4.75)
+            { 
+            <img src="~/Content/svg/stars_50.svg" alt="@Model.Rating.Value" width="111" height="20" />
+            }
+            else if (Model.Rating.Value >= 4.25)
+            { 
+            <img src="~/Content/svg/stars_45.svg" alt="@Model.Rating.Value" width="111" height="20" />
+            }
+            else if (Model.Rating.Value >= 3.75)
+            { 
+            <img src="~/Content/svg/stars_40.svg" alt="@Model.Rating.Value" width="111" height="20" />
+            }
+            else if (Model.Rating.Value >= 3.25)
+            { 
+            <img src="~/Content/svg/stars_35.svg" alt="@Model.Rating.Value" width="111" height="20" />
+            }
+            else if (Model.Rating.Value >= 2.75)
+            { 
+            <img src="~/Content/svg/stars_30.svg" alt="@Model.Rating.Value" width="111" height="20" />
+            }
+            else if (Model.Rating.Value >= 2.25)
+            { 
+            <img src="~/Content/svg/stars_25.svg" alt="@Model.Rating.Value" width="111" height="20" />
+            }
+            else if (Model.Rating.Value >= 1.75)
+            { 
+            <img src="~/Content/svg/stars_20.svg" alt="@Model.Rating.Value" width="111" height="20" />
+            }
+            else if (Model.Rating.Value >= 1.25)
+            { 
+            <img src="~/Content/svg/stars_15.svg" alt="@Model.Rating.Value" width="111" height="20" />
+            }
+            else if (Model.Rating.Value >= 0.75)
+            { 
+            <img src="~/Content/svg/stars_10.svg" alt="@Model.Rating.Value" width="111" height="20" />
+            }
+            else if (Model.Rating.Value >= 0.25)
+            { 
+            <img src="~/Content/svg/stars_05.svg" alt="@Model.Rating.Value" width="111" height="20" />
+            }
+            else
+            { 
+            <img src="~/Content/svg/stars_00.svg" alt="@Model.Rating.Value" width="111" height="20" />
+            }
+        }
+    </div>
+</div>
+<div class="resultnutritionlevels">
+    @if (!Model.CaloriesLevel.HasValue)
+    {
+        <img src="~/Content/svg/nutlevel_none.svg" width="30" height="50" />
+    }
+    else if (Model.CaloriesLevel.Value > 4.0f)
+    {
+        <img src="~/Content/svg/nutlevel_5.svg" width="30" height="50" />
+    }
+    else if (Model.CaloriesLevel.Value > 3.0f)
+    {
+        <img src="~/Content/svg/nutlevel_4.svg" width="30" height="50" />
+    }
+    else if (Model.CaloriesLevel.Value > 2.0f)
+    {
+        <img src="~/Content/svg/nutlevel_3.svg" width="30" height="50" />
+    }
+    else if (Model.CaloriesLevel.Value > 1.0f)
+    {
+        <img src="~/Content/svg/nutlevel_2.svg" width="30" height="50" />
+    }
+    else
+    {
+        <img src="~/Content/svg/nutlevel_1.svg" width="30" height="50" />
+    }
+
+    @if (!Model.CarbohydratesLevel.HasValue)
+    {
+        <img src="~/Content/svg/nutlevel_none.svg" width="30" height="50" />
+    }
+    else if (Model.CarbohydratesLevel.Value > 0.8f)
+    {
+        <img src="~/Content/svg/nutlevel_5.svg" width="30" height="50" />
+    }
+    else if (Model.CarbohydratesLevel.Value > 0.6f)
+    {
+        <img src="~/Content/svg/nutlevel_4.svg" width="30" height="50" />
+    }
+    else if (Model.CarbohydratesLevel.Value > 0.4f)
+    {
+        <img src="~/Content/svg/nutlevel_3.svg" width="30" height="50" />
+    }
+    else if (Model.CarbohydratesLevel.Value > 0.2f)
+    {
+        <img src="~/Content/svg/nutlevel_2.svg" width="30" height="50" />
+    }
+    else
+    {
+        <img src="~/Content/svg/nutlevel_1.svg" width="30" height="50" />
+    }
+
+    @if (!Model.ProteinLevel.HasValue)
+    {
+        <img src="~/Content/svg/nutlevel_none.svg" width="30" height="50" />
+    }
+    else if (Model.ProteinLevel.Value > 0.8f)
+    {
+        <img src="~/Content/svg/nutlevel_5.svg" width="30" height="50" />
+    }
+    else if (Model.ProteinLevel.Value > 0.6f)
+    {
+        <img src="~/Content/svg/nutlevel_4.svg" width="30" height="50" />
+    }
+    else if (Model.ProteinLevel.Value > 0.4f)
+    {
+        <img src="~/Content/svg/nutlevel_3.svg" width="30" height="50" />
+    }
+    else if (Model.ProteinLevel.Value > 0.2f)
+    {
+        <img src="~/Content/svg/nutlevel_2.svg" width="30" height="50" />
+    }
+    else
+    {
+        <img src="~/Content/svg/nutlevel_1.svg" width="30" height="50" />
+    }
+
+    @if (!Model.FatLevel.HasValue)
+    {
+        <img src="~/Content/svg/nutlevel_none.svg" width="30" height="50" />
+    }
+    else if (Model.FatLevel.Value > 0.8f)
+    {
+        <img src="~/Content/svg/nutlevel_5.svg" width="30" height="50" />
+    }
+    else if (Model.FatLevel.Value > 0.6f)
+    {
+        <img src="~/Content/svg/nutlevel_4.svg" width="30" height="50" />
+    }
+    else if (Model.FatLevel.Value > 0.4f)
+    {
+        <img src="~/Content/svg/nutlevel_3.svg" width="30" height="50" />
+    }
+    else if (Model.FatLevel.Value > 0.2f)
+    {
+        <img src="~/Content/svg/nutlevel_2.svg" width="30" height="50" />
+    }
+    else
+    {
+        <img src="~/Content/svg/nutlevel_1.svg" width="30" height="50" />
+    }
+
+</div>
+<div class="resultnutritionnames">
+    <img src="~/Content/svg/nutname_cal_hun.svg" alt="tápérték" width="30" height="50" />
+    <img src="~/Content/svg/nutname_carbs_hun.svg" alt="cukor" width="30" height="50" />
+    <img src="~/Content/svg/nutname_protein_hun.svg" alt="só" width="30" height="50" />
+    <img src="~/Content/svg/nutname_fat_hun.svg" alt="zsír" width="30" height="50" />
+</div>

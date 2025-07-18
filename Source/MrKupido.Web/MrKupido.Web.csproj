@@ -96,6 +96,7 @@
     <Use64BitIISExpress />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <_MigrateToProjectGuid>9c9558ff-3feb-4e0f-f714-d2d3da11667b</_MigrateToProjectGuid>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>

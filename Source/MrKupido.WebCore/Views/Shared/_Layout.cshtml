@@ -1,0 +1,79 @@
+﻿@using MrKupido.Web.Models
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="content-language" content="hu" />
+    <meta name="description" content="Mr. Kupido - recept kereső" />
+    <meta name="keywords" content="recept, főzés, hozzávaló, diéta">
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/themes/base/jquery.ui.autocomplete.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/themes/base/jquery.ui.slider.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/themes/base/jquery.ui.theme.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/css/site.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/nivo-slider.css" rel="stylesheet" type="text/css">
+    <link rel="icon" type="image/ico" href="~/Content/images/mrkupido.ico">
+    <!-- IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+        <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <script type="text/javascript" async>
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-34057275-1']);
+        _gaq.push(['_setDomainName', 'mrkupido.com']);
+        _gaq.push(['_trackPageview']);
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <script type="text/javascript">
+        var idleTime = 0;
+        $(function () {
+            var idleInterval = setInterval(timerIncrement, 60000);
+            $(document).on('mousemove keypress', function () { idleTime = 0; });
+        });
+        function timerIncrement() { idleTime = idleTime + 1; }
+    </script>
+</head>
+<body>
+    <div class="wrapper">
+        @RenderBody()
+        <hr class="single" />
+        <footer>
+            <p>
+                <a href="~/">Főoldal</a>
+                |<a href="~/account/Profile">Profil</a>
+                |<a href="mailto:help@mrkupido.com">Kapcsolat</a>
+                |<a href="~/help/PrivacyPolicy">Jogi nyilatkozat</a>
+            </p>
+            <p>
+                &copy; 2012-@DateTime.Now.Year.ToString() <a href="http://hu.linkedin.com/pub/andras-fuchs/32/355/924">Andras Fuchs</a> Minden jog fenntartva
+            </p>
+        </footer>
+    </div>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+    <script src="~/Scripts/wTimer.js"></script>
+    <script src="~/Scripts/jquery.nivo.slider.js"></script>
+    <!-- UserVoice JavaScript SDK (only needed once on a page) -->
+    <script>(function () { var uv = document.createElement('script'); uv.type = 'text/javascript'; uv.async = true; uv.src = '//widget.uservoice.com/bQqIiv9tekPJeh4cNURJQ.js'; var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(uv, s) })()</script>
+    <!-- A tab to launch the Classic Widget -->
+    <script>
+        var placeHolderTextHtml = $("<div />").html('Visszajelzés és támogatás v' + '@DateTime.Now.Year.ToString()').contents();
+        UserVoice = window.UserVoice || [];
+        UserVoice.push(['showTab', 'classic_widget', {
+            mode: 'full',
+            primary_color: '#553e31',
+            link_color: '#cdb8ab',
+            default_mode: 'support',
+            forum_id: 201766,
+            tab_label: placeHolderTextHtml[0].data,
+            tab_color: '#553e31',
+            tab_position: 'middle-right',
+            tab_inverted: false
+        }]);
+    </script>
+</body>
+</html>

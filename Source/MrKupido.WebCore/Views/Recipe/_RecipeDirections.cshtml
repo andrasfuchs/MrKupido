@@ -1,0 +1,200 @@
+﻿@model MrKupido.Library.IDirection[]
+@using MrKupido.Web.Models
+@using System.Configuration
+@{
+    var rootUrl = ConfigurationManager.AppSettings["RootUrl"];
+}
+@this.ScriptBlock(
+    @<script type="text/javascript">
+         function makeStruct(names) {
+             var names = names.split(' ');
+             var count = names.length;
+             function constructor() {
+                 for (var i = 0; i < count; i++) {
+                     this[names[i]] = arguments[i];
+                 }
+             }
+             return constructor;
+         }
+
+         var DirectionItem = makeStruct("id image timeInSecs li");
+
+         var timerCounter = 0;
+         var directionItems;
+
+         var timer = new wTimer({
+             fps: 5,
+             run: function () {
+                 timerCounter += 0.2;
+                 var currentTimeInSeconds = 0
+
+                 if (typeof directionItems == 'undefined') {
+                     directionItems = new Array(100);
+                     $("img[id^='clock_']").each(function (i, item) {
+
+                         directionItems[i] = new DirectionItem(item["id"], item, parseInt(item["id"].substring(6) - currentTimeInSeconds, 10), $(this).parents("li"));
+                         currentTimeInSeconds += directionItems[i].timeInSecs;
+                     });
+                 }
+
+                 currentTimeInSeconds = 0;
+                 var currentIndex = 0;
+
+                 while ((directionItems[currentIndex] != null) && (directionItems[currentIndex].timeInSecs + currentTimeInSeconds <= timerCounter)) {
+                     directionItems[currentIndex].image["src"] = "./../../Content/svg/d_clock8.svg";
+                     directionItems[currentIndex].li.addClass('pastDirection');
+
+                     if (directionItems[currentIndex].li.is('.currentDirection')) {
+                         directionItems[currentIndex].li.removeClass('currentDirection');
+
+                         compactDirection(directionItems[currentIndex].li);
+                     }
+
+                     currentTimeInSeconds += directionItems[currentIndex].timeInSecs;
+                     currentIndex++;
+                 }
+
+                 if (directionItems[currentIndex] != null) {
+                     var imgIndex = Math.floor(((timerCounter - currentTimeInSeconds) / directionItems[currentIndex].timeInSecs) * 8 + 1);
+
+                     directionItems[currentIndex].image["src"] = "./../../Content/svg/d_clock" + imgIndex + ".svg";
+                     directionItems[currentIndex].li.removeClass('pastDirection');
+
+                     if (!directionItems[currentIndex].li.is('.currentDirection')) {
+                         directionItems[currentIndex].li.addClass('currentDirection');
+
+                         expandDirection(directionItems[currentIndex].li);
+                     }
+
+                     currentTimeInSeconds += directionItems[currentIndex].timeInSecs;
+                     currentIndex++;
+                 }
+
+                 while (directionItems[currentIndex] != null) {
+                     directionItems[currentIndex].image["src"] = "./../../Content/svg/d_clock0.svg";
+                     directionItems[currentIndex].li.removeClass('pastDirection');
+
+                     if (directionItems[currentIndex].li.is('.currentDirection')) {
+                         directionItems[currentIndex].li.removeClass('currentDirection');
+
+                         compactDirection(directionItems[currentIndex].li);
+                     }
+
+                     currentTimeInSeconds += directionItems[currentIndex].timeInSecs;
+                     currentIndex++;
+                 }
+
+             }
+         });
+
+         function expandDirection(li) {
+             li.animate({ height: 140 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             li.find("span[class^=stage]").animate({ height: 140 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             //li.find("span.timer").animate({ height: 135 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             //li.find("span.timer>img").animate({ height: 120, width: 120 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             //li.find("span.timer>span.action").animate({ marginTop: -175, marginLeft: 0 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             //li.find("span.timer>span.action>img").animate({ height: 120, width: 120 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             li.find("div.directionRightPart").animate({ width: 630, height: 140 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             li.find("div.directionRightPart>span.directionBigIcons").animate({ opacity: 1.0 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             li.find("div.directionRightPart>span.directionText").animate({ width: 630 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+         }
+
+         function compactDirection(li) {
+             li.animate({ height: 70 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             li.find("span[class^=stage]").animate({ height: 70 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             //li.find("span.timer").animate({ height: 70 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             //li.find("span.timer>img").animate({ height: 60, width: 60 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             //li.find("span.timer>span.action").animate({ marginTop: -54, marginLeft: -75 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             //li.find("span.timer>span.action>img").animate({ height: 60, width: 60, marginTop: -44, marginLeft: -70 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             li.find("div.directionRightPart").animate({ width: 690, height: 70 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             li.find("div.directionRightPart>span.directionBigIcons").animate({ opacity: 0.0 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+             li.find("div.directionRightPart>span.directionText").animate({ width: 690 }, { duration: 400, easing: "easeInOutCubic", queue: false });
+         }
+    </script>
+)
+
+@if (Model == null)
+{
+    <span class="unknown">Az étel elkészítése jelenleg ismeretlen</span>
+}
+else
+{
+    <div class="clickabledirection" onclick="javascript: timerCounter = 0; timer.start();">
+        <div class="icon">
+            <img runat="server" src="~/Content/svg/icon_recipestart.svg" width="19" height="22" />
+        </div>
+        <div class="text">Kezdődhet a főzés!</div>
+    </div>
+
+    <ul id="directions">
+        @{
+            int i = 0;
+            TimeSpan time = new TimeSpan();
+            foreach (MrKupido.Library.IDirection dir in Model)
+            {
+                <li>
+                    <span class="stage@(dir.Stage)"></span>
+                    <span class="time">@Math.Floor(time.TotalHours).ToString("00"):@time.Minutes.ToString("00")</span>
+                    <span class="timer">
+                        <img runat="server" id="clock_@((time + dir.TimeToComplete).TotalSeconds)" src="~/Content/svg/d_clock0.svg" alt="1 perc" width="60px" height="60px" />
+                        <span class="action">
+                            <img runat="server" src="@dir.ActionIconUrl" width="60px" height="60px" onclick="javascript: timerCounter = @((time).TotalSeconds); timer.start();" />
+                        </span>
+                    </span>
+                    <div class="directionRightPart">
+                        <span class="directionBigIcons">
+                            <img runat="server" src="@dir.Equipment.GetIconUrl(rootUrl)" width="60px" height="60px" />
+                            @foreach (MrKupido.Library.ITreeNode tn in dir.Parameters)
+                            {
+                                if (tn != null)
+                                {
+                                    <img runat="server" src="@tn.GetIconUrl(rootUrl)" width="60px" height="60px" />
+                                }
+                            }
+                        </span>
+                        <span class="directionText">
+                            <span class="directionTextContent">
+                                @foreach (MrKupido.Library.IDirectionSegment segment in dir.DirectionSegments)
+                                {
+                                    if (segment is MrKupido.Processor.Model.RecipeDirectionSegmentReference)
+                                    {
+                                        MrKupido.Processor.Model.RecipeDirectionSegmentReference refSegment = (MrKupido.Processor.Model.RecipeDirectionSegmentReference)segment;
+
+                                        if (!String.IsNullOrEmpty(refSegment.IconUrl))
+                                        {
+                                            @*<img runat="server" src="@refSegment.IconUrl" alt="@refSegment.IconAlt" title="@refSegment.IconAlt" width="32px" height="32px" />*@
+                                        }
+
+                                        if (refSegment.Id > 0)
+                                        {
+                                            @*<span>@refSegment.Id</span>*@
+                                            @*<span>@refSegment.IconAlt</span>*@
+                                        }
+
+                                        if (!String.IsNullOrEmpty(refSegment.Name))
+                                        {
+                                            <span>@refSegment.Name</span>
+                                        }
+
+                                        @refSegment.Text
+                                    }
+                                    else
+                                    {
+                                        @segment
+                                    }
+                                }
+                            </span>
+                        </span>
+                    </div>
+                </li>
+                time = time + dir.TimeToComplete;
+            }
+        }
+    </ul>
+
+    <div class="clickabledirection" onclick="javascript: timerCounter = 65535; timer.start();">
+        <div class="icon"></div>
+        <div class="text">Elkészültem!</div>
+    </div>
+
+}

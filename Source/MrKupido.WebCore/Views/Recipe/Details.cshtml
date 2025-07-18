@@ -1,0 +1,301 @@
+﻿@model object[]
+@{
+    var recipeNode = (MrKupido.Processor.Model.RecipeTreeNode)Model[0];
+    ViewBag.Title = $"Recept részletei: {recipeNode.LongName} - Mr. Kupido";
+}
+@using MrKupido.Web.Models
+<script type="text/javascript">
+         var popupToClose = null;
+
+         function isDescendant(parent, child) {
+             var node = child.parentNode;
+             while (node != null) {
+                 if (node == parent) {
+                     return true;
+                 }
+                 node = node.parentNode;
+             }
+             return false;
+         }
+
+         $(document).ready(function () {
+             deleteFilter("", false);
+
+             $(document).click(function (e)
+             {
+                 if ((popupToClose != null) && (!isDescendant(popupToClose[0], e.toElement))) {
+                     popupToClose.animate({ opacity: '0.00' }, 500, "easeInOutCubic", function () { popupToClose.toggle(); popupToClose = null; });
+
+                     e.preventDefault();
+                     e.stopPropagation();
+                 }
+             });
+
+             $(".portionselector-trigger").click(function (e) {
+                 if (popupToClose == null) {
+                     $("#portionselector").toggle().animate({ opacity: '1.00' }, 500, "easeInOutCubic");
+                     popupToClose = $("#portionselector");
+
+                     e.preventDefault();
+                     e.stopPropagation();
+                 }
+             });
+         });
+
+         $(function () {
+             $("#portionslider").slider({
+                 value: 1000,
+                 min: 500,
+                 max: 1500,
+                 step: 250,
+                 slide: function (event, ui) {
+                     if (blockRefresh > 0) {                         
+                         return false;
+                     }
+
+                     $("#portionamount").val(ui.value + " kcal");
+                     refreshAll(ui.value);
+                 }
+             });
+             $("#portionamount").val($("#portionslider").slider("value") + " kcal");
+         });
+
+         function portionAdd() {
+             if (blockRefresh > 0) return;
+
+             var counterValue = parseInt($("#portioncountervalue").html(), 10);
+
+             if (counterValue < 99) {
+                 counterValue++;
+             }
+
+             refreshPortionValue(counterValue);
+         }
+
+         function portionSubtract() {
+             if (blockRefresh > 0) return;
+
+             var counterValue = parseInt($("#portioncountervalue").html(), 10);
+
+             if (counterValue > 1) {
+                 counterValue--;
+             }
+
+             refreshPortionValue(counterValue);
+         }
+
+         function refreshPortionValue(counterValue) {
+             if (blockRefresh > 0) return;
+
+             $("#portioncountervalue").html(counterValue);
+
+             $("#portionimage_1").addClass("hidden");
+             $("#portionimage_2").addClass("hidden");
+             $("#portionimage_3").addClass("hidden");
+             $("#portionimage_4").addClass("hidden");
+             $("#portionimage_5").addClass("hidden");
+
+             if (counterValue == 1) {
+                 $("#portionimage_1").removeClass("hidden");
+             } else if (counterValue == 2) {
+                 $("#portionimage_2").removeClass("hidden");
+             } else if (counterValue == 3) {
+                 $("#portionimage_3").removeClass("hidden");
+             } else if (counterValue == 4) {
+                 $("#portionimage_4").removeClass("hidden");
+             } else {
+                 $("#portionimage_5").removeClass("hidden");
+             }
+
+             refreshAll();
+         }
+
+         var blockRefresh = 0;
+
+         function refreshAll(portionValue) {
+
+             if (blockRefresh > 0) return;
+             blockRefresh = 3;
+
+             var portion = (portionValue != null ? portionValue : $("#portionslider").slider("value"));
+             var multiplier = parseInt($("#portioncountervalue").html(), 10);
+
+             $.ajax({
+                 url: '@Url.Action("GetNewStrings", "Recipe", new { id = 0 })',
+                type: "POST",
+                dataType: "html",
+                data: {
+                    portion: portion,
+                    multiplier: multiplier
+                },
+                success: function (json) {
+                    var data = $.parseJSON(json);
+                    $('div#equipmentlist h3').html(data[0]);
+                    $('div#ingredientlist h3 span').html(data[1]);
+                    $('div#directionlist h3').html(data[2]);
+                }, // success
+                error: function (xhr, textStatus, errorThrown) {
+                },
+                complete: function () {
+                    blockRefresh--;
+                }
+            });   // ajax
+
+            $.ajax({
+                url: '@Url.Action("GetIngredients", "Recipe", new { id = 0 })',
+                type: "POST",
+                dataType: "html",
+                data: {
+                    portion: portion,
+                    multiplier: multiplier
+                },
+                success: function (data) {
+                    $('div#_RecipeIngredients').html(data);
+                }, // success
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("Error");
+                    console.log(xhr);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                },
+                complete: function () {
+                    blockRefresh--;
+                }
+            });   // ajax
+
+            $.ajax({
+                url: '@Url.Action("GetDirections", "Recipe", new { id = 0 })',
+                type: "POST",
+                dataType: "html",
+                data: {
+                    portion: portion,
+                    multiplier: multiplier
+                },
+                success: function (data) {
+                    $('div#_RecipeDirections').html(data);
+                }, // success
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log("Error");
+                    console.log(xhr);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                },
+                complete: function () {
+                    blockRefresh--;
+                }
+            });   // ajax
+         }
+
+
+
+         $(function () {
+             //$('#svgbasics').svg();
+             //$('#svgbasics').svg('get').load('http://localhost/MrKupido.Web/Content/svg/multilayer_test04.svg', { onLoad: svgLoadDone });
+         });
+
+         function svgLoadDone(svg, error) {
+             $('g#forditottpe', svg.root()).css({ opacity: 0 });
+         }
+
+    </script>
+<header>
+    @await Html.PartialAsync("_SearchHeader")
+</header>
+<hr class="single" />
+<article>
+    <div class="details" id="recipe">
+        <div class="summary">
+            <h1>
+                @{string name = recipeNode.LongName;}
+                @name
+            </h1>
+            @{string version = recipeNode.Version;}
+            @if (!string.IsNullOrEmpty(version))
+            {
+                <hr class="single" />
+                <h3>@version</h3>
+            }
+        </div>
+        <hr class="single" />
+        @if (((Array)Model[1]).Length > 0) {
+        <div id="taglist">
+            @await Html.PartialAsync("_RecipeTags", Model[1])
+        </div>
+        }
+        <hr />
+        <div style="display: none">
+            <hr />
+            <div id="equipmentlist">
+                <h2>Szükséges eszközök</h2>
+                <h3>Hiányzó eszközök: 2</h3>
+                <div id="_RecipeEquipment">
+                    @* Equipment partial *@
+                </div>
+            </div>
+        </div>
+        <div id="ingredientlist">
+            <h2>Hozzávalók</h2>
+            <h3>
+                <input type="button" id="minusbutton1" value="-" onclick="portionSubtract();" class="littlebutton"/>
+                <span class="portionselector-trigger">Adag: 4</span>
+                <input type="button" id="plusbutton1" value="+" onclick="portionAdd();" class="littlebutton"/>
+            </h3>
+            <div id="portionselectorwrapper">
+                <div id="portionselector">
+                    <div id="portionsliderblock">
+                        <img id="portionsmall" src="~/Content/svg/icon_figuresmall.svg" width="12px" height="35px" />
+                        <div id="portionsliderandtext">
+                            <input type="text" id="portionamount" />
+                            <br />
+                            <div id="portionslider">
+                                <img id="portionslidersigns" src="~/Content/svg/icon_slidersigns.svg" width="204px" height="10px" />
+                            </div>
+                        </div>
+                        <img id="portionbig" src="~/Content/svg/icon_figurebig.svg" width="18px" height="35px" />
+                    </div>
+                    <div id="portioncounterblock">
+                        <div id="portioncountertext">x <span id="portioncountervalue">4</span></div>
+                        <img id="portionimage_1" src="~/Content/svg/crowd_1.svg" width="45px" height="35px" class="hidden" />
+                        <img id="portionimage_2" src="~/Content/svg/crowd_2.svg" width="45px" height="35px" class="hidden" />
+                        <img id="portionimage_3" src="~/Content/svg/crowd_3.svg" width="45px" height="35px" class="hidden" />
+                        <img id="portionimage_4" src="~/Content/svg/crowd_4.svg" width="45px" height="35px" />
+                        <img id="portionimage_5" src="~/Content/svg/crowd_5.svg" width="45px" height="35px" class="hidden" />
+                        <div id="portionbuttonblock">
+                            <input type="button" id="plusbutton2" value="+" onclick="portionAdd();"  class="littlebutton"/><br />
+                            <input type="button" id="minusbutton2" value="-" onclick="portionSubtract();"  class="littlebutton"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="_RecipeIngredients">
+                @await Html.PartialAsync("_RecipeIngredients", (MrKupido.Processor.Model.RuntimeIngredient[])Model[3])
+            </div>
+        </div>
+        <hr class="space" />
+        <div id="directionlist">
+            <h2>Elkészítés</h2>
+            <h3>Séf #1</h3>
+            <div id="_RecipeDirections">
+                @await Html.PartialAsync("_RecipeDirections", (MrKupido.Library.IDirection[])Model[4])
+            </div>
+        </div>
+        <div style="display: none">
+            <hr />
+            <div id="serving">
+                <h2>Tálalás</h2>
+                <div id="_RecipeServing">
+                    @* Serving partial *@
+                </div>
+            </div>
+            <hr />
+            <div id="nutritionlist">
+                <h2>Tápértékek</h2>
+                <h3>Részletes tápértékek</h3>
+                <div id="_RecipeNutritions">
+                    @* Nutrition partial *@
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="space" />
+</article>

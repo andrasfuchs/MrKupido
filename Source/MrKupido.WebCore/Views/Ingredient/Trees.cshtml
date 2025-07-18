@@ -1,0 +1,39 @@
+﻿@model object[]
+@{
+    ViewBag.Title = "Összetevők fák - Mr. Kupido";
+}
+<header class="nosearch">
+    <a href="~/">
+        <img src="~/Content/svg/logo_mrkupido_wide.svg" alt="Mr. Kupido" width="600" height="157" />
+    </a>
+</header>
+<details open class="alwaysopen">
+    <summary>
+        <h1>Taxonómia</h1>
+    </summary>
+</details>
+@await Html.PartialAsync("_TaxonomyTree", Model[0])
+<details open class="alwaysopen">
+    <summary>
+        <h1>Összetevők</h1>
+    </summary>
+</details>
+@await Html.PartialAsync("_IngredientTree", Model[1])
+<details open class="alwaysopen">
+    <summary>
+        <h1>Receptek</h1>
+    </summary>
+</details>
+@await Html.PartialAsync("_RecipeTree", Model[2])
+<details open class="alwaysopen">
+    <summary>
+        <h1>Eszközök</h1>
+    </summary>
+</details>
+@await Html.PartialAsync("_EquipmentTree", Model[3])
+<details open class="alwaysopen">
+    <summary>
+        <h1>Címkék</h1>
+    </summary>
+</details>
+@await Html.PartialAsync("_TagTree", Model[4])

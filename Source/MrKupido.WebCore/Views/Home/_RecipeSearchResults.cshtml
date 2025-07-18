@@ -1,0 +1,15 @@
+@model MrKupido.Web.Models.RecipeSearchResultItem[]
+@using MrKupido.Web.Models
+<ul>
+    @{ var rsri = (Model == null ? new MrKupido.Web.Models.RecipeSearchResultItem[0] : Model); }
+    @for (int i = 0; i < rsri.Length; i++)
+    { 
+        <li id="@rsri[i].UniqueName.Replace("[","_").Replace("]","_")">
+            @await Html.PartialAsync("_RecipeSearchResultSideB", rsri[i])
+        </li>
+    }
+    @for (int j = rsri.Length; j < 6; j++)
+    { 
+        <li class="disabled"></li>
+    }
+</ul>

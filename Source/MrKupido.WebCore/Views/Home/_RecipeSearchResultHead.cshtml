@@ -1,0 +1,50 @@
+﻿@model MrKupido.Web.Models.RecipeSearchResult
+@using MrKupido.Web.Models
+<script type="text/javascript">
+     function doPaging(actionName, index, total) {
+         if ((actionName == "first") && (index == 1)) return;
+         if ((actionName == "prev") && (index == 1)) return;
+         if ((actionName == "next") && (index == total)) return;
+         if ((actionName == "last") && (index == total)) return;
+         hideAllResults();
+         $.ajax({
+             url: '@Url.Action("RefreshRecipeResults", "Home")',
+            type: "POST",
+            dataType: "html",
+            data: {
+                actionName: actionName
+            },
+            success: function (data) {
+                $("details#searchresults li").promise().done(function () {
+                    $('div#_RecipeSearchResults').html(data);
+                    showAllResults();
+                });
+            },
+            error: function (xhr, textStatus, errorThrown) {
+            }
+        });
+    }
+</script>
+<hr class="space" />
+<details id="searchresults" open class="alwaysopen">
+    <summary>
+        <h1>Találatok</h1>
+        <h2>(@(Model == null ? "0" : Model.Items.Count.ToString()) recept)</h2>
+    </summary>
+    <hr class="space" />
+    @await Html.PartialAsync("_RecipeSearchResults", (Model == null ? null : Model.GetCurrentPage()))
+    @if (Model != null)
+    {
+        <div id="paging">
+            <div id="pagingleft">
+                <img id="pagefirst" src="~/Content/svg/paging_first.svg" alt="első oldal" width="21" height="18" onclick="javascript:doPaging('first', @Model.PageIndex, @Model.PageNumber)" />
+                <img id="pageprev" src="~/Content/svg/paging_prev.svg" alt="előző oldal" width="15" height="18" onclick="javascript:doPaging('prev', @Model.PageIndex, @Model.PageNumber)" />
+            </div>
+            <div id="pagingnumber">@Model.PageIndex.ToString() / @Model.PageNumber.ToString()</div>
+            <div id="pagingright">
+                <img id="pagenext" src="~/Content/svg/paging_next.svg" alt="következő oldal" width="15" height="18" onclick="javascript:doPaging('next', @Model.PageIndex, @Model.PageNumber)" />
+                <img id="pagelast" src="~/Content/svg/paging_last.svg" alt="utolsó oldal" width="21" height="18" onclick="javascript:doPaging('last', @Model.PageIndex, @Model.PageNumber)" />
+            </div>
+        </div>
+    }
+</details>
