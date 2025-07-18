@@ -52,9 +52,6 @@
     <Compile Remove="MultiOutput.cs" />
     <Compile Remove="ProcessIngredients.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\GeoCoordinate\src\GeoCoordinate.NetStandard1\GeoCoordinate.NetStandard1.csproj" />
-  </ItemGroup>
   <ProjectExtensions>
     <VisualStudio>
       <UserProperties BuildVersion_UseGlobalSettings="True" />

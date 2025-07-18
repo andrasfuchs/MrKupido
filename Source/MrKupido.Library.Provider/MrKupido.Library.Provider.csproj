@@ -5,7 +5,6 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GeoCoordinate\src\GeoCoordinate.NetStandard1\GeoCoordinate.NetStandard1.csproj" />
     <ProjectReference Include="..\MrKupido.Library\MrKupido.Library.csproj" />
   </ItemGroup>
   <ItemGroup>

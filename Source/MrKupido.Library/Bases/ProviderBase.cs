@@ -1,4 +1,4 @@
-﻿using GeoCoordinatePortable;
+﻿using MrKupido.Library.GeoLocation;
 using System;
 
 namespace MrKupido.Library
